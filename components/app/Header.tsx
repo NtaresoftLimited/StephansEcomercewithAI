@@ -15,7 +15,7 @@ export function Header() {
   const totalItems = useTotalItems();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[#2a1a0e]/50 bg-[#3D2314]/50 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-[#6b3e1e]/50 bg-[rgba(107,62,30,0.5)] backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
@@ -45,7 +45,7 @@ export function Header() {
           {!isChatOpen && (
             <Button
               onClick={openChat}
-              className="gap-2 bg-primary text-primary-foreground shadow-md transition-all hover:bg-primary/90 hover:shadow-lg"
+              className="gap-2 bg-white text-[rgb(107,62,30)] shadow-md transition-all hover:bg-white/90 hover:shadow-lg"
             >
               <Image
                 src="/favicon.png"
@@ -54,7 +54,7 @@ export function Header() {
                 height={16}
                 className="h-4 w-4"
               />
-              <span className="text-sm font-medium">Ask Sky</span>
+              <span className="text-sm font-medium">Talk to Sky</span>
             </Button>
           )}
 
@@ -62,7 +62,7 @@ export function Header() {
           <Button
             variant="ghost"
             size="icon"
-            className="relative text-white hover:text-white/80 hover:bg-white/10"
+            className="relative text-[rgb(107,62,30)] hover:text-[rgb(107,62,30)]/80 hover:bg-[rgb(107,62,30)]/10"
             onClick={openCart}
           >
             <ShoppingBag className="h-5 w-5" />
@@ -95,7 +95,7 @@ export function Header() {
           </SignedIn>
           <SignedOut>
             <SignInButton mode="modal">
-              <Button variant="ghost" size="icon" className="text-white hover:text-white/80 hover:bg-white/10">
+              <Button variant="ghost" size="icon" className="text-[rgb(107,62,30)] hover:text-[rgb(107,62,30)]/80 hover:bg-[rgb(107,62,30)]/10">
                 <User className="h-5 w-5" />
                 <span className="sr-only">Sign in</span>
               </Button>

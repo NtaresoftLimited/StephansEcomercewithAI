@@ -74,7 +74,7 @@ export function AdoptionSection({
     const fishImage = fishImages[fishIdx] || defaultFish;
 
     return (
-        <section className="relative w-full bg-background overflow-hidden pt-4 pb-8">
+        <section className="relative w-full min-h-screen bg-background overflow-x-hidden flex items-center justify-center pt-4 pb-8">
             {/* Decorative sparkles */}
             <div className="absolute top-8 left-4 md:left-12 text-primary/30 opacity-50">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
