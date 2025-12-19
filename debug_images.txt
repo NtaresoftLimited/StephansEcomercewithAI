@@ -1,0 +1,47 @@
+[dotenv@17.2.3] injecting env (13) from .env.local -- tip: ???? encrypt with Dotenvx: https://dotenvx.com
+Product image structures:
+
+Bear Face Dog Bed L:
+  images array: [
+  {
+    "_key": "7de172c0-9f12-44e8-aa3f-74c1d852ced6",
+    "_type": "image",
+    "asset": {
+      "_ref": "image-695864d183766fa7c175cff28664654dab3c16d3-225x225-webp",
+      "_type": "reference"
+    }
+  }
+]
+  imageUrls: [
+  'https://cdn.sanity.io/images/ubqcgegx/production/695864d183766fa7c175cff28664654dab3c16d3-225x225.webp'
+]
+
+Bear Face Dog Bed M:
+  images array: [
+  {
+    "_key": "a3a2a499-752b-4d76-a869-29f8c2435e30",
+    "_type": "image",
+    "asset": {
+      "_ref": "image-695864d183766fa7c175cff28664654dab3c16d3-225x225-webp",
+      "_type": "reference"
+    }
+  }
+]
+  imageUrls: [
+  'https://cdn.sanity.io/images/ubqcgegx/production/695864d183766fa7c175cff28664654dab3c16d3-225x225.webp'
+]
+
+Bear Face Dog Bed S:
+  images array: [
+  {
+    "_key": "326d41a5-262f-4f4e-a57e-bf7d918cfc9a",
+    "_type": "image",
+    "asset": {
+      "_ref": "image-695864d183766fa7c175cff28664654dab3c16d3-225x225-webp",
+      "_type": "reference"
+    }
+  }
+]
+  imageUrls: [
+  'https://cdn.sanity.io/images/ubqcgegx/production/695864d183766fa7c175cff28664654dab3c16d3-225x225.webp'
+]

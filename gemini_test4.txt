@@ -1,0 +1,37 @@
+[dotenv@17.2.3] injecting env (15) from .env.local -- tip: ??????  write to custom object with { processEnv: myObject }
+Testing Gemini API...
+API Key present: true
+AI Provider: gemini
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+node.exe : AI SDK Warning 
+(google.generative-ai / 
+gemini-pro): The feature 
+"specificationVersion" is 
+used in a compatibility 
+mode. Using v2 
+specification compatibility 
+mode. Some features may not 
+be available.
+At C:\Program 
+Files\nodejs\npx.ps1:29 
+char:3
++   & $NODE_EXE $NPX_CLI_JS 
+$args
++   ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~
+    + CategoryInfo          
+    : NotSpecified: (AI SD  
+  K Warning ...t be avail   
+ able.:String) [], Remot    
+eException
+    + FullyQualifiedErrorId 
+    : NativeCommandError
+ 
+??? Gemini Error: 
+models/gemini-pro is not 
+found for API version 
+v1beta, or is not supported 
+for generateContent. Call 
+ListModels to see the list 
+of available models and 
+their supported methods.

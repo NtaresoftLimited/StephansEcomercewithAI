@@ -1,0 +1,22 @@
+[dotenv@17.2.3] injecting env (13) from .env.local -- tip: ???? prevent committing .env to code: https://dotenvx.com/precommit
+Query result sample:
+
+ Whiskas Chicken 900g:
+  images: [
+  {
+    "_key": "8ec20221-fc70-45b2-b1d4-79203b869413",
+    "asset": {
+      "_id": "image-2152fc1db01841945aeef0ef798d022287ffccac-276x411-webp",
+      "url": "https://cdn.sanity.io/images/ubqcgegx/production/2152fc1db01841945aeef0ef798d022287ffccac-276x411.webp"
+    }
+  }
+]
+  First image URL: https://cdn.sanity.io/images/ubqcgegx/production/2152fc1db01841945aeef0ef798d022287ffccac-276x411.webp
+
+Alinana Pet Bell Toy :
+  images: []
+  First image URL: undefined
+
+Amy's Dog Leash :
+  images: []
+  First image URL: undefined

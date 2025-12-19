@@ -1,0 +1,30 @@
+[dotenv@17.2.3] injecting env (13) from .env.local -- tip: ??????? backup and recover secrets: https://dotenvx.com/ops
+Total products: 100
+Sample products:
+[
+  {
+    "imageUrl": "https://cdn.sanity.io/images/ubqcgegx/production/695864d183766fa7c175cff28664654dab3c16d3-225x225.webp",
+    "name": "Bear Face Dog Bed L",
+    "price": 81999
+  },
+  {
+    "imageUrl": "https://cdn.sanity.io/images/ubqcgegx/production/695864d183766fa7c175cff28664654dab3c16d3-225x225.webp",
+    "name": "Bear Face Dog Bed M",
+    "price": 66999
+  },
+  {
+    "imageUrl": "https://cdn.sanity.io/images/ubqcgegx/production/695864d183766fa7c175cff28664654dab3c16d3-225x225.webp",
+    "name": "Bear Face Dog Bed S",
+    "price": 51999
+  },
+  {
+    "imageUrl": null,
+    "name": "Bioline Flea & Tick Collar For Cat",
+    "price": 77999
+  },
+  {
+    "imageUrl": null,
+    "name": "Balang Square Dog Bed",
+    "price": 214920
+  }
+]

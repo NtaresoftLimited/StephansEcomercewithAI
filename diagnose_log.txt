@@ -1,0 +1,78 @@
+[dotenv@17.2.3] injecting env (13) from .env.local -- tip: ??????  suppress all logs with { quiet: true }
+=== DIAGNOSING SANITY DATA ===
+
+CATEGORIES: [
+  {
+    "_id": "category-beds",
+    "slug": "beds",
+    "title": "Beds"
+  },
+  {
+    "_id": "category-chairs",
+    "slug": "chairs",
+    "title": "Chairs"
+  },
+  {
+    "_id": "category-lighting",
+    "slug": "lighting",
+    "title": "Lighting"
+  },
+  {
+    "_id": "category-sofas",
+    "slug": "sofas",
+    "title": "Sofas"
+  },
+  {
+    "_id": "category-storage",
+    "slug": "storage",
+    "title": "Storage"
+  },
+  {
+    "_id": "category-tables",
+    "slug": "tables",
+    "title": "Tables"
+  }
+]
+
+SAMPLE PRODUCT: {
+  "_id": "odoo-1081",
+  "category": {
+    "_id": "category-beds",
+    "title": "Beds"
+  },
+  "imageUrls": [
+    "https://cdn.sanity.io/images/ubqcgegx/production/695864d183766fa7c175cff28664654dab3c16d3-225x225.webp"
+  ],
+  "images": [
+    {
+      "_key": "7de172c0-9f12-44e8-aa3f-74c1d852ced6",
+      "_type": "image",
+      "asset": {
+        "_ref": "image-695864d183766fa7c175cff28664654dab3c16d3-225x225-webp",
+        "_type": "reference"
+      }
+    }
+  ],
+  "name": "Bear Face Dog Bed L"
+}
+
+IMAGE ASSETS: [
+  {
+    "_id": "image-0283c720670abd502d5eca4aab738254169483c8-800x533-jpg",
+    "url": "https://cdn.sanity.io/images/ubqcgegx/production/0283c720670abd502d5eca4aab738254169483c8-800x533.jpg"
+  },
+  {
+    "_id": "image-03165e1faf61ce6da78064d70c00d49ecc284138-1200x830-jpg",
+    "url": "https://cdn.sanity.io/images/ubqcgegx/production/03165e1faf61ce6da78064d70c00d49ecc284138-1200x830.jpg"
+  },
+  {
+    "_id": "image-04368ca94fa656fe5f85274e064fe0813948530f-800x1000-jpg",
+    "url": "https://cdn.sanity.io/images/ubqcgegx/production/04368ca94fa656fe5f85274e064fe0813948530f-800x1000.jpg"
+  }
+]
+
+PRODUCT STATS: {
+  "total": 100,
+  "withCategory": 100,
+  "withImages": 97
+}

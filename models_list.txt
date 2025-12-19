@@ -1,0 +1,87 @@
+
+
+StatusCode        : 200
+StatusDescription : OK
+Content           : {
+                      "model
+                    s": [
+                        {
+                          
+                    "name": 
+                    "models/
+                    embeddin
+                    g-gecko-
+                    001",
+                          "v
+                    ersion":
+                     "001",
+                          "d
+                    isplayNa
+                    me": "Em
+                    bedding 
+                    Gecko",
+                          "d
+                    escripti
+                    on": 
+                    "Obtain 
+                    a distri
+                    buted re
+                    presenta
+                    tion of 
+                    a text."
+                    ,...
+RawContent        : HTTP/1.1
+                     200 OK
+                    Vary: X-
+                    Origin,R
+                    eferer,O
+                    rigin,Ac
+                    cept-Enc
+                    oding
+                    X-XSS-Pr
+                    otection
+                    : 0
+                    X-Frame-
+                    Options:
+                     SAMEORI
+                    GIN
+                    X-Conten
+                    t-Type-O
+                    ptions: 
+                    nosniff
+                    Server-T
+                    iming: g
+                    fet4t7; 
+                    dur=721
+                    Alt-Svc:
+                     h3=":44
+                    3"; ...
+Forms             : {}
+Headers           : {[Vary, 
+                    X-Origin
+                    ,Referer
+                    ,Origin,
+                    Accept-E
+                    ncoding]
+                    , [X-XSS
+                    -Protect
+                    ion, 
+                    0], [X-F
+                    rame-Opt
+                    ions, SA
+                    MEORIGIN
+                    ], [X-Co
+                    ntent-Ty
+                    pe-Optio
+                    ns, nosn
+                    iff]...}
+Images            : {}
+InputFields       : {}
+Links             : {}
+ParsedHtml        : mshtml.H
+                    TMLDocum
+                    entClass
+RawContentLength  : 22371
+
+
+

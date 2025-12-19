@@ -1,0 +1,283 @@
+[dotenv@17.2.3] injecting env (13) from .env.local -- tip: ??? audit secrets and track compliance: https://dotenvx.com/ops
+???? Starting Odoo to Sanity Sync...
+Using Project: ubqcgegx
+Found 6 categories in Sanity.
+???? Fetching products from Odoo...
+Fetched 30 products from Odoo.
+??????? Deleting existing products in Sanity...
+Found 23 existing products.
+node.exe : ??? 
+Global Sync Failure: 
+ClientError: 
+Mutation failed: 
+Document "product-mar
+ble-coffee-table" 
+cannot be deleted as 
+there are references 
+to it from 
+"order-sample-3", 
+"order-sample-4", 
+"order-sample-2":
+At C:\Program Files\n
+odejs\npx.ps1:29 
+char:3
++   & $NODE_EXE 
+$NPX_CLI_JS $args
++   ~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~
+    + CategoryInfo   
+           : NotSpe  
+  cified: (??? Gl    
+obal Syn...rder-    
+sample-2"::Strin    
+g) [], RemoteExc    
+eption
+    + FullyQualified 
+   ErrorId : Native  
+  CommandError
+ 
+- Document "product-m
+arble-coffee-table" 
+cannot be deleted as 
+there are references 
+to it from 
+"order-sample-3", 
+"order-sample-4", 
+"order-sample-2"
+    at onResponse (C:
+\Users\fisto\Download
+s\ecommerce-ai-nextjs
+-16-sanity-clerk-agen
+tkit-stripe-checkout-
+vercel-ai-agents-main
+\node_modules\@sanity
+\client\dist\index.cj
+s:194:13)
+    at 
+applyMiddleware (C:\U
+sers\fisto\Downloads\
+ecommerce-ai-nextjs-1
+6-sanity-clerk-agentk
+it-stripe-checkout-ve
+rcel-ai-agents-main\n
+ode_modules\get-it\sr
+c\util\middlewareRedu
+cer.ts:9:40)
+    at onResponse (C:
+\Users\fisto\Download
+s\ecommerce-ai-nextjs
+-16-sanity-clerk-agen
+tkit-stripe-checkout-
+vercel-ai-agents-main
+\node_modules\get-it\
+src\createRequester.t
+s:62:22)
+    at <anonymous> (C
+:\Users\fisto\Downloa
+ds\ecommerce-ai-nextj
+s-16-sanity-clerk-age
+ntkit-stripe-checkout
+-vercel-ai-agents-mai
+n\node_modules\get-it
+\src\createRequester.
+ts:104:55)
+    at callback (C:\U
+sers\fisto\Downloads\
+ecommerce-ai-nextjs-1
+6-sanity-clerk-agentk
+it-stripe-checkout-ve
+rcel-ai-agents-main\n
+ode_modules\get-it\sr
+c\request\node-reques
+t.ts:147:81)
+    at cb (C:\Users\f
+isto\Downloads\ecomme
+rce-ai-nextjs-16-sani
+ty-clerk-agentkit-str
+ipe-checkout-vercel-a
+i-agents-main\node_mo
+dules\get-it\src\requ
+est\node-request.ts:2
+50:14)
+    at Transform.<ano
+nymous> (C:\Users\fis
+to\Downloads\ecommerc
+e-ai-nextjs-16-sanity
+-clerk-agentkit-strip
+e-checkout-vercel-ai-
+agents-main\node_modu
+les\get-it\src\reques
+t\node\simpleConcat.t
+s:8:13)
+    at 
+Object.onceWrapper 
+(node:events:632:28)
+    at 
+Transform.emit 
+(node:events:518:28)
+    at endReadableNT 
+(C:\Users\fisto\Downl
+oads\ecommerce-ai-nex
+tjs-16-sanity-clerk-a
+gentkit-stripe-checko
+ut-vercel-ai-agents-m
+ain\node_modules\thro
+ugh2\node_modules\rea
+dable-stream\lib\_str
+eam_readable.js:1003:
+12) {
+  response: {
+    body: { error: 
+[Object] },
+    url: 'https://ubq
+cgegx.api.sanity.io/v
+2025-12-05/data/mutat
+e/production?returnId
+s=true&visibility=syn
+c',
+    method: 'POST',
+    headers: {
+      
+'content-type': 
+'application/json; 
+charset=utf-8',
+      'ratelimit-rema
+ining': '49',
+      
+'ratelimit-reset': 
+'1',
+      'x-ratelimit-re
+maining-second': 
+'49',
+      'x-ratelimit-li
+mit-second': '50',
+      
+'ratelimit-limit': 
+'50',
+      'sanity-infligh
+t-current': '0',
+      'sanity-infligh
+t-limit': '100',
+      date: 'Fri, 19 
+Dec 2025 02:51:11 
+GMT',
+      
+'server-timing': 
+'api;dur=64',
+      vary: 
+'Accept-Encoding, 
+origin',
+      
+'x-sanity-shard': 'gc
+p-eu-w1-prod-40009',
+      'x-served-by': 
+'gradient-web-7bcb8cb
+8b-5dwq5',
+      
+'sanity-gateway': 'k8
+s-gcp-as-s1-prod-ing-
+01',
+      'strict-transpo
+rt-security': 
+'max-age=63072000; 
+includeSubDomains; 
+preload',
+      xkey: 
+'project-ubqcgegx, pr
+oject-ubqcgegx-produc
+tion',
+      via: '1.1 
+google',
+      'alt-svc': 
+'h3=":443"; ma=259200
+0,h3-29=":443"; 
+ma=2592000',
+      
+'transfer-encoding': 
+'chunked'
+    },
+    statusCode: 409,
+    statusMessage: 
+'Conflict',
+    remoteAddress: 
+'34.117.95.95'
+  },
+  statusCode: 409,
+  responseBody: 
+'{\n' +
+    '  "error": {\n' 
++
+    '    
+"description": 
+"Mutation failed: 
+Document \\"product-m
+arble-coffee-table\\"
+ cannot be deleted 
+as there are 
+references to it 
+from \\"order-sample-
+3\\", \\"order-sample
+-4\\", \\"order-sampl
+e-2\\"",\n' +
+    '    "items": 
+[\n' +
+    '      {\n' +
+    '        
+"error": {\n' +
+    '          
+"description": 
+"Document \\"product-
+marble-coffee-table\\
+" cannot be deleted 
+as there are 
+references to it 
+from \\"order-sample-
+3\\", \\"order-sample
+-4\\", \\"order-sampl
+e-2\\"",\n' +
+    '          "id": 
+"product-marble-coffe
+e-table",\n' +
+    '          
+"referencingIDs": 
+[\n' +
+    '            
+"order-sample-3",\n' 
++
+    '            
+"order-sample-4",\n' 
++
+    '            
+"order-sample-2"\n' +
+    '          ],\n' 
++
+    '          
+"type": "documentHasE
+xistingReferencesErro
+r"\n' +
+    '        },\n' +
+    '        
+"index": 8\n' +
+    '      }\n' +
+    '    ],\n' +
+    '    "type": 
+"mutationError"\n' +
+    '  }\n' +
+    '}',
+  details: {
+    description: 
+'Mutation failed: 
+Document "product-mar
+ble-coffee-table" 
+cannot be deleted as 
+there are references 
+to it from 
+"order-sample-3", 
+"order-sample-4", 
+"order-sample-2"',
+    items: [ 
+[Object] ],
+    type: 
+'mutationError'
+  }
+}

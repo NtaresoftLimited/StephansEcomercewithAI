@@ -1,0 +1,57 @@
+[dotenv@17.2.3] injecting env (13) from .env.local -- tip: ???? prevent committing .env to code: https://dotenvx.com/precommit
+Products without images: [
+  {
+    "name": "Beeno Rolles Sizzlin' steak flavor 120g "
+  },
+  {
+    "name": "Beeno Shapes Meat treat Sizlin Steak Flavor 120g  "
+  },
+  {
+    "name": "Bear Unisex Pet Cloth XS,S,M,L,XL"
+  },
+  {
+    "name": "Back Length/Bust Cat Cloths XS,S,M,L"
+  },
+  {
+    "name": "Bear Cat Cloth"
+  },
+  {
+    "name": "Beeno Rolles Crispy chicken flavor 120g "
+  },
+  {
+    "name": "Beeno Pawsome Peanut Butter Flavor 49g"
+  },
+  {
+    "name": "Beeno Blissful Biltong Flavor 49g"
+  },
+  {
+    "name": "Beeno Sizzlin Steak Flavor 49g"
+  },
+  {
+    "name": "Beeno Lip lickin Flavor 120g"
+  },
+  {
+    "name": "Beeno Crips Chicken Flavor 120g"
+  },
+  {
+    "name": "Bioline Chew Stop 120mls"
+  },
+  {
+    "name": "Amy's Dog Leash "
+  },
+  {
+    "name": "Alinana Pet Bell Toy "
+  },
+  {
+    "name": "Beeno Treats"
+  },
+  {
+    "name": "Apple Cloth"
+  },
+  {
+    "name": "Banana Cloth"
+  },
+  {
+    "name": "Bioline Dilutional Bottle 500mls"
+  }
+]

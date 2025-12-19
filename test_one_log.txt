@@ -1,0 +1,16 @@
+[dotenv@17.2.3] injecting env (13) from .env.local -- tip: ??????  specify custom .env file path with { path: '/custom/path/.env' }
+Processing: Bioline Tea Tree Oil Pet Soap
+Asset Uploaded ID: image-4027e29d36fa70587d3a4e3281a81a3b5513add9-800x800-webp
+Asset Uploaded URL: https://cdn.sanity.io/images/ubqcgegx/production/4027e29d36fa70587d3a4e3281a81a3b5513add9-800x800.webp
+Product Created ID: test-sync-2262
+Fetched Result:
+{
+  "images": [
+    {
+      "asset": {
+        "url": "https://cdn.sanity.io/images/ubqcgegx/production/4027e29d36fa70587d3a4e3281a81a3b5513add9-800x800.webp"
+      }
+    }
+  ],
+  "name": "Bioline Tea Tree Oil Pet Soap"
+}

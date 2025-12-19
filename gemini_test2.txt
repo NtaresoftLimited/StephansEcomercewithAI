@@ -1,0 +1,62 @@
+[dotenv@17.2.3] injecting env (15) from .env.local -- tip: ??????  enable debug logging with { debug: true }
+Testing Gemini API...
+API Key present: true
+AI Provider: gemini
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+node.exe : AI SDK Warning 
+(google.generative-ai / 
+gemini-2.0-flash): The 
+feature 
+"specificationVersion" is 
+used in a compatibility 
+mode. Using v2 
+specification compatibility 
+mode. Some features may not 
+be available.
+At C:\Program 
+Files\nodejs\npx.ps1:29 
+char:3
++   & $NODE_EXE $NPX_CLI_JS 
+$args
++   ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~
+    + CategoryInfo          
+    : NotSpecified: (AI SD  
+  K Warning ...t be avail   
+ able.:String) [], Remot    
+eException
+    + FullyQualifiedErrorId 
+    : NativeCommandError
+ 
+??? Gemini Error: Failed 
+after 3 attempts. Last 
+error: You exceeded your 
+current quota, please check 
+your plan and billing 
+details. For more 
+information on this error, 
+head to: https://ai.google.d
+ev/gemini-api/docs/rate-limi
+ts. To monitor your current 
+usage, head to: https://ai.d
+ev/usage?tab=rate-limit. 
+* Quota exceeded for 
+metric: generativelanguage.g
+oogleapis.com/generate_conte
+nt_free_tier_requests, 
+limit: 0, model: 
+gemini-2.0-flash
+* Quota exceeded for 
+metric: generativelanguage.g
+oogleapis.com/generate_conte
+nt_free_tier_requests, 
+limit: 0, model: 
+gemini-2.0-flash
+* Quota exceeded for 
+metric: generativelanguage.g
+oogleapis.com/generate_conte
+nt_free_tier_input_token_cou
+nt, limit: 0, model: 
+gemini-2.0-flash
+Please retry in 
+14.693626815s.

@@ -1,0 +1,36 @@
+[dotenv@17.2.3] injecting env (13) from .env.local -- tip: ??????  load multiple .env files with { path: ['.env.local', '.env'] }
+Testing Gemini API...
+API Key present: false
+AI Provider: undefined
+AI SDK Warning System: To turn off warning logging, set the AI_SDK_LOG_WARNINGS global to false.
+node.exe : AI SDK Warning 
+(google.generative-ai / 
+gemini-2.0-flash): The 
+feature 
+"specificationVersion" is 
+used in a compatibility 
+mode. Using v2 
+specification compatibility 
+mode. Some features may not 
+be available.
+At C:\Program 
+Files\nodejs\npx.ps1:29 
+char:3
++   & $NODE_EXE $NPX_CLI_JS 
+$args
++   ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~
+    + CategoryInfo          
+    : NotSpecified: (AI SD  
+  K Warning ...t be avail   
+ able.:String) [], Remot    
+eException
+    + FullyQualifiedErrorId 
+    : NativeCommandError
+ 
+??? Gemini Error: Google 
+Generative AI API key is 
+missing. Pass it using the 
+'apiKey' parameter or the GO
+OGLE_GENERATIVE_AI_API_KEY 
+environment variable.
