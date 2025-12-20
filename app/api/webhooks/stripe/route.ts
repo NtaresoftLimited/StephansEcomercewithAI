@@ -5,19 +5,22 @@ import { client, writeClient } from "@/sanity/lib/client";
 import { ORDER_BY_STRIPE_PAYMENT_ID_QUERY } from "@/lib/sanity/queries/orders";
 import { pushOrderToOdoo, getOdooProductId } from "@/lib/odoo/order-sync";
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error("STRIPE_SECRET_KEY is not defined");
+// Initialize Stripe lazily to avoid build-time errors
+function getStripe() {
+  if (!process.env.STRIPE_SECRET_KEY) {
+    throw new Error("STRIPE_SECRET_KEY is not defined");
+  }
+  return new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: "2025-12-15.clover" as any,
+  });
 }
 
-if (!process.env.STRIPE_WEBHOOK_SECRET) {
-  throw new Error("STRIPE_WEBHOOK_SECRET is not defined");
+function getWebhookSecret() {
+  if (!process.env.STRIPE_WEBHOOK_SECRET) {
+    throw new Error("STRIPE_WEBHOOK_SECRET is not defined");
+  }
+  return process.env.STRIPE_WEBHOOK_SECRET;
 }
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2025-12-15.clover" as any,
-});
-
-const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 export async function POST(req: Request) {
   const body = await req.text();
@@ -34,7 +37,7 @@ export async function POST(req: Request) {
   let event: Stripe.Event;
 
   try {
-    event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
+    event = getStripe().webhooks.constructEvent(body, signature, getWebhookSecret());
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
     console.error("Webhook signature verification failed:", message);
@@ -92,7 +95,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     const quantities = quantitiesString.split(",").map(Number);
 
     // Get line items from Stripe
-    const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
+    const lineItems = await getStripe().checkout.sessions.listLineItems(session.id);
 
     // Build order items array
     const orderItems = productIds.map((productId, index) => ({
