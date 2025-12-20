@@ -3,10 +3,20 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Grid2x2 } from "lucide-react";
-import type { ALL_CATEGORIES_QUERYResult } from "@/sanity.types";
+
+interface Category {
+    _id: string;
+    title: string | null;
+    slug: string | null;
+    image?: {
+        asset?: {
+            url: string | null;
+        };
+    };
+}
 
 interface CategoryTilesProps {
-  categories: ALL_CATEGORIES_QUERYResult;
+  categories: Category[];
   activeCategory?: string;
 }
 

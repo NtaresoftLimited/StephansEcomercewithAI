@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Package, ShoppingBag, User } from "lucide-react";
+import { Package, ShoppingBag, User, Scissors } from "lucide-react";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { useCartActions, useTotalItems } from "@/lib/store/cart-store-provider";
@@ -31,6 +31,14 @@ export function Header() {
 
         {/* Actions */}
         <div className="flex items-center gap-2">
+          {/* Grooming Link */}
+          <Button asChild variant="ghost" className="text-white hover:bg-white/20">
+            <Link href="/grooming" className="flex items-center gap-2">
+              <Scissors className="h-5 w-5" />
+              <span className="hidden sm:inline text-sm font-medium">Grooming</span>
+            </Link>
+          </Button>
+
           {/* My Orders - Only when signed in */}
           <SignedIn>
             <Button asChild>

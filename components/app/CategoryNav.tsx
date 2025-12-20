@@ -3,10 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ChevronDown, Home } from "lucide-react";
-import type { ALL_CATEGORIES_QUERYResult } from "@/sanity.types";
 
 interface CategoryNavProps {
-    categories: ALL_CATEGORIES_QUERYResult;
+    // categories: any; // Removed unused prop
     activeCategory?: string;
 }
 
@@ -89,7 +88,7 @@ const petCategories = [
     },
 ];
 
-export function CategoryNav({ categories, activeCategory }: CategoryNavProps) {
+export function CategoryNav({ activeCategory }: CategoryNavProps) {
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
     return (

@@ -8,9 +8,26 @@ import { Badge } from "@/components/ui/badge";
 import { cn, formatPrice } from "@/lib/utils";
 import { AddToCartButton } from "@/components/app/AddToCartButton";
 import { StockBadge } from "@/components/app/StockBadge";
-import type { FILTER_PRODUCTS_BY_NAME_QUERYResult } from "@/sanity.types";
 
-type Product = FILTER_PRODUCTS_BY_NAME_QUERYResult[number];
+// import type { FILTER_PRODUCTS_BY_NAME_QUERYResult } from "@/sanity.types";
+// type Product = FILTER_PRODUCTS_BY_NAME_QUERYResult[number];
+
+interface Product {
+    _id: string;
+    name: string | null;
+    slug: string | null;
+    price: number | null;
+    stock: number | null;
+    images: Array<{
+        _key: string;
+        asset: {
+            url: string | null;
+        } | null;
+    }> | null;
+    category: {
+        title: string | null;
+    } | null;
+}
 
 interface ProductCardProps {
   product: Product;
