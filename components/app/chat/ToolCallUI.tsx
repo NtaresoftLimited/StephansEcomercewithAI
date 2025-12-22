@@ -1,10 +1,12 @@
-import { Search, Package, CheckCircle2, Loader2 } from "lucide-react";
+import { Search, Package, CheckCircle2, Loader2, Scissors, CreditCard } from "lucide-react";
 import type { ToolCallPart } from "./types";
 import type { SearchProductsResult } from "@/lib/ai/types";
 import type { GetMyOrdersResult } from "@/lib/ai/tools/get-my-orders";
 import { getToolDisplayName } from "./utils";
 import { ProductCardWidget } from "./ProductCardWidget";
 import { OrderCardWidget } from "./OrderCardWidget";
+import { GroomingCardWidget } from "./GroomingCardWidget";
+import { Button } from "@/components/ui/button";
 
 interface ToolCallUIProps {
   toolPart: ToolCallPart;
@@ -48,8 +50,23 @@ export function ToolCallUI({ toolPart, closeChat }: ToolCallUIProps) {
     orderResult.orders &&
     orderResult.orders.length > 0;
 
+  const hasGrooming =
+    toolName === "bookGrooming" &&
+    (result as any)?.success &&
+    (result as any)?.bookingNumber;
+
+  const hasCheckout =
+    toolName === "createCheckout" &&
+    (result as any)?.success &&
+    (result as any)?.checkoutUrl;
+
+  const checkoutUrl = (result as any)?.checkoutUrl;
+
   // Determine icon based on tool type
-  const ToolIcon = toolName === "getMyOrders" ? Package : Search;
+  let ToolIcon = Search;
+  if (toolName === "getMyOrders") ToolIcon = Package;
+  else if (toolName === "bookGrooming") ToolIcon = Scissors;
+  else if (toolName === "createCheckout") ToolIcon = CreditCard;
 
   return (
     <div className="space-y-2">
@@ -59,11 +76,10 @@ export function ToolCallUI({ toolPart, closeChat }: ToolCallUIProps) {
           <ToolIcon className="h-4 w-4 text-amber-600 dark:text-amber-400" />
         </div>
         <div
-          className={`flex items-center gap-3 rounded-xl px-4 py-2 text-sm ${
-            isComplete
-              ? "bg-emerald-50 border border-emerald-200 dark:bg-emerald-950/30 dark:border-emerald-800"
-              : "bg-amber-50 border border-amber-200 dark:bg-amber-950/30 dark:border-amber-800"
-          }`}
+          className={`flex items-center gap-3 rounded-xl px-4 py-2 text-sm ${isComplete
+            ? "bg-emerald-50 border border-emerald-200 dark:bg-emerald-950/30 dark:border-emerald-800"
+            : "bg-amber-50 border border-amber-200 dark:bg-amber-950/30 dark:border-amber-800"
+            }`}
         >
           {isComplete ? (
             <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
@@ -72,11 +88,10 @@ export function ToolCallUI({ toolPart, closeChat }: ToolCallUIProps) {
           )}
           <div className="flex flex-col">
             <span
-              className={`font-medium ${
-                isComplete
-                  ? "text-emerald-700 dark:text-emerald-300"
-                  : "text-amber-700 dark:text-amber-300"
-              }`}
+              className={`font-medium ${isComplete
+                ? "text-emerald-700 dark:text-emerald-300"
+                : "text-amber-700 dark:text-amber-300"
+                }`}
             >
               {isComplete ? `${displayName} complete` : `${displayName}...`}
             </span>
@@ -129,6 +144,26 @@ export function ToolCallUI({ toolPart, closeChat }: ToolCallUIProps) {
               />
             ))}
           </div>
+        </div>
+      )}
+
+      {/* Grooming Confirmation */}
+      {hasGrooming && (
+        <div className="ml-11 mt-2">
+          <GroomingCardWidget booking={result as any} />
+        </div>
+      )}
+
+      {/* Checkout Button */}
+      {hasCheckout && checkoutUrl && (
+        <div className="ml-11 mt-2">
+          <Button
+            className="w-full bg-emerald-600 hover:bg-emerald-700 text-white"
+            onClick={() => window.open(checkoutUrl, "_blank")}
+          >
+            <CreditCard className="mr-2 h-4 w-4" />
+            Pay Now
+          </Button>
         </div>
       )}
     </div>

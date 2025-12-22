@@ -68,6 +68,95 @@ export class OdooClient {
             limit
         });
     }
+
+    /**
+     * Get product variants (product.product) for a product template
+     * Odoo uses product.template for the base product and product.product for variants
+     */
+    async getProductVariants(templateId: number): Promise<any[]> {
+        return this.searchRead(
+            "product.product",
+            [["product_tmpl_id", "=", templateId]],
+            [
+                "id",
+                "name",
+                "display_name",
+                "lst_price",
+                "list_price",
+                "qty_available",
+                "weight",
+                "volume",
+                "default_code",
+                "barcode",
+                "image_variant_1920",
+                "product_template_attribute_value_ids",
+                "attribute_line_ids"
+            ]
+        );
+    }
+
+    /**
+     * Get additional product images from product.image model
+     * This is where extra gallery images are stored in Odoo e-commerce
+     */
+    async getProductImages(templateId: number): Promise<any[]> {
+        return this.searchRead(
+            "product.image",
+            [["product_tmpl_id", "=", templateId]],
+            ["id", "name", "image_1920", "sequence"]
+        );
+    }
+
+    /**
+     * Get product attribute values (e.g., sizes, weights, colors)
+     */
+    async getProductAttributeValues(attributeIds: number[]): Promise<any[]> {
+        if (!attributeIds.length) return [];
+        return this.searchRead(
+            "product.template.attribute.value",
+            [["id", "in", attributeIds]],
+            ["id", "name", "display_name", "attribute_id", "product_attribute_value_id", "price_extra"]
+        );
+    }
+
+    /**
+     * Get full product details including variants and images
+     */
+    async getProductWithDetails(templateId: number): Promise<{
+        template: any;
+        variants: any[];
+        images: any[];
+    }> {
+        const [template] = await this.searchRead(
+            "product.template",
+            [["id", "=", templateId]],
+            [
+                "id",
+                "name",
+                "list_price",
+                "description_sale",
+                "description",
+                "categ_id",
+                "qty_available",
+                "image_1920",
+                "product_variant_ids",
+                "attribute_line_ids"
+            ],
+            1
+        );
+
+        if (!template) {
+            throw new Error(`Product template ${templateId} not found`);
+        }
+
+        const [variants, images] = await Promise.all([
+            this.getProductVariants(templateId),
+            this.getProductImages(templateId)
+        ]);
+
+        return { template, variants, images };
+    }
 }
 
 export const odoo = new OdooClient();
+

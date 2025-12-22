@@ -6,13 +6,14 @@ import { client } from "@/sanity/lib/client";
 import { PRODUCTS_BY_IDS_QUERY } from "@/lib/sanity/queries/products";
 import { getOrCreateStripeCustomer } from "@/lib/actions/customer";
 
-if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error("STRIPE_SECRET_KEY is not defined");
+function getStripe() {
+  if (!process.env.STRIPE_SECRET_KEY) {
+    throw new Error("STRIPE_SECRET_KEY is not defined");
+  }
+  return new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: "2025-12-15.clover" as any,
+  });
 }
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2025-12-15.clover" as any,
-});
 
 // Types
 interface CartItem {
@@ -133,7 +134,7 @@ export async function createCheckoutSession(
       (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
       "http://localhost:3000";
 
-    const session = await stripe.checkout.sessions.create({
+    const session = await getStripe().checkout.sessions.create({
       mode: "payment",
       payment_method_types: ["card"],
       line_items: lineItems,
@@ -219,7 +220,7 @@ export async function getCheckoutSession(sessionId: string) {
       return { success: false, error: "Not authenticated" };
     }
 
-    const session = await stripe.checkout.sessions.retrieve(sessionId, {
+    const session = await getStripe().checkout.sessions.retrieve(sessionId, {
       expand: ["line_items", "customer_details"],
     });
 
@@ -247,5 +248,88 @@ export async function getCheckoutSession(sessionId: string) {
   } catch (error) {
     console.error("Get session error:", error);
     return { success: false, error: "Could not retrieve order details" };
+  }
+}
+
+/**
+ * Creates a Stripe Checkout Session for grooming services
+ */
+export async function createGroomingCheckoutSession(
+  bookingId: string,
+  bookingNumber: string,
+  petName: string,
+  packageName: string,
+  price: number,
+  appointmentDate: string
+): Promise<CheckoutResult> {
+  try {
+    // 1. Verify user is authenticated
+    const { userId } = await auth();
+    const user = await currentUser();
+
+    if (!userId || !user) {
+      return { success: false, error: "Please sign in to checkout" };
+    }
+
+    // 2. Get or create Stripe customer
+    const userEmail = user.emailAddresses[0]?.emailAddress ?? "";
+    const userName =
+      `${user.firstName ?? ""} ${user.lastName ?? ""}`.trim() || userEmail;
+
+    const { stripeCustomerId, sanityCustomerId } =
+      await getOrCreateStripeCustomer(userEmail, userName, userId);
+
+    // 3. Create Stripe line item for grooming
+    const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [
+      {
+        price_data: {
+          currency: "tzs",
+          product_data: {
+            name: `${packageName} Grooming for ${petName}`,
+            description: `Grooming appointment on ${new Date(appointmentDate).toLocaleDateString()}`,
+            metadata: {
+              bookingId,
+              type: "grooming",
+            },
+          },
+          unit_amount: price, // Already in smallest unit (TZS)
+        },
+        quantity: 1,
+      },
+    ];
+
+    // 4. Prepare metadata
+    const metadata = {
+      clerkUserId: userId,
+      userEmail,
+      sanityCustomerId,
+      bookingId,
+      bookingNumber,
+      type: "grooming",
+    };
+
+    // 5. Create Stripe Checkout Session
+    const baseUrl =
+      process.env.NEXT_PUBLIC_BASE_URL ||
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
+      "http://localhost:3000";
+
+    const session = await getStripe().checkout.sessions.create({
+      mode: "payment",
+      payment_method_types: ["card"],
+      line_items: lineItems,
+      customer: stripeCustomerId,
+      metadata,
+      success_url: `${baseUrl}/grooming?booking=${bookingNumber}&paid=true`,
+      cancel_url: `${baseUrl}/grooming?booking=${bookingNumber}`,
+    });
+
+    return { success: true, url: session.url ?? undefined };
+  } catch (error) {
+    console.error("Grooming checkout error:", error);
+    return {
+      success: false,
+      error: "Something went wrong. Please try again.",
+    };
   }
 }

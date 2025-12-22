@@ -28,29 +28,10 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
   const selectedImage = images[selectedIndex];
 
   return (
-    <div className="space-y-4">
-      {/* Main Image */}
-      <div className="relative aspect-square overflow-hidden rounded-lg bg-zinc-100 dark:bg-zinc-800">
-        {selectedImage?.asset?.url ? (
-          <Image
-            src={selectedImage.asset.url}
-            alt={productName ?? "Product image"}
-            fill
-            unoptimized
-            className="object-contain"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            priority
-          />
-        ) : (
-          <div className="flex h-full items-center justify-center text-zinc-400">
-            No image
-          </div>
-        )}
-      </div>
-
-      {/* Thumbnail Grid */}
+    <div className="flex flex-col gap-4 md:flex-row">
+      {/* Thumbnail Strip (Desktop: Left, Mobile: Bottom/Scroll) */}
       {images.length > 1 && (
-        <div className="grid grid-cols-4 gap-2 sm:grid-cols-5 md:grid-cols-6">
+        <div className="order-2 flex gap-3 overflow-x-auto pb-2 md:order-1 md:h-[500px] md:w-24 md:flex-col md:overflow-y-auto md:pb-0 scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-700">
           {images.map((image, index) => (
             <button
               key={image._key}
@@ -59,10 +40,10 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
               aria-label={`View image ${index + 1}`}
               aria-pressed={selectedIndex === index}
               className={cn(
-                "relative aspect-square overflow-hidden rounded-md bg-zinc-100 transition-all dark:bg-zinc-800",
+                "relative aspect-square h-20 w-20 flex-shrink-0 overflow-hidden rounded-md bg-zinc-100 transition-all dark:bg-zinc-800 md:h-24 md:w-24",
                 selectedIndex === index
-                  ? "ring-2 ring-zinc-900 dark:ring-zinc-100"
-                  : "hover:opacity-75",
+                  ? "ring-2 ring-blue-500 ring-offset-2 dark:ring-offset-zinc-900"
+                  : "opacity-70 hover:opacity-100",
               )}
             >
               {image.asset?.url ? (
@@ -83,6 +64,25 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
           ))}
         </div>
       )}
+
+      {/* Main Image */}
+      <div className="order-1 relative aspect-square w-full overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 md:order-2 md:aspect-auto md:h-[500px] md:flex-1">
+        {selectedImage?.asset?.url ? (
+          <Image
+            src={selectedImage.asset.url}
+            alt={productName ?? "Product image"}
+            fill
+            unoptimized
+            className="object-contain p-2"
+            sizes="(max-width: 768px) 100vw, 80vw"
+            priority
+          />
+        ) : (
+          <div className="flex h-full items-center justify-center text-zinc-400">
+            No image
+          </div>
+        )}
+      </div>
     </div>
   );
 }

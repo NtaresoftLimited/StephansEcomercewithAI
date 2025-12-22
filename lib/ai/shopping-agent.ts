@@ -1,9 +1,13 @@
 import { gateway, type Tool, ToolLoopAgent } from "ai";
 import { searchProductsTool } from "./tools/search-products";
 import { createGetMyOrdersTool } from "./tools/get-my-orders";
+import { createBookGroomingTool, getGroomingPricesTool } from "./tools/book-grooming";
+import { createCheckoutTool } from "./tools/create-checkout";
 
 interface ShoppingAgentOptions {
   userId: string | null;
+  userEmail?: string | null;
+  userName?: string | null;
 }
 
 const baseInstructions = `You are Sky, a friendly shopping assistant for Stephan's Pet Store - Tanzania's premier destination for pet lovers.
@@ -84,15 +88,6 @@ The tool returns products with these fields:
 - ⚠️ Warn clearly if a product is OUT OF STOCK or LOW STOCK
 - Suggest alternatives if something is unavailable
 
-## Grooming Services
-
-We also offer professional pet grooming services! If users ask about grooming:
-- Standard Package: TZS 45,000 - 70,000 (bath, blow dry, ear cleaning)
-- Premium Package: TZS 50,000 - 80,000 (includes nail trim, teeth brushing)
-- Super Premium Package: TZS 60,000 - 90,000 (includes flea treatment, paw balm)
-
-Direct them to the grooming page: [Book Grooming](/grooming)
-
 ## Response Style
 - Be warm, friendly, and enthusiastic about pets!
 - Keep responses concise
@@ -100,6 +95,79 @@ Direct them to the grooming page: [Book Grooming](/grooming)
 - Always include prices in TZS (Tanzania Shillings)
 - Link to products using markdown: [Name](/products/slug)
 - Add fun pet-related emojis when appropriate 🐕 🐈 🐾`;
+
+const groomingInstructions = `
+
+## Grooming Services 🐾
+
+We offer professional pet grooming services! You have TWO tools for grooming:
+
+### getGroomingPrices Tool
+Use this when users ask about grooming costs, packages, or want to know prices before booking.
+
+### bookGrooming Tool
+Use this to book a grooming appointment. **IMPORTANT:** You must collect ALL required information before calling this tool:
+
+1. **Pet Type**: Dog or Cat
+2. **Pet Name**: The pet's name
+3. **Breed Size**: 
+   - Dogs: mini, small, medium, or large
+   - Cats: kitten or adult_cat
+4. **Package**: standard, premium, or super_premium
+5. **Appointment Date**: In YYYY-MM-DD format
+6. **Appointment Time**: In HH:mm format (e.g., "14:00")
+7. **Phone Number**: Customer's contact number
+
+### Conversational Booking Flow
+When a user wants to book grooming, guide them step by step:
+
+1. Ask what type of pet (dog or cat)
+2. Ask the pet's name
+3. Ask about the size/age
+4. Present package options with prices
+5. Ask preferred date and time
+6. Confirm phone number
+7. Only then call bookGrooming with all the details
+
+### Package Information
+**Standard Package** (TZS 45,000-70,000):
+- Bath with premium shampoo
+- Blow dry and brushing
+- Ear cleaning
+
+**Premium Package** (TZS 50,000-80,000):
+- Everything in Standard PLUS:
+- Nail trimming
+- Teeth brushing
+
+**Super Premium Package** (TZS 60,000-90,000):
+- Everything in Premium PLUS:
+- Flea/tick treatment
+- Paw balm application
+- Finishing cologne
+
+**Additional Service:**
+- Detangling: +30,000 TZS
+
+### After Booking
+Once booking is confirmed, present:
+- Booking number
+- Pet name and service details
+- Appointment date/time
+- Total price
+- Mention they can pay at the store or ask about online payment
+
+### Grooming Payments
+If the user wants to pay for grooming online:
+1. Ensure the booking is confirmed first (you need the booking details)
+2. Use the \`createCheckout\` tool with type="grooming"
+3. Provide the checkout link to the user
+
+## Product Payments
+If the user wants to buy products they've found:
+1. Confirm which products and quantities they want
+2. Use the \`createCheckout\` tool with type="product"
+3. Provide the checkout link to the user`;
 
 const ordersInstructions = `
 
@@ -142,19 +210,27 @@ The user is not signed in. If they ask about orders, politely let them know they
 /**
  * Creates a shopping agent with tools based on user authentication status
  */
-export function createShoppingAgent({ userId }: ShoppingAgentOptions) {
+export function createShoppingAgent({ userId, userEmail, userName }: ShoppingAgentOptions) {
   const isAuthenticated = !!userId;
 
   // Build instructions based on authentication
-  const instructions = isAuthenticated
-    ? baseInstructions + ordersInstructions
-    : baseInstructions + notAuthenticatedInstructions;
+  let instructions = baseInstructions + groomingInstructions;
 
-  // Build tools - only include orders tool if authenticated
+  if (isAuthenticated) {
+    instructions += ordersInstructions;
+  } else {
+    instructions += notAuthenticatedInstructions;
+  }
+
+  // Build tools
   const getMyOrdersTool = createGetMyOrdersTool(userId);
+  const bookGroomingTool = createBookGroomingTool(userId, userEmail || null, userName || null);
 
   const tools: Record<string, Tool> = {
     searchProducts: searchProductsTool,
+    getGroomingPrices: getGroomingPricesTool,
+    bookGrooming: bookGroomingTool,
+    createCheckout: createCheckoutTool,
   };
 
   if (getMyOrdersTool) {

@@ -113,6 +113,81 @@ export const productType = defineType({
       ],
     }),
     defineField({
+      name: "variants",
+      title: "Product Variants",
+      type: "array",
+      group: "inventory",
+      description: "Size/weight variants with different prices (e.g., 400g, 3kg, 10kg, 20kg)",
+      of: [
+        {
+          type: "object",
+          name: "productVariant",
+          title: "Variant",
+          fields: [
+            {
+              name: "name",
+              type: "string",
+              title: "Variant Name",
+              description: "e.g., '3kg', '10kg', 'Small', 'Large'",
+              validation: (rule: any) => rule.required(),
+            },
+            {
+              name: "sku",
+              type: "string",
+              title: "SKU",
+              description: "Unique stock keeping unit",
+            },
+            {
+              name: "price",
+              type: "number",
+              title: "Price (TZS)",
+              description: "Price for this variant",
+              validation: (rule: any) => rule.required().positive(),
+            },
+            {
+              name: "compareAtPrice",
+              type: "number",
+              title: "Compare At Price (TZS)",
+              description: "Original price for showing discounts",
+            },
+            {
+              name: "stock",
+              type: "number",
+              title: "Stock",
+              description: "Available quantity for this variant",
+              initialValue: 0,
+              validation: (rule: any) => rule.min(0),
+            },
+            {
+              name: "weight",
+              type: "string",
+              title: "Weight",
+              description: "e.g., '400g', '3kg'",
+            },
+            {
+              name: "odooVariantId",
+              type: "number",
+              title: "Odoo Variant ID",
+              description: "Internal Odoo product.product ID",
+            },
+          ],
+          preview: {
+            select: {
+              title: "name",
+              price: "price",
+              weight: "weight",
+            },
+            prepare({ title, price, weight }: { title?: string; price?: number; weight?: string }) {
+              return {
+                title: title || weight || "Variant",
+                subtitle: price ? `TZS ${price.toLocaleString()}` : "",
+              };
+            },
+          },
+        },
+      ],
+    }),
+    defineField({
       name: "featured",
       type: "boolean",
       group: "inventory",

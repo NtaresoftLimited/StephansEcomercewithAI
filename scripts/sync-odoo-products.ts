@@ -14,8 +14,54 @@ const client = createClient({
     token: process.env.SANITY_API_WRITE_TOKEN,
 });
 
+interface SanityImage {
+    _type: 'image';
+    _key: string;
+    asset: {
+        _type: 'reference';
+        _ref: string;
+    };
+}
+
+interface SanityVariant {
+    _type: 'productVariant';
+    _key: string;
+    name: string;
+    sku?: string;
+    price: number;
+    stock: number;
+    weight?: string;
+    odooVariantId: number;
+}
+
+/**
+ * Upload a base64 image to Sanity
+ */
+async function uploadImage(base64Data: string, filename: string): Promise<SanityImage | null> {
+    if (!base64Data || base64Data.length < 100) return null;
+
+    try {
+        const buffer = Buffer.from(base64Data, 'base64');
+        const asset = await client.assets.upload('image', buffer, {
+            filename,
+            contentType: 'image/jpeg'
+        });
+        return {
+            _type: 'image',
+            _key: uuidv4(),
+            asset: {
+                _type: 'reference',
+                _ref: asset._id
+            }
+        };
+    } catch (error) {
+        console.error(`  - Failed to upload image: ${filename}`);
+        return null;
+    }
+}
+
 async function syncOdoo() {
-    console.log("🚀 Starting Aggressive Odoo to Sanity Sync...");
+    console.log("🚀 Starting Enhanced Odoo to Sanity Sync (with images & variants)...");
 
     try {
         // 1. CLEAR EVERYTHING (except categories)
@@ -43,35 +89,68 @@ async function syncOdoo() {
         const odooProducts = await odoo.searchRead(
             "product.template",
             [["sale_ok", "=", true]],
-            ["name", "list_price", "description_sale", "categ_id", "qty_available", "image_1920", "id"],
-            100 // Sync up to 100 products
+            ["name", "list_price", "description_sale", "categ_id", "qty_available", "image_1920", "id", "product_variant_count"],
+            100
         );
         console.log(`Fetched ${odooProducts.length} products from Odoo.`);
 
-        // 4. Import Products
+        // 4. Import Products with all images and variants
         for (const op of odooProducts) {
             console.log(`Processing: ${op.name}...`);
 
-            // Image processing
-            let mainImage = null;
-            if (op.image_1920 && op.image_1920.length > 100) { // Basic check for valid base64
-                try {
-                    const buffer = Buffer.from(op.image_1920, 'base64');
-                    const asset = await client.assets.upload('image', buffer, {
-                        filename: `odoo-${op.id}.jpg`,
-                        contentType: 'image/jpeg'
-                    });
-                    mainImage = {
-                        _type: 'image',
-                        _key: uuidv4(),
-                        asset: {
-                            _type: 'reference',
-                            _ref: asset._id
+            // Collect all images
+            const allImages: SanityImage[] = [];
+
+            // Main image
+            const mainImage = await uploadImage(op.image_1920, `odoo-${op.id}-main.jpg`);
+            if (mainImage) {
+                allImages.push(mainImage);
+            }
+
+            // Fetch additional images from product.image model
+            try {
+                const additionalImages = await odoo.getProductImages(op.id);
+                console.log(`  - Found ${additionalImages.length} additional images`);
+
+                for (let i = 0; i < additionalImages.length; i++) {
+                    const img = additionalImages[i];
+                    if (img.image_1920) {
+                        const uploadedImg = await uploadImage(
+                            img.image_1920,
+                            `odoo-${op.id}-img-${i + 1}.jpg`
+                        );
+                        if (uploadedImg) {
+                            allImages.push(uploadedImg);
                         }
-                    };
-                } catch (imgError) {
-                    console.error(`  - Failed image: ${op.name}`);
+                    }
                 }
+            } catch (imgError) {
+                console.log(`  - No additional images or error fetching`);
+            }
+
+            // Fetch product variants
+            const variants: SanityVariant[] = [];
+            try {
+                const odooVariants = await odoo.getProductVariants(op.id);
+                console.log(`  - Found ${odooVariants.length} variants`);
+
+                for (const variant of odooVariants) {
+                    // Only add variants if product has more than 1 variant
+                    if (odooVariants.length > 1 || variant.display_name !== op.name) {
+                        variants.push({
+                            _type: 'productVariant',
+                            _key: uuidv4(),
+                            name: variant.display_name || variant.name,
+                            sku: variant.default_code || undefined,
+                            price: variant.lst_price || variant.list_price || op.list_price || 0,
+                            stock: Math.max(0, Math.floor(variant.qty_available || 0)),
+                            weight: variant.weight ? `${variant.weight}kg` : undefined,
+                            odooVariantId: variant.id
+                        });
+                    }
+                }
+            } catch (variantError) {
+                console.log(`  - No variants or error fetching`);
             }
 
             // Category mapping
@@ -89,7 +168,7 @@ async function syncOdoo() {
                 categoryRef = { _type: 'reference', _ref: sanityCategories[0]._id };
             }
 
-            // Create
+            // Create product document
             try {
                 await client.create({
                     _type: 'product',
@@ -105,17 +184,18 @@ async function syncOdoo() {
                     price: op.list_price || 0,
                     stock: Math.max(0, Math.floor(op.qty_available || 0)),
                     category: categoryRef,
-                    images: mainImage ? [mainImage] : [],
+                    images: allImages.length > 0 ? allImages : [],
+                    variants: variants.length > 0 ? variants : undefined,
                     odooId: op.id,
                     featured: Math.random() > 0.8
                 });
-                console.log(`  - ✅ Synced: ${op.name}`);
+                console.log(`  - ✅ Synced: ${op.name} (${allImages.length} images, ${variants.length} variants)`);
             } catch (err) {
-                console.error(`  - ❌ Error: ${op.name}`);
+                console.error(`  - ❌ Error: ${op.name}`, err);
             }
         }
 
-        console.log("✨ Odoo Sync Finished!");
+        console.log("✨ Enhanced Odoo Sync Finished!");
 
     } catch (error) {
         console.error("🏁 Sync Failed:", error);
@@ -123,3 +203,4 @@ async function syncOdoo() {
 }
 
 syncOdoo();
+

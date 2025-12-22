@@ -26,6 +26,7 @@ import {
   RevertButton,
   ImageUploader,
   DeleteButton,
+  VariantEditor,
 } from "@/components/admin";
 
 const MATERIALS = [
@@ -375,43 +376,53 @@ function ProductDetailContent({ handle }: { handle: DocumentHandle }) {
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Sidebar */}
-        <div className="space-y-6">
-          {/* Image Upload */}
+
+          {/* Variants */}
           <div className="rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900 sm:p-6">
             <h2 className="mb-4 font-semibold text-zinc-900 dark:text-zinc-100">
-              Product Images
+              Variants
             </h2>
-            <ImageUploader {...handle} />
-            <div className="mt-4">
-              <Suspense fallback={null}>
-                <ProductStoreLink {...handle} />
-              </Suspense>
-            </div>
-          </div>
-
-          {/* Studio Link */}
-          <div className="rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900 sm:p-6">
-            <h2 className="font-semibold text-zinc-900 dark:text-zinc-100">
-              Advanced Editing
-            </h2>
-            <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
-              Set category and other options in Sanity Studio.
-            </p>
-            <Link
-              href={`/studio/structure/product;${handle.documentId}`}
-              target="_blank"
-              className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-zinc-900 hover:text-zinc-600 dark:text-zinc-100 dark:hover:text-zinc-300"
-            >
-              Open in Studio
-              <ExternalLink className="h-3.5 w-3.5" />
-            </Link>
+            <VariantEditor {...handle} />
           </div>
         </div>
       </div>
+
+      {/* Sidebar */}
+      <div className="space-y-6">
+        {/* Image Upload */}
+        <div className="rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900 sm:p-6">
+          <h2 className="mb-4 font-semibold text-zinc-900 dark:text-zinc-100">
+            Product Images
+          </h2>
+          <ImageUploader {...handle} />
+          <div className="mt-4">
+            <Suspense fallback={null}>
+              <ProductStoreLink {...handle} />
+            </Suspense>
+          </div>
+        </div>
+
+        {/* Studio Link */}
+        <div className="rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900 sm:p-6">
+          <h2 className="font-semibold text-zinc-900 dark:text-zinc-100">
+            Advanced Editing
+          </h2>
+          <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+            Set category and other options in Sanity Studio.
+          </p>
+          <Link
+            href={`/studio/structure/product;${handle.documentId}`}
+            target="_blank"
+            className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-zinc-900 hover:text-zinc-600 dark:text-zinc-100 dark:hover:text-zinc-300"
+          >
+            Open in Studio
+            <ExternalLink className="h-3.5 w-3.5" />
+          </Link>
+        </div>
+      </div>
     </div>
+
   );
 }
 
