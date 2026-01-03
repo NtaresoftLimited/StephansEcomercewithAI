@@ -115,9 +115,8 @@ patch(ControlButtons.prototype, {
     async applyDiscountWithinProducts(applicableLines, pc, discount_type) {
         // Apply discount using standard Odoo mechanism
         for (const line of applicableLines) {
-            // Get the original product price
-            const product = line.get_product();
-            const originalPrice = product.lst_price;
+            // Get the current unit price (accounts for pricelists/manual edits)
+            const originalPrice = line.get_unit_price();
 
             // Calculate discount percentage
             let discountPercentage = 0;
@@ -130,12 +129,12 @@ patch(ControlButtons.prototype, {
                 // Get quantity for accurate percentage calculation
                 const quantity = line.get_quantity();
 
-                if (quantity && quantity !== 0) {
+                if (quantity && quantity !== 0 && originalPrice && originalPrice !== 0) {
                     // Distribute the fixed amount across ALL units in the line
                     // Formula: (FixedAmount / (UnitPrice * Quantity)) * 100
                     discountPercentage = (fixedDiscountPerLine / (originalPrice * quantity)) * 100;
                 } else {
-                    // Fallback if quantity is zero (shouldn't happen for valid lines)
+                    // Fallback to avoid division by zero or invalid data
                     discountPercentage = 0;
                 }
 
