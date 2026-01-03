@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <!-- Extend the Orderline template to show fixed discount badge -->
+    <t t-name="pos_dynamic_discount.OrderlineDiscount" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension">
+        
+        <!-- Securely attach only if we can find product name -->
+        <xpath expr="//div[hasclass('product-name')]" position="inside">
+            <!-- Defensive check: ensure line exists and function exists or property exists -->
+            <t t-if="props.line">
+                <t t-set="fixedAmount" t-value="props.line.getFixedDiscountAmount ? props.line.getFixedDiscountAmount() : (props.line.fixed_discount_amount || 0)"/>
+                
+                <t t-if="fixedAmount > 0">
+                    <span class="orderline-discount-badge" style="vertical-align: middle; margin-left: 8px;">
+                        With a <t t-esc="Math.round(fixedAmount)"/> discount
+                    </span>
+                </t>
+            </t>
+        </xpath>
+        
+        <!-- Fallback section -->
+        <xpath expr="//li[hasclass('orderline')]" position="inside">
+            <t t-if="props.line">
+                <t t-set="fixedAmount" t-value="props.line.getFixedDiscountAmount ? props.line.getFixedDiscountAmount() : (props.line.fixed_discount_amount || 0)"/>
+                
+                <t t-if="fixedAmount > 0">
+                    <div class="discount-info-line" style="display:none; color: #92400e; font-size: 0.8em; padding-left: 10px;">
+                        fixed discount: <t t-esc="Math.round(fixedAmount)"/>
+                    </div>
+                </t>
+            </t>
+        </xpath>
+    </t>
+
+</templates>
