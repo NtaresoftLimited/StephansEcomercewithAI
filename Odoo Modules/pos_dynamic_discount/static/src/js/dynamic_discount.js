@@ -126,7 +126,18 @@ patch(ControlButtons.prototype, {
             if (discount_type === 'amount') {
                 // For fixed amount, calculate equivalent percentage for each product
                 fixedDiscountPerLine = Math.abs(pc) / applicableLines.length;
-                discountPercentage = (fixedDiscountPerLine / originalPrice) * 100;
+
+                // Get quantity for accurate percentage calculation
+                const quantity = line.get_quantity();
+
+                if (quantity && quantity !== 0) {
+                    // Distribute the fixed amount across ALL units in the line
+                    // Formula: (FixedAmount / (UnitPrice * Quantity)) * 100
+                    discountPercentage = (fixedDiscountPerLine / (originalPrice * quantity)) * 100;
+                } else {
+                    // Fallback if quantity is zero (shouldn't happen for valid lines)
+                    discountPercentage = 0;
+                }
 
                 // Round to 2 decimal places
                 discountPercentage = Math.round(discountPercentage * 100) / 100;
