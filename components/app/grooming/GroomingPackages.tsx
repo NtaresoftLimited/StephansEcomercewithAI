@@ -2,123 +2,7 @@
 
 import { Check, Dog, Cat } from "lucide-react";
 import { useState } from "react";
-
-// Price data
-const DOG_PACKAGES = {
-    standard: {
-        name: "Standard Package",
-        prices: {
-            mini: 45000,
-            small: 50000,
-            medium: 60000,
-            large: 70000,
-        },
-        services: [
-            "Warm bath",
-            "Blow dry",
-            "Ear cleaning",
-            "Brush out",
-            "Sanitary trim (if needed)",
-        ],
-        color: "from-[#8b5a2b] to-[#6b3e1e]",
-    },
-    premium: {
-        name: "Premium Package",
-        prices: {
-            mini: 50000,
-            small: 60000,
-            medium: 70000,
-            large: 80000,
-        },
-        services: [
-            "Warm Deep Clean Bath",
-            "Blow dry",
-            "Ear cleaning",
-            "Full Hair Cut or Styling",
-            "Nail Trim",
-            "Teeth Brushing",
-        ],
-        color: "from-[#6b3e1e] to-[#4a2c14]",
-        popular: true,
-    },
-    super_premium: {
-        name: "Super Premium Package",
-        prices: {
-            mini: 60000,
-            small: 75000,
-            medium: 85000,
-            large: 90000,
-        },
-        services: [
-            "Warm Deep Clean Bath",
-            "Blow dry",
-            "Ear cleaning",
-            "Full Hair Cut or Styling",
-            "Nail Trim",
-            "Teeth Brushing",
-            "De-shedding",
-            "Flea & Tick Treatment",
-            "Soothing Paw Balm",
-            "Finishing Touches",
-        ],
-        color: "from-[#4a2c14] to-[#2d1a0d]",
-    },
-};
-
-const CAT_PACKAGES = {
-    standard: {
-        name: "Standard Package",
-        prices: {
-            kitten: 45000,
-            adult_cat: 60000,
-        },
-        services: [
-            "Warm bath",
-            "Blow dry",
-            "Ear cleaning",
-            "Brush out",
-            "Sanitary trim (if needed)",
-        ],
-        color: "from-[#8b5a2b] to-[#6b3e1e]",
-    },
-    premium: {
-        name: "Premium Package",
-        prices: {
-            kitten: 60000,
-            adult_cat: 75000,
-        },
-        services: [
-            "Warm Deep Clean Bath",
-            "Blow dry",
-            "Ear cleaning",
-            "Full Hair Cut or Styling",
-            "Nail Trim",
-            "Teeth Brushing",
-        ],
-        color: "from-[#6b3e1e] to-[#4a2c14]",
-        popular: true,
-    },
-    super_premium: {
-        name: "Super Premium Package",
-        prices: {
-            kitten: 75000,
-            adult_cat: 85000,
-        },
-        services: [
-            "Warm Deep Clean Bath",
-            "Blow dry",
-            "Ear cleaning",
-            "Full Hair Cut or Styling",
-            "Nail Trim",
-            "Teeth Brushing",
-            "De-shedding",
-            "Flea & Tick Treatment",
-            "Soothing Paw Balm",
-            "Finishing Touches",
-        ],
-        color: "from-[#4a2c14] to-[#2d1a0d]",
-    },
-};
+import { PRICES, DOG_PACKAGES, CAT_PACKAGES, SIZE_LABELS } from "@/lib/constants/grooming";
 
 function formatPrice(price: number) {
     return new Intl.NumberFormat("en-TZ", {
@@ -138,14 +22,6 @@ interface PackageCardProps {
 
 function PackageCard({ name, prices, services, color, popular, petType }: PackageCardProps) {
     const priceEntries = Object.entries(prices);
-    const sizeLabels: Record<string, string> = {
-        mini: "Mini Breeds",
-        small: "Small Breeds",
-        medium: "Medium Breeds",
-        large: "Large Breeds",
-        kitten: "Kittens (2-7 months)",
-        adult_cat: "Adults (7+ months)",
-    };
 
     return (
         <div className={`relative rounded-2xl bg-white dark:bg-zinc-900 shadow-xl overflow-hidden ${popular ? "ring-2 ring-[#6b3e1e]" : ""}`}>
@@ -165,7 +41,7 @@ function PackageCard({ name, prices, services, color, popular, petType }: Packag
                     {priceEntries.map(([size, price]) => (
                         <div key={size} className="flex justify-between items-center">
                             <span className="text-sm text-zinc-600 dark:text-zinc-400">
-                                {sizeLabels[size]}
+                                {SIZE_LABELS[size]}
                             </span>
                             <span className="font-bold text-zinc-900 dark:text-white">
                                 {formatPrice(price)}
@@ -200,8 +76,22 @@ function PackageCard({ name, prices, services, color, popular, petType }: Packag
     );
 }
 
-export function GroomingPackages() {
+interface GroomingPackagesProps {
+    prices?: typeof PRICES;
+}
+
+export function GroomingPackages({ prices = PRICES }: GroomingPackagesProps) {
     const [activeTab, setActiveTab] = useState<"dog" | "cat">("dog");
+
+    const getPackage = (petType: "dog" | "cat", pkgKey: "standard" | "premium" | "super_premium") => {
+        const pkgData = petType === "dog" ? DOG_PACKAGES[pkgKey] : CAT_PACKAGES[pkgKey];
+        const dynamicPrices = prices?.[petType]?.[pkgKey];
+        
+        return {
+            ...pkgData,
+            prices: dynamicPrices || pkgData.prices
+        };
+    };
 
     return (
         <section id="packages" className="py-16 px-4 bg-[#f5ebe0]/50 dark:bg-zinc-900/50">
@@ -219,8 +109,8 @@ export function GroomingPackages() {
                         <button
                             onClick={() => setActiveTab("dog")}
                             className={`flex items-center gap-2 rounded-full px-6 py-2 font-semibold transition-all ${activeTab === "dog"
-                                    ? "bg-white dark:bg-zinc-700 text-[#6b3e1e] shadow-md"
-                                    : "text-zinc-500 hover:text-zinc-700"
+                                ? "bg-white dark:bg-zinc-700 text-[#6b3e1e] shadow-md"
+                                : "text-zinc-500 hover:text-zinc-700"
                                 }`}
                         >
                             <Dog className="h-5 w-5" />
@@ -229,8 +119,8 @@ export function GroomingPackages() {
                         <button
                             onClick={() => setActiveTab("cat")}
                             className={`flex items-center gap-2 rounded-full px-6 py-2 font-semibold transition-all ${activeTab === "cat"
-                                    ? "bg-white dark:bg-zinc-700 text-[#6b3e1e] shadow-md"
-                                    : "text-zinc-500 hover:text-zinc-700"
+                                ? "bg-white dark:bg-zinc-700 text-[#6b3e1e] shadow-md"
+                                : "text-zinc-500 hover:text-zinc-700"
                                 }`}
                         >
                             <Cat className="h-5 w-5" />
@@ -243,15 +133,15 @@ export function GroomingPackages() {
                 <div className="grid gap-6 md:grid-cols-3">
                     {activeTab === "dog" ? (
                         <>
-                            <PackageCard petType="dog" {...DOG_PACKAGES.standard} />
-                            <PackageCard petType="dog" {...DOG_PACKAGES.premium} />
-                            <PackageCard petType="dog" {...DOG_PACKAGES.super_premium} />
+                            <PackageCard petType="dog" {...getPackage("dog", "standard")} />
+                            <PackageCard petType="dog" {...getPackage("dog", "premium")} />
+                            <PackageCard petType="dog" {...getPackage("dog", "super_premium")} />
                         </>
                     ) : (
                         <>
-                            <PackageCard petType="cat" {...CAT_PACKAGES.standard} />
-                            <PackageCard petType="cat" {...CAT_PACKAGES.premium} />
-                            <PackageCard petType="cat" {...CAT_PACKAGES.super_premium} />
+                            <PackageCard petType="cat" {...getPackage("cat", "standard")} />
+                            <PackageCard petType="cat" {...getPackage("cat", "premium")} />
+                            <PackageCard petType="cat" {...getPackage("cat", "super_premium")} />
                         </>
                     )}
                 </div>
@@ -261,18 +151,26 @@ export function GroomingPackages() {
                     <h3 className="font-bold text-zinc-900 dark:text-white mb-4">
                         Additional Charges
                     </h3>
-                    <div className="grid gap-4 sm:grid-cols-3">
+                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         <div className="flex justify-between">
                             <span className="text-zinc-600 dark:text-zinc-400">Detangling Hair</span>
                             <span className="font-semibold text-[#6b3e1e]">30,000 TZS</span>
                         </div>
                         <div className="flex justify-between">
-                            <span className="text-zinc-600 dark:text-zinc-400">Late Pickup (per hour)</span>
-                            <span className="font-semibold text-[#6b3e1e]">10,000 TZS</span>
+                            <span className="text-zinc-600 dark:text-zinc-400">Emergency (after 6:30 PM)</span>
+                            <span className="font-semibold text-[#6b3e1e]">30,000 TZS</span>
                         </div>
                         <div className="flex justify-between">
                             <span className="text-zinc-600 dark:text-zinc-400">Handling Fee</span>
-                            <span className="font-semibold text-[#6b3e1e]">20,000 TZS</span>
+                            <span className="font-semibold text-[#6b3e1e]">10,000 TZS</span>
+                        </div>
+                        <div className="flex justify-between">
+                            <span className="text-zinc-600 dark:text-zinc-400">Sedation (Vet Supervision)</span>
+                            <span className="font-semibold text-[#6b3e1e]">5,000 TZS</span>
+                        </div>
+                        <div className="flex justify-between">
+                            <span className="text-zinc-600 dark:text-zinc-400">Late Pickup (per hour)</span>
+                            <span className="font-semibold text-[#6b3e1e]">10,000 TZS</span>
                         </div>
                     </div>
                 </div>

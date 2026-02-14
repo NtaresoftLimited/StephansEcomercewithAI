@@ -62,6 +62,12 @@ export const productType = defineType({
       validation: (rule) => [rule.required().error("Category is required")],
     }),
     defineField({
+      name: "brand",
+      type: "reference",
+      to: [{ type: "brand" }],
+      group: "details",
+    }),
+    defineField({
       name: "material",
       type: "string",
       group: "details",

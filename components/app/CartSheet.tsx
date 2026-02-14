@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertTriangle, Loader2, ShoppingBag } from "lucide-react";
+import { AlertTriangle, Loader2, ShoppingBag, X, Minus, Plus, Trash2 } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -16,6 +16,7 @@ import {
 import { useCartStock } from "@/lib/hooks/useCartStock";
 import { CartItem } from "./CartItem";
 import { CartSummary } from "./CartSummary";
+import { Button } from "@/components/ui/button";
 
 export function CartSheet() {
   const items = useCartItems();
@@ -26,42 +27,50 @@ export function CartSheet() {
 
   return (
     <Sheet open={isOpen} onOpenChange={(open) => !open && closeCart()}>
-      <SheetContent className="flex w-full flex-col sm:max-w-lg gap-0">
-        <SheetHeader className="border-b border-zinc-200 dark:border-zinc-800">
-          <SheetTitle className="flex items-center gap-2">
-            <ShoppingBag className="h-5 w-5" />
-            Shopping Cart ({totalItems})
-            {isLoading && (
-              <Loader2 className="h-4 w-4 animate-spin text-zinc-400" />
-            )}
+      <SheetContent className="flex w-full flex-col sm:max-w-md gap-0 bg-background border-l border-border p-0">
+        <SheetHeader className="px-6 py-4 border-b border-border flex flex-row items-center justify-between space-y-0">
+          <SheetTitle className="flex items-center gap-2 text-lg font-medium text-foreground tracking-wide">
+            <ShoppingBag className="h-4 w-4" />
+            Cart <span className="text-muted-foreground font-normal">({totalItems})</span>
           </SheetTitle>
+           {/* Close button is handled by Sheet primitive, but we can style content if needed */}
         </SheetHeader>
 
         {items.length === 0 ? (
-          <div className="flex flex-1 flex-col items-center justify-center text-center">
-            <ShoppingBag className="h-12 w-12 text-zinc-300 dark:text-zinc-600" />
-            <h3 className="mt-4 text-lg font-medium text-zinc-900 dark:text-zinc-100">
+          <div className="flex flex-1 flex-col items-center justify-center text-center p-6">
+            <div className="h-16 w-16 rounded-full bg-secondary/30 flex items-center justify-center mb-4">
+                <ShoppingBag className="h-8 w-8 text-foreground/40" />
+            </div>
+            <h3 className="text-lg font-medium text-foreground">
               Your cart is empty
             </h3>
-            <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-              Add some items to get started
+            <p className="mt-2 text-sm text-muted-foreground max-w-xs">
+              Looks like you haven't added anything yet. Explore our products to find something for your pet.
             </p>
+            <Button 
+                onClick={closeCart}
+                className="mt-6 rounded-full bg-foreground text-background hover:bg-foreground/90 px-8"
+            >
+                Start Shopping
+            </Button>
           </div>
         ) : (
           <>
-            {/* Stock Issues Banner */}
+            {/* Stock Issues Banner - Minimalist */}
             {hasStockIssues && !isLoading && (
-              <div className="flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800 dark:border-amber-800 dark:bg-amber-950/50 dark:text-amber-200">
-                <AlertTriangle className="h-4 w-4 shrink-0" />
-                <span>
-                  Some items have stock issues. Please review before checkout.
-                </span>
+              <div className="bg-amber-50/50 border-b border-amber-100 px-6 py-3">
+                <div className="flex items-start gap-3">
+                  <AlertTriangle className="h-4 w-4 text-amber-600 mt-0.5 shrink-0" />
+                  <p className="text-xs text-amber-800 font-medium leading-relaxed">
+                    Some items in your cart have availability issues. Please review before checking out.
+                  </p>
+                </div>
               </div>
             )}
 
-            {/* Cart Items */}
-            <div className="flex-1 overflow-y-auto px-5">
-              <div className="space-y-2 py-2 divide-y divide-zinc-200 dark:divide-zinc-800">
+            {/* Cart Items List */}
+            <div className="flex-1 overflow-y-auto px-6 py-4">
+              <div className="space-y-6">
                 {items.map((item) => (
                   <CartItem
                     key={item.productId}
@@ -72,8 +81,10 @@ export function CartSheet() {
               </div>
             </div>
 
-            {/* Summary */}
-            <CartSummary hasStockIssues={hasStockIssues} />
+            {/* Footer / Summary */}
+            <div className="bg-secondary/10 border-t border-border p-6">
+                <CartSummary hasStockIssues={hasStockIssues} />
+            </div>
           </>
         )}
       </SheetContent>

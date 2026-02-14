@@ -21,9 +21,11 @@ export const MATERIALS = [
 ] as const;
 
 export const SORT_OPTIONS = [
-  { value: "name", label: "Name (A-Z)" },
+  { value: "popular", label: "Most Popular" },
+  { value: "rated", label: "Most Rated" },
   { value: "price_asc", label: "Price: Low to High" },
   { value: "price_desc", label: "Price: High to Low" },
+  { value: "name", label: "Name (A-Z)" },
   { value: "relevance", label: "Relevance" },
 ] as const;
 

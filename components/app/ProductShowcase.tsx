@@ -106,7 +106,7 @@ export function ProductShowcase({ products }: ProductShowcaseProps) {
                             }}
                             plugins={[
                                 Autoplay({
-                                    delay: 15000,
+                                    delay: 120000,
                                     stopOnInteraction: false,
                                     stopOnMouseEnter: true,
                                 }),

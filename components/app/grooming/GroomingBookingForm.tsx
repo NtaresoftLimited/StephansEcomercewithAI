@@ -4,39 +4,17 @@ import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { Calendar, Clock, Dog, Cat, Check } from "lucide-react";
 import { createGroomingBooking } from "@/lib/actions/grooming";
-
-// Price lookup
-const PRICES: Record<string, Record<string, Record<string, number>>> = {
-    dog: {
-        standard: { mini: 45000, small: 50000, medium: 60000, large: 70000 },
-        premium: { mini: 50000, small: 60000, medium: 70000, large: 80000 },
-        super_premium: { mini: 60000, small: 75000, medium: 85000, large: 90000 },
-    },
-    cat: {
-        standard: { kitten: 45000, adult_cat: 60000 },
-        premium: { kitten: 60000, adult_cat: 75000 },
-        super_premium: { kitten: 75000, adult_cat: 85000 },
-    },
-};
-
-const BREED_SIZES = {
-    dog: [
-        { value: "mini", label: "Mini Breeds" },
-        { value: "small", label: "Small Breeds" },
-        { value: "medium", label: "Medium Breeds" },
-        { value: "large", label: "Large Breeds" },
-    ],
-    cat: [
-        { value: "kitten", label: "Kitten (2-7 months)" },
-        { value: "adult_cat", label: "Adult Cat (7+ months)" },
-    ],
-};
+import { PRICES, BREED_SIZES, VALID_TIMES, SIZE_LABELS, DOG_PACKAGES, CAT_PACKAGES } from "@/lib/constants/grooming";
 
 function formatPrice(price: number) {
     return new Intl.NumberFormat("en-TZ").format(price) + " TZS";
 }
 
-export function GroomingBookingForm() {
+interface GroomingBookingFormProps {
+    prices?: typeof PRICES;
+}
+
+export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProps) {
     const { user, isSignedIn } = useUser();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
@@ -59,9 +37,27 @@ export function GroomingBookingForm() {
     // Calculate price
     const calculatePrice = () => {
         if (!formData.package || !formData.breedSize) return 0;
-        const basePrice = PRICES[formData.petType]?.[formData.package]?.[formData.breedSize] || 0;
+        const basePrice = prices[formData.petType]?.[formData.package]?.[formData.breedSize] || 0;
         const detanglingFee = formData.detangling ? 30000 : 0;
         return basePrice + detanglingFee;
+    };
+
+    const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const dateStr = e.target.value;
+        if (!dateStr) {
+            setFormData({ ...formData, appointmentDate: "" });
+            return;
+        }
+        
+        const date = new Date(dateStr);
+        if (date.getDay() === 0) { // 0 is Sunday
+            setError("We are closed on Sundays. Please select another day.");
+            setFormData({ ...formData, appointmentDate: "" });
+            return;
+        }
+        
+        setError(null);
+        setFormData({ ...formData, appointmentDate: dateStr });
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -72,7 +68,6 @@ export function GroomingBookingForm() {
         try {
             const result = await createGroomingBooking({
                 ...formData,
-                price: calculatePrice(),
                 clerkUserId: user?.id,
             });
 
@@ -255,7 +250,7 @@ export function GroomingBookingForm() {
                                 required
                                 min={new Date().toISOString().split("T")[0]}
                                 value={formData.appointmentDate}
-                                onChange={(e) => setFormData({ ...formData, appointmentDate: e.target.value })}
+                                onChange={handleDateChange}
                                 className="w-full rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-700 px-4 py-3 text-zinc-900 dark:text-white focus:border-amber-500 focus:ring-amber-500"
                             />
                         </div>
@@ -272,13 +267,11 @@ export function GroomingBookingForm() {
                                 className="w-full rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-700 px-4 py-3 text-zinc-900 dark:text-white focus:border-amber-500 focus:ring-amber-500"
                             >
                                 <option value="">Select time</option>
-                                <option value="09:00">9:00 AM</option>
-                                <option value="10:00">10:00 AM</option>
-                                <option value="11:00">11:00 AM</option>
-                                <option value="12:00">12:00 PM</option>
-                                <option value="14:00">2:00 PM</option>
-                                <option value="15:00">3:00 PM</option>
-                                <option value="16:00">4:00 PM</option>
+                                {VALID_TIMES.map((time) => (
+                                    <option key={time.value} value={time.value}>
+                                        {time.label}
+                                    </option>
+                                ))}
                             </select>
                         </div>
 
@@ -358,6 +351,32 @@ export function GroomingBookingForm() {
                     {/* Price Summary */}
                     {formData.package && formData.breedSize && (
                         <div className="mt-6 rounded-lg bg-[#6b3e1e]/10 p-4">
+                            {/* Breakdown */}
+                            <div className="space-y-2 mb-3 border-b border-[#6b3e1e]/20 pb-3">
+                                <div className="flex justify-between text-sm">
+                                    <span className="text-zinc-600 dark:text-zinc-400">
+                                        {(formData.petType === 'dog' ? DOG_PACKAGES : CAT_PACKAGES)[formData.package as keyof typeof DOG_PACKAGES]?.name || formData.package}
+                                        {' '}
+                                        <span className="text-xs opacity-80">
+                                            ({SIZE_LABELS[formData.breedSize] || formData.breedSize})
+                                        </span>
+                                    </span>
+                                    <span className="font-medium text-zinc-900 dark:text-zinc-100">
+                                        {formatPrice(PRICES[formData.petType]?.[formData.package]?.[formData.breedSize] || 0)}
+                                    </span>
+                                </div>
+                                {formData.detangling && (
+                                    <div className="flex justify-between text-sm">
+                                        <span className="text-zinc-600 dark:text-zinc-400">
+                                            Detangling Fee
+                                        </span>
+                                        <span className="font-medium text-zinc-900 dark:text-zinc-100">
+                                            {formatPrice(30000)}
+                                        </span>
+                                    </div>
+                                )}
+                            </div>
+
                             <div className="flex justify-between items-center">
                                 <span className="font-semibold text-zinc-700 dark:text-zinc-300">
                                     Total Price:

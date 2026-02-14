@@ -2,7 +2,6 @@ import { gateway, type Tool, ToolLoopAgent } from "ai";
 import { searchProductsTool } from "./tools/search-products";
 import { createGetMyOrdersTool } from "./tools/get-my-orders";
 import { createBookGroomingTool, getGroomingPricesTool } from "./tools/book-grooming";
-import { createCheckoutTool } from "./tools/create-checkout";
 
 interface ShoppingAgentOptions {
   userId: string | null;
@@ -155,19 +154,7 @@ Once booking is confirmed, present:
 - Pet name and service details
 - Appointment date/time
 - Total price
-- Mention they can pay at the store or ask about online payment
-
-### Grooming Payments
-If the user wants to pay for grooming online:
-1. Ensure the booking is confirmed first (you need the booking details)
-2. Use the \`createCheckout\` tool with type="grooming"
-3. Provide the checkout link to the user
-
-## Product Payments
-If the user wants to buy products they've found:
-1. Confirm which products and quantities they want
-2. Use the \`createCheckout\` tool with type="product"
-3. Provide the checkout link to the user`;
+- Let them know they can visit the store or pay at the location`;
 
 const ordersInstructions = `
 
@@ -230,7 +217,6 @@ export function createShoppingAgent({ userId, userEmail, userName }: ShoppingAge
     searchProducts: searchProductsTool,
     getGroomingPrices: getGroomingPricesTool,
     bookGrooming: bookGroomingTool,
-    createCheckout: createCheckoutTool,
   };
 
   if (getMyOrdersTool) {

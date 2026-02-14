@@ -13,25 +13,46 @@ import { AppShell } from "@/components/app/AppShell";
 import { MobileFooterNav } from "@/components/app/MobileFooterNav";
 
 function AppLayout({ children }: { children: React.ReactNode }) {
+  const hasClerk = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
   return (
-    <ClerkProvider>
-      <CartStoreProvider>
-        <WishlistStoreProvider>
-          <ChatStoreProvider>
-            <AppShell>
-              <Header />
-              <main>{children}</main>
-              <Footer />
-              <MobileFooterNav />
-            </AppShell>
-            <CartSheet />
-            <ChatSheet />
-            <Toaster position="bottom-center" />
-            <SanityLive />
-          </ChatStoreProvider>
-        </WishlistStoreProvider>
-      </CartStoreProvider>
-    </ClerkProvider>
+    hasClerk
+      ? (
+        <ClerkProvider>
+          <CartStoreProvider>
+            <WishlistStoreProvider>
+              <ChatStoreProvider>
+                <AppShell>
+                  <Header />
+                  <main>{children}</main>
+                  <Footer />
+                  <MobileFooterNav />
+                </AppShell>
+                <CartSheet />
+                {hasClerk && <ChatSheet />}
+                <Toaster position="bottom-center" />
+                {process.env.SANITY_API_READ_TOKEN && <SanityLive />}
+              </ChatStoreProvider>
+            </WishlistStoreProvider>
+          </CartStoreProvider>
+        </ClerkProvider>
+      ) : (
+        <CartStoreProvider>
+          <WishlistStoreProvider>
+            <ChatStoreProvider>
+              <AppShell>
+                <Header />
+                <main>{children}</main>
+                <Footer />
+                <MobileFooterNav />
+              </AppShell>
+              <CartSheet />
+              {hasClerk && <ChatSheet />}
+              <Toaster position="bottom-center" />
+              {process.env.SANITY_API_READ_TOKEN && <SanityLive />}
+            </ChatStoreProvider>
+          </WishlistStoreProvider>
+        </CartStoreProvider>
+      )
   );
 }
 

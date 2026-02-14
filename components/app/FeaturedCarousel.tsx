@@ -77,7 +77,7 @@ export function FeaturedCarousel({ products }: FeaturedCarouselProps) {
         }}
         plugins={[
           Autoplay({
-            delay: 15000, // 15 seconds between slides
+            delay: 120000,
             stopOnInteraction: false,
             stopOnMouseEnter: true,
           }),

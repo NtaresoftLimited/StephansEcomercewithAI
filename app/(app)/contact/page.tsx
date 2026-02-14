@@ -11,7 +11,7 @@ const HOURS = [
     { day: "Wednesday", time: "9 AM – 8:30 PM" },
     { day: "Thursday", time: "9 AM – 8:30 PM" },
     { day: "Friday", time: "9 AM – 8:30 PM" },
-    { day: "Saturday", time: "9 AM – 8:30 PM" },
+    { day: "Saturday", time: "10 AM – 8:30 PM" },
     { day: "Sunday", time: "Closed" },
 ];
 
@@ -97,12 +97,20 @@ export default function ContactPage() {
                                         </div>
                                         <div>
                                             <h3 className="font-medium text-zinc-900">Phone</h3>
-                                            <a
-                                                href="tel:+255786627873"
-                                                className="text-zinc-500 text-sm hover:text-[#6b3e1e] transition-colors"
-                                            >
-                                                +255 786 627 873
-                                            </a>
+                                            <div className="flex flex-col gap-1">
+                                                <a
+                                                    href="tel:+255786627873"
+                                                    className="text-zinc-500 text-sm hover:text-[#6b3e1e] transition-colors"
+                                                >
+                                                    +255 786 627 873
+                                                </a>
+                                                <a
+                                                    href="tel:+255769324445"
+                                                    className="text-zinc-500 text-sm hover:text-[#6b3e1e] transition-colors"
+                                                >
+                                                    +255 769 324 445
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
 

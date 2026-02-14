@@ -1,6 +1,7 @@
 
 import * as dotenv from "dotenv";
 dotenv.config({ path: ".env.local" });
+dotenv.config({ path: ".env" });
 
 import { createClient } from "@sanity/client";
 import { odoo } from "../lib/odoo/client";
@@ -89,7 +90,7 @@ async function syncOdoo() {
         const odooProducts = await odoo.searchRead(
             "product.template",
             [["sale_ok", "=", true]],
-            ["name", "list_price", "description_sale", "categ_id", "qty_available", "image_1920", "id", "product_variant_count"],
+            ["name", "list_price", "description_sale", "categ_id", "qty_available", "image_1920", "id", "product_variant_count", "brand_id"],
             100
         );
         console.log(`Fetched ${odooProducts.length} products from Odoo.`);
@@ -184,6 +185,7 @@ async function syncOdoo() {
                     price: op.list_price || 0,
                     stock: Math.max(0, Math.floor(op.qty_available || 0)),
                     category: categoryRef,
+                    brand: op.brand_id ? { _type: 'reference', _ref: `brand-odoo-${op.brand_id[0]}` } : undefined,
                     images: allImages.length > 0 ? allImages : [],
                     variants: variants.length > 0 ? variants : undefined,
                     odooId: op.id,

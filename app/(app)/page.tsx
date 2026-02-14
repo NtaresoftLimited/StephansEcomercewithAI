@@ -16,6 +16,9 @@ import { FeaturedCarouselSkeleton } from "@/components/app/FeaturedCarouselSkele
 import { AdoptionSection } from "@/components/app/AdoptionSection";
 import { GroomingSection } from "@/components/app/GroomingSection";
 import { CategoryTabs } from "@/components/app/CategoryTabs";
+import { AutoRotatingProductGrid } from "@/components/app/AutoRotatingProductGrid";
+import { BrandsSection } from "@/components/app/BrandsSection";
+import { odoo } from "@/lib/odoo/client";
 
 interface PageProps {
   searchParams: Promise<{
@@ -95,6 +98,15 @@ export default async function HomePage({ searchParams }: PageProps) {
     query: GROOMING_IMAGES_QUERY,
   });
 
+  // Fetch Odoo brands
+  let brands: any[] = [];
+  try {
+    brands = await odoo.getBrands();
+  } catch (error) {
+    console.error("Failed to fetch brands:", error);
+    // Continue without brands if Odoo is down
+  }
+
   // Extract image URLs
   const dogImages = petImages?.dogImages?.map((img: any) => img.url).filter((url: any): url is string => !!url) ?? [];
   const catImages = petImages?.catImages?.map((img: any) => img.url).filter((url: any): url is string => !!url) ?? [];
@@ -105,33 +117,46 @@ export default async function HomePage({ searchParams }: PageProps) {
   return (
     <div className="min-h-screen bg-background">
       {/* PAW Section - Main Hero */}
-      <AdoptionSection
-        dogImages={dogImages}
-        catImages={catImages}
-        birdImages={birdImages}
-        fishImages={fishImages}
-      />
+      <section className="pt-20"> {/* Add padding for fixed header */}
+        <AdoptionSection
+          dogImages={dogImages}
+          catImages={catImages}
+          birdImages={birdImages}
+          fishImages={fishImages}
+        />
+      </section>
+
+      {/* Brands Section */}
+      <BrandsSection brands={brands} />
 
       {/* Featured Products - JoJo's Style Grid (Section 3) */}
       {featuredProducts.length > 0 && (
-        <Suspense fallback={<FeaturedCarouselSkeleton />}>
-          <ProductShowcase products={featuredProducts} />
-        </Suspense>
+        <section className="py-24 md:py-32 bg-secondary/20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-12 text-center">
+            <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-foreground">Featured Collections</h2>
+            <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">Curated selection of our finest products.</p>
+          </div>
+          <Suspense fallback={<FeaturedCarouselSkeleton />}>
+            <ProductShowcase products={featuredProducts} />
+          </Suspense>
+        </section>
       )}
 
       {/* Grooming Section (Section 2) */}
-      <GroomingSection images={groomingImageUrls} />
+      <section className="py-24 md:py-32">
+        <GroomingSection images={groomingImageUrls} />
+      </section>
 
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        {/* Category Quick Filters */}
-        <CategoryTabs />
-
-        <ProductSection
-          categories={categories}
-          products={products}
-          searchQuery={searchQuery}
-        />
-      </div>
+      {/* All Products */}
+      <section className="py-24 md:py-32 bg-background border-t border-border">
+        <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8">
+          <div className="mb-16 text-center">
+            <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-foreground">Explore Everything</h2>
+            <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">Everything your pet needs, all in one place.</p>
+          </div>
+          <AutoRotatingProductGrid products={products} />
+        </div>
+      </section>
     </div>
   );
 }

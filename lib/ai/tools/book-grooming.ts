@@ -96,13 +96,12 @@ If the user hasn't provided all information, ask for it conversationally before 
                     };
                 }
 
-                // Create the booking
+                // Create the booking (price is calculated server-side for security)
                 const result = await createGroomingBooking({
                     petType,
                     petName,
                     breedSize,
                     package: packageType,
-                    price,
                     appointmentDate,
                     appointmentTime,
                     customerName: userName || "Guest",

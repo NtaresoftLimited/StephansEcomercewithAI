@@ -108,6 +108,17 @@ export class OdooClient {
     }
 
     /**
+     * Get all brands (product.brand)
+     */
+    async getBrands(): Promise<any[]> {
+        return this.searchRead(
+            "product.brand",
+            [],
+            ["id", "name", "logo"]
+        );
+    }
+
+    /**
      * Get product attribute values (e.g., sizes, weights, colors)
      */
     async getProductAttributeValues(attributeIds: number[]): Promise<any[]> {
@@ -139,6 +150,7 @@ export class OdooClient {
                 "categ_id",
                 "qty_available",
                 "image_1920",
+                "brand_id",
                 "product_variant_ids",
                 "attribute_line_ids"
             ],
@@ -155,6 +167,46 @@ export class OdooClient {
         ]);
 
         return { template, variants, images };
+    }
+    /**
+     * Get a brand by its slug (name)
+     * Performs a case-insensitive search
+     */
+    async getBrandBySlug(slug: string): Promise<any | null> {
+        // Simple slug to name conversion (replace dashes with spaces)
+        // Adjust logic if you have a specific slug field in Odoo
+        const name = slug.replace(/-/g, " ");
+
+        const brands = await this.searchRead(
+            "product.brand",
+            [["name", "ilike", name]],
+            ["id", "name", "logo"],
+            1
+        );
+
+        return brands.length > 0 ? brands[0] : null;
+    }
+
+    /**
+     * Get products for a specific brand
+     */
+    async getProductsByBrand(brandId: number): Promise<any[]> {
+        return this.searchRead(
+            "product.template",
+            [
+                ["brand_id", "=", brandId],
+                ["sale_ok", "=", true],
+                ["website_published", "=", true]
+            ],
+            [
+                "id",
+                "name",
+                "list_price",
+                "description_sale",
+                "image_1920",
+                "default_code"
+            ]
+        );
     }
 }
 

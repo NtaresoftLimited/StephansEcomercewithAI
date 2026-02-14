@@ -74,7 +74,7 @@ export function AdoptionSection({
     const fishImage = fishImages[fishIdx] || defaultFish;
 
     return (
-        <section className="relative w-full min-h-screen bg-white overflow-x-hidden flex items-center justify-center pt-4 pb-8">
+        <section className="relative w-full h-[600px] md:h-[700px] bg-white overflow-x-hidden flex items-center justify-center pt-4 pb-8">
             {/* Video Background */}
             <div className="absolute inset-0 z-0 overflow-hidden">
                 <video
@@ -82,6 +82,8 @@ export function AdoptionSection({
                     muted
                     loop
                     playsInline
+                    preload="none"
+                    onError={() => { }}
                     className="absolute inset-0 w-full h-full object-cover opacity-30"
                 >
                     <source src="/pet-store-video.mp4" type="video/mp4" />
