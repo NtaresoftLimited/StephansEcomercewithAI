@@ -8,6 +8,7 @@ import {
   FILTER_PRODUCTS_BY_RELEVANCE_QUERY,
 } from "@/lib/sanity/queries/products";
 import { ALL_CATEGORIES_QUERY } from "@/lib/sanity/queries/categories";
+import { ALL_BRANDS_QUERY } from "@/lib/sanity/queries/brands";
 import { HERO_PET_IMAGES_QUERY } from "@/lib/sanity/queries/heroImages";
 import { GROOMING_IMAGES_QUERY } from "@/lib/sanity/queries/groomingImages";
 import { ProductSection } from "@/components/app/ProductSection";
@@ -18,7 +19,7 @@ import { GroomingSection } from "@/components/app/GroomingSection";
 import { CategoryTabs } from "@/components/app/CategoryTabs";
 import { AutoRotatingProductGrid } from "@/components/app/AutoRotatingProductGrid";
 import { BrandsSection } from "@/components/app/BrandsSection";
-import { odoo } from "@/lib/odoo/client";
+import { ConsultationCTA } from "@/components/app/ConsultationCTA";
 
 interface PageProps {
   searchParams: Promise<{
@@ -98,14 +99,10 @@ export default async function HomePage({ searchParams }: PageProps) {
     query: GROOMING_IMAGES_QUERY,
   });
 
-  // Fetch Odoo brands
-  let brands: any[] = [];
-  try {
-    brands = await odoo.getBrands();
-  } catch (error) {
-    console.error("Failed to fetch brands:", error);
-    // Continue without brands if Odoo is down
-  }
+  // Fetch brands from Sanity
+  const { data: brands } = await sanityFetch({
+    query: ALL_BRANDS_QUERY,
+  });
 
   // Extract image URLs
   const dogImages = petImages?.dogImages?.map((img: any) => img.url).filter((url: any): url is string => !!url) ?? [];
@@ -126,13 +123,10 @@ export default async function HomePage({ searchParams }: PageProps) {
         />
       </section>
 
-      {/* Brands Section */}
-      <BrandsSection brands={brands} />
-
       {/* Featured Products - JoJo's Style Grid (Section 3) */}
       {featuredProducts.length > 0 && (
-        <section className="py-24 md:py-32 bg-secondary/20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-12 text-center">
+        <section className="py-16 md:py-24 bg-secondary/20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-8 text-center">
             <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-foreground">Featured Collections</h2>
             <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">Curated selection of our finest products.</p>
           </div>
@@ -143,9 +137,7 @@ export default async function HomePage({ searchParams }: PageProps) {
       )}
 
       {/* Grooming Section (Section 2) */}
-      <section className="py-24 md:py-32">
-        <GroomingSection images={groomingImageUrls} />
-      </section>
+      <GroomingSection images={groomingImageUrls} />
 
       {/* All Products */}
       <section className="py-24 md:py-32 bg-background border-t border-border">
@@ -157,6 +149,12 @@ export default async function HomePage({ searchParams }: PageProps) {
           <AutoRotatingProductGrid products={products} />
         </div>
       </section>
+
+      {/* Brands Section */}
+      <BrandsSection brands={brands} />
+
+      {/* Consultation CTA */}
+      <ConsultationCTA />
     </div>
   );
 }

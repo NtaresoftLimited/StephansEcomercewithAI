@@ -34,9 +34,9 @@ export function GroomingSection({ images }: GroomingSectionProps) {
 
     return (
         <section className="w-full">
-            <div className="relative overflow-hidden bg-primary/90 py-24 md:py-32">
+            <div className="relative overflow-hidden bg-primary/90 py-16 md:py-20">
                 <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="flex flex-col items-center justify-between gap-12 md:flex-row">
+                    <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
                         <div className="max-w-xl space-y-6 text-primary-foreground text-center md:text-left">
                             <h2 className="text-3xl font-medium tracking-wide sm:text-4xl lg:text-5xl">
                                 Spoil Your Pet

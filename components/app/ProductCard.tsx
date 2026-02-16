@@ -63,7 +63,7 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="group relative flex flex-col">
       <Link href={`/products/${product.slug}`} className="block relative">
-        <div className="relative aspect-[3/4] overflow-hidden bg-secondary/30 rounded-lg">
+        <div className="relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-transparent group-hover:border-zinc-200 dark:group-hover:border-zinc-700 transition-colors">
           {displayedImageUrl ? (
             <Image
               src={displayedImageUrl}
@@ -83,7 +83,7 @@ export function ProductCard({ product }: ProductCardProps) {
             <button
               onClick={handleQuickAdd}
               disabled={isOutOfStock}
-              className="w-full h-10 bg-white/90 backdrop-blur-sm text-foreground hover:bg-white transition-colors rounded-md text-xs font-medium tracking-wide uppercase shadow-sm"
+              className="w-full h-10 bg-white text-zinc-900 border border-zinc-200 hover:bg-zinc-900 hover:text-white transition-colors text-xs font-bold tracking-widest uppercase shadow-sm"
             >
               {isOutOfStock ? "Out of Stock" : "Quick Add"}
             </button>
@@ -91,15 +91,8 @@ export function ProductCard({ product }: ProductCardProps) {
 
           {/* Minimalist Badges */}
           {isOutOfStock && (
-            <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-sm">
-              <span className="text-[10px] font-medium uppercase tracking-wider text-destructive">Sold Out</span>
-            </div>
-          )}
-          {product.category && !isOutOfStock && (
-            <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <span className="text-[10px] font-medium uppercase tracking-wider text-foreground/70">
-                {product.category.title}
-              </span>
+            <div className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm px-2 py-1">
+              <span className="text-[9px] font-bold uppercase tracking-wider text-red-600">Sold Out</span>
             </div>
           )}
         </div>
@@ -117,20 +110,20 @@ export function ProductCard({ product }: ProductCardProps) {
             {formatPrice(product.price)}
           </p>
           {/* Optional: Minimalist Stock Indicator if low stock */}
-           {!isOutOfStock && stock < 5 && (
-              <span className="text-[10px] text-orange-500 font-medium">
-                Only {stock} left
-              </span>
-           )}
+          {!isOutOfStock && stock < 5 && (
+            <span className="text-[10px] text-orange-500 font-medium">
+              Only {stock} left
+            </span>
+          )}
         </div>
       </div>
-      
+
       {/* Thumbnail Interaction (Optional - can be removed for strict minimalism, but kept for function) */}
-       {hasMultipleImages && (
+      {hasMultipleImages && (
         <div className="mt-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 h-1">
-             {/* Using invisible hover zones or small dots could be cleaner, but for now just hiding standard thumbnails unless hovered */}
+          {/* Using invisible hover zones or small dots could be cleaner, but for now just hiding standard thumbnails unless hovered */}
         </div>
-       )}
+      )}
     </div>
   );
 }

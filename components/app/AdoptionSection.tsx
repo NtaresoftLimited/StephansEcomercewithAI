@@ -77,7 +77,7 @@ export function AdoptionSection({
         <section className="relative w-full h-[600px] md:h-[700px] bg-white overflow-x-hidden flex items-center justify-center pt-4 pb-8">
             {/* Video Background */}
             <div className="absolute inset-0 z-0 overflow-hidden">
-                <video
+                {/* <video
                     autoPlay
                     muted
                     loop
@@ -87,7 +87,9 @@ export function AdoptionSection({
                     className="absolute inset-0 w-full h-full object-cover opacity-30"
                 >
                     <source src="/pet-store-video.mp4" type="video/mp4" />
-                </video>
+                </video> */}
+                {/* Fallback image/color if video is missing */}
+                <div className="absolute inset-0 w-full h-full bg-secondary/10" />
                 {/* Gradient overlay - transparent top to white bottom */}
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white" />
             </div>
@@ -123,8 +125,7 @@ export function AdoptionSection({
                     <div className="absolute left-1/2 bottom-0 w-[72%] h-[52%] -translate-x-1/2">
                         <svg viewBox="0 0 717 478" className="w-full h-full drop-shadow-lg" preserveAspectRatio="xMidYMax meet">
                             <path
-                                d="M717,373.9c0,65.17-50.06,104.1-133.95,104.1c-90.4,0-150.78-46.83-224.55-46.83
-                c-73.14,0-133.36,46.83-224.55,46.83C50.06,478,0,439.07,0,373.9C0,229.21,210.23,0,358.5,0S717,229.22,717,373.9"
+                                d="M717,373.9c0,65.17-50.06,104.1-133.95,104.1c-90.4,0-150.78-46.83-224.55-46.83c-73.14,0-133.36,46.83-224.55,46.83C50.06,478,0,439.07,0,373.9C0,229.21,210.23,0,358.5,0S717,229.22,717,373.9"
                                 className="fill-secondary"
                             />
                         </svg>

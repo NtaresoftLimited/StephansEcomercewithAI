@@ -1,55 +1,59 @@
-"use client";
-
-import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { odoo } from "@/lib/odoo/client";
+import Image from "next/image";
 
 interface Brand {
-    id: number;
-    name: string;
-    logo?: string;
+  _id: string;
+  name: string;
+  slug: string;
+  logo?: string;
+  description?: string;
 }
 
-export function BrandsSection({ brands }: { brands: Brand[] }) {
-    if (!brands || brands.length === 0) return null;
+interface BrandsSectionProps {
+  brands: Brand[];
+}
 
-    return (
-        <section className="py-16 bg-white">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                        Our Brands
-                    </h2>
-                    <p className="mt-4 text-lg text-gray-500">
-                        Trusted by pet parents, approved by pets.
-                    </p>
-                </div>
+export function BrandsSection({ brands }: BrandsSectionProps) {
+  if (!brands || brands.length === 0) return null;
 
-                <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-6">
-                    {brands.map((brand) => (
-                        <Link
-                            key={brand.id}
-                            href={`/brands/${brand.name.toLowerCase().replace(/\s+/g, '-')}`}
-                            className="flex items-center justify-center p-6 bg-gray-50 rounded-xl hover:shadow-lg transition-all duration-300 group hover:bg-white border border-transparent hover:border-gray-100"
-                        >
-                            <div className="relative w-full h-24 flex items-center justify-center">
-                                {brand.logo ? (
-                                    <img
-                                        src={`data:image/png;base64,${brand.logo}`}
-                                        alt={brand.name}
-                                        className="max-h-full max-w-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                                    />
-                                ) : (
-                                    <span className="text-lg font-semibold text-gray-400 group-hover:text-primary transition-colors">
-                                        {brand.name}
-                                    </span>
-                                )}
-                            </div>
-                        </Link>
-                    ))}
+  return (
+    <section className="py-24 bg-zinc-50 dark:bg-black border-t border-zinc-200 dark:border-zinc-800">
+      <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8">
+        <div className="mb-12 text-center">
+          <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-foreground uppercase">
+            Our Brands
+          </h2>
+          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+            Top quality brands for your beloved pets
+          </p>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center justify-items-center">
+          {brands.map((brand) => (
+            <Link 
+              key={brand._id} 
+              href={`/products?q=${encodeURIComponent(brand.name)}`}
+              className="group relative w-full aspect-[3/2] flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 rounded-lg p-4"
+            >
+              {brand.logo ? (
+                <div className="relative w-full h-full">
+                    <Image
+                      src={brand.logo}
+                      alt={brand.name}
+                      fill
+                      className="object-contain"
+                      sizes="(max-width: 768px) 50vw, 16vw"
+                    />
                 </div>
-            </div>
-        </section>
-    );
+              ) : (
+                <span className="text-lg font-bold text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100">
+                  {brand.name}
+                </span>
+              )}
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }

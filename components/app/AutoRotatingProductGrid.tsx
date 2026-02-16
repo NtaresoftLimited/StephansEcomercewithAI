@@ -43,7 +43,7 @@ export function AutoRotatingProductGrid({ products }: AutoRotatingProductGridPro
     const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
 
     // Auto-rotation effect
-    useEffect(() => {
+    /* useEffect(() => {
         if (products.length <= ITEMS_PER_PAGE) return;
 
         const timer = setInterval(() => {
@@ -57,7 +57,7 @@ export function AutoRotatingProductGrid({ products }: AutoRotatingProductGridPro
         }, 1000);
 
         return () => clearInterval(timer);
-    }, [currentPage, totalPages, products.length]);
+    }, [currentPage, totalPages, products.length]); */
 
     const handlePageChange = (newPage: number) => {
         setIsTransitioning(true);

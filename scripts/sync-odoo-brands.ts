@@ -38,14 +38,23 @@ async function uploadLogo(base64Data: string, filename: string) {
 }
 
 async function syncBrands() {
-    console.log("🚀 Syncing Brands from Odoo to Sanity...");
+    console.log("🚀 Syncing Brands from Odoo to Sanity (Full CRUD)...");
 
     try {
+        // 1. Fetch Brands from Odoo
         const odooBrands = await odoo.getBrands();
         console.log(`Fetched ${odooBrands.length} brands from Odoo.`);
+        
+        // Map of Odoo IDs for quick lookup
+        const odooBrandIds = new Set(odooBrands.map((b: any) => b.id));
 
+        // 2. Fetch Existing Brands from Sanity
+        const sanityBrands = await client.fetch(`*[_type == "brand"]{_id, odooId, name}`);
+        console.log(`Fetched ${sanityBrands.length} existing brands from Sanity.`);
+
+        // 3. Create or Update Brands
         for (const brand of odooBrands) {
-            console.log(`Processing Brand: ${brand.name}...`);
+            console.log(`Processing Brand: ${brand.name} (ID: ${brand.id})...`);
 
             const logoAsset = await uploadLogo(brand.logo, `brand-${brand.id}.png`);
 
@@ -60,11 +69,32 @@ async function syncBrands() {
                         .replace(/^-+|-+$/g, '')
                 },
                 logo: logoAsset || undefined,
-                odooId: brand.id
+                odooId: brand.id,
+                description: brand.description || undefined
             };
 
             await client.createOrReplace(sanityBrand);
-            console.log(`  - ✅ Synced: ${brand.name}`);
+            console.log(`  - ✅ Synced (Create/Update): ${brand.name}`);
+        }
+
+        // 4. Delete Obsolete Brands (that exist in Sanity but not in Odoo)
+        // We filter for brands that have an odooId (meaning they were synced from Odoo)
+        // If a brand was created manually in Sanity without odooId, we keep it (safe mode)
+        const brandsToDelete = sanityBrands.filter((sb: any) => sb.odooId && !odooBrandIds.has(sb.odooId));
+        
+        if (brandsToDelete.length > 0) {
+            console.log(`🗑️ Found ${brandsToDelete.length} obsolete brands to delete...`);
+            const transaction = client.transaction();
+            
+            for (const brand of brandsToDelete) {
+                console.log(`  - Deleting: ${brand.name} (Odoo ID: ${brand.odooId})`);
+                transaction.delete(brand._id);
+            }
+            
+            await transaction.commit();
+            console.log("  - ✅ Deletion complete.");
+        } else {
+            console.log("  - No brands to delete.");
         }
 
         console.log("✨ Brand Sync Finished!");

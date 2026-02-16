@@ -13,7 +13,7 @@ const PRODUCT_FILTER_CONDITIONS = `
   && ($material == "" || material == $material)
   && ($minPrice == 0 || price >= $minPrice)
   && ($maxPrice == 0 || price <= $maxPrice)
-  && ($searchQuery == "" || name match $searchQuery + "*" || description match $searchQuery + "*")
+  && ($searchQuery == "" || name match $searchQuery + "*" || description match $searchQuery + "*" || brand->name match $searchQuery + "*")
   && ($inStock == false || stock > 0)
 `;
 
@@ -35,6 +35,10 @@ const FILTERED_PRODUCT_PROJECTION = `{
     title,
     "slug": slug.current
   },
+  brand->{
+    name,
+    "slug": slug.current
+  },
   material,
   color,
   stock
@@ -43,6 +47,7 @@ const FILTERED_PRODUCT_PROJECTION = `{
 /** Scoring for relevance-based search */
 const RELEVANCE_SCORE = `score(
   boost(name match $searchQuery + "*", 3),
+  boost(brand->name match $searchQuery + "*", 2),
   boost(description match $searchQuery + "*", 1)
 )`;
 
@@ -190,7 +195,16 @@ export const PRODUCT_BY_SLUG_QUERY = defineQuery(`*[
   dimensions,
   stock,
   featured,
-  assemblyRequired
+  assemblyRequired,
+  "variants": variants[]{
+    name,
+    sku,
+    price,
+    compareAtPrice,
+    stock,
+    weight,
+    odooVariantId
+  }
 }`);
 
 // ============================================
@@ -208,9 +222,11 @@ export const SEARCH_PRODUCTS_QUERY = defineQuery(`*[
   && (
     name match $searchQuery + "*"
     || description match $searchQuery + "*"
+    || brand->name match $searchQuery + "*"
   )
 ] | score(
   boost(name match $searchQuery + "*", 3),
+  boost(brand->name match $searchQuery + "*", 2),
   boost(description match $searchQuery + "*", 1)
 ) | order(_score desc) {
   _id,

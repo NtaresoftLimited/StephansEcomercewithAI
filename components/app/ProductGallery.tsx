@@ -19,7 +19,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
 
   if (!images || images.length === 0) {
     return (
-      <div className="flex aspect-square items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-800">
+      <div className="flex aspect-square items-center justify-center bg-zinc-50 dark:bg-zinc-800">
         <span className="text-zinc-400">No images available</span>
       </div>
     );
@@ -28,22 +28,21 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
   const selectedImage = images[selectedIndex];
 
   return (
-    <div className="flex flex-col gap-4 md:flex-row">
-      {/* Thumbnail Strip (Desktop: Left, Mobile: Bottom/Scroll) */}
+    <div className="flex flex-col-reverse gap-4 md:flex-row">
+      {/* Thumbnail Strip */}
       {images.length > 1 && (
-        <div className="order-2 flex gap-3 overflow-x-auto pb-2 md:order-1 md:h-[500px] md:w-24 md:flex-col md:overflow-y-auto md:pb-0 scrollbar-thin scrollbar-thumb-zinc-300 dark:scrollbar-thumb-zinc-700">
+        <div className="flex gap-4 overflow-x-auto pb-2 md:w-[80px] md:flex-col md:overflow-y-auto md:pb-0 scrollbar-hide">
           {images.map((image, index) => (
             <button
               key={image._key}
               type="button"
               onClick={() => setSelectedIndex(index)}
               aria-label={`View image ${index + 1}`}
-              aria-pressed={selectedIndex === index}
               className={cn(
-                "relative aspect-square h-20 w-20 flex-shrink-0 overflow-hidden rounded-md bg-zinc-100 transition-all dark:bg-zinc-800 md:h-24 md:w-24",
+                "relative aspect-square h-20 w-20 flex-shrink-0 overflow-hidden border transition-all dark:border-zinc-700",
                 selectedIndex === index
-                  ? "ring-2 ring-blue-500 ring-offset-2 dark:ring-offset-zinc-900"
-                  : "opacity-70 hover:opacity-100",
+                  ? "border-zinc-900 ring-1 ring-zinc-900 dark:border-zinc-100 dark:ring-zinc-100"
+                  : "border-transparent opacity-70 hover:opacity-100"
               )}
             >
               {image.asset?.url ? (
@@ -51,12 +50,11 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
                   src={image.asset.url}
                   alt={`${productName} thumbnail ${index + 1}`}
                   fill
-                  unoptimized
                   className="object-cover"
-                  sizes="100px"
+                  sizes="80px"
                 />
               ) : (
-                <div className="flex h-full items-center justify-center text-xs text-zinc-400">
+                <div className="flex h-full items-center justify-center text-[10px] text-zinc-400">
                   N/A
                 </div>
               )}
@@ -66,15 +64,14 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
       )}
 
       {/* Main Image */}
-      <div className="order-1 relative aspect-square w-full overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 md:order-2 md:aspect-auto md:h-[500px] md:flex-1">
+      <div className="relative aspect-square w-full overflow-hidden bg-white dark:bg-zinc-800 md:flex-1">
         {selectedImage?.asset?.url ? (
           <Image
             src={selectedImage.asset.url}
             alt={productName ?? "Product image"}
             fill
-            unoptimized
-            className="object-contain p-2"
-            sizes="(max-width: 768px) 100vw, 80vw"
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
             priority
           />
         ) : (

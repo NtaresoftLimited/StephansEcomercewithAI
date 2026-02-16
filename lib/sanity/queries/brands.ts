@@ -1,7 +1,7 @@
 import { groq } from "next-sanity";
 
 export const ALL_BRANDS_QUERY = groq`
-  *[_type == "brand"] | order(name asc) {
+  *[_type == "brand" && defined(odooId)] | order(name asc) {
     _id,
     name,
     "slug": slug.current,
