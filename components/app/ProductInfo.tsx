@@ -111,12 +111,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
       {/* Select Size Section */}
       {variants.length > 0 && (
         <div className="mb-8">
-          <div className="flex justify-between items-center mb-3">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-zinc-900 dark:text-zinc-100">
-              SELECT SIZE
-            </span>
-            <span className="text-xs font-bold text-zinc-500 cursor-pointer underline underline-offset-2 hover:text-zinc-900">SIZE GUIDE</span>
-          </div>
+
           <div className="flex flex-wrap gap-2">
             {variants.map((variant: any) => (
               <button
