@@ -44,13 +44,12 @@ export function ProductCard({ product }: ProductCardProps) {
       : mainImageUrl;
 
   const stock = product.stock ?? 0;
-  const isOutOfStock = stock <= 0;
+  const isOutOfStock = false;
   const hasMultipleImages = images.length > 1;
 
   const handleQuickAdd = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (isOutOfStock) return;
-
+    
     addItem({
       productId: product._id,
       name: product.name ?? "Product",
@@ -110,11 +109,6 @@ export function ProductCard({ product }: ProductCardProps) {
             {formatPrice(product.price)}
           </p>
           {/* Optional: Minimalist Stock Indicator if low stock */}
-          {!isOutOfStock && stock < 5 && (
-            <span className="text-[10px] text-orange-500 font-medium">
-              Only {stock} left
-            </span>
-          )}
         </div>
       </div>
 

@@ -34,7 +34,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
   const [selectedFlavor, setSelectedFlavor] = useState(flavors[0]);
 
   return (
-    <div className="flex flex-col animate-in fade-in max-w-xl">
+    <div className="flex flex-col animate-in fade-in w-full">
       {/* Header Section */}
       <div className="mb-6 border-b border-zinc-100 dark:border-zinc-800 pb-6">
         <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-4 font-sans uppercase">

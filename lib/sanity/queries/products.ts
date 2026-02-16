@@ -197,6 +197,7 @@ export const PRODUCT_BY_SLUG_QUERY = defineQuery(`*[
   featured,
   assemblyRequired,
   "variants": variants[]{
+    _key,
     name,
     sku,
     price,

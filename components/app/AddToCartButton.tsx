@@ -27,14 +27,12 @@ export function AddToCartButton({
   const cartItem = useCartItem(productId);
 
   const quantityInCart = cartItem?.quantity ?? 0;
-  const isOutOfStock = stock <= 0;
-  const isAtMax = quantityInCart >= stock;
+  const isOutOfStock = false;
+  const isAtMax = false;
 
   const handleAdd = () => {
-    if (quantityInCart < stock) {
-      addItem({ productId, name, price, image }, 1);
-      toast.success(`Added ${name}`);
-    }
+    addItem({ productId, name, price, image }, 1);
+    toast.success(`Added ${name}`);
   };
 
   const handleDecrement = () => {
