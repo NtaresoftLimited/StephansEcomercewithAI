@@ -28,25 +28,25 @@ export function BrandsSection({ brands }: BrandsSectionProps) {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center justify-items-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
           {brands.map((brand) => (
-            <Link 
-              key={brand._id} 
+            <Link
+              key={brand._id}
               href={`/products?q=${encodeURIComponent(brand.name)}`}
-              className="group relative w-full aspect-[3/2] flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300 rounded-lg p-4"
+              className="group relative aspect-[3/2] flex items-center justify-center bg-white dark:bg-zinc-900/50 rounded-3xl p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 border border-zinc-100 dark:border-zinc-800"
             >
               {brand.logo ? (
-                <div className="relative w-full h-full">
-                    <Image
-                      src={brand.logo}
-                      alt={brand.name}
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 768px) 50vw, 16vw"
-                    />
+                <div className="relative w-full h-full grayscale group-hover:grayscale-0 transition-all duration-300 opacity-70 group-hover:opacity-100">
+                  <Image
+                    src={brand.logo}
+                    alt={brand.name}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 768px) 50vw, 20vw"
+                  />
                 </div>
               ) : (
-                <span className="text-lg font-bold text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100">
+                <span className="text-lg font-bold text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
                   {brand.name}
                 </span>
               )}

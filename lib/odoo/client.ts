@@ -26,7 +26,8 @@ export class OdooClient {
                     args: [ODOO_DB, ODOO_USER, ODOO_PASSWORD, {}]
                 },
                 id: Date.now()
-            })
+            }),
+            signal: AbortSignal.timeout(5000) // 5s timeout
         });
 
         const data = await response.json();
@@ -53,7 +54,8 @@ export class OdooClient {
                     args: [ODOO_DB, uid, ODOO_PASSWORD, model, method, args, kwargs]
                 },
                 id: Date.now()
-            })
+            }),
+            signal: AbortSignal.timeout(5000) // 5s timeout
         });
 
         const data = await response.json();

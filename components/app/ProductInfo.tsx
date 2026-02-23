@@ -209,7 +209,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
       {/* Specs */}
-      <div className="mt-8 pt-6 border-t border-zinc-200 dark:border-zinc-800">
+      <div className="mt-8 pt-6 border-t border-zinc-200 dark:border-zinc-800 pb-24 md:pb-0">
         <h3 className="text-sm font-bold uppercase tracking-wide mb-4 text-zinc-900 dark:text-zinc-100">Details</h3>
         <dl className="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
           {product.material && (
@@ -225,6 +225,26 @@ export function ProductInfo({ product }: ProductInfoProps) {
             </div>
           )}
         </dl>
+      </div>
+
+      {/* Sticky Mobile Add to Cart Bar */}
+      <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur-md border-t border-zinc-200 z-40 md:hidden flex items-center justify-between gap-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] safe-area-bottom">
+        <div className="flex flex-col">
+          <span className="text-[10px] font-bold text-zinc-500 uppercase">Total Price</span>
+          <span className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
+            {formatPrice(currentPrice)}
+          </span>
+        </div>
+        <div className="flex-1">
+          <AddToCartButton
+            productId={product._id}
+            name={product.name ?? "Unknown Product"}
+            price={currentPrice}
+            image={imageUrl ?? undefined}
+            stock={currentStock ?? 0}
+            className="h-12 w-full text-sm font-bold tracking-widest uppercase bg-[#D35122] text-white hover:bg-[#B54218] rounded-full shadow-sm transition-all"
+          />
+        </div>
       </div>
     </div>
   );

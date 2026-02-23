@@ -8,7 +8,7 @@ import {
   FILTER_PRODUCTS_BY_RELEVANCE_QUERY,
 } from "@/lib/sanity/queries/products";
 import { ALL_CATEGORIES_QUERY } from "@/lib/sanity/queries/categories";
-import { ALL_BRANDS_QUERY } from "@/lib/sanity/queries/brands";
+// import { ALL_BRANDS_QUERY } from "@/lib/sanity/queries/brands";
 import { HERO_PET_IMAGES_QUERY } from "@/lib/sanity/queries/heroImages";
 import { GROOMING_IMAGES_QUERY } from "@/lib/sanity/queries/groomingImages";
 import { ProductSection } from "@/components/app/ProductSection";
@@ -20,6 +20,7 @@ import { CategoryTabs } from "@/components/app/CategoryTabs";
 import { AutoRotatingProductGrid } from "@/components/app/AutoRotatingProductGrid";
 import { BrandsSection } from "@/components/app/BrandsSection";
 import { ConsultationCTA } from "@/components/app/ConsultationCTA";
+import { odoo } from "@/lib/odoo/client";
 
 interface PageProps {
   searchParams: Promise<{
@@ -99,10 +100,8 @@ export default async function HomePage({ searchParams }: PageProps) {
     query: GROOMING_IMAGES_QUERY,
   });
 
-  // Fetch brands from Sanity
-  const { data: brands } = await sanityFetch({
-    query: ALL_BRANDS_QUERY,
-  });
+  // Fetch brands from Odoo
+  const brands = await odoo.getBrands();
 
   // Extract image URLs
   const dogImages = petImages?.dogImages?.map((img: any) => img.url).filter((url: any): url is string => !!url) ?? [];

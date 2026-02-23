@@ -16,6 +16,7 @@ export const BRAND_BY_SLUG_QUERY = groq`
     name,
     "slug": slug.current,
     "logo": logo.asset->url,
+    "banner": banner.asset->url,
     description
   }
 `;

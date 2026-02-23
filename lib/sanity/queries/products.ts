@@ -47,7 +47,6 @@ const FILTERED_PRODUCT_PROJECTION = `{
 /** Scoring for relevance-based search */
 const RELEVANCE_SCORE = `score(
   boost(name match $searchQuery + "*", 3),
-  boost(brand->name match $searchQuery + "*", 2),
   boost(description match $searchQuery + "*", 1)
 )`;
 
@@ -165,6 +164,38 @@ export const PRODUCTS_BY_CATEGORY_QUERY = defineQuery(`*[
 }`);
 
 /**
+ * Get products by brand slug
+ */
+export const PRODUCTS_BY_BRAND_QUERY = defineQuery(`*[
+  _type == "product"
+  && brand->slug.current == $brandSlug
+] | order(name asc) {
+  _id,
+  name,
+  "slug": slug.current,
+  "images": images[0...1]{
+    _key,
+    asset->{
+      _id,
+      url,
+      metadata
+    },
+    hotspot
+  },
+  category->{
+    _id,
+    title,
+    "slug": slug.current
+  },
+  brand->{
+    name,
+    "slug": slug.current
+  },
+  price,
+  stock
+}`);
+
+/**
  * Get single product by slug
  * Used on product detail page
  */
@@ -227,7 +258,6 @@ export const SEARCH_PRODUCTS_QUERY = defineQuery(`*[
   )
 ] | score(
   boost(name match $searchQuery + "*", 3),
-  boost(brand->name match $searchQuery + "*", 2),
   boost(description match $searchQuery + "*", 1)
 ) | order(_score desc) {
   _id,

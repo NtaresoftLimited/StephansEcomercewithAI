@@ -5,7 +5,9 @@
 import { defineCliConfig } from "sanity/cli";
 import dotenv from "dotenv";
 
-// Load .env.local for Sanity CLI
+// Load .env for Sanity CLI
+dotenv.config({ path: ".env" });
+// Load .env.local for Sanity CLI overrides
 dotenv.config({ path: ".env.local" });
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;

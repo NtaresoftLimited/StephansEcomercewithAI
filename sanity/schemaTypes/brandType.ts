@@ -29,6 +29,15 @@ export const brandType = defineType({
             },
         }),
         defineField({
+            name: "banner",
+            title: "Brand Banner",
+            type: "image",
+            options: {
+                hotspot: true,
+            },
+            description: "Full-width banner image for the brand page",
+        }),
+        defineField({
             name: "description",
             type: "text",
         }),
