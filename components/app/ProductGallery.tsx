@@ -19,7 +19,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
 
   if (!images || images.length === 0) {
     return (
-      <div className="flex aspect-square items-center justify-center bg-zinc-50 dark:bg-zinc-800">
+      <div className="flex aspect-[4/5] items-center justify-center bg-zinc-50 dark:bg-zinc-800">
         <span className="text-zinc-400">No images available</span>
       </div>
     );
@@ -39,7 +39,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
               onClick={() => setSelectedIndex(index)}
               aria-label={`View image ${index + 1}`}
               className={cn(
-                "relative aspect-square h-20 w-20 flex-shrink-0 overflow-hidden border transition-all dark:border-zinc-700",
+                "relative aspect-[4/5] h-20 w-20 flex-shrink-0 overflow-hidden border transition-all dark:border-zinc-700",
                 selectedIndex === index
                   ? "border-zinc-900 ring-1 ring-zinc-900 dark:border-zinc-100 dark:ring-zinc-100"
                   : "border-transparent opacity-70 hover:opacity-100"
@@ -64,7 +64,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
       )}
 
       {/* Main Image */}
-      <div className="relative aspect-square w-full overflow-hidden bg-white dark:bg-zinc-800 md:flex-1">
+      <div className="relative aspect-[4/5] w-full overflow-hidden bg-white dark:bg-zinc-800 md:flex-1">
         {selectedImage?.asset?.url ? (
           <Image
             src={selectedImage.asset.url}

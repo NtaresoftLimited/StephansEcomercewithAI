@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
-  FEATURED_PRODUCTS_QUERY,
   FILTER_PRODUCTS_BY_NAME_QUERY,
   FILTER_PRODUCTS_BY_PRICE_ASC_QUERY,
   FILTER_PRODUCTS_BY_PRICE_DESC_QUERY,
@@ -12,8 +11,6 @@ import { ALL_CATEGORIES_QUERY } from "@/lib/sanity/queries/categories";
 import { HERO_PET_IMAGES_QUERY } from "@/lib/sanity/queries/heroImages";
 import { GROOMING_IMAGES_QUERY } from "@/lib/sanity/queries/groomingImages";
 import { ProductSection } from "@/components/app/ProductSection";
-import { ProductShowcase } from "@/components/app/ProductShowcase";
-import { FeaturedCarouselSkeleton } from "@/components/app/FeaturedCarouselSkeleton";
 import { AdoptionSection } from "@/components/app/AdoptionSection";
 import { GroomingSection } from "@/components/app/GroomingSection";
 import { CategoryTabs } from "@/components/app/CategoryTabs";
@@ -85,11 +82,6 @@ export default async function HomePage({ searchParams }: PageProps) {
     query: ALL_CATEGORIES_QUERY,
   });
 
-  // Fetch featured products for carousel
-  const { data: featuredProducts } = await sanityFetch({
-    query: FEATURED_PRODUCTS_QUERY,
-  });
-
   // Fetch pet category images
   const { data: petImages } = await sanityFetch({
     query: HERO_PET_IMAGES_QUERY,
@@ -121,19 +113,6 @@ export default async function HomePage({ searchParams }: PageProps) {
           fishImages={fishImages}
         />
       </section>
-
-      {/* Featured Products - JoJo's Style Grid (Section 3) */}
-      {featuredProducts.length > 0 && (
-        <section className="py-16 md:py-24 bg-secondary/20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-8 text-center">
-            <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-foreground">Featured Collections</h2>
-            <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">Curated selection of our finest products.</p>
-          </div>
-          <Suspense fallback={<FeaturedCarouselSkeleton />}>
-            <ProductShowcase products={featuredProducts} />
-          </Suspense>
-        </section>
-      )}
 
       {/* Grooming Section (Section 2) */}
       <GroomingSection images={groomingImageUrls} />

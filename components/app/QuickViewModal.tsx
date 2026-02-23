@@ -103,7 +103,7 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
 
                 <div className="grid md:grid-cols-2">
                     {/* Image Gallery */}
-                    <div className="relative aspect-square bg-zinc-100">
+                    <div className="relative aspect-[4/5] bg-zinc-100">
                         {mainImage ? (
                             <Image
                                 src={mainImage}
@@ -147,8 +147,8 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
                                         key={index}
                                         onClick={() => setCurrentImageIndex(index)}
                                         className={`h-2 w-2 rounded-full transition-all ${currentImageIndex === index
-                                                ? "bg-white w-6"
-                                                : "bg-white/50 hover:bg-white/80"
+                                            ? "bg-white w-6"
+                                            : "bg-white/50 hover:bg-white/80"
                                             }`}
                                         aria-label={`View image ${index + 1}`}
                                     />
@@ -234,8 +234,8 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
                                 variant="outline"
                                 onClick={handleToggleWishlist}
                                 className={`h-12 w-12 p-0 ${isInWishlist
-                                        ? "border-red-200 bg-red-50 text-red-500 hover:bg-red-100"
-                                        : "border-zinc-200 text-zinc-600 hover:text-red-500"
+                                    ? "border-red-200 bg-red-50 text-red-500 hover:bg-red-100"
+                                    : "border-zinc-200 text-zinc-600 hover:text-red-500"
                                     }`}
                                 aria-label={isInWishlist ? "Remove from wishlist" : "Add to wishlist"}
                             >

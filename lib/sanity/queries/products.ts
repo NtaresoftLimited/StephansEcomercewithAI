@@ -288,7 +288,7 @@ export const SEARCH_PRODUCTS_QUERY = defineQuery(`*[
  * Returns up to 4 images for hover preview in product cards
  */
 export const FILTER_PRODUCTS_BY_NAME_QUERY = defineQuery(
-  `*[${PRODUCT_FILTER_CONDITIONS}] | order(name asc) ${FILTERED_PRODUCT_PROJECTION}`
+  `*[${PRODUCT_FILTER_CONDITIONS}] | order(defined(brand) desc, name asc) ${FILTERED_PRODUCT_PROJECTION}`
 );
 
 /**

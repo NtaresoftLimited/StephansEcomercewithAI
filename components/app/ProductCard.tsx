@@ -3,13 +3,11 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingCart, Heart, Eye, Share2 } from "lucide-react";
 import { toast } from "sonner";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { cn, formatPrice } from "@/lib/utils";
 import { useCartActions } from "@/lib/store/cart-store-provider";
-import { StockBadge } from "@/components/app/StockBadge";
+import { useWishlistActions, useIsInWishlist } from "@/lib/store/wishlist-store-provider";
 
 interface Product {
   _id: string;
@@ -33,23 +31,19 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const [hoveredImageIndex, setHoveredImageIndex] = useState<number | null>(null);
   const { addItem } = useCartActions();
+  const { toggleItem } = useWishlistActions();
+  const isInWishlist = useIsInWishlist(product._id);
 
   const images = product.images ?? [];
   const mainImageUrl = images[0]?.asset?.url;
-  const displayedImageUrl =
-    hoveredImageIndex !== null
-      ? images[hoveredImageIndex]?.asset?.url
-      : mainImageUrl;
 
   const stock = product.stock ?? 0;
   const isOutOfStock = false;
-  const hasMultipleImages = images.length > 1;
 
-  const handleQuickAdd = (e: React.MouseEvent) => {
+  const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
-    
+    e.stopPropagation();
     addItem({
       productId: product._id,
       name: product.name ?? "Product",
@@ -59,13 +53,59 @@ export function ProductCard({ product }: ProductCardProps) {
     toast.success("Added to cart");
   };
 
+  const handleToggleWishlist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const added = toggleItem({
+        productId: product._id,
+        name: product.name ?? "Product",
+        price: product.price ?? 0,
+        image: mainImageUrl ?? undefined,
+        slug: product.slug ?? "",
+    });
+    if (added) {
+        toast.success("Added to wishlist!");
+    } else {
+        toast.info("Removed from wishlist");
+    }
+  };
+
+  const handleQuickView = (e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      // Implement Quick View logic here if needed, or emit event
+      toast.info("Quick View");
+  };
+
+  const handleShare = async (e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const url = `${window.location.origin}/products/${product.slug}`;
+
+      if (navigator.share) {
+          try {
+              await navigator.share({
+                  title: product.name ?? "Product",
+                  text: `Check out ${product.name} at Stephan's Pet Store!`,
+                  url,
+              });
+          } catch {
+              // User cancelled
+          }
+      } else {
+          await navigator.clipboard.writeText(url);
+          toast.success("Link copied to clipboard!");
+      }
+  };
+
   return (
     <div className="group relative flex flex-col">
       <Link href={`/products/${product.slug}`} className="block relative">
-        <div className="relative aspect-square overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-transparent group-hover:border-zinc-200 dark:group-hover:border-zinc-700 transition-colors">
-          {displayedImageUrl ? (
+        {/* Image Container - Aspect Ratio 4:5 (1080x1350) */}
+        <div className="relative aspect-[4/5] overflow-hidden bg-zinc-100 dark:bg-zinc-800 rounded-lg">
+          {mainImageUrl ? (
             <Image
-              src={displayedImageUrl}
+              src={mainImageUrl}
               alt={product.name ?? "Product image"}
               fill
               className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -77,23 +117,53 @@ export function ProductCard({ product }: ProductCardProps) {
             </div>
           )}
 
-          {/* Quick Add Button - Minimalist Overlay */}
-          <div className="absolute inset-x-4 bottom-4 translate-y-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 z-10">
-            <button
-              onClick={handleQuickAdd}
-              disabled={isOutOfStock}
-              className="w-full h-10 bg-white text-zinc-900 border border-zinc-200 hover:bg-zinc-900 hover:text-white transition-colors text-xs font-bold tracking-widest uppercase shadow-sm"
-            >
-              {isOutOfStock ? "Out of Stock" : "Quick Add"}
-            </button>
+          {/* Hover Action Buttons - Right Side (100% Similar to Featured Products) */}
+          <div className="absolute right-3 top-3 flex flex-col gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-20">
+              <button
+                  onClick={handleToggleWishlist}
+                  className={cn(
+                      "flex h-10 w-10 items-center justify-center rounded-full shadow-md transition-all hover:scale-110",
+                      isInWishlist
+                          ? "bg-red-500 text-white hover:bg-red-600"
+                          : "bg-white/95 text-zinc-600 hover:bg-white hover:text-red-500"
+                  )}
+                  aria-label={isInWishlist ? "Remove from wishlist" : "Add to wishlist"}
+              >
+                  <Heart className={cn("h-5 w-5", isInWishlist && "fill-current")} />
+              </button>
+              <button
+                  onClick={handleAddToCart}
+                  disabled={isOutOfStock}
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-zinc-600 shadow-md transition-all hover:bg-white hover:text-[#6b3e1e] hover:scale-110"
+                  aria-label="Add to cart"
+              >
+                  <ShoppingCart className="h-5 w-5" />
+              </button>
+              <button
+                  onClick={handleQuickView}
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-zinc-600 shadow-md transition-all hover:bg-white hover:text-blue-500 hover:scale-110"
+                  aria-label="Quick view"
+              >
+                  <Eye className="h-5 w-5" />
+              </button>
+              <button
+                  onClick={handleShare}
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-zinc-600 shadow-md transition-all hover:bg-white hover:text-green-500 hover:scale-110"
+                  aria-label="Share"
+              >
+                  <Share2 className="h-5 w-5" />
+              </button>
           </div>
 
           {/* Minimalist Badges */}
           {isOutOfStock && (
-            <div className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm px-2 py-1">
+            <div className="absolute top-2 left-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded">
               <span className="text-[9px] font-bold uppercase tracking-wider text-red-600">Sold Out</span>
             </div>
           )}
+          
+          {/* Hover Overlay */}
+          <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/5 z-10" />
         </div>
       </Link>
 
@@ -108,16 +178,8 @@ export function ProductCard({ product }: ProductCardProps) {
           <p className="text-sm font-medium text-foreground/70">
             {formatPrice(product.price)}
           </p>
-          {/* Optional: Minimalist Stock Indicator if low stock */}
         </div>
       </div>
-
-      {/* Thumbnail Interaction (Optional - can be removed for strict minimalism, but kept for function) */}
-      {hasMultipleImages && (
-        <div className="mt-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 h-1">
-          {/* Using invisible hover zones or small dots could be cleaner, but for now just hiding standard thumbnails unless hovered */}
-        </div>
-      )}
     </div>
   );
 }

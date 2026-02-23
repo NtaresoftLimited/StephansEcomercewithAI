@@ -2,15 +2,16 @@ import Link from "next/link";
 import Image from "next/image";
 
 interface Brand {
-  _id: string;
+  _id?: string;
+  id?: number;
   name: string;
-  slug: string;
+  slug?: string;
   logo?: string;
   description?: string;
 }
 
 interface BrandsSectionProps {
-  brands: Brand[];
+  brands: any[]; // Using any[] to accept both Sanity and Odoo data structures for now
 }
 
 export function BrandsSection({ brands }: BrandsSectionProps) {
@@ -28,21 +29,33 @@ export function BrandsSection({ brands }: BrandsSectionProps) {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-          {brands.map((brand) => (
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6">
+          {brands.map((brand) => {
+             // Handle Odoo vs Sanity data differences
+             const key = brand._id || brand.id;
+             // Generate slug if missing (Odoo brands might not have slug field)
+             const slug = brand.slug?.current || brand.slug || brand.name.toLowerCase().replace(/\s+/g, '-');
+             // Handle Logo: Odoo sends base64, Sanity sends URL
+             let logoSrc = brand.logo;
+             if (brand.logo && !brand.logo.startsWith('http') && !brand.logo.startsWith('data:')) {
+                 // Assume Odoo base64 without prefix
+                 logoSrc = `data:image/png;base64,${brand.logo}`;
+             }
+
+             return (
             <Link
-              key={brand._id}
-              href={`/products?q=${encodeURIComponent(brand.name)}`}
-              className="group relative aspect-[3/2] flex items-center justify-center bg-white dark:bg-zinc-900/50 rounded-3xl p-6 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 border border-zinc-100 dark:border-zinc-800"
+              key={key}
+              href={`/brands/${slug}`}
+              className="group relative aspect-[3/2] flex items-center justify-center bg-white dark:bg-zinc-900/50 rounded-3xl p-8 md:p-10 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 border border-zinc-100 dark:border-zinc-800"
             >
-              {brand.logo ? (
-                <div className="relative w-full h-full grayscale group-hover:grayscale-0 transition-all duration-300 opacity-70 group-hover:opacity-100">
+              {logoSrc ? (
+                <div className="relative w-full h-full">
                   <Image
-                    src={brand.logo}
+                    src={logoSrc}
                     alt={brand.name}
                     fill
                     className="object-contain"
-                    sizes="(max-width: 768px) 50vw, 20vw"
+                    sizes="(max-width: 768px) 40vw, 15vw"
                   />
                 </div>
               ) : (
@@ -51,7 +64,8 @@ export function BrandsSection({ brands }: BrandsSectionProps) {
                 </span>
               )}
             </Link>
-          ))}
+          );
+        })}
         </div>
       </div>
     </section>

@@ -427,7 +427,7 @@ function ProductShowcaseCard({ product, onQuickView }: ProductShowcaseCardProps)
     return (
         <Link href={`/products/${product.slug}`} className="group block">
             {/* Image Container - Portrait Ratio */}
-            <div className="relative aspect-[3/4] overflow-hidden rounded-lg bg-zinc-100">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-zinc-100">
                 {mainImage ? (
                     <Image
                         src={mainImage}
