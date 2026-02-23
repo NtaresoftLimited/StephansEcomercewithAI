@@ -343,11 +343,10 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
 
                         <div className="md:col-span-2">
                             <label className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300 mb-2">
-                                Email *
+                                Email
                             </label>
                             <input
                                 type="email"
-                                required
                                 value={formData.customerEmail}
                                 onChange={(e) => setFormData({ ...formData, customerEmail: e.target.value })}
                                 className="w-full rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-700 px-4 py-3 text-zinc-900 dark:text-white focus:border-amber-500 focus:ring-amber-500"

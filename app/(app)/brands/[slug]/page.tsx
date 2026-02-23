@@ -27,7 +27,8 @@ export default async function BrandPage(props: BrandPageProps) {
         const odooBrands = await odoo.searchRead(
             "product.brand",
             [["name", "ilike", brand.name]],
-            ["id", "name"],
+            // Try to fetch highest quality image field first, fallback to generic logo if present
+            ["id", "name", "image_1920", "logo"],
             1
         );
 
@@ -40,8 +41,12 @@ export default async function BrandPage(props: BrandPageProps) {
                 200
             );
         }
-    } catch (e) {
-        console.error("Odoo product fetch failed, showing empty state:", e);
+
+        // Attach potential high-quality brand logo from Odoo for later rendering
+        (brand as any).__odooLogo =
+            odooBrands[0]?.image_1920 || odooBrands[0]?.logo || null;
+    } catch {
+        // Swallow Odoo timeouts/errors to avoid noisy console; page renders with Sanity data only
     }
 
     return (
@@ -68,18 +73,28 @@ export default async function BrandPage(props: BrandPageProps) {
                     </div>
                 )}
 
-                {/* Brand identity overlay — align left */}
-                <div className="absolute inset-0 flex flex-col justify-end pb-6 px-6 md:px-12 md:pb-8">
-                    <div className="flex items-end gap-6 max-w-4xl">
-                        {brand.logo && (
+                {/* Brand identity overlay — align left to site container */}
+                <div className="absolute inset-0 flex flex-col justify-end pb-6 md:pb-8">
+                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <div className="flex items-end gap-6">
+                        {((brand as any).__odooLogo || brand.logo) && (
                             <div className="relative w-24 h-24 md:w-32 md:h-32 bg-white rounded-2xl shadow-xl flex-shrink-0 border border-zinc-100 flex items-center justify-center -mb-2 z-10">
-                                <Image
-                                    src={brand.logo}
-                                    alt={`${brand.name} logo`}
-                                    fill
-                                    className="object-contain p-3"
-                                    sizes="128px"
-                                />
+                                {(() => {
+                                    const odooLogo = (brand as any).__odooLogo as string | null;
+                                    const logoSrc = odooLogo
+                                        ? `data:image/png;base64,${odooLogo}`
+                                        : brand.logo;
+                                    return (
+                                        <Image
+                                            src={logoSrc}
+                                            alt={`${brand.name} logo`}
+                                            fill
+                                            className="object-contain p-3"
+                                            sizes="(max-width: 768px) 96px, 128px"
+                                            priority
+                                        />
+                                    );
+                                })()}
                             </div>
                         )}
 
@@ -95,6 +110,7 @@ export default async function BrandPage(props: BrandPageProps) {
                                     {brand.description}
                                 </p>
                             )}
+                        </div>
                         </div>
                     </div>
                 </div>

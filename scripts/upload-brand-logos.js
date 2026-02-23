@@ -12,8 +12,9 @@ const client = createClient({
 });
 
 const LOGOS = [
-    { name: "Summit10", path: "C:\\Users\\fisto\\Downloads\\Summit-10.svg", odooId: 2667 }, // ID from prev turns or just name match
-    { name: "Tropicat", path: "C:\\Users\\fisto\\Downloads\\TropiCat_logo.svg" }
+    { name: "Summit10", path: "C:\\Users\\fisto\\Downloads\\Summit-10.svg", odooId: 5 },
+    { name: "Tropicat", path: "C:\\Users\\fisto\\Downloads\\TropiCat_logo.svg", odooId: 14 },
+    { name: "Tropidog", path: "C:\\Users\\fisto\\Downloads\\tropidog.png", odooId: 13 }
 ];
 
 async function run() {
@@ -27,9 +28,12 @@ async function run() {
 
         // Upload asset
         const logoBuffer = fs.readFileSync(logo.path);
+        const fileName = path.basename(logo.path);
+        const contentType = fileName.endsWith(".svg") ? "image/svg+xml" : (fileName.endsWith(".png") ? "image/png" : "image/jpeg");
+
         const asset = await client.assets.upload("image", logoBuffer, {
-            filename: path.basename(logo.path),
-            contentType: "image/svg+xml",
+            filename: fileName,
+            contentType: contentType,
         });
         console.log(`Uploaded asset ${asset._id} for ${logo.name}`);
 

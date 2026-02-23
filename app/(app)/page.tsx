@@ -93,10 +93,41 @@ export default async function HomePage({ searchParams }: PageProps) {
     query: GROOMING_IMAGES_QUERY,
   });
 
-  // Fetch brands from Sanity for high-quality SVG support
-  const { data: brands } = await sanityFetch({
-    query: ALL_BRANDS_QUERY,
-  });
+  // Fetch brands from Odoo and Sanity, prefer Odoo logo but fallback to Sanity
+  const [sanityBrands, odooBrands] = await Promise.all([
+    sanityFetch({ query: ALL_BRANDS_QUERY })
+      .then((r: any) => r?.data as any[])
+      .catch(() => [] as any[]),
+    odoo.getBrands().catch(() => [] as any[]),
+  ]);
+  const mergedByName = new Map<string, any>();
+  for (const b of (odooBrands as any[]) || []) {
+    const match =
+      (sanityBrands as any[])?.find(
+        (s) => s.name?.toLowerCase() === b.name?.toLowerCase()
+      ) || null;
+    const logo =
+      b.logo ? `data:image/png;base64,${b.logo}` : match?.logo || undefined;
+    mergedByName.set((b.name || "").toLowerCase(), {
+      id: b.id,
+      name: b.name,
+      slug: match?.slug || (b.name || "").toLowerCase().replace(/\s+/g, "-"),
+      logo,
+      description: match?.description,
+    });
+  }
+  for (const s of ((sanityBrands as any[]) || [])) {
+    const key = (s.name || "").toLowerCase();
+    if (!mergedByName.has(key)) {
+      mergedByName.set(key, {
+        name: s.name,
+        slug: s.slug,
+        logo: s.logo,
+        description: s.description,
+      });
+    }
+  }
+  const brands = Array.from(mergedByName.values());
 
   // Extract image URLs
   const dogImages = petImages?.dogImages?.map((img: any) => img.url).filter((url: any): url is string => !!url) ?? [];

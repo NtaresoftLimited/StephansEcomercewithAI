@@ -41,6 +41,7 @@ export function BrandsSection({ brands }: BrandsSectionProps) {
                     src={brand.logo}
                     alt={brand.name}
                     fill
+                    unoptimized
                     className="object-contain"
                     sizes="(max-width: 768px) 40vw, 15vw"
                     priority
