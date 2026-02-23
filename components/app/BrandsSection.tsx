@@ -2,16 +2,15 @@ import Link from "next/link";
 import Image from "next/image";
 
 interface Brand {
-  _id?: string;
-  id?: number;
+  _id: string;
   name: string;
-  slug?: string;
+  slug: string;
   logo?: string;
   description?: string;
 }
 
 interface BrandsSectionProps {
-  brands: any[]; // Using any[] to accept both Sanity and Odoo data structures for now
+  brands: Brand[];
 }
 
 export function BrandsSection({ brands }: BrandsSectionProps) {
@@ -30,42 +29,30 @@ export function BrandsSection({ brands }: BrandsSectionProps) {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6">
-          {brands.map((brand) => {
-             // Handle Odoo vs Sanity data differences
-             const key = brand._id || brand.id;
-             // Generate slug if missing (Odoo brands might not have slug field)
-             const slug = brand.slug?.current || brand.slug || brand.name.toLowerCase().replace(/\s+/g, '-');
-             // Handle Logo: Odoo sends base64, Sanity sends URL
-             let logoSrc = brand.logo;
-             if (brand.logo && !brand.logo.startsWith('http') && !brand.logo.startsWith('data:')) {
-                 // Assume Odoo base64 without prefix
-                 logoSrc = `data:image/png;base64,${brand.logo}`;
-             }
-
-             return (
+          {brands.map((brand) => (
             <Link
-              key={key}
-              href={`/brands/${slug}`}
+              key={brand._id}
+              href={`/brands/${brand.slug}`}
               className="group relative aspect-[3/2] flex items-center justify-center bg-white dark:bg-zinc-900/50 rounded-3xl p-8 md:p-10 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 border border-zinc-100 dark:border-zinc-800"
             >
-              {logoSrc ? (
-                <div className="relative w-full h-full">
+              {brand.logo ? (
+                <div className="relative w-full h-full transition-transform duration-300 group-hover:scale-105">
                   <Image
-                    src={logoSrc}
+                    src={brand.logo}
                     alt={brand.name}
                     fill
                     className="object-contain"
                     sizes="(max-width: 768px) 40vw, 15vw"
+                    priority
                   />
                 </div>
               ) : (
-                <span className="text-lg font-bold text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors">
+                <span className="text-xl font-bold text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors uppercase tracking-widest text-center px-4">
                   {brand.name}
                 </span>
               )}
             </Link>
-          );
-        })}
+          ))}
         </div>
       </div>
     </section>

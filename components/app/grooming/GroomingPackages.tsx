@@ -2,6 +2,7 @@
 
 import { Check, Dog, Cat } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 import { PRICES, DOG_PACKAGES, CAT_PACKAGES, SIZE_LABELS } from "@/lib/constants/grooming";
 
 function formatPrice(price: number) {
@@ -12,6 +13,7 @@ function formatPrice(price: number) {
 }
 
 interface PackageCardProps {
+    packageKey: "standard" | "premium" | "super_premium";
     name: string;
     prices: Record<string, number>;
     services: string[];
@@ -20,7 +22,7 @@ interface PackageCardProps {
     petType: "dog" | "cat";
 }
 
-function PackageCard({ name, prices, services, color, popular, petType }: PackageCardProps) {
+function PackageCard({ packageKey, name, prices, services, color, popular, petType }: PackageCardProps) {
     const priceEntries = Object.entries(prices);
 
     return (
@@ -39,14 +41,18 @@ function PackageCard({ name, prices, services, color, popular, petType }: Packag
                 {/* Prices */}
                 <div className="mb-6 space-y-2">
                     {priceEntries.map(([size, price]) => (
-                        <div key={size} className="flex justify-between items-center">
+                        <Link
+                            key={size}
+                            href={`?petType=${petType}&package=${packageKey}&size=${size}#booking`}
+                            className="flex justify-between items-center rounded-lg px-3 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"
+                        >
                             <span className="text-sm text-zinc-600 dark:text-zinc-400">
                                 {SIZE_LABELS[size]}
                             </span>
                             <span className="font-bold text-zinc-900 dark:text-white">
                                 {formatPrice(price)}
                             </span>
-                        </div>
+                        </Link>
                     ))}
                 </div>
 
@@ -65,12 +71,12 @@ function PackageCard({ name, prices, services, color, popular, petType }: Packag
                     </ul>
                 </div>
 
-                <a
-                    href="#booking"
+                <Link
+                    href={`?petType=${petType}&package=${packageKey}#booking`}
                     className={`mt-6 block w-full rounded-lg bg-gradient-to-r ${color} py-3 text-center font-semibold text-white transition-all hover:opacity-90`}
                 >
                     Book Now
-                </a>
+                </Link>
             </div>
         </div>
     );
@@ -133,15 +139,15 @@ export function GroomingPackages({ prices = PRICES }: GroomingPackagesProps) {
                 <div className="grid gap-6 md:grid-cols-3">
                     {activeTab === "dog" ? (
                         <>
-                            <PackageCard petType="dog" {...getPackage("dog", "standard")} />
-                            <PackageCard petType="dog" {...getPackage("dog", "premium")} />
-                            <PackageCard petType="dog" {...getPackage("dog", "super_premium")} />
+                            <PackageCard petType="dog" packageKey="standard" {...getPackage("dog", "standard")} />
+                            <PackageCard petType="dog" packageKey="premium" {...getPackage("dog", "premium")} />
+                            <PackageCard petType="dog" packageKey="super_premium" {...getPackage("dog", "super_premium")} />
                         </>
                     ) : (
                         <>
-                            <PackageCard petType="cat" {...getPackage("cat", "standard")} />
-                            <PackageCard petType="cat" {...getPackage("cat", "premium")} />
-                            <PackageCard petType="cat" {...getPackage("cat", "super_premium")} />
+                            <PackageCard petType="cat" packageKey="standard" {...getPackage("cat", "standard")} />
+                            <PackageCard petType="cat" packageKey="premium" {...getPackage("cat", "premium")} />
+                            <PackageCard petType="cat" packageKey="super_premium" {...getPackage("cat", "super_premium")} />
                         </>
                     )}
                 </div>

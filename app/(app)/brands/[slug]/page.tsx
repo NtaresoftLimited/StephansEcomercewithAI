@@ -4,7 +4,7 @@ import { client } from "@/sanity/lib/client";
 import { BRAND_BY_SLUG_QUERY } from "@/lib/sanity/queries/brands";
 import { odoo } from "@/lib/odoo/client";
 import { Button } from "@/components/ui/button";
-import { Heart, ShoppingCart, Eye } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { formatPrice } from "@/lib/utils";
 
@@ -100,25 +100,7 @@ export default async function BrandPage(props: BrandPageProps) {
                 </div>
             </div>
 
-            {/* Feature strip */}
-            <div className="bg-white border-b border-zinc-100 py-8">
-                <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-3 gap-6 text-center">
-                        {[
-                            { icon: Heart, label: "Loved by Pets" },
-                            { icon: ShoppingCart, label: "Quality Assured" },
-                            { icon: Eye, label: "Trusted Brand" },
-                        ].map(({ icon: Icon, label }) => (
-                            <div key={label} className="flex flex-col items-center gap-2">
-                                <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
-                                    <Icon className="w-5 h-5 text-amber-700" />
-                                </div>
-                                <p className="text-xs font-semibold text-zinc-700 uppercase tracking-wide">{label}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
+            
 
             {/* Products Grid — from Odoo */}
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14">

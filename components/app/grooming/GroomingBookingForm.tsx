@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { Calendar, Clock, Dog, Cat, Check } from "lucide-react";
 import { createGroomingBooking } from "@/lib/actions/grooming";
@@ -10,12 +11,21 @@ function formatPrice(price: number) {
     return new Intl.NumberFormat("en-TZ").format(price) + " TZS";
 }
 
+function useUserSafe() {
+    try {
+        return useUser();
+    } catch {
+        return { user: null, isSignedIn: false } as any;
+    }
+}
+
 interface GroomingBookingFormProps {
     prices?: typeof PRICES;
 }
 
 export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProps) {
-    const { user, isSignedIn } = useUser();
+    const searchParams = useSearchParams();
+    const { user, isSignedIn } = useUserSafe();
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -33,6 +43,28 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
         specialNotes: "",
         detangling: false,
     });
+
+    useEffect(() => {
+        const urlPackage = (searchParams.get("package") || "").trim();
+        const urlPetType = (searchParams.get("petType") || "").trim();
+        const urlSize = (searchParams.get("size") || "").trim();
+        const validPackages = new Set(["standard", "premium", "super_premium"]);
+        const validPetTypes = new Set(["dog", "cat"]);
+        const next: Partial<typeof formData> = {};
+        const petTypeToUse = validPetTypes.has(urlPetType) ? (urlPetType as "dog" | "cat") : undefined;
+        if (petTypeToUse) next.petType = petTypeToUse;
+        if (petTypeToUse) next.breedSize = "";
+        if (validPackages.has(urlPackage)) {
+            next.package = urlPackage;
+        }
+        const sizeSet = new Set((petTypeToUse || formData.petType) && BREED_SIZES[petTypeToUse || formData.petType].map((s) => s.value));
+        if (urlSize && sizeSet.has(urlSize)) {
+            next.breedSize = urlSize;
+        }
+        if (Object.keys(next).length > 0) {
+            setFormData((prev) => ({ ...prev, ...next }));
+        }
+    }, [searchParams]);
 
     // Calculate price
     const calculatePrice = () => {
@@ -223,12 +255,17 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
                                         key={pkg.value}
                                         type="button"
                                         onClick={() => setFormData({ ...formData, package: pkg.value })}
-                                        className={`rounded-lg border-2 p-4 text-center transition-all ${formData.package === pkg.value
-                                            ? "border-[#6b3e1e] bg-[#6b3e1e]/10"
+                                        aria-pressed={formData.package === pkg.value}
+                                        data-selected={formData.package === pkg.value || undefined}
+                                        className={`relative rounded-lg border-2 p-4 text-center transition-all ${formData.package === pkg.value
+                                            ? "border-[#6b3e1e] bg-[#6b3e1e]/10 ring-2 ring-[#6b3e1e]/30 shadow-md"
                                             : "border-zinc-200 dark:border-zinc-700 hover:border-zinc-300"
                                             }`}
                                     >
-                                        <span className="font-semibold block">{pkg.label}</span>
+                                        <span className={`font-semibold block ${formData.package === pkg.value ? "text-[#6b3e1e]" : ""}`}>{pkg.label}</span>
+                                        {formData.package === pkg.value && (
+                                            <Check className="absolute right-2 top-2 h-4 w-4 text-[#6b3e1e]" />
+                                        )}
                                         {formData.breedSize && (
                                             <span className="text-sm text-zinc-500">
                                                 {formatPrice(PRICES[formData.petType]?.[pkg.value]?.[formData.breedSize] || 0)}
