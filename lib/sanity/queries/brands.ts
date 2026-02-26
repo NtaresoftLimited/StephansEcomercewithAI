@@ -17,6 +17,7 @@ export const BRAND_BY_SLUG_QUERY = groq`
     "slug": slug.current,
     "logo": logo.asset->url,
     "banner": banner.asset->url,
-    description
+    description,
+    odooId
   }
 `;

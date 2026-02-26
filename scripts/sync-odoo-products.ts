@@ -66,8 +66,8 @@ async function syncOdoo() {
 
     try {
         // 1. CLEAR EVERYTHING (except categories)
-        console.log("🧹 Clearing orders and products...");
-        const allToDelete = await client.fetch(`*[_type in ["product", "order", "customer"]] { _id }`);
+        console.log("🧹 Clearing orders, products, and brands...");
+        const allToDelete = await client.fetch(`*[_type in ["product", "order", "customer", "brand"]] { _id }`);
         console.log(`Found ${allToDelete.length} records to delete.`);
 
         if (allToDelete.length > 0) {
@@ -85,7 +85,51 @@ async function syncOdoo() {
         const sanityCategories = await client.fetch(`*[_type == "category"]{_id, title, slug}`);
         console.log(`Found ${sanityCategories.length} categories.`);
 
-        // 3. Fetch products from Odoo
+        // 3. Sync Brands from Odoo
+        console.log("🏷️ Syncing Brands from Odoo...");
+        const odooBrandsList = await odoo.searchRead(
+            "product.brand",
+            [],
+            ["id", "name", "logo"],
+            100
+        );
+
+        for (const ob of odooBrandsList) {
+            const brandId = `brand-odoo-${ob.id}`;
+            const brandSlug = ob.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
+            // Check if logo is provided in Odoo, otherwise use fallback logic
+            let logoAssetId = null;
+            if (ob.logo) {
+                const uploaded = await uploadImage(ob.logo, `${brandSlug}-logo.jpg`);
+                if (uploaded) logoAssetId = uploaded.asset._ref;
+            }
+
+            // Special case for Bioline logo from public folder
+            let localLogoPath = null;
+            if (brandSlug === "bioline") {
+                localLogoPath = "/brands/Bioline.webp";
+            }
+
+            await client.createOrReplace({
+                _type: 'brand',
+                _id: brandId,
+                name: ob.name,
+                slug: { _type: 'slug', current: brandSlug },
+                odooId: ob.id,
+                logo: logoAssetId ? {
+                    _type: 'image',
+                    asset: { _type: 'reference', _ref: logoAssetId }
+                } : undefined,
+                // If it's Bioline and we don't have an Odoo logo, the page fallback handles it
+            });
+            console.log(`  - Brand Synced: ${ob.name}`);
+        }
+
+        // 4. Fetch updated brands from Sanity
+        const sanityBrands = await client.fetch(`*[_type == "brand"]{_id, name, odooId}`);
+
+        // 5. Fetch products from Odoo
         console.log("📦 Fetching products from Odoo...");
         const odooProducts = await odoo.searchRead(
             "product.template",
@@ -95,9 +139,10 @@ async function syncOdoo() {
         );
         console.log(`Fetched ${odooProducts.length} products from Odoo.`);
 
-        // 4. Import Products with all images and variants
+        // 6. Import Products with all images and variants
         for (const op of odooProducts) {
             console.log(`Processing: ${op.name}...`);
+
 
             // Collect all images
             const allImages: SanityImage[] = [];

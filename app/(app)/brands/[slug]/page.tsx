@@ -54,26 +54,49 @@ export default async function BrandPage(props: BrandPageProps) {
     // 3. Fetch products from Odoo
     let odooProducts: any[] = [];
     try {
-        // Find brand in Odoo by name
-        const odooBrands = await odoo.searchRead(
-            "product.brand",
-            [["name", "ilike", brand.name]],
-            ["id", "name", "image_1920", "logo"],
-            1
-        );
+        let odooBrandId: number | null = null;
 
-        if (odooBrands.length > 0) {
+        if (brand.odooId) {
+            odooBrandId = brand.odooId;
+        } else {
+            // Find brand in Odoo by name
+            const odooBrands = await odoo.searchRead(
+                "product.brand",
+                [["name", "ilike", brand.name]],
+                ["id", "name", "logo"],
+                1
+            );
+            if (odooBrands.length > 0) {
+                odooBrandId = odooBrands[0].id;
+                // Attach Odoo logo if Sanity/Mock logo is missing
+                if (!brand.logo) {
+                    (brand as any).__odooLogo = odooBrands[0]?.logo || null;
+                }
+            }
+        }
+
+        if (odooBrandId) {
             odooProducts = await odoo.searchRead(
                 "product.template",
-                [["brand_id", "=", odooBrands[0].id], ["active", "=", true]],
+                [["brand_id", "=", odooBrandId], ["active", "=", true]],
                 ["id", "name", "list_price", "default_code", "image_512", "qty_available"],
                 200
             );
-            
-            // Attach Odoo logo if Sanity/Mock logo is missing
-            if (!brand.logo) {
-                 (brand as any).__odooLogo = odooBrands[0]?.image_1920 || odooBrands[0]?.logo || null;
-            }
+        }
+
+        // 3.5 Fallback: Search by name if no products found by brand ID
+        if (odooProducts.length === 0) {
+            console.log(`No products found for brand ID ${odooBrandId}, falling back to name search for: ${brand.name}`);
+            odooProducts = await odoo.searchRead(
+                "product.template",
+                [
+                    ["name", "ilike", brand.name],
+                    ["active", "=", true],
+                    ["sale_ok", "=", true]
+                ],
+                ["id", "name", "list_price", "default_code", "image_512", "qty_available"],
+                200
+            );
         }
     } catch (e) {
         console.error("Odoo fetch failed:", e);
@@ -135,12 +158,12 @@ export default async function BrandPage(props: BrandPageProps) {
                                     {(() => {
                                         const odooLogo = (brand as any).__odooLogo as string | null;
                                         let logoSrc = brand.logo;
-                                        
+
                                         // If using Odoo logo (base64)
                                         if (odooLogo && !logoSrc) {
                                             logoSrc = `data:image/png;base64,${odooLogo}`;
                                         }
-                                        
+
                                         // If local file or URL, use directly
                                         return (
                                             <Image
