@@ -1,6 +1,6 @@
 "use server";
 
-import { writeClient } from "@/sanity/lib/client";
+import { client, writeClient } from "@/sanity/lib/client";
 import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 import { PRICES, VALID_TIMES } from "@/lib/constants/grooming";
@@ -108,8 +108,8 @@ export async function createGroomingBooking(rawData: GroomingBookingData) {
 
         // 4. Create in Sanity
         console.log("📝 Step 4: Creating booking in Sanity...");
-        const doc: Record<string, any> = {
-            _type: "groomingBooking",
+        const doc = {
+            _type: "groomingBooking" as const,
             bookingNumber,
             customerName: data.customerName,
             customerPhone: data.customerPhone,
@@ -117,21 +117,15 @@ export async function createGroomingBooking(rawData: GroomingBookingData) {
             petName: data.petName,
             breedSize: data.breedSize,
             package: data.package,
-            price: finalPrice, // Use server-calculated price
+            price: finalPrice,
             additionalServices,
             appointmentDate: appointmentDateTime.toISOString(),
             specialNotes: data.specialNotes || "",
             status: "pending",
             createdAt: new Date().toISOString(),
+            ...(data.clerkUserId ? { clerkUserId: data.clerkUserId } : {}),
+            ...(data.customerEmail ? { customerEmail: data.customerEmail } : {}),
         };
-        // Only include clerkUserId if provided (Sanity string fields don't accept null)
-        if (data.clerkUserId) {
-            doc.clerkUserId = data.clerkUserId;
-        }
-        // Only include email if provided (Sanity schema validates it as email)
-        if (data.customerEmail) {
-            doc.customerEmail = data.customerEmail;
-        }
 
         console.log("   Sanity doc:", JSON.stringify(doc, null, 2));
         const booking = await writeClient.create(doc);
