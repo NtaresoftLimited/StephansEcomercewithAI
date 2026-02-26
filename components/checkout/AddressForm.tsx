@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useForm } from "react-hook-form"; // Wait, I said I would avoid installing it? I said "I'll stick to controlled components... unless the user didn't explicitly ask for react-hook-form".
-// Since it's not installed, I should use standard controlled components.
+// Since react-hook-form is not installed, we use standard controlled components.
 
 import { MapPin, Loader2, Check } from "lucide-react";
 import { Input } from "@/components/ui/input";

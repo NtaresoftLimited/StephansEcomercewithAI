@@ -23,7 +23,7 @@ export const groomingBookingType = defineType({
             name: "customerEmail",
             title: "Customer Email",
             type: "string",
-            validation: (Rule) => Rule.required().email(),
+            validation: (Rule) => Rule.email(),
         }),
         defineField({
             name: "customerPhone",
@@ -66,7 +66,7 @@ export const groomingBookingType = defineType({
                     { title: "Medium Breeds", value: "medium" },
                     { title: "Large Breeds", value: "large" },
                     { title: "Kitten (2-7 months)", value: "kitten" },
-                    { title: "Adult Cat (7+ months)", value: "adult_cat" },
+                    { title: "Adult Cat (7+ months)", value: "adult" },
                 ],
             },
             validation: (Rule) => Rule.required(),

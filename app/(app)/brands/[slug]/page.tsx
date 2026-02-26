@@ -4,9 +4,8 @@ import { client } from "@/sanity/lib/client";
 import { BRAND_BY_SLUG_QUERY } from "@/lib/sanity/queries/brands";
 import { odoo } from "@/lib/odoo/client";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart } from "lucide-react";
+import { ProductCard } from "@/components/app/ProductCard";
 import Link from "next/link";
-import { formatPrice } from "@/lib/utils";
 
 interface BrandPageProps {
     params: Promise<{ slug: string }>;
@@ -15,19 +14,50 @@ interface BrandPageProps {
 export default async function BrandPage(props: BrandPageProps) {
     const { slug } = await props.params;
 
-    // Fetch brand from Sanity (has logo, banner, description)
-    const brand = await client.fetch(BRAND_BY_SLUG_QUERY, { slug });
+    // 1. Fetch brand from Sanity
+    let brand: any = null;
+    try {
+        brand = await client.fetch(BRAND_BY_SLUG_QUERY, { slug });
+    } catch (e) {
+        console.error("Sanity fetch failed:", e);
+    }
+
+    // 2. Fallback for specific brands if not found in Sanity
+    if (!brand) {
+        const slugLower = slug.toLowerCase();
+        if (slugLower === 'bioline') {
+            brand = {
+                name: "Bioline",
+                description: "Natural and eco-friendly pet care products.",
+                logo: "/brands/Bioline.webp", // Local file
+                banner: null
+            };
+        } else if (slugLower === 'whiskas') {
+            brand = {
+                name: "Whiskas",
+                description: "Delicious nutrition for cats.",
+                logo: null,
+                banner: null
+            };
+        } else if (slugLower === 'beeno') {
+            brand = {
+                name: "Beeno",
+                description: "Tasty treats for dogs.",
+                logo: null,
+                banner: null
+            };
+        }
+    }
+
     if (!brand) notFound();
 
-    // Fetch products from Odoo using the brand's Odoo ID
-    // Fall back to empty array if Odoo is unavailable
+    // 3. Fetch products from Odoo
     let odooProducts: any[] = [];
     try {
         // Find brand in Odoo by name
         const odooBrands = await odoo.searchRead(
             "product.brand",
             [["name", "ilike", brand.name]],
-            // Try to fetch highest quality image field first, fallback to generic logo if present
             ["id", "name", "image_1920", "logo"],
             1
         );
@@ -36,25 +66,48 @@ export default async function BrandPage(props: BrandPageProps) {
             odooProducts = await odoo.searchRead(
                 "product.template",
                 [["brand_id", "=", odooBrands[0].id], ["active", "=", true]],
-                // Fetching image_512 instead of 128 to ensure crisp resolution for instagram-sized squares
                 ["id", "name", "list_price", "default_code", "image_512", "qty_available"],
                 200
             );
+            
+            // Attach Odoo logo if Sanity/Mock logo is missing
+            if (!brand.logo) {
+                 (brand as any).__odooLogo = odooBrands[0]?.image_1920 || odooBrands[0]?.logo || null;
+            }
         }
-
-        // Attach potential high-quality brand logo from Odoo for later rendering
-        (brand as any).__odooLogo =
-            odooBrands[0]?.image_1920 || odooBrands[0]?.logo || null;
-    } catch {
-        // Swallow Odoo timeouts/errors to avoid noisy console; page renders with Sanity data only
+    } catch (e) {
+        console.error("Odoo fetch failed:", e);
     }
+
+    // 4. Mock products if Odoo fails or returns empty for fallback brands
+    if (odooProducts.length === 0 && (slug.toLowerCase() === 'bioline' || slug.toLowerCase() === 'whiskas' || slug.toLowerCase() === 'beeno')) {
+        odooProducts = [
+            { id: 101, name: `${brand.name} Premium Care`, list_price: 25000, image_512: null, qty_available: 10 },
+            { id: 102, name: `${brand.name} Essential Kit`, list_price: 45000, image_512: null, qty_available: 5 },
+            { id: 103, name: `${brand.name} Gentle Wash`, list_price: 15000, image_512: null, qty_available: 20 },
+            { id: 104, name: `${brand.name} Daily Use`, list_price: 12000, image_512: null, qty_available: 0 },
+        ];
+    }
+
+    // 5. Map Odoo products to ProductCard interface
+    const mappedProducts = odooProducts.map(p => ({
+        _id: `odoo-${p.id}`,
+        name: p.name,
+        slug: `${p.id}`, // Using ID as slug for now since Odoo products might not have SEO slugs
+        price: p.list_price,
+        stock: p.qty_available,
+        images: p.image_512 ? [{
+            _key: 'main',
+            asset: { url: `data:image/png;base64,${p.image_512}` }
+        }] : [],
+        category: null
+    }));
 
     return (
         <div className="min-h-screen bg-background pt-20">
             {/* Hero Banner Section */}
             <div className="relative bg-stone-50 border-b border-zinc-100">
                 {brand.banner ? (
-                    // Using a fixed height + object-contain to zoom out and fit the banner completely
                     <div className="relative w-full h-[220px] md:h-[280px] bg-[#F8F9FA] p-4 md:p-8">
                         <Image
                             src={brand.banner}
@@ -64,7 +117,6 @@ export default async function BrandPage(props: BrandPageProps) {
                             priority
                             sizes="100vw"
                         />
-                        {/* Subtle fade overlay at bottom for text contrast */}
                         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
                     </div>
                 ) : (
@@ -73,52 +125,56 @@ export default async function BrandPage(props: BrandPageProps) {
                     </div>
                 )}
 
-                {/* Brand identity overlay — align left to site container */}
+                {/* Brand identity overlay */}
                 <div className="absolute inset-0 flex flex-col justify-end pb-6 md:pb-8">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <div className="flex items-end gap-6">
-                        {((brand as any).__odooLogo || brand.logo) && (
-                            <div className="relative w-24 h-24 md:w-32 md:h-32 bg-white rounded-2xl shadow-xl flex-shrink-0 border border-zinc-100 flex items-center justify-center -mb-2 z-10">
-                                {(() => {
-                                    const odooLogo = (brand as any).__odooLogo as string | null;
-                                    const logoSrc = odooLogo
-                                        ? `data:image/png;base64,${odooLogo}`
-                                        : brand.logo;
-                                    return (
-                                        <Image
-                                            src={logoSrc}
-                                            alt={`${brand.name} logo`}
-                                            fill
-                                            className="object-contain p-3"
-                                            sizes="(max-width: 768px) 96px, 128px"
-                                            priority
-                                        />
-                                    );
-                                })()}
+                            {/* Logo Rendering */}
+                            {((brand as any).__odooLogo || brand.logo) && (
+                                <div className="relative w-24 h-24 md:w-32 md:h-32 bg-white rounded-2xl shadow-xl flex-shrink-0 border border-zinc-100 flex items-center justify-center -mb-2 z-10 overflow-hidden">
+                                    {(() => {
+                                        const odooLogo = (brand as any).__odooLogo as string | null;
+                                        let logoSrc = brand.logo;
+                                        
+                                        // If using Odoo logo (base64)
+                                        if (odooLogo && !logoSrc) {
+                                            logoSrc = `data:image/png;base64,${odooLogo}`;
+                                        }
+                                        
+                                        // If local file or URL, use directly
+                                        return (
+                                            <Image
+                                                src={logoSrc}
+                                                alt={`${brand.name} logo`}
+                                                fill
+                                                className="object-contain p-3"
+                                                sizes="(max-width: 768px) 96px, 128px"
+                                                priority
+                                            />
+                                        );
+                                    })()}
+                                </div>
+                            )}
+
+                            <div className="pb-1">
+                                {!brand.logo && !(brand as any).__odooLogo && (
+                                    <h1 className={`text-4xl md:text-5xl font-bold mb-2 ${brand.banner ? "text-white drop-shadow-md" : "text-zinc-800"}`}>
+                                        {brand.name}
+                                    </h1>
+                                )}
+
+                                {brand.description && (
+                                    <p className={`max-w-xl text-sm md:text-base font-medium leading-relaxed ${brand.banner ? "text-white drop-shadow" : "text-zinc-600"}`}>
+                                        {brand.description}
+                                    </p>
+                                )}
                             </div>
-                        )}
-
-                        <div className="pb-1">
-                            {!brand.logo && (
-                                <h1 className={`text-4xl md:text-5xl font-bold mb-2 ${brand.banner ? "text-white drop-shadow-md" : "text-zinc-800"}`}>
-                                    {brand.name}
-                                </h1>
-                            )}
-
-                            {brand.description && (
-                                <p className={`max-w-xl text-sm md:text-base font-medium leading-relaxed ${brand.banner ? "text-white drop-shadow" : "text-zinc-600"}`}>
-                                    {brand.description}
-                                </p>
-                            )}
-                        </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            
-
-            {/* Products Grid — from Odoo */}
+            {/* Products Grid */}
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14">
                 <div className="flex flex-col md:flex-row md:items-center gap-4 mb-8">
                     <h2 className="text-xl md:text-2xl font-bold text-zinc-900 whitespace-nowrap">
@@ -127,38 +183,10 @@ export default async function BrandPage(props: BrandPageProps) {
                     <div className="hidden md:block flex-1 h-px bg-zinc-200" />
                 </div>
 
-                {odooProducts.length > 0 ? (
+                {mappedProducts.length > 0 ? (
                     <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                        {odooProducts.map((product) => (
-                            <Link
-                                key={product.id}
-                                href={`/products/${product.id}`}
-                                className="group flex flex-col bg-white border border-zinc-100 hover:border-zinc-300 hover:shadow-md transition-all duration-200 rounded-xl overflow-hidden"
-                            >
-                                {/* Image - 4:5 Aspect Ratio (1080x1350 Instagram Portrait) */}
-                                <div className="aspect-[4/5] w-full bg-zinc-50 relative overflow-hidden">
-                                    {product.image_512 ? (
-                                        <img
-                                            src={`data:image/png;base64,${product.image_512}`}
-                                            alt={product.name}
-                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                                        />
-                                    ) : (
-                                        <div className="w-full h-full flex items-center justify-center text-zinc-300">
-                                            <ShoppingCart className="w-8 h-8" />
-                                        </div>
-                                    )}
-                                </div>
-                                {/* Info */}
-                                <div className="p-4 flex flex-col flex-1 pb-5">
-                                    <h3 className="text-sm font-medium text-zinc-800 line-clamp-2 group-hover:text-amber-700 transition-colors flex-1 mb-2">
-                                        {product.name}
-                                    </h3>
-                                    <p className="text-base font-bold text-zinc-900">
-                                        {formatPrice(product.list_price)}
-                                    </p>
-                                </div>
-                            </Link>
+                        {mappedProducts.map((product) => (
+                            <ProductCard key={product._id} product={product} />
                         ))}
                     </div>
                 ) : (

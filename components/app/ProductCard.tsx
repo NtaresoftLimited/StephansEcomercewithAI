@@ -14,7 +14,8 @@ interface Product {
   name: string | null;
   slug: string | null;
   price: number | null;
-  stock: number | null;
+  stock?: number | null;
+  description?: string | null;
   images: Array<{
     _key: string;
     asset: {
@@ -23,6 +24,10 @@ interface Product {
   }> | null;
   category: {
     title: string | null;
+  } | null;
+  brand?: {
+    name: string | null;
+    slug: string | null;
   } | null;
 }
 
@@ -57,45 +62,45 @@ export function ProductCard({ product }: ProductCardProps) {
     e.preventDefault();
     e.stopPropagation();
     const added = toggleItem({
-        productId: product._id,
-        name: product.name ?? "Product",
-        price: product.price ?? 0,
-        image: mainImageUrl ?? undefined,
-        slug: product.slug ?? "",
+      productId: product._id,
+      name: product.name ?? "Product",
+      price: product.price ?? 0,
+      image: mainImageUrl ?? undefined,
+      slug: product.slug ?? "",
     });
     if (added) {
-        toast.success("Added to wishlist!");
+      toast.success("Added to wishlist!");
     } else {
-        toast.info("Removed from wishlist");
+      toast.info("Removed from wishlist");
     }
   };
 
   const handleQuickView = (e: React.MouseEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      // Implement Quick View logic here if needed, or emit event
-      toast.info("Quick View");
+    e.preventDefault();
+    e.stopPropagation();
+    // Implement Quick View logic here if needed, or emit event
+    toast.info("Quick View");
   };
 
   const handleShare = async (e: React.MouseEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const url = `${window.location.origin}/products/${product.slug}`;
+    e.preventDefault();
+    e.stopPropagation();
+    const url = `${window.location.origin}/products/${product.slug}`;
 
-      if (navigator.share) {
-          try {
-              await navigator.share({
-                  title: product.name ?? "Product",
-                  text: `Check out ${product.name} at Stephan's Pet Store!`,
-                  url,
-              });
-          } catch {
-              // User cancelled
-          }
-      } else {
-          await navigator.clipboard.writeText(url);
-          toast.success("Link copied to clipboard!");
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: product.name ?? "Product",
+          text: `Check out ${product.name} at Stephan's Pet Store!`,
+          url,
+        });
+      } catch {
+        // User cancelled
       }
+    } else {
+      await navigator.clipboard.writeText(url);
+      toast.success("Link copied to clipboard!");
+    }
   };
 
   return (
@@ -119,40 +124,40 @@ export function ProductCard({ product }: ProductCardProps) {
 
           {/* Hover Action Buttons - Right Side (100% Similar to Featured Products) */}
           <div className="absolute right-3 top-3 flex flex-col gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-20">
-              <button
-                  onClick={handleToggleWishlist}
-                  className={cn(
-                      "flex h-10 w-10 items-center justify-center rounded-full shadow-md transition-all hover:scale-110",
-                      isInWishlist
-                          ? "bg-red-500 text-white hover:bg-red-600"
-                          : "bg-white/95 text-zinc-600 hover:bg-white hover:text-red-500"
-                  )}
-                  aria-label={isInWishlist ? "Remove from wishlist" : "Add to wishlist"}
-              >
-                  <Heart className={cn("h-5 w-5", isInWishlist && "fill-current")} />
-              </button>
-              <button
-                  onClick={handleAddToCart}
-                  disabled={isOutOfStock}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-zinc-600 shadow-md transition-all hover:bg-white hover:text-[#6b3e1e] hover:scale-110"
-                  aria-label="Add to cart"
-              >
-                  <ShoppingCart className="h-5 w-5" />
-              </button>
-              <button
-                  onClick={handleQuickView}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-zinc-600 shadow-md transition-all hover:bg-white hover:text-blue-500 hover:scale-110"
-                  aria-label="Quick view"
-              >
-                  <Eye className="h-5 w-5" />
-              </button>
-              <button
-                  onClick={handleShare}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-zinc-600 shadow-md transition-all hover:bg-white hover:text-green-500 hover:scale-110"
-                  aria-label="Share"
-              >
-                  <Share2 className="h-5 w-5" />
-              </button>
+            <button
+              onClick={handleToggleWishlist}
+              className={cn(
+                "flex h-10 w-10 items-center justify-center rounded-full shadow-md transition-all hover:scale-110",
+                isInWishlist
+                  ? "bg-red-500 text-white hover:bg-red-600"
+                  : "bg-white/95 text-zinc-600 hover:bg-white hover:text-red-500"
+              )}
+              aria-label={isInWishlist ? "Remove from wishlist" : "Add to wishlist"}
+            >
+              <Heart className={cn("h-5 w-5", isInWishlist && "fill-current")} />
+            </button>
+            <button
+              onClick={handleAddToCart}
+              disabled={isOutOfStock}
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-zinc-600 shadow-md transition-all hover:bg-white hover:text-[#6b3e1e] hover:scale-110"
+              aria-label="Add to cart"
+            >
+              <ShoppingCart className="h-5 w-5" />
+            </button>
+            <button
+              onClick={handleQuickView}
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-zinc-600 shadow-md transition-all hover:bg-white hover:text-blue-500 hover:scale-110"
+              aria-label="Quick view"
+            >
+              <Eye className="h-5 w-5" />
+            </button>
+            <button
+              onClick={handleShare}
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-zinc-600 shadow-md transition-all hover:bg-white hover:text-green-500 hover:scale-110"
+              aria-label="Share"
+            >
+              <Share2 className="h-5 w-5" />
+            </button>
           </div>
 
           {/* Minimalist Badges */}
@@ -161,7 +166,7 @@ export function ProductCard({ product }: ProductCardProps) {
               <span className="text-[9px] font-bold uppercase tracking-wider text-red-600">Sold Out</span>
             </div>
           )}
-          
+
           {/* Hover Overlay */}
           <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/5 z-10" />
         </div>

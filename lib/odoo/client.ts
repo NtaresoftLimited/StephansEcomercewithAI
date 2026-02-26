@@ -27,7 +27,7 @@ export class OdooClient {
                 },
                 id: Date.now()
             }),
-            signal: AbortSignal.timeout(5000) // 5s timeout
+            signal: AbortSignal.timeout(12000) // bump timeout to 12s for reliability
         });
 
         const data = await response.json();
@@ -55,7 +55,7 @@ export class OdooClient {
                 },
                 id: Date.now()
             }),
-            signal: AbortSignal.timeout(5000) // 5s timeout
+            signal: AbortSignal.timeout(12000) // bump timeout to 12s for reliability
         });
 
         const data = await response.json();
@@ -115,7 +115,7 @@ export class OdooClient {
     async getBrands(): Promise<any[]> {
         return this.searchRead(
             "product.brand",
-            [],
+            [["active", "=", true]],
             ["id", "name", "logo"]
         );
     }
@@ -198,7 +198,8 @@ export class OdooClient {
             [
                 ["brand_id", "=", brandId],
                 ["sale_ok", "=", true],
-                ["website_published", "=", true]
+                ["website_published", "=", true],
+                ["active", "=", true]
             ],
             [
                 "id",

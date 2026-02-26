@@ -93,7 +93,7 @@ export default async function HomePage({ searchParams }: PageProps) {
     query: GROOMING_IMAGES_QUERY,
   });
 
-  // Fetch brands from Odoo and Sanity, prefer Odoo logo but fallback to Sanity
+  // Fetch brands from Odoo and Sanity, prefer Sanity logo for high quality
   const [sanityBrands, odooBrands] = await Promise.all([
     sanityFetch({ query: ALL_BRANDS_QUERY })
       .then((r: any) => r?.data as any[])
@@ -106,8 +106,14 @@ export default async function HomePage({ searchParams }: PageProps) {
       (sanityBrands as any[])?.find(
         (s) => s.name?.toLowerCase() === b.name?.toLowerCase()
       ) || null;
-    const logo =
-      b.logo ? `data:image/png;base64,${b.logo}` : match?.logo || undefined;
+
+    // Prefer Sanity logo if available (usually high-quality SVG/PNG we uploaded)
+    let logo = match?.logo;
+    if (!logo && b.logo) {
+      // Fallback to Odoo logo if Sanity doesn't have one
+      logo = `data:image/png;base64,${b.logo}`;
+    }
+
     mergedByName.set((b.name || "").toLowerCase(), {
       id: b.id,
       name: b.name,

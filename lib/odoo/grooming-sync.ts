@@ -14,11 +14,56 @@ interface GroomingData {
     appointmentDate: string; // ISO string
     appointmentTime: string; // HH:mm
     customerName: string;
-    customerEmail: string;
+    customerEmail?: string;
     customerPhone: string;
     specialNotes?: string;
     detangling: boolean;
     bookingNumber: string;
+}
+
+/**
+ * Check if a grooming slot is available in Odoo
+ * Requirement: Max 30 bookings per day.
+ * Also check for exact duplicate slots to prevent double-booking same time.
+ * @param appointmentDate ISO String of the requested date/time
+ */
+export async function checkGroomingAvailability(appointmentDate: string): Promise<boolean> {
+    try {
+        // 1. Check Daily Limit (Max 30)
+        // Get YYYY-MM-DD
+        const datePart = appointmentDate.split("T")[0];
+        const startOfDay = `${datePart} 00:00:00`;
+        const endOfDay = `${datePart} 23:59:59`;
+
+        console.log(`🔎 Checking daily limit for ${datePart}...`);
+
+        const dailyCount = await odoo.executeKw("grooming.appointment", "search_count", [[
+            ["appointment_date", ">=", startOfDay],
+            ["appointment_date", "<=", endOfDay],
+            ["state", "!=", "cancelled"]
+        ]]);
+
+        if (dailyCount >= 30) {
+            console.log(`  - ❌ Daily limit reached (${dailyCount}/30)`);
+            return false;
+        }
+
+        // 2. Check Exact Slot (Optional: allow multiple per hour if staff permits,
+        // but keeping it for now to avoid obvious collisions if not requested otherwise)
+        const formattedFullDate = appointmentDate.replace("T", " ").substring(0, 19);
+        const slotCount = await odoo.executeKw("grooming.appointment", "search_count", [[
+            ["appointment_date", "=", formattedFullDate],
+            ["state", "!=", "cancelled"]
+        ]]);
+
+        console.log(`  - Daily count: ${dailyCount}/30. Slot count: ${slotCount}.`);
+
+        return slotCount === 0;
+    } catch (error) {
+        console.error("Failed to check availability:", error);
+        // Fail open: If Odoo is down, allow booking to proceed (don't block sales)
+        return true;
+    }
 }
 
 /**
@@ -42,11 +87,6 @@ export async function pushBookingToOdoo(data: GroomingData): Promise<string | nu
         // 3. Create Appointment
         // Combine Date + Time
         // appointmentDate comes as "2024-01-01T00:00:00.000Z" usually from serialized Date
-        // But our form sends YYYY-MM-DD string directly? Let's check input.
-        // Actually actions/grooming.ts lines 28 constructs a Date object.
-        // But here we receive the DTO.
-
-        // Let's assume data.appointmentDate is "2024-01-01T..." ISO from action
 
         const appointmentId = await odoo.executeKw("grooming.appointment", "create", [{
             partner_id: partnerId,
@@ -71,49 +111,38 @@ export async function pushBookingToOdoo(data: GroomingData): Promise<string | nu
     }
 }
 
-/**
- * Check if a grooming slot is available in Odoo
- * @param appointmentDate ISO String of the requested date/time
- */
-export async function checkGroomingAvailability(appointmentDate: string): Promise<boolean> {
-    try {
-        const formattedDate = appointmentDate.replace("T", " ").substring(0, 19);
-        console.log(`🔎 Checking availability for ${formattedDate}...`);
-
-        const count = await odoo.executeKw("grooming.appointment", "search_count", [[
-            ["appointment_date", "=", formattedDate],
-            ["state", "!=", "cancelled"]
-        ]]);
-
-        return count === 0;
-    } catch (error) {
-        console.error("Failed to check availability:", error);
-        // Fail open: If Odoo is down, allow booking to proceed (don't block sales)
-        // Ideally we should alert admin, but for now we assume available.
-        return true;
-    }
-}
-
 async function getOrCreatePartner(data: GroomingData): Promise<number> {
-    // Search by email
-    const existing = await odoo.searchRead(
-        "res.partner",
-        [["email", "=", data.customerEmail]],
-        ["id"],
-        1
-    );
+    // Prefer search by email when available, otherwise fallback to phone
+    let existing: any[] = [];
+    if (data.customerEmail) {
+        existing = await odoo.searchRead(
+            "res.partner",
+            [["email", "=", data.customerEmail]],
+            ["id"],
+            1
+        );
+    }
+    if ((!existing || existing.length === 0) && data.customerPhone) {
+        existing = await odoo.searchRead(
+            "res.partner",
+            [["phone", "=", data.customerPhone]],
+            ["id"],
+            1
+        );
+    }
 
     if (existing.length > 0) {
         return existing[0].id;
     }
 
     // Create new
-    return await odoo.executeKw("res.partner", "create", [{
+    const partnerPayload: any = {
         name: data.customerName,
-        email: data.customerEmail,
         phone: data.customerPhone,
         customer_rank: 1, // Indicate it's a customer
-    }]);
+    };
+    if (data.customerEmail) partnerPayload.email = data.customerEmail;
+    return await odoo.executeKw("res.partner", "create", [partnerPayload]);
 }
 
 async function getServiceByCode(pkgCode: string): Promise<number | false> {

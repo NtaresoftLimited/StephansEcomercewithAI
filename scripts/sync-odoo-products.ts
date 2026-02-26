@@ -89,7 +89,7 @@ async function syncOdoo() {
         console.log("📦 Fetching products from Odoo...");
         const odooProducts = await odoo.searchRead(
             "product.template",
-            [["sale_ok", "=", true]],
+            [["sale_ok", "=", true], ["active", "=", true]],
             ["name", "list_price", "description_sale", "categ_id", "qty_available", "image_1920", "id", "product_variant_count", "brand_id"],
             100
         );
