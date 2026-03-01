@@ -92,7 +92,7 @@ export function GroomingPackages({ prices = PRICES }: GroomingPackagesProps) {
     const getPackage = (petType: "dog" | "cat", pkgKey: "standard" | "premium" | "super_premium") => {
         const pkgData = petType === "dog" ? DOG_PACKAGES[pkgKey] : CAT_PACKAGES[pkgKey];
         const dynamicPrices = prices?.[petType]?.[pkgKey];
-        
+
         return {
             ...pkgData,
             prices: dynamicPrices || pkgData.prices
@@ -152,31 +152,31 @@ export function GroomingPackages({ prices = PRICES }: GroomingPackagesProps) {
                     )}
                 </div>
 
-                {/* Additional Charges */}
+                {/* Extra Charges */}
                 <div className="mt-12 rounded-xl bg-white dark:bg-zinc-800/50 p-6 border border-[#6b3e1e]/20">
                     <h3 className="font-bold text-zinc-900 dark:text-white mb-4">
-                        Additional Charges
+                        Extra Charges
                     </h3>
                     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         <div className="flex justify-between">
-                            <span className="text-zinc-600 dark:text-zinc-400">Detangling Hair</span>
-                            <span className="font-semibold text-[#6b3e1e]">30,000 TZS</span>
+                            <span className="text-zinc-600 dark:text-zinc-400 font-bold">Detangling Hair</span>
+                            <span className="font-bold text-[#6b3e1e]">30,000 TZS</span>
                         </div>
                         <div className="flex justify-between">
-                            <span className="text-zinc-600 dark:text-zinc-400">Emergency (after 6:30 PM)</span>
-                            <span className="font-semibold text-[#6b3e1e]">30,000 TZS</span>
+                            <span className="text-zinc-600 dark:text-zinc-400 font-bold">Emergency (after 6:30 PM)</span>
+                            <span className="font-bold text-[#6b3e1e]">30,000 TZS</span>
                         </div>
                         <div className="flex justify-between">
-                            <span className="text-zinc-600 dark:text-zinc-400">Handling Fee</span>
-                            <span className="font-semibold text-[#6b3e1e]">10,000 TZS</span>
+                            <span className="text-zinc-600 dark:text-zinc-400 font-bold">Handling Fee</span>
+                            <span className="font-bold text-[#6b3e1e]">10,000 TZS</span>
                         </div>
                         <div className="flex justify-between">
-                            <span className="text-zinc-600 dark:text-zinc-400">Sedation (Vet Supervision)</span>
-                            <span className="font-semibold text-[#6b3e1e]">5,000 TZS</span>
+                            <span className="text-zinc-600 dark:text-zinc-400 font-bold">Sedation (Vet Supervision)</span>
+                            <span className="font-bold text-[#6b3e1e]">5,000 TZS</span>
                         </div>
                         <div className="flex justify-between">
-                            <span className="text-zinc-600 dark:text-zinc-400">Late Pickup (per hour)</span>
-                            <span className="font-semibold text-[#6b3e1e]">10,000 TZS</span>
+                            <span className="text-zinc-600 dark:text-zinc-400 font-bold">Late Pickup (per hour)</span>
+                            <span className="font-bold text-[#6b3e1e]">10,000 TZS</span>
                         </div>
                     </div>
                 </div>

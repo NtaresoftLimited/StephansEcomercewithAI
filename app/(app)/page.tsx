@@ -11,10 +11,8 @@ import { ALL_CATEGORIES_QUERY } from "@/lib/sanity/queries/categories";
 import { ALL_BRANDS_QUERY } from "@/lib/sanity/queries/brands";
 import { HERO_PET_IMAGES_QUERY } from "@/lib/sanity/queries/heroImages";
 import { GROOMING_IMAGES_QUERY } from "@/lib/sanity/queries/groomingImages";
-import { ProductSection } from "@/components/app/ProductSection";
 import { AdoptionSection } from "@/components/app/AdoptionSection";
 import { GroomingSection } from "@/components/app/GroomingSection";
-import { CategoryTabs } from "@/components/app/CategoryTabs";
 import { AutoRotatingProductGrid } from "@/components/app/AutoRotatingProductGrid";
 import { BrandsSection } from "@/components/app/BrandsSection";
 import { ConsultationCTA } from "@/components/app/ConsultationCTA";
@@ -115,6 +113,7 @@ export default async function HomePage({ searchParams }: PageProps) {
     }
 
     mergedByName.set((b.name || "").toLowerCase(), {
+      _id: match?._id || b.id?.toString() || (b.name || "").toLowerCase().replace(/\s+/g, "-"),
       id: b.id,
       name: b.name,
       slug: match?.slug || (b.name || "").toLowerCase().replace(/\s+/g, "-"),
@@ -126,6 +125,7 @@ export default async function HomePage({ searchParams }: PageProps) {
     const key = (s.name || "").toLowerCase();
     if (!mergedByName.has(key)) {
       mergedByName.set(key, {
+        _id: s._id,
         name: s.name,
         slug: s.slug,
         logo: s.logo,
@@ -146,16 +146,20 @@ export default async function HomePage({ searchParams }: PageProps) {
     <div className="min-h-screen bg-background">
       {/* PAW Section - Main Hero */}
       <section className="pt-20"> {/* Add padding for fixed header */}
-        <AdoptionSection
-          dogImages={dogImages}
-          catImages={catImages}
-          birdImages={birdImages}
-          fishImages={fishImages}
-        />
+        <Suspense fallback={<div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8 py-12 text-center text-muted-foreground">Loading adoption content…</div>}>
+          <AdoptionSection
+            dogImages={dogImages}
+            catImages={catImages}
+            birdImages={birdImages}
+            fishImages={fishImages}
+          />
+        </Suspense>
       </section>
 
       {/* Grooming Section (Section 2) */}
-      <GroomingSection images={groomingImageUrls} />
+      <Suspense fallback={<div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8 py-12 text-center text-muted-foreground">Loading grooming content…</div>}>
+        <GroomingSection images={groomingImageUrls} />
+      </Suspense>
 
       {/* All Products */}
       <section className="py-24 md:py-32 bg-background border-t border-border">

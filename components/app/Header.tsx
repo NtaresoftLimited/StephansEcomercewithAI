@@ -155,9 +155,8 @@ export function Header() {
             >
               <ShoppingBag className="h-5 w-5" strokeWidth={1.5} />
               {totalItems > 0 && (
-                <span className="absolute top-1 right-1 flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+                <span className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-amber-600 text-[9px] font-bold text-white shadow-sm ring-1 ring-white">
+                  {totalItems > 99 ? "99" : totalItems}
                 </span>
               )}
               <span className="sr-only">Open cart</span>

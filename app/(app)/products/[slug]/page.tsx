@@ -5,6 +5,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { PRODUCT_BY_SLUG_QUERY, PRODUCTS_BY_CATEGORY_QUERY } from "@/lib/sanity/queries/products";
 import { ProductGallery } from "@/components/app/ProductGallery";
 import { ProductInfo } from "@/components/app/ProductInfo";
+import { ProductTabs } from "@/components/app/ProductTabs";
 import { ProductCard } from "@/components/app/ProductCard";
 
 interface ProductPageProps {
@@ -64,11 +65,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </span>
         </div>
 
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          {/* Image Gallery */}
-          <ProductGallery images={product.images} productName={product.name} />
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-16 relative items-start">
+          {/* Left Column: Image Gallery & Tabs */}
+          <div className="flex flex-col gap-12 min-w-0">
+            <ProductGallery images={product.images} productName={product.name} />
+            <ProductTabs product={product} />
+          </div>
 
-          {/* Product Info */}
+          {/* Right Column: Sticky Product Info */}
           <div className="lg:sticky lg:top-24 h-fit">
             <ProductInfo product={product} />
           </div>

@@ -6,6 +6,7 @@ import {
   OFFERS_BY_RELEVANCE_QUERY,
 } from "@/lib/sanity/queries/products";
 import { ALL_CATEGORIES_QUERY } from "@/lib/sanity/queries/categories";
+import { ALL_BRANDS_QUERY } from "@/lib/sanity/queries/brands";
 import { ProductSection } from "@/components/app/ProductSection";
 import { Home } from "lucide-react";
 import Link from "next/link";
@@ -56,22 +57,15 @@ export default async function OffersPage({ searchParams }: PageProps) {
     }
   };
 
-  const { data: products } = await sanityFetch({
-    query: getQuery(),
-    params: {
-      searchQuery,
-      categorySlug,
-      color,
-      material,
-      minPrice,
-      maxPrice,
-      inStock,
-    },
-  });
+  const [productsResult, categoriesResult, brandsResult] = await Promise.all([
+    sanityFetch({ query: getQuery(), params: { searchQuery, categorySlug, color, material, minPrice, maxPrice, inStock } }),
+    sanityFetch({ query: ALL_CATEGORIES_QUERY }),
+    sanityFetch({ query: ALL_BRANDS_QUERY }),
+  ]);
 
-  const { data: categories } = await sanityFetch({
-    query: ALL_CATEGORIES_QUERY,
-  });
+  const products = productsResult.data || [];
+  const categories = categoriesResult.data || [];
+  const brands = brandsResult.data || [];
 
   return (
     <div className="min-h-screen bg-white">
@@ -109,6 +103,7 @@ export default async function OffersPage({ searchParams }: PageProps) {
 
         <ProductSection
           categories={categories}
+          brands={brands}
           products={products}
           searchQuery={searchQuery}
         />

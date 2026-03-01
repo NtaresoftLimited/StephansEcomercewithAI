@@ -38,7 +38,7 @@ const STORES: StoreLocation[] = [
     {
         id: "2",
         name: "Mikocheni Branch",
-        address: "Opposite the Tanesco Office, Mikocheni, Dar es Salaam",
+        address: "58 Mikocheni A, Dar es Salaam",
         phone: "+255 786 627 873",
         hours: "Mon-Sat: 9AM - 6:00PM",
         position: [-6.7733, 39.2699], // Mikocheni coordinates

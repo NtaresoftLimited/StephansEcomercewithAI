@@ -76,8 +76,9 @@ export default function ContactPage() {
                                         <div>
                                             <h3 className="font-medium text-zinc-900">Address</h3>
                                             <p className="text-zinc-500 text-sm">
-                                                11 Slipway Rd<br />
-                                                Masaki, Dar es Salaam, Tanzania
+                                                11 Slipway Rd, Masaki<br />
+                                                58 Mikocheni A<br />
+                                                Dar es Salaam, Tanzania
                                             </p>
                                             <a
                                                 href="https://www.google.com/maps/dir//11+Slipway+Rd,+Dar+es+Salaam,+Tanzania/@-6.7642817,39.2653047,17z/"

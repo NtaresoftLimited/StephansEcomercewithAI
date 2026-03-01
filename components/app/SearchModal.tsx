@@ -12,12 +12,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { client } from "@/sanity/lib/client";
-import { FEATURED_PRODUCTS_QUERY } from "@/lib/sanity/queries/products";
-import { ALL_BRANDS_QUERY } from "@/lib/sanity/queries/brands";
 import { useCartActions } from "@/lib/store/cart-store-provider";
 import { urlFor } from "@/sanity/lib/image";
-import { searchProducts } from "@/app/actions/search";
+import { searchProducts, getFeaturedProducts, getAllBrands } from "@/app/actions/search";
 
 const POPULAR_SEARCHES = [
     "Dry Food",
@@ -53,8 +50,8 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                 setIsLoadingInitial(true);
                 try {
                     const [productsData, brandsData] = await Promise.all([
-                        client.fetch(FEATURED_PRODUCTS_QUERY),
-                        client.fetch(ALL_BRANDS_QUERY)
+                        getFeaturedProducts(),
+                        getAllBrands()
                     ]);
                     setProducts(productsData.slice(0, 12));
                     setBrands(brandsData);

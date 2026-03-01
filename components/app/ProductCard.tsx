@@ -105,9 +105,12 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <div className="group relative flex flex-col">
-      <Link href={`/products/${product.slug}`} className="block relative">
+      <Link
+        href={`/products/${product.slug}`}
+        className="block relative rounded-xl border border-zinc-200 bg-white shadow-sm transition-all hover:shadow-md hover:border-amber-300"
+      >
         {/* Image Container - Aspect Ratio 4:5 (1080x1350) */}
-        <div className="relative aspect-[4/5] overflow-hidden bg-zinc-100 dark:bg-zinc-800 rounded-lg">
+        <div className="relative aspect-[4/5] overflow-hidden bg-white dark:bg-zinc-800 rounded-xl">
           {mainImageUrl ? (
             <Image
               src={mainImageUrl}
@@ -175,7 +178,7 @@ export function ProductCard({ product }: ProductCardProps) {
       {/* Product Details - Clean Layout */}
       <div className="mt-4 flex flex-col gap-1">
         <Link href={`/products/${product.slug}`} className="group/title">
-          <h3 className="text-sm font-medium text-foreground/90 group-hover/title:text-foreground transition-colors line-clamp-1">
+          <h3 className="text-sm font-medium text-foreground/90 group-hover/title:text-amber-600 transition-colors line-clamp-1">
             {product.name}
           </h3>
         </Link>

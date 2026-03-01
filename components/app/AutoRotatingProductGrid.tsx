@@ -37,7 +37,7 @@ interface AutoRotatingProductGridProps {
 
 export function AutoRotatingProductGrid({ products }: AutoRotatingProductGridProps) {
     const [currentPage, setCurrentPage] = useState(0);
-    const [timeLeft, setTimeLeft] = useState(120);
+    const [timeLeft, setTimeLeft] = useState(30);
     const [isTransitioning, setIsTransitioning] = useState(false);
 
     // Ensure brand-first ordering regardless of source sort
@@ -64,7 +64,7 @@ export function AutoRotatingProductGrid({ products }: AutoRotatingProductGridPro
             setTimeLeft((prev) => {
                 if (prev <= 1) {
                     handlePageChange((currentPage + 1) % totalPages);
-                    return 120;
+                    return 30;
                 }
                 return prev - 1;
             });
@@ -78,7 +78,7 @@ export function AutoRotatingProductGrid({ products }: AutoRotatingProductGridPro
         setTimeout(() => {
             setCurrentPage(newPage);
             setIsTransitioning(false);
-            setTimeLeft(120);
+            setTimeLeft(30);
         }, 300); // Wait for fade out
     };
 
@@ -111,24 +111,7 @@ export function AutoRotatingProductGrid({ products }: AutoRotatingProductGridPro
                 ))}
             </div>
 
-            {/* Pagination Dots */}
-            {totalPages > 1 && (
-                <div className="flex justify-center gap-3 mt-16">
-                    {Array.from({ length: totalPages }).map((_, index) => (
-                        <button
-                            key={`dot-${index}`}
-                            onClick={() => handlePageChange(index)}
-                            className={cn(
-                                "h-1.5 rounded-full transition-all duration-300",
-                                currentPage === index
-                                    ? "w-8 bg-foreground"
-                                    : "w-1.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                            )}
-                            aria-label={`Go to page ${index + 1}`}
-                        />
-                    ))}
-                </div>
-            )}
+            {/* Pagination Dots removed per request */}
         </section>
     );
 }

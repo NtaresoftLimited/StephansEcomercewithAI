@@ -12,12 +12,14 @@ import { ProductGrid } from "./ProductGrid";
 
 interface ProductSectionProps {
   categories: any[]; // ALL_CATEGORIES_QUERYResult;
+  brands: any[];
   products: any[]; // FILTER_PRODUCTS_BY_NAME_QUERYResult;
   searchQuery: string;
 }
 
 export function ProductSection({
   categories,
+  brands,
   products,
   searchQuery,
 }: ProductSectionProps) {
@@ -66,11 +68,10 @@ export function ProductSection({
       <div className="flex flex-col gap-8 lg:flex-row">
         {/* Sidebar Filters - completely hidden when collapsed on desktop */}
         <aside
-          className={`shrink-0 transition-all duration-300 ease-in-out ${
-            filtersOpen ? "w-full lg:w-72 lg:opacity-100" : "hidden lg:hidden"
-          }`}
+          className={`shrink-0 transition-all duration-300 ease-in-out ${filtersOpen ? "w-full lg:w-72 lg:opacity-100" : "hidden lg:hidden"
+            }`}
         >
-          <ProductFilters categories={categories} />
+          <ProductFilters categories={categories} brands={brands} />
         </aside>
 
         {/* Product Grid - expands to full width when filters hidden */}

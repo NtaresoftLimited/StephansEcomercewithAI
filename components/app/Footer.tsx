@@ -63,7 +63,8 @@ export function Footer() {
           <div className='flex flex-col gap-1 md:gap-4'>
             <h4 className='uppercase whitespace-nowrap font-display text-md text-neutral-500 font-semibold'>Contact</h4>
             <div className="flex flex-col gap-2 text-sm text-neutral-800 items-start font-medium">
-              <p>11 Slipway Rd, Masaki, Dar es Salaam</p>
+              <p>11 Slipway Rd, Masaki</p>
+              <p>58 Mikocheni A, Dar es Salaam</p>
               <a href="tel:+255786627873" className="hover:text-black transition-colors">+255 786 627 873</a>
               <a href="tel:+255769324445" className="hover:text-black transition-colors">+255 769 324 445</a>
               <a href="mailto:info@stephanspetstore.co.tz" className="hover:text-black transition-colors">info@stephanspetstore.co.tz</a>

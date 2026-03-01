@@ -13,6 +13,7 @@ interface AddToCartButtonProps {
   image?: string;
   stock: number;
   className?: string;
+  children?: React.ReactNode;
 }
 
 export function AddToCartButton({
@@ -22,6 +23,7 @@ export function AddToCartButton({
   image,
   stock,
   className,
+  children,
 }: AddToCartButtonProps) {
   const { addItem, updateQuantity } = useCartActions();
   const cartItem = useCartItem(productId);
@@ -57,9 +59,9 @@ export function AddToCartButton({
   // Not in cart - show Add to Basket button
   if (quantityInCart === 0) {
     return (
-      <Button onClick={handleAdd} className={cn("h-11 w-full", className)}>
-        <ShoppingBag className="mr-2 h-4 w-4" />
-        Add to Basket
+      <Button onClick={handleAdd} className={cn("h-11 w-full text-blue-500 bg-[#E8F3FF] hover:bg-[#D8E9FF]", className)}>
+        {!children && <ShoppingBag className="mr-2 h-4 w-4" />}
+        {children || "Add to Basket"}
       </Button>
     );
   }

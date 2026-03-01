@@ -13,6 +13,7 @@ interface BrandPageProps {
 
 export default async function BrandPage(props: BrandPageProps) {
     const { slug } = await props.params;
+    const slugLower = slug.toLowerCase();
 
     // 1. Fetch brand from Sanity
     let brand: any = null;
@@ -24,7 +25,6 @@ export default async function BrandPage(props: BrandPageProps) {
 
     // 2. Fallback for specific brands if not found in Sanity
     if (!brand) {
-        const slugLower = slug.toLowerCase();
         if (slugLower === 'bioline') {
             brand = {
                 name: "Bioline",
@@ -130,7 +130,27 @@ export default async function BrandPage(props: BrandPageProps) {
         <div className="min-h-screen bg-background pt-20">
             {/* Hero Banner Section */}
             <div className="relative bg-stone-50 border-b border-zinc-100">
-                {brand.banner ? (
+                {slugLower === 'summit10' ? (
+                    <div className="relative h-[280px] md:h-[360px] lg:h-[420px]">
+                        <div className="absolute inset-0 bg-center bg-cover bg-no-repeat summit-banner-rotator" />
+                        <style>{`
+                          .summit-banner-rotator {
+                            animation: summitBannerRotation 60s linear infinite;
+                          }
+                          @keyframes summitBannerRotation {
+                            0%, 33% {
+                              background-image: url('/Banners/Summit Banner.jpg.jpeg');
+                            }
+                            33.01%, 66% {
+                              background-image: url('/Banners/Summit Banner 1.jpg.jpeg');
+                            }
+                            66.01%, 100% {
+                              background-image: url('/Banners/Summit Banner 2.jpg.jpeg');
+                            }
+                          }
+                        `}</style>
+                    </div>
+                ) : brand.banner ? (
                     <div className="relative w-full h-[220px] md:h-[280px] bg-[#F8F9FA] p-4 md:p-8">
                         <Image
                             src={brand.banner}
@@ -170,7 +190,7 @@ export default async function BrandPage(props: BrandPageProps) {
                                                 src={logoSrc}
                                                 alt={`${brand.name} logo`}
                                                 fill
-                                                className="object-contain p-3"
+                                                className="object-contain object-left p-3"
                                                 sizes="(max-width: 768px) 96px, 128px"
                                                 priority
                                             />

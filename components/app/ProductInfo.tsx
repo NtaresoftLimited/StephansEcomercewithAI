@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Check, Star, RefreshCw, Info } from "lucide-react";
+import { Check, Star, RefreshCw, Info, MessageCircle, Users, Heart, Share2, Truck, ShieldCheck, RotateCcw, CreditCard, ExternalLink } from "lucide-react";
 import { AddToCartButton } from "@/components/app/AddToCartButton";
 import { AskAISimilarButton } from "@/components/app/AskAISimilarButton";
 import { StockBadge } from "@/components/app/StockBadge";
@@ -18,8 +18,27 @@ export function ProductInfo({ product }: ProductInfoProps) {
     product.variants?.[0]?._key || null
   );
 
-  // Purchase type state (mock for UI)
-  const [purchaseType, setPurchaseType] = useState<"onetime" | "subscribe">("onetime");
+  // Live Visitors state
+  const [liveVisitors, setLiveVisitors] = useState<number | null>(null);
+  const [quantity, setQuantity] = useState(1);
+  const [isWishlisted, setIsWishlisted] = useState(false);
+
+  useEffect(() => {
+    // Generate a random initial number between 15 and 45
+    setLiveVisitors(Math.floor(Math.random() * 30) + 15);
+
+    // Randomly update the number every 5-15 seconds to simulate activity
+    const interval = setInterval(() => {
+      setLiveVisitors(prev => {
+        if (!prev) return 20;
+        const change = Math.random() > 0.5 ? 1 : -1;
+        // Keep between 10 and 50
+        return Math.max(10, Math.min(50, prev + change * Math.floor(Math.random() * 3 + 1)));
+      });
+    }, Math.floor(Math.random() * 10000) + 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const variants = product.variants || [];
   const selectedVariant = variants.find((v: any) => v._key === selectedVariantId) || null;
@@ -29,202 +48,236 @@ export function ProductInfo({ product }: ProductInfoProps) {
   const currentStock = selectedVariant ? selectedVariant.stock : product.stock;
   const imageUrl = product.images?.[0]?.asset?.url;
 
-  // Mock Flavors if none exist (to satisfy UI requirement)
-  const flavors = product.material ? [product.material] : ["Original Recipe"];
-  const [selectedFlavor, setSelectedFlavor] = useState(flavors[0]);
-
   return (
     <div className="flex flex-col animate-in fade-in w-full">
       {/* Header Section */}
       <div className="mb-6 border-b border-zinc-100 dark:border-zinc-800 pb-6">
-        <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-4 font-sans uppercase">
-          {product.name}
-        </h1>
-
-        <div className="flex items-center justify-between">
-          {/* Mock Reviews */}
-          <div className="flex items-center gap-2">
-            <div className="flex text-zinc-900 dark:text-zinc-100">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <Star key={star} className="w-4 h-4 fill-current" />
-              ))}
-            </div>
-            <span className="text-sm font-medium text-zinc-500 underline-offset-4 hover:underline cursor-pointer">
-              128 Reviews
-            </span>
+        {/* Brand Link */}
+        {product.brand && (
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-xs font-bold uppercase tracking-widest text-zinc-400">Brand</span>
+            <Link
+              href={`/brands/${product.brand.slug?.current || product.brand.slug}`}
+              className="text-xs font-bold uppercase tracking-widest text-[#D35122] hover:underline"
+            >
+              {product.brand.name}
+            </Link>
           </div>
+        )}
 
-          {/* Price */}
-          <div className="flex items-baseline gap-3">
-            <span className="text-xl md:text-2xl font-bold text-zinc-900 dark:text-zinc-50">
-              {formatPrice(currentPrice)}
-            </span>
-            {selectedVariant?.compareAtPrice && (
-              <span className="text-base text-zinc-400 line-through">
-                {formatPrice(selectedVariant.compareAtPrice)}
-              </span>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* New Customer Offer - Highlighted */}
-      <div className="mb-8 bg-[#F4F1ED] dark:bg-zinc-800/50 p-4 rounded-md flex items-start gap-3 border border-[#E5E0D8] dark:border-zinc-700">
-        <div className="shrink-0 mt-0.5">
-          <Info className="w-5 h-5 text-zinc-900 dark:text-zinc-100" />
-        </div>
-        <div>
-          <p className="text-sm font-bold text-zinc-900 dark:text-zinc-100 uppercase mb-1">
-            New Customer Offer
-          </p>
-          <p className="text-sm text-zinc-700 dark:text-zinc-300">
-            Get <span className="font-bold">20% OFF</span> your first order with code <span className="font-bold border-b border-zinc-900 border-dashed">NEW20</span>
-          </p>
-        </div>
-      </div>
-
-      {/* Select Flavor Section */}
-      <div className="mb-6">
-        <div className="flex justify-between items-center mb-3">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-zinc-900 dark:text-zinc-100">
-            SELECT A FLAVOR
-          </span>
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {flavors.map((flavor: string) => (
+        <div className="flex justify-between items-start gap-4 mb-4">
+          <h1 className="text-xl md:text-2xl font-semibold tracking-normal leading-tight text-zinc-900 dark:text-zinc-50">
+            {product.name}
+          </h1>
+          <div className="flex gap-2 shrink-0">
             <button
-              key={flavor}
-              onClick={() => setSelectedFlavor(flavor)}
+              onClick={() => setIsWishlisted(!isWishlisted)}
               className={cn(
-                "px-6 py-3 border text-sm font-bold uppercase transition-all duration-200 min-w-[100px]",
-                selectedFlavor === flavor
-                  ? "border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900"
-                  : "border-zinc-300 text-zinc-600 hover:border-zinc-900 dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-zinc-100"
+                "p-3 rounded-full border transition-all duration-300",
+                isWishlisted
+                  ? "bg-red-50 border-red-200 text-red-500 shadow-sm"
+                  : "bg-white border-zinc-200 text-zinc-400 hover:text-red-500 hover:border-red-200 dark:bg-zinc-900 dark:border-zinc-800"
               )}
             >
-              {flavor}
+              <Heart className={cn("w-5 h-5", isWishlisted && "fill-current")} />
             </button>
-          ))}
+            <button
+              onClick={() => {
+                if (navigator.share) {
+                  navigator.share({
+                    title: product.name,
+                    url: window.location.href,
+                  });
+                } else {
+                  navigator.clipboard.writeText(window.location.href);
+                  alert("Link copied to clipboard!");
+                }
+              }}
+              className="p-3 rounded-full border border-zinc-200 bg-white text-zinc-400 hover:text-zinc-900 hover:border-zinc-300 transition-all dark:bg-zinc-900 dark:border-zinc-800 dark:hover:text-zinc-100 dark:hover:border-zinc-700"
+            >
+              <Share2 className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-between gap-4 mt-4">
+          {/* Rating Section */}
+          <div className="flex items-center gap-2 hidden">
+            <div className="flex text-[#D35122]">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <Star key={star} className="w-3.5 h-3.5 fill-current" />
+              ))}
+            </div>
+            <span className="text-sm font-bold text-zinc-900 dark:text-zinc-50">5.0</span>
+            <span className="text-xs font-medium text-zinc-500 uppercase tracking-widest">
+              (128 Reviews)
+            </span>
+          </div>
+
+          {/* SKU Section */}
+          {product.sku && (
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">SKU</span>
+              <code className="text-xs font-bold text-zinc-900 dark:text-zinc-50 bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded">
+                {product.sku}
+              </code>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(product.sku);
+                  alert("SKU copied!");
+                }}
+                className="text-zinc-400 hover:text-[#D35122] transition-colors"
+              >
+                <Share2 className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Select Size Section */}
-      {variants.length > 0 && (
-        <div className="mb-8">
-
-          <div className="flex flex-wrap gap-2">
-            {variants.map((variant: any) => (
-              <button
-                key={variant._key}
-                onClick={() => setSelectedVariantId(variant._key)}
-                className={cn(
-                  "relative px-6 py-3 border text-sm font-bold uppercase transition-all duration-200 min-w-[80px]",
-                  selectedVariantId === variant._key
-                    ? "border-zinc-900 bg-white text-zinc-900 ring-1 ring-zinc-900 dark:border-zinc-100 dark:bg-zinc-900 dark:text-zinc-100"
-                    : "border-zinc-300 text-zinc-600 hover:border-zinc-900 dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-zinc-100"
-                )}
-              >
-                {variant.weight || variant.name}
-                {variant.stock <= 0 && (
-                  <span className="absolute -top-2 -right-2 bg-zinc-100 text-zinc-500 text-[9px] font-bold px-1.5 py-0.5 rounded-full border border-zinc-200">
-                    SOLD OUT
-                  </span>
-                )}
-              </button>
-            ))}
+      {/* Live Visitors Alert */}
+      {liveVisitors !== null && (
+        <div className="mb-6 flex items-center gap-2 text-sm text-[#D35122] font-medium bg-[#D35122]/10 dark:bg-[#D35122]/20 py-2 px-4 rounded-full w-fit border border-[#D35122]/20 shadow-sm backdrop-blur-sm">
+          <div className="relative flex h-3 w-3 items-center justify-center">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D35122] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D35122]"></span>
           </div>
+          <Users className="w-4 h-4 ml-1" />
+          <span className="animate-in fade-in slide-in-from-bottom-1">{liveVisitors} people are viewing this right now</span>
         </div>
       )}
 
-      {/* Purchase Options */}
-      <div className="mb-8 space-y-3">
-        {/* Mocked Subscribe/One-time logic - aligned with Open Farm style (clean rows) */}
-        <div
-          onClick={() => setPurchaseType("onetime")}
-          className={cn(
-            "relative p-4 border cursor-pointer transition-all flex items-center justify-between group",
-            purchaseType === "onetime"
-              ? "border-zinc-900 shadow-sm dark:border-zinc-100"
-              : "border-zinc-200 hover:border-zinc-400 dark:border-zinc-700"
-          )}
-        >
-          <div className="flex items-center gap-3">
-            <div className={cn(
-              "w-5 h-5 rounded-full border flex items-center justify-center transition-colors",
-              purchaseType === "onetime" ? "border-zinc-900 bg-zinc-900 dark:border-zinc-100 dark:bg-zinc-100" : "border-zinc-300"
-            )}>
-              <div className="w-2 h-2 rounded-full bg-white dark:bg-zinc-900" />
-            </div>
-            <span className="font-bold text-zinc-900 dark:text-zinc-100 text-sm uppercase tracking-wide">One-Time Purchase</span>
-          </div>
-          <div className="text-right">
-            <span className="font-bold text-zinc-900 dark:text-zinc-100 block">{formatPrice(currentPrice)}</span>
-          </div>
-        </div>
-
-        <div
-          onClick={() => setPurchaseType("subscribe")}
-          className={cn(
-            "relative p-4 border cursor-pointer transition-all flex items-center justify-between group bg-zinc-50 dark:bg-zinc-900/50",
-            purchaseType === "subscribe"
-              ? "border-zinc-900 shadow-sm dark:border-zinc-100"
-              : "border-zinc-200 hover:border-zinc-400 dark:border-zinc-700"
-          )}
-        >
-          <div className="flex items-center gap-3">
-            <div className={cn(
-              "w-5 h-5 rounded-full border flex items-center justify-center transition-colors",
-              purchaseType === "subscribe" ? "border-zinc-900 bg-zinc-900 dark:border-zinc-100 dark:bg-zinc-100" : "border-zinc-300"
-            )}>
-              <div className="w-2 h-2 rounded-full bg-white dark:bg-zinc-900" />
-            </div>
-            <div>
-              <span className="font-bold text-zinc-900 dark:text-zinc-100 text-sm uppercase tracking-wide flex items-center gap-2">
-                Subscribe & Save
-                <span className="bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded-full">5% OFF</span>
+      {/* Purchase Box - CMS Style */}
+      <div className="border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 mb-8 bg-white dark:bg-zinc-900/30">
+        <div className="flex flex-col gap-4">
+          {/* Header Row: Price and QTY */}
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            <div className="flex flex-col">
+              <span className="text-4xl font-extrabold text-zinc-900 dark:text-zinc-50">
+                {formatPrice(currentPrice)}
               </span>
+              <div className="mt-2 flex flex-col gap-1">
+                <p className="text-xs text-zinc-400 font-medium tracking-wide">
+                  Minimum order qty <span className="font-bold text-zinc-900 dark:text-zinc-100">{product.min_qty || 1}</span>
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-end gap-3">
+              <div className="flex items-center gap-4">
+                <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">QTY</span>
+                <div className="flex items-center border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden h-10">
+                  <button
+                    type="button"
+                    className="px-3 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors border-r border-zinc-200 dark:border-zinc-800"
+                    onClick={() => setQuantity(prev => Math.max(product.min_qty || 1, prev - 1))}
+                  >
+                    <span className="text-zinc-400 font-bold">−</span>
+                  </button>
+                  <input
+                    type="number"
+                    value={quantity}
+                    readOnly
+                    className="w-10 text-center text-sm font-bold bg-transparent border-none appearance-none"
+                  />
+                  <button
+                    type="button"
+                    className="px-3 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors border-l border-zinc-200 dark:border-zinc-800"
+                    onClick={() => setQuantity(prev => (currentStock > prev ? prev + 1 : prev))}
+                  >
+                    <span className="text-zinc-400 font-bold">+</span>
+                  </button>
+                </div>
+              </div>
+              <button
+                onClick={() => {
+                  const pageUrl = typeof window !== 'undefined' ? window.location.href : '';
+                  const msg = encodeURIComponent(`Hi, I would like to order: ${product.name} - ${pageUrl}`);
+                  window.open(`https://wa.me/255743419999?text=${msg}`, '_blank');
+                }}
+                className="flex items-center gap-1.5 text-[#25D366] hover:opacity-80 transition-all group"
+              >
+                <MessageCircle className="w-4 h-4 fill-current transition-transform group-hover:scale-110" />
+                <span className="text-sm font-semibold">Order Via WhatsApp</span>
+              </button>
             </div>
           </div>
-          <div className="text-right">
-            <span className="font-bold text-zinc-900 dark:text-zinc-100 block">{formatPrice(currentPrice * 0.95)}</span>
+
+          {/* Divider */}
+          <div className="border-t border-dashed border-zinc-200 dark:border-zinc-800 my-2" />
+
+          {/* Selected Product Summary removed as requested */}
+
+          {/* Action Buttons */}
+          <div className="flex flex-col md:flex-row gap-4 mt-2">
+            <button
+              onClick={() => {/* Buy Now logic would go here if implemented, for now it matches UI */ }}
+              className="h-14 flex-1 text-sm font-bold tracking-widest uppercase bg-[#1A1A1E] text-white hover:bg-[#2A2A2E] rounded-lg transition-all active:scale-[0.98]"
+            >
+              Buy Now
+            </button>
+            <AddToCartButton
+              productId={product._id}
+              name={product.name ?? "Unknown Product"}
+              price={currentPrice}
+              image={imageUrl ?? undefined}
+              stock={currentStock ?? 0}
+              className="h-14 flex-1 text-sm font-bold tracking-widest uppercase bg-[#E8F3FF] text-[#0080FF] hover:bg-[#D8E9FF] rounded-lg shadow-none transition-all active:scale-[0.98]"
+            />
           </div>
         </div>
       </div>
 
-      {/* Action Buttons */}
-      <div className="flex flex-col gap-4 mb-8">
-        <AddToCartButton
-          productId={product._id}
-          name={product.name ?? "Unknown Product"}
-          price={currentPrice}
-          image={imageUrl ?? undefined}
-          stock={currentStock ?? 0}
-          className="h-14 w-full text-sm font-bold tracking-widest uppercase bg-[#D35122] text-white hover:bg-[#B54218] dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200 rounded-none shadow-sm transition-all"
-        />
+
+
+
+      {/* Trust Badges Section */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 hidden">
+        {[
+          { icon: Truck, label: "Free Shipping", desc: "For orders over 50k" },
+          { icon: CreditCard, label: "Secure Payment", desc: "100% Secure" },
+          { icon: ShieldCheck, label: "Warranty", desc: "Authentic products" },
+          { icon: RotateCcw, label: "Easy Return", desc: "7 days easy return" },
+        ].map((item, i) => (
+          <div key={i} className="flex flex-col items-center text-center p-4 rounded-xl border border-zinc-100 dark:border-zinc-800 bg-white dark:bg-zinc-900/20 shadow-sm transition-all hover:shadow-md">
+            <item.icon className="w-6 h-6 text-[#D35122] mb-2" />
+            <span className="text-[10px] font-bold uppercase tracking-tighter text-zinc-900 dark:text-zinc-50">{item.label}</span>
+            <span className="text-[9px] text-zinc-400 mt-1">{item.desc}</span>
+          </div>
+        ))}
       </div>
 
-      {/* Description */}
-      <div className="prose prose-sm prose-zinc dark:prose-invert max-w-none text-zinc-600 dark:text-zinc-400 leading-7">
-        <p>{product.description}</p>
+      {/* Estimate Shipping Section */}
+      <div className="mb-8 p-4 rounded-xl border border-dashed border-zinc-200 dark:border-zinc-800 flex items-center gap-3 hidden">
+        <Truck className="w-5 h-5 text-zinc-400" />
+        <div>
+          <span className="text-xs font-medium text-zinc-500">Estimate Shipping Time</span>
+          <p className="text-sm font-bold text-zinc-900 dark:text-zinc-50">3 - 5 Days</p>
+        </div>
       </div>
 
-      {/* Specs */}
-      <div className="mt-8 pt-6 border-t border-zinc-200 dark:border-zinc-800 pb-24 md:pb-0">
-        <h3 className="text-sm font-bold uppercase tracking-wide mb-4 text-zinc-900 dark:text-zinc-100">Details</h3>
-        <dl className="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
-          {product.material && (
-            <div className="border-t border-zinc-100 dark:border-zinc-800 pt-2">
-              <dt className="font-medium text-zinc-900 dark:text-zinc-100 text-xs uppercase">Ingredients / Material</dt>
-              <dd className="mt-1 text-sm text-zinc-500 dark:text-zinc-400 capitalize">{product.material}</dd>
+      {/* Seller Section */}
+      <div className="mb-8 p-6 rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 flex items-center justify-between hidden">
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 rounded-full bg-[#D35122] text-white flex items-center justify-center font-bold text-xl ring-4 ring-white dark:ring-zinc-800 shadow-lg">
+            S
+          </div>
+          <div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm font-bold text-zinc-900 dark:text-zinc-50">Sold by Stephan's Pet Store</span>
+              <Check className="w-3.5 h-3.5 text-white bg-blue-500 rounded-full p-0.5" strokeWidth={4} />
             </div>
-          )}
-          {product.dimensions && (
-            <div className="border-t border-zinc-100 dark:border-zinc-800 pt-2">
-              <dt className="font-medium text-zinc-900 dark:text-zinc-100 text-xs uppercase">Dimensions</dt>
-              <dd className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{product.dimensions}</dd>
-            </div>
-          )}
-        </dl>
+            <Link href="/about" className="text-xs text-[#D35122] font-semibold hover:underline">
+              Visit Store
+            </Link>
+          </div>
+        </div>
+        <Link
+          href="/contact"
+          className="px-4 py-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-xs font-bold uppercase text-zinc-900 dark:text-white shadow-sm hover:shadow-md transition-all"
+        >
+          Message Seller
+        </Link>
       </div>
 
       {/* Sticky Mobile Add to Cart Bar */}
