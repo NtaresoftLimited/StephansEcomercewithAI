@@ -148,31 +148,40 @@ export function GroomingPackages({ prices = PRICES }: GroomingPackagesProps) {
                 </div>
 
                 {/* Extra Charges */}
-                <div className="mt-12 rounded-xl bg-white dark:bg-zinc-800/50 p-6 border border-[#6b3e1e]/20">
-                    <h3 className="font-bold text-zinc-900 dark:text-white mb-4">
-                        Extra Charges
-                    </h3>
+                <div className="mt-16">
+                    <div className="flex items-center gap-4 mb-8">
+                        <div className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800"></div>
+                        <h3 className="text-xl font-bold text-zinc-900 dark:text-white uppercase tracking-wider">
+                            Additional Services
+                        </h3>
+                        <div className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800"></div>
+                    </div>
+                    
                     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                        <div className="flex justify-between">
-                            <span className="text-zinc-600 dark:text-zinc-400 font-bold">Detangling Hair</span>
-                            <span className="font-bold text-[#6b3e1e]">30,000 TZS</span>
-                        </div>
-                        <div className="flex justify-between">
-                            <span className="text-zinc-600 dark:text-zinc-400 font-bold">Emergency (after 6:30 PM)</span>
-                            <span className="font-bold text-[#6b3e1e]">30,000 TZS</span>
-                        </div>
-                        <div className="flex justify-between">
-                            <span className="text-zinc-600 dark:text-zinc-400 font-bold">Handling Fee</span>
-                            <span className="font-bold text-[#6b3e1e]">10,000 TZS</span>
-                        </div>
-                        <div className="flex justify-between">
-                            <span className="text-zinc-600 dark:text-zinc-400 font-bold">Sedation (Vet Supervision)</span>
-                            <span className="font-bold text-[#6b3e1e]">5,000 TZS</span>
-                        </div>
-                        <div className="flex justify-between">
-                            <span className="text-zinc-600 dark:text-zinc-400 font-bold">Late Pickup (per hour)</span>
-                            <span className="font-bold text-[#6b3e1e]">10,000 TZS</span>
-                        </div>
+                        {[
+                            { name: "Detangling Hair", price: "30,000 TZS", desc: "For matted fur" },
+                            { name: "Emergency Service", price: "30,000 TZS", desc: "After 6:30 PM" },
+                            { name: "Handling Fee", price: "10,000 TZS", desc: "For difficult pets" },
+                            { name: "Sedation", price: "5,000 TZS", desc: "Vet supervision required" },
+                            { name: "Late Pickup", price: "10,000 TZS", desc: "Per hour charge" },
+                        ].map((item, i) => (
+                            <div key={i} className="group relative overflow-hidden rounded-xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 p-5 hover:shadow-lg transition-all duration-300 hover:border-[#6b3e1e]/30">
+                                <div className="absolute top-0 left-0 w-1 h-full bg-[#6b3e1e] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                <div className="flex justify-between items-start gap-4">
+                                    <div>
+                                        <h4 className="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-[#6b3e1e] transition-colors">
+                                            {item.name}
+                                        </h4>
+                                        <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                                            {item.desc}
+                                        </p>
+                                    </div>
+                                    <span className="font-bold text-[#6b3e1e] bg-[#6b3e1e]/10 px-3 py-1 rounded-full text-sm whitespace-nowrap">
+                                        {item.price}
+                                    </span>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

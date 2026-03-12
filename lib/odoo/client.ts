@@ -118,6 +118,7 @@ export class OdooClient {
                     const isSessionError = errMsg.toLowerCase().includes("session")
                         || errMsg.toLowerCase().includes("unauthorized")
                         || errMsg.toLowerCase().includes("access denied")
+                        || errMsg.toLowerCase().includes("forbidden")
                         || response.status === 401
                         || response.status === 403;
 

@@ -3,6 +3,7 @@
 import { client, writeClient } from "@/sanity/lib/client";
 import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
+import { auth } from "@/auth";
 import { PRICES, VALID_TIMES } from "@/lib/constants/grooming";
 import { sendWhatsAppMessage } from "@/lib/whatsapp";
 
@@ -54,6 +55,25 @@ type GroomingBookingData = z.infer<typeof bookingSchema>;
 
 export async function createGroomingBooking(rawData: GroomingBookingData) {
     try {
+        // 0. Verify Session
+        console.log("🔒 Step 0: Verifying session...");
+        const session = await auth();
+        
+        if (!session?.user) {
+            console.warn("   ❌ No active session found during booking creation.");
+            // If the user is unauthenticated, they can't book?
+            // Wait, the client allows booking if not signed in, but we might want to know who is booking.
+            // If the user is unauthenticated, the client won't pass userId.
+            // But we should at least check if the form is being submitted by someone we trust.
+            // Actually, for now, we follow the existing logic where userId is optional.
+            // But let's log the session state.
+            console.log("   (User is booking as guest)");
+        } else {
+            console.log(`   ✅ Session verified for user: ${session.user.id}`);
+            // Force the session userId to prevent tampering if signed in
+            rawData.userId = session.user.id;
+        }
+
         // 1. Validate Input
         console.log("📋 Step 1: Validating booking data...");
         console.log("   Raw data received:", JSON.stringify(rawData, null, 2));

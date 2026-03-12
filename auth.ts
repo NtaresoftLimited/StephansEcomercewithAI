@@ -1,10 +1,24 @@
-import NextAuth from "next-auth";
+import NextAuth, { type DefaultSession } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { odoo } from "@/lib/odoo/client";
 import { sanityFetch } from "@/sanity/lib/live";
 import { defineQuery } from "next-sanity";
 
+// Diagnostics (Remove in production)
+if (!process.env.AUTH_SECRET) {
+  console.error("⚠️ AUTH_SECRET is not set! NextAuth will not function correctly.");
+}
+
 const CUSTOMER_BY_EMAIL_QUERY = defineQuery(`*[_type == "customer" && email == $email][0]`);
+
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      odooPartnerId?: number;
+    } & DefaultSession["user"]
+  }
+}
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
@@ -69,7 +83,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      if (token) {
+      if (token && session.user) {
         session.user.id = token.id as string;
         (session.user as any).odooPartnerId = token.odooPartnerId;
       }
