@@ -6,7 +6,7 @@ import { defineQuery } from "next-sanity";
  */
 export const ORDERS_BY_USER_QUERY = defineQuery(`*[
   _type == "order"
-  && clerkUserId == $clerkUserId
+  && userId == $userId
 ] | order(createdAt desc) {
   _id,
   orderNumber,
@@ -28,7 +28,7 @@ export const ORDER_BY_ID_QUERY = defineQuery(`*[
 ][0] {
   _id,
   orderNumber,
-  clerkUserId,
+  userId,
   email,
   items[]{
     _key,

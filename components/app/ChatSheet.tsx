@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useChat } from "@ai-sdk/react";
-import { useAuth } from "@clerk/nextjs";
+import { useSession } from "next-auth/react";
 import { Sparkles, Send, Loader2, X, Bot } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -24,12 +24,13 @@ export function ChatSheet() {
   const isOpen = useIsChatOpen();
   const { closeChat, clearPendingMessage } = useChatActions();
   const pendingMessage = usePendingMessage();
-  const { isSignedIn } = useAuth();
+  const { data: session, status: authStatus } = useSession();
+  const isSignedIn = authStatus === "authenticated";
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const { messages, sendMessage, status } = useChat();
-  const isLoading = status === "streaming" || status === "submitted";
+  const { messages, sendMessage, status: chatStatus } = useChat();
+  const isLoading = chatStatus === "streaming" || chatStatus === "submitted";
 
   // Auto-scroll to bottom when new messages arrive or streaming updates
   // biome-ignore lint/correctness/useExhaustiveDependencies: trigger scroll on message/loading changes

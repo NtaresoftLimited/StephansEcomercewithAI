@@ -60,7 +60,7 @@ export function createGetMyOrdersTool(userId: string | null) {
       try {
         const { data: orders } = await sanityFetch({
           query: ORDERS_BY_USER_QUERY,
-          params: { clerkUserId: userId },
+          params: { userId: userId },
         });
 
         console.log("[GetMyOrders] Orders found:", orders.length);

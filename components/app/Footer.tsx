@@ -41,7 +41,7 @@ export function Footer() {
           </div>
 
           <div className='flex flex-col gap-1 md:gap-4'>
-            <h4 className='uppercase font-display text-md text-neutral-500 font-semibold'>Shop</h4>
+            <h4 className='uppercase font-display text-md text-neutral-500 font-semibold'>Shop Page</h4>
             <div className="flex flex-col gap-2 text-sm text-neutral-800 items-start">
               <Link className='hover:text-black transition-colors font-medium' href="/products?category=dogs">Dogs</Link>
               <Link className='hover:text-black transition-colors font-medium' href="/products?category=cats">Cats</Link>

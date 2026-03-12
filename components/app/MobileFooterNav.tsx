@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Home, ShoppingBag } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useCartActions, useTotalItems } from "@/lib/store/cart-store-provider";
 import { useChatActions } from "@/lib/store/chat-store-provider";
 
@@ -10,6 +11,11 @@ export function MobileFooterNav() {
     const { openChat } = useChatActions();
     const { openCart } = useCartActions();
     const totalItems = useTotalItems();
+    const pathname = usePathname();
+
+    // Hide on product detail pages to avoid overlap with sticky add to cart
+    const isProductPage = pathname?.startsWith('/products/') && pathname !== '/products';
+    if (isProductPage) return null;
 
     return (
         <div className="fixed bottom-0 left-0 right-0 z-50 flex h-16 items-center justify-around bg-white/90 backdrop-blur-lg border-t border-zinc-200 px-4 sm:hidden pb-safe">
@@ -41,9 +47,9 @@ export function MobileFooterNav() {
                 </span>
             </button>
 
-            {/* Shop/Cart (Right) */}
-            <button
-                onClick={openCart}
+            {/* Shop Page Link (Right) */}
+            <Link
+                href="/products"
                 className="relative flex flex-col items-center justify-center gap-1 text-zinc-500 hover:text-amber-600 transition-colors"
             >
                 <div className="relative">
@@ -54,8 +60,8 @@ export function MobileFooterNav() {
                         </span>
                     )}
                 </div>
-                <span className="text-[10px] font-medium">Shop</span>
-            </button>
+                <span className="text-[10px] font-medium">Shop Page</span>
+            </Link>
         </div>
     );
 }

@@ -5,12 +5,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { PRICES, DOG_PACKAGES, CAT_PACKAGES, SIZE_LABELS } from "@/lib/constants/grooming";
 
-function formatPrice(price: number) {
-    return new Intl.NumberFormat("en-TZ", {
-        style: "decimal",
-        minimumFractionDigits: 0,
-    }).format(price) + " TZS";
-}
+import { formatPrice } from "@/lib/utils";
 
 interface PackageCardProps {
     packageKey: "standard" | "premium" | "super_premium";

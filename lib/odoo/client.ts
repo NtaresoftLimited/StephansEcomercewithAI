@@ -61,6 +61,34 @@ export class OdooClient {
         return this.uid;
     }
 
+    async authenticateUser(login: string, password: string): Promise<number | null> {
+        console.log(`🔑 Authenticating user ${login} with Odoo...`);
+        const now = Date.now();
+        const response = await fetch(`${ODOO_URL}/jsonrpc`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                jsonrpc: "2.0",
+                method: "call",
+                params: {
+                    service: "common",
+                    method: "authenticate",
+                    args: [ODOO_DB, login, password, {}]
+                },
+                id: now
+            }),
+            signal: AbortSignal.timeout(15000)
+        });
+
+        const data = await response.json();
+        if (data.error) {
+            console.error("Odoo User Auth Error:", data.error);
+            return null;
+        }
+
+        return data.result || null;
+    }
+
     async executeKw(model: string, method: string, args: any[], kwargs: any = {}): Promise<any> {
         // Try the call; if it fails with session/auth error, re-authenticate and retry once
         for (let attempt = 1; attempt <= 2; attempt++) {

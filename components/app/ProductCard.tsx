@@ -107,7 +107,7 @@ export function ProductCard({ product }: ProductCardProps) {
     <div className="group relative flex flex-col">
       <Link
         href={`/products/${product.slug}`}
-        className="block relative rounded-xl border border-zinc-200 bg-white shadow-sm transition-all hover:shadow-md hover:border-amber-300"
+        className="block relative rounded-xl border border-zinc-200 bg-white shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-amber-300/50"
       >
         {/* Image Container - Aspect Ratio 4:5 (1080x1350) */}
         <div className="relative aspect-[4/5] overflow-hidden bg-white dark:bg-zinc-800 rounded-xl">

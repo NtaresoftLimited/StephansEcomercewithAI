@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Check, Star, RefreshCw, Info, MessageCircle, Users, Heart, Share2, Truck, ShieldCheck, RotateCcw, CreditCard, ExternalLink } from "lucide-react";
+import Image from "next/image";
+import { Check, Star, RefreshCw, Info, MessageCircle, Users, Heart, Share2, Truck, ShieldCheck, RotateCcw, CreditCard, ExternalLink, ShoppingBag, Minus, Plus } from "lucide-react";
 import { AddToCartButton } from "@/components/app/AddToCartButton";
 import { AskAISimilarButton } from "@/components/app/AskAISimilarButton";
 import { StockBadge } from "@/components/app/StockBadge";
@@ -22,6 +23,8 @@ export function ProductInfo({ product }: ProductInfoProps) {
   const [liveVisitors, setLiveVisitors] = useState<number | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
+  const [showStickyBar, setShowStickyBar] = useState(false);
+  const purchaseBoxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Generate a random initial number between 15 and 45
@@ -37,7 +40,28 @@ export function ProductInfo({ product }: ProductInfoProps) {
       });
     }, Math.floor(Math.random() * 10000) + 5000);
 
-    return () => clearInterval(interval);
+    // Intersection Observer for sticky bar visibility
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Show sticky bar when the purchase box is NOT visible (scrolled past)
+        setShowStickyBar(!entry.isIntersecting);
+      },
+      {
+        threshold: 0,
+        rootMargin: "-100px 0px 0px 0px" // Trigger slightly before it's completely gone
+      }
+    );
+
+    if (purchaseBoxRef.current) {
+      observer.observe(purchaseBoxRef.current);
+    }
+
+    return () => {
+      clearInterval(interval);
+      if (purchaseBoxRef.current) {
+        observer.unobserve(purchaseBoxRef.current);
+      }
+    };
   }, []);
 
   const variants = product.variants || [];
@@ -148,7 +172,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
       )}
 
       {/* Purchase Box - CMS Style */}
-      <div className="border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 mb-8 bg-white dark:bg-zinc-900/30">
+      <div ref={purchaseBoxRef} className="border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 mb-8 bg-white dark:bg-zinc-900/30 shadow-sm transition-all hover:shadow-md">
         <div className="flex flex-col gap-4">
           {/* Header Row: Price and QTY */}
           <div className="flex items-center justify-between flex-wrap gap-4">
@@ -280,24 +304,95 @@ export function ProductInfo({ product }: ProductInfoProps) {
         </Link>
       </div>
 
-      {/* Sticky Mobile Add to Cart Bar */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/95 backdrop-blur-md border-t border-zinc-200 z-40 md:hidden flex items-center justify-between gap-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] safe-area-bottom">
-        <div className="flex flex-col">
-          <span className="text-[10px] font-bold text-zinc-500 uppercase">Total Price</span>
-          <span className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
-            {formatPrice(currentPrice)}
-          </span>
+      {/* Sticky Add to Cart Bar - Adorama Style */}
+      <div className={cn(
+        "fixed bottom-0 left-0 right-0 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 z-[100] transition-all duration-500 transform",
+        showStickyBar ? "translate-y-0 opacity-100 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]" : "translate-y-full opacity-0 pointer-events-none"
+      )}>
+        <div className="w-full px-2 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+          {/* Left: Product Info (Desktop only) */}
+          <div className="hidden md:flex items-center gap-4 flex-1 min-w-0">
+            {imageUrl && (
+              <div className="relative h-12 w-12 rounded-lg border border-zinc-100 dark:border-zinc-800 overflow-hidden flex-shrink-0 bg-white">
+                <Image
+                  src={imageUrl}
+                  alt={product.name}
+                  fill
+                  className="object-contain p-1"
+                />
+              </div>
+            )}
+            <div className="min-w-0">
+              <h3 className="text-sm font-bold text-zinc-900 dark:text-zinc-50 truncate">
+                {product.name}
+              </h3>
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-extrabold text-[#D35122]">
+                  {formatPrice(currentPrice)}
+                </span>
+                {currentStock > 0 ? (
+                  <Badge variant="outline" className="text-[10px] h-4 bg-emerald-50 text-emerald-600 border-emerald-100 dark:bg-emerald-950/30 dark:text-emerald-400 dark:border-emerald-900/50">
+                    In Stock
+                  </Badge>
+                ) : (
+                  <Badge variant="outline" className="text-[10px] h-4 bg-red-50 text-red-600 border-red-100 dark:bg-red-950/30 dark:text-red-400 dark:border-red-900/50">
+                    Out of Stock
+                  </Badge>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Actions */}
+          <div className="flex items-center gap-3 sm:gap-6 w-full md:w-auto justify-between md:justify-end">
+            {/* Price (Mobile only) */}
+            <div className="flex flex-col md:hidden">
+              <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Total</span>
+              <span className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
+                {formatPrice(currentPrice * quantity)}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3">
+              {/* QTY Selector (Desktop only) */}
+              <div className="hidden sm:flex items-center border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden h-10 bg-white dark:bg-zinc-900">
+                <button
+                  type="button"
+                  className="px-2 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors border-r border-zinc-200 dark:border-zinc-800"
+                  onClick={() => setQuantity(prev => Math.max(product.min_qty || 1, prev - 1))}
+                >
+                  <Minus className="w-3 h-3 text-zinc-400" />
+                </button>
+                <input
+                  type="number"
+                  value={quantity}
+                  readOnly
+                  className="w-8 text-center text-xs font-bold bg-transparent border-none appearance-none"
+                />
+                <button
+                  type="button"
+                  className="px-2 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors border-l border-zinc-200 dark:border-zinc-800"
+                  onClick={() => setQuantity(prev => (currentStock > prev ? prev + 1 : prev))}
+                >
+                  <Plus className="w-3 h-3 text-zinc-400" />
+                </button>
+              </div>
+
+              <AddToCartButton
+                productId={product._id}
+                name={product.name ?? "Unknown Product"}
+                price={currentPrice}
+                image={imageUrl ?? undefined}
+                stock={currentStock ?? 0}
+                className="h-10 sm:h-11 px-6 sm:px-8 text-xs font-bold tracking-widest uppercase bg-[#D35122] text-white hover:bg-[#B54218] rounded-lg shadow-sm transition-all active:scale-[0.98] min-w-[140px]"
+              >
+                Add to Cart
+              </AddToCartButton>
+            </div>
+          </div>
         </div>
-        <div className="flex-1">
-          <AddToCartButton
-            productId={product._id}
-            name={product.name ?? "Unknown Product"}
-            price={currentPrice}
-            image={imageUrl ?? undefined}
-            stock={currentStock ?? 0}
-            className="h-12 w-full text-sm font-bold tracking-widest uppercase bg-[#D35122] text-white hover:bg-[#B54218] rounded-full shadow-sm transition-all"
-          />
-        </div>
+        {/* Safe Area Padding for Mobile */}
+        <div className="h-[env(safe-area-inset-bottom)] w-full md:hidden" />
       </div>
     </div>
   );

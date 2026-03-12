@@ -156,14 +156,14 @@ export function GoogleBusinessProfile() {
                                 </div>
                             </div>
 
-                            <div className="mt-6 flex gap-3">
-                                <Button asChild className="flex-1 bg-[#6b3e1e] hover:bg-[#5a3319]">
+                            <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+                                <Button asChild className="w-4/5 sm:flex-1 bg-[#6b3e1e] hover:bg-[#5a3319]">
                                     <a href={BUSINESS_INFO.googleMapsUrl} target="_blank" rel="noopener noreferrer">
                                         <Navigation className="h-4 w-4 mr-2" />
                                         Get Directions
                                     </a>
                                 </Button>
-                                <Button asChild variant="outline" className="flex-1">
+                                <Button asChild variant="outline" className="w-4/5 sm:flex-1">
                                     <a href={`tel:${BUSINESS_INFO.phone}`}>
                                         <Phone className="h-4 w-4 mr-2" />
                                         Call Now

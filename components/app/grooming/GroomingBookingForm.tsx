@@ -2,20 +2,18 @@
 
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { useUser } from "@clerk/nextjs";
+import { useSession } from "next-auth/react";
 import { Calendar, Clock, Dog, Cat, Check } from "lucide-react";
 import { createGroomingBooking } from "@/lib/actions/grooming";
 import { PRICES, BREED_SIZES, VALID_TIMES, SIZE_LABELS, DOG_PACKAGES, CAT_PACKAGES } from "@/lib/constants/grooming";
 
-function formatPrice(price: number) {
-    return new Intl.NumberFormat("en-TZ").format(price) + " TZS";
-}
+import { formatPrice } from "@/lib/utils";
 
-function useUserSafe() {
+function useSessionSafe() {
     try {
-        return useUser();
+        return useSession();
     } catch {
-        return { user: null, isSignedIn: false } as any;
+        return { data: null, status: "unauthenticated" } as any;
     }
 }
 
@@ -25,7 +23,9 @@ interface GroomingBookingFormProps {
 
 export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProps) {
     const searchParams = useSearchParams();
-    const { user, isSignedIn } = useUserSafe();
+    const { data: session, status: authStatus } = useSessionSafe();
+    const isSignedIn = authStatus === "authenticated";
+    const user = session?.user;
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -37,12 +37,23 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
         package: "",
         appointmentDate: "",
         appointmentTime: "",
-        customerName: user?.fullName || "",
-        customerEmail: user?.emailAddresses[0]?.emailAddress || "",
+        customerName: "",
+        customerEmail: "",
         customerPhone: "",
         specialNotes: "",
         detangling: false,
     });
+
+    // Initialize customer info from session when it becomes available
+    useEffect(() => {
+        if (user) {
+            setFormData(prev => ({
+                ...prev,
+                customerName: prev.customerName || user.name || "",
+                customerEmail: prev.customerEmail || user.email || "",
+            }));
+        }
+    }, [user]);
 
     useEffect(() => {
         const urlPackage = (searchParams.get("package") || "").trim();
@@ -100,7 +111,7 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
         try {
             const result = await createGroomingBooking({
                 ...formData,
-                clerkUserId: user?.id,
+                userId: user?.id, // passed as userId
             });
 
             if (result.success) {
@@ -139,8 +150,8 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
                                 package: "",
                                 appointmentDate: "",
                                 appointmentTime: "",
-                                customerName: user?.fullName || "",
-                                customerEmail: user?.emailAddresses[0]?.emailAddress || "",
+                                customerName: user?.name || "",
+                                customerEmail: user?.email || "",
                                 customerPhone: "",
                                 specialNotes: "",
                                 detangling: false,

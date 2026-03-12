@@ -17,7 +17,7 @@ export function formatPrice(
 ): string {
   const value = amount ?? 0;
   // Format with thousands separator for TZS
-  const formatted = value.toLocaleString('en-TZ', {
+  const formatted = value.toLocaleString('en-US', {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0
   });

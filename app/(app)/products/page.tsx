@@ -17,6 +17,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { Button } from "@/components/ui/button";
 import { SlidersHorizontal } from "lucide-react";
 import { Metadata } from "next";
+import { ProductsBanner } from "@/components/app/ProductsBanner";
 
 export const metadata: Metadata = {
   title: "Products | Stephan's Pet Store",
@@ -82,6 +83,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
+      <ProductsBanner />
       <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
 
         {/* Header */}
@@ -117,11 +119,10 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                   <a
                     key={key}
                     href={href}
-                    className={`px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all ${
-                      isActive
-                        ? "bg-amber-500 text-white"
-                        : "bg-white text-zinc-600 hover:bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800"
-                    }`}
+                    className={`px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all ${isActive
+                      ? "bg-amber-500 text-white"
+                      : "bg-white text-zinc-600 hover:bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800"
+                      }`}
                   >
                     {label}
                   </a>

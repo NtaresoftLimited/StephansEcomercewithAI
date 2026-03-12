@@ -1,7 +1,7 @@
 import { CartStoreProvider } from "@/lib/store/cart-store-provider";
 import { WishlistStoreProvider } from "@/lib/store/wishlist-store-provider";
 import { ChatStoreProvider } from "@/lib/store/chat-store-provider";
-import { ClerkProvider } from "@clerk/nextjs";
+import { SessionProvider } from "@/components/providers/SessionProvider";
 import { SanityLive } from "@/sanity/lib/live";
 import { Toaster } from "@/components/ui/sonner";
 import Link from "next/link";
@@ -47,17 +47,7 @@ export default function CheckoutLayout({ children }: { children: React.ReactNode
     );
 
     return (
-        hasClerk ? (
-            <ClerkProvider>
-                <CartStoreProvider>
-                    <WishlistStoreProvider>
-                        <ChatStoreProvider>
-                            {LayoutContent}
-                        </ChatStoreProvider>
-                    </WishlistStoreProvider>
-                </CartStoreProvider>
-            </ClerkProvider>
-        ) : (
+        <SessionProvider>
             <CartStoreProvider>
                 <WishlistStoreProvider>
                     <ChatStoreProvider>
@@ -65,6 +55,6 @@ export default function CheckoutLayout({ children }: { children: React.ReactNode
                     </ChatStoreProvider>
                 </WishlistStoreProvider>
             </CartStoreProvider>
-        )
+        </SessionProvider>
     );
 }

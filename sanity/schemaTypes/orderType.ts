@@ -90,11 +90,11 @@ export const orderType = defineType({
       description: "Reference to the customer record",
     }),
     defineField({
-      name: "clerkUserId",
+      name: "userId",
       type: "string",
       group: "customer",
       readOnly: true,
-      description: "Clerk user ID",
+      description: "External User ID (NextAuth)",
     }),
     defineField({
       name: "email",

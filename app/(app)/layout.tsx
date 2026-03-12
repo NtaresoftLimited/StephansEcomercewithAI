@@ -1,7 +1,7 @@
 import { CartStoreProvider } from "@/lib/store/cart-store-provider";
 import { WishlistStoreProvider } from "@/lib/store/wishlist-store-provider";
 import { ChatStoreProvider } from "@/lib/store/chat-store-provider";
-import { ClerkProvider } from "@clerk/nextjs";
+import { SessionProvider } from "@/components/providers/SessionProvider";
 import { SanityLive } from "@/sanity/lib/live";
 import { Toaster } from "@/components/ui/sonner";
 import { Header } from "@/components/app/Header";
@@ -13,46 +13,25 @@ import { AppShell } from "@/components/app/AppShell";
 import { MobileFooterNav } from "@/components/app/MobileFooterNav";
 
 function AppLayout({ children }: { children: React.ReactNode }) {
-  const hasClerk = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
   return (
-    hasClerk
-      ? (
-        <ClerkProvider>
-          <CartStoreProvider>
-            <WishlistStoreProvider>
-              <ChatStoreProvider>
-                <AppShell>
-                  <Header />
-                  <main>{children}</main>
-                  <Footer />
-                  <MobileFooterNav />
-                </AppShell>
-                <CartSheet />
-                {hasClerk && <ChatSheet />}
-                <Toaster position="bottom-center" />
-                {process.env.SANITY_API_READ_TOKEN && <SanityLive />}
-              </ChatStoreProvider>
-            </WishlistStoreProvider>
-          </CartStoreProvider>
-        </ClerkProvider>
-      ) : (
-        <CartStoreProvider>
-          <WishlistStoreProvider>
-            <ChatStoreProvider>
-              <AppShell>
-                <Header />
-                <main>{children}</main>
-                <Footer />
-                <MobileFooterNav />
-              </AppShell>
-              <CartSheet />
-              {hasClerk && <ChatSheet />}
-              <Toaster position="bottom-center" />
-              {process.env.SANITY_API_READ_TOKEN && <SanityLive />}
-            </ChatStoreProvider>
-          </WishlistStoreProvider>
-        </CartStoreProvider>
-      )
+    <SessionProvider>
+      <CartStoreProvider>
+        <WishlistStoreProvider>
+          <ChatStoreProvider>
+            <AppShell>
+              <Header />
+              <main>{children}</main>
+              <Footer />
+              <MobileFooterNav />
+            </AppShell>
+            <CartSheet />
+            <ChatSheet />
+            <Toaster position="bottom-center" />
+            {process.env.SANITY_API_READ_TOKEN && <SanityLive />}
+          </ChatStoreProvider>
+        </WishlistStoreProvider>
+      </CartStoreProvider>
+    </SessionProvider>
   );
 }
 

@@ -46,22 +46,6 @@ export function CartSheet() {
           </SheetTitle>
         </SheetHeader>
 
-        {/* Promo Banner */}
-        <div className="bg-emerald-100/80 py-2.5 text-center px-4">
-          <p className="text-sm font-medium text-emerald-800">
-            20% off first order with code 'WELCOME20'
-          </p>
-        </div>
-
-        {/* Free Shipping Progress */}
-        <div className="px-6 py-5 bg-[#fcfbf9] border-b border-zinc-100">
-          <p className="text-sm text-[#6b3e1e] mb-3 font-medium text-center">
-            You&apos;re <span className="font-bold">$50.00</span> away from free shipping!
-          </p>
-          <div className="h-2.5 w-full bg-zinc-200 rounded-full overflow-hidden">
-            <div className="h-full bg-[#6b3e1e] w-[20%] rounded-full" />
-          </div>
-        </div>
 
         {items.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-start pt-12 p-6 space-y-8 animate-in fade-in">

@@ -6,10 +6,7 @@ import { z } from "zod";
 import { PRICES, VALID_TIMES } from "@/lib/constants/grooming";
 import { sendWhatsAppMessage } from "@/lib/whatsapp";
 
-// Helper function to format price
-function formatPrice(price: number): string {
-    return new Intl.NumberFormat("en-TZ").format(price) + " TZS";
-}
+import { formatPrice } from "@/lib/utils";
 
 const bookingSchema = z.object({
     petType: z.enum(["dog", "cat"]),
@@ -34,7 +31,7 @@ const bookingSchema = z.object({
     customerPhone: z.string().min(1, "Phone number is required"),
     specialNotes: z.string().optional(),
     detangling: z.boolean().optional(),
-    clerkUserId: z.string().optional().nullable(),
+    userId: z.string().optional().nullable(),
 }).refine((data) => {
     const now = new Date();
     const [hours, minutes] = data.appointmentTime.split(":").map(Number);
@@ -123,7 +120,7 @@ export async function createGroomingBooking(rawData: GroomingBookingData) {
             specialNotes: data.specialNotes || "",
             status: "pending",
             createdAt: new Date().toISOString(),
-            ...(data.clerkUserId ? { clerkUserId: data.clerkUserId } : {}),
+            ...(data.userId ? { userId: data.userId } : {}),
             ...(data.customerEmail ? { customerEmail: data.customerEmail } : {}),
         };
 
@@ -154,7 +151,8 @@ export async function createGroomingBooking(rawData: GroomingBookingData) {
             console.warn(`   ⚠️ Booking ${bookingNumber} created in Sanity but Odoo sync failed`);
         }
 
-        // 6. Send WhatsApp Confirmation
+        // 6. Send WhatsApp Confirmation (DEACTIVATED DUE TO ULTRAMSG STOPPED)
+        /*
         console.log("💬 Step 6: Sending WhatsApp confirmation...");
         try {
             const whatsAppDateTime = new Date(`${data.appointmentDate}T${data.appointmentTime}:00`);
@@ -202,6 +200,8 @@ See you soon! 🎉`;
             // Don't fail the booking if WhatsApp fails
             console.error('   ❌ WhatsApp notification failed:', whatsappError);
         }
+        */
+        console.log("💬 Step 6: WhatsApp confirmation skipped (service deactivated)");
 
         console.log(`🎉 Booking ${bookingNumber} completed successfully!`);
         return {
@@ -222,6 +222,11 @@ See you soon! 🎉`;
         }
         // Surface the actual error message instead of a generic one
         const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
+        console.error("❌ Detailed Error Info:", {
+            message: errorMessage,
+            stack: error instanceof Error ? error.stack : undefined,
+            errorObject: error
+        });
         return {
             success: false,
             error: `Booking failed: ${errorMessage}`,
@@ -229,10 +234,10 @@ See you soon! 🎉`;
     }
 }
 
-export async function getMyGroomingBookings(clerkUserId: string) {
+export async function getMyGroomingBookings(userId: string) {
     try {
         const bookings = await client.fetch(
-            `*[_type == "groomingBooking" && clerkUserId == $clerkUserId] | order(appointmentDate desc) {
+            `*[_type == "groomingBooking" && userId == $userId] | order(appointmentDate desc) {
         _id,
         bookingNumber,
         petName,
@@ -243,7 +248,7 @@ export async function getMyGroomingBookings(clerkUserId: string) {
         status,
         syncStatus
       }`,
-            { clerkUserId }
+            { userId }
         );
 
         return { success: true, bookings };

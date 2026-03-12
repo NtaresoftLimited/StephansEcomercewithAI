@@ -32,8 +32,8 @@ export const groomingBookingType = defineType({
             validation: (Rule) => Rule.required(),
         }),
         defineField({
-            name: "clerkUserId",
-            title: "Clerk User ID",
+            name: "userId",
+            title: "User ID",
             type: "string",
             description: "Links to authenticated user",
         }),

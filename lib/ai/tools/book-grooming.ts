@@ -18,9 +18,7 @@ const PRICES: Record<string, Record<string, Record<string, number>>> = {
 
 const DETANGLING_FEE = 30000;
 
-function formatPrice(price: number): string {
-    return new Intl.NumberFormat("en-TZ").format(price) + " TZS";
-}
+import { formatPrice } from "@/lib/utils";
 
 function calculatePrice(petType: string, packageType: string, breedSize: string, detangling: boolean): number {
     const basePrice = PRICES[petType]?.[packageType]?.[breedSize] || 0;
@@ -109,7 +107,7 @@ If the user hasn't provided all information, ask for it conversationally before 
                     customerPhone,
                     specialNotes: specialNotes || "",
                     detangling,
-                    clerkUserId: userId || undefined,
+                    userId: userId || undefined,
                 });
 
                 if (result.success) {

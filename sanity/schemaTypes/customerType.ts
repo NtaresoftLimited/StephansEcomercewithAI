@@ -24,10 +24,16 @@ export const customerType = defineType({
       description: "Customer's full name",
     }),
     defineField({
-      name: "clerkUserId",
+      name: "odooPartnerId",
+      type: "number",
+      group: "details",
+      description: "Odoo partner ID",
+    }),
+    defineField({
+      name: "userId",
       type: "string",
       group: "details",
-      description: "Clerk user ID for authentication",
+      description: "External User ID (NextAuth)",
     }),
     defineField({
       name: "stripeCustomerId",
