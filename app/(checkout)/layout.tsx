@@ -8,8 +8,6 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function CheckoutLayout({ children }: { children: React.ReactNode }) {
-    const hasClerk = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
-
     const LayoutContent = (
         <div className="min-h-screen bg-zinc-50 flex flex-col">
             {/* Minimal Header */}

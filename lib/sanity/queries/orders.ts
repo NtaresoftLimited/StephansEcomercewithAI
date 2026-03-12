@@ -1,7 +1,7 @@
 import { defineQuery } from "next-sanity";
 
 /**
- * Get orders by Clerk user ID
+ * Get orders by user ID
  * Used on orders list page
  */
 export const ORDERS_BY_USER_QUERY = defineQuery(`*[

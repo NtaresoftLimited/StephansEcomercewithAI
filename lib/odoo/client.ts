@@ -94,43 +94,53 @@ export class OdooClient {
         for (let attempt = 1; attempt <= 2; attempt++) {
             const uid = await this.authenticate(attempt > 1);
 
-            const response = await fetch(`${ODOO_URL}/jsonrpc`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    jsonrpc: "2.0",
-                    method: "call",
-                    params: {
-                        service: "object",
-                        method: "execute_kw",
-                        args: [ODOO_DB, uid, ODOO_PASSWORD, model, method, args, kwargs]
-                    },
-                    id: Date.now()
-                }),
-                signal: AbortSignal.timeout(15000)
-            });
+            try {
+                const response = await fetch(`${ODOO_URL}/jsonrpc`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        jsonrpc: "2.0",
+                        method: "call",
+                        params: {
+                            service: "object",
+                            method: "execute_kw",
+                            args: [ODOO_DB, uid, ODOO_PASSWORD, model, method, args, kwargs]
+                        },
+                        id: Date.now()
+                    }),
+                    signal: AbortSignal.timeout(15000)
+                });
 
-            const data = await response.json();
+                const data = await response.json();
 
-            if (data.error) {
-                const errMsg = data.error.data?.message || data.error.message || JSON.stringify(data.error);
-                const isSessionError = errMsg.toLowerCase().includes("session")
-                    || errMsg.toLowerCase().includes("unauthorized")
-                    || errMsg.toLowerCase().includes("access denied")
-                    || response.status === 401
-                    || response.status === 403;
+                if (data.error) {
+                    const errMsg = data.error.data?.message || data.error.message || JSON.stringify(data.error);
+                    const isSessionError = errMsg.toLowerCase().includes("session")
+                        || errMsg.toLowerCase().includes("unauthorized")
+                        || errMsg.toLowerCase().includes("access denied")
+                        || response.status === 401
+                        || response.status === 403;
 
-                if (isSessionError && attempt === 1) {
-                    console.warn(`⚠️ Odoo session error on attempt ${attempt}, re-authenticating...`, errMsg);
-                    // Force re-auth on next iteration
+                    if (isSessionError && attempt === 1) {
+                        console.warn(`⚠️ Odoo session error on attempt ${attempt}, re-authenticating...`, errMsg);
+                        // Force re-auth on next iteration
+                        this.uid = null;
+                        this.uidTimestamp = 0;
+                        continue;
+                    }
+                    throw new Error(errMsg);
+                }
+
+                return data.result;
+            } catch (err: any) {
+                if (attempt === 1 && (err.message.includes("Session") || err.message.includes("Unauthorized"))) {
+                    console.warn(`⚠️ Caught Odoo error "${err.message}", retrying...`);
                     this.uid = null;
                     this.uidTimestamp = 0;
                     continue;
                 }
-                throw new Error(`Odoo API Error (${model}.${method}): ${errMsg}`);
+                throw new Error(`Odoo API Error (${model}.${method}): ${err.message}`);
             }
-
-            return data.result;
         }
     }
 
