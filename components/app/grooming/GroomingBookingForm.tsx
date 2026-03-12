@@ -418,12 +418,6 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
                     >
                         {isSubmitting ? "Booking..." : "Confirm Booking"}
                     </button>
-
-                    {!isSignedIn && (
-                        <p className="mt-4 text-center text-sm text-zinc-500">
-                            Sign in to save your booking to your account
-                        </p>
-                    )}
                 </form>
             </div>
 
