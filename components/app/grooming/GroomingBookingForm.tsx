@@ -8,6 +8,8 @@ import { createGroomingBooking } from "@/lib/actions/grooming";
 import { PRICES, BREED_SIZES, VALID_TIMES, SIZE_LABELS, DOG_PACKAGES, CAT_PACKAGES } from "@/lib/constants/grooming";
 
 import { formatPrice } from "@/lib/utils";
+import { toast } from "sonner";
+import { BookingSuccessModal } from "./BookingSuccessModal";
 
 function useSessionSafe() {
     try {
@@ -27,8 +29,7 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
     const isSignedIn = authStatus === "authenticated";
     const user = session?.user;
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const [formData, setFormData] = useState({
         petType: "dog" as "dog" | "cat",
@@ -94,77 +95,56 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
         
         const date = new Date(dateStr);
         if (date.getDay() === 0) { // 0 is Sunday
-            setError("We are closed on Sundays. Please select another day.");
+            toast.error("We are closed on Sundays", {
+                description: "Please select another day for your pet's grooming."
+            });
             setFormData({ ...formData, appointmentDate: "" });
             return;
         }
         
-        setError(null);
         setFormData({ ...formData, appointmentDate: dateStr });
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
-        setError(null);
 
-        try {
-            const result = await createGroomingBooking({
-                ...formData,
-                userId: user?.id, // passed as userId
-            });
+        const promise = createGroomingBooking({
+            ...formData,
+            userId: user?.id,
+        });
 
-            if (result.success) {
-                setIsSuccess(true);
-            } else {
-                setError(result.error || "Failed to create booking");
-            }
-        } catch (err) {
-            setError("An unexpected error occurred");
-        } finally {
-            setIsSubmitting(false);
-        }
+        toast.promise(promise, {
+            loading: 'Scheduling your appointment...',
+            success: (result) => {
+                if (result.success) {
+                    setShowSuccessModal(true);
+                    return 'Booking confirmed!';
+                } else {
+                    throw new Error(result.error || "Failed to create booking");
+                }
+            },
+            error: (err) => err.message || "An unexpected error occurred",
+            finally: () => setIsSubmitting(false)
+        });
     };
 
-    if (isSuccess) {
-        return (
-            <section id="booking" className="py-16 px-4 bg-green-50 dark:bg-green-900/20">
-                <div className="mx-auto max-w-2xl text-center">
-                    <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-green-500">
-                        <Check className="h-8 w-8 text-white" />
-                    </div>
-                    <h2 className="text-2xl font-bold text-green-800 dark:text-green-200 mb-4">
-                        Booking Confirmed!
-                    </h2>
-                    <p className="text-green-700 dark:text-green-300 mb-6">
-                        We've received your grooming appointment request. You'll receive a
-                        confirmation email shortly with all the details.
-                    </p>
-                    <button
-                        onClick={() => {
-                            setIsSuccess(false);
-                            setFormData({
-                                petType: "dog",
-                                petName: "",
-                                breedSize: "",
-                                package: "",
-                                appointmentDate: "",
-                                appointmentTime: "",
-                                customerName: user?.name || "",
-                                customerEmail: user?.email || "",
-                                customerPhone: "",
-                                specialNotes: "",
-                                detangling: false,
-                            });
-                        }}
-                        className="rounded-full bg-green-600 px-6 py-2 text-white hover:bg-green-700"
-                    >
-                        Book Another Appointment
-                    </button>
-                </div>
-            </section>
-        );
-    }
+    const resetForm = () => {
+        setShowSuccessModal(false);
+        setFormData({
+            petType: "dog",
+            petName: "",
+            breedSize: "",
+            package: "",
+            appointmentDate: "",
+            appointmentTime: "",
+            customerName: user?.name || "",
+            customerEmail: user?.email || "",
+            customerPhone: "",
+            specialNotes: "",
+            detangling: false,
+        });
+    };
 
 
     return (
@@ -178,11 +158,6 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
                 </p>
 
                 <form onSubmit={handleSubmit} className="rounded-2xl bg-white dark:bg-zinc-800 shadow-xl p-6 md:p-10 border border-[#6b3e1e]/10">
-                    {error && (
-                        <div className="mb-6 rounded-lg bg-red-100 dark:bg-red-900/30 p-4 text-red-700 dark:text-red-300">
-                            {error}
-                        </div>
-                    )}
 
                     {/* Pet Type Selection */}
                     <div className="mb-6">
@@ -451,6 +426,18 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
                     )}
                 </form>
             </div>
+
+            <BookingSuccessModal 
+                isOpen={showSuccessModal} 
+                onClose={resetForm}
+                bookingDetails={{
+                    petName: formData.petName,
+                    package: formData.package,
+                    date: formData.appointmentDate,
+                    time: formData.appointmentTime,
+                    price: calculatePrice()
+                }}
+            />
         </section>
     );
 }
