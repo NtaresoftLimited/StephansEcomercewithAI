@@ -57,7 +57,13 @@ export async function createGroomingBooking(rawData: GroomingBookingData) {
     try {
         // 0. Verify Session
         console.log("🔒 Step 0: Verifying session...");
-        const session = await auth();
+        let session;
+        try {
+            session = await auth();
+        } catch (authErr: any) {
+            console.error("   ❌ Auth function threw an error:", authErr);
+            throw new Error(`Auth internal error: ${authErr.message || 'Unknown'}`);
+        }
         
         if (!session?.user) {
             console.warn("   ❌ No active session found during booking creation.");

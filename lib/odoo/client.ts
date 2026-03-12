@@ -122,12 +122,17 @@ export class OdooClient {
                         || response.status === 401
                         || response.status === 403;
 
-                    if (isSessionError && attempt === 1) {
-                        console.warn(`⚠️ Odoo session error on attempt ${attempt}, re-authenticating...`, errMsg);
-                        // Force re-auth on next iteration
-                        this.uid = null;
-                        this.uidTimestamp = 0;
-                        continue;
+                    if (isSessionError) {
+                        if (attempt === 1) {
+                            console.warn(`⚠️ Odoo session error on attempt ${attempt}, re-authenticating...`, errMsg);
+                            // Force re-auth on next iteration
+                            this.uid = null;
+                            this.uidTimestamp = 0;
+                            continue;
+                        } else {
+                            // On second attempt, give a clearer message
+                            throw new Error(`Unauthorized - Session not found (Odoo)`);
+                        }
                     }
                     throw new Error(errMsg);
                 }
