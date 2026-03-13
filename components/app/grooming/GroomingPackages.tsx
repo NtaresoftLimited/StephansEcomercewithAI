@@ -147,23 +147,24 @@ export function GroomingPackages({ prices = PRICES }: GroomingPackagesProps) {
                     )}
                 </div>
 
-                {/* Extra Charges */}
+                {/* Extras */}
                 <div className="mt-16">
                     <div className="flex items-center gap-4 mb-8">
                         <div className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800"></div>
                         <h3 className="text-xl font-bold text-zinc-900 dark:text-white uppercase tracking-wider">
-                            Additional Services
+                            Extras
                         </h3>
                         <div className="h-px flex-1 bg-zinc-200 dark:bg-zinc-800"></div>
                     </div>
                     
                     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         {[
-                            { name: "Detangling Hair", price: "30,000 TZS", desc: "For matted fur" },
-                            { name: "Emergency Service", price: "30,000 TZS", desc: "After 6:30 PM" },
+                            { name: "Express Grooming", price: "30,000 TZS", desc: "Priority service" },
+                            { name: "De-tangling Fee", price: "30,000 TZS", desc: "For matted fur" },
                             { name: "Handling Fee", price: "10,000 TZS", desc: "For difficult pets" },
-                            { name: "Sedation", price: "5,000 TZS", desc: "Vet supervision required" },
-                            { name: "Late Pickup", price: "10,000 TZS", desc: "Per hour charge" },
+                            { name: "Sedation Fee", price: "5,000 TZS", desc: "Vet supervision required" },
+                            { name: "Late Pickup Fee", price: "10,000 TZS", desc: "Per hour charge" },
+                            { name: "Emergency Grooming", price: "30,000 TZS", desc: "After 6:30 PM" },
                         ].map((item, i) => (
                             <div key={i} className="group relative overflow-hidden rounded-xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 p-5 hover:shadow-lg transition-all duration-300 hover:border-[#6b3e1e]/30">
                                 <div className="absolute top-0 left-0 w-1 h-full bg-[#6b3e1e] opacity-0 group-hover:opacity-100 transition-opacity"></div>

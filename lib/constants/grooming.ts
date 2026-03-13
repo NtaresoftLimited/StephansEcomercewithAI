@@ -39,8 +39,8 @@ export const DOG_PACKAGES = {
         name: "Super Premium Package",
         prices: {
             mini: 60000,
-            small: 75000,
-            medium: 85000,
+            small: 70000,
+            medium: 80000,
             large: 90000,
         },
         services: [
@@ -118,7 +118,7 @@ export const PRICES: Record<string, Record<string, Record<string, number>>> = {
     dog: {
         standard: { mini: 45000, small: 50000, medium: 60000, large: 70000 },
         premium: { mini: 50000, small: 60000, medium: 70000, large: 80000 },
-        super_premium: { mini: 60000, small: 75000, medium: 85000, large: 90000 },
+        super_premium: { mini: 60000, small: 70000, medium: 80000, large: 90000 },
     },
     cat: {
         standard: { kitten: 45000, adult: 60000 },
