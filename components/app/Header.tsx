@@ -154,8 +154,8 @@ export function Header() {
                   className={cn(
                     "absolute transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] z-0",
                     isScrolled
-                      ? "h-[calc(100%-4px)] top-[2px] rounded-lg bg-[#0f1d07]/10 dark:bg-zinc-100" // Subtle box when expanded
-                      : "h-[calc(100%-8px)] top-[4px] rounded-full bg-[#0f1d07] dark:bg-zinc-100"
+                      ? "h-[calc(100%-4px)] top-[2px] rounded-lg bg-[#6b3e1e]/10 dark:bg-zinc-100" // Subtle box when expanded
+                      : "h-[calc(100%-8px)] top-[4px] rounded-full bg-[#6b3e1e] dark:bg-zinc-100"
                   )}
                   style={{
                     left: (hoverRect?.left ?? activeRect?.left ?? 0) + (isScrolled ? 0 : 4),
@@ -186,8 +186,8 @@ export function Header() {
                     className={cn(
                       "text-[13px] font-bold tracking-tight px-6 py-2 rounded-full transition-all relative z-10 duration-300",
                       isScrolled
-                        ? (isActive || isHovered) ? "text-[#0f1d07] dark:text-zinc-100" : "text-zinc-600 dark:text-zinc-400 hover:text-[#0f1d07]"
-                        : (isActive || isHovered) ? "text-[#90f188] dark:text-zinc-900" : "text-[#0f1d07] dark:text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-300"
+                        ? (isActive || isHovered) ? "text-[#6b3e1e] dark:text-zinc-100" : "text-zinc-600 dark:text-zinc-400 hover:text-[#6b3e1e]"
+                        : (isActive || isHovered) ? "text-white dark:text-zinc-900" : "text-[#6b3e1e] dark:text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-300"
                     )}
                   >
                     {link.name}
@@ -199,33 +199,33 @@ export function Header() {
 
           {/* Actions - Right Aligned */}
           <div className={cn(
-            "flex items-center gap-2 transition-all duration-500",
+            "flex items-center gap-1 transition-all duration-500",
             isScrolled
               ? "bg-transparent border-transparent"
-              : "bg-white/40 dark:bg-zinc-900/20 backdrop-blur-md rounded-full p-1 border border-zinc-200/20 shadow-sm"
+              : "bg-white/60 dark:bg-zinc-900/40 backdrop-blur-xl rounded-full p-1 border border-zinc-200/50 dark:border-zinc-800/40 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_4px_6px_-2px_rgba(0,0,0,0.02)]"
           )}>
             <button
               onClick={() => setIsSearchOpen(true)}
-              className="p-2 text-foreground/70 hover:text-foreground transition-all rounded-full hover:bg-white/50 dark:hover:bg-zinc-800/50"
+              className="p-2 text-zinc-600 dark:text-zinc-400 hover:text-[#6b3e1e] dark:hover:text-zinc-100 transition-all rounded-full hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50"
             >
-              <Search className="h-4 w-5" strokeWidth={1.5} />
+              <Search className="h-4 w-5" strokeWidth={2} />
               <span className="sr-only">Search</span>
             </button>
 
             {/* User Account */}
             <div className="hidden sm:block">
               {status === "authenticated" ? (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1">
                   <Link
                     href="/orders"
-                    className="p-2 text-foreground/70 hover:text-foreground transition-all rounded-full hover:bg-white/50 dark:hover:bg-zinc-800/50"
+                    className="p-2 text-zinc-600 dark:text-zinc-400 hover:text-[#6b3e1e] dark:hover:text-zinc-100 transition-all rounded-full hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50"
                   >
-                    <User className="h-4 w-5" strokeWidth={1.5} />
+                    <User className="h-4 w-5" strokeWidth={2} />
                     <span className="sr-only">Account</span>
                   </Link>
                   <button
                     onClick={() => signOut()}
-                    className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-900 transition-colors ml-1"
+                    className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-[#6b3e1e] transition-colors px-2 py-1"
                   >
                     Logout
                   </button>
@@ -233,21 +233,21 @@ export function Header() {
               ) : (
                 <Link
                   href="/login"
-                  className="p-2 text-foreground/70 hover:text-foreground transition-all rounded-full hover:bg-white/50 dark:hover:bg-zinc-800/50"
+                  className="p-2 text-zinc-600 dark:text-zinc-400 hover:text-[#6b3e1e] dark:hover:text-zinc-100 transition-all rounded-full hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50"
                 >
-                  <User className="h-4 w-5" strokeWidth={1.5} />
+                  <User className="h-4 w-5" strokeWidth={2} />
                   <span className="sr-only">Sign in</span>
                 </Link>
               )}
             </div>
 
             <button
-              className="relative p-2 text-foreground/70 hover:text-foreground transition-all rounded-full hover:bg-white/50 dark:hover:bg-zinc-800/50 group"
+              className="relative p-2 text-zinc-600 dark:text-zinc-400 hover:text-[#6b3e1e] dark:hover:text-zinc-100 transition-all rounded-full hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50 group"
               onClick={openCart}
             >
-              <ShoppingBag className="h-4 w-5" strokeWidth={1.5} />
+              <ShoppingBag className="h-4 w-5" strokeWidth={2} />
               {totalItems > 0 && (
-                <span className="absolute -right-1 -top-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-amber-600 text-[8px] font-extrabold text-white shadow-sm ring-1 ring-white">
+                <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#6b3e1e] text-[9px] font-bold text-white shadow-sm ring-2 ring-white dark:ring-zinc-900 transition-transform group-hover:scale-110">
                   {totalItems > 99 ? "99" : totalItems}
                 </span>
               )}

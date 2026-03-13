@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { Calendar, Clock, Dog, Cat, Check } from "lucide-react";
+import { Calendar, Clock, Check } from "lucide-react";
+import Image from "next/image";
 import { createGroomingBooking } from "@/lib/actions/grooming";
 import { PRICES, BREED_SIZES, VALID_TIMES, SIZE_LABELS, DOG_PACKAGES, CAT_PACKAGES } from "@/lib/constants/grooming";
 
@@ -168,24 +169,40 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
                             <button
                                 type="button"
                                 onClick={() => setFormData({ ...formData, petType: "dog", breedSize: "" })}
-                                className={`flex-1 flex items-center justify-center gap-2 rounded-lg border-2 p-4 transition-all ${formData.petType === "dog"
-                                    ? "border-[#6b3e1e] bg-[#6b3e1e]/10"
+                                className={`flex-1 flex items-center justify-center gap-3 rounded-xl border-2 p-5 transition-all ${formData.petType === "dog"
+                                    ? "border-[#6b3e1e] bg-[#6b3e1e]/5"
                                     : "border-zinc-200 dark:border-zinc-700 hover:border-zinc-300"
                                     }`}
                             >
-                                <Dog className="h-6 w-6" />
-                                <span className="font-semibold">Dog</span>
+                                <div className="relative w-8 h-8 flex items-center justify-center">
+                                    <Image 
+                                        src="/icons/icon-dog.png" 
+                                        alt="Dog" 
+                                        width={32} 
+                                        height={32}
+                                        className={`object-contain transition-all ${formData.petType === "dog" ? "opacity-100" : "opacity-40 grayscale"}`}
+                                    />
+                                </div>
+                                <span className={`font-bold text-lg ${formData.petType === "dog" ? "text-[#6b3e1e]" : "text-zinc-600"}`}>Dog</span>
                             </button>
                             <button
                                 type="button"
                                 onClick={() => setFormData({ ...formData, petType: "cat", breedSize: "" })}
-                                className={`flex-1 flex items-center justify-center gap-2 rounded-lg border-2 p-4 transition-all ${formData.petType === "cat"
-                                    ? "border-[#6b3e1e] bg-[#6b3e1e]/10"
+                                className={`flex-1 flex items-center justify-center gap-3 rounded-xl border-2 p-5 transition-all ${formData.petType === "cat"
+                                    ? "border-[#6b3e1e] bg-[#6b3e1e]/5"
                                     : "border-zinc-200 dark:border-zinc-700 hover:border-zinc-300"
                                     }`}
                             >
-                                <Cat className="h-6 w-6" />
-                                <span className="font-semibold">Cat</span>
+                                <div className="relative w-8 h-8 flex items-center justify-center">
+                                    <Image 
+                                        src="/icons/icon-cat.png" 
+                                        alt="Cat" 
+                                        width={32} 
+                                        height={32}
+                                        className={`object-contain transition-all ${formData.petType === "cat" ? "opacity-100" : "opacity-40 grayscale"}`}
+                                    />
+                                </div>
+                                <span className={`font-bold text-lg ${formData.petType === "cat" ? "text-[#6b3e1e]" : "text-zinc-600"}`}>Cat</span>
                             </button>
                         </div>
                     </div>

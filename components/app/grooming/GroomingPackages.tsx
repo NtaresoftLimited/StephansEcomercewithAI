@@ -1,8 +1,9 @@
 "use client";
 
-import { Check, Dog, Cat } from "lucide-react";
+import { Check } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { PRICES, DOG_PACKAGES, CAT_PACKAGES, SIZE_LABELS } from "@/lib/constants/grooming";
 
 import { formatPrice } from "@/lib/utils";
@@ -109,22 +110,38 @@ export function GroomingPackages({ prices = PRICES }: GroomingPackagesProps) {
                     <div className="inline-flex rounded-full bg-zinc-100 dark:bg-zinc-800 p-1">
                         <button
                             onClick={() => setActiveTab("dog")}
-                            className={`flex items-center gap-2 rounded-full px-6 py-2 font-semibold transition-all ${activeTab === "dog"
-                                ? "bg-white dark:bg-zinc-700 text-[#6b3e1e] shadow-md"
-                                : "text-zinc-500 hover:text-zinc-700"
+                            className={`flex items-center gap-3 rounded-full px-8 py-3 font-bold transition-all ${activeTab === "dog"
+                                ? "bg-white dark:bg-zinc-700 text-[#6b3e1e] shadow-lg scale-105"
+                                : "text-zinc-400 hover:text-zinc-600"
                                 }`}
                         >
-                            <Dog className="h-5 w-5" />
+                            <div className="relative w-6 h-6 flex items-center justify-center">
+                                <Image 
+                                    src="/icons/icon-dog.png" 
+                                    alt="Dog" 
+                                    width={24} 
+                                    height={24}
+                                    className={`object-contain transition-all ${activeTab === "dog" ? "opacity-100" : "opacity-40 grayscale"}`}
+                                />
+                            </div>
                             Dogs
                         </button>
                         <button
                             onClick={() => setActiveTab("cat")}
-                            className={`flex items-center gap-2 rounded-full px-6 py-2 font-semibold transition-all ${activeTab === "cat"
-                                ? "bg-white dark:bg-zinc-700 text-[#6b3e1e] shadow-md"
-                                : "text-zinc-500 hover:text-zinc-700"
+                            className={`flex items-center gap-3 rounded-full px-8 py-3 font-bold transition-all ${activeTab === "cat"
+                                ? "bg-white dark:bg-zinc-700 text-[#6b3e1e] shadow-lg scale-105"
+                                : "text-zinc-400 hover:text-zinc-600"
                                 }`}
                         >
-                            <Cat className="h-5 w-5" />
+                            <div className="relative w-6 h-6 flex items-center justify-center">
+                                <Image 
+                                    src="/icons/icon-cat.png" 
+                                    alt="Cat" 
+                                    width={24} 
+                                    height={24}
+                                    className={`object-contain transition-all ${activeTab === "cat" ? "opacity-100" : "opacity-40 grayscale"}`}
+                                />
+                            </div>
                             Cats
                         </button>
                     </div>

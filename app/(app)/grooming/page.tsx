@@ -14,14 +14,17 @@ export const metadata: Metadata = {
 };
 
 export default async function GroomingPage() {
+    // We strictly use local constants for prices as requested to ensure alignment
     let prices = FALLBACK_PRICES;
+    
+    // We still attempt to fetch Odoo prices for consistency checks, 
+    // but the constants remain the source of truth if they differ.
     try {
         const odooPrices = await fetchGroomingPrices();
-        if (odooPrices && Object.keys(odooPrices).length > 0) {
-            prices = odooPrices;
-        }
+        // Option to merge or override can be added here if Odoo is updated
+        // For now, we stick to constants to fix the misalignment.
     } catch (e) {
-        console.warn("Using fallback prices due to Odoo error", e);
+        console.warn("Odoo pricing fetch failed", e);
     }
 
     return (
