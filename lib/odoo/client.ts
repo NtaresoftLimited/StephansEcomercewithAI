@@ -11,127 +11,140 @@ const ODOO_USER = process.env.ODOO_USER || "info@stephanspetstore.co.tz";
 const ODOO_PASSWORD = process.env.ODOO_PASSWORD || "Stephan@3202";
 
 export class OdooClient {
+    private sessionId: string | null = null;
     private uid: number | null = null;
-    private uidTimestamp: number = 0;
-    // Cache UID for max 5 minutes to avoid re-authenticating every single call
-    // but short enough to avoid stale session issues in serverless
-    private static readonly UID_TTL_MS = 5 * 60 * 1000;
+    private sessionTimestamp: number = 0;
+    private static readonly SESSION_TTL_MS = 15 * 60 * 1000; // 15 minutes
 
-    private async authenticate(forceRefresh = false): Promise<number> {
+    private async authenticate(forceRefresh = false): Promise<{ uid: number; sessionId: string }> {
         const now = Date.now();
-        const isExpired = (now - this.uidTimestamp) > OdooClient.UID_TTL_MS;
+        const isExpired = (now - this.sessionTimestamp) > OdooClient.SESSION_TTL_MS;
 
-        if (this.uid && !forceRefresh && !isExpired) {
-            return this.uid;
+        if (this.uid && this.sessionId && !forceRefresh && !isExpired) {
+            return { uid: this.uid, sessionId: this.sessionId };
         }
 
-        // Clear stale UID
-        this.uid = null;
-        this.uidTimestamp = 0;
+        console.log(`🔑 Authenticating with Odoo via /web/session/authenticate (URL=${ODOO_URL}, DB=${ODOO_DB}, User=${ODOO_USER})`);
 
-        console.log("🔑 Authenticating with Odoo...");
+        try {
+            const response = await fetch(`${ODOO_URL}/web/session/authenticate`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    jsonrpc: "2.0",
+                    params: {
+                        db: ODOO_DB,
+                        login: ODOO_USER,
+                        password: ODOO_PASSWORD,
+                    }
+                }),
+                signal: AbortSignal.timeout(15000)
+            });
 
-        const response = await fetch(`${ODOO_URL}/jsonrpc`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                jsonrpc: "2.0",
-                method: "call",
-                params: {
-                    service: "common",
-                    method: "authenticate",
-                    args: [ODOO_DB, ODOO_USER, ODOO_PASSWORD, {}]
-                },
-                id: now
-            }),
-            signal: AbortSignal.timeout(15000)
-        });
+            if (!response.ok) {
+                throw new Error(`Odoo Auth HTTP ${response.status}: ${response.statusText}`);
+            }
 
-        const data = await response.json();
-        if (data.error) {
-            const errMsg = data.error.data?.message || data.error.message || JSON.stringify(data.error);
-            throw new Error(`Odoo Auth Error: ${errMsg}`);
+            const data = await response.json();
+            if (data.error) {
+                const errMsg = data.error.data?.message || data.error.message || JSON.stringify(data.error);
+                throw new Error(`Odoo Auth Error: ${errMsg}`);
+            }
+
+            const result = data.result;
+            if (!result || !result.uid || !result.session_id) {
+                throw new Error("Odoo Auth failed: No UID or Session ID returned");
+            }
+
+            const uid = result.uid as number;
+            const sessionId = result.session_id as string;
+
+            this.uid = uid;
+            this.sessionId = sessionId;
+            this.sessionTimestamp = now;
+
+            console.log(`🔑 Authenticated! UID: ${uid}, Session: ${sessionId.substring(0, 8)}...`);
+            return { uid, sessionId };
+        } catch (err: any) {
+            console.error(`❌ Odoo Auth Error: ${err.message}`);
+            this.uid = null;
+            this.sessionId = null;
+            throw err;
         }
-
-        this.uid = data.result;
-        if (!this.uid) throw new Error("Odoo Auth failed: UID is null — check ODOO_USER and ODOO_PASSWORD");
-
-        this.uidTimestamp = now;
-        console.log(`🔑 Authenticated with Odoo (UID: ${this.uid})`);
-        return this.uid;
     }
 
     async authenticateUser(login: string, password: string): Promise<number | null> {
         console.log(`🔑 Authenticating user ${login} with Odoo...`);
-        const now = Date.now();
-        const response = await fetch(`${ODOO_URL}/jsonrpc`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                jsonrpc: "2.0",
-                method: "call",
-                params: {
-                    service: "common",
-                    method: "authenticate",
-                    args: [ODOO_DB, login, password, {}]
-                },
-                id: now
-            }),
-            signal: AbortSignal.timeout(15000)
-        });
+        try {
+            const response = await fetch(`${ODOO_URL}/web/session/authenticate`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    jsonrpc: "2.0",
+                    params: {
+                        db: ODOO_DB,
+                        login: login,
+                        password: password,
+                    }
+                }),
+                signal: AbortSignal.timeout(15000)
+            });
 
-        const data = await response.json();
-        if (data.error) {
-            console.error("Odoo User Auth Error:", data.error);
+            const data = await response.json();
+            if (data.error) {
+                console.error("❌ Odoo User Auth Error:", JSON.stringify(data.error, null, 2));
+                return null;
+            }
+
+            return data.result?.uid || null;
+        } catch (err) {
+            console.error("❌ Odoo User Auth Network Error:", err);
             return null;
         }
-
-        return data.result || null;
     }
 
     async executeKw(model: string, method: string, args: any[], kwargs: any = {}): Promise<any> {
-        // Try the call; if it fails with session/auth error, re-authenticate and retry once
         for (let attempt = 1; attempt <= 2; attempt++) {
-            const uid = await this.authenticate(attempt > 1);
-
             try {
-                const response = await fetch(`${ODOO_URL}/jsonrpc`, {
+                const { uid, sessionId } = await this.authenticate(attempt > 1);
+
+                // For /web/dataset/call_kw, the format is slightly different 
+                const response = await fetch(`${ODOO_URL}/web/dataset/call_kw/${model}/${method}`, {
                     method: "POST",
-                    headers: { "Content-Type": "application/json" },
+                    headers: { 
+                        "Content-Type": "application/json",
+                        "Cookie": `session_id=${sessionId}`
+                    },
                     body: JSON.stringify({
                         jsonrpc: "2.0",
-                        method: "call",
                         params: {
-                            service: "object",
-                            method: "execute_kw",
-                            args: [ODOO_DB, uid, ODOO_PASSWORD, model, method, args, kwargs]
+                            model,
+                            method,
+                            args,
+                            kwargs,
                         },
                         id: Date.now()
                     }),
-                    signal: AbortSignal.timeout(15000)
+                    signal: AbortSignal.timeout(20000)
                 });
 
-                const data = await response.json();
+                if (!response.ok) {
+                    if (response.status === 404) throw new Error("Odoo endpoint not found (404)");
+                    if (response.status === 401 || response.status === 403) {
+                        if (attempt === 1) continue; // Retry with fresh auth
+                    }
+                    throw new Error(`HTTP ${response.status} from Odoo`);
+                }
 
+                const data = await response.json();
                 if (data.error) {
                     const errMsg = data.error.data?.message || data.error.message || JSON.stringify(data.error);
-                    const isSessionError = errMsg.toLowerCase().includes("session")
-                        || errMsg.toLowerCase().includes("unauthorized")
-                        || errMsg.toLowerCase().includes("access denied")
-                        || errMsg.toLowerCase().includes("forbidden")
-                        || response.status === 401
-                        || response.status === 403;
-
-                    if (isSessionError) {
+                    
+                    // If Odoo says session expired or invalid, retry with fresh auth
+                    if (errMsg.toLowerCase().includes("session") || errMsg.toLowerCase().includes("expired")) {
                         if (attempt === 1) {
-                            console.warn(`⚠️ Odoo session error on attempt ${attempt}, re-authenticating...`, errMsg);
-                            // Force re-auth on next iteration
-                            this.uid = null;
-                            this.uidTimestamp = 0;
+                            console.warn("⚠️ Odoo session expired, retrying with fresh auth...");
                             continue;
-                        } else {
-                            // On second attempt, give a clearer message
-                            throw new Error(`Unauthorized - Session not found (Odoo)`);
                         }
                     }
                     throw new Error(errMsg);
@@ -139,13 +152,13 @@ export class OdooClient {
 
                 return data.result;
             } catch (err: any) {
-                if (attempt === 1 && (err.message.includes("Session") || err.message.includes("Unauthorized"))) {
-                    console.warn(`⚠️ Caught Odoo error "${err.message}", retrying...`);
-                    this.uid = null;
-                    this.uidTimestamp = 0;
-                    continue;
+                if (attempt === 2) {
+                    throw new Error(`Odoo API Error (${model}.${method}): ${err.message}`);
                 }
-                throw new Error(`Odoo API Error (${model}.${method}): ${err.message}`);
+                console.warn(`⚠️ Odoo call failed (attempt ${attempt}), retrying: ${err.message}`);
+                // Clear state to force fresh auth on next attempt
+                this.uid = null;
+                this.sessionId = null;
             }
         }
     }
