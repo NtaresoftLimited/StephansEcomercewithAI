@@ -21,7 +21,7 @@ export class OdooClient {
             return this.uid;
         }
 
-        console.log(`🔑 Odoo Stateless Auth...`);
+        console.log(`🔑 Odoo Stateless Auth... (DB=${ODOO_DB}, User=${ODOO_USER})`);
         try {
             const response = await fetch(`${ODOO_URL}/jsonrpc`, {
                 method: "POST",
@@ -35,21 +35,33 @@ export class OdooClient {
                         args: [ODOO_DB, ODOO_USER, ODOO_PASSWORD, {}]
                     }
                 }),
+                credentials: "omit",
                 signal: AbortSignal.timeout(10000)
             });
 
-            if (!response.ok) throw new Error(`Odoo Auth HTTP ${response.status}`);
+            if (!response.ok) {
+                console.error(`❌ Odoo Auth HTTP Error: ${response.status}`);
+                throw new Error(`Odoo Auth HTTP ${response.status}`);
+            }
+            
             const data = await response.json();
-            if (data.error) throw new Error(data.error.data?.message || data.error.message);
+            if (data.error) {
+                console.error("❌ Odoo Auth Logic Error:", data.error.message || data.error);
+                throw new Error(data.error.data?.message || data.error.message);
+            }
             
             const uid = data.result;
-            if (!uid) throw new Error("Odoo Auth failed (null UID)");
+            if (!uid) {
+                console.error("❌ Odoo Auth Success but UID is null. Check credentials and user permissions.");
+                throw new Error("Odoo Auth failed (null UID)");
+            }
             
             this.uid = uid;
             this.lastAuth = now;
+            console.log(`✅ Odoo Auth Success: UID=${uid}`);
             return uid;
         } catch (err: any) {
-            console.error(`❌ Odoo Auth Failed: ${err.message}`);
+            console.error(`❌ Odoo Auth Exception: ${err.message}`);
             throw err;
         }
     }
@@ -80,37 +92,51 @@ export class OdooClient {
 
     async executeKw(model: string, method: string, args: any[], kwargs: any = {}): Promise<any> {
         const uid = await this.getUid();
-        console.log(`🌐 Odoo stateless RPC [${model}.${method}]...`);
+        console.log(`🌐 Odoo stateless RPC [${model}.${method}] (UID: ${uid})`);
 
         try {
+            const body = JSON.stringify({
+                jsonrpc: "2.0",
+                method: "call",
+                params: {
+                    service: "object",
+                    method: "execute_kw",
+                    args: [ODOO_DB, uid, ODOO_PASSWORD, model, method, args, kwargs]
+                },
+                id: Date.now()
+            });
+
             const response = await fetch(`${ODOO_URL}/jsonrpc`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    jsonrpc: "2.0",
-                    method: "call",
-                    params: {
-                        service: "object",
-                        method: "execute_kw",
-                        args: [ODOO_DB, uid, ODOO_PASSWORD, model, method, args, kwargs]
-                    },
-                    id: Date.now()
-                }),
+                body,
+                credentials: "omit", // Ensure NO cookies are leaked from server context
                 signal: AbortSignal.timeout(20000)
             });
 
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            if (!response.ok) {
+                console.error(`❌ Odoo RPC HTTP Error: ${response.status} ${response.statusText}`);
+                throw new Error(`HTTP ${response.status} from Odoo`);
+            }
+
             const data = await response.json();
             
             if (data.error) {
                 const errMsg = data.error.data?.message || data.error.message || JSON.stringify(data.error);
+                console.error(`❌ Odoo Business Error [${model}.${method}]:`, errMsg);
+                // Log the full error for debugging in Vercel logs
+                console.log(`🔍 Raw Odoo Error Data: ${JSON.stringify(data.error).substring(0, 500)}`);
                 throw new Error(errMsg);
             }
 
             return data.result;
         } catch (err: any) {
             console.error(`❌ Odoo RPC Failed [${model}.${method}]: ${err.message}`);
-            throw new Error(`Odoo API Error: ${err.message}`);
+            // Provide more context if it's a session error
+            if (err.message.includes("Session") || err.message.includes("Session not found")) {
+                console.error("DEBUG: Stateless call triggered session error. This implies Odoo side session requirement.");
+            }
+            throw new Error(err.message);
         }
     }
 
