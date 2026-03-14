@@ -52,12 +52,20 @@ export class OdooClient {
             }
 
             const result = data.result;
-            if (!result || !result.uid || !result.session_id) {
+            // Capture session_id from JSON result or fallback to Set-Cookie header
+            let sessionId = result?.session_id;
+            if (!sessionId) {
+                const cookieHeader = response.headers.get("set-cookie");
+                const match = cookieHeader?.match(/session_id=([^;]+)/);
+                if (match) sessionId = match[1];
+            }
+
+            if (!result || !result.uid || !sessionId) {
+                console.error("❌ Odoo Auth Failed - Missing identifiers:", { uid: result?.uid, sessionId: !!sessionId });
                 throw new Error("Odoo Auth failed: No UID or Session ID returned");
             }
 
             const uid = result.uid as number;
-            const sessionId = result.session_id as string;
 
             this.uid = uid;
             this.sessionId = sessionId;
@@ -108,12 +116,15 @@ export class OdooClient {
             try {
                 const { uid, sessionId } = await this.authenticate(attempt > 1);
 
-                // For /web/dataset/call_kw, the format is slightly different 
-                const response = await fetch(`${ODOO_URL}/web/dataset/call_kw/${model}/${method}`, {
+                const url = `${ODOO_URL}/web/dataset/call_kw/${model}/${method}`;
+                console.log(`🌐 Odoo RPC [${model}.${method}] (Attempt ${attempt})...`);
+
+                const response = await fetch(url, {
                     method: "POST",
                     headers: { 
                         "Content-Type": "application/json",
-                        "Cookie": `session_id=${sessionId}`
+                        "Cookie": `session_id=${sessionId}`,
+                        "X-Openerp-Session-Id": sessionId
                     },
                     body: JSON.stringify({
                         jsonrpc: "2.0",
@@ -129,21 +140,32 @@ export class OdooClient {
                 });
 
                 if (!response.ok) {
-                    if (response.status === 404) throw new Error("Odoo endpoint not found (404)");
-                    if (response.status === 401 || response.status === 403) {
-                        if (attempt === 1) continue; // Retry with fresh auth
+                    console.error(`❌ Odoo HTTP Error: ${response.status} ${response.statusText}`);
+                    if (response.status === 401 || response.status === 403 || response.status === 404) {
+                        if (attempt === 1) {
+                            this.uid = null;
+                            this.sessionId = null;
+                            continue; 
+                        }
                     }
-                    throw new Error(`HTTP ${response.status} from Odoo`);
+                    throw new Error(`HTTP ${response.status} from Odoo at ${url}`);
                 }
 
                 const data = await response.json();
                 if (data.error) {
                     const errMsg = data.error.data?.message || data.error.message || JSON.stringify(data.error);
+                    console.error(`❌ Odoo RPC Error [${model}.${method}]:`, errMsg);
                     
                     // If Odoo says session expired or invalid, retry with fresh auth
-                    if (errMsg.toLowerCase().includes("session") || errMsg.toLowerCase().includes("expired")) {
+                    const isSessionError = errMsg.toLowerCase().includes("session") || 
+                                         errMsg.toLowerCase().includes("expired") ||
+                                         errMsg.toLowerCase().includes("not found");
+                                         
+                    if (isSessionError) {
                         if (attempt === 1) {
-                            console.warn("⚠️ Odoo session expired, retrying with fresh auth...");
+                            console.warn("⚠️ Odoo session invalid/expired, retrying with fresh auth...");
+                            this.uid = null;
+                            this.sessionId = null;
                             continue;
                         }
                     }
@@ -152,10 +174,10 @@ export class OdooClient {
 
                 return data.result;
             } catch (err: any) {
+                console.error(`❌ Odoo Client Attempt ${attempt} failed: ${err.message}`);
                 if (attempt === 2) {
                     throw new Error(`Odoo API Error (${model}.${method}): ${err.message}`);
                 }
-                console.warn(`⚠️ Odoo call failed (attempt ${attempt}), retrying: ${err.message}`);
                 // Clear state to force fresh auth on next attempt
                 this.uid = null;
                 this.sessionId = null;
