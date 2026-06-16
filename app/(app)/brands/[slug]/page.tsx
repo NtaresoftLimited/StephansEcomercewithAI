@@ -1,14 +1,96 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import type { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 import { BRAND_BY_SLUG_QUERY } from "@/lib/sanity/queries/brands";
 import { odoo } from "@/lib/odoo/client";
 import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/app/ProductCard";
 import Link from "next/link";
+import { absoluteUrl, truncateDescription } from "@/lib/seo";
 
 interface BrandPageProps {
     params: Promise<{ slug: string }>;
+}
+
+async function fetchBrand(slug: string) {
+    const slugLower = slug.toLowerCase();
+
+    try {
+        const brand = await client.fetch(BRAND_BY_SLUG_QUERY, { slug });
+        if (brand) return brand;
+    } catch (e) {
+        console.error("Sanity fetch failed:", e);
+    }
+
+    if (slugLower === 'bioline') {
+        return {
+            name: "Bioline",
+            description: "Natural and eco-friendly pet care products.",
+            logo: "/brands/Bioline.webp",
+            banner: null
+        };
+    }
+
+    if (slugLower === 'whiskas') {
+        return {
+            name: "Whiskas",
+            description: "Delicious nutrition for cats.",
+            logo: null,
+            banner: null
+        };
+    }
+
+    if (slugLower === 'beeno') {
+        return {
+            name: "Beeno",
+            description: "Tasty treats for dogs.",
+            logo: null,
+            banner: null
+        };
+    }
+
+    return null;
+}
+
+export async function generateMetadata(props: BrandPageProps): Promise<Metadata> {
+    const { slug } = await props.params;
+    const brand = await fetchBrand(slug);
+
+    if (!brand) {
+        return {
+            title: "Brand Not Found | Stephan's Pet Store",
+            robots: {
+                index: false,
+                follow: false,
+            },
+        };
+    }
+
+    const path = `/brands/${brand.slug || slug}`;
+    const description = truncateDescription(brand.description || `Shop ${brand.name} pet products at Stephan's Pet Store.`);
+    const imageUrl = brand.banner || brand.logo;
+
+    return {
+        title: `${brand.name} Products | Stephan's Pet Store`,
+        description,
+        alternates: {
+            canonical: path,
+        },
+        openGraph: {
+            type: "website",
+            url: absoluteUrl(path),
+            title: `${brand.name} Products | Stephan's Pet Store`,
+            description,
+            images: imageUrl ? [{ url: imageUrl, alt: `${brand.name} products` }] : undefined,
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: `${brand.name} Products | Stephan's Pet Store`,
+            description,
+            images: imageUrl ? [imageUrl] : undefined,
+        },
+    };
 }
 
 export default async function BrandPage(props: BrandPageProps) {
@@ -16,38 +98,7 @@ export default async function BrandPage(props: BrandPageProps) {
     const slugLower = slug.toLowerCase();
 
     // 1. Fetch brand from Sanity
-    let brand: any = null;
-    try {
-        brand = await client.fetch(BRAND_BY_SLUG_QUERY, { slug });
-    } catch (e) {
-        console.error("Sanity fetch failed:", e);
-    }
-
-    // 2. Fallback for specific brands if not found in Sanity
-    if (!brand) {
-        if (slugLower === 'bioline') {
-            brand = {
-                name: "Bioline",
-                description: "Natural and eco-friendly pet care products.",
-                logo: "/brands/Bioline.webp", // Local file
-                banner: null
-            };
-        } else if (slugLower === 'whiskas') {
-            brand = {
-                name: "Whiskas",
-                description: "Delicious nutrition for cats.",
-                logo: null,
-                banner: null
-            };
-        } else if (slugLower === 'beeno') {
-            brand = {
-                name: "Beeno",
-                description: "Tasty treats for dogs.",
-                logo: null,
-                banner: null
-            };
-        }
-    }
+    const brand = await fetchBrand(slug);
 
     if (!brand) notFound();
 

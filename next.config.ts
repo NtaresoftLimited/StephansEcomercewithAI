@@ -3,6 +3,20 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
+  async redirects() {
+    return [
+      {
+        source: "/shop",
+        destination: "/products",
+        permanent: true,
+      },
+      {
+        source: "/shop/:slug*",
+        destination: "/products/:slug*",
+        permanent: true,
+      },
+    ];
+  },
   // Empty turbopack config to silence the warning
   turbopack: {},
   images: {

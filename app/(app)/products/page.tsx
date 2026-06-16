@@ -22,6 +22,9 @@ import { ProductsBanner } from "@/components/app/ProductsBanner";
 export const metadata: Metadata = {
   title: "Products | Stephan's Pet Store",
   description: "Browse our collection of pet products",
+  alternates: {
+    canonical: "/products",
+  },
 };
 
 interface ProductsPageProps {

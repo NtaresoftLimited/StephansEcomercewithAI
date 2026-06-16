@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { ChevronRight } from "lucide-react";
 import { sanityFetch } from "@/sanity/lib/live";
 import { PRODUCT_BY_SLUG_QUERY, PRODUCTS_BY_CATEGORY_QUERY } from "@/lib/sanity/queries/products";
@@ -7,11 +8,57 @@ import { ProductGallery } from "@/components/app/ProductGallery";
 import { ProductInfo } from "@/components/app/ProductInfo";
 import { ProductTabs } from "@/components/app/ProductTabs";
 import { ProductCard } from "@/components/app/ProductCard";
+import { absoluteUrl, truncateDescription } from "@/lib/seo";
 
 interface ProductPageProps {
   params: Promise<{
     slug: string;
   }>;
+}
+
+export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+  const { slug } = await params;
+
+  const { data: product } = await sanityFetch({
+    query: PRODUCT_BY_SLUG_QUERY,
+    params: { slug },
+  });
+
+  if (!product) {
+    return {
+      title: "Product Not Found | Stephan's Pet Store",
+      robots: {
+        index: false,
+        follow: false,
+      },
+    };
+  }
+
+  const path = `/products/${product.slug || slug}`;
+  const productName = product.name || "Pet Product";
+  const description = truncateDescription(product.description);
+  const imageUrl = product.images?.[0]?.asset?.url;
+
+  return {
+    title: `${productName} | Stephan's Pet Store`,
+    description,
+    alternates: {
+      canonical: path,
+    },
+    openGraph: {
+      type: "website",
+      url: absoluteUrl(path),
+      title: `${productName} | Stephan's Pet Store`,
+      description,
+      images: imageUrl ? [{ url: imageUrl, alt: productName }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${productName} | Stephan's Pet Store`,
+      description,
+      images: imageUrl ? [imageUrl] : undefined,
+    },
+  };
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {

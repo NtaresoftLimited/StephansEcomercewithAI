@@ -56,7 +56,7 @@ export function Footer() {
               <Link className='hover:text-black transition-colors font-medium' href="/grooming">Grooming</Link>
               <Link className='hover:text-black transition-colors font-medium' href="/about">About Us</Link>
               <Link className='hover:text-black transition-colors font-medium' href="/contact">Contact</Link>
-              <Link className='hover:text-black transition-colors font-medium' href="/account">My Account</Link>
+              <Link className='hover:text-black transition-colors font-medium' href="/login">My Account</Link>
             </div>
           </div>
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -22,10 +23,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Stephan's Pet Store" }],
   creator: "Stephan's Pet Store",
   publisher: "Stephan's Pet Store",
-  metadataBase: new URL("https://www.stephanspetstore.co.tz"),
-  alternates: {
-    canonical: "/",
-  },
+  metadataBase: new URL(SITE_URL),
   openGraph: {
     type: "website",
     locale: "en_TZ",
