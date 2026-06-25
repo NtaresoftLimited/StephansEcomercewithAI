@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     };
   }
 
-  const path = `/products/${product.slug || slug}`;
+  const path = `/shop/${product.slug || slug}`;
   const productName = product.name || "Pet Product";
   const description = truncateDescription(product.description);
   const imageUrl = product.images?.[0]?.asset?.url;

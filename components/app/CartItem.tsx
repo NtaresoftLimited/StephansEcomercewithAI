@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Trash2 } from "lucide-react";
@@ -18,6 +19,7 @@ interface CartItemProps {
 
 export function CartItem({ item, stockInfo }: CartItemProps) {
   const { removeItem } = useCartActions();
+  const [imageError, setImageError] = useState(false);
 
   const isOutOfStock = stockInfo?.isOutOfStock ?? false;
   const exceedsStock = stockInfo?.exceedsStock ?? false;
@@ -38,7 +40,7 @@ export function CartItem({ item, stockInfo }: CartItemProps) {
           isOutOfStock && "opacity-50",
         )}
       >
-        {item.image ? (
+        {item.image && !imageError ? (
           <Image
             src={item.image}
             alt={item.name}
@@ -46,10 +48,17 @@ export function CartItem({ item, stockInfo }: CartItemProps) {
             unoptimized
             className="object-cover"
             sizes="80px"
+            onError={() => setImageError(true)}
           />
         ) : (
-          <div className="flex h-full items-center justify-center text-xs text-zinc-400">
-            No image
+          <div className="flex h-full items-center justify-center bg-zinc-50">
+            <Image 
+              src="/favicon.png" 
+              alt="Stephan's" 
+              width={24} 
+              height={24} 
+              className="opacity-20 grayscale"
+            />
           </div>
         )}
       </div>
@@ -58,7 +67,7 @@ export function CartItem({ item, stockInfo }: CartItemProps) {
       <div className="flex flex-1 flex-col">
         <div className="flex justify-between">
           <Link
-            href={`/products/${item.productId}`}
+            href={`/shop/${item.productId}`}
             className={cn(
               "font-medium text-zinc-900 hover:text-zinc-600 dark:text-zinc-100 dark:hover:text-zinc-300",
               isOutOfStock && "text-zinc-400 dark:text-zinc-500",

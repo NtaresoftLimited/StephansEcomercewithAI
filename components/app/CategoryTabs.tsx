@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Dog, Cat, Bird, Fish, Bone, Heart, Sparkles } from "lucide-react";
 
@@ -19,7 +20,7 @@ const QUICK_CATEGORIES: Category[] = [
     { slug: "accessories", title: "Accessories", icon: <Heart className="h-4 w-4" /> },
 ];
 
-export function CategoryTabs() {
+function CategoryTabsInner() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const activeCategory = searchParams.get("category") || "";
@@ -55,5 +56,13 @@ export function CategoryTabs() {
                 ))}
             </div>
         </div>
+    );
+}
+
+export function CategoryTabs() {
+    return (
+        <Suspense fallback={null}>
+            <CategoryTabsInner />
+        </Suspense>
     );
 }

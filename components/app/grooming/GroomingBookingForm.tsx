@@ -110,24 +110,89 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
         e.preventDefault();
         setIsSubmitting(true);
 
-        const promise = createGroomingBooking({
-            ...formData,
-            userId: user?.id,
-        });
+        const toastId = toast.loading('Recording your booking...');
 
-        toast.promise(promise, {
-            loading: 'Scheduling your appointment...',
-            success: (result) => {
-                if (result.success) {
-                    setShowSuccessModal(true);
-                    return 'Booking confirmed!';
+        try {
+            let bookingNumber = `GRM-WIP-${Date.now().toString(36).toUpperCase()}`;
+            
+            try {
+                const result = await createGroomingBooking({
+                    ...formData,
+                    userId: user?.id,
+                });
+                
+                if (result.success && result.bookingNumber) {
+                    bookingNumber = result.bookingNumber;
+                    toast.success('Booking recorded! Redirecting to WhatsApp...', { id: toastId });
                 } else {
-                    throw new Error(result.error || "Failed to create booking");
+                    console.warn("Database sync failed/skipped, using fallback offline booking ref. Error:", result.error);
+                    bookingNumber = `GRM-OFF-${Date.now().toString(36).toUpperCase()}`;
+                    toast.success('Redirecting to WhatsApp...', { id: toastId });
                 }
-            },
-            error: (err) => err.message || "An unexpected error occurred",
-            finally: () => setIsSubmitting(false)
-        });
+            } catch (err) {
+                console.error("Failed to sync booking to database, proceeding to WhatsApp anyway:", err);
+                bookingNumber = `GRM-OFF-${Date.now().toString(36).toUpperCase()}`;
+                toast.success('Redirecting to WhatsApp...', { id: toastId });
+            }
+
+            // Construct WhatsApp Message
+            const pkgName = formData.package === 'standard' ? 'Standard Package' :
+                            formData.package === 'premium' ? 'Premium Package' :
+                            formData.package === 'super_premium' ? 'Super Premium Package' : formData.package;
+                            
+            const sizeLabel = SIZE_LABELS[formData.breedSize] || formData.breedSize;
+            const petTypeLabel = formData.petType === 'dog' ? 'Dog 🐕' : 'Cat 🐈';
+            const extraServices = formData.detangling ? 'Detangling Service (+30,000 TZS)' : 'None';
+            const basePrice = prices[formData.petType]?.[formData.package]?.[formData.breedSize] || 0;
+            const detanglingFee = formData.detangling ? 30000 : 0;
+            const totalPrice = basePrice + detanglingFee;
+
+            let formattedDate = formData.appointmentDate;
+            try {
+                formattedDate = new Date(formData.appointmentDate).toLocaleDateString('en-US', {
+                    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+                });
+            } catch (dateErr) {
+                console.error("Error formatting date:", dateErr);
+            }
+            
+            const customerMessage = `Hi Stephan's Pet Store!\n` +
+                   `I want to book a grooming appointment:\n\n` +
+                   `*GROOMING APPOINTMENT BOOKING*\n` +
+                   `----------------------------------\n` +
+                   `*Booking Ref:* #${bookingNumber}\n` +
+                   `*Customer Name:* ${formData.customerName}\n` +
+                   `*Phone Number:* ${formData.customerPhone}\n` +
+                   `*Email Address:* ${formData.customerEmail || 'N/A'}\n\n` +
+                   `*PET DETAILS*\n` +
+                   `*Pet Name:* ${formData.petName} (${formData.petType === 'dog' ? 'Dog' : 'Cat'})\n` +
+                   `*Breed Size:* ${sizeLabel}\n\n` +
+                   `*SERVICE DETAILS*\n` +
+                   `*Selected Package:* ${pkgName}\n` +
+                   `*Extra Service:* ${extraServices}\n` +
+                   `*Preferred Date:* ${formattedDate}\n` +
+                   `*Preferred Time:* ${formData.appointmentTime}\n\n` +
+                   `*PRICE SUMMARY*\n` +
+                   `  - Package Price: ${formatPrice(basePrice)}\n` +
+                   (formData.detangling ? `  - Detangling Fee: ${formatPrice(detanglingFee)}\n` : '') +
+                   `----------------------------------\n` +
+                   `*Total Amount:* ${formatPrice(totalPrice)}\n\n` +
+                   (formData.specialNotes ? `*Special Notes:*\n${formData.specialNotes}\n` : '');
+
+            const encodedMessage = encodeURIComponent(customerMessage);
+            const whatsappUrl = `https://wa.me/255769324445?text=${encodedMessage}`;
+
+            // Reset form before leaving
+            resetForm();
+
+            // Redirect customer to WhatsApp
+            window.location.href = whatsappUrl;
+        } catch (err: any) {
+            console.error("Booking redirect failed:", err);
+            toast.error(err.message || "An unexpected error occurred", { id: toastId });
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const resetForm = () => {

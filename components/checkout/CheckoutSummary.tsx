@@ -1,9 +1,38 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { useCartItems, useTotalPrice } from "@/lib/store/cart-store-provider";
 import { formatPrice } from "@/lib/utils";
 import { ShoppingBag } from "lucide-react";
+
+function CartItemImage({ image, name }: { image?: string; name: string }) {
+    const [error, setError] = useState(false);
+
+    if (image && !error) {
+        return (
+            <Image
+                src={image}
+                alt={name}
+                fill
+                className="object-contain p-1"
+                onError={() => setError(true)}
+            />
+        );
+    }
+
+    return (
+        <div className="w-full h-full flex items-center justify-center bg-zinc-50">
+            <Image 
+                src="/favicon.png" 
+                alt="Stephan's" 
+                width={24} 
+                height={24} 
+                className="opacity-20 grayscale"
+            />
+        </div>
+    );
+}
 
 export function CheckoutSummary() {
     const items = useCartItems();
@@ -31,18 +60,7 @@ export function CheckoutSummary() {
                 {items.map((item) => (
                     <div key={item.productId} className="flex gap-4 items-start">
                         <div className="h-16 w-16 bg-zinc-50 rounded-lg shrink-0 overflow-hidden relative border border-zinc-100">
-                            {item.image ? (
-                                <Image
-                                    src={item.image}
-                                    alt={item.name}
-                                    fill
-                                    className="object-contain p-1"
-                                />
-                            ) : (
-                                <div className="w-full h-full flex items-center justify-center text-zinc-300">
-                                    <ShoppingBag className="h-6 w-6" />
-                                </div>
-                            )}
+                            <CartItemImage image={item.image} name={item.name} />
                             <span className="absolute top-0 right-0 bg-[#6b3e1e] text-white text-[10px] font-bold h-5 w-5 flex items-center justify-center rounded-bl-lg">
                                 {item.quantity}
                             </span>

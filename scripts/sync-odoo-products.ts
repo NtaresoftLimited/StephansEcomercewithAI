@@ -204,14 +204,40 @@ async function syncOdoo() {
             let categoryRef = null;
 
             const match = sanityCategories.find((c: any) =>
+                c.title.toLowerCase() === odooCatName.toLowerCase() ||
                 c.title.toLowerCase().includes(odooCatName.toLowerCase()) ||
                 odooCatName.toLowerCase().includes(c.title.toLowerCase())
             );
 
             if (match) {
                 categoryRef = { _type: 'reference', _ref: match._id };
-            } else if (sanityCategories.length > 0) {
-                categoryRef = { _type: 'reference', _ref: sanityCategories[0]._id };
+            } else {
+                // Auto-create missing category in Sanity
+                const categorySlug = odooCatName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+                const newCategoryId = `category-odoo-${categorySlug}`;
+                try {
+                    await client.createIfNotExists({
+                        _type: 'category',
+                        _id: newCategoryId,
+                        title: odooCatName,
+                        slug: { _type: 'slug', current: categorySlug }
+                    });
+                    
+                    // Add to our local cache so we don't try to create it again
+                    sanityCategories.push({
+                        _id: newCategoryId,
+                        title: odooCatName,
+                        slug: { current: categorySlug }
+                    });
+                    
+                    categoryRef = { _type: 'reference', _ref: newCategoryId };
+                    console.log(`  - 🆕 Created new category in Sanity: ${odooCatName}`);
+                } catch (catErr) {
+                    console.error(`  - ❌ Failed to create category ${odooCatName}`, catErr);
+                    if (sanityCategories.length > 0) {
+                        categoryRef = { _type: 'reference', _ref: sanityCategories[0]._id };
+                    }
+                }
             }
 
             // Create product document

@@ -1,29 +1,36 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useState, useEffect } from "react";
-import { X } from "lucide-react";
+import { useCallback, useState, useEffect, useMemo, Suspense } from "react";
+import { X, ChevronDown, Search, Filter, RotateCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
-import { SORT_OPTIONS } from "@/lib/constants/filters";
-// import type { ALL_CATEGORIES_QUERYResult } from "@/sanity.types";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { DEEP_NAV_MENU } from "@/lib/config/navigation";
+
+interface Category {
+  _id: string;
+  title: string;
+  slug: string;
+  parentCategory?: {
+    title: string;
+    slug: string;
+  } | null;
+  productCount: number;
+}
 
 interface ProductFiltersProps {
-  categories: any[];
+  categories: Category[];
   brands: any[];
 }
 
-export function ProductFilters({ categories, brands }: ProductFiltersProps) {
+function ProductFiltersInner({ categories, brands }: ProductFiltersProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -31,52 +38,92 @@ export function ProductFilters({ categories, brands }: ProductFiltersProps) {
   const currentCategory = searchParams.get("category") ?? "";
   const currentBrand = searchParams.get("brand") ?? "";
   const currentColor = searchParams.get("color") ?? "";
-  const currentSort = searchParams.get("sort") ?? "name";
   const urlMinPrice = Number(searchParams.get("minPrice")) || 0;
   const urlMaxPrice = Number(searchParams.get("maxPrice")) || 500000;
   const currentInStock = searchParams.get("inStock") === "true";
 
-  // Local state for price range
-  const [priceRange, setPriceRange] = useState<[number, number]>([
-    urlMinPrice,
-    urlMaxPrice,
-  ]);
+  // Local state for UI
+  const [brandSearch, setBrandSearch] = useState("");
+  const [openCategories, setOpenCategories] = useState<Record<string, boolean>>({});
 
-  // Sync local state when URL changes
+  const categoryTree = useMemo(() => {
+    // 1. Filter out categories with no products
+    const linkedCategories = categories.filter(cat => cat.productCount > 0);
+    
+    const root: Record<string, { title: string; slug: string; children: { title: string; slug: string }[] }> = {};
+    
+    // 2. Identify top-level categories (DOGS, CATS, BIRDS, SMALL PETS)
+    linkedCategories.forEach(cat => {
+      if (!cat.parentCategory) {
+        const titleUpper = cat.title?.toUpperCase();
+        // Skip noisy/singular top-level names if they exist as duplicates
+        if (titleUpper === "CAT" || titleUpper === "DOG" || titleUpper === "UNCATEGORIZED") return;
+        
+        root[cat.slug] = { title: cat.title, slug: cat.slug, children: [] };
+      }
+    });
+
+    // 3. Add children from Sanity
+    linkedCategories.forEach(cat => {
+      if (cat.parentCategory && root[cat.parentCategory.slug]) {
+        // Only add if not already present
+        if (!root[cat.parentCategory.slug].children.some(c => c.slug === cat.slug)) {
+          root[cat.parentCategory.slug].children.push({ title: cat.title, slug: cat.slug });
+        }
+      }
+    });
+
+    // 4. Enrich/Fallback with DEEP_NAV_MENU structure
+    const navMapping: Record<string, keyof typeof DEEP_NAV_MENU> = {
+      'dogs': 'dogs',
+      'cats': 'cats',
+      'birds': 'birds',
+      'small-pets': 'smallPets'
+    };
+
+    Object.entries(navMapping).forEach(([slug, navKey]) => {
+      if (root[slug]) {
+        const navItems = DEEP_NAV_MENU[navKey];
+        navItems.forEach(section => {
+          const sectionSlug = section.href.split('category=')[1];
+          if (sectionSlug && !root[slug].children.some(c => c.slug === sectionSlug)) {
+            // ONLY add if it has products (check in linkedCategories)
+            const sanityCat = linkedCategories.find(c => c.slug === sectionSlug);
+            if (sanityCat) {
+              root[slug].children.push({ title: section.title, slug: sectionSlug });
+            }
+          }
+          // Also add sub-items if they have products
+          section.items.forEach(item => {
+            const itemSlug = item.href.split('category=')[1];
+            if (itemSlug && !root[slug].children.some(c => c.slug === itemSlug)) {
+              const sanityCat = linkedCategories.find(c => c.slug === itemSlug);
+              if (sanityCat) {
+                root[slug].children.push({ title: item.name, slug: itemSlug });
+              }
+            }
+          });
+        });
+      }
+    });
+
+    // 5. Return sorted by title
+    return Object.values(root).sort((a, b) => a.title.localeCompare(b.title));
+  }, [categories]);
+
+  // Open the parent category if a child is selected
   useEffect(() => {
-    setPriceRange([urlMinPrice, urlMaxPrice]);
-  }, [urlMinPrice, urlMaxPrice]);
-
-  // Check which filters are active
-  const isSearchActive = !!currentSearch;
-  const isCategoryActive = !!currentCategory;
-  const isBrandActive = !!currentBrand;
-  const isColorActive = !!currentColor;
-  const isPriceActive = urlMinPrice > 0 || urlMaxPrice < 500000;
-  const isInStockActive = currentInStock;
-
-  const hasActiveFilters =
-    isSearchActive ||
-    isCategoryActive ||
-    isBrandActive ||
-    isColorActive ||
-    isPriceActive ||
-    isInStockActive;
-
-  // Count active filters
-  const activeFilterCount = [
-    isSearchActive,
-    isCategoryActive,
-    isBrandActive,
-    isColorActive,
-    isPriceActive,
-    isInStockActive,
-  ].filter(Boolean).length;
+    if (currentCategory) {
+      const parent = categories.find(c => c.slug === currentCategory)?.parentCategory;
+      if (parent) {
+        setOpenCategories(prev => ({ ...prev, [parent.slug]: true }));
+      }
+    }
+  }, [currentCategory, categories]);
 
   const updateParams = useCallback(
     (updates: Record<string, string | number | null>) => {
       const params = new URLSearchParams(searchParams.toString());
-
       Object.entries(updates).forEach(([key, value]) => {
         if (value === null || value === "" || value === 0) {
           params.delete(key);
@@ -84,21 +131,13 @@ export function ProductFilters({ categories, brands }: ProductFiltersProps) {
           params.set(key, String(value));
         }
       });
-
       router.push(`?${params.toString()}`, { scroll: false });
     },
     [router, searchParams],
   );
 
-  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const searchQuery = formData.get("search") as string;
-    updateParams({ q: searchQuery || null });
-  };
-
   const handleClearFilters = () => {
-    router.push("/products", { scroll: false });
+    router.push("/shop", { scroll: false });
   };
 
   const clearSingleFilter = (key: string) => {
@@ -109,186 +148,220 @@ export function ProductFilters({ categories, brands }: ProductFiltersProps) {
     }
   };
 
-  // Helper for filter label with active indicator
-  const FilterLabel = ({
-    children,
-    isActive,
-    filterKey,
-  }: {
-    children: React.ReactNode;
-    isActive: boolean;
-    filterKey: string;
-  }) => (
-    <div className="mb-2 flex items-center justify-between">
-      <span
-        className={`block text-xs font-bold uppercase tracking-wider ${isActive
-          ? "text-zinc-900 dark:text-zinc-100"
-          : "text-zinc-500 dark:text-zinc-400"
-          }`}
-      >
-        {children}
-      </span>
-      {isActive && (
-        <button
-          type="button"
-          onClick={() => clearSingleFilter(filterKey)}
-          className="text-amber-500 hover:text-amber-600 flex items-center gap-1 text-[10px] font-bold uppercase"
-        >
-          <span>Clear</span>
-          <X className="h-3 w-3" />
-        </button>
-      )}
-    </div>
+  const filteredBrands = brands.filter(b => 
+    b.productCount > 0 && 
+    b.name?.toLowerCase().includes(brandSearch.toLowerCase())
   );
 
+  const isPriceActive = urlMinPrice > 0 || urlMaxPrice < 500000;
+  const hasActiveFilters = !!(currentSearch || currentCategory || currentBrand || currentColor || isPriceActive || currentInStock);
+
   return (
-    <div className="space-y-8">
-      {/* Search */}
-      <div className="bg-white dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-100 dark:border-zinc-800">
-        <FilterLabel isActive={isSearchActive} filterKey="q">
-          Search
-        </FilterLabel>
-        <form onSubmit={handleSearchSubmit} className="relative">
-          <Input
-            name="search"
-            placeholder="Search products..."
-            defaultValue={currentSearch}
-            className="pr-10 bg-zinc-50 border-zinc-100 dark:bg-zinc-800 dark:border-zinc-700 rounded-lg"
-          />
-          <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
-          </button>
-        </form>
-      </div>
-
-      {/* Category */}
-      <div className="bg-white dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-100 dark:border-zinc-800">
-        <FilterLabel isActive={isCategoryActive} filterKey="category">
-          Category
-        </FilterLabel>
-        <div className="space-y-2 max-h-48 overflow-y-auto scrollbar-hide">
-          {categories.map((category) => (
-            <button
-              key={category.slug}
-              onClick={() => updateParams({ category: currentCategory === category.slug ? null : category.slug })}
-              className={cn(
-                "w-full text-left px-3 py-2 rounded-lg text-sm transition-all",
-                currentCategory === category.slug
-                  ? "bg-zinc-900 text-white font-bold dark:bg-zinc-100 dark:text-zinc-900"
-                  : "text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800"
-              )}
-            >
-              {category.title}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Brands */}
-      <div className="bg-white dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-100 dark:border-zinc-800">
-        <FilterLabel isActive={isBrandActive} filterKey="brand">
-          Brands
-        </FilterLabel>
-        <div className="space-y-2 max-h-48 overflow-y-auto scrollbar-hide">
-          {brands.map((brand) => (
-            <button
-              key={brand.slug}
-              onClick={() => updateParams({ brand: currentBrand === brand.slug ? null : brand.slug })}
-              className={cn(
-                "w-full text-left px-3 py-2 rounded-lg text-sm transition-all",
-                currentBrand === brand.slug
-                  ? "bg-zinc-900 text-white font-bold dark:bg-zinc-100 dark:text-zinc-900"
-                  : "text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-800"
-              )}
-            >
-              {brand.name}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Price Range */}
-      <div className="bg-white dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-100 dark:border-zinc-800">
-        <FilterLabel isActive={isPriceActive} filterKey="price">
-          Price Range
-        </FilterLabel>
-        <div className="px-2 pt-2">
-          <Slider
-            min={0}
-            max={500000}
-            step={5000}
-            value={priceRange}
-            onValueChange={(value) => setPriceRange(value as [number, number])}
-            onValueCommit={([min, max]) =>
-              updateParams({
-                minPrice: min > 0 ? min : null,
-                maxPrice: max < 500000 ? max : null,
-              })
-            }
-            className="mb-4"
-          />
-          <div className="flex justify-between text-[10px] font-bold text-zinc-400 uppercase">
-            <span>{priceRange[0].toLocaleString()} TZS</span>
-            <span>{priceRange[1].toLocaleString()} TZS</span>
+    <div className="flex flex-col gap-6">
+      {/* Container with background and border as requested */}
+      <div className="max-h-fit rounded-lg border border-gray-100 bg-white p-6 shadow-sm">
+        <div className="flex flex-col gap-6">
+          
+          {/* Deals Section */}
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center justify-between">
+              <span className="text-md leading-5 font-bold text-zinc-900">Deals</span>
+            </div>
+            <div className="flex min-w-full justify-between">
+              <label className="text-sm leading-4 font-normal flex items-center gap-3 align-middle cursor-pointer group">
+                <div className="relative flex items-center justify-center">
+                  <input 
+                    type="checkbox" 
+                    className="peer appearance-none size-5 shrink-0 rounded border border-zinc-300 shadow-sm focus-visible:outline-none checked:bg-[#6b3e1e] checked:border-[#6b3e1e] transition-all" 
+                  />
+                  <svg className="absolute size-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <span className="text-sm leading-5 font-medium text-zinc-600 group-hover:text-[#6b3e1e] transition-colors">Today&apos;s Deals</span>
+              </label>
+            </div>
+            <div className="h-px w-full bg-zinc-100"></div>
           </div>
-        </div>
-      </div>
 
-      {/* Colors (Mocked common colors as placeholder) */}
-      <div className="bg-white dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-100 dark:border-zinc-800">
-        <FilterLabel isActive={isColorActive} filterKey="color">
-          Colors
-        </FilterLabel>
-        <div className="flex flex-wrap gap-2">
-          {["Black", "White", "Blue", "Red", "Brown", "Gray"].map((color) => (
-            <button
-              key={color}
-              onClick={() => updateParams({ color: currentColor === color.toLowerCase() ? null : color.toLowerCase() })}
-              className={cn(
-                "w-8 h-8 rounded-full border-2 transition-all p-0.5",
-                currentColor === color.toLowerCase()
-                  ? "border-zinc-900 dark:border-zinc-100 scale-110"
-                  : "border-transparent"
+          {/* Categories Section (Maintaining existing logic but with new styling) */}
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center justify-between">
+              <span className="text-md leading-5 font-bold text-zinc-900">Categories</span>
+              {currentCategory && (
+                <button onClick={() => clearSingleFilter("category")} className="text-[10px] font-bold text-[#6b3e1e] uppercase hover:underline">Clear</button>
               )}
-            >
-              <div
-                className="w-full h-full rounded-full shadow-inner"
-                style={{ backgroundColor: color.toLowerCase() }}
-                title={color}
+            </div>
+            <div className="space-y-1">
+              {categoryTree.map((root) => (
+                <Collapsible
+                  key={root.slug}
+                  open={openCategories[root.slug]}
+                  onOpenChange={(isOpen) => setOpenCategories(prev => ({ ...prev, [root.slug]: isOpen }))}
+                  className="group"
+                >
+                  <CollapsibleTrigger asChild>
+                    <div className={cn(
+                      "flex w-full items-center justify-between p-2 rounded-lg cursor-pointer transition-all",
+                      currentCategory === root.slug ? "bg-[#6b3e1e]/5 text-[#6b3e1e]" : "hover:bg-zinc-50"
+                    )}>
+                      <span className="text-sm font-semibold">{root.title}</span>
+                      <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", openCategories[root.slug] && "rotate-180")} />
+                    </div>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="pl-4 pt-1 pb-2 space-y-1 animate-in fade-in slide-in-from-top-1 max-h-64 overflow-y-auto scrollbar-hide">
+                    <button
+                      onClick={() => updateParams({ category: currentCategory === root.slug ? null : root.slug })}
+                      className={cn(
+                        "w-full text-left px-3 py-1.5 rounded-md text-xs transition-colors",
+                        currentCategory === root.slug ? "text-[#6b3e1e] font-bold" : "text-zinc-500 hover:text-zinc-900"
+                      )}
+                    >
+                      All {root.title}
+                    </button>
+                    {root.children.sort((a,b) => a.title.localeCompare(b.title)).map((child) => (
+                      <button
+                        key={child.slug}
+                        onClick={() => updateParams({ category: currentCategory === child.slug ? null : child.slug })}
+                        className={cn(
+                          "w-full text-left px-3 py-1.5 rounded-md text-xs transition-colors",
+                          currentCategory === child.slug 
+                            ? "bg-[#6b3e1e] text-white font-medium" 
+                            : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"
+                        )}
+                      >
+                        {child.title}
+                      </button>
+                    ))}
+                  </CollapsibleContent>
+                </Collapsible>
+              ))}
+            </div>
+            <div className="h-px w-full bg-zinc-100"></div>
+          </div>
+
+          {/* Brand Section */}
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center justify-between">
+              <span className="text-md leading-5 font-bold text-zinc-900">Brand</span>
+              {currentBrand && (
+                <button onClick={() => clearSingleFilter("brand")} className="text-[10px] font-bold text-[#6b3e1e] uppercase hover:underline">Clear</button>
+              )}
+            </div>
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400" />
+              <input 
+                type="text"
+                placeholder="Search Brand"
+                value={brandSearch}
+                onChange={(e) => setBrandSearch(e.target.value)}
+                className="h-10 w-full rounded-full border border-zinc-200 bg-white pl-10 pr-4 py-2 text-sm outline-none focus:ring-2 focus:ring-[#6b3e1e]/20 transition-all"
               />
+            </div>
+            <div className="flex flex-col gap-3 max-h-[500px] overflow-y-auto pr-2 scrollbar-hide">
+              {filteredBrands.map((brand) => (
+                <label key={brand.slug} className="text-sm leading-4 font-normal flex items-center gap-3 align-middle cursor-pointer group">
+                  <div className="relative flex items-center justify-center">
+                    <input 
+                      type="checkbox" 
+                      checked={currentBrand === brand.slug}
+                      onChange={() => updateParams({ brand: currentBrand === brand.slug ? null : brand.slug })}
+                      className="peer appearance-none size-5 shrink-0 rounded border border-zinc-300 shadow-sm focus-visible:outline-none checked:bg-[#6b3e1e] checked:border-[#6b3e1e] transition-all" 
+                    />
+                    <svg className="absolute size-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <span className={cn(
+                    "text-sm leading-5 font-medium transition-colors truncate flex-1",
+                    currentBrand === brand.slug ? "text-[#6b3e1e]" : "text-zinc-600 group-hover:text-[#6b3e1e]"
+                  )}>
+                    {brand.name}
+                  </span>
+                </label>
+              ))}
+              {filteredBrands.length === 0 && (
+                <p className="text-xs text-center text-zinc-400 py-2">No brands found</p>
+              )}
+            </div>
+            <div className="h-px w-full bg-zinc-100"></div>
+          </div>
+
+          {/* Size Section (Mocked UI) */}
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center justify-between">
+              <span className="text-md leading-5 font-bold text-zinc-900">Size</span>
+            </div>
+            <div className="flex flex-col gap-3">
+              {["100g", "400g", "2kg", "405 Gr", "80g"].map((size) => (
+                <label key={size} className="text-sm leading-4 font-normal flex items-center gap-3 align-middle cursor-pointer group">
+                  <div className="relative flex items-center justify-center">
+                    <input 
+                      type="checkbox" 
+                      className="peer appearance-none size-5 shrink-0 rounded border border-zinc-300 shadow-sm focus-visible:outline-none checked:bg-[#6b3e1e] checked:border-[#6b3e1e] transition-all" 
+                    />
+                    <svg className="absolute size-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <span className="text-sm leading-5 font-medium text-zinc-600 group-hover:text-[#6b3e1e] transition-colors">{size}</span>
+                </label>
+              ))}
+            </div>
+            <button className="text-sm font-bold text-[#6b3e1e] self-start hover:underline transition-all">
+              Show more (37)
             </button>
-          ))}
+            <div className="h-px w-full bg-zinc-100"></div>
+          </div>
+
+          {/* Price Section */}
+          <div className="flex flex-col gap-4">
+            <div className="flex items-start justify-between">
+              <div className="text-md leading-5 font-bold text-zinc-900">Price</div>
+              <span className="text-[10px] font-bold rounded-full bg-[#6b3e1e] px-2 py-0.5 leading-5 text-white">
+                TSh {urlMinPrice.toLocaleString()} - {urlMaxPrice.toLocaleString()}
+              </span>
+            </div>
+            <div className="flex justify-between items-center gap-4">
+              <input 
+                className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-center text-sm text-zinc-600 focus:ring-2 focus:ring-[#6b3e1e]/20 outline-none" 
+                type="text" 
+                value={urlMinPrice}
+                onChange={(e) => updateParams({ minPrice: Number(e.target.value) || 0 })}
+              />
+              <span className="text-zinc-400">-</span>
+              <input 
+                className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-center text-sm text-zinc-600 focus:ring-2 focus:ring-[#6b3e1e]/20 outline-none" 
+                type="text" 
+                value={urlMaxPrice}
+                onChange={(e) => updateParams({ maxPrice: Number(e.target.value) || 500000 })}
+              />
+            </div>
+            <div className="px-1 pt-2">
+              <Slider
+                defaultValue={[urlMinPrice, urlMaxPrice]}
+                max={500000}
+                step={1000}
+                onValueChange={([min, max]) => updateParams({ minPrice: min, maxPrice: max })}
+                className="text-[#6b3e1e]"
+              />
+            </div>
+          </div>
+
+          {/* Reset Button */}
+          {hasActiveFilters && (
+            <Button
+              onClick={handleClearFilters}
+              className="w-full bg-[#6b3e1e] hover:bg-black text-white rounded-xl py-6 flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-[10px] transition-all"
+            >
+              <RotateCcw className="h-3 w-3" />
+              Reset All Filters
+            </Button>
+          )}
         </div>
       </div>
-
-      {/* In Stock */}
-      <div className="bg-white dark:bg-zinc-900/50 p-4 rounded-xl border border-zinc-100 dark:border-zinc-800">
-        <label className="flex cursor-pointer items-center justify-between group">
-          <span className="text-xs font-bold uppercase tracking-wider text-zinc-500 transition-colors group-hover:text-zinc-900 dark:group-hover:text-zinc-100">
-            Show in-stock only
-          </span>
-          <input
-            type="checkbox"
-            checked={currentInStock}
-            onChange={(e) =>
-              updateParams({ inStock: e.target.checked ? "true" : null })
-            }
-            className="h-5 w-5 rounded-lg border-zinc-200 text-zinc-900 focus:ring-zinc-900 dark:border-zinc-800 dark:bg-zinc-950 dark:checked:bg-zinc-100"
-          />
-        </label>
-      </div>
-
-      {/* Clear All */}
-      {hasActiveFilters && (
-        <Button
-          onClick={handleClearFilters}
-          variant="outline"
-          className="w-full py-6 rounded-xl border-2 border-amber-500 text-amber-500 hover:bg-amber-500 hover:text-white transition-all font-bold uppercase tracking-widest text-xs"
-        >
-          <X className="mr-2 h-4 w-4" />
-          Reset All Filters
-        </Button>
-      )}
     </div>
+  );
+}
+
+export function ProductFilters(props: ProductFiltersProps) {
+  return (
+    <Suspense fallback={null}>
+      <ProductFiltersInner {...props} />
+    </Suspense>
   );
 }

@@ -74,7 +74,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
-  callbacks: {
+    callbacks: {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
@@ -85,9 +85,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async session({ session, token }) {
       if (token && session.user) {
         session.user.id = token.id as string;
-        (session.user as any).odooPartnerId = token.odooPartnerId;
+        (session.user as any).odooPartnerId = token.odooPartnerId as number;
       }
       return session;
+    },
+    async authorized({ request, auth }) {
+      return true; // Allow all requests (guests can book)
     },
   },
   pages: {

@@ -1,7 +1,8 @@
 "use client";
 
-import { AlertTriangle, Loader2, ShoppingBag, X, Minus, Plus, Trash2, Bone } from "lucide-react";
+import { AlertTriangle, Loader2, ShoppingBag, X, Minus, Plus, Trash2, Bone, ShieldCheck, CreditCard, ArrowRight, Clock } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Sheet,
   SheetContent,
@@ -32,39 +33,54 @@ export function CartSheet() {
 
         {/* Custom Header */}
         <SheetHeader className="px-6 py-4 border-b border-zinc-100 flex flex-row items-center justify-between space-y-0">
-          {/* Close button is automatically rendered by SheetContent, usually on the right. 
-               If we want to match the image exactly (Left X, Right Title), we'd need to hide the default close and add our own.
-               For now, let's keep standard layout but style the title. */}
-          <SheetTitle className="flex items-center justify-end w-full gap-3">
-            <span className="text-xl font-bold text-[#6b3e1e]">Your Cart</span>
-            <div className="relative">
-              <ShoppingBag className="h-6 w-6 text-[#6b3e1e]" />
-              <span className="absolute -top-1.5 -right-1.5 bg-[#6b3e1e] text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
-                {totalItems}
-              </span>
-            </div>
-          </SheetTitle>
+          <div className="flex items-center gap-3">
+            <Image 
+              src="/favicon.png" 
+              alt="Stephan's" 
+              width={24} 
+              height={24} 
+              className="object-contain"
+            />
+            <SheetTitle className="text-xl font-bold text-[#6b3e1e]">Your Cart</SheetTitle>
+          </div>
+          <div className="relative">
+            <ShoppingBag className="h-6 w-6 text-[#6b3e1e]" />
+            <span className="absolute -top-1.5 -right-1.5 bg-[#6b3e1e] text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
+              {totalItems}
+            </span>
+          </div>
         </SheetHeader>
 
 
         {items.length === 0 ? (
-          <div className="flex flex-1 flex-col items-center justify-start pt-12 p-6 space-y-8 animate-in fade-in">
-            <div className="flex flex-col items-center gap-4">
-              <Bone className="w-16 h-16 text-[#6b3e1e]" strokeWidth={1.5} />
-              <h3 className="text-lg font-medium text-zinc-900">
-                You don't have any items in your cart!
-              </h3>
+          <div className="flex flex-1 flex-col h-full overflow-hidden bg-white">
+            {/* Top section: Big Image */}
+            <div className="flex-1 flex items-center justify-center p-6 animate-in fade-in">
+              <div className="relative w-full h-full min-h-[300px]">
+                <Image 
+                  src="/empty-cart-pet.png" 
+                  alt="Empty Cart" 
+                  fill
+                  className="object-contain"
+                />
+              </div>
             </div>
 
-            <div className="w-full space-y-4">
-              <Link href="/products?category=dogs" onClick={closeCart} className="w-full">
-                <Button className="w-full bg-[#D35122] hover:bg-[#B54218] text-white font-bold h-14 uppercase tracking-wider text-base shadow-sm">
-                  Shop Dog
-                </Button>
-              </Link>
-              <Link href="/products?category=cats" onClick={closeCart} className="w-full">
-                <Button className="w-full bg-[#D35122] hover:bg-[#B54218] text-white font-bold h-14 uppercase tracking-wider text-base shadow-sm">
-                  Shop Cat
+            {/* Bottom section: Text and Button */}
+            <div className="p-6 bg-white border-t border-zinc-100 flex flex-col items-center space-y-6 pb-8 shadow-[0_-4px_15px_-3px_rgba(0,0,0,0.05)]">
+              <div className="text-center space-y-2">
+                <h3 className="text-xl font-bold text-zinc-900">
+                  Your cart is feeling lonely!
+                </h3>
+                <p className="text-sm text-zinc-500 max-w-[280px] mx-auto">
+                  Looks like you haven't added anything to your cart yet. Discover our latest collections.
+                </p>
+              </div>
+
+              <Link href="/shop" onClick={closeCart} className="w-full">
+                <Button className="w-full bg-[#D35122] hover:bg-[#B54218] text-white font-bold h-14 uppercase tracking-wider text-base shadow-sm group transition-all duration-300">
+                  Shop Now
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
             </div>

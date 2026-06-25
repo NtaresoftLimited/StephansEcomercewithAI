@@ -50,6 +50,24 @@ async function fetchBrand(slug: string) {
         };
     }
 
+    if (slugLower === 'tropidog') {
+        return {
+            name: "Tropidog",
+            description: "High quality food for dogs.",
+            logo: null,
+            banner: "/Banners/Tropidog Banner.jpg"
+        };
+    }
+
+    if (slugLower === 'tropicat') {
+        return {
+            name: "Tropicat",
+            description: "High quality food for cats.",
+            logo: null,
+            banner: "/Banners/Tropicat Banner.jpg"
+        };
+    }
+
     return null;
 }
 
@@ -99,6 +117,12 @@ export default async function BrandPage(props: BrandPageProps) {
 
     // 1. Fetch brand from Sanity
     const brand = await fetchBrand(slug);
+    // Ensure banners are set even if brand was found in Sanity but has no banner
+    if (brand && !brand.banner) {
+        if (slugLower === 'bioline') brand.banner = "/Banners/Bioline Banner.jpg";
+        else if (slugLower === 'tropidog') brand.banner = "/Banners/Tropidog Banner.jpg";
+        else if (slugLower === 'tropicat') brand.banner = "/Banners/Tropicat Banner.jpg";
+    }
 
     if (!brand) notFound();
 
@@ -211,7 +235,7 @@ export default async function BrandPage(props: BrandPageProps) {
                             priority
                             sizes="100vw"
                         />
-                        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+                        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
                     </div>
                 ) : (
                     <div className="relative h-[260px] bg-gradient-to-br from-amber-50 to-orange-100">

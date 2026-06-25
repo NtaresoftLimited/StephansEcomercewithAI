@@ -238,7 +238,7 @@ function MobileProductCard({
     const handleShare = async (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        const url = `${window.location.origin}/products/${product.slug}`;
+        const url = `${window.location.origin}/shop/${product.slug}`;
 
         if (navigator.share) {
             try {
@@ -257,7 +257,7 @@ function MobileProductCard({
     };
 
     return (
-        <Link href={`/products/${product.slug}`} className="block relative h-[85vh] w-full snap-center">
+        <Link href={`/shop/${product.slug}`} className="block relative h-[85vh] w-full snap-center">
             {/* Full-height product image */}
             <div className="absolute inset-0 bg-zinc-100">
                 {mainImage ? (
@@ -406,7 +406,7 @@ function ProductShowcaseCard({ product, onQuickView }: ProductShowcaseCardProps)
     const handleShare = async (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        const url = `${window.location.origin}/products/${product.slug}`;
+        const url = `${window.location.origin}/shop/${product.slug}`;
 
         if (navigator.share) {
             try {
@@ -425,7 +425,7 @@ function ProductShowcaseCard({ product, onQuickView }: ProductShowcaseCardProps)
     };
 
     return (
-        <Link href={`/products/${product.slug}`} className="group block">
+        <Link href={`/shop/${product.slug}`} className="group block">
             {/* Image Container - Portrait Ratio */}
             <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-zinc-100">
                 {mainImage ? (

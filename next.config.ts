@@ -31,6 +31,7 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
       },
     ],
+    formats: ["image/webp", "image/avif"],
   },
 };
 

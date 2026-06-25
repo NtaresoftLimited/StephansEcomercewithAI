@@ -8,7 +8,12 @@ import { LOW_STOCK_THRESHOLD } from "@/lib/constants/stock";
 /** Common filter conditions for product filtering */
 const PRODUCT_FILTER_CONDITIONS = `
   _type == "product"
-  && ($categorySlug == "" || category->slug.current == $categorySlug)
+  && price > 0
+  && stock > 0
+  && ($categorySlug == "" || 
+      category->slug.current == $categorySlug || 
+      category->parentCategory->slug.current == $categorySlug || 
+      category->parentCategory->parentCategory->slug.current == $categorySlug)
   && ($color == "" || color == $color)
   && ($material == "" || material == $material)
   && ($minPrice == 0 || price >= $minPrice)
@@ -55,11 +60,16 @@ const RELEVANCE_SCORE = `score(
 // ============================================
 const OFFERS_FILTER_CONDITIONS = `
   _type == "product"
+  && price > 0
+  && stock > 0
   && (
     featured == true
     || count(variants[defined(compareAtPrice) && compareAtPrice > price]) > 0
   )
-  && ($categorySlug == "" || category->slug.current == $categorySlug)
+  && ($categorySlug == "" || 
+      category->slug.current == $categorySlug || 
+      category->parentCategory->slug.current == $categorySlug || 
+      category->parentCategory->parentCategory->slug.current == $categorySlug)
   && ($color == "" || color == $color)
   && ($material == "" || material == $material)
   && ($minPrice == 0 || price >= $minPrice)
@@ -78,6 +88,8 @@ const OFFERS_FILTER_CONDITIONS = `
  */
 export const ALL_PRODUCTS_QUERY = defineQuery(`*[
   _type == "product"
+  && price > 0
+  && stock > 0
 ] | order(name asc) {
   _id,
   name,
@@ -135,11 +147,47 @@ export const FEATURED_PRODUCTS_QUERY = defineQuery(`*[
 }`);
 
 /**
- * Get products by category slug
+ * Get all products with brand info for rotation
+ */
+export const PRODUCTS_WITH_BRANDS_QUERY = defineQuery(`*[
+  _type == "product"
+  && defined(brand)
+  && price > 0
+  && stock > 0
+] | order(name asc) {
+  _id,
+  name,
+  "slug": slug.current,
+  price,
+  "images": images[0...2]{
+    _key,
+    asset->{
+      _id,
+      url
+    }
+  },
+  brand->{
+    name,
+    "slug": slug.current
+  },
+  category->{
+    title
+  },
+  stock
+}`);
+
+/**
+ * Get all products by category slug
  */
 export const PRODUCTS_BY_CATEGORY_QUERY = defineQuery(`*[
   _type == "product"
-  && category->slug.current == $categorySlug
+  && price > 0
+  && stock > 0
+  && (
+    category->slug.current == $categorySlug || 
+    category->parentCategory->slug.current == $categorySlug || 
+    category->parentCategory->parentCategory->slug.current == $categorySlug
+  )
 ] | order(name asc) {
   _id,
   name,
@@ -168,6 +216,8 @@ export const PRODUCTS_BY_CATEGORY_QUERY = defineQuery(`*[
  */
 export const PRODUCTS_BY_BRAND_QUERY = defineQuery(`*[
   _type == "product"
+  && price > 0
+  && stock > 0
   && brand->slug.current == $brandSlug
 ] | order(name asc) {
   _id,
@@ -251,6 +301,8 @@ export const PRODUCT_BY_SLUG_QUERY = defineQuery(`*[
  */
 export const SEARCH_PRODUCTS_QUERY = defineQuery(`*[
   _type == "product"
+  && price > 0
+  && stock > 0
   && (
     name match $searchQuery + "*"
     || description match $searchQuery + "*"
@@ -288,7 +340,7 @@ export const SEARCH_PRODUCTS_QUERY = defineQuery(`*[
  * Returns up to 4 images for hover preview in product cards
  */
 export const FILTER_PRODUCTS_BY_NAME_QUERY = defineQuery(
-  `*[${PRODUCT_FILTER_CONDITIONS}] | order(defined(brand) desc, name asc) ${FILTERED_PRODUCT_PROJECTION}`
+  `*[${PRODUCT_FILTER_CONDITIONS}] | order(defined(brand) desc, name asc) [0...24] ${FILTERED_PRODUCT_PROJECTION}`
 );
 
 /**
@@ -296,7 +348,7 @@ export const FILTER_PRODUCTS_BY_NAME_QUERY = defineQuery(
  * Returns up to 4 images for hover preview in product cards
  */
 export const FILTER_PRODUCTS_BY_PRICE_ASC_QUERY = defineQuery(
-  `*[${PRODUCT_FILTER_CONDITIONS}] | order(price asc) ${FILTERED_PRODUCT_PROJECTION}`
+  `*[${PRODUCT_FILTER_CONDITIONS}] | order(price asc) [0...24] ${FILTERED_PRODUCT_PROJECTION}`
 );
 
 /**
@@ -304,7 +356,7 @@ export const FILTER_PRODUCTS_BY_PRICE_ASC_QUERY = defineQuery(
  * Returns up to 4 images for hover preview in product cards
  */
 export const FILTER_PRODUCTS_BY_PRICE_DESC_QUERY = defineQuery(
-  `*[${PRODUCT_FILTER_CONDITIONS}] | order(price desc) ${FILTERED_PRODUCT_PROJECTION}`
+  `*[${PRODUCT_FILTER_CONDITIONS}] | order(price desc) [0...24] ${FILTERED_PRODUCT_PROJECTION}`
 );
 
 /**
@@ -313,7 +365,7 @@ export const FILTER_PRODUCTS_BY_PRICE_DESC_QUERY = defineQuery(
  * Returns up to 4 images for hover preview in product cards
  */
 export const FILTER_PRODUCTS_BY_RELEVANCE_QUERY = defineQuery(
-  `*[${PRODUCT_FILTER_CONDITIONS}] | ${RELEVANCE_SCORE} | order(_score desc, name asc) ${FILTERED_PRODUCT_PROJECTION}`
+  `*[${PRODUCT_FILTER_CONDITIONS}] | ${RELEVANCE_SCORE} | order(_score desc, name asc) [0...24] ${FILTERED_PRODUCT_PROJECTION}`
 );
 
 // ============================================
@@ -416,13 +468,18 @@ export const OUT_OF_STOCK_PRODUCTS_QUERY = defineQuery(`*[
  */
 export const AI_SEARCH_PRODUCTS_QUERY = defineQuery(`*[
   _type == "product"
+  && price > 0
+  && stock > 0
   && (
     $searchQuery == ""
     || name match $searchQuery + "*"
     || description match $searchQuery + "*"
     || category->title match $searchQuery + "*"
   )
-  && ($categorySlug == "" || category->slug.current == $categorySlug)
+  && ($categorySlug == "" || 
+      category->slug.current == $categorySlug || 
+      category->parentCategory->slug.current == $categorySlug || 
+      category->parentCategory->parentCategory->slug.current == $categorySlug)
   && ($material == "" || material == $material)
   && ($color == "" || color == $color)
   && ($minPrice == 0 || price >= $minPrice)

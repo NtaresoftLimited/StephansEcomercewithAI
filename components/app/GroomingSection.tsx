@@ -17,6 +17,12 @@ const DEFAULT_IMAGES = [
     "/grooming-3.png",
 ];
 
+const getOptimizedSanityUrl = (url: string, size = 600): string => {
+    if (!url.includes("cdn.sanity.io")) return url;
+    const sep = url.includes("?") ? "&" : "?";
+    return `${url}${sep}w=${size}&h=${size}&fit=crop&q=80&auto=format`;
+};
+
 export function GroomingSection({ images }: GroomingSectionProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const backgroundImages = images && images.length > 0 ? images : DEFAULT_IMAGES;
@@ -63,10 +69,13 @@ export function GroomingSection({ images }: GroomingSectionProps) {
                         <div className="relative h-64 w-64 shrink-0 sm:h-80 sm:w-80 overflow-hidden rounded-full">
                             <div className="absolute inset-0 bg-background/10 mix-blend-overlay z-10" />
                             <Image
-                                src={backgroundImages[currentIndex]}
+                                src={getOptimizedSanityUrl(backgroundImages[currentIndex])}
                                 alt="Professional grooming"
                                 fill
+                                sizes="(max-width: 640px) 256px, 320px"
+                                priority={currentIndex === 0}
                                 className="object-cover transition-transform duration-1000 ease-in-out scale-105"
+                                unoptimized={backgroundImages[currentIndex].includes("cdn.sanity.io")}
                             />
                         </div>
                     </div>

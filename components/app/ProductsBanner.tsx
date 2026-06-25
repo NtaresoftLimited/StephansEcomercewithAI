@@ -10,7 +10,10 @@ const BANNERS = [
     "/Banners/Summit Banner.jpg.jpeg",
     "/Banners/Summit Banner 1.jpg.jpeg",
     "/Banners/Summit Banner 2.jpg.jpeg",
-    "/Banners/Tropdpog Banner.jpg.jpeg",
+    "/Banners/Tropidog Banner.jpg",
+    "/Banners/Tropicat Banner.jpg",
+    "/Banners/Bioline Banner.jpg",
+    "/Banners/Tropidog banner 2.png",
 ];
 
 export function ProductsBanner() {

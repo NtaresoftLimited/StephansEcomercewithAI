@@ -245,7 +245,7 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
 
                         {/* View Full Details Link */}
                         <Link
-                            href={`/products/${product.slug}`}
+                            href={`/shop/${product.slug}`}
                             onClick={onClose}
                             className="mt-4 text-center text-sm font-medium text-[#6b3e1e] hover:underline"
                         >

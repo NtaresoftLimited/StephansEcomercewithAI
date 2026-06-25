@@ -10,13 +10,18 @@ export const ALL_CATEGORIES_QUERY = defineQuery(`*[
   _id,
   title,
   "slug": slug.current,
+  "parentCategory": parentCategory->{
+    "slug": slug.current,
+    title
+  },
   "image": image{
     asset->{
       _id,
       url
     },
     hotspot
-  }
+  },
+  "productCount": count(*[_type == "product" && (category._ref == ^._id || category->parentCategory._ref == ^._id || category->parentCategory->parentCategory._ref == ^._id)])
 }`);
 
 /**

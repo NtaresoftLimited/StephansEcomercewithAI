@@ -5,8 +5,6 @@ import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 import { auth } from "@/auth";
 import { PRICES, VALID_TIMES } from "@/lib/constants/grooming";
-import { sendWhatsAppMessage } from "@/lib/whatsapp";
-
 import { formatPrice } from "@/lib/utils";
 
 const bookingSchema = z.object({
@@ -57,8 +55,17 @@ export async function createGroomingBooking(rawData: GroomingBookingData) {
     try {
         // 0. Optional session check — booking works for guests too
         console.log("🔒 Step 0: Checking for session (optional)...");
+        let session = null;
         try {
-            const session = await auth();
+            // Only try auth() if we suspect we are logged in or in an environment where auth() is stable
+            // Added explicit check for browser context or specific headers if needed, 
+            // but for now just wrapping more carefully.
+            const sessionPromise = auth();
+            session = await Promise.race([
+                sessionPromise,
+                new Promise((_, reject) => setTimeout(() => reject(new Error("Auth timeout")), 5000))
+            ]) as any;
+            
             if (session?.user) {
                 console.log(`   ✅ Session found for user: ${session.user.id}`);
                 rawData.userId = session.user.id;
@@ -67,7 +74,7 @@ export async function createGroomingBooking(rawData: GroomingBookingData) {
             }
         } catch (authErr: any) {
             // Auth failure should NEVER block a guest booking
-            console.warn("   ⚠️ Auth check failed (non-blocking):", authErr.message);
+            console.warn("   ⚠️ Auth check failed or timed out (non-blocking):", authErr.message);
         }
 
         // 1. Validate Input
@@ -149,12 +156,21 @@ export async function createGroomingBooking(rawData: GroomingBookingData) {
         let syncSuccess = false;
         try {
             const { pushBookingToOdoo } = await import("@/lib/odoo/grooming-sync");
+            
+            // Get odooPartnerId from session if available
+            let odooPartnerId: number | undefined;
+            if (session?.user && (session.user as any).odooPartnerId) {
+                odooPartnerId = (session.user as any).odooPartnerId;
+                console.log(`   🔗 Using Odoo Partner ID from session: ${odooPartnerId}`);
+            }
+
             await pushBookingToOdoo({
                 ...data,
                 detangling: data.detangling || false,
                 price: finalPrice,
                 bookingNumber,
                 appointmentDate: appointmentDateTime.toISOString(),
+                odooPartnerId
             });
             syncSuccess = true;
             console.log("   ✅ Odoo sync successful");
@@ -166,58 +182,6 @@ export async function createGroomingBooking(rawData: GroomingBookingData) {
         if (!syncSuccess) {
             console.warn(`   ⚠️ Booking ${bookingNumber} created in Sanity but Odoo sync failed`);
         }
-
-        // 6. Send WhatsApp Confirmation (DEACTIVATED DUE TO ULTRAMSG STOPPED)
-        /*
-        console.log("💬 Step 6: Sending WhatsApp confirmation...");
-        try {
-            const whatsAppDateTime = new Date(`${data.appointmentDate}T${data.appointmentTime}:00`);
-            const formattedDate = whatsAppDateTime.toLocaleDateString('en-US', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-            const formattedTime = whatsAppDateTime.toLocaleTimeString('en-US', {
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-
-            const message = `🐾 *Grooming Appointment Confirmed!* 🐾
-
-Hello ${data.customerName}!
-
-Thank you for booking with Stephan's Pet Store. Your grooming appointment has been confirmed.
-
-📋 *Booking Details:*
-• Booking #: ${bookingNumber}
-• Pet Name: ${data.petName}
-• Pet Type: ${data.petType === 'dog' ? '🐕 Dog' : '🐱 Cat'}
-• Package: ${data.package.replace('_', ' ').toUpperCase()}
-• Date: ${formattedDate}
-• Time: ${formattedTime}
-• Price: ${formatPrice(finalPrice)}
-
-📍 *Location:*
-11 Slipway Road, Dar es Salaam
-
-⏰ *Please Note:*
-- Arrive 10 minutes early
-- Bring your pet's vaccination records
-- We're closed on Sundays
-
-Need to reschedule? Call us at +255 769 324 445
-
-See you soon! 🎉`;
-
-            await sendWhatsAppMessage(data.customerPhone, message);
-            console.log("   ✅ WhatsApp sent");
-        } catch (whatsappError) {
-            // Don't fail the booking if WhatsApp fails
-            console.error('   ❌ WhatsApp notification failed:', whatsappError);
-        }
-        */
-        console.log("💬 Step 6: WhatsApp confirmation skipped (service deactivated)");
 
         console.log(`🎉 Booking ${bookingNumber} completed successfully!`);
         return {
@@ -247,6 +211,38 @@ See you soon! 🎉`;
             success: false,
             error: `Booking failed: ${errorMessage}`,
         };
+    }
+}
+
+export async function getLatestGroomingStatus() {
+    try {
+        const session = await auth();
+        if (!session?.user) return { success: false, error: "Not authenticated" };
+
+        const odooPartnerId = (session.user as any).odooPartnerId;
+        if (!odooPartnerId) return { success: false, error: "No Odoo partner linked" };
+
+        const { odoo } = await import("@/lib/odoo/client");
+        
+        // Find latest active booking for this partner
+        const appointments = await odoo.searchRead(
+            "grooming.appointment",
+            [
+                ["partner_id", "=", odooPartnerId],
+                ["state", "not in", ["cancelled"]]
+            ],
+            ["id", "state", "pet_name", "appointment_date", "name"],
+            1 // limit to 1 (latest)
+        );
+
+        if (appointments.length === 0) {
+            return { success: true, booking: null };
+        }
+
+        return { success: true, booking: appointments[0] };
+    } catch (error: any) {
+        console.error("Failed to fetch latest grooming status:", error);
+        return { success: false, error: error.message || "Failed to fetch status" };
     }
 }
 

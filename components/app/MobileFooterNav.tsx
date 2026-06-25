@@ -14,11 +14,11 @@ export function MobileFooterNav() {
     const pathname = usePathname();
 
     // Hide on product detail pages to avoid overlap with sticky add to cart
-    const isProductPage = pathname?.startsWith('/products/') && pathname !== '/products';
+    const isProductPage = pathname?.startsWith('/shop/') && pathname !== '/shop';
     if (isProductPage) return null;
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 z-50 flex h-16 items-center justify-around bg-white/90 backdrop-blur-lg border-t border-zinc-200 px-4 sm:hidden pb-safe">
+        <div className="fixed bottom-0 left-0 right-0 z-[5000] flex h-16 items-center justify-around bg-white/90 backdrop-blur-lg border-t border-zinc-200 px-4 sm:hidden pb-safe">
             {/* Home Link (Left) */}
             <Link
                 href="/"

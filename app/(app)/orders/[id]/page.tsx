@@ -96,7 +96,7 @@ export default async function OrderDetailPage({ params }: OrderPageProps) {
                   <div className="flex flex-1 flex-col justify-between">
                     <div>
                       <Link
-                        href={`/products/${item.product?.slug}`}
+                        href={`/shop/${item.product?.slug}`}
                         className="font-medium text-zinc-900 hover:text-zinc-600 dark:text-zinc-100 dark:hover:text-zinc-300"
                       >
                         {item.product?.name ?? "Unknown Product"}

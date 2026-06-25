@@ -13,10 +13,10 @@ export default function AboutPage() {
                 {/* Hero Section */}
                 <div className="text-center mb-16">
                     <h1 className="text-4xl font-bold text-zinc-900 mb-4">
-                        About Stephan's Pet Store
+                        About Stephan&apos;s Pet Store
                     </h1>
                     <p className="text-lg text-zinc-600 max-w-2xl mx-auto">
-                        Tanzania's premier destination for pet lovers, dedicated to providing the best care and products for your furry, feathered, and aquatic friends.
+                        Tanzania&apos;s premier destination for pet lovers, dedicated to providing the best care and products for your furry, feathered, and aquatic friends.
                     </p>
                 </div>
 
@@ -25,7 +25,7 @@ export default function AboutPage() {
                     <h2 className="text-2xl font-bold text-zinc-900 mb-6">Our Story</h2>
                     <div className="prose prose-zinc max-w-none">
                         <p className="text-zinc-700 leading-relaxed mb-4">
-                            Founded with a passion for pets and their well-being, Stephan's Pet Store has grown to become one of Tanzania's most trusted names in pet care. Our journey began with a simple mission: to provide pet owners with access to premium quality products and professional services that their beloved companions deserve.
+                            Founded with a passion for pets and their well-being, Stephan&apos;s Pet Store has grown to become one of Tanzania&apos;s most trusted names in pet care. Our journey began with a simple mission: to provide pet owners with access to premium quality products and professional services that their beloved companions deserve.
                         </p>
                         <p className="text-zinc-700 leading-relaxed">
                             Today, we proudly serve the Dar es Salaam community and beyond, offering everything from premium pet food and accessories to professional grooming services. Our commitment to excellence has earned us the trust of thousands of pet parents across Tanzania.
@@ -45,7 +45,7 @@ export default function AboutPage() {
                                 <div>
                                     <h3 className="font-bold text-zinc-900 mb-2">Pet-First Approach</h3>
                                     <p className="text-zinc-600 text-sm">
-                                        Every decision we make is guided by what's best for your pets. Their health, happiness, and well-being are our top priorities.
+                                        Every decision we make is guided by what&apos;s best for your pets. Their health, happiness, and well-being are our top priorities.
                                     </p>
                                 </div>
                             </div>
@@ -73,7 +73,7 @@ export default function AboutPage() {
                                 <div>
                                     <h3 className="font-bold text-zinc-900 mb-2">Expert Guidance</h3>
                                     <p className="text-zinc-600 text-sm">
-                                        Our knowledgeable team is always ready to provide expert advice and personalized recommendations for your pet's unique needs.
+                                        Our knowledgeable team is always ready to provide expert advice and personalized recommendations for your pet&apos;s unique needs.
                                     </p>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@ export default function AboutPage() {
                                 <div>
                                     <h3 className="font-bold text-zinc-900 mb-2">Community Connection</h3>
                                     <p className="text-zinc-600 text-sm">
-                                        We're proud to be part of the Dar es Salaam community, supporting local pet owners and contributing to animal welfare initiatives.
+                                        We&apos;re proud to be part of the Dar es Salaam community, supporting local pet owners and contributing to animal welfare initiatives.
                                     </p>
                                 </div>
                             </div>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { MapPin, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -188,7 +189,7 @@ export function AdoptionSection({
                            ${hoveredPet === 'cat' ? 'bg-accent' : 'bg-muted'} 
                            transition-colors duration-300 shadow-lg border-4 border-secondary`} />
                         <div className="absolute inset-[8px] rounded-[50%_50%_50%_50%/60%_60%_40%_40%] overflow-hidden border-[3px] border-card">
-                            <img src={catImage} className="w-full h-full object-cover" alt="Cat" />
+                            <Image src={catImage} className="w-full h-full object-cover" alt="Cat" width={200} height={200} quality={75} />
                         </div>
                     </div>
 
@@ -210,7 +211,7 @@ export function AdoptionSection({
                            ${hoveredPet === 'bird' ? 'bg-accent' : 'bg-muted'} 
                            transition-colors duration-300 shadow-lg border-4 border-secondary`} />
                         <div className="absolute inset-[8px] rounded-[50%_50%_50%_50%/60%_60%_40%_40%] overflow-hidden border-[3px] border-card">
-                            <img src={birdImage} className="w-full h-full object-cover" alt="Bird" />
+                            <Image src={birdImage} className="w-full h-full object-cover" alt="Bird" width={200} height={200} quality={75} />
                         </div>
                     </div>
 
@@ -232,7 +233,7 @@ export function AdoptionSection({
                            ${hoveredPet === 'dog' ? 'bg-accent' : 'bg-muted'} 
                            transition-colors duration-300 shadow-lg border-4 border-secondary`} />
                         <div className="absolute inset-[8px] rounded-[50%] overflow-hidden border-[3px] border-card">
-                            <img src={dogImage} className="w-full h-full object-cover" alt="Dog" />
+                            <Image src={dogImage} className="w-full h-full object-cover" alt="Dog" width={200} height={200} quality={75} />
                         </div>
                     </div>
 
@@ -254,7 +255,7 @@ export function AdoptionSection({
                            ${hoveredPet === 'fish' ? 'bg-accent' : 'bg-primary'} 
                            transition-colors duration-300 shadow-lg border-4 border-secondary`} />
                         <div className="absolute inset-[8px] rounded-[45%_55%_55%_45%/50%] overflow-hidden border-[3px] border-card">
-                            <img src={fishImage} className="w-full h-full object-cover" alt="Fish" />
+                            <Image src={fishImage} className="w-full h-full object-cover" alt="Fish" width={200} height={200} quality={75} />
                         </div>
                     </div>
 

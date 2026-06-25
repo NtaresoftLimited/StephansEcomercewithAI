@@ -14,6 +14,8 @@ interface AddToCartButtonProps {
   stock: number;
   className?: string;
   children?: React.ReactNode;
+  quantity?: number;
+  showQuantityControls?: boolean;
 }
 
 export function AddToCartButton({
@@ -24,17 +26,26 @@ export function AddToCartButton({
   stock,
   className,
   children,
+  quantity = 1,
+  showQuantityControls = true,
 }: AddToCartButtonProps) {
-  const { addItem, updateQuantity } = useCartActions();
+  const { addItem, updateQuantity, openCart } = useCartActions();
   const cartItem = useCartItem(productId);
 
   const quantityInCart = cartItem?.quantity ?? 0;
-  const isOutOfStock = false;
-  const isAtMax = false;
+  const isOutOfStock = stock <= 0;
+  const isAtMax = quantityInCart >= stock;
 
   const handleAdd = () => {
-    addItem({ productId, name, price, image }, 1);
-    toast.success(`Added ${name}`);
+    addItem({ productId, name, price, image }, quantity);
+    toast.success(`Added ${quantity} ${name} to cart`);
+    openCart();
+  };
+
+  const handleIncrement = () => {
+    if (quantityInCart < stock) {
+      updateQuantity(productId, quantityInCart + 1);
+    }
   };
 
   const handleDecrement = () => {
@@ -56,8 +67,8 @@ export function AddToCartButton({
     );
   }
 
-  // Not in cart - show Add to Basket button
-  if (quantityInCart === 0) {
+  // Not in cart OR showQuantityControls is false - show simple Add button
+  if (quantityInCart === 0 || !showQuantityControls) {
     return (
       <Button onClick={handleAdd} className={cn("h-11 w-full text-blue-500 bg-[#E8F3FF] hover:bg-[#D8E9FF]", className)}>
         {!children && <ShoppingBag className="mr-2 h-4 w-4" />}
@@ -89,7 +100,7 @@ export function AddToCartButton({
         variant="ghost"
         size="icon"
         className="h-full flex-1 rounded-l-none disabled:opacity-20"
-        onClick={handleAdd}
+        onClick={handleIncrement}
         disabled={isAtMax}
       >
         <Plus className="h-4 w-4" />

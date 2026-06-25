@@ -41,8 +41,8 @@ function toSitemapUrl(
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     toSitemapUrl("/", null, "daily", 1),
-    toSitemapUrl("/products", null, "daily", 0.9),
-    toSitemapUrl("/products/offers", null, "daily", 0.8),
+    toSitemapUrl("/shop", null, "daily", 0.9),
+    toSitemapUrl("/shop/offers", null, "daily", 0.8),
     toSitemapUrl("/grooming", null, "monthly", 0.8),
     toSitemapUrl("/about", null, "monthly", 0.6),
     toSitemapUrl("/contact", null, "monthly", 0.6),
@@ -60,7 +60,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .filter((product) => product.slug)
     .map((product) =>
       toSitemapUrl(
-        `/products/${product.slug}`,
+        `/shop/${product.slug}`,
         product._updatedAt,
         "weekly",
         0.8,

@@ -38,7 +38,7 @@ export default function TermsPage() {
                             1. General Terms
                         </h2>
                         <p className="text-zinc-700 mb-4">
-                            By accessing and using Stephan's Pet Store website and services, you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree to these terms, please do not use our services.
+                            By accessing and using Stephan&apos;s Pet Store website and services, you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree to these terms, please do not use our services.
                         </p>
                         <ul className="list-disc pl-6 space-y-2 text-zinc-700">
                             <li>You must be at least 18 years old to make purchases</li>
@@ -135,7 +135,7 @@ export default function TermsPage() {
                     <section className="mb-8">
                         <h2 className="text-2xl font-bold text-zinc-900 mb-4">8. Limitation of Liability</h2>
                         <p className="text-zinc-700">
-                            Stephan's Pet Store shall not be liable for any indirect, incidental, special, or consequential damages arising from the use of our products or services. Our liability is limited to the purchase price of the product or service in question.
+                            Stephan&apos;s Pet Store shall not be liable for any indirect, incidental, special, or consequential damages arising from the use of our products or services. Our liability is limited to the purchase price of the product or service in question.
                         </p>
                     </section>
 
@@ -152,7 +152,7 @@ export default function TermsPage() {
                             If you have any questions about these terms and conditions, please contact us:
                         </p>
                         <div className="bg-zinc-50 rounded-lg p-6 border border-zinc-200">
-                            <p className="text-zinc-700 mb-2"><strong>Stephan's Pet Store</strong></p>
+                            <p className="text-zinc-700 mb-2"><strong>Stephan&apos;s Pet Store</strong></p>
                             <p className="text-zinc-600 mb-1">11 Slipway Road, Dar es Salaam, Tanzania</p>
                             <p className="text-zinc-600 mb-1">Phone: +255 769 324 445</p>
                             <p className="text-zinc-600">Email: info@stephanspetstore.co.tz</p>

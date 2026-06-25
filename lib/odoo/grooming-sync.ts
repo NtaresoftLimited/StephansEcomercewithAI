@@ -69,12 +69,12 @@ export async function checkGroomingAvailability(appointmentDate: string): Promis
 /**
  * Push booking to Odoo
  */
-export async function pushBookingToOdoo(data: GroomingData): Promise<string | null> {
+export async function pushBookingToOdoo(data: GroomingData & { odooPartnerId?: number }): Promise<string | null> {
     try {
         console.log(`📤 Syncing booking ${data.bookingNumber} to Odoo...`);
 
         // 1. Find or Create Customer (Partner)
-        const partnerId = await getOrCreatePartner(data);
+        const partnerId = data.odooPartnerId || await getOrCreatePartner(data);
         console.log(`  - Customer ID: ${partnerId}`);
 
         // 2. Resolve Service ID (Package)
@@ -112,7 +112,11 @@ export async function pushBookingToOdoo(data: GroomingData): Promise<string | nu
 }
 
 async function getOrCreatePartner(data: GroomingData): Promise<number> {
-    // Prefer search by email when available, otherwise fallback to phone
+    // 0. If userId is provided, we might have an odooPartnerId in the session
+    // However, this lib doesn't have access to the session directly.
+    // It's better if pushBookingToOdoo receives partnerId if known.
+    
+    // 1. Search by Email
     let existing: any[] = [];
     if (data.customerEmail) {
         existing = await odoo.searchRead(
@@ -122,6 +126,7 @@ async function getOrCreatePartner(data: GroomingData): Promise<number> {
             1
         );
     }
+    // 2. Search by Phone (fallback)
     if ((!existing || existing.length === 0) && data.customerPhone) {
         existing = await odoo.searchRead(
             "res.partner",
@@ -131,15 +136,16 @@ async function getOrCreatePartner(data: GroomingData): Promise<number> {
         );
     }
 
-    if (existing.length > 0) {
+    if (existing && existing.length > 0) {
         return existing[0].id;
     }
 
-    // Create new
+    // 3. Create new if not found
+    console.log(`  - Customer not found, creating new partner: ${data.customerName}`);
     const partnerPayload: any = {
         name: data.customerName,
         phone: data.customerPhone,
-        customer_rank: 1, // Indicate it's a customer
+        customer_rank: 1,
     };
     if (data.customerEmail) partnerPayload.email = data.customerEmail;
     return await odoo.executeKw("res.partner", "create", [partnerPayload]);

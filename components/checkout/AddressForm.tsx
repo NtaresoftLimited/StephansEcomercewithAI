@@ -25,9 +25,10 @@ const CITIES = [
 
 interface AddressFormProps {
     onComplete: (data: any) => void;
+    isProcessing?: boolean;
 }
 
-export function AddressForm({ onComplete }: AddressFormProps) {
+export function AddressForm({ onComplete, isProcessing }: AddressFormProps) {
     const [loadingLocation, setLoadingLocation] = useState(false);
     const [formData, setFormData] = useState({
         firstName: "",
@@ -75,9 +76,9 @@ export function AddressForm({ onComplete }: AddressFormProps) {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // Basic validation
-        if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone || !formData.address || !formData.city) {
-            alert("Please fill in all required fields.");
+        // Basic validation - only names and phone required
+        if (!formData.firstName || !formData.lastName || !formData.phone) {
+            alert("Please fill in your name and phone number.");
             return;
         }
         onComplete(formData);
@@ -114,12 +115,11 @@ export function AddressForm({ onComplete }: AddressFormProps) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email">Email (Optional)</Label>
                     <Input
                         id="email"
                         name="email"
                         type="email"
-                        required
                         placeholder="john@example.com"
                         value={formData.email}
                         onChange={handleInputChange}
@@ -160,11 +160,10 @@ export function AddressForm({ onComplete }: AddressFormProps) {
                         Use Current Location
                     </Button>
                 </div>
-                <Textarea
-                    id="address"
-                    name="address"
-                    required
-                    placeholder="Street address, apartment, suite, unit, etc."
+                    <Input
+                        id="address"
+                        name="address"
+                        placeholder="Street address, apartment, suite, unit, etc."
                     value={formData.address}
                     onChange={handleInputChange}
                     className="min-h-[100px] bg-zinc-50 border-zinc-200 focus:ring-[#6b3e1e] resize-none"
@@ -203,9 +202,19 @@ export function AddressForm({ onComplete }: AddressFormProps) {
             <div className="pt-4">
                 <Button
                     type="submit"
-                    className="w-full h-12 bg-[#6b3e1e] hover:bg-[#5a3419] text-white font-bold uppercase tracking-wider shadow-md active:scale-[0.98] transition-all"
+                    disabled={isProcessing}
+                    className="w-full h-14 bg-[#D35122] hover:bg-[#B54218] text-white font-bold uppercase tracking-wider text-lg shadow-md active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    Continue to Payment
+                    {isProcessing ? (
+                        <>
+                            <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                            Processing Order...
+                        </>
+                    ) : (
+                        <>
+                            Spoil Your Pet via WhatsApp
+                        </>
+                    )}
                 </Button>
             </div>
         </form>

@@ -88,7 +88,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
     const handleSearch = (searchTerm: string) => {
         if (searchTerm.trim()) {
-            router.push(`/products?q=${encodeURIComponent(searchTerm.trim())}`);
+            router.push(`/shop?q=${encodeURIComponent(searchTerm.trim())}`);
             onClose();
             setQuery("");
         }
@@ -108,14 +108,25 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent className="sm:max-w-[700px] p-0 gap-0 overflow-hidden border-none shadow-2xl bg-white">
+            <DialogContent showCloseButton={false} className="sm:max-w-[700px] p-0 gap-0 overflow-hidden border-none shadow-2xl bg-white rounded-3xl">
                 <DialogTitle className="sr-only">Search Products</DialogTitle>
+                <div className="hidden sm:flex items-center justify-between px-6 py-4 bg-white">
+                    <div className="text-lg font-semibold text-zinc-900">Search Products</div>
+                    <button
+                        onClick={onClose}
+                        className="p-1 hover:bg-zinc-100 rounded-full transition-colors"
+                    >
+                        <X className="h-5 w-5 text-zinc-500" />
+                    </button>
+                </div>
 
                 {/* Search Input Area */}
-                <div className="p-4 border-b border-zinc-100 bg-white sticky top-0 z-10">
-                    <div className="relative flex items-center gap-2">
+                <div className="px-4 py-4 sm:px-6 sm:pb-6 bg-white sticky top-0 z-10">
+                    <div className="relative flex items-center">
                         <div className="relative flex-1">
-                            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#6b3e1e]" />
+                            <div className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[#6b3e1e] flex items-center justify-center z-10">
+                                <Search className="h-4 w-4 text-white" strokeWidth={3} />
+                            </div>
                             <Input
                                 autoFocus
                                 placeholder="Search for products, brands and more..."
@@ -124,29 +135,28 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                 onKeyDown={(e) => {
                                     if (e.key === "Enter") handleSearch(query);
                                 }}
-                                className="h-12 pl-10 pr-10 text-sm border-zinc-200 focus-visible:ring-[#6b3e1e] rounded-full bg-zinc-50/50 shadow-sm"
+                                className="h-14 pl-12 pr-12 text-base border-zinc-200 focus-visible:ring-zinc-200 rounded-full bg-white shadow-none placeholder:text-zinc-400"
                             />
-                            <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
+                            <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
                                 {isSearching ? (
-                                    <Loader2 className="h-4 w-4 animate-spin text-[#6b3e1e]" />
-                                ) : query && (
-                                    <button
-                                        onClick={() => setQuery("")}
-                                        className="p-1 hover:bg-zinc-200 rounded-full transition-colors text-zinc-400"
-                                    >
-                                        <X className="h-3 w-3" />
-                                    </button>
+                                    <Loader2 className="h-5 w-5 animate-spin text-[#6b3e1e]" />
+                                ) : (
+                                    <div className="flex items-center gap-1">
+                                        {query && (
+                                            <button
+                                                onClick={() => setQuery("")}
+                                                className="p-1 hover:bg-zinc-100 rounded-full transition-colors text-zinc-400"
+                                            >
+                                                <X className="h-4 w-4" />
+                                            </button>
+                                        )}
+                                        <div className="w-8 h-8 rounded-full bg-[#FEE2E2] flex items-center justify-center">
+                                            <Mic className="h-4 w-4 text-[#EF4444]" />
+                                        </div>
+                                    </div>
                                 )}
                             </div>
                         </div>
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={onClose}
-                            className="rounded-full hover:bg-zinc-100 h-10 w-10"
-                        >
-                            <X className="h-5 w-5 text-zinc-400" />
-                        </Button>
                     </div>
                 </div>
 
@@ -170,7 +180,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                     <div
                                         key={product._id}
                                         onClick={() => {
-                                            router.push(`/products/${product.slug}`);
+                                            router.push(`/shop/${product.slug}`);
                                             onClose();
                                         }}
                                         className="group flex items-center gap-3 p-3 rounded-2xl border border-zinc-100 bg-white hover:border-[#6b3e1e]/20 hover:shadow-md transition-all cursor-pointer relative"
@@ -355,7 +365,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                             <div
                                                 key={product._id}
                                                 onClick={() => {
-                                                    router.push(`/products/${product.slug}`);
+                                                    router.push(`/shop/${product.slug}`);
                                                     onClose();
                                                 }}
                                                 className="group flex items-center gap-3 p-3 rounded-2xl border border-zinc-100 bg-white hover:border-[#6b3e1e]/20 hover:shadow-md transition-all cursor-pointer relative"

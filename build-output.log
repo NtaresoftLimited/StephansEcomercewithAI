@@ -1,0 +1,70 @@
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+   Ôû▓ Next.js 16.0.7 (Turbopack)
+   - Environments: .env.local, .env
+
+ ÔÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+   Creating an optimized production build ...
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+ Ô£ô Compiled successfully in 27.0s
+   Running TypeScript ...
+   Collecting page data using 19 workers ...
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+   Generating static pages using 19 workers (0/32) ...
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+ ÔÜá Unsupported metadata themeColor is configured in metadata export in /admin/orders. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ÔÜá Unsupported metadata themeColor is configured in metadata export in /_not-found. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ÔÜá Unsupported metadata themeColor is configured in metadata export in /admin/inventory. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ÔÜá Unsupported metadata themeColor is configured in metadata export in /terms. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ ÔÜá Unsupported metadata themeColor is configured in metadata export in /about. Please move it to viewport export instead.
+Read more: https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+ Ô¿» useSearchParams() should be wrapped in a suspense boundary at page "/about". Read more: https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
+    at S (D:\CODEX\STEPHANS OG\stephans-pet-app\StephansEcomercewithAI\.next\server\chunks\ssr\node_modules_next_15323350._.js:2:2111)
+    at p (D:\CODEX\STEPHANS OG\stephans-pet-app\StephansEcomercewithAI\.next\server\chunks\ssr\node_modules_next_15323350._.js:4:4878)
+    at al (D:\CODEX\STEPHANS OG\stephans-pet-app\StephansEcomercewithAI\.next\server\chunks\ssr\[root-of-the-server]__c9176094._.js:1:39515)
+    at ar (D:\CODEX\STEPHANS OG\stephans-pet-app\StephansEcomercewithAI\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:84366)
+    at aa (D:\CODEX\STEPHANS OG\stephans-pet-app\StephansEcomercewithAI\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:86185)
+    at as (D:\CODEX\STEPHANS OG\stephans-pet-app\StephansEcomercewithAI\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:107952)
+    at ao (D:\CODEX\STEPHANS OG\stephans-pet-app\StephansEcomercewithAI\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:105374)
+    at ah (D:\CODEX\STEPHANS OG\stephans-pet-app\StephansEcomercewithAI\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:112881)
+    at al (D:\CODEX\STEPHANS OG\stephans-pet-app\StephansEcomercewithAI\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:109984)
+    at as (D:\CODEX\STEPHANS OG\stephans-pet-app\StephansEcomercewithAI\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:108230)
+Error occurred prerendering page "/about". Read more: https://nextjs.org/docs/messages/prerender-error
+Export encountered an error on /(app)/about/page: /about, exiting the build.
+ Ô¿» useSearchParams() should be wrapped in a suspense boundary at page "/terms". Read more: https://nextjs.org/docs/messages/missing-suspense-with-csr-bailout
+    at S (D:\CODEX\STEPHANS OG\stephans-pet-app\StephansEcomercewithAI\.next\server\chunks\ssr\node_modules_next_15323350._.js:2:2111)
+    at p (D:\CODEX\STEPHANS OG\stephans-pet-app\StephansEcomercewithAI\.next\server\chunks\ssr\node_modules_next_15323350._.js:4:4878)
+    at al (D:\CODEX\STEPHANS OG\stephans-pet-app\StephansEcomercewithAI\.next\server\chunks\ssr\[root-of-the-server]__c9176094._.js:1:39515)
+    at ar (D:\CODEX\STEPHANS OG\stephans-pet-app\StephansEcomercewithAI\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:84366)
+    at aa (D:\CODEX\STEPHANS OG\stephans-pet-app\StephansEcomercewithAI\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:86185)
+    at as (D:\CODEX\STEPHANS OG\stephans-pet-app\StephansEcomercewithAI\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:107952)
+    at ao (D:\CODEX\STEPHANS OG\stephans-pet-app\StephansEcomercewithAI\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:105374)
+    at ah (D:\CODEX\STEPHANS OG\stephans-pet-app\StephansEcomercewithAI\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:112881)
+    at al (D:\CODEX\STEPHANS OG\stephans-pet-app\StephansEcomercewithAI\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:109984)
+    at as (D:\CODEX\STEPHANS OG\stephans-pet-app\StephansEcomercewithAI\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.prod.js:2:108230)
+Error occurred prerendering page "/terms". Read more: https://nextjs.org/docs/messages/prerender-error
+Export encountered an error on /(app)/terms/page: /terms, exiting the build.
+ Ô¿» Next.js build worker exited with code: 1 and signal: null

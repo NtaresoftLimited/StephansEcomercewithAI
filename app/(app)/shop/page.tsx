@@ -12,6 +12,7 @@ import {
   FILTER_PRODUCTS_BY_RELEVANCE_QUERY
 } from "@/lib/sanity/queries/products";
 import { ProductGrid } from "@/components/app/ProductGrid";
+import { ShopHeader } from "@/components/app/ShopHeader";
 import { ProductFilters } from "@/components/app/ProductFilters";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -20,10 +21,10 @@ import { Metadata } from "next";
 import { ProductsBanner } from "@/components/app/ProductsBanner";
 
 export const metadata: Metadata = {
-  title: "Products | Stephan's Pet Store",
-  description: "Browse our collection of pet products",
+  title: "Shop | Stephan's Pet Store",
+  description: "Browse our professional collection of pet products",
   alternates: {
-    canonical: "/products",
+    canonical: "/shop",
   },
 };
 
@@ -57,21 +58,13 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   };
 
   // Determine which query to use based on sort
-  let query: any = FILTER_PRODUCTS_BY_NAME_QUERY; // Default sort: Name A-Z
+  let query: any = FILTER_PRODUCTS_BY_NAME_QUERY;
 
-  if (q) {
-    query = FILTER_PRODUCTS_BY_RELEVANCE_QUERY; // Default search sort: Relevance
-  }
-
-  if (sort === "price-asc") {
-    query = FILTER_PRODUCTS_BY_PRICE_ASC_QUERY;
-  } else if (sort === "price-desc") {
-    query = FILTER_PRODUCTS_BY_PRICE_DESC_QUERY;
-  } else if (sort === "relevance") {
-    query = FILTER_PRODUCTS_BY_RELEVANCE_QUERY;
-  } else if (sort === "name") {
-    query = FILTER_PRODUCTS_BY_NAME_QUERY;
-  }
+  if (q) query = FILTER_PRODUCTS_BY_RELEVANCE_QUERY;
+  if (sort === "price-asc") query = FILTER_PRODUCTS_BY_PRICE_ASC_QUERY;
+  else if (sort === "price-desc") query = FILTER_PRODUCTS_BY_PRICE_DESC_QUERY;
+  else if (sort === "relevance") query = FILTER_PRODUCTS_BY_RELEVANCE_QUERY;
+  else if (sort === "name") query = FILTER_PRODUCTS_BY_NAME_QUERY;
 
   // Fetch Data in Parallel
   const [productsResult, categoriesResult, brandsResult] = await Promise.all([
@@ -87,54 +80,14 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
       <ProductsBanner />
+      
       <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
-
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-            {q ? `Search results for "${q}"` : "All Products"}
-          </h1>
-          <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
-            {products.length} {products.length === 1 ? "product" : "products"} found
-          </p>
-          <div className="mt-4 flex items-center justify-between gap-4">
-            <div className="hidden md:block h-px flex-1 bg-zinc-200 dark:bg-zinc-800" />
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-widest text-zinc-500">Sort by</span>
-              {[
-                { key: "name", label: "Name" },
-                { key: "price-asc", label: "Price Low" },
-                { key: "price-desc", label: "Price High" },
-                { key: "relevance", label: "Relevance" },
-              ].map(({ key, label }) => {
-                const sp = new URLSearchParams();
-                if (q) sp.set("q", q);
-                if (category) sp.set("category", category);
-                if (brand) sp.set("brand", brand);
-                if (color) sp.set("color", color);
-                if (minPrice) sp.set("minPrice", minPrice);
-                if (maxPrice) sp.set("maxPrice", maxPrice);
-                if (inStock === "true") sp.set("inStock", "true");
-                sp.set("sort", key);
-                const href = `/products?${sp.toString()}`;
-                const isActive = (sort || "name") === key || (!sort && key === "name");
-                return (
-                  <a
-                    key={key}
-                    href={href}
-                    className={`px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all ${isActive
-                      ? "bg-amber-500 text-white"
-                      : "bg-white text-zinc-600 hover:bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800"
-                      }`}
-                  >
-                    {label}
-                  </a>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-
+        <ShopHeader 
+          categories={categories} 
+          brands={brands} 
+          productCount={products.length} 
+          searchQuery={q}
+        />
         <div className="flex flex-col gap-8 lg:flex-row">
           {/* Mobile Filter Trigger */}
           <div className="lg:hidden">

@@ -60,13 +60,13 @@ export function ChatSheet() {
     <>
       {/* Backdrop - only visible on mobile/tablet (< xl) */}
       <div
-        className="fixed inset-0 z-40 bg-black/50 xl:hidden"
+        className="fixed inset-0 z-[5999] bg-black/50 xl:hidden"
         onClick={closeChat}
         aria-hidden="true"
       />
 
       {/* Sidebar */}
-      <div className="fixed top-0 right-0 z-50 flex h-full w-full flex-col border-l border-zinc-200 bg-white overscroll-contain dark:border-zinc-800 dark:bg-zinc-950 sm:w-[448px] animate-in slide-in-from-right duration-300">
+      <div className="fixed top-0 right-0 z-[6000] flex h-full w-full flex-col border-l border-zinc-200 bg-white overscroll-contain dark:border-zinc-800 dark:bg-zinc-950 sm:w-[448px] animate-in slide-in-from-right duration-300">
         {/* Header */}
         <header className="shrink-0 border-b border-zinc-200 dark:border-zinc-800">
           <div className="flex h-16 items-center justify-between px-6">

@@ -6,7 +6,8 @@ export const ALL_BRANDS_QUERY = groq`
     name,
     "slug": slug.current,
     "logo": logo.asset->url,
-    description
+    description,
+    "productCount": count(*[_type == "product" && brand._ref == ^._id])
   }
 `;
 

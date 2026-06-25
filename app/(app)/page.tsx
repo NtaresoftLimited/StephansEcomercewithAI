@@ -7,7 +7,6 @@ import {
   FILTER_PRODUCTS_BY_RELEVANCE_QUERY,
 } from "@/lib/sanity/queries/products";
 import { ALL_CATEGORIES_QUERY } from "@/lib/sanity/queries/categories";
-// import { ALL_BRANDS_QUERY } from "@/lib/sanity/queries/brands";
 import { ALL_BRANDS_QUERY } from "@/lib/sanity/queries/brands";
 import { HERO_PET_IMAGES_QUERY } from "@/lib/sanity/queries/heroImages";
 import { GROOMING_IMAGES_QUERY } from "@/lib/sanity/queries/groomingImages";
@@ -16,7 +15,8 @@ import { GroomingSection } from "@/components/app/GroomingSection";
 import { AutoRotatingProductGrid } from "@/components/app/AutoRotatingProductGrid";
 import { BrandsSection } from "@/components/app/BrandsSection";
 import { ConsultationCTA } from "@/components/app/ConsultationCTA";
-import { odoo } from "@/lib/odoo/client";
+
+export const revalidate = 3600;
 
 interface PageProps {
   searchParams: Promise<{
@@ -62,8 +62,8 @@ export default async function HomePage({ searchParams }: PageProps) {
     }
   };
 
-  // Fetch products with filters (server-side via GROQ)
-  const { data: products } = await sanityFetch({
+  // Fetch products with filters (server-side via GROQ) with error handling
+  const products = await sanityFetch({
     query: getQuery(),
     params: {
       searchQuery,
@@ -74,66 +74,26 @@ export default async function HomePage({ searchParams }: PageProps) {
       maxPrice,
       inStock,
     },
-  });
+  }).then((r: any) => r?.data as any[]).catch(() => [] as any[]);
 
-  // Fetch categories for filter sidebar
-  const { data: categories } = await sanityFetch({
-    query: ALL_CATEGORIES_QUERY,
-  });
-
-  // Fetch pet category images
-  const { data: petImages } = await sanityFetch({
-    query: HERO_PET_IMAGES_QUERY,
-  });
-
-  // Fetch grooming section images
-  const { data: groomingImages } = await sanityFetch({
-    query: GROOMING_IMAGES_QUERY,
-  });
-
-  // Fetch brands from Odoo and Sanity, prefer Sanity logo for high quality
-  const [sanityBrands, odooBrands] = await Promise.all([
+  // Fetch categories, pet images, grooming images, and brands in parallel
+  const [categories, petImages, groomingImages, sanityBrands] = await Promise.all([
+    sanityFetch({ query: ALL_CATEGORIES_QUERY })
+      .then((r: any) => r?.data as any[])
+      .catch(() => [] as any[]),
+    sanityFetch({ query: HERO_PET_IMAGES_QUERY })
+      .then((r: any) => r?.data)
+      .catch(() => null),
+    sanityFetch({ query: GROOMING_IMAGES_QUERY })
+      .then((r: any) => r?.data as any[])
+      .catch(() => [] as any[]),
     sanityFetch({ query: ALL_BRANDS_QUERY })
       .then((r: any) => r?.data as any[])
       .catch(() => [] as any[]),
-    odoo.getBrands().catch(() => [] as any[]),
   ]);
-  const mergedByName = new Map<string, any>();
-  for (const b of (odooBrands as any[]) || []) {
-    const match =
-      (sanityBrands as any[])?.find(
-        (s) => s.name?.toLowerCase() === b.name?.toLowerCase()
-      ) || null;
 
-    // Prefer Sanity logo if available (usually high-quality SVG/PNG we uploaded)
-    let logo = match?.logo;
-    if (!logo && b.logo) {
-      // Fallback to Odoo logo if Sanity doesn't have one
-      logo = `data:image/png;base64,${b.logo}`;
-    }
-
-    mergedByName.set((b.name || "").toLowerCase(), {
-      _id: match?._id || b.id?.toString() || (b.name || "").toLowerCase().replace(/\s+/g, "-"),
-      id: b.id,
-      name: b.name,
-      slug: match?.slug || (b.name || "").toLowerCase().replace(/\s+/g, "-"),
-      logo,
-      description: match?.description,
-    });
-  }
-  for (const s of ((sanityBrands as any[]) || [])) {
-    const key = (s.name || "").toLowerCase();
-    if (!mergedByName.has(key)) {
-      mergedByName.set(key, {
-        _id: s._id,
-        name: s.name,
-        slug: s.slug,
-        logo: s.logo,
-        description: s.description,
-      });
-    }
-  }
-  const brands = Array.from(mergedByName.values());
+  // Use Sanity brands directly (Odoo brands loaded client-side for performance)
+  const brands = sanityBrands;
 
   // Extract image URLs
   const dogImages = petImages?.dogImages?.map((img: any) => img.url).filter((url: any): url is string => !!url) ?? [];
