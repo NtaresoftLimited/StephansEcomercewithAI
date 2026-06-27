@@ -2,8 +2,27 @@ import { Metadata } from "next";
 import { Heart, Award, Users, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
-    title: "About Us",
-    description: "Learn about Stephan's Pet Store - Tanzania's premier destination for pet lovers since our founding.",
+    title: "About Us | Stephan's Pet Store Dar es Salaam",
+    description: "Learn about Stephan's Pet Store - Tanzania's premier destination for pet lovers since our founding. We provide premium pet food, grooming, and accessories in Dar es Salaam.",
+    alternates: {
+        canonical: "/about",
+    },
+    openGraph: {
+        title: "About Stephan's Pet Store | Tanzania's Premier Pet Shop",
+        description: "Discover our story, values, and commitment to providing the best pet care, food, and grooming services in Dar es Salaam.",
+        url: "https://www.stephanspetstore.co.tz/about",
+        siteName: "Stephan's Pet Store",
+        images: [
+            {
+                url: "/og-image.png",
+                width: 1200,
+                height: 630,
+                alt: "About Stephan's Pet Store",
+            },
+        ],
+        locale: "en_TZ",
+        type: "website",
+    },
 };
 
 export default function AboutPage() {
