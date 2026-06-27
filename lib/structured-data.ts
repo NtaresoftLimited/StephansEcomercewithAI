@@ -28,10 +28,9 @@ export function organizationJsonLd() {
 }
 
 export function localBusinessJsonLd() {
-  return {
+  const baseStore = {
     "@context": "https://schema.org",
     "@type": "PetStore",
-    "@id": `${SITE_URL}/#localbusiness`,
     name: BUSINESS_NAME,
     url: SITE_URL,
     image: absoluteUrl("/og-image.png"),
@@ -40,10 +39,6 @@ export function localBusinessJsonLd() {
     priceRange: "TZS",
     currenciesAccepted: "TZS",
     paymentAccepted: "Cash, Mobile Money, Card",
-    address: {
-      "@type": "PostalAddress",
-      ...BUSINESS_ADDRESS,
-    },
     areaServed: [
       {
         "@type": "City",
@@ -60,6 +55,29 @@ export function localBusinessJsonLd() {
       `https://wa.me/${BUSINESS_WHATSAPP.replace("+", "")}`,
     ],
   };
+
+  return [
+    {
+      ...baseStore,
+      "@id": `${SITE_URL}/#localbusiness-slipway`,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "11 Slipway Road",
+        addressLocality: "Dar es Salaam",
+        addressCountry: "TZ",
+      },
+    },
+    {
+      ...baseStore,
+      "@id": `${SITE_URL}/#localbusiness-mikocheni`,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "67M6+93V, Mwai Kibaki Rd, Mikocheni A",
+        addressLocality: "Dar es Salaam",
+        addressCountry: "TZ",
+      },
+    }
+  ];
 }
 
 export function websiteJsonLd() {

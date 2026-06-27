@@ -21,7 +21,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
         <WishlistStoreProvider>
           <ChatStoreProvider>
             <AppShell>
-              <JsonLd data={[organizationJsonLd(), localBusinessJsonLd(), websiteJsonLd()]} />
+              <JsonLd data={[organizationJsonLd(), localBusinessJsonLd(), websiteJsonLd()].flat()} />
               <Header />
               <main>{children}</main>
               <Footer />
