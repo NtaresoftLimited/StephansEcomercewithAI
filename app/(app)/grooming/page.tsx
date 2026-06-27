@@ -6,11 +6,32 @@ import { GroomingBookingForm } from "@/components/app/grooming/GroomingBookingFo
 import { fetchGroomingPrices } from "@/lib/odoo/pricing";
 import { PRICES as FALLBACK_PRICES } from "@/lib/constants/grooming";
 
+import { groomingServiceJsonLd } from "@/lib/structured-data";
+
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-    title: "Pet Grooming Services | Stephan's Pet Store",
-    description: "Professional grooming services for dogs and cats. Standard, Premium, and Super Premium packages available.",
+    title: "Dog & Cat Grooming in Dar es Salaam | Stephan's Pet Store",
+    description: "Professional pet grooming services in Dar es Salaam. We offer dog bathing, nail clipping, cat grooming, and spa treatments. Book your appointment online today!",
+    alternates: {
+        canonical: "/grooming",
+    },
+    openGraph: {
+        title: "Professional Pet Grooming | Stephan's Pet Store Dar es Salaam",
+        description: "Treat your furry friend to a spa day! Expert dog and cat grooming services at Stephan's Pet Store in Masaki, Dar es Salaam.",
+        url: "https://www.stephanspetstore.co.tz/grooming",
+        siteName: "Stephan's Pet Store",
+        images: [
+            {
+                url: "/og-image.jpg",
+                width: 1200,
+                height: 630,
+                alt: "Pet Grooming at Stephan's Pet Store",
+            },
+        ],
+        locale: "en_TZ",
+        type: "website",
+    },
 };
 
 export default async function GroomingPage() {
@@ -28,11 +49,17 @@ export default async function GroomingPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-[#f5ebe0] to-white dark:from-zinc-900 dark:to-zinc-950">
-            <GroomingHero />
-            <GroomingBookingForm prices={prices} />
-            <GroomingPackages prices={prices} />
-            <GroomingPolicy />
-        </div>
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(groomingServiceJsonLd()) }}
+            />
+            <div className="min-h-screen bg-gradient-to-b from-[#f5ebe0] to-white dark:from-zinc-900 dark:to-zinc-950">
+                <GroomingHero />
+                <GroomingBookingForm prices={prices} />
+                <GroomingPackages prices={prices} />
+                <GroomingPolicy />
+            </div>
+        </>
     );
 }

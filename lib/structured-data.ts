@@ -130,3 +130,28 @@ export function breadcrumbJsonLd(items: Array<{ name: string; url: string }>) {
     })),
   };
 }
+
+export function groomingServiceJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${SITE_URL}/grooming#service`,
+    name: "Pet Grooming Services",
+    provider: {
+      "@id": `${SITE_URL}/#localbusiness`,
+    },
+    areaServed: {
+      "@type": "City",
+      name: "Dar es Salaam",
+    },
+    description: "Professional grooming services for dogs and cats in Dar es Salaam. We offer bathing, nail clipping, haircuts, and spa treatments. Book online.",
+    offers: {
+      "@type": "AggregateOffer",
+      priceCurrency: "TZS",
+      lowPrice: "15000",
+      highPrice: "60000",
+      offerCount: "3"
+    },
+    serviceType: "Pet Grooming"
+  };
+}
