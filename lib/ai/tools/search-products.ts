@@ -112,7 +112,7 @@ export const searchProductsTool = tool({
         featured: !!product.featured,
         assemblyRequired: !!product.assemblyRequired,
         imageUrl: product.image?.asset?.url ?? null,
-        productUrl: product.slug ? `/products/${product.slug}` : null,
+        productUrl: product.slug ? `/shop/${product.slug}` : null,
       }));
 
       return {

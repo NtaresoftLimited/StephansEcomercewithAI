@@ -92,14 +92,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
             Home
           </Link>
           <ChevronRight className="w-4 h-4 flex-shrink-0" />
-          <Link href="/products" className="hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
+          <Link href="/shop" className="hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
             Shop
           </Link>
           {product.categories && product.categories.length > 0 && (
             <>
               <ChevronRight className="w-4 h-4 flex-shrink-0" />
               <Link
-                href={`/products?category=${product.categories[0].slug}`}
+                href={`/shop?category=${product.categories[0].slug}`}
                 className="hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors capitalize"
               >
                 {product.categories[0].title}

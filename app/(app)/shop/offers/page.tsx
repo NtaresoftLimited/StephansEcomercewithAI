@@ -89,7 +89,7 @@ export default async function OffersPage({ searchParams }: PageProps) {
             <Home className="h-3.5 w-3.5" /> Home
           </Link>
           <span className="text-zinc-300">/</span>
-          <Link href="/products" className="hover:text-[#6b3e1e] transition-colors">Products</Link>
+          <Link href="/shop" className="hover:text-[#6b3e1e] transition-colors">Products</Link>
           <span className="text-zinc-300">/</span>
           <span className="text-[#6b3e1e] font-bold uppercase tracking-widest">Offers</span>
         </div>

@@ -49,7 +49,7 @@ export function MobileFooterNav() {
 
             {/* Shop Page Link (Right) */}
             <Link
-                href="/products"
+                href="/shop"
                 className="relative flex flex-col items-center justify-center gap-1 text-zinc-500 hover:text-amber-600 transition-colors"
             >
                 <div className="relative">

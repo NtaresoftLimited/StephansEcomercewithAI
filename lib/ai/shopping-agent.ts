@@ -74,11 +74,11 @@ The tool returns products with these fields:
 - category, description
 - stockStatus: "in_stock", "low_stock", or "out_of_stock"
 - stockMessage: Human-readable stock info
-- productUrl: Link to product page (e.g., "/products/dog-food")
+- productUrl: Link to product page (e.g., "/shop/dog-food")
 
 ### Format products like this:
 
-**[Product Name](/products/slug)** - TZS 24,700
+**[Product Name](/shop/slug)** - TZS 24,700
 - Description: Brief product description
 - ✅ In stock
 
@@ -92,7 +92,7 @@ The tool returns products with these fields:
 - Keep responses concise
 - Use bullet points for product features
 - Always include prices in TZS (Tanzania Shillings)
-- Link to products using markdown: [Name](/products/slug)
+- Link to products using markdown: [Name](/shop/slug)
 - Add fun pet-related emojis when appropriate 🐕 🐈 🐾`;
 
 const groomingInstructions = `

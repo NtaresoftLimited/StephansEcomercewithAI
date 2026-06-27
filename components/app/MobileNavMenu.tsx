@@ -153,7 +153,7 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
       </Link>
       
       <Link
-        href="/products?sort=new"
+        href="/shop?sort=new"
         onClick={onClose}
         className="text-lg font-medium text-pink-600 dark:text-pink-400 hover:text-pink-700 transition-colors flex items-center gap-3"
       >

@@ -311,7 +311,7 @@ export default async function BrandPage(props: BrandPageProps) {
                     <div className="text-center py-24 bg-zinc-50 rounded-2xl border border-zinc-100">
                         <p className="text-lg text-zinc-400 mb-4">No products found for {brand.name}.</p>
                         <Button variant="outline" asChild>
-                            <a href="/products">Browse all products</a>
+                            <a href="/shop">Browse all products</a>
                         </Button>
                     </div>
                 )}
