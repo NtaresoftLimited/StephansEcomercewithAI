@@ -21,8 +21,9 @@ import { Metadata } from "next";
 import { ProductsBanner } from "@/components/app/ProductsBanner";
 
 export const metadata: Metadata = {
-  title: "Shop | Stephan's Pet Store",
-  description: "Browse our professional collection of pet products",
+  title: "Pet Shop Dar es Salaam | Pet Food, Accessories & Supplies",
+  description:
+    "Shop pet food, beds, toys, grooming products and accessories in Dar es Salaam. Stephan's Pet Store offers premium supplies for dogs, cats, birds and small pets.",
   alternates: {
     canonical: "/shop",
   },

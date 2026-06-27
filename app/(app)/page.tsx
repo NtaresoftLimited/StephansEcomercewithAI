@@ -68,6 +68,7 @@ export default async function HomePage({ searchParams }: PageProps) {
     params: {
       searchQuery,
       categorySlug,
+      brandSlug: "",
       color,
       material,
       minPrice,

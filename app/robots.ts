@@ -5,6 +5,19 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
+        userAgent: ["OAI-SearchBot", "ChatGPT-User", "GPTBot"],
+        allow: "/",
+        disallow: [
+          "/admin/",
+          "/api/",
+          "/checkout/",
+          "/login",
+          "/register",
+          "/orders/",
+          "/studio/",
+        ],
+      },
+      {
         userAgent: "*",
         allow: "/",
         disallow: [

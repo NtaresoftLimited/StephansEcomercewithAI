@@ -9,6 +9,8 @@ import { Footer } from "@/components/app/Footer";
 import { CartSheet } from "@/components/app/CartSheet";
 import { ChatSheet } from "@/components/app/ChatSheet";
 import { AppShell } from "@/components/app/AppShell";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { localBusinessJsonLd, organizationJsonLd, websiteJsonLd } from "@/lib/structured-data";
 
 import { MobileFooterNav } from "@/components/app/MobileFooterNav";
 
@@ -19,6 +21,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
         <WishlistStoreProvider>
           <ChatStoreProvider>
             <AppShell>
+              <JsonLd data={[organizationJsonLd(), localBusinessJsonLd(), websiteJsonLd()]} />
               <Header />
               <main>{children}</main>
               <Footer />

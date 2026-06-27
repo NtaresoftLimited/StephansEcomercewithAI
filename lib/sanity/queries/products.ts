@@ -14,6 +14,7 @@ const PRODUCT_FILTER_CONDITIONS = `
       $categorySlug in categories[]->slug.current || 
       $categorySlug in categories[]->parentCategory->slug.current || 
       $categorySlug in categories[]->parentCategory->parentCategory->slug.current)
+  && ($brandSlug == "" || brand->slug.current == $brandSlug)
   && ($color == "" || color == $color)
   && ($material == "" || material == $material)
   && ($minPrice == 0 || price >= $minPrice)
@@ -107,6 +108,10 @@ export const ALL_PRODUCTS_QUERY = defineQuery(`*[
   categories[]->{
     _id,
     title,
+    "slug": slug.current
+  },
+  brand->{
+    name,
     "slug": slug.current
   },
   material,
@@ -206,6 +211,10 @@ export const PRODUCTS_BY_CATEGORY_QUERY = defineQuery(`*[
     title,
     "slug": slug.current
   },
+  brand->{
+    name,
+    "slug": slug.current
+  },
   material,
   color,
   stock
@@ -269,6 +278,10 @@ export const PRODUCT_BY_SLUG_QUERY = defineQuery(`*[
   categories[]->{
     _id,
     title,
+    "slug": slug.current
+  },
+  brand->{
+    name,
     "slug": slug.current
   },
   material,

@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
+import Link from "next/link";
 import {
   Collapsible,
   CollapsibleContent,
@@ -167,18 +168,12 @@ function ProductFiltersInner({ categories, brands }: ProductFiltersProps) {
             <div className="flex items-center justify-between">
               <span className="text-md leading-5 font-bold text-zinc-900">Deals</span>
             </div>
-            <div className="flex min-w-full justify-between">
-              <label className="text-sm leading-4 font-normal flex items-center gap-3 align-middle cursor-pointer group">
-                <div className="relative flex items-center justify-center">
-                  <input 
-                    type="checkbox" 
-                    className="peer appearance-none size-5 shrink-0 rounded border border-zinc-300 shadow-sm focus-visible:outline-none checked:bg-[#6b3e1e] checked:border-[#6b3e1e] transition-all" 
-                  />
-                  <svg className="absolute size-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                </div>
-                <span className="text-sm leading-5 font-medium text-zinc-600 group-hover:text-[#6b3e1e] transition-colors">Today&apos;s Deals</span>
-              </label>
-            </div>
+            <Link
+              href="/shop/offers"
+              className="text-sm leading-5 font-medium text-zinc-600 hover:text-[#6b3e1e] transition-colors"
+            >
+              Today&apos;s Deals
+            </Link>
             <div className="h-px w-full bg-zinc-100"></div>
           </div>
 
@@ -280,31 +275,6 @@ function ProductFiltersInner({ categories, brands }: ProductFiltersProps) {
                 <p className="text-xs text-center text-zinc-400 py-2">No brands found</p>
               )}
             </div>
-            <div className="h-px w-full bg-zinc-100"></div>
-          </div>
-
-          {/* Size Section (Mocked UI) */}
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between">
-              <span className="text-md leading-5 font-bold text-zinc-900">Size</span>
-            </div>
-            <div className="flex flex-col gap-3">
-              {["100g", "400g", "2kg", "405 Gr", "80g"].map((size) => (
-                <label key={size} className="text-sm leading-4 font-normal flex items-center gap-3 align-middle cursor-pointer group">
-                  <div className="relative flex items-center justify-center">
-                    <input 
-                      type="checkbox" 
-                      className="peer appearance-none size-5 shrink-0 rounded border border-zinc-300 shadow-sm focus-visible:outline-none checked:bg-[#6b3e1e] checked:border-[#6b3e1e] transition-all" 
-                    />
-                    <svg className="absolute size-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  </div>
-                  <span className="text-sm leading-5 font-medium text-zinc-600 group-hover:text-[#6b3e1e] transition-colors">{size}</span>
-                </label>
-              ))}
-            </div>
-            <button className="text-sm font-bold text-[#6b3e1e] self-start hover:underline transition-all">
-              Show more (37)
-            </button>
             <div className="h-px w-full bg-zinc-100"></div>
           </div>
 

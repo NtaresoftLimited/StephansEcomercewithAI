@@ -8,7 +8,9 @@ import { ProductGallery } from "@/components/app/ProductGallery";
 import { ProductInfo } from "@/components/app/ProductInfo";
 import { ProductTabs } from "@/components/app/ProductTabs";
 import { ProductCard } from "@/components/app/ProductCard";
-import { absoluteUrl, truncateDescription } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { absoluteUrl, buildProductDescription } from "@/lib/seo";
+import { breadcrumbJsonLd, productJsonLd } from "@/lib/structured-data";
 
 interface ProductPageProps {
   params: Promise<{
@@ -36,7 +38,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
   const path = `/shop/${product.slug || slug}`;
   const productName = product.name || "Pet Product";
-  const description = truncateDescription(product.description);
+  const description = buildProductDescription(product);
   const imageUrl = product.images?.[0]?.asset?.url;
 
   return {
@@ -83,8 +85,17 @@ export default async function ProductPage({ params }: ProductPageProps) {
     .filter((p: any) => p._id !== product._id)
     .slice(0, 4);
 
+  const category = product.categories?.[0];
+  const breadcrumbs = [
+    { name: "Home", url: "/" },
+    { name: "Shop", url: "/shop" },
+    ...(category ? [{ name: category.title, url: `/shop?category=${category.slug}` }] : []),
+    { name: product.name, url: `/shop/${product.slug || slug}` },
+  ];
+
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-900 pt-20">
+      <JsonLd data={[productJsonLd(product), breadcrumbJsonLd(breadcrumbs)]} />
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 scale-[0.9] origin-top">
         {/* Breadcrumbs */}
         <div className="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400 mb-8 overflow-x-auto whitespace-nowrap scrollbar-hide">
