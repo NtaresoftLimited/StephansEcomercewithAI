@@ -26,9 +26,17 @@ export async function generateMetadata({ searchParams }: ProductsPageProps): Pro
   
   if (category) {
     const formattedCategory = category.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+    const rootCategoryTitles: Record<string, string> = {
+      dogs: "Dog Supplies",
+      cats: "Cat Supplies",
+      birds: "Bird Supplies",
+      "small-pets": "Small Pet Supplies",
+    };
+    const titleCategory = rootCategoryTitles[category] ?? formattedCategory;
+
     return {
-      title: `Buy ${formattedCategory} in Dar es Salaam | Stephan's Pet Store`,
-      description: `Shop premium ${formattedCategory.toLowerCase()} and other pet supplies at Stephan's Pet Store in Dar es Salaam. Fast delivery available!`,
+      title: `${rootCategoryTitles[category] ? titleCategory : `Buy ${titleCategory}`} in Dar es Salaam`,
+      description: `Shop premium ${titleCategory.toLowerCase()} and other pet supplies at Stephan's Pet Store in Dar es Salaam. Fast delivery available!`,
       alternates: {
         canonical: `/shop?category=${category}`,
       },
