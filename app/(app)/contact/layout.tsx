@@ -13,7 +13,7 @@ export const metadata: Metadata = {
         siteName: "Stephan's Pet Store",
         images: [
             {
-                url: "/og-image.png",
+                url: "/og-image.jpg",
                 width: 1200,
                 height: 630,
                 alt: "Contact Stephan's Pet Store",

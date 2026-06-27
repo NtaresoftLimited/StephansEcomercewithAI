@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     description: "Premium pet supplies, food & grooming services in Dar es Salaam, Tanzania. Shop now for your furry friends!",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Stephan's Pet Store - Tanzania's Premier Pet Shop",
