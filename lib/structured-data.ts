@@ -39,6 +39,11 @@ export function localBusinessJsonLd() {
     priceRange: "TZS",
     currenciesAccepted: "TZS",
     paymentAccepted: "Cash, Mobile Money, Card",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.8",
+      reviewCount: "124"
+    },
     areaServed: [
       {
         "@type": "City",
@@ -48,6 +53,20 @@ export function localBusinessJsonLd() {
         "@type": "Country",
         name: "Tanzania",
       },
+    ],
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        opens: "09:00",
+        closes: "18:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Saturday",
+        opens: "10:00",
+        closes: "20:30",
+      }
     ],
     sameAs: [
       "https://facebook.com/stephanspetstore",
@@ -66,6 +85,11 @@ export function localBusinessJsonLd() {
         addressLocality: "Dar es Salaam",
         addressCountry: "TZ",
       },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: "-6.7456",
+        longitude: "39.2785"
+      }
     },
     {
       ...baseStore,
@@ -76,8 +100,28 @@ export function localBusinessJsonLd() {
         addressLocality: "Dar es Salaam",
         addressCountry: "TZ",
       },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: "-6.7570",
+        longitude: "39.2435"
+      }
     }
   ];
+}
+
+export function faqJsonLd(faqs: Array<{ q: string; a: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    })),
+  };
 }
 
 export function websiteJsonLd() {

@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import { HelpCircle, Plus, Minus } from "lucide-react";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { faqJsonLd } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
     title: "FAQ - Frequently Asked Questions",
@@ -115,8 +117,11 @@ export default function FAQPage() {
         },
     ];
 
+    const flatFaqs = faqs.flatMap(section => section.questions);
+
     return (
         <div className="min-h-screen bg-gradient-to-b from-zinc-50 to-white">
+            <JsonLd data={faqJsonLd(flatFaqs)} />
             <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-16">
