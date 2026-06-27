@@ -25,9 +25,9 @@ interface ProductProjection {
   stock: number;
   price: number;
   featured: boolean;
-  category: {
+  categories: Array<{
     title: string;
-  } | null;
+  }> | null;
   image: {
     asset: {
       url: string;
@@ -44,7 +44,7 @@ function ProductRowContent(handle: DocumentHandle) {
       stock,
       price,
       featured,
-      category->{
+      "categories": categories[]->{
         title
       },
       "image": images[0]{
@@ -141,9 +141,9 @@ function ProductRowContent(handle: DocumentHandle) {
                 </Badge>
               </div>
             )}
-            {data.category && (
+            {data.categories && data.categories.length > 0 && (
               <p className="truncate text-xs text-zinc-500 dark:text-zinc-400">
-                {data.category.title}
+                {data.categories[0].title}
               </p>
             )}
             {/* Mobile: show price and stock inline */}

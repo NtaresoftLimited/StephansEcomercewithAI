@@ -119,7 +119,7 @@ async function runSync() {
                 odooId: product.id,
             });
 
-            if (categoryRef) patch.set({ category: categoryRef });
+            if (categoryRef) patch.set({ categories: [categoryRef] });
             if (imageAssetId) {
                 patch.setIfMissing({ images: [] });
                 patch.insert("replace", "images[0]", [{

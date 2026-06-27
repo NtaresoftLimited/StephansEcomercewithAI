@@ -24,9 +24,11 @@ interface QuickViewProduct {
             url: string | null;
         } | null;
     }> | null;
-    category: {
+    categories?: Array<{
+        _id: string;
         title: string | null;
-    } | null;
+        slug: string | null;
+    }> | null;
 }
 
 interface QuickViewModalProps {
@@ -160,9 +162,9 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
                     {/* Product Details */}
                     <div className="flex flex-col p-6 md:p-8">
                         {/* Category */}
-                        {product.category && (
+                        {product.categories && product.categories.length > 0 && (
                             <Badge variant="secondary" className="w-fit mb-3 bg-[#6b3e1e]/10 text-[#6b3e1e]">
-                                {product.category.title}
+                                {product.categories[0].title}
                             </Badge>
                         )}
 

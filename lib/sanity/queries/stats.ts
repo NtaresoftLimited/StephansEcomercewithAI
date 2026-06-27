@@ -81,7 +81,7 @@ export const PRODUCTS_INVENTORY_QUERY = defineQuery(`*[_type == "product"] {
   name,
   price,
   stock,
-  "category": category->title
+  "categories": categories[]->title
 }`);
 
 /**

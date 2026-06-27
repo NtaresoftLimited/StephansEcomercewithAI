@@ -76,7 +76,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   // Fetch related products
   const { data: relatedProductsRaw } = await sanityFetch({
     query: PRODUCTS_BY_CATEGORY_QUERY,
-    params: { categorySlug: product.category?.slug || "" },
+    params: { categorySlug: product.categories?.[0]?.slug || "" },
   });
 
   const relatedProducts = (relatedProductsRaw || [])
@@ -95,14 +95,14 @@ export default async function ProductPage({ params }: ProductPageProps) {
           <Link href="/products" className="hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
             Shop
           </Link>
-          {product.category && (
+          {product.categories && product.categories.length > 0 && (
             <>
               <ChevronRight className="w-4 h-4 flex-shrink-0" />
               <Link
-                href={`/products?category=${product.category.slug}`}
+                href={`/products?category=${product.categories[0].slug}`}
                 className="hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors capitalize"
               >
-                {product.category.title}
+                {product.categories[0].title}
               </Link>
             </>
           )}

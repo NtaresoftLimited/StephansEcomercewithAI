@@ -214,7 +214,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                                 {product.name}
                                             </h4>
                                             <p className="text-xs text-zinc-500 mt-0.5">
-                                                {product.category?.title || "Pet Essentials"}
+                                                {product.categories?.[0]?.title || "Pet Essentials"}
                                             </p>
                                             <p className="text-sm font-bold text-[#6b3e1e] mt-1">
                                                 TSh {product.price?.toLocaleString()}
@@ -398,7 +398,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                                         {product.name}
                                                     </h4>
                                                     <p className="text-[10px] text-zinc-500 mt-0.5">
-                                                        {product.category?.title || "Pet Essentials"}
+                                                        {product.categories?.[0]?.title || "Pet Essentials"}
                                                     </p>
                                                     <p className="text-xs font-bold text-[#6b3e1e] mt-0.5">
                                                         TSh {product.price?.toLocaleString()}

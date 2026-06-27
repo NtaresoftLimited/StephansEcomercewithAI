@@ -45,10 +45,11 @@ async function syncSanity() {
       transaction.patch(prodId, {
         set: {
           name: update.name.replace(/\s+/g, ' ').trim(),
-          category: {
+          categories: [{
+            _key: Math.random().toString(36).substring(2, 9),
             _type: 'reference',
             _ref: catId
-          }
+          }]
         }
       });
       updateCount++;

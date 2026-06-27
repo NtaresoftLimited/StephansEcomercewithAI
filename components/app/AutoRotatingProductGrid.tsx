@@ -21,9 +21,11 @@ interface Product {
             url: string | null;
         } | null;
     }> | null;
-    category: {
+    categories?: Array<{
+        _id: string;
         title: string | null;
-    } | null;
+        slug: string | null;
+    }> | null;
     brand?: {
         name: string | null;
         slug: string | null;

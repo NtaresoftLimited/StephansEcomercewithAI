@@ -11,9 +11,9 @@ const PRODUCT_FILTER_CONDITIONS = `
   && price > 0
   && stock > 0
   && ($categorySlug == "" || 
-      category->slug.current == $categorySlug || 
-      category->parentCategory->slug.current == $categorySlug || 
-      category->parentCategory->parentCategory->slug.current == $categorySlug)
+      $categorySlug in categories[]->slug.current || 
+      $categorySlug in categories[]->parentCategory->slug.current || 
+      $categorySlug in categories[]->parentCategory->parentCategory->slug.current)
   && ($color == "" || color == $color)
   && ($material == "" || material == $material)
   && ($minPrice == 0 || price >= $minPrice)
@@ -35,7 +35,7 @@ const FILTERED_PRODUCT_PROJECTION = `{
       url
     }
   },
-  category->{
+  categories[]->{
     _id,
     title,
     "slug": slug.current
@@ -67,9 +67,9 @@ const OFFERS_FILTER_CONDITIONS = `
     || count(variants[defined(compareAtPrice) && compareAtPrice > price]) > 0
   )
   && ($categorySlug == "" || 
-      category->slug.current == $categorySlug || 
-      category->parentCategory->slug.current == $categorySlug || 
-      category->parentCategory->parentCategory->slug.current == $categorySlug)
+      $categorySlug in categories[]->slug.current || 
+      $categorySlug in categories[]->parentCategory->slug.current || 
+      $categorySlug in categories[]->parentCategory->parentCategory->slug.current)
   && ($color == "" || color == $color)
   && ($material == "" || material == $material)
   && ($minPrice == 0 || price >= $minPrice)
@@ -104,7 +104,7 @@ export const ALL_PRODUCTS_QUERY = defineQuery(`*[
     },
     hotspot
   },
-  category->{
+  categories[]->{
     _id,
     title,
     "slug": slug.current
@@ -138,7 +138,7 @@ export const FEATURED_PRODUCTS_QUERY = defineQuery(`*[
     },
     hotspot
   },
-  category->{
+  categories[]->{
     _id,
     title,
     "slug": slug.current
@@ -170,7 +170,7 @@ export const PRODUCTS_WITH_BRANDS_QUERY = defineQuery(`*[
     name,
     "slug": slug.current
   },
-  category->{
+  categories[]->{
     title
   },
   stock
@@ -184,9 +184,9 @@ export const PRODUCTS_BY_CATEGORY_QUERY = defineQuery(`*[
   && price > 0
   && stock > 0
   && (
-    category->slug.current == $categorySlug || 
-    category->parentCategory->slug.current == $categorySlug || 
-    category->parentCategory->parentCategory->slug.current == $categorySlug
+    $categorySlug in categories[]->slug.current || 
+    $categorySlug in categories[]->parentCategory->slug.current || 
+    $categorySlug in categories[]->parentCategory->parentCategory->slug.current
   )
 ] | order(name asc) {
   _id,
@@ -201,7 +201,7 @@ export const PRODUCTS_BY_CATEGORY_QUERY = defineQuery(`*[
     },
     hotspot
   },
-  category->{
+  categories[]->{
     _id,
     title,
     "slug": slug.current
@@ -232,7 +232,7 @@ export const PRODUCTS_BY_BRAND_QUERY = defineQuery(`*[
     },
     hotspot
   },
-  category->{
+  categories[]->{
     _id,
     title,
     "slug": slug.current
@@ -266,7 +266,7 @@ export const PRODUCT_BY_SLUG_QUERY = defineQuery(`*[
     },
     hotspot
   },
-  category->{
+  categories[]->{
     _id,
     title,
     "slug": slug.current
@@ -325,7 +325,7 @@ export const SEARCH_PRODUCTS_QUERY = defineQuery(`*[
     },
     hotspot
   },
-  category->{
+  categories[]->{
     _id,
     title,
     "slug": slug.current
@@ -474,12 +474,12 @@ export const AI_SEARCH_PRODUCTS_QUERY = defineQuery(`*[
     $searchQuery == ""
     || name match $searchQuery + "*"
     || description match $searchQuery + "*"
-    || category->title match $searchQuery + "*"
+    || categories[]->title match $searchQuery + "*"
   )
   && ($categorySlug == "" || 
-      category->slug.current == $categorySlug || 
-      category->parentCategory->slug.current == $categorySlug || 
-      category->parentCategory->parentCategory->slug.current == $categorySlug)
+      $categorySlug in categories[]->slug.current || 
+      $categorySlug in categories[]->parentCategory->slug.current || 
+      $categorySlug in categories[]->parentCategory->parentCategory->slug.current)
   && ($material == "" || material == $material)
   && ($color == "" || color == $color)
   && ($minPrice == 0 || price >= $minPrice)
@@ -497,7 +497,7 @@ export const AI_SEARCH_PRODUCTS_QUERY = defineQuery(`*[
       metadata
     }
   },
-  category->{
+  categories[]->{
     _id,
     title,
     "slug": slug.current

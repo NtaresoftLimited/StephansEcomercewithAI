@@ -45,7 +45,7 @@ interface Product {
   name: string;
   price: number;
   stock: number;
-  category: string;
+  categories: string[];
 }
 
 interface UnfulfilledOrder {
@@ -185,12 +185,12 @@ export async function GET() {
         needsRestock: needsRestock.map((p) => ({
           name: p.name,
           stock: p.stock,
-          category: p.category,
+          category: p.categories?.[0] || 'Unknown',
         })),
         slowMoving: slowMoving.map((p) => ({
           name: p.name,
           stock: p.stock,
-          category: p.category,
+          category: p.categories?.[0] || 'Unknown',
         })),
         totalProducts: productsInventory.length,
         lowStockCount: productsInventory.filter((p) => p.stock <= 5).length,

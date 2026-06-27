@@ -55,11 +55,12 @@ export const productType = defineType({
       description: "Internal Odoo ID for syncing",
     }),
     defineField({
-      name: "category",
-      type: "reference",
-      to: [{ type: "category" }],
+      name: "categories",
+      title: "Categories",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "category" }] }],
       group: "details",
-      validation: (rule) => [rule.required().error("Category is required")],
+      validation: (rule) => [rule.required().min(1).error("At least one category is required")],
     }),
     defineField({
       name: "brand",
@@ -211,7 +212,7 @@ export const productType = defineType({
   preview: {
     select: {
       title: "name",
-      subtitle: "category.title",
+      subtitle: "categories.0.title",
       media: "images.0",
       price: "price",
     },

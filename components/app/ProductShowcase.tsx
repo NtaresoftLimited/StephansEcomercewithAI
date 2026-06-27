@@ -28,9 +28,11 @@ interface FeaturedProduct {
             url: string | null;
         } | null;
     }> | null;
-    category: {
+    categories?: Array<{
+        _id: string;
         title: string | null;
-    } | null;
+        slug: string | null;
+    }> | null;
 }
 
 interface ProductShowcaseProps {
@@ -281,9 +283,9 @@ function MobileProductCard({
             </div>
 
             {/* Category Badge - Top Left */}
-            {product.category && (
+            {product.categories && product.categories.length > 0 && (
                 <span className="absolute left-4 top-4 rounded-full bg-black/40 backdrop-blur-md px-3 py-1 text-xs font-medium text-white border border-white/20">
-                    {product.category.title}
+                    {product.categories[0].title}
                 </span>
             )}
 
@@ -444,9 +446,9 @@ function ProductShowcaseCard({ product, onQuickView }: ProductShowcaseCardProps)
                 )}
 
                 {/* Category Badge - Top Left */}
-                {product.category && (
+                {product.categories && product.categories.length > 0 && (
                     <span className="absolute left-3 top-3 rounded bg-[#1e3a5f] px-2.5 py-1 text-xs font-medium text-white shadow-sm">
-                        {product.category.title}
+                        {product.categories[0].title}
                     </span>
                 )}
 

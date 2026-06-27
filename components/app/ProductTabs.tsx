@@ -61,7 +61,7 @@ export function ProductTabs({ product }: ProductTabsProps) {
                             </div>
                             <div className="border-t border-zinc-100 dark:border-zinc-800 pt-3">
                                 <dt className="font-medium text-zinc-900 dark:text-zinc-100 text-xs uppercase mb-1">Category</dt>
-                                <dd className="text-sm text-zinc-500 dark:text-zinc-400">{product.category?.title || "N/A"}</dd>
+                                <dd className="text-sm text-zinc-500 dark:text-zinc-400">{product.categories?.[0]?.title || "N/A"}</dd>
                             </div>
                             {product.material && (
                                 <div className="border-t border-zinc-100 dark:border-zinc-800 pt-3">

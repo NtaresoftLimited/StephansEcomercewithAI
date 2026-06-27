@@ -21,7 +21,7 @@ export const ALL_CATEGORIES_QUERY = defineQuery(`*[
     },
     hotspot
   },
-  "productCount": count(*[_type == "product" && (category._ref == ^._id || category->parentCategory._ref == ^._id || category->parentCategory->parentCategory._ref == ^._id)])
+  "productCount": count(*[_type == "product" && (^._id in categories[]._ref || ^._id in categories[]->parentCategory._ref || ^._id in categories[]->parentCategory->parentCategory._ref)])
 }`);
 
 /**

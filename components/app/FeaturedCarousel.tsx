@@ -31,9 +31,11 @@ interface FeaturedProduct {
       url: string | null;
     } | null;
   }> | null;
-  category: {
+  categories?: Array<{
+    _id: string;
     title: string | null;
-  } | null;
+    slug: string | null;
+  }> | null;
 }
 
 interface FeaturedCarouselProps {
@@ -154,12 +156,12 @@ function FeaturedSlide({ product }: FeaturedSlideProps) {
 
       {/* Content Section - Right side (40% on desktop) */}
       <div className="flex w-full flex-col justify-center px-6 py-8 md:w-2/5 md:px-10 lg:px-16">
-        {product.category && (
+        {product.categories && product.categories.length > 0 && (
           <Badge
             variant="secondary"
             className="mb-4 w-fit bg-amber-500/20 text-amber-400 hover:bg-amber-500/30"
           >
-            {product.category.title}
+            {product.categories[0].title}
           </Badge>
         )}
 
