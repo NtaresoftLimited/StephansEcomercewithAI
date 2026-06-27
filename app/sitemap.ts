@@ -24,6 +24,13 @@ const BRAND_SITEMAP_QUERY = groq`
   }
 `;
 
+const CATEGORY_SITEMAP_QUERY = groq`
+  *[_type == "category" && defined(slug.current)] {
+    "slug": slug.current,
+    _updatedAt
+  }
+`;
+
 function toSitemapUrl(
   path: string,
   lastModified?: string | null,
@@ -51,9 +58,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     toSitemapUrl("/terms", null, "yearly", 0.4),
   ];
 
-  const [products, brands] = await Promise.all([
+  const [products, brands, categories] = await Promise.all([
     client.fetch<SitemapEntry[]>(PRODUCT_SITEMAP_QUERY),
     client.fetch<SitemapEntry[]>(BRAND_SITEMAP_QUERY),
+    client.fetch<SitemapEntry[]>(CATEGORY_SITEMAP_QUERY),
   ]);
 
   const productRoutes = products
@@ -73,5 +81,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       toSitemapUrl(`/brands/${brand.slug}`, brand._updatedAt, "weekly", 0.7),
     );
 
-  return [...staticRoutes, ...productRoutes, ...brandRoutes];
+  const categoryRoutes = categories
+    .filter((category) => category.slug)
+    .map((category) =>
+      toSitemapUrl(`/shop?category=${category.slug}`, category._updatedAt, "weekly", 0.8),
+    );
+
+  return [...staticRoutes, ...productRoutes, ...brandRoutes, ...categoryRoutes];
 }

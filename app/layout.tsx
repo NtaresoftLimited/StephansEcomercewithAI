@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Stephan's Pet Store | Tanzania's Premier Pet Shop",
+    default: "Stephan's Pet Store | Premier Pet Shop in Dar es Salaam",
     template: "%s | Stephan's Pet Store",
   },
   description: "Tanzania's leading pet store. Shop premium pet food, accessories, grooming services & more. Free delivery in Dar es Salaam. Visit us at Slipway Road.",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     locale: "en_TZ",
     url: "https://www.stephanspetstore.co.tz",
     siteName: "Stephan's Pet Store",
-    title: "Stephan's Pet Store | Tanzania's Premier Pet Shop",
+    title: "Stephan's Pet Store | Premier Pet Shop in Dar es Salaam",
     description: "Premium pet supplies, food & grooming services in Dar es Salaam, Tanzania. Shop now for your furry friends!",
     images: [
       {
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Stephan's Pet Store | Tanzania's Premier Pet Shop",
+    title: "Stephan's Pet Store | Premier Pet Shop in Dar es Salaam",
     description: "Premium pet supplies, food & grooming services in Dar es Salaam, Tanzania.",
     images: ["/og-image.png"],
   },

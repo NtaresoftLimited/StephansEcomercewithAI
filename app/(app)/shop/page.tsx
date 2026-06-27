@@ -20,14 +20,29 @@ import { SlidersHorizontal } from "lucide-react";
 import { Metadata } from "next";
 import { ProductsBanner } from "@/components/app/ProductsBanner";
 
-export const metadata: Metadata = {
-  title: "Pet Shop Dar es Salaam | Pet Food, Accessories & Supplies",
-  description:
-    "Shop pet food, beds, toys, grooming products and accessories in Dar es Salaam. Stephan's Pet Store offers premium supplies for dogs, cats, birds and small pets.",
-  alternates: {
-    canonical: "/shop",
-  },
-};
+export async function generateMetadata({ searchParams }: ProductsPageProps): Promise<Metadata> {
+  const params = await searchParams;
+  const category = params?.category;
+  
+  if (category) {
+    const formattedCategory = category.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+    return {
+      title: `Buy ${formattedCategory} in Dar es Salaam | Stephan's Pet Store`,
+      description: `Shop premium ${formattedCategory.toLowerCase()} and other pet supplies at Stephan's Pet Store in Dar es Salaam. Fast delivery available!`,
+      alternates: {
+        canonical: `/shop?category=${category}`,
+      },
+    };
+  }
+
+  return {
+    title: "Pet Shop Dar es Salaam | Pet Food, Accessories & Supplies",
+    description: "Shop pet food, beds, toys, grooming products and accessories in Dar es Salaam. Stephan's Pet Store offers premium supplies for dogs, cats, birds and small pets.",
+    alternates: {
+      canonical: "/shop",
+    },
+  };
+}
 
 interface ProductsPageProps {
   searchParams: Promise<{
