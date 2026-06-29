@@ -11,8 +11,18 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/product/:slug*",
+        destination: "/shop/:slug*",
+        permanent: true,
+      },
+      {
         source: "/products/:slug*",
         destination: "/shop/:slug*",
+        permanent: true,
+      },
+      {
+        source: "/merchant-feed.xml",
+        destination: "/google-merchant-feed.xml",
         permanent: true,
       },
     ];

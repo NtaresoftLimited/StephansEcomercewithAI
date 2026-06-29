@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SITE_URL } from "@/lib/seo";
 import "./globals.css";
@@ -65,7 +65,6 @@ export const metadata: Metadata = {
     shortcut: "/favicon.png",
   },
   manifest: "/manifest.json",
-  themeColor: "#6b3e1e",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
@@ -77,6 +76,10 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#6b3e1e",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -85,7 +88,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="theme-color" content="#6b3e1e" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
