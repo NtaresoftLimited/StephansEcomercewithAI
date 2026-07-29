@@ -98,7 +98,7 @@
 
   /* Muted - Pale Foam */
   --muted: oklch(0.94 0.02 90);
-  --muted-foreground: oklch(0.50 0.04 45);
+  --muted-foreground: oklch(0.38 0.04 45);
   /* Medium Coffee */
 
   /* Accent - Warm Latte */
@@ -169,7 +169,7 @@
 
   /* Muted */
   --muted: oklch(0.25 0.04 40);
-  --muted-foreground: oklch(0.65 0.05 60);
+  --muted-foreground: oklch(0.72 0.04 60);
 
   /* Accent */
   --accent: oklch(0.25 0.04 40);

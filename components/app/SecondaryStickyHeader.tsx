@@ -161,7 +161,7 @@ function SecondaryStickyHeaderInner({ isScrolled, onSearchOpen }: SecondaryStick
           <div className="lg:hidden">
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-zinc-800 dark:text-zinc-200 hover:bg-transparent -ml-2">
+                <Button variant="ghost" size="icon" className="text-zinc-800 dark:text-zinc-200 hover:bg-transparent -ml-2" aria-label="Toggle navigation menu">
                   <Menu className="h-6 w-6" strokeWidth={1.5} />
                   <span className="sr-only">Menu</span>
                 </Button>
@@ -184,7 +184,7 @@ function SecondaryStickyHeaderInner({ isScrolled, onSearchOpen }: SecondaryStick
           </div>
 
           {/* Logo */}
-          <Link href="/" className="shrink-0 flex items-center">
+          <Link href="/" className="shrink-0 flex items-center" aria-label="Stephan's Pet Store Home">
             <Image src="/logo.png" alt="Stephan's Pet Store" width={140} height={40} className="h-9 w-auto dark:invert" />
           </Link>
 
@@ -197,8 +197,9 @@ function SecondaryStickyHeaderInner({ isScrolled, onSearchOpen }: SecondaryStick
                 placeholder="Search For Products, Brands, and More..." 
                 className="w-full bg-transparent border-none focus:ring-0 text-[13px] px-3 py-2.5 text-zinc-800 dark:text-zinc-200"
                 onFocus={onSearchOpen}
+                aria-label="Search input"
               />
-              <button className="bg-[#6b3e1e] text-white px-6 py-2.5 text-[12px] font-bold uppercase tracking-wider hover:bg-[#5a3419] transition-colors">
+              <button className="bg-[#6b3e1e] text-white px-6 py-2.5 text-[12px] font-bold uppercase tracking-wider hover:bg-[#5a3419] transition-colors" aria-label="Search">
                 Search
               </button>
             </div>
@@ -210,6 +211,7 @@ function SecondaryStickyHeaderInner({ isScrolled, onSearchOpen }: SecondaryStick
             <button 
               onClick={onSearchOpen}
               className="flex md:hidden flex-col items-center gap-1 group"
+              aria-label="Search products"
             >
               <div className="w-8 h-8 rounded-full bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center group-hover:bg-amber-50 dark:group-hover:bg-amber-950/30 transition-colors overflow-hidden">
                 <Image 
@@ -223,7 +225,7 @@ function SecondaryStickyHeaderInner({ isScrolled, onSearchOpen }: SecondaryStick
               <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-tight">Search</span>
             </button>
 
-            <Link href="/login" className="hidden md:flex flex-col items-center gap-1 group">
+            <Link href="/login" className="hidden md:flex flex-col items-center gap-1 group" aria-label="Log in">
               <div className="w-8 h-8 rounded-full bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center group-hover:bg-amber-50 dark:group-hover:bg-amber-950/30 transition-colors">
                 <User className="h-4 w-4 text-zinc-600 dark:text-zinc-400 group-hover:text-amber-600 transition-colors" />
               </div>
@@ -234,6 +236,7 @@ function SecondaryStickyHeaderInner({ isScrolled, onSearchOpen }: SecondaryStick
               onClick={handleTrackLocation}
               disabled={isLocating}
               className="hidden md:flex flex-col items-center gap-1 group disabled:opacity-70"
+              aria-label="Track my location"
             >
               <div className="w-8 h-8 rounded-full bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center group-hover:bg-amber-50 dark:group-hover:bg-amber-950/30 transition-colors">
                 {isLocating ? (
@@ -247,14 +250,14 @@ function SecondaryStickyHeaderInner({ isScrolled, onSearchOpen }: SecondaryStick
               </span>
             </button>
 
-            <Link href="/wishlist" className="hidden md:flex flex-col items-center gap-1 group">
+            <Link href="/wishlist" className="hidden md:flex flex-col items-center gap-1 group" aria-label="Wishlist">
               <div className="w-8 h-8 rounded-full bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center group-hover:bg-amber-50 dark:group-hover:bg-amber-950/30 transition-colors">
                 <Heart className="h-4 w-4 text-zinc-600 dark:text-zinc-400 group-hover:text-amber-600 transition-colors" />
               </div>
               <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-tight">Wishlist</span>
             </Link>
 
-            <button onClick={openCart} className="flex flex-col items-center gap-1 group relative">
+            <button onClick={openCart} className="flex flex-col items-center gap-1 group relative" aria-label="Open shopping cart">
               <div className="w-8 h-8 rounded-full bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center group-hover:bg-amber-50 dark:group-hover:bg-amber-950/30 transition-colors overflow-hidden">
                 <Image
                   src="/icons/icon-shopping-bag.png"

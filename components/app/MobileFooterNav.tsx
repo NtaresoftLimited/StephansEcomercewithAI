@@ -23,6 +23,7 @@ export function MobileFooterNav() {
             <Link
                 href="/"
                 className="flex flex-col items-center justify-center gap-1 text-zinc-500 hover:text-amber-600 transition-colors"
+                aria-label="Home"
             >
                 <Home className="h-5 w-5" />
                 <span className="text-[10px] font-medium">Home</span>
@@ -32,6 +33,7 @@ export function MobileFooterNav() {
             <button
                 onClick={openChat}
                 className="relative -top-5 flex flex-col items-center justify-center"
+                aria-label="Talk to Sky AI Assistant"
             >
                 <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#6b3e1e] text-white shadow-lg shadow-[#6b3e1e]/40 border-4 border-white dark:border-zinc-950 transition-transform active:scale-95">
                     <Image
@@ -51,6 +53,7 @@ export function MobileFooterNav() {
             <Link
                 href="/shop"
                 className="relative flex flex-col items-center justify-center gap-1 text-zinc-500 hover:text-amber-600 transition-colors"
+                aria-label="Shop Page"
             >
                 <div className="relative">
                     <ShoppingBag className="h-5 w-5" />

@@ -90,7 +90,7 @@ export function Header() {
             <div className="lg:hidden">
               <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="text-foreground hover:bg-transparent">
+                  <Button variant="ghost" size="icon" className="text-foreground hover:bg-transparent" aria-label="Toggle navigation menu">
                     <Menu className="h-5 w-5" strokeWidth={1.5} />
                     <span className="sr-only">Menu</span>
                   </Button>
@@ -198,6 +198,7 @@ export function Header() {
               <button
                 onClick={() => setIsSearchOpen(true)}
                 className="h-full px-2 text-zinc-600 dark:text-zinc-400 hover:text-[#6b3e1e] dark:hover:text-zinc-100 transition-all rounded-full hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50 flex items-center justify-center overflow-hidden"
+                aria-label="Search products"
               >
                 <Image
                   src="/icons/icon-search-glass.png"
@@ -216,6 +217,7 @@ export function Header() {
                     <Link
                       href="/orders"
                       className="h-full px-2 text-zinc-600 dark:text-zinc-400 hover:text-[#6b3e1e] dark:hover:text-zinc-100 transition-all rounded-full hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50 flex items-center justify-center overflow-hidden"
+                      aria-label="My Account"
                     >
                       <Image
                         src="/icons/icon-profile-user.png"
@@ -237,6 +239,7 @@ export function Header() {
                   <Link
                     href="/login"
                     className="h-full px-2 text-zinc-600 dark:text-zinc-400 hover:text-[#6b3e1e] dark:hover:text-zinc-100 transition-all rounded-full hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50 flex items-center justify-center overflow-hidden"
+                    aria-label="Log in"
                   >
                     <Image
                       src="/icons/icon-profile-user.png"
@@ -253,6 +256,7 @@ export function Header() {
               <button
                 className="relative h-full px-2 text-zinc-600 dark:text-zinc-400 hover:text-[#6b3e1e] dark:hover:text-zinc-100 transition-all rounded-full hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50 group flex items-center justify-center overflow-hidden"
                 onClick={openCart}
+                aria-label="Open shopping cart"
               >
                 <Image
                   src="/icons/icon-shopping-bag.png"

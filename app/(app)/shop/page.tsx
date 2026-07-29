@@ -113,30 +113,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
           searchQuery={q}
         />
         <div className="flex flex-col gap-8 lg:flex-row">
-          {/* Mobile Filter Trigger */}
-          <div className="lg:hidden">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="outline" className="w-full justify-between">
-                  <span className="flex items-center gap-2">
-                    <SlidersHorizontal className="h-4 w-4" />
-                    Filters
-                  </span>
-                  {/* Optional: Add active filter count badge here */}
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="w-[300px] overflow-y-auto">
-                <SheetHeader>
-                  <SheetTitle>Filters</SheetTitle>
-                </SheetHeader>
-                <div className="mt-6">
-                  <ProductFilters categories={categories} brands={brands} />
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
-
-          {/* Desktop Sidebar */}
+          {/* Desktop Filters */}
           <aside className="hidden w-64 flex-shrink-0 lg:block">
             <div className="sticky top-24">
               <h2 className="mb-4 text-lg font-semibold text-zinc-900 dark:text-zinc-50">Filters</h2>

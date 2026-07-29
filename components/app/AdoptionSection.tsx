@@ -173,7 +173,7 @@ export function AdoptionSection({
 
                     {/* Top Left Paw Toe - CAT */}
                     <div
-                        className="absolute cursor-pointer transition-all duration-300 hover:scale-110 z-20"
+                        className="absolute cursor-pointer transition-all duration-300 hover:scale-110 z-20focus:outline-none focus:ring-4 focus:ring-primary/50 focus:rounded-full"
                         style={{
                             left: '20%',
                             top: '10%',
@@ -184,6 +184,15 @@ export function AdoptionSection({
                         onMouseEnter={() => setHoveredPet('cat')}
                         onMouseLeave={() => setHoveredPet(null)}
                         onClick={() => handlePetClick('cats')}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                handlePetClick('cats');
+                            }
+                        }}
+                        role="button"
+                        tabIndex={0}
+                        aria-label="Filter products for Cats"
                     >
                         <div className={`absolute inset-0 rounded-[50%_50%_50%_50%/60%_60%_40%_40%] 
                            ${hoveredPet === 'cat' ? 'bg-accent' : 'bg-muted'} 
@@ -195,7 +204,7 @@ export function AdoptionSection({
 
                     {/* Top Right Paw Toe - BIRD */}
                     <div
-                        className="absolute cursor-pointer transition-all duration-300 hover:scale-110 z-20"
+                        className="absolute cursor-pointer transition-all duration-300 hover:scale-110 z-20 focus:outline-none focus:ring-4 focus:ring-primary/50 focus:rounded-full"
                         style={{
                             right: '20%',
                             top: '10%',
@@ -206,6 +215,15 @@ export function AdoptionSection({
                         onMouseEnter={() => setHoveredPet('bird')}
                         onMouseLeave={() => setHoveredPet(null)}
                         onClick={() => handlePetClick('birds')}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                handlePetClick('birds');
+                            }
+                        }}
+                        role="button"
+                        tabIndex={0}
+                        aria-label="Filter products for Birds"
                     >
                         <div className={`absolute inset-0 rounded-[50%_50%_50%_50%/60%_60%_40%_40%] 
                            ${hoveredPet === 'bird' ? 'bg-accent' : 'bg-muted'} 
@@ -217,7 +235,7 @@ export function AdoptionSection({
 
                     {/* Bottom Left Paw Toe - DOG */}
                     <div
-                        className="absolute cursor-pointer transition-all duration-300 hover:scale-110 z-20"
+                        className="absolute cursor-pointer transition-all duration-300 hover:scale-110 z-20 focus:outline-none focus:ring-4 focus:ring-primary/50 focus:rounded-full"
                         style={{
                             left: '5%',
                             top: '32%',
@@ -228,6 +246,15 @@ export function AdoptionSection({
                         onMouseEnter={() => setHoveredPet('dog')}
                         onMouseLeave={() => setHoveredPet(null)}
                         onClick={() => handlePetClick('dogs')}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                handlePetClick('dogs');
+                            }
+                        }}
+                        role="button"
+                        tabIndex={0}
+                        aria-label="Filter products for Dogs"
                     >
                         <div className={`absolute inset-0 rounded-[50%] 
                            ${hoveredPet === 'dog' ? 'bg-accent' : 'bg-muted'} 
@@ -239,7 +266,7 @@ export function AdoptionSection({
 
                     {/* Bottom Right Paw Toe - FISH */}
                     <div
-                        className="absolute cursor-pointer transition-all duration-300 hover:scale-110 z-20"
+                        className="absolute cursor-pointer transition-all duration-300 hover:scale-110 z-20 focus:outline-none focus:ring-4 focus:ring-primary/50 focus:rounded-full"
                         style={{
                             right: '5%',
                             top: '32%',
@@ -250,6 +277,15 @@ export function AdoptionSection({
                         onMouseEnter={() => setHoveredPet('fish')}
                         onMouseLeave={() => setHoveredPet(null)}
                         onClick={() => handlePetClick('fish')}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                handlePetClick('fish');
+                            }
+                        }}
+                        role="button"
+                        tabIndex={0}
+                        aria-label="Filter products for Fish"
                     >
                         <div className={`absolute inset-0 rounded-[45%_55%_55%_45%/50%] 
                            ${hoveredPet === 'fish' ? 'bg-accent' : 'bg-primary'} 

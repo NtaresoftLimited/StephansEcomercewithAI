@@ -176,7 +176,6 @@ function ProductFiltersInner({ categories, brands }: ProductFiltersProps) {
             </Link>
             <div className="h-px w-full bg-zinc-100"></div>
           </div>
-
           {/* Categories Section (Maintaining existing logic but with new styling) */}
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-between">

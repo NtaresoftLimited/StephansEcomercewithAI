@@ -20,6 +20,7 @@ const PRODUCT_FILTER_CONDITIONS = `
   && ($minPrice == 0 || price >= $minPrice)
   && ($maxPrice == 0 || price <= $maxPrice)
   && ($searchQuery == "" || name match $searchQuery + "*" || description match $searchQuery + "*" || brand->name match $searchQuery + "*")
+  && ($brandSlug == "" || brand->slug.current == $brandSlug)
   && ($inStock == false || stock > 0)
 `;
 
@@ -76,6 +77,7 @@ const OFFERS_FILTER_CONDITIONS = `
   && ($minPrice == 0 || price >= $minPrice)
   && ($maxPrice == 0 || price <= $maxPrice)
   && ($searchQuery == "" || name match $searchQuery + "*" || description match $searchQuery + "*")
+  && ($brandSlug == "" || brand->slug.current == $brandSlug)
   && ($inStock == false || stock > 0)
 `;
 
