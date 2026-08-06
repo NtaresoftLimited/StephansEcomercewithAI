@@ -10,7 +10,7 @@ import { ALL_CATEGORIES_QUERY } from "@/lib/sanity/queries/categories";
 import { ALL_BRANDS_QUERY } from "@/lib/sanity/queries/brands";
 import { HERO_PET_IMAGES_QUERY } from "@/lib/sanity/queries/heroImages";
 import { GROOMING_IMAGES_QUERY } from "@/lib/sanity/queries/groomingImages";
-import { AdoptionSection } from "@/components/app/AdoptionSection";
+import { HeroSection } from "@/components/app/HeroSection";
 import { GroomingSection } from "@/components/app/GroomingSection";
 import { AutoRotatingProductGrid } from "@/components/app/AutoRotatingProductGrid";
 import { BrandsSection } from "@/components/app/BrandsSection";
@@ -105,15 +105,10 @@ export default async function HomePage({ searchParams }: PageProps) {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* PAW Section - Main Hero */}
-      <section className="pt-20"> {/* Add padding for fixed header */}
-        <Suspense fallback={<div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8 py-12 text-center text-muted-foreground">Loading adoption content…</div>}>
-          <AdoptionSection
-            dogImages={dogImages}
-            catImages={catImages}
-            birdImages={birdImages}
-            fishImages={fishImages}
-          />
+      {/* Main Hero */}
+      <section className="w-full">
+        <Suspense fallback={<div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8 py-12 text-center text-muted-foreground">Loading hero content…</div>}>
+          <HeroSection />
         </Suspense>
       </section>
 
