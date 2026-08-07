@@ -1,0 +1,56 @@
+activity_ids: one2many - Activities
+activity_state: selection - Activity State
+activity_user_id: many2one - Responsible User
+activity_type_id: many2one - Next Activity Type
+activity_type_icon: char - Activity Type Icon
+activity_date_deadline: date - Next Activity Deadline
+my_activity_date_deadline: date - My Activity Deadline
+activity_summary: char - Next Activity Summary
+activity_exception_decoration: selection - Activity Exception Decoration
+activity_exception_icon: char - Icon
+activity_calendar_event_id: many2one - Next Activity Calendar Event
+message_is_follower: boolean - Is Follower
+message_follower_ids: one2many - Followers
+message_partner_ids: many2many - Followers (Partners)
+message_ids: one2many - Messages
+has_message: boolean - Has Message
+message_needaction: boolean - Action Needed
+message_needaction_counter: integer - Number of Actions
+message_has_error: boolean - Message Delivery error
+message_has_error_counter: integer - Number of errors
+message_attachment_count: integer - Attachment Count
+rating_ids: one2many - Ratings
+website_message_ids: one2many - Website Messages
+message_has_sms_error: boolean - SMS Delivery error
+name: char - Reference
+partner_id: many2one - Customer
+customer_phone: char - Phone
+customer_email: char - Email
+pet_id: many2one - Pet Profile
+pet_name: char - Pet's Name
+pet_type: selection - Pet Species
+pet_category: selection - Size / Age Category
+service_type: selection - Service Type
+service_id: many2one - Package
+addon_ids: many2many - Additional Treatments
+has_detangling: boolean - Detangling Required
+has_handling: boolean - Handling Fee Applied
+late_pickup_hours: integer - Late Pickup Hours
+appointment_date: datetime - Appointment Date & Time
+preferred_time: char - Preferred Time Slot
+total_price: float - Total Price
+price_details: html - Price Details
+currency_id: many2one - Currency
+notes: text - Special Requests
+state: selection - Status
+sale_order_id: many2one - Sales Order
+pos_order_id: many2one - POS Order
+invoice_count: integer - Invoice Count
+is_paid: boolean - Is Paid
+policy_description: html - Policy Charges
+create_date: datetime - Booked On
+id: integer - ID
+display_name: char - Display Name
+create_uid: many2one - Created by
+write_uid: many2one - Last Updated by
+write_date: datetime - Last Updated on

@@ -1,5 +1,6 @@
 import { Metadata } from "next";
-import { Heart, Award, Users, MapPin } from "lucide-react";
+import Image from "next/image";
+import { Heart, ShoppingBag, Scissors } from "lucide-react";
 
 export const metadata: Metadata = {
     title: "About Us | Stephan's Pet Store Dar es Salaam",
@@ -27,152 +28,123 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
     return (
-        <div className="min-h-screen bg-gradient-to-b from-zinc-50 to-white">
-            <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
-                {/* Hero Section */}
-                <div className="text-center mb-16">
-                    <h1 className="text-4xl font-bold text-zinc-900 mb-4">
-                        About Stephan&apos;s Pet Store
-                    </h1>
-                    <p className="text-lg text-zinc-600 max-w-2xl mx-auto">
-                        Tanzania&apos;s premier destination for pet lovers, dedicated to providing the best care and products for your furry, feathered, and aquatic friends.
-                    </p>
+        <div className="min-h-screen bg-[#fbf8f5]">
+            {/* Hero Section */}
+            <section className="mx-auto max-w-4xl px-4 pt-24 pb-20 sm:px-6 lg:px-8 text-center">
+                <h3 className="text-[11px] font-bold tracking-[0.2em] text-[#A66C44] uppercase mb-6">
+                    ABOUT STEPHAN
+                </h3>
+                <h1 className="text-5xl md:text-7xl font-serif text-[#222222] leading-tight mb-8">
+                    Happy pet,
+                    <br />
+                    Happy home.
+                </h1>
+                
+                <div className="flex justify-center mb-8">
+                    <div className="w-12 h-[1px] bg-[#A66C44]"></div>
                 </div>
+                
+                <p className="text-lg md:text-xl text-[#222222] max-w-2xl mx-auto font-medium">
+                    At Stephan&apos;s, we believe pets deserve good products, 
+                    <br className="hidden md:block" />
+                    thoughtful care, and people who genuinely understand them.
+                </p>
+            </section>
 
-                {/* Story Section */}
-                <div className="mb-16">
-                    <h2 className="text-2xl font-bold text-zinc-900 mb-6">Our Story</h2>
-                    <div className="prose prose-zinc max-w-none">
-                        <p className="text-zinc-700 leading-relaxed mb-4">
-                            Founded with a passion for pets and their well-being, Stephan&apos;s Pet Store has grown to become one of Tanzania&apos;s most trusted names in pet care. Our journey began with a simple mission: to provide pet owners with access to premium quality products and professional services that their beloved companions deserve.
-                        </p>
-                        <p className="text-zinc-700 leading-relaxed">
-                            Today, we proudly serve the Dar es Salaam community and beyond, offering everything from premium pet food and accessories to professional grooming services. Our commitment to excellence has earned us the trust of thousands of pet parents across Tanzania.
-                        </p>
-                    </div>
-                </div>
-
-                {/* Values Grid */}
-                <div className="mb-16">
-                    <h2 className="text-2xl font-bold text-zinc-900 mb-8 text-center">Our Values</h2>
-                    <div className="grid md:grid-cols-2 gap-8">
-                        <div className="bg-white rounded-xl p-6 shadow-sm border border-zinc-100">
-                            <div className="flex items-start gap-4">
-                                <div className="p-3 bg-[#6b3e1e]/10 rounded-lg">
-                                    <Heart className="h-6 w-6 text-[#6b3e1e]" />
-                                </div>
-                                <div>
-                                    <h3 className="font-bold text-zinc-900 mb-2">Pet-First Approach</h3>
-                                    <p className="text-zinc-600 text-sm">
-                                        Every decision we make is guided by what&apos;s best for your pets. Their health, happiness, and well-being are our top priorities.
-                                    </p>
-                                </div>
-                            </div>
+            {/* Meet Stephan Section */}
+            <section className="bg-white">
+                <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+                    <div className="grid md:grid-cols-2 gap-12 lg:gap-24 items-center">
+                        <div className="order-2 md:order-1 relative aspect-[4/5] md:aspect-square w-full">
+                            <Image
+                                src="/about/stephan.png"
+                                alt="Stephan the pug"
+                                fill
+                                className="object-cover rounded-2xl"
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                priority
+                            />
                         </div>
-
-                        <div className="bg-white rounded-xl p-6 shadow-sm border border-zinc-100">
-                            <div className="flex items-start gap-4">
-                                <div className="p-3 bg-[#6b3e1e]/10 rounded-lg">
-                                    <Award className="h-6 w-6 text-[#6b3e1e]" />
-                                </div>
-                                <div>
-                                    <h3 className="font-bold text-zinc-900 mb-2">Quality Assurance</h3>
-                                    <p className="text-zinc-600 text-sm">
-                                        We carefully curate our product selection, partnering only with trusted brands that meet our high standards for quality and safety.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="bg-white rounded-xl p-6 shadow-sm border border-zinc-100">
-                            <div className="flex items-start gap-4">
-                                <div className="p-3 bg-[#6b3e1e]/10 rounded-lg">
-                                    <Users className="h-6 w-6 text-[#6b3e1e]" />
-                                </div>
-                                <div>
-                                    <h3 className="font-bold text-zinc-900 mb-2">Expert Guidance</h3>
-                                    <p className="text-zinc-600 text-sm">
-                                        Our knowledgeable team is always ready to provide expert advice and personalized recommendations for your pet&apos;s unique needs.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="bg-white rounded-xl p-6 shadow-sm border border-zinc-100">
-                            <div className="flex items-start gap-4">
-                                <div className="p-3 bg-[#6b3e1e]/10 rounded-lg">
-                                    <MapPin className="h-6 w-6 text-[#6b3e1e]" />
-                                </div>
-                                <div>
-                                    <h3 className="font-bold text-zinc-900 mb-2">Community Connection</h3>
-                                    <p className="text-zinc-600 text-sm">
-                                        We&apos;re proud to be part of the Dar es Salaam community, supporting local pet owners and contributing to animal welfare initiatives.
-                                    </p>
-                                </div>
+                        <div className="order-1 md:order-2 flex flex-col items-start justify-center">
+                            <h3 className="text-sm font-medium text-[#A66C44] mb-3">
+                                Where it all began.
+                            </h3>
+                            <h2 className="text-4xl md:text-5xl font-serif text-[#222222] mb-6">
+                                Meet Stephan.
+                            </h2>
+                            
+                            <div className="w-12 h-[1px] bg-[#A66C44] mb-8"></div>
+                            
+                            <div className="text-[#222222] space-y-4 text-lg">
+                                <p>Before the store, there was Stephan.</p>
+                                <p>Our much-loved pet, whose place in our family inspired the name Stephan. In many ways, he became part of where our story began.</p>
                             </div>
                         </div>
                     </div>
                 </div>
+            </section>
 
-                {/* Services Section */}
-                <div className="bg-[#6b3e1e]/5 rounded-2xl p-8 mb-16">
-                    <h2 className="text-2xl font-bold text-zinc-900 mb-6">What We Offer</h2>
-                    <ul className="space-y-4">
-                        <li className="flex items-start gap-3">
-                            <div className="h-6 w-6 rounded-full bg-[#6b3e1e] flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <span className="text-white text-xs">✓</span>
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-zinc-900 mb-1">Premium Pet Food & Nutrition</h3>
-                                <p className="text-zinc-600 text-sm">Wide selection of high-quality food for dogs, cats, birds, and fish</p>
-                            </div>
-                        </li>
-                        <li className="flex items-start gap-3">
-                            <div className="h-6 w-6 rounded-full bg-[#6b3e1e] flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <span className="text-white text-xs">✓</span>
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-zinc-900 mb-1">Professional Grooming Services</h3>
-                                <p className="text-zinc-600 text-sm">Expert grooming by trained professionals who love what they do</p>
-                            </div>
-                        </li>
-                        <li className="flex items-start gap-3">
-                            <div className="h-6 w-6 rounded-full bg-[#6b3e1e] flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <span className="text-white text-xs">✓</span>
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-zinc-900 mb-1">Pet Accessories & Toys</h3>
-                                <p className="text-zinc-600 text-sm">Everything your pet needs for play, comfort, and safety</p>
-                            </div>
-                        </li>
-                        <li className="flex items-start gap-3">
-                            <div className="h-6 w-6 rounded-full bg-[#6b3e1e] flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <span className="text-white text-xs">✓</span>
-                            </div>
-                            <div>
-                                <h3 className="font-semibold text-zinc-900 mb-1">Health & Wellness Products</h3>
-                                <p className="text-zinc-600 text-sm">Supplements, vitamins, and healthcare items to keep pets healthy</p>
-                            </div>
-                        </li>
-                    </ul>
+            {/* What Matters Section */}
+            <section className="mx-auto max-w-5xl px-4 py-24 sm:px-6 lg:px-8 text-center">
+                <h2 className="text-3xl md:text-4xl font-serif text-[#222222] mb-6">
+                    What matters to us.
+                </h2>
+                
+                <div className="flex justify-center mb-16">
+                    <div className="w-12 h-[1px] bg-[#A66C44]"></div>
                 </div>
+                
+                <div className="grid md:grid-cols-3 gap-12 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-[#e5e0db]">
+                    {/* Value 1 */}
+                    <div className="flex flex-col items-center pt-8 md:pt-0">
+                        <div className="mb-6 text-[#A66C44]">
+                            <ShoppingBag strokeWidth={1} className="w-12 h-12" />
+                        </div>
+                        <h3 className="text-lg font-bold text-[#222222] mb-3">
+                            Good products.
+                        </h3>
+                        <p className="text-[#555555] text-sm leading-relaxed max-w-[250px]">
+                            Carefully selected items we&apos;d trust for our own pets.
+                        </p>
+                    </div>
 
-                {/* Location */}
-                <div className="text-center">
-                    <h2 className="text-2xl font-bold text-zinc-900 mb-4">Visit Us</h2>
-                    <p className="text-zinc-600 mb-2">11 Slipway Road</p>
-                    <p className="text-zinc-600 mb-6">Dar es Salaam, Tanzania</p>
-                    <a
-                        href="https://www.google.com/maps/dir//11+Slipway+Rd,+Dar+es+Salaam,+Tanzania/@-0.6820625,37.350665,13z/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-[#6b3e1e] text-white rounded-lg hover:bg-[#5a3419] transition-colors font-medium"
-                    >
-                        <MapPin className="h-5 w-5" />
-                        Get Directions
-                    </a>
+                    {/* Value 2 */}
+                    <div className="flex flex-col items-center pt-12 md:pt-0">
+                        <div className="mb-6 text-[#A66C44]">
+                            <Scissors strokeWidth={1} className="w-12 h-12" />
+                        </div>
+                        <h3 className="text-lg font-bold text-[#222222] mb-3">
+                            Gentle care.
+                        </h3>
+                        <p className="text-[#555555] text-sm leading-relaxed max-w-[250px]">
+                            Patience, kindness and a stress-free experience.
+                        </p>
+                    </div>
+
+                    {/* Value 3 */}
+                    <div className="flex flex-col items-center pt-12 md:pt-0">
+                        <div className="mb-6 text-[#A66C44]">
+                            <Heart strokeWidth={1} className="w-12 h-12" />
+                        </div>
+                        <h3 className="text-lg font-bold text-[#222222] mb-3">
+                            Helpful people.
+                        </h3>
+                        <p className="text-[#555555] text-sm leading-relaxed max-w-[250px]">
+                            Friendly advice and support whenever you need it.
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </section>
+
+            {/* Footer Hook */}
+            <section className="bg-[#f2efe9] border-t border-[#e5e0db]">
+                <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 text-center flex flex-col items-center">
+                    <Heart strokeWidth={1.5} className="w-8 h-8 text-[#A66C44] mb-4" />
+                    <h2 className="text-3xl md:text-4xl font-serif text-[#222222]">
+                        From our pets to yours.
+                    </h2>
+                </div>
+            </section>
         </div>
     );
 }

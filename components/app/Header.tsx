@@ -41,7 +41,7 @@ export function Header() {
   }, []);
 
   const navLinks = [
-    { name: "Spoil", href: "/shop" },
+    { name: "Shop", href: "/shop" },
     { name: "Grooming", href: "/grooming" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },

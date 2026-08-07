@@ -1,0 +1,94 @@
+<t t-name="grooming.report_grooming_receipt">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <div class="page" style="font-family: Arial, sans-serif;">
+                            <!-- Header -->
+                            <div class="text-center mb-4">
+                                <img t-if="o.env.company.logo" t-att-src="image_data_uri(o.env.company.logo)" style="max-height: 100px; margin-bottom: 10px;" alt="Logo"/>
+                                <h2 t-if="not o.env.company.logo" style="margin-bottom: 2px;"><strong>Stephan's Pet Store</strong></h2>
+                                <p class="text-muted" style="margin: 0;">11 Slipway Road, Msasani Peninsula, Dar es Salaam</p>
+                                <p class="text-muted" style="margin: 0;">Tel: +255 757 870 177</p>
+                                <p class="text-muted" style="margin: 0;">TIN: 137-033-089</p>
+                                <hr style="border-top: 2px solid #333; margin-top: 10px;"/>
+                                <h3 style="margin-top: 5px;"><strong>GROOMING RECEIPT</strong></h3>
+                            </div>
+
+                            <!-- Receipt Info -->
+                            <div class="row mb-3">
+                                <div class="col-6">
+                                    <strong>Receipt No:</strong> <span t-esc="o.name.split(':')[0] if ':' in o.name else o.name"/><br/>
+                                    <strong>Date:</strong> <span t-field="o.appointment_date" t-options="{&quot;widget&quot;: &quot;date&quot;}"/><br/>
+                                    <strong>Customer:</strong> <span t-field="o.partner_id"/><br/>
+                                    <strong>Phone:</strong> <span t-field="o.customer_phone"/>
+                                </div>
+                                <div class="col-6">
+                                    <strong>Pet Name:</strong> <span t-field="o.pet_name"/><br/>
+                                    <strong>Species:</strong> <span t-field="o.pet_type"/><br/>
+                                    <strong>Size/Age:</strong> <span t-field="o.pet_category"/><br/>
+                                    <strong>Status:</strong> <span t-field="o.state" class="badge"/>
+                                </div>
+                            </div>
+
+                            <hr/>
+
+                            <!-- Service Details Table -->
+                            <table class="table table-sm table-bordered" style="font-size: 13px;">
+                                <thead>
+                                    <tr style="background-color: #f5f5f5;">
+                                        <th style="width: 70%;">Description</th>
+                                        <th class="text-end" style="width: 30%;">Amount (TZS)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Sale Order Lines -->
+                                    <t t-if="o.sale_order_id">
+                                        <t t-foreach="o.sale_order_id.order_line" t-as="line">
+                                            <tr>
+                                                <td><span t-field="line.name"/></td>
+                                                <td class="text-end">
+                                                    <span t-esc="'{:,.0f}'.format(line.price_subtotal)"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </tbody>
+                                <tfoot>
+                                    <tr style="font-weight: bold; font-size: 14px; border-top: 2px solid #333;">
+                                        <td class="text-end"><strong>TOTAL</strong></td>
+                                        <td class="text-end">
+                                            <strong>TZS <span t-esc="'{:,.0f}'.format(o.total_price)"/></strong>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+                            <!-- Payment Info -->
+                            <t t-if="o.sale_order_id and o.sale_order_id.invoice_ids">
+                                <t t-foreach="o.sale_order_id.invoice_ids" t-as="inv">
+                                    <t t-if="inv.payment_state in ('paid', 'in_payment')">
+                                        <div class="mt-2 p-2" style="background: #e8f5e9; border-radius: 5px;">
+                                            <strong style="color: #2e7d32;">✓ PAID</strong>
+                                            <t t-if="inv.invoice_payments_widget">
+                                                <t t-set="payments" t-value="inv._get_reconciled_payments()"/>
+                                                <t t-foreach="payments" t-as="payment">
+                                                    <span> — <span t-field="payment.journal_id"/> on <span t-field="payment.date"/></span>
+                                                </t>
+                                            </t>
+                                        </div>
+                                    </t>
+                                </t>
+                            </t>
+
+                            <!-- Footer -->
+                            <div class="text-center mt-4" style="font-size: 11px; color: #888;">
+                                <hr/>
+                                <p><strong>Thank you for choosing Stephan's Pet Store!</strong></p>
+                                <p>www.stephanspetstore.co.tz</p>
+                                
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </t>

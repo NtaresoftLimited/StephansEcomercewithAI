@@ -1,0 +1,11 @@
+customer_display_type: selection - Customer Facing Display
+customer_display_bg_img: binary - Background Image
+customer_display_bg_img_name: char - Background Image Name
+receipt_header: text - Receipt Header
+receipt_footer: text - Receipt Footer
+basic_receipt: boolean - Basic Receipt
+is_header_or_footer: boolean - Custom Header & Footer
+receipt_design_id: many2one - Receipt Design
+design_receipt: text - Receipt XML
+is_custom_receipt: boolean - Is Custom Receipt
+receipt_template_id: many2one - Receipt template

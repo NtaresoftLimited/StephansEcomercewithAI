@@ -55,7 +55,7 @@ export function AutoRotatingProductGrid({ products }: AutoRotatingProductGridPro
     }, [products]);
 
     // Grid configuration
-    const ITEMS_PER_PAGE = 12; // 6 cols x 2 rows
+    const ITEMS_PER_PAGE = 4; // Show 4 items per page
     const totalPages = Math.ceil(sortedProducts.length / ITEMS_PER_PAGE);
 
     // Auto-rotation effect
@@ -66,7 +66,7 @@ export function AutoRotatingProductGrid({ products }: AutoRotatingProductGridPro
             setTimeLeft((prev) => {
                 if (prev <= 1) {
                     handlePageChange((currentPage + 1) % totalPages);
-                    return 30;
+                    return 10; // slightly faster rotation for fewer items? or keep 30. Let's keep 30
                 }
                 return prev - 1;
             });
@@ -95,16 +95,11 @@ export function AutoRotatingProductGrid({ products }: AutoRotatingProductGridPro
     }
 
     return (
-        <section className="bg-background">
-            {/* Header with Timer */}
-            <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-4">
-                {/* Timer hidden for cleaner look, or made very subtle */}
-            </div>
-
+        <div className="w-full">
             {/* Grid */}
             <div
                 className={cn(
-                    "grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-x-4 gap-y-12 min-h-[600px] transition-opacity duration-300 ease-in-out",
+                    "grid grid-cols-2 lg:grid-cols-4 gap-4 transition-opacity duration-300 ease-in-out",
                     isTransitioning ? "opacity-0" : "opacity-100"
                 )}
             >
@@ -114,6 +109,6 @@ export function AutoRotatingProductGrid({ products }: AutoRotatingProductGridPro
             </div>
 
             {/* Pagination Dots removed per request */}
-        </section>
+        </div>
     );
 }

@@ -1,0 +1,32 @@
+domReady(()=>{document.body.innerHTML="";const container=document.createElement("div");container.className="o_module_error position-fixed
+---
+=0;for(var i=0,l=fonts.length;i<l;++i){(function(font){var node=document.createElement('span');node.innerHTML='giItT1WQy@!-/#';node.style.position='absolute';node.style.left='-10000px';node.style.top='-10000px
+---
+toString(){const div=document.createElement("div");this.mount(div,null);return div.innerHTML;}
+---
+t(parent,afterNode){this.parentEl=parent;const template=document.createElement("template");template.innerHTML=this.html;this.content=[...template.content.childNodes];for(let elem of this.content){nodeInsertBef
+---
+parentEl;const afterNode=this.content[0];const template=document.createElement("template");template.innerHTML=html2;const content=[...template.content.childNodes];for(let elem of content){nodeInsertBefore.call
+---
+asXmlString(){const t=xmlDoc.createElement("t");t.appendChild(this.dom);return t.innerHTML;}}
+---
+e=node.getAttribute("t-set");const value=node.getAttribute("t-value")||null;const defaultValue=node.innerHTML===node.textContent?node.textContent||null:null;let body=null;if(node.textContent!==node.innerHTML){
+---
+oString=renderToString;function renderToString(template,context={}){return render(template,context).innerHTML;}
+---
+=async({el,container,callback})=>{container||=document.querySelector(".render-container");container.innerHTML="";return await applyWhenMounted({el,container,callback});};return{toHtml,toCanvas,toJpeg,whenMount
+---
+nputValue(nativeNode,clonedNode){if(isInstanceOfElement(nativeNode,HTMLTextAreaElement)){clonedNode.innerHTML=nativeNode.value;}
+---
+const[open,close]=node.outerHTML.replace(`>${node.innerHTML}<`,">\n<").split("\n");const layer={inline:false,level,value:{open,close}};layers.push(layer);const
+---
+his.chart.chartArea.top;const viewContentTop=this.containerRef.el.getBoundingClientRect().top;const innerHTML=renderToString("web.GraphRenderer.CustomTooltip",{maxWidth:getMaxWidth(this.chart.chartArea),measur
+---
+ems(data,metaData,tooltipModel),});const template=Object.assign(document.createElement("template"),{innerHTML});const tooltip=template.content.firstChild;this.containerRef.el.prepend(tooltip);let top;const too
+---
+__exports.isHtmlEmpty=isHtmlEmpty;function isHtmlEmpty(innerHTML=""){const div=Object.assign(document.createElement("div"),{innerHTML});return div.innerText.trim()=
+---
+ntext,action.context)):domain;if(action.help){const htmlHelp=document.createElement("div");htmlHelp.innerHTML=action.help;if(!htmlHelp.innerText.trim()){delete action.help;}}
+---
+intEl]=ePOSLayout.getElementsByTagName("epos-print");append(eposPrintEl,children);return ePOSLayout.innerHTML.replaceAll(`xmlns=""`,"");}
+---
