@@ -266,9 +266,9 @@ export function Header() {
                 )}
               </div>
 
-              <button
+              <Link
+                href="/cart"
                 className="relative h-full px-2 text-zinc-600 dark:text-zinc-400 hover:text-[#6b3e1e] dark:hover:text-zinc-100 transition-all rounded-full hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50 group flex items-center justify-center overflow-hidden"
-                onClick={openCart}
                 aria-label="Open shopping cart"
               >
                 <Image
@@ -284,7 +284,7 @@ export function Header() {
                   </span>
                 )}
                 <span className="sr-only">Open cart</span>
-              </button>
+              </Link>
             </div>
           </div>
         </header>

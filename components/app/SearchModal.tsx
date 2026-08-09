@@ -41,7 +41,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
     const [brandPage, setBrandPage] = useState(0);
     const [productPage, setProductPage] = useState(0);
     const router = useRouter();
-    const { addItem, openCart } = useCartActions();
+    const { addItem } = useCartActions();
 
     // Fetch initial data (popular products/brands)
     useEffect(() => {
@@ -102,7 +102,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
             price: product.price,
             image: product.images?.[0]?.asset?.url,
         });
-        openCart();
+        router.push('/cart');
         onClose();
     };
 

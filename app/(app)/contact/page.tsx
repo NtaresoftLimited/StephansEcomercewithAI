@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import { toast } from "sonner";
 
 export default function ContactPage() {
@@ -105,16 +106,13 @@ export default function ContactPage() {
                         {/* Card 3: Book Grooming */}
                         <div className="flex flex-col items-center text-center border border-[#E0D6CC] rounded-2xl p-8 bg-white/50 hover:shadow-md transition-shadow">
                             {/* Scissors Icon */}
-                            <div className="mb-5">
-                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="16" cy="34" r="4" stroke="#6b3e1e" strokeWidth="1.8"/>
-                                    <circle cx="32" cy="34" r="4" stroke="#6b3e1e" strokeWidth="1.8"/>
-                                    <line x1="19.5" y1="31.5" x2="32" y2="12" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round"/>
-                                    <line x1="28.5" y1="31.5" x2="16" y2="12" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round"/>
-                                    <circle cx="24" cy="22" r="2" fill="#6b3e1e"/>
-                                    <circle cx="16" cy="12" r="2" fill="#6b3e1e"/>
-                                    <circle cx="32" cy="12" r="2" fill="#6b3e1e"/>
-                                </svg>
+                            <div className="mb-5 relative h-12 w-12">
+                                <Image
+                                    src="/grooming-scissors-bubbles.png"
+                                    alt="Stephan's Signature Grooming Scissors"
+                                    fill
+                                    className="object-contain"
+                                />
                             </div>
                             <h3 className="text-xl font-bold text-[#222222] mb-2">Book Grooming</h3>
                             <p className="text-[#888888] text-sm mb-4">
@@ -168,7 +166,7 @@ export default function ContactPage() {
                             <div className="text-sm font-medium w-full max-w-[260px] space-y-3">
                                 <div className="flex justify-between border-b border-[#E0D6CC]/60 pb-3">
                                     <span className="text-[#222222]">Monday – Friday</span>
-                                    <span className="text-[#4E2A15]">9:00 AM – 9:00 PM</span>
+                                    <span className="text-[#4E2A15]">9:00 AM – 8:30 PM</span>
                                 </div>
                                 <div className="flex justify-between border-b border-[#E0D6CC]/60 pb-3">
                                     <span className="text-[#222222]">Saturday</span>

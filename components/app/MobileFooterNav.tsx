@@ -4,12 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { Home, ShoppingBag } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useCartActions, useTotalItems } from "@/lib/store/cart-store-provider";
+import { useTotalItems } from "@/lib/store/cart-store-provider";
 import { useChatActions } from "@/lib/store/chat-store-provider";
 
 export function MobileFooterNav() {
     const { openChat } = useChatActions();
-    const { openCart } = useCartActions();
     const totalItems = useTotalItems();
     const pathname = usePathname();
 
@@ -49,11 +48,11 @@ export function MobileFooterNav() {
                 </span>
             </button>
 
-            {/* Shop Page Link (Right) */}
+            {/* Cart Page Link (Right) */}
             <Link
-                href="/shop"
+                href="/cart"
                 className="relative flex flex-col items-center justify-center gap-1 text-zinc-500 hover:text-amber-600 transition-colors"
-                aria-label="Shop Page"
+                aria-label="Cart Page"
             >
                 <div className="relative">
                     <ShoppingBag className="h-5 w-5" />
@@ -63,7 +62,7 @@ export function MobileFooterNav() {
                         </span>
                     )}
                 </div>
-                <span className="text-[10px] font-medium">Shop Page</span>
+                <span className="text-[10px] font-medium">Cart</span>
             </Link>
         </div>
     );

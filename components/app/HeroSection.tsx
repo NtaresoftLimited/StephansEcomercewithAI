@@ -44,7 +44,7 @@ export function HeroSection() {
                 <div className="flex flex-row items-center justify-center gap-2 sm:gap-4 w-full px-2 sm:px-0">
                     <Button 
                         asChild 
-                        className="flex-1 sm:flex-none h-auto bg-[#222222] hover:bg-black hover:text-white border-2 border-[#222222] hover:border-black text-white px-2 sm:px-8 py-4 sm:py-8 rounded-md text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center gap-1 sm:gap-2 group"
+                        className="flex-1 sm:flex-none h-auto bg-[#222222] hover:bg-black hover:text-white border-2 border-[#222222] hover:border-black text-white px-2 sm:px-6 py-3 sm:py-5 rounded-md text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center gap-1 sm:gap-2 group"
                     >
                         <Link href="/shop" className="text-center whitespace-normal flex items-center justify-center gap-3">
                             <Image
@@ -60,10 +60,10 @@ export function HeroSection() {
                     <Button 
                         asChild 
                         variant="outline" 
-                        className="flex-1 sm:flex-none h-auto bg-transparent hover:bg-white hover:text-black border-white border-2 text-white px-1 sm:px-8 py-4 sm:py-8 rounded-md text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center gap-1 sm:gap-2 group"
+                        className="flex-1 sm:flex-none h-auto bg-transparent hover:bg-white hover:text-black border-white border-2 text-white px-1 sm:px-6 py-3 sm:py-5 rounded-md text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center gap-1 sm:gap-2 group"
                     >
                         <Link href="/grooming" className="text-center whitespace-normal flex items-center justify-center gap-3">
-                            <Image src="/calendar-stephans.svg" alt="Calendar" width={36} height={36} className="h-5 w-5 shrink-0 transition-all group-hover:invert group-hover:brightness-0 group-hover:contrast-200 sm:h-9 sm:w-9" />
+                            <Image src="/calendar-stephans.svg" alt="Calendar" width={36} height={36} className="h-5 w-5 shrink-0 transition-all sm:h-9 sm:w-9" />
                             Book Grooming
                         </Link>
                     </Button>

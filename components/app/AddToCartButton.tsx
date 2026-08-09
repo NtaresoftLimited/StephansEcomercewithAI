@@ -2,6 +2,7 @@
 
 import { Minus, Plus, ShoppingBag } from "lucide-react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useCartActions, useCartItem } from "@/lib/store/cart-store-provider";
 import { cn } from "@/lib/utils";
@@ -29,8 +30,9 @@ export function AddToCartButton({
   quantity = 1,
   showQuantityControls = true,
 }: AddToCartButtonProps) {
-  const { addItem, updateQuantity, openCart } = useCartActions();
+  const { addItem, updateQuantity } = useCartActions();
   const cartItem = useCartItem(productId);
+  const router = useRouter();
 
   const quantityInCart = cartItem?.quantity ?? 0;
   const isOutOfStock = stock <= 0;
@@ -39,7 +41,7 @@ export function AddToCartButton({
   const handleAdd = () => {
     addItem({ productId, name, price, image }, quantity);
     toast.success(`Added ${quantity} ${name} to cart`);
-    openCart();
+    router.push("/cart");
   };
 
   const handleIncrement = () => {

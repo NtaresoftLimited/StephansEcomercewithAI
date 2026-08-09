@@ -6,7 +6,6 @@ import { Toaster } from "@/components/ui/sonner";
 import { Header } from "@/components/app/Header";
 import { GroomingStatusNotification } from "@/components/app/grooming/GroomingStatusNotification";
 import { Footer } from "@/components/app/Footer";
-import { CartSheet } from "@/components/app/CartSheet";
 import { ChatSheet } from "@/components/app/ChatSheet";
 import { AppShell } from "@/components/app/AppShell";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -27,7 +26,6 @@ function AppLayout({ children }: { children: React.ReactNode }) {
               <Footer />
               <MobileFooterNav />
             </AppShell>
-            <CartSheet />
             <ChatSheet />
             <GroomingStatusNotification />
             <Toaster position="bottom-center" />

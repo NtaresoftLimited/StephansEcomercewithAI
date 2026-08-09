@@ -270,7 +270,7 @@ function SecondaryStickyHeaderInner({ isScrolled, onSearchOpen }: SecondaryStick
               <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-tight">Wishlist</span>
             </Link>
 
-            <button onClick={openCart} className="flex flex-col items-center gap-1 group relative" aria-label="Open shopping cart">
+            <Link href="/cart" className="flex flex-col items-center gap-1 group relative" aria-label="Open shopping cart">
               <div className="w-8 h-8 rounded-full bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center group-hover:bg-amber-50 dark:group-hover:bg-amber-950/30 transition-colors overflow-hidden">
                 <Image
                   src="/icons/icon-shopping-bag.png"
@@ -286,14 +286,14 @@ function SecondaryStickyHeaderInner({ isScrolled, onSearchOpen }: SecondaryStick
                 )}
               </div>
               <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-tight">Bag</span>
-            </button>
+            </Link>
           </div>
         </div>
       </div>
 
       {/* 3. BOTTOM BAR (Navigation) */}
       <div className="hidden lg:block bg-white dark:bg-zinc-950 px-4 sm:px-6 lg:px-8 shadow-sm">
-        <div className="mx-auto max-w-7xl flex items-center h-11 gap-8 text-[12px] font-bold tracking-wider text-zinc-700 dark:text-zinc-200">
+        <div className="mx-auto max-w-7xl flex items-center h-11 gap-8 text-[15px] font-bold text-zinc-700 dark:text-zinc-200">
           {categories.map((cat) => (
             <div 
               key={cat.id} 
@@ -347,7 +347,7 @@ function SecondaryStickyHeaderInner({ isScrolled, onSearchOpen }: SecondaryStick
           </Link>
 
           <Link href="/grooming" className="flex items-center gap-1.5 hover:text-emerald-600 transition-colors h-full border-b-2 border-transparent hover:border-emerald-500">
-            <Scissors className="h-3.5 w-3.5" /> Grooming
+            <Image src="/about/grooming-scissors.png" alt="Grooming" width={16} height={16} className="h-[16px] w-[16px] object-contain" /> Grooming
           </Link>
 
           <Link href="/stores" className="ml-auto text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors h-full flex items-center border-b-2 border-transparent hover:border-zinc-500 gap-2">
