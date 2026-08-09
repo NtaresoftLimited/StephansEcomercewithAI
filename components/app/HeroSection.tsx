@@ -41,22 +41,29 @@ export function HeroSection() {
                 </p>
 
                 {/* Buttons */}
-                <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+                <div className="flex flex-row items-center justify-center gap-2 sm:gap-4 w-full px-2 sm:px-0">
                     <Button 
                         asChild 
-                        className="w-full sm:w-auto bg-[#222222] hover:bg-black hover:text-white border-2 border-[#222222] hover:border-black text-white px-8 py-6 rounded-md text-sm font-semibold transition-colors"
+                        className="flex-1 sm:flex-none h-auto bg-[#222222] hover:bg-black hover:text-white border-2 border-[#222222] hover:border-black text-white px-2 sm:px-8 py-4 sm:py-8 rounded-md text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center gap-1 sm:gap-2 group"
                     >
-                        <Link href="/shop">
+                        <Link href="/shop" className="text-center whitespace-normal flex items-center justify-center gap-3">
+                            <Image
+                                src="/icons/icon-shopping-bag.png"
+                                alt=""
+                                width={36}
+                                height={36}
+                                className="h-5 w-5 shrink-0 object-contain brightness-0 invert transition-transform group-hover:scale-110 sm:h-9 sm:w-9"
+                            />
                             Shop Collection
                         </Link>
                     </Button>
                     <Button 
                         asChild 
                         variant="outline" 
-                        className="w-full sm:w-auto bg-transparent hover:bg-white hover:text-black border-white border-2 text-white px-8 py-6 rounded-md text-sm font-semibold transition-colors flex items-center gap-2 group"
+                        className="flex-1 sm:flex-none h-auto bg-transparent hover:bg-white hover:text-black border-white border-2 text-white px-1 sm:px-8 py-4 sm:py-8 rounded-md text-xs sm:text-sm font-semibold transition-colors flex items-center justify-center gap-1 sm:gap-2 group"
                     >
-                        <Link href="/grooming">
-                            <Image src="/calendar-stephans.svg" alt="Calendar" width={26} height={26} className="mr-1 transition-all" />
+                        <Link href="/grooming" className="text-center whitespace-normal flex items-center justify-center gap-3">
+                            <Image src="/calendar-stephans.svg" alt="Calendar" width={36} height={36} className="h-5 w-5 shrink-0 transition-all group-hover:invert group-hover:brightness-0 group-hover:contrast-200 sm:h-9 sm:w-9" />
                             Book Grooming
                         </Link>
                     </Button>

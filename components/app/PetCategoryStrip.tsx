@@ -5,14 +5,14 @@ const petCategories = [
   {
     name: "Dogs",
     href: "/shop?category=dogs",
-    icon: "/icons/minimalist-dog-v4.jpg",
-    imageClassName: "scale-[1.7]",
+    icon: "/icons/minimalist-dog.png",
+    imageClassName: "scale-[1.2]",
   },
   {
     name: "Cats",
     href: "/shop?category=cats",
-    icon: "/icons/minimalist-cat-v4.jpg",
-    imageClassName: "scale-[1.8]",
+    icon: "/icons/minimalist-cat.png",
+    imageClassName: "scale-[1.2]",
   },
   {
     name: "Small Animals",

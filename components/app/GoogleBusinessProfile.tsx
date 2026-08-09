@@ -14,12 +14,12 @@ const BUSINESS_INFO = {
     email: "info@stephanspetstore.co.tz",
     website: "https://www.stephanspetstore.co.tz",
     hours: [
-        { day: "Monday", open: "9:00 AM", close: "8:30 PM" },
-        { day: "Tuesday", open: "9:00 AM", close: "8:30 PM" },
-        { day: "Wednesday", open: "9:00 AM", close: "8:30 PM" },
-        { day: "Thursday", open: "9:00 AM", close: "8:30 PM" },
-        { day: "Friday", open: "9:00 AM", close: "8:30 PM" },
-        { day: "Saturday", open: "9:00 AM", close: "8:30 PM" },
+        { day: "Monday", open: "9:00 AM", close: "9:00 PM" },
+        { day: "Tuesday", open: "9:00 AM", close: "9:00 PM" },
+        { day: "Wednesday", open: "9:00 AM", close: "9:00 PM" },
+        { day: "Thursday", open: "9:00 AM", close: "9:00 PM" },
+        { day: "Friday", open: "9:00 AM", close: "9:00 PM" },
+        { day: "Saturday", open: "10:00 AM", close: "8:30 PM" },
         { day: "Sunday", open: "Closed", close: "" },
     ],
     // Google Maps coordinates for Slipway, Dar es Salaam

@@ -160,23 +160,23 @@ export default function ContactPage() {
                             {/* Clock Icon */}
                             <div className="mb-5">
                                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="24" cy="24" r="14" stroke="#6b3e1e" strokeWidth="1.8"/>
-                                    <polyline points="24,16 24,24 30,28" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <circle cx="24" cy="24" r="14" stroke="#4E2A15" strokeWidth="1.8"/>
+                                    <polyline points="24,16 24,24 30,28" stroke="#4E2A15" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
                             </div>
-                            <h3 className="text-xl font-bold text-[#222222] mb-2">Opening Hours</h3>
-                            <div className="text-sm text-[#555555] w-full max-w-[220px] mt-2 space-y-1.5">
-                                <div className="flex justify-between">
-                                    <span className="font-semibold text-[#222222]">Monday – Friday</span>
-                                    <span>9:00 AM – 9:00 PM</span>
+                            <h3 className="text-xl font-bold text-[#222222] mb-4">Opening Hours</h3>
+                            <div className="text-sm font-medium w-full max-w-[260px] space-y-3">
+                                <div className="flex justify-between border-b border-[#E0D6CC]/60 pb-3">
+                                    <span className="text-[#222222]">Monday – Friday</span>
+                                    <span className="text-[#4E2A15]">9:00 AM – 9:00 PM</span>
+                                </div>
+                                <div className="flex justify-between border-b border-[#E0D6CC]/60 pb-3">
+                                    <span className="text-[#222222]">Saturday</span>
+                                    <span className="text-[#4E2A15]">10:00 AM – 8:30 PM</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="font-semibold text-[#222222]">Saturday</span>
-                                    <span>10:00 AM – 8:30 PM</span>
-                                </div>
-                                <div className="flex justify-between">
-                                    <span className="font-semibold text-[#222222]">Sunday</span>
-                                    <span className="text-red-500">Closed</span>
+                                    <span className="text-[#222222]">Sunday</span>
+                                    <span className="text-[#4E2A15] font-semibold">Closed</span>
                                 </div>
                             </div>
                         </div>

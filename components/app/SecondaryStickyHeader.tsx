@@ -9,7 +9,7 @@ import {
   Phone, Mail, MessageCircle, User, MapPin, Heart, ShoppingBag,
   CircleDot, Utensils, ShieldCheck, HeartPulse, Bone, Scissors, Trash2, 
   Refrigerator, Bed, Home, Dumbbell, Shield, Shirt, Brain, Car, Baby, Wind,
-  Loader2, Menu
+  Loader2
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { DEEP_NAV_MENU } from "@/lib/config/navigation";
@@ -161,8 +161,21 @@ function SecondaryStickyHeaderInner({ isScrolled, onSearchOpen }: SecondaryStick
           <div className="lg:hidden">
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-zinc-800 dark:text-zinc-200 hover:bg-transparent -ml-2" aria-label="Toggle navigation menu">
-                  <Menu className="h-6 w-6" strokeWidth={1.5} />
+                <Button variant="ghost" size="icon" className="group -ml-2 text-[#6b3e1e] hover:bg-transparent hover:text-[#6b3e1e]" aria-label="Toggle navigation menu">
+                  <span
+                    aria-hidden="true"
+                    className="block h-8 w-8 bg-[#6b3e1e] opacity-70 transition-opacity group-hover:opacity-100"
+                    style={{
+                      WebkitMaskImage: "url('/line-3.svg')",
+                      maskImage: "url('/line-3.svg')",
+                      WebkitMaskPosition: "center",
+                      maskPosition: "center",
+                      WebkitMaskRepeat: "no-repeat",
+                      maskRepeat: "no-repeat",
+                      WebkitMaskSize: "contain",
+                      maskSize: "contain",
+                    }}
+                  />
                   <span className="sr-only">Menu</span>
                 </Button>
               </SheetTrigger>

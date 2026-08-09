@@ -32,7 +32,7 @@ export default function AboutPage() {
             {/* Hero Section */}
             <section className="mx-auto max-w-4xl px-4 pt-24 pb-20 sm:px-6 lg:px-8 text-center">
                 <h3 className="text-[11px] font-bold tracking-[0.2em] text-[#A66C44] uppercase mb-6">
-                    ABOUT STEPHAN
+                    ABOUT STEPHAN'S
                 </h3>
                 <h1 className="text-5xl md:text-7xl font-serif text-[#222222] leading-tight mb-8">
                     Happy pet,
@@ -110,8 +110,14 @@ export default function AboutPage() {
 
                     {/* Value 2 */}
                     <div className="flex flex-col items-center pt-12 md:pt-0">
-                        <div className="mb-6 text-[#A66C44]">
-                            <Scissors strokeWidth={1} className="w-12 h-12" />
+                        <div className="mb-6 text-[#A66C44] flex items-center justify-center h-12 w-12">
+                            <Image 
+                                src="/about/grooming-scissors.png" 
+                                alt="Gentle Care" 
+                                width={48} 
+                                height={48} 
+                                className="w-12 h-12 object-contain scale-[2]" 
+                            />
                         </div>
                         <h3 className="text-lg font-bold text-[#222222] mb-3">
                             Gentle care.

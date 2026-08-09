@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { cn } from "@/lib/utils";
 import { 
-  ChevronDown, Sparkles, Percent, Dog, Cat, Bird, MousePointer2,
+  ChevronDown, Sparkles, Percent,
   Utensils, ShieldCheck, HeartPulse, Bone, Scissors, Trash2, Refrigerator,
   Bed, Home, Dumbbell, Shield, Shirt, Brain, Car, Baby, CircleDot,
   Wind, User, Heart, LogIn, LogOut
@@ -64,10 +63,10 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
   };
 
   const sections = [
-    { id: "dogs", title: "Shop For Dog", icon: "/icons/icon-dog.png", data: DEEP_NAV_MENU.dogs, href: "/shop?category=dogs" },
-    { id: "cats", title: "Shop For Cat", icon: "/icons/icon-cat.png", data: DEEP_NAV_MENU.cats, href: "/shop?category=cats" },
-    { id: "birds", title: "Shop For Birds", icon: Bird, data: DEEP_NAV_MENU.birds, href: "/shop?category=birds" },
-    { id: "smallPets", title: "Small Pets", icon: MousePointer2, data: DEEP_NAV_MENU.smallPets, href: "/shop?category=small-pets" },
+    { id: "dogs", title: "Shop For Dog", icon: "/icons/minimalist-dog.png", data: DEEP_NAV_MENU.dogs, href: "/shop?category=dogs", iconClass: "" },
+    { id: "cats", title: "Shop For Cat", icon: "/icons/minimalist-cat.png", data: DEEP_NAV_MENU.cats, href: "/shop?category=cats", iconClass: "" },
+    { id: "birds", title: "Shop For Birds", icon: "/icons/minimalist-bird.png", data: DEEP_NAV_MENU.birds, href: "/shop?category=birds", iconClass: "scale-125" },
+    { id: "smallPets", title: "Small Pets", icon: "/icons/minimalist-rabbit.png", data: DEEP_NAV_MENU.smallPets, href: "/shop?category=small-pets", iconClass: "scale-125" },
   ];
 
   return (
@@ -82,20 +81,17 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
         >
           <CollapsibleTrigger className="flex w-full items-center justify-between text-lg font-medium text-zinc-700 dark:text-zinc-200 hover:text-amber-600 transition-colors">
             <div className="flex items-center gap-3">
-              {typeof section.icon === "string" ? (
+              <div className="h-5 w-5 shrink-0 flex items-center justify-center overflow-visible">
                 <Image
                   src={section.icon}
                   alt={section.title}
                   width={20}
                   height={20}
-                  className={cn(
-                    "w-5 h-5 object-contain",
+                  className={`h-5 w-5 object-contain mix-blend-multiply ${section.iconClass} ${
                     openSection === section.id ? "brightness-90" : "opacity-80"
-                  )}
+                  }`}
                 />
-              ) : (
-                <section.icon className={openSection === section.id ? "text-amber-600" : "text-zinc-400"} size={20} />
-              )}
+              </div>
               {section.title}
             </div>
             <ChevronDown
@@ -144,12 +140,18 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
       <Link
         href="/grooming"
         onClick={onClose}
-        className="text-lg font-medium text-blue-600 dark:text-blue-400 mt-2 hover:text-blue-700 transition-colors flex items-center gap-3"
+        className="text-lg font-medium text-zinc-700 dark:text-zinc-200 mt-2 hover:text-amber-600 transition-colors flex items-center gap-3"
       >
-        <div className="w-5 h-5 flex items-center justify-center">
-          <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+        <div className="h-5 w-5 shrink-0 flex items-center justify-center overflow-visible">
+          <Image
+            src="/icons/Grooming Scissors.png"
+            alt="Grooming Studio"
+            width={20}
+            height={20}
+            className="w-5 h-5 object-contain opacity-80 scale-125"
+          />
         </div>
-        Grooming Salon
+        Grooming Studio
       </Link>
       
       <Link
@@ -157,7 +159,7 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
         onClick={onClose}
         className="text-lg font-medium text-pink-600 dark:text-pink-400 hover:text-pink-700 transition-colors flex items-center gap-3"
       >
-        <Sparkles size={20} className="text-pink-500" />
+        <Sparkles className="h-5 w-5 shrink-0 text-pink-500" />
         New Arrivals
       </Link>
 
@@ -166,7 +168,7 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
         onClick={onClose}
         className="text-lg font-medium text-orange-600 dark:text-orange-400 hover:text-orange-700 transition-colors flex items-center gap-3"
       >
-        <Percent size={20} className="text-orange-500" />
+        <Percent className="h-5 w-5 shrink-0 text-orange-500" />
         Offers & Deals
       </Link>
 
@@ -185,7 +187,7 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
         onClick={onClose}
         className="text-lg font-medium text-zinc-700 dark:text-zinc-200 hover:text-amber-600 transition-colors"
       >
-        About Us
+        About Stephan's
       </Link>
       
       <Link

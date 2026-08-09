@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { ShoppingBag, User, Search, Menu, X } from "lucide-react";
+import { ShoppingBag, User, Search, X } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
 import { useCartActions, useTotalItems } from "@/lib/store/cart-store-provider";
 import { SearchModal } from "./SearchModal";
@@ -90,8 +90,21 @@ export function Header() {
             <div className="lg:hidden">
               <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="text-foreground hover:bg-transparent" aria-label="Toggle navigation menu">
-                    <Menu className="h-5 w-5" strokeWidth={1.5} />
+                  <Button variant="ghost" size="icon" className="group text-[#6b3e1e] hover:bg-transparent hover:text-[#6b3e1e]" aria-label="Toggle navigation menu">
+                    <span
+                      aria-hidden="true"
+                      className="block h-8 w-8 bg-[#6b3e1e] opacity-70 transition-opacity group-hover:opacity-100"
+                      style={{
+                        WebkitMaskImage: "url('/line-3.svg')",
+                        maskImage: "url('/line-3.svg')",
+                        WebkitMaskPosition: "center",
+                        maskPosition: "center",
+                        WebkitMaskRepeat: "no-repeat",
+                        maskRepeat: "no-repeat",
+                        WebkitMaskSize: "contain",
+                        maskSize: "contain",
+                      }}
+                    />
                     <span className="sr-only">Menu</span>
                   </Button>
                 </SheetTrigger>
