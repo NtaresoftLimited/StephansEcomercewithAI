@@ -45,7 +45,7 @@ export function CartPageClient() {
         <aside className="sticky top-0 flex h-screen flex-col justify-between overflow-y-auto p-8 xl:p-14">
           {/* Middle: Content */}
           <div className="flex-1 flex flex-col justify-center">
-            <h1 className="font-serif text-5xl leading-[1.1] tracking-tight xl:text-[4rem] text-[#1a1816]">
+            <h1 className="font-serif text-4xl leading-[1.1] tracking-tight xl:text-[3.5rem] text-[#1a1816]">
               Everything
               <br />
               your pet
@@ -57,15 +57,6 @@ export function CartPageClient() {
               Premium products, trusted brands, and exceptional care for happy
               pets and happy homes.
             </p>
-            <div className="mt-10">
-              <Link
-                href="/shop"
-                className="group inline-flex h-14 w-full sm:w-[220px] items-center justify-between rounded-lg bg-[#3e332a] px-6 text-white transition-all hover:bg-[#2a221c]"
-              >
-                <span className="font-medium">Shop Collection</span>
-                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </div>
           </div>
 
           {/* Bottom: Left Promises */}
@@ -73,7 +64,7 @@ export function CartPageClient() {
             {leftPromises.map((promise, i) => (
               <div
                 key={i}
-                className="flex flex-col items-center justify-start px-2 text-center"
+                className={`flex flex-col items-start justify-start text-left ${i === 0 ? 'pr-4' : 'px-4'}`}
               >
                 <promise.icon className="mb-3 h-6 w-6 text-[#2d2a24] stroke-[1.5]" />
                 <span className="whitespace-pre-line text-[12px] font-medium text-[#4a453e]">
@@ -172,13 +163,13 @@ export function CartPageClient() {
           </div>
         )}
 
-        {/* Bottom Right Promises (Only show when empty, or always? Let's show always at bottom) */}
+        {/* Bottom Right Promises */}
         {items.length === 0 && (
           <div className="mt-16 grid grid-cols-3 divide-x divide-[#d8d2c6] border-t border-[#e6e2d8] pt-10">
             {rightPromises.map((promise, i) => (
               <div
                 key={i}
-                className="flex flex-col items-center justify-start px-2 text-center"
+                className={`flex flex-col items-start justify-start text-left ${i === 0 ? 'pr-4' : 'px-4'}`}
               >
                 <promise.icon className="mb-3 h-6 w-6 text-[#2d2a24] stroke-[1.5]" />
                 <span className="whitespace-pre-line text-[11px] font-medium text-[#4a453e]">
