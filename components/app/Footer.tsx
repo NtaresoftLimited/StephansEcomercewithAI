@@ -1,12 +1,39 @@
 import { cn } from "@/lib/utils";
 import Link from 'next/link';
-import Image from "next/image";
-import { Facebook, Instagram, MapPin, Phone, Mail, Clock } from 'lucide-react';
+import Image from 'next/image';
+import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className}>
     <path fill="#25D366" d="M12.01 2.01c-5.52 0-9.99 4.47-9.99 9.99 0 1.77.46 3.44 1.28 4.9L2 22l5.24-1.28c1.42.78 3.05 1.22 4.77 1.22 5.52 0 9.99-4.47 9.99-9.99 0-5.52-4.47-9.99-9.99-9.99z"/>
     <path fill="#FFF" d="M17.47 14.7c-.27-.14-1.61-.8-1.86-.89-.25-.09-.43-.14-.61.14-.18.28-.7.89-.86 1.07-.15.18-.31.2-.58.06-.27-.14-1.15-.43-2.19-1.35-.81-.72-1.36-1.61-1.52-1.88-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.28.27-.47.1-.18.05-.35-.02-.48-.06-.14-.61-1.47-.83-2.02-.22-.53-.44-.46-.61-.47-.16-.01-.34-.01-.52-.01-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29 0 1.35.98 2.65 1.12 2.84.14.18 1.93 2.95 4.68 4.14 2.75 1.19 2.75.8 3.25.75.5-.05 1.61-.66 1.84-1.3.23-.64.23-1.19.16-1.3-.06-.11-.25-.18-.52-.32z"/>
+  </svg>
+);
+
+const FacebookIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className}>
+    <path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+    <path fill="#FFF" d="M16.671 15.542l.532-3.469h-3.328v-2.25c0-.949.465-1.874 1.956-1.874h1.514V5.002c0 0-1.374-.235-2.686-.235-2.74 0-4.533 1.662-4.533 4.669v2.637H7.078v3.469h3.047v8.385a12.09 12.09 0 003.75 0v-8.385h2.796z"/>
+  </svg>
+);
+
+const InstagramIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className}>
+    <defs>
+      <linearGradient id="ig-grad" x1="12" y1="24" x2="12" y2="0" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stopColor="#b02e5b" />
+        <stop offset="0.5" stopColor="#dd2a7b" />
+        <stop offset="1" stopColor="#8134af" />
+      </linearGradient>
+      <radialGradient id="ig-grad2" cx="0.4" cy="1" r="1.1" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stopColor="#feda77" />
+        <stop offset="0.5" stopColor="#f58529" />
+        <stop offset="1" stopColor="transparent" />
+      </radialGradient>
+    </defs>
+    <rect width="24" height="24" rx="6" fill="url(#ig-grad)" />
+    <rect width="24" height="24" rx="6" fill="url(#ig-grad2)" />
+    <path fill="#FFF" d="M12 7.03a4.97 4.97 0 100 9.94 4.97 4.97 0 000-9.94zm0 8.192a3.222 3.222 0 110-6.444 3.222 3.222 0 010 6.444zm5.02-7.59a1.18 1.18 0 11-2.36 0 1.18 1.18 0 012.36 0zM17.155 4H6.845A2.845 2.845 0 004 6.845v10.31A2.845 2.845 0 006.845 20h10.31A2.845 2.845 0 0020 17.155V6.845A2.845 2.845 0 0017.155 4zM18.25 17.155A1.095 1.095 0 0117.155 18.25H6.845A1.095 1.095 0 015.75 17.155V6.845A1.095 1.095 0 016.845 5.75h10.31A1.095 1.095 0 0118.25 6.845v10.31z"/>
   </svg>
 );
 
@@ -40,14 +67,14 @@ export function Footer() {
             <div className="w-full h-px bg-[#EAE3D9] mb-8"></div>
             
             <div className="flex gap-4">
-              <a href="https://instagram.com/stephans_ps" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full border border-[#D5C6B6] flex items-center justify-center text-[#4E2A15] hover:bg-[#D5C6B6] transition-colors">
-                <Instagram className="w-5 h-5" />
+              <a href="https://instagram.com/stephans_ps" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full border border-[#D5C6B6] flex items-center justify-center hover:bg-[#F4F0EB] transition-colors">
+                <InstagramIcon className="w-6 h-6" />
               </a>
-              <a href="https://facebook.com/stephanspetstore" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full border border-[#D5C6B6] flex items-center justify-center text-[#4E2A15] hover:bg-[#D5C6B6] transition-colors">
-                <Facebook className="w-5 h-5" />
+              <a href="https://facebook.com/stephanspetstore" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full border border-[#D5C6B6] flex items-center justify-center hover:bg-[#F4F0EB] transition-colors">
+                <FacebookIcon className="w-6 h-6" />
               </a>
-              <a href="https://wa.me/255786627873" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full border border-[#D5C6B6] flex items-center justify-center text-[#4E2A15] hover:bg-[#D5C6B6] transition-colors">
-                <WhatsAppIcon className="w-5 h-5" />
+              <a href="https://wa.me/255786627873" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full border border-[#D5C6B6] flex items-center justify-center hover:bg-[#F4F0EB] transition-colors">
+                <WhatsAppIcon className="w-6 h-6" />
               </a>
             </div>
           </div>
@@ -148,15 +175,15 @@ export function Footer() {
             <Link href="/terms" className="hover:text-amber-700 transition-colors">Terms & Conditions</Link>
           </div>
 
-          <div className="flex items-center gap-6 text-[#4E2A15]">
-            <a href="https://instagram.com/stephans_ps" target="_blank" rel="noreferrer" className="hover:text-amber-700 transition-colors">
-              <Instagram className="w-[22px] h-[22px]" />
+          <div className="flex items-center gap-6">
+            <a href="https://instagram.com/stephans_ps" target="_blank" rel="noreferrer" className="hover:opacity-80 transition-opacity">
+              <InstagramIcon className="w-6 h-6" />
             </a>
-            <a href="https://facebook.com/stephanspetstore" target="_blank" rel="noreferrer" className="hover:text-amber-700 transition-colors">
-              <Facebook className="w-[22px] h-[22px]" />
+            <a href="https://facebook.com/stephanspetstore" target="_blank" rel="noreferrer" className="hover:opacity-80 transition-opacity">
+              <FacebookIcon className="w-6 h-6" />
             </a>
-            <a href="https://wa.me/255786627873" target="_blank" rel="noreferrer" className="hover:text-amber-700 transition-colors">
-              <WhatsAppIcon className="w-[22px] h-[22px]" />
+            <a href="https://wa.me/255786627873" target="_blank" rel="noreferrer" className="hover:opacity-80 transition-opacity">
+              <WhatsAppIcon className="w-6 h-6" />
             </a>
           </div>
         </div>
