@@ -135,18 +135,22 @@ export default async function BrandPage(props: BrandPageProps) {
             odooBrandId = brand.odooId;
         } else {
             // Find brand in Odoo by name
-            const odooBrands = await odoo.searchRead(
-                "product.brand",
-                [["name", "ilike", brand.name]],
-                ["id", "name", "logo"],
-                1
-            );
-            if (odooBrands.length > 0) {
-                odooBrandId = odooBrands[0].id;
-                // Attach Odoo logo if Sanity/Mock logo is missing
-                if (!brand.logo) {
-                    (brand as any).__odooLogo = odooBrands[0]?.logo || null;
+            try {
+                const odooBrands = await odoo.searchRead(
+                    "product.brand",
+                    [["name", "ilike", brand.name]],
+                    ["id", "name", "logo"],
+                    1
+                );
+                if (odooBrands.length > 0) {
+                    odooBrandId = odooBrands[0].id;
+                    // Attach Odoo logo if Sanity/Mock logo is missing
+                    if (!brand.logo) {
+                        (brand as any).__odooLogo = odooBrands[0]?.logo || null;
+                    }
                 }
+            } catch (err: any) {
+                console.log(`Brand model search skipped/failed: ${err.message}`);
             }
         }
 

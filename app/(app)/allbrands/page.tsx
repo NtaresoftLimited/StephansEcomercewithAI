@@ -51,7 +51,7 @@ export default function AllBrandsPage() {
             <Link 
               key={brand.slug}
               href={`/brands/${brand.slug}`}
-              className="bg-white rounded-[32px] p-8 h-[340px] md:h-[420px] flex flex-col justify-between items-center border border-[#EAE3D9]/60 shadow-[0_2px_12px_rgba(0,0,0,0.02)] transition-all duration-500 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1 group"
+              className="bg-white rounded-[32px] p-8 h-[340px] md:h-[420px] flex flex-col justify-between items-center border border-[#EAE3D9]/60 shadow-none transition-all duration-500 hover:shadow-sm hover:-translate-y-1 group"
             >
               {/* Logo Area (centered) */}
               <div className="flex-grow flex items-center justify-center w-full">
