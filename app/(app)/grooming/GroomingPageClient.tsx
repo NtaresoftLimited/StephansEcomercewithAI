@@ -440,6 +440,20 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                         </div>
                     </div>
 
+                    {formData.package && formData.breedSize && (
+                        <div className="mt-8 p-6 md:p-8 border border-[#E8E0D8] rounded-2xl flex flex-col md:flex-row items-center justify-between bg-white/50 gap-4">
+                            <div className="flex flex-col">
+                                <span className="text-xs font-bold tracking-widest text-[#6b3e1e] uppercase mb-1">Estimated Total</span>
+                                <span className="text-sm text-[#666]">
+                                    {formData.petType === 'dog' ? 'Dog' : 'Cat'} • {SIZE_LABELS[formData.breedSize] || formData.breedSize} • {formData.package === 'standard' ? 'Essential' : formData.package === 'premium' ? 'Premium' : 'Signature'} Package
+                                </span>
+                            </div>
+                            <span className="text-3xl md:text-4xl font-serif text-[#222]">
+                                {formatPrice(prices[formData.petType]?.[formData.package]?.[formData.breedSize] || 0)}
+                            </span>
+                        </div>
+                    )}
+
                     <div className="mt-8">
                         <button
                             type="submit"
