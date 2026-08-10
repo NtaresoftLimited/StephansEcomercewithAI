@@ -52,6 +52,7 @@ export function ReviewsSection() {
   );
 
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
@@ -103,9 +104,6 @@ export function ReviewsSection() {
                       <div>
                         <div className="flex items-center gap-3">
                           <p className="font-bold text-[#222] text-base md:text-lg">{review.name}</p>
-                          {index === 0 && ( // Just to match the screenshot 'NEW' badge
-                            <span className="text-[10px] font-bold bg-[#222] text-white px-2 py-0.5 rounded-sm">NEW</span>
-                          )}
                         </div>
                         <p className="text-[#888] text-[13px] mt-0.5">{review.time}</p>
                       </div>
@@ -131,6 +129,10 @@ export function ReviewsSection() {
                         {review.gallery.map((img, i) => (
                           <div 
                             key={i} 
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedImage(img);
+                            }}
                             className={`relative w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden border-[4px] border-white shadow-md transition-transform duration-300 hover:scale-110 hover:!z-50 cursor-pointer ${GALLERY_STYLES[i % GALLERY_STYLES.length]}`}
                           >
                             <Image src={img} alt="Review photo" fill className="object-cover" />
@@ -145,6 +147,26 @@ export function ReviewsSection() {
           </div>
         </div>
       </div>
+
+      {/* Image Modal */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative w-full max-w-5xl max-h-[90vh] aspect-square md:aspect-[4/3] rounded-lg overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            <Image src={selectedImage} alt="Viewed photo" fill className="object-contain" />
+          </div>
+          <button 
+            className="absolute top-6 right-6 text-white bg-black/50 hover:bg-black p-3 rounded-full transition-colors"
+            onClick={() => setSelectedImage(null)}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      )}
     </section>
   );
 }
