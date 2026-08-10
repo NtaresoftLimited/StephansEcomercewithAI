@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { Check, Calendar as CalendarIcon, Scissors, Paintbrush, Wand2, ArrowRight } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { createGroomingBooking } from "@/lib/actions/grooming";
 import { PRICES, BREED_SIZES, VALID_TIMES, SIZE_LABELS, DOG_PACKAGES, CAT_PACKAGES } from "@/lib/constants/grooming";
 import { formatPrice } from "@/lib/utils";
@@ -296,14 +297,34 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                             onChange={e => setFormData({ ...formData, petName: e.target.value })}
                             className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#6b3e1e]"
                         />
-                        <select
+                        <Select
                             value={formData.petType}
-                            onChange={e => setFormData({ ...formData, petType: e.target.value as any })}
-                            className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#6b3e1e] appearance-none"
+                            onValueChange={(value) => setFormData({ ...formData, petType: value as any })}
                         >
-                            <option value="dog">Dog</option>
-                            <option value="cat">Cat</option>
-                        </select>
+                            <SelectTrigger className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-[26px] text-sm focus:outline-none focus:ring-1 focus:ring-[#6b3e1e] shadow-none flex items-center justify-between">
+                                <SelectValue placeholder="Select Pet Type" />
+                            </SelectTrigger>
+                            <SelectContent className="rounded-xl border-[#E8E0D8] shadow-lg">
+                                <SelectItem value="dog" className="cursor-pointer focus:bg-[#F4F0EB]">
+                                    <div className="flex items-center gap-3">
+                                        <div 
+                                            className="w-5 h-5 bg-[#6b3e1e]"
+                                            style={{ maskImage: 'url(/minimalist-dog.png)', maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center', WebkitMaskImage: 'url(/minimalist-dog.png)', WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center' }}
+                                        />
+                                        <span className="text-[15px]">Dog</span>
+                                    </div>
+                                </SelectItem>
+                                <SelectItem value="cat" className="cursor-pointer focus:bg-[#F4F0EB]">
+                                    <div className="flex items-center gap-3">
+                                        <div 
+                                            className="w-5 h-5 bg-[#6b3e1e]"
+                                            style={{ maskImage: 'url(/minimalist-cat.png)', maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center', WebkitMaskImage: 'url(/minimalist-cat.png)', WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center' }}
+                                        />
+                                        <span className="text-[15px]">Cat</span>
+                                    </div>
+                                </SelectItem>
+                            </SelectContent>
+                        </Select>
                         
                         <select
                             required
