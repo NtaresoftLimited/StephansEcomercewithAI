@@ -126,7 +126,7 @@ function SecondaryStickyHeaderInner({ isScrolled, onSearchOpen }: SecondaryStick
   return (
     <div
       className={cn(
-        "fixed left-0 right-0 z-[4990] transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] shadow-lg bg-white dark:bg-zinc-950",
+        "fixed left-0 right-0 z-[4990] transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] border-b border-zinc-200 bg-white dark:bg-zinc-950",
         isScrolled
           ? "top-0 translate-y-0 opacity-100"
           : "-top-full -translate-y-[150%] opacity-0 pointer-events-none"
@@ -292,7 +292,7 @@ function SecondaryStickyHeaderInner({ isScrolled, onSearchOpen }: SecondaryStick
       </div>
 
       {/* 3. BOTTOM BAR (Navigation) */}
-      <div className="hidden lg:block bg-white dark:bg-zinc-950 px-4 sm:px-6 lg:px-8 shadow-sm">
+      <div className="hidden lg:block bg-white dark:bg-zinc-950 px-4 sm:px-6 lg:px-8 border-t border-zinc-100 dark:border-zinc-800">
         <div className="mx-auto max-w-7xl flex items-center h-11 gap-8 text-[15px] font-bold text-zinc-700 dark:text-zinc-200">
           {categories.map((cat) => (
             <div 

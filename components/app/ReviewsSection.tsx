@@ -86,7 +86,7 @@ export function ReviewsSection() {
                   <div 
                     className={`h-full bg-white rounded-3xl p-6 md:p-10 flex flex-col border border-[#EAE3D9]/50 transition-all duration-700 ease-out cursor-grab active:cursor-grabbing ${
                       isActive 
-                        ? 'scale-100 opacity-100 blur-0 shadow-sm' 
+                        ? 'scale-100 opacity-100 blur-0 shadow-none' 
                         : 'scale-90 opacity-40 blur-[3px] hover:blur-[1px] hover:opacity-60 shadow-none'
                     }`}
                   >
