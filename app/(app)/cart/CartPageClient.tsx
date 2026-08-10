@@ -42,19 +42,9 @@ export function CartPageClient() {
     <div className="flex min-h-screen w-full flex-col lg:flex-row font-sans text-[#2d2a24]">
       {/* LEFT SIDEBAR */}
       <div className="hidden lg:block lg:w-[35%] bg-[#efece1]">
-        <aside className="sticky top-[130px] flex h-[calc(100vh-130px)] flex-col justify-between overflow-y-auto p-8 xl:p-14">
-          {/* Top: Search */}
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-zinc-500" />
-            <input
-              type="text"
-              placeholder="Search"
-              className="w-full rounded-lg border border-[#d8d2c6] bg-transparent py-3.5 pl-12 pr-4 outline-none placeholder:text-zinc-500 focus:border-[#b8a88a] focus:ring-1 focus:ring-[#b8a88a]"
-            />
-          </div>
-
+        <aside className="sticky top-0 flex h-screen flex-col justify-between overflow-y-auto p-8 xl:p-14">
           {/* Middle: Content */}
-          <div className="my-16 flex-1 flex flex-col justify-center">
+          <div className="flex-1 flex flex-col justify-center">
             <h1 className="font-serif text-5xl leading-[1.1] tracking-tight xl:text-[4rem] text-[#1a1816]">
               Everything
               <br />
@@ -97,15 +87,6 @@ export function CartPageClient() {
 
       {/* RIGHT MAIN AREA */}
       <div className="relative flex w-full flex-col bg-[#fdfbf7] p-8 lg:w-[65%] xl:p-14 min-h-screen">
-        {/* Close Button */}
-        <button
-          onClick={() => router.back()}
-          className="absolute right-8 top-8 xl:right-14 xl:top-14 text-zinc-400 hover:text-zinc-900 transition-colors"
-          aria-label="Close"
-        >
-          <X className="h-8 w-8 stroke-[1.5]" />
-        </button>
-
         <h2 className="font-serif text-4xl text-[#1a1816] mt-4 xl:mt-0">
           Your Cart
         </h2>
@@ -113,17 +94,14 @@ export function CartPageClient() {
 
         {items.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center">
-            {/* Arch Image */}
-            <div className="relative flex h-[320px] w-[260px] items-end justify-center rounded-t-full bg-[#efece1] mb-12">
-              <div className="relative h-[110%] w-[130%] -mb-4">
-                <Image
-                  src="/empty-cart-bag.avif"
-                  alt="Empty Cart Bag"
-                  fill
-                  className="object-contain drop-shadow-2xl"
-                  priority
-                />
-              </div>
+            <div className="relative flex h-[340px] w-[340px] mb-8">
+              <Image
+                src="/empty-cart-bag.avif"
+                alt="Empty Cart Bag"
+                fill
+                className="object-contain"
+                priority
+              />
             </div>
 
             <h3 className="font-serif text-4xl text-[#1a1816]">
