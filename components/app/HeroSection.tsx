@@ -10,7 +10,7 @@ export function HeroSection() {
             {/* Background Image */}
             <div className="absolute inset-0 z-0 bg-[#111111]">
                 <Image
-                    src="/hero-sky-cat.png"
+                    src="/hero-stephans.png"
                     alt="Happy pet, happy home"
                     fill
                     className="object-cover object-bottom opacity-80 brightness-[0.65]"
