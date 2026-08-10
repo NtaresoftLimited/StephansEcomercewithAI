@@ -67,13 +67,13 @@ export function Footer() {
             <div className="w-full h-px bg-[#EAE3D9] mb-8"></div>
             
             <div className="flex gap-4">
-              <a href="https://instagram.com/stephans_ps" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full border border-[#D5C6B6] flex items-center justify-center hover:bg-[#F4F0EB] transition-colors">
+              <a href="https://instagram.com/stephans_ps" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full flex items-center justify-center hover:bg-[#F4F0EB] transition-colors">
                 <InstagramIcon className="w-6 h-6" />
               </a>
-              <a href="https://facebook.com/stephanspetstore" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full border border-[#D5C6B6] flex items-center justify-center hover:bg-[#F4F0EB] transition-colors">
+              <a href="https://facebook.com/stephanspetstore" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full flex items-center justify-center hover:bg-[#F4F0EB] transition-colors">
                 <FacebookIcon className="w-6 h-6" />
               </a>
-              <a href="https://wa.me/255786627873" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full border border-[#D5C6B6] flex items-center justify-center hover:bg-[#F4F0EB] transition-colors">
+              <a href="https://wa.me/255786627873" target="_blank" rel="noreferrer" className="w-11 h-11 rounded-full flex items-center justify-center hover:bg-[#F4F0EB] transition-colors">
                 <WhatsAppIcon className="w-6 h-6" />
               </a>
             </div>
