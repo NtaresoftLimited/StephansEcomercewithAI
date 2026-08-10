@@ -167,17 +167,13 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
             name: "Premium",
             desc: "Complete care for a healthier, happier pet.",
             icon: (
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-12 h-12">
-                    <circle cx="18" cy="34" r="4" stroke="#6b3e1e" strokeWidth="1.8"/>
-                    <circle cx="30" cy="34" r="4" stroke="#6b3e1e" strokeWidth="1.8"/>
-                    <line x1="20.5" y1="31.5" x2="32" y2="14" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round"/>
-                    <line x1="27.5" y1="31.5" x2="16" y2="14" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round"/>
-                    <circle cx="24" cy="24" r="1.5" fill="#6b3e1e"/>
-                    <circle cx="16" cy="18" r="1.5" stroke="#6b3e1e" strokeWidth="1.5"/>
-                    <circle cx="34" cy="20" r="2" stroke="#6b3e1e" strokeWidth="1.5"/>
-                    <circle cx="14" cy="28" r="1" stroke="#6b3e1e" strokeWidth="1.5"/>
-                    <circle cx="36" cy="30" r="1.5" stroke="#6b3e1e" strokeWidth="1.5"/>
-                </svg>
+                <div 
+                    className="w-16 h-16 bg-[#6b3e1e]"
+                    style={{ 
+                        maskImage: 'url(/grooming-scissors-bubbles.png)', maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
+                        WebkitMaskImage: 'url(/grooming-scissors-bubbles.png)', WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center' 
+                    }}
+                />
             ),
             popular: true
         },
@@ -216,18 +212,30 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                 <div className="flex justify-center items-center gap-8 md:gap-16 border-b border-[#E8E0D8] max-w-md mx-auto pb-4">
                     <button 
                         onClick={() => { setActiveTab("dog"); setFormData(f => ({ ...f, petType: "dog" })) }}
-                        className={`flex items-center gap-3 text-lg font-medium transition-colors relative ${activeTab === 'dog' ? 'text-[#222]' : 'text-[#888]'}`}
+                        className={`flex items-center gap-3 text-xl font-medium transition-colors relative ${activeTab === 'dog' ? 'text-[#222]' : 'text-[#888]'}`}
                     >
-                        <Image src="/minimalist-dog.png" alt="Dog" width={24} height={24} className={activeTab === 'dog' ? 'opacity-100' : 'opacity-40 grayscale'} />
+                        <div 
+                            className={`w-10 h-10 bg-[#6b3e1e] transition-opacity ${activeTab === 'dog' ? 'opacity-100' : 'opacity-40'}`}
+                            style={{ 
+                                maskImage: 'url(/minimalist-dog.png)', maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
+                                WebkitMaskImage: 'url(/minimalist-dog.png)', WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center' 
+                            }}
+                        />
                         Dogs
                         {activeTab === 'dog' && <div className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-[#6b3e1e]"></div>}
                     </button>
                     <div className="w-px h-8 bg-[#E8E0D8]"></div>
                     <button 
                         onClick={() => { setActiveTab("cat"); setFormData(f => ({ ...f, petType: "cat" })) }}
-                        className={`flex items-center gap-3 text-lg font-medium transition-colors relative ${activeTab === 'cat' ? 'text-[#222]' : 'text-[#888]'}`}
+                        className={`flex items-center gap-3 text-xl font-medium transition-colors relative ${activeTab === 'cat' ? 'text-[#222]' : 'text-[#888]'}`}
                     >
-                        <Image src="/minimalist-cat.png" alt="Cat" width={24} height={24} className={activeTab === 'cat' ? 'opacity-100' : 'opacity-40 grayscale'} />
+                        <div 
+                            className={`w-10 h-10 bg-[#6b3e1e] transition-opacity ${activeTab === 'cat' ? 'opacity-100' : 'opacity-40'}`}
+                            style={{ 
+                                maskImage: 'url(/minimalist-cat.png)', maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
+                                WebkitMaskImage: 'url(/minimalist-cat.png)', WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center' 
+                            }}
+                        />
                         Cats
                         {activeTab === 'cat' && <div className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-[#6b3e1e]"></div>}
                     </button>
