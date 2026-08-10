@@ -218,7 +218,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                         onClick={() => { setActiveTab("dog"); setFormData(f => ({ ...f, petType: "dog" })) }}
                         className={`flex items-center gap-3 text-lg font-medium transition-colors relative ${activeTab === 'dog' ? 'text-[#222]' : 'text-[#888]'}`}
                     >
-                        <Image src="/icons/icon-dog.png" alt="Dog" width={24} height={24} className={activeTab === 'dog' ? 'opacity-100' : 'opacity-40 grayscale'} />
+                        <Image src="/minimalist-dog.png" alt="Dog" width={24} height={24} className={activeTab === 'dog' ? 'opacity-100' : 'opacity-40 grayscale'} />
                         Dogs
                         {activeTab === 'dog' && <div className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-[#6b3e1e]"></div>}
                     </button>
@@ -227,7 +227,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                         onClick={() => { setActiveTab("cat"); setFormData(f => ({ ...f, petType: "cat" })) }}
                         className={`flex items-center gap-3 text-lg font-medium transition-colors relative ${activeTab === 'cat' ? 'text-[#222]' : 'text-[#888]'}`}
                     >
-                        <Image src="/icons/icon-cat.png" alt="Cat" width={24} height={24} className={activeTab === 'cat' ? 'opacity-100' : 'opacity-40 grayscale'} />
+                        <Image src="/minimalist-cat.png" alt="Cat" width={24} height={24} className={activeTab === 'cat' ? 'opacity-100' : 'opacity-40 grayscale'} />
                         Cats
                         {activeTab === 'cat' && <div className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-[#6b3e1e]"></div>}
                     </button>
