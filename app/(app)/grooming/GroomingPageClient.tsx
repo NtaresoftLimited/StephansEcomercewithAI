@@ -145,21 +145,60 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
             key: "standard",
             name: "Essential",
             desc: "Fresh care for regular maintenance.",
-            icon: <Paintbrush className="w-8 h-8 text-[#6b3e1e]" strokeWidth={1.5} />,
+            icon: (
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-12 h-12">
+                    <g transform="rotate(-45 24 24)">
+                        <rect x="10" y="22" width="26" height="4" rx="2" stroke="#6b3e1e" strokeWidth="1.8"/>
+                        <line x1="16" y1="26" x2="16" y2="34" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round"/>
+                        <line x1="20" y1="26" x2="20" y2="34" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round"/>
+                        <line x1="24" y1="26" x2="24" y2="34" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round"/>
+                        <line x1="28" y1="26" x2="28" y2="34" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round"/>
+                        <line x1="32" y1="26" x2="32" y2="34" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round"/>
+                    </g>
+                    <circle cx="14" cy="16" r="2" stroke="#6b3e1e" strokeWidth="1.5"/>
+                    <circle cx="20" cy="12" r="1.5" stroke="#6b3e1e" strokeWidth="1.5"/>
+                    <path d="M34 32 C36 30, 38 34, 36 36 C34 38, 38 40, 38 40" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
+                </svg>
+            ),
             popular: false
         },
         {
             key: "premium",
             name: "Premium",
             desc: "Complete care for a healthier, happier pet.",
-            icon: <Scissors className="w-8 h-8 text-[#6b3e1e]" strokeWidth={1.5} />,
+            icon: (
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-12 h-12">
+                    <circle cx="18" cy="34" r="4" stroke="#6b3e1e" strokeWidth="1.8"/>
+                    <circle cx="30" cy="34" r="4" stroke="#6b3e1e" strokeWidth="1.8"/>
+                    <line x1="20.5" y1="31.5" x2="32" y2="14" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round"/>
+                    <line x1="27.5" y1="31.5" x2="16" y2="14" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round"/>
+                    <circle cx="24" cy="24" r="1.5" fill="#6b3e1e"/>
+                    <circle cx="16" cy="18" r="1.5" stroke="#6b3e1e" strokeWidth="1.5"/>
+                    <circle cx="34" cy="20" r="2" stroke="#6b3e1e" strokeWidth="1.5"/>
+                    <circle cx="14" cy="28" r="1" stroke="#6b3e1e" strokeWidth="1.5"/>
+                    <circle cx="36" cy="30" r="1.5" stroke="#6b3e1e" strokeWidth="1.5"/>
+                </svg>
+            ),
             popular: true
         },
         {
             key: "super_premium",
             name: "Signature",
             desc: "The ultimate grooming experience at Stephan's.",
-            icon: <Wand2 className="w-8 h-8 text-[#6b3e1e]" strokeWidth={1.5} />,
+            icon: (
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-12 h-12">
+                    <g transform="rotate(-45 24 24)">
+                        <rect x="12" y="22" width="12" height="4" rx="2" stroke="#6b3e1e" strokeWidth="1.8"/>
+                        <rect x="24" y="16" width="14" height="16" rx="2" stroke="#6b3e1e" strokeWidth="1.8"/>
+                        <line x1="28" y1="20" x2="28" y2="28" stroke="#6b3e1e" strokeWidth="1.5" strokeLinecap="round"/>
+                        <line x1="31" y1="20" x2="31" y2="28" stroke="#6b3e1e" strokeWidth="1.5" strokeLinecap="round"/>
+                        <line x1="34" y1="20" x2="34" y2="28" stroke="#6b3e1e" strokeWidth="1.5" strokeLinecap="round"/>
+                    </g>
+                    <circle cx="12" cy="20" r="1.5" stroke="#6b3e1e" strokeWidth="1.5"/>
+                    <circle cx="16" cy="14" r="2" stroke="#6b3e1e" strokeWidth="1.5"/>
+                    <path d="M36 30 C38 28, 40 32, 38 34 C36 36, 40 38, 40 38" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
+                </svg>
+            ),
             popular: false
         }
     ];
