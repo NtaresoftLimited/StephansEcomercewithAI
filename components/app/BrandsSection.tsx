@@ -44,7 +44,7 @@ export function BrandsSection() {
         </div>
 
         <Link 
-          href="/shop" 
+          href="/allbrands" 
           className="inline-flex items-center gap-2 text-[13px] font-bold text-[#222] hover:text-[#A66C44] transition-colors uppercase tracking-wide"
         >
           View All Brands
