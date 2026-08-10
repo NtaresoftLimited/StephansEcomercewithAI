@@ -301,7 +301,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                         >
                             <option value="" disabled>Time</option>
                             {VALID_TIMES.map(time => (
-                                <option key={time} value={time}>{time}</option>
+                                <option key={time.value} value={time.value}>{time.label}</option>
                             ))}
                         </select>
 
