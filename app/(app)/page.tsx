@@ -15,6 +15,7 @@ import { PetCategoryStrip } from "@/components/app/PetCategoryStrip";
 import { GroomingSection } from "@/components/app/GroomingSection";
 import { AutoRotatingProductGrid } from "@/components/app/AutoRotatingProductGrid";
 import { ReviewsSection } from "@/components/app/ReviewsSection";
+import { BrandsSection } from "@/components/app/BrandsSection";
 
 export const revalidate = 3600;
 
@@ -134,6 +135,9 @@ export default async function HomePage({ searchParams }: PageProps) {
 
       {/* Reviews Section */}
       <ReviewsSection />
+
+      {/* Brands Section */}
+      <BrandsSection />
 
       {/* Grooming Section (Moved to bottom) */}
       <Suspense fallback={<div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8 py-12 text-center text-muted-foreground">Loading grooming content…</div>}>
