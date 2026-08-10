@@ -153,6 +153,7 @@ export function Footer() {
                 <Mail className="w-[18px] h-[18px] shrink-0 text-[#6B5A4D]" />
                 <a href="mailto:info@stephanspetstore.co.tz" className="hover:text-amber-700 transition-colors">info@stephanspetstore.co.tz</a>
               </div>
+              <div className="w-full h-px bg-[#EAE3D9] my-1"></div>
               <div className="flex items-start gap-4">
                 <Clock className="w-[18px] h-[18px] mt-1 shrink-0 text-[#6B5A4D]" />
                 <span className="leading-relaxed whitespace-nowrap">
