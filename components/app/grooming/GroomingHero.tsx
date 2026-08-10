@@ -1,6 +1,7 @@
 "use client";
 
 import { Scissors } from "lucide-react";
+import Image from "next/image";
 
 export function GroomingHero() {
     return (
@@ -34,9 +35,16 @@ export function GroomingHero() {
                 <div className="mt-8 flex flex-wrap justify-center gap-4">
                     <a
                         href="#booking"
-                        className="rounded-full bg-gradient-to-r from-[#6b3e1e] to-[#8b5a2b] px-8 py-3 font-semibold text-white shadow-lg transition-all hover:shadow-xl hover:scale-105"
+                        className="rounded-full bg-gradient-to-r from-[#6b3e1e] to-[#8b5a2b] px-8 py-3 font-semibold text-white shadow-lg transition-all hover:shadow-xl hover:scale-105 flex items-center gap-2"
                     >
                         Book Appointment
+                        <Image 
+                            src="/calendar-stephans.svg" 
+                            alt="Calendar" 
+                            width={28} 
+                            height={28} 
+                            className="w-7 h-7 object-contain" 
+                        />
                     </a>
                     <a
                         href="#packages"

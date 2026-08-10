@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { Check, Calendar as CalendarIcon, Scissors, Paintbrush, Wand2, ArrowRight } from "lucide-react";
+import { Check, Scissors, Paintbrush, Wand2, ArrowRight } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { createGroomingBooking } from "@/lib/actions/grooming";
 import { PRICES, BREED_SIZES, VALID_TIMES, SIZE_LABELS, DOG_PACKAGES, CAT_PACKAGES } from "@/lib/constants/grooming";
@@ -358,7 +358,13 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                                 onChange={handleDateChange}
                                 className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#6b3e1e]"
                             />
-                            <CalendarIcon className="w-4 h-4 text-[#888] absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                            <Image 
+                                src="/calendar-stephans.svg" 
+                                alt="Calendar" 
+                                width={20} 
+                                height={20} 
+                                className="w-5 h-5 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none object-contain opacity-50" 
+                            />
                         </div>
 
                         <select
