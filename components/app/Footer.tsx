@@ -55,15 +55,15 @@ export function Footer() {
           <div className="hidden md:block w-px bg-[#EAE3D9]"></div>
 
           {/* Column 2: SHOP */}
-          <div className="flex-1 md:px-10 mb-10 md:mb-0">
+          <div className="flex-1 md:px-6 mb-10 md:mb-0">
             <h4 className="text-[#4E2A15] font-bold text-sm tracking-widest uppercase mb-3">Shop</h4>
             <div className="w-8 h-px bg-[#4E2A15] mb-8"></div>
             <div className="flex flex-col gap-6 text-[15px] text-[#4E2A15]">
-              <Link href="/shop?category=dogs" className="hover:text-amber-700 transition-colors">Dogs</Link>
-              <Link href="/shop?category=cats" className="hover:text-amber-700 transition-colors">Cats</Link>
-              <Link href="/shop?category=small-pets" className="hover:text-amber-700 transition-colors">Small Animals</Link>
-              <Link href="/shop?category=pet-food" className="hover:text-amber-700 transition-colors">Pet Food</Link>
-              <Link href="/shop?category=accessories" className="hover:text-amber-700 transition-colors">Accessories</Link>
+              <Link href="/shop?category=dogs" className="hover:text-amber-700 transition-colors whitespace-nowrap">Dogs</Link>
+              <Link href="/shop?category=cats" className="hover:text-amber-700 transition-colors whitespace-nowrap">Cats</Link>
+              <Link href="/shop?category=small-pets" className="hover:text-amber-700 transition-colors whitespace-nowrap">Small Animals</Link>
+              <Link href="/shop?category=pet-food" className="hover:text-amber-700 transition-colors whitespace-nowrap">Pet Food</Link>
+              <Link href="/shop?category=accessories" className="hover:text-amber-700 transition-colors whitespace-nowrap">Accessories</Link>
             </div>
           </div>
 
@@ -71,14 +71,14 @@ export function Footer() {
           <div className="hidden md:block w-px bg-[#EAE3D9]"></div>
 
           {/* Column 3: GROOMING */}
-          <div className="flex-1 md:px-10 mb-10 md:mb-0">
+          <div className="flex-1 md:px-6 mb-10 md:mb-0">
             <h4 className="text-[#4E2A15] font-bold text-sm tracking-widest uppercase mb-3">Grooming</h4>
             <div className="w-8 h-px bg-[#4E2A15] mb-8"></div>
             <div className="flex flex-col gap-6 text-[15px] text-[#4E2A15]">
-              <Link href="/grooming" className="hover:text-amber-700 transition-colors">Grooming Services</Link>
-              <Link href="/grooming-packages" className="hover:text-amber-700 transition-colors">Grooming Packages</Link>
-              <Link href="/grooming" className="hover:text-amber-700 transition-colors">Book Appointment</Link>
-              <Link href="/about" className="hover:text-amber-700 transition-colors">About Grooming</Link>
+              <Link href="/grooming" className="hover:text-amber-700 transition-colors whitespace-nowrap">Grooming Services</Link>
+              <Link href="/grooming-packages" className="hover:text-amber-700 transition-colors whitespace-nowrap">Grooming Packages</Link>
+              <Link href="/grooming" className="hover:text-amber-700 transition-colors whitespace-nowrap">Book Appointment</Link>
+              <Link href="/about" className="hover:text-amber-700 transition-colors whitespace-nowrap">About Grooming</Link>
             </div>
           </div>
 
@@ -86,14 +86,14 @@ export function Footer() {
           <div className="hidden md:block w-px bg-[#EAE3D9]"></div>
 
           {/* Column 4: ABOUT */}
-          <div className="flex-1 md:px-10 mb-10 md:mb-0">
+          <div className="flex-1 md:px-6 mb-10 md:mb-0">
             <h4 className="text-[#4E2A15] font-bold text-sm tracking-widest uppercase mb-3">About</h4>
             <div className="w-8 h-px bg-[#4E2A15] mb-8"></div>
             <div className="flex flex-col gap-6 text-[15px] text-[#4E2A15]">
-              <Link href="/about" className="hover:text-amber-700 transition-colors">About Us</Link>
-              <Link href="/faqs" className="hover:text-amber-700 transition-colors">FAQs</Link>
-              <Link href="/delivery" className="hover:text-amber-700 transition-colors">Delivery</Link>
-              <Link href="/return-policy" className="hover:text-amber-700 transition-colors">Returns</Link>
+              <Link href="/about" className="hover:text-amber-700 transition-colors whitespace-nowrap">About Us</Link>
+              <Link href="/faqs" className="hover:text-amber-700 transition-colors whitespace-nowrap">FAQs</Link>
+              <Link href="/delivery" className="hover:text-amber-700 transition-colors whitespace-nowrap">Delivery</Link>
+              <Link href="/return-policy" className="hover:text-amber-700 transition-colors whitespace-nowrap">Returns</Link>
             </div>
           </div>
 
@@ -101,21 +101,25 @@ export function Footer() {
           <div className="hidden md:block w-px bg-[#EAE3D9]"></div>
 
           {/* Column 5: CONTACT */}
-          <div className="flex-[1.2] md:pl-10">
+          <div className="flex-[1.8] md:pl-8">
             <h4 className="text-[#4E2A15] font-bold text-sm tracking-widest uppercase mb-3">Contact</h4>
             <div className="w-8 h-px bg-[#4E2A15] mb-8"></div>
             <div className="flex flex-col gap-6 text-[15px] text-[#4E2A15]">
               <div className="flex items-center gap-4">
                 <Phone className="w-[18px] h-[18px] shrink-0 text-[#6B5A4D]" />
-                <a href="tel:+255786627873" className="hover:text-amber-700 transition-colors">+255 786 627 873</a>
+                <a href="tel:+255786627873" className="hover:text-amber-700 transition-colors whitespace-nowrap">+255 786 627 873</a>
               </div>
               <div className="flex items-center gap-4">
                 <Phone className="w-[18px] h-[18px] shrink-0 text-[#6B5A4D]" />
-                <a href="tel:+255769324445" className="hover:text-amber-700 transition-colors">+255 769 324 445</a>
+                <a href="tel:+255769324445" className="hover:text-amber-700 transition-colors whitespace-nowrap">+255 769 324 445</a>
               </div>
               <div className="flex items-start gap-4">
                 <MapPin className="w-[18px] h-[18px] mt-1 shrink-0 text-[#6B5A4D]" />
-                <span className="leading-relaxed">11 Slipway Rd, Masaki<br />58 Mikocheni A,<br />Dar es Salaam</span>
+                <span className="leading-relaxed">11 Slipway Rd, Masaki, Dar es Salaam, Tanzania <span className="text-[17px]">🇹🇿</span></span>
+              </div>
+              <div className="flex items-start gap-4">
+                <MapPin className="w-[18px] h-[18px] mt-1 shrink-0 text-[#6B5A4D]" />
+                <span className="leading-relaxed">58 Mikocheni A, Dar es Salaam, Tanzania <span className="text-[17px]">🇹🇿</span></span>
               </div>
               <div className="flex items-center gap-4">
                 <Mail className="w-[18px] h-[18px] shrink-0 text-[#6B5A4D]" />
@@ -123,7 +127,11 @@ export function Footer() {
               </div>
               <div className="flex items-start gap-4">
                 <Clock className="w-[18px] h-[18px] mt-1 shrink-0 text-[#6B5A4D]" />
-                <span className="leading-relaxed">Mon – Friday: 9:00 AM – 8:30 PM<br />Saturday: 10:00 AM – 8:30 PM<br />Sunday: Closed</span>
+                <span className="leading-relaxed whitespace-nowrap">
+                  Mon – Friday: 9:00 AM – 8:30 PM<br />
+                  Saturday: 10:00 AM – 8:30 PM<br />
+                  Sunday: Closed
+                </span>
               </div>
             </div>
           </div>
