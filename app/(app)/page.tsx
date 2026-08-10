@@ -8,14 +8,13 @@ import {
   FILTER_PRODUCTS_BY_RELEVANCE_QUERY,
 } from "@/lib/sanity/queries/products";
 import { ALL_CATEGORIES_QUERY } from "@/lib/sanity/queries/categories";
-import { ALL_BRANDS_QUERY } from "@/lib/sanity/queries/brands";
 import { HERO_PET_IMAGES_QUERY } from "@/lib/sanity/queries/heroImages";
 import { GROOMING_IMAGES_QUERY } from "@/lib/sanity/queries/groomingImages";
 import { HeroSection } from "@/components/app/HeroSection";
 import { PetCategoryStrip } from "@/components/app/PetCategoryStrip";
 import { GroomingSection } from "@/components/app/GroomingSection";
 import { AutoRotatingProductGrid } from "@/components/app/AutoRotatingProductGrid";
-import { BrandsSection } from "@/components/app/BrandsSection";
+import { ReviewsSection } from "@/components/app/ReviewsSection";
 
 export const revalidate = 3600;
 
@@ -78,8 +77,8 @@ export default async function HomePage({ searchParams }: PageProps) {
     },
   }).then((r: any) => r?.data as any[]).catch(() => [] as any[]);
 
-  // Fetch categories, pet images, grooming images, and brands in parallel
-  const [categories, petImages, groomingImages, sanityBrands] = await Promise.all([
+  // Fetch categories, pet images, and grooming images in parallel
+  const [categories, petImages, groomingImages] = await Promise.all([
     sanityFetch({ query: ALL_CATEGORIES_QUERY })
       .then((r: any) => r?.data as any[])
       .catch(() => [] as any[]),
@@ -89,13 +88,7 @@ export default async function HomePage({ searchParams }: PageProps) {
     sanityFetch({ query: GROOMING_IMAGES_QUERY })
       .then((r: any) => r?.data as any[])
       .catch(() => [] as any[]),
-    sanityFetch({ query: ALL_BRANDS_QUERY })
-      .then((r: any) => r?.data as any[])
-      .catch(() => [] as any[]),
   ]);
-
-  // Use Sanity brands directly (Odoo brands loaded client-side for performance)
-  const brands = sanityBrands;
 
   // Extract image URLs
   const dogImages = petImages?.dogImages?.map((img: any) => img.url).filter((url: any): url is string => !!url) ?? [];
@@ -139,8 +132,8 @@ export default async function HomePage({ searchParams }: PageProps) {
         </div>
       </section>
 
-      {/* Brands Section */}
-      <BrandsSection brands={brands} />
+      {/* Reviews Section */}
+      <ReviewsSection />
 
       {/* Grooming Section (Moved to bottom) */}
       <Suspense fallback={<div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8 py-12 text-center text-muted-foreground">Loading grooming content…</div>}>
