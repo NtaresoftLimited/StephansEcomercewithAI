@@ -4,8 +4,9 @@ import Image from "next/image";
 import { Facebook, Instagram, MapPin, Phone, Mail, Clock } from 'lucide-react';
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className}>
+    <path fill="#25D366" d="M12.01 2.01c-5.52 0-9.99 4.47-9.99 9.99 0 1.77.46 3.44 1.28 4.9L2 22l5.24-1.28c1.42.78 3.05 1.22 4.77 1.22 5.52 0 9.99-4.47 9.99-9.99 0-5.52-4.47-9.99-9.99-9.99z"/>
+    <path fill="#FFF" d="M17.47 14.7c-.27-.14-1.61-.8-1.86-.89-.25-.09-.43-.14-.61.14-.18.28-.7.89-.86 1.07-.15.18-.31.2-.58.06-.27-.14-1.15-.43-2.19-1.35-.81-.72-1.36-1.61-1.52-1.88-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.28.27-.47.1-.18.05-.35-.02-.48-.06-.14-.61-1.47-.83-2.02-.22-.53-.44-.46-.61-.47-.16-.01-.34-.01-.52-.01-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29 0 1.35.98 2.65 1.12 2.84.14.18 1.93 2.95 4.68 4.14 2.75 1.19 2.75.8 3.25.75.5-.05 1.61-.66 1.84-1.3.23-.64.23-1.19.16-1.3-.06-.11-.25-.18-.52-.32z"/>
   </svg>
 );
 
@@ -115,11 +116,11 @@ export function Footer() {
               </div>
               <div className="flex items-start gap-4">
                 <MapPin className="w-[18px] h-[18px] mt-1 shrink-0 text-[#6B5A4D]" />
-                <span className="leading-relaxed">11 Slipway Rd, Masaki, Dar es Salaam, Tanzania <span className="text-[17px]">🇹🇿</span></span>
+                <span className="leading-relaxed whitespace-nowrap">11 Slipway Rd, Masaki, Dar es Salaam</span>
               </div>
               <div className="flex items-start gap-4">
                 <MapPin className="w-[18px] h-[18px] mt-1 shrink-0 text-[#6B5A4D]" />
-                <span className="leading-relaxed">58 Mikocheni A, Dar es Salaam, Tanzania <span className="text-[17px]">🇹🇿</span></span>
+                <span className="leading-relaxed whitespace-nowrap">58 Mikocheni A, Dar es Salaam</span>
               </div>
               <div className="flex items-center gap-4">
                 <Mail className="w-[18px] h-[18px] shrink-0 text-[#6B5A4D]" />
