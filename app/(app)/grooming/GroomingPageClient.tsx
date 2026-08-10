@@ -380,19 +380,15 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
             </div>
 
             {/* Bottom Image Section */}
-            <div className="relative w-full h-[400px] md:h-[500px]">
-                <Image 
-                    src="/grooming-dog.jpeg"
-                    alt="Happy Pet, Happy Home"
-                    fill
-                    className="object-cover object-top"
-                />
-                <div className="absolute inset-0 bg-black/20"></div>
-                <div className="absolute bottom-12 right-12 text-white">
-                    <h2 className="text-4xl md:text-5xl font-serif leading-tight text-shadow-sm">
+            <div 
+                className="relative w-full h-[500px] md:h-[600px] bg-fixed bg-cover bg-center flex items-center justify-end px-8 md:px-24 lg:px-32"
+                style={{ backgroundImage: 'url(/grooming-dog.jpeg)' }}
+            >
+                <div className="z-10">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif leading-tight drop-shadow-lg text-white text-left">
                         Happy Pet,<br />Happy Home.
                     </h2>
-                    <div className="w-16 h-px bg-white/50 mt-6"></div>
+                    <div className="w-16 h-[2px] bg-[#6b3e1e] mt-6"></div>
                 </div>
             </div>
         </div>
