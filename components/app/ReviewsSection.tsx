@@ -80,14 +80,14 @@ export function ReviewsSection() {
               return (
                 <div 
                   key={review.id} 
-                  className="flex-[0_0_85%] md:flex-[0_0_70%] lg:flex-[0_0_60%] min-w-0 pl-4 relative"
+                  className="flex-[0_0_85%] md:flex-[0_0_70%] lg:flex-[0_0_70%] min-w-0 pl-4 relative"
                   onClick={() => emblaApi?.scrollTo(index)}
                 >
                   <div 
-                    className={`h-full bg-white rounded-3xl p-6 md:p-10 flex flex-col shadow-sm border border-[#EAE3D9]/50 transition-all duration-700 ease-out cursor-grab active:cursor-grabbing ${
+                    className={`h-full bg-white rounded-3xl p-6 md:p-10 flex flex-col border border-[#EAE3D9]/50 transition-all duration-700 ease-out cursor-grab active:cursor-grabbing ${
                       isActive 
-                        ? 'scale-100 opacity-100 blur-0 shadow-[0_8px_30px_rgba(0,0,0,0.08)]' 
-                        : 'scale-90 opacity-40 blur-[3px] hover:blur-[1px] hover:opacity-60'
+                        ? 'scale-100 opacity-100 blur-0 shadow-sm' 
+                        : 'scale-90 opacity-40 blur-[3px] hover:blur-[1px] hover:opacity-60 shadow-none'
                     }`}
                   >
                     {/* User Info */}
@@ -151,14 +151,14 @@ export function ReviewsSection() {
       {/* Image Modal */}
       {selectedImage && (
         <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 cursor-pointer"
           onClick={() => setSelectedImage(null)}
         >
-          <div className="relative w-full max-w-5xl max-h-[90vh] aspect-square md:aspect-[4/3] rounded-lg overflow-hidden" onClick={(e) => e.stopPropagation()}>
+          <div className="relative w-full max-w-5xl max-h-[85vh] aspect-square md:aspect-[4/3] rounded-lg overflow-hidden pointer-events-none">
             <Image src={selectedImage} alt="Viewed photo" fill className="object-contain" />
           </div>
           <button 
-            className="absolute top-6 right-6 text-white bg-black/50 hover:bg-black p-3 rounded-full transition-colors"
+            className="fixed top-6 right-6 text-white bg-black/50 hover:bg-black p-3 rounded-full transition-colors z-[110]"
             onClick={() => setSelectedImage(null)}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
