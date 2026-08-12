@@ -1,4 +1,4 @@
-import { odoo } from './lib/odoo/client.ts';
+import { odoo } from './lib/odoo/client';
 async function test() {
   try {
     const prods = await odoo.searchRead('product.template', [['name', 'ilike', 'bioline']], ['id', 'name']);
