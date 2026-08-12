@@ -101,9 +101,9 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   const brands = brandsResult.data || [];
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] font-sans pb-24">
+    <div className="min-h-screen bg-[#FAF7F2] font-sans pb-24 overflow-hidden">
       {/* Hero Section */}
-      <div className="container mx-auto px-4 pt-12 pb-12 sm:px-6 lg:px-8 text-center sm:text-left">
+      <div className="container mx-auto px-4 pt-12 pb-12 sm:px-6 lg:px-8 text-left">
         <h3 className="text-xs font-bold tracking-widest text-zinc-900 uppercase mb-6">Shop</h3>
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif text-[#222222] leading-[1.1] tracking-tight mb-4 max-w-2xl">
           Everything they need,<br className="hidden sm:block" />
@@ -114,24 +114,24 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
 
       {/* Category Icons Strip */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div className="flex items-center justify-start sm:justify-start gap-8 sm:gap-16 md:gap-24 overflow-x-auto no-scrollbar pb-6 border-b border-[#EAE3D9]">
-          <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity min-w-[70px]">
+        <div className="flex items-center justify-start gap-8 sm:gap-16 md:gap-24 overflow-x-auto no-scrollbar pb-6 border-b border-[#EAE3D9]">
+          <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
             <Beef className="w-10 h-10 text-[#4E2A15] stroke-[1.5]" />
             <span className="text-sm font-semibold text-[#4E2A15]">Food</span>
           </Link>
-          <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity min-w-[70px]">
+          <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
             <Bone className="w-10 h-10 text-[#4E2A15] stroke-[1.5]" />
             <span className="text-sm font-semibold text-[#4E2A15]">Treats</span>
           </Link>
-          <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity min-w-[70px]">
+          <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
             <Smile className="w-10 h-10 text-[#4E2A15] stroke-[1.5]" />
             <span className="text-sm font-semibold text-[#4E2A15]">Toys</span>
           </Link>
-          <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity min-w-[70px]">
+          <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
             <Tag className="w-10 h-10 text-[#4E2A15] stroke-[1.5]" />
             <span className="text-sm font-semibold text-[#4E2A15]">Accessories</span>
           </Link>
-          <Link href="/grooming" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity min-w-[70px]">
+          <Link href="/grooming" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
             <Scissors className="w-10 h-10 text-[#4E2A15] stroke-[1.5]" />
             <span className="text-sm font-semibold text-[#4E2A15]">Grooming</span>
           </Link>
