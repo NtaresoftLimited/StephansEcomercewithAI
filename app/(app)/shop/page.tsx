@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { SlidersHorizontal, ChevronDown, Beef, Bone, Smile, Tag, Scissors } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 
 export async function generateMetadata({ searchParams }: ProductsPageProps): Promise<Metadata> {
   const params = await searchParams;
@@ -132,7 +133,9 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
             <span className="text-sm font-semibold text-[#4E2A15]">Accessories</span>
           </Link>
           <Link href="/grooming" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
-            <Scissors className="w-10 h-10 text-[#4E2A15] stroke-[1.5]" />
+            <div className="relative w-10 h-10">
+              <Image src="/icons/Grooming Scissors.png" alt="Grooming" fill className="object-contain" />
+            </div>
             <span className="text-sm font-semibold text-[#4E2A15]">Grooming</span>
           </Link>
         </div>
