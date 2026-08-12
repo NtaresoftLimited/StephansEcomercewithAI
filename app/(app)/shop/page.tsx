@@ -12,13 +12,12 @@ import {
   FILTER_PRODUCTS_BY_RELEVANCE_QUERY
 } from "@/lib/sanity/queries/products";
 import { ProductGrid } from "@/components/app/ProductGrid";
-import { ShopHeader } from "@/components/app/ShopHeader";
 import { ProductFilters } from "@/components/app/ProductFilters";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { SlidersHorizontal } from "lucide-react";
+import { SlidersHorizontal, ChevronDown, Beef, Bone, Smile, Tag, Scissors } from "lucide-react";
 import { Metadata } from "next";
-import { ProductsBanner } from "@/components/app/ProductsBanner";
+import Link from "next/link";
 
 export async function generateMetadata({ searchParams }: ProductsPageProps): Promise<Metadata> {
   const params = await searchParams;
@@ -102,30 +101,78 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   const brands = brandsResult.data || [];
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950">
-      <ProductsBanner />
-      
-      <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        <ShopHeader 
-          categories={categories} 
-          brands={brands} 
-          productCount={products.length} 
-          searchQuery={q}
-        />
-        <div className="flex flex-col gap-8 lg:flex-row">
-          {/* Desktop Filters */}
-          <aside className="hidden w-64 flex-shrink-0 lg:block">
-            <div className="sticky top-24">
-              <h2 className="mb-4 text-lg font-semibold text-zinc-900 dark:text-zinc-50">Filters</h2>
-              <ProductFilters categories={categories} brands={brands} />
-            </div>
-          </aside>
+    <div className="min-h-screen bg-[#FAF7F2] font-sans pb-24">
+      {/* Hero Section */}
+      <div className="container mx-auto px-4 pt-12 pb-12 sm:px-6 lg:px-8 text-center sm:text-left">
+        <h3 className="text-xs font-bold tracking-widest text-zinc-900 uppercase mb-6">Shop</h3>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif text-[#222222] leading-[1.1] tracking-tight mb-4 max-w-2xl">
+          Everything they need,<br className="hidden sm:block" />
+          chosen with care.
+        </h1>
+        <p className="text-lg text-zinc-800 font-medium">For the life you share with them.</p>
+      </div>
 
-          {/* Product Grid */}
-          <main className="flex-1">
-            <ProductGrid products={products} />
-          </main>
+      {/* Category Icons Strip */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+        <div className="flex items-center justify-start sm:justify-start gap-8 sm:gap-16 md:gap-24 overflow-x-auto no-scrollbar pb-6 border-b border-[#EAE3D9]">
+          <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity min-w-[70px]">
+            <Beef className="w-10 h-10 text-[#4E2A15] stroke-[1.5]" />
+            <span className="text-sm font-semibold text-[#4E2A15]">Food</span>
+          </Link>
+          <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity min-w-[70px]">
+            <Bone className="w-10 h-10 text-[#4E2A15] stroke-[1.5]" />
+            <span className="text-sm font-semibold text-[#4E2A15]">Treats</span>
+          </Link>
+          <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity min-w-[70px]">
+            <Smile className="w-10 h-10 text-[#4E2A15] stroke-[1.5]" />
+            <span className="text-sm font-semibold text-[#4E2A15]">Toys</span>
+          </Link>
+          <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity min-w-[70px]">
+            <Tag className="w-10 h-10 text-[#4E2A15] stroke-[1.5]" />
+            <span className="text-sm font-semibold text-[#4E2A15]">Accessories</span>
+          </Link>
+          <Link href="/grooming" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity min-w-[70px]">
+            <Scissors className="w-10 h-10 text-[#4E2A15] stroke-[1.5]" />
+            <span className="text-sm font-semibold text-[#4E2A15]">Grooming</span>
+          </Link>
         </div>
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Top Controls Row */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
+          <div>
+            <h2 className="text-2xl font-serif text-[#222222] mb-1">All Products</h2>
+            <p className="text-sm text-zinc-500 font-medium">Showing {products.length} products</p>
+          </div>
+
+          <div className="flex items-center gap-3 w-full sm:w-auto">
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="outline" className="flex-1 sm:flex-none border-[#EAE3D9] bg-transparent hover:bg-white rounded-full h-10 px-6 flex items-center gap-2 text-[#4E2A15]">
+                  <SlidersHorizontal className="w-4 h-4" />
+                  <span className="font-semibold text-sm">Filter</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] sm:w-[400px] overflow-y-auto">
+                <SheetHeader className="mb-6">
+                  <SheetTitle className="font-serif text-2xl">Filters</SheetTitle>
+                </SheetHeader>
+                <ProductFilters categories={categories} brands={brands} />
+              </SheetContent>
+            </Sheet>
+
+            <Button variant="outline" className="flex-1 sm:flex-none border-[#EAE3D9] bg-transparent hover:bg-white rounded-full h-10 px-6 flex items-center justify-between gap-3 min-w-[200px] text-[#4E2A15]">
+              <span className="font-semibold text-sm">Sort by: <span className="font-normal">Featured</span></span>
+              <ChevronDown className="w-4 h-4" />
+            </Button>
+          </div>
+        </div>
+
+        {/* Product Grid */}
+        <main className="w-full">
+          <ProductGrid products={products} />
+        </main>
       </div>
     </div>
   );

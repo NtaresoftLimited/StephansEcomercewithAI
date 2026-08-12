@@ -88,17 +88,17 @@ export function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <div className="group relative overflow-hidden h-full bg-white rounded-2xl transition-all duration-300 flex flex-col hover:shadow-md border border-transparent hover:border-gray-100">
+    <div className="group relative h-full flex flex-col transition-all duration-300">
       <Link className="block relative flex-grow flex flex-col" href={`/shop/${product.slug}`}>
         {/* Product Image */}
-        <div className="aspect-[4/3] w-full flex items-center justify-center overflow-hidden p-6 md:p-8">
+        <div className="aspect-[4/5] sm:aspect-square w-full rounded-2xl bg-[#F4F1EA] flex items-center justify-center overflow-hidden p-6 md:p-8 mb-4">
           <div className="relative w-full h-full">
             {mainImageUrl ? (
               <Image 
                 alt={product.name ?? "Product"} 
                 src={getOptimizedSanityUrl(mainImageUrl) ?? mainImageUrl}
                 fill
-                className="object-contain transition-transform duration-500 group-hover:scale-105"
+                className="object-contain transition-transform duration-500 group-hover:scale-105 mix-blend-multiply"
                 sizes="(max-width: 768px) 50vw, (max-width: 1280px) 25vw, 15vw"
                 unoptimized
               />
@@ -111,13 +111,20 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
         
         {/* Product Details */}
-        <div className="px-6 pb-6 flex flex-col flex-grow justify-end">
-          <h3 className="text-[13px] sm:text-[15px] font-medium text-[#222222] leading-tight mb-2 min-h-[2.5rem]">
+        <div className="flex flex-col flex-grow justify-start">
+          <h3 className="text-sm font-semibold text-[#222222] leading-snug mb-1">
             {product.name}
           </h3>
-          <span className="text-[13px] sm:text-[14px] text-[#444444]">
-            {formatPrice(product.price, "Tsh")}
-          </span>
+          {/* Subtitle placeholder - normally this would come from variant or short description */}
+          {product.brand?.name && (
+            <p className="text-xs text-zinc-500 mb-3">{product.brand.name}</p>
+          )}
+          
+          <div className="mt-auto pt-2 flex items-center justify-between">
+            <span className="text-sm font-semibold text-[#4E2A15]">
+              {formatPrice(product.price, "Tsh")}
+            </span>
+          </div>
         </div>
       </Link>
 
@@ -125,7 +132,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <button 
         onClick={handleAddToCart}
         disabled={isOutOfStock}
-        className="absolute bottom-4 right-4 z-20 p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 disabled:pointer-events-none disabled:opacity-50 text-[#222222]"
+        className="absolute bottom-0 right-0 z-20 p-2 rounded-full hover:bg-black/5 transition-colors duration-200 disabled:pointer-events-none disabled:opacity-50 text-[#222222]"
         aria-label="Add to cart"
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
