@@ -16,6 +16,7 @@ import { GroomingSection } from "@/components/app/GroomingSection";
 import { AutoRotatingProductGrid } from "@/components/app/AutoRotatingProductGrid";
 import { ReviewsSection } from "@/components/app/ReviewsSection";
 import { BrandsSection } from "@/components/app/BrandsSection";
+import { CategoryNavigationSection } from "@/components/app/CategoryNavigationSection";
 
 export const revalidate = 3600;
 
@@ -132,6 +133,9 @@ export default async function HomePage({ searchParams }: PageProps) {
           </div>
         </div>
       </section>
+
+      {/* Category Navigation Section */}
+      <CategoryNavigationSection />
 
       {/* Reviews Section */}
       <ReviewsSection />
