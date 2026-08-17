@@ -84,19 +84,19 @@ export function CategoryMegaMenu({
 
   return (
     <div className="mx-auto w-full max-w-7xl">
-      <div className="bg-[#fffdfb] dark:bg-zinc-950">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 lg:p-6">
+      <div className="bg-white dark:bg-zinc-950">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 lg:p-6 pb-2">
           {featuredGroups.map((group) => {
             const Icon = CATEGORY_ICONS[group.title] || CircleDot;
 
             return (
               <article
                 key={group.title}
-                className="group/card flex flex-col min-h-[200px] gap-4 rounded-xl border border-[#6b3e1e]/10 bg-white p-5 transition-all duration-200 hover:border-[#9a5d2d]/30 dark:border-zinc-800 dark:bg-zinc-900"
+                className="group/card flex flex-col min-h-[200px] gap-4 rounded-xl border border-transparent bg-transparent p-5 transition-all duration-200 hover:border-[#6b3e1e]/10 dark:hover:border-zinc-800"
               >
                 <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#6b3e1e]/5 text-[#6b3e1e] transition-colors group-hover/card:bg-[#6b3e1e]/10 dark:bg-amber-950/25 dark:text-amber-500">
-                    <Icon aria-hidden="true" className="h-6 w-6 stroke-[1.5]" />
+                  <div className="flex shrink-0 items-center justify-center text-[#6b3e1e] dark:text-amber-500">
+                    <Icon aria-hidden="true" className="h-7 w-7 stroke-[1]" />
                   </div>
                   <Link
                     href={group.href}
@@ -107,8 +107,8 @@ export function CategoryMegaMenu({
                   </Link>
                 </div>
 
-                <div className="flex min-w-0 flex-1 flex-col">
-                  <ul className="mt-2 space-y-2.5">
+                <div className="flex min-w-0 flex-1 flex-col pl-10">
+                  <ul className="mt-1 space-y-2.5">
                     {group.items.slice(0, 4).map((item) => (
                       <li key={item.name}>
                         <Link
@@ -122,11 +122,11 @@ export function CategoryMegaMenu({
                     ))}
                   </ul>
 
-                  <div className="mt-auto border-t border-[#6b3e1e]/10 pt-3 dark:border-zinc-800">
+                  <div className="mt-auto pt-3">
                     <Link
                       href={group.href}
                       onClick={onNavigate}
-                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#6b3e1e] transition-colors hover:text-[#9a5d2d] dark:text-amber-500"
+                      className="inline-flex items-center gap-1.5 text-[13px] font-bold uppercase tracking-wider text-[#6b3e1e] transition-colors hover:text-[#9a5d2d] dark:text-amber-500"
                     >
                       View all
                       <ArrowRight aria-hidden="true" className="h-3.5 w-3.5" />
@@ -138,11 +138,11 @@ export function CategoryMegaMenu({
           })}
         </div>
 
-        <div className="flex justify-center border-t border-[#6b3e1e]/10 bg-[#fbf7f3] px-6 py-4 dark:border-zinc-800 dark:bg-zinc-900/70">
+        <div className="flex justify-start px-6 lg:px-10 pb-6 pt-2">
           <Link
             href={viewAllHref}
             onClick={onNavigate}
-            className="inline-flex min-w-72 items-center justify-center gap-3 rounded-full bg-[#6b3e1e] px-8 py-3 text-sm font-bold text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-[#573017] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6b3e1e] focus-visible:ring-offset-2"
+            className="inline-flex items-center gap-2 text-[13px] font-bold uppercase tracking-wider text-[#6b3e1e] hover:text-[#9a5d2d] dark:text-amber-500 transition-colors"
           >
             View all {animalName} categories
             <ArrowRight aria-hidden="true" className="h-4 w-4" />
