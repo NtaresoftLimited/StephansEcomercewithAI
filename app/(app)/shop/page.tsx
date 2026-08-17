@@ -15,10 +15,10 @@ import { ProductGrid } from "@/components/app/ProductGrid";
 import { ProductFilters } from "@/components/app/ProductFilters";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { SlidersHorizontal, ChevronDown, Beef, Bone, Smile, Tag } from "lucide-react";
+import { SlidersHorizontal, ChevronDown } from "lucide-react";
+import { FoodBowlIcon, BoneIcon, TeddyBearIcon, CollarIcon, ScissorsBubblesIcon } from "@/components/app/CustomIcons";
 import { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { odoo } from "@/lib/odoo/client";
 
 export async function generateMetadata({ searchParams }: ProductsPageProps): Promise<Metadata> {
@@ -192,25 +192,23 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
         <div className="flex items-center justify-start gap-8 sm:gap-16 md:gap-24 overflow-x-auto no-scrollbar pb-6 border-b border-[#EAE3D9]">
           <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
-            <Beef className="w-10 h-10 text-[#4E2A15] stroke-[1.5]" />
+            <FoodBowlIcon className="w-10 h-10 text-[#4E2A15]" />
             <span className="text-sm font-semibold text-[#4E2A15]">Food</span>
           </Link>
           <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
-            <Bone className="w-10 h-10 text-[#4E2A15] stroke-[1.5]" />
+            <BoneIcon className="w-10 h-10 text-[#4E2A15]" />
             <span className="text-sm font-semibold text-[#4E2A15]">Treats</span>
           </Link>
           <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
-            <Smile className="w-10 h-10 text-[#4E2A15] stroke-[1.5]" />
+            <TeddyBearIcon className="w-10 h-10 text-[#4E2A15]" />
             <span className="text-sm font-semibold text-[#4E2A15]">Toys</span>
           </Link>
           <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
-            <Tag className="w-10 h-10 text-[#4E2A15] stroke-[1.5]" />
+            <CollarIcon className="w-10 h-10 text-[#4E2A15]" />
             <span className="text-sm font-semibold text-[#4E2A15]">Accessories</span>
           </Link>
           <Link href="/grooming" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
-            <div className="relative w-10 h-10">
-              <Image src="/icons/Grooming Scissors.png" alt="Grooming" fill className="object-contain" />
-            </div>
+            <ScissorsBubblesIcon className="w-10 h-10 text-[#4E2A15]" />
             <span className="text-sm font-semibold text-[#4E2A15]">Grooming</span>
           </Link>
         </div>
