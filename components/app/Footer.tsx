@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import Link from 'next/link';
 import Image from 'next/image';
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Truck, Award, ShieldCheck, Heart } from 'lucide-react';
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className={className}>
@@ -41,9 +41,51 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#FAF7F2] w-full pt-20 pb-10 border-t border-[#EAE3D9]">
+    <footer className="bg-[#FAF7F2] w-full pt-10 pb-10 border-t border-[#EAE3D9]">
       <div className="max-w-[1400px] mx-auto px-6 md:px-12">
         
+        {/* Trust Banner Section */}
+        <div className="flex flex-col md:flex-row items-center justify-between pb-12 mb-12 border-b border-[#EAE3D9] gap-8 md:gap-4">
+          {/* Fast Delivery */}
+          <div className="flex items-center gap-4 flex-1">
+            <Truck className="w-8 h-8 text-[#222222] shrink-0" strokeWidth={1.5} />
+            <div>
+              <h5 className="font-bold text-[13px] text-[#222222]">Fast Delivery</h5>
+              <p className="text-[12px] text-zinc-600 mt-0.5">Across Tanzania</p>
+            </div>
+          </div>
+          <div className="hidden md:block w-px h-10 bg-[#EAE3D9] shrink-0"></div>
+
+          {/* Top Quality */}
+          <div className="flex items-center gap-4 flex-1 md:justify-center md:pl-4 w-full md:w-auto">
+            <Award className="w-8 h-8 text-[#222222] shrink-0" strokeWidth={1.5} />
+            <div>
+              <h5 className="font-bold text-[13px] text-[#222222]">Top Quality Products</h5>
+              <p className="text-[12px] text-zinc-600 mt-0.5">For every pet</p>
+            </div>
+          </div>
+          <div className="hidden md:block w-px h-10 bg-[#EAE3D9] shrink-0"></div>
+
+          {/* Secure Payments */}
+          <div className="flex items-center gap-4 flex-1 md:justify-center md:pl-4 w-full md:w-auto">
+            <ShieldCheck className="w-8 h-8 text-[#222222] shrink-0" strokeWidth={1.5} />
+            <div>
+              <h5 className="font-bold text-[13px] text-[#222222]">Secure Payments</h5>
+              <p className="text-[12px] text-zinc-600 mt-0.5">100% safe checkout</p>
+            </div>
+          </div>
+          <div className="hidden md:block w-px h-10 bg-[#EAE3D9] shrink-0"></div>
+
+          {/* Care You Can Trust */}
+          <div className="flex items-center gap-4 flex-1 md:justify-center md:pl-4 w-full md:w-auto">
+            <Heart className="w-8 h-8 text-[#222222] shrink-0" strokeWidth={1.5} />
+            <div>
+              <h5 className="font-bold text-[13px] text-[#222222]">Care You Can Trust</h5>
+              <p className="text-[12px] text-zinc-600 mt-0.5">We're pet lovers too</p>
+            </div>
+          </div>
+        </div>
+
         {/* Top Section */}
         <div className="flex flex-col md:flex-row border-b border-[#EAE3D9] pb-12">
           
