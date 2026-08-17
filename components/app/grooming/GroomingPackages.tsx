@@ -181,7 +181,7 @@ export function GroomingPackages({ prices = PRICES }: GroomingPackagesProps) {
                             { name: "Handling Fee", price: "10,000 TZS", desc: "For difficult pets" },
                             { name: "Sedation Fee", price: "5,000 TZS", desc: "Vet supervision required" },
                             { name: "Late Pickup Fee", price: "10,000 TZS", desc: "Per hour charge" },
-                            { name: "Emergency Grooming", price: "30,000 TZS", desc: "After 6:30 PM" },
+                            { name: "Emergency Grooming", price: "30,000 TZS", desc: "At 6:00 PM" },
                         ].map((item, i) => (
                             <div key={i} className="group relative overflow-hidden rounded-xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 p-5 hover:shadow-lg transition-all duration-300 hover:border-[#6b3e1e]/30">
                                 <div className="absolute top-0 left-0 w-1 h-full bg-[#6b3e1e] opacity-0 group-hover:opacity-100 transition-opacity"></div>
