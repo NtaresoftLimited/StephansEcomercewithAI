@@ -274,7 +274,7 @@ export class OdooClient {
             [
                 ["brand_id", "=", brandId],
                 ["sale_ok", "=", true],
-                ["website_published", "=", true],
+                ["is_published", "=", true],
                 ["active", "=", true]
             ],
             [
@@ -286,6 +286,73 @@ export class OdooClient {
                 "default_code"
             ]
         );
+    }
+
+    /**
+     * Get all website public categories (product.public.category)
+     */
+    async getPublicCategories(): Promise<any[]> {
+        return this.searchRead(
+            "product.public.category",
+            [],
+            ["id", "name", "display_name", "parent_id"]
+        );
+    }
+
+    /**
+     * Get all shop products from Odoo, normalized to match Sanity Product format
+     */
+    async getOdooShopProducts(publicCategories: any[] = []): Promise<any[]> {
+        const products = await this.searchRead(
+            "product.template",
+            [
+                ["sale_ok", "=", true],
+                ["is_published", "=", true],
+                ["active", "=", true]
+            ],
+            [
+                "id",
+                "name",
+                "list_price",
+                "public_categ_ids",
+                "qty_available"
+            ]
+        );
+        
+        // Create category lookup map for faster mapping
+        const catMap = new Map(publicCategories.map(c => [c.id, c]));
+
+        return products.map(p => {
+            const productCategories = (p.public_categ_ids || [])
+                .map((cId: number) => {
+                    const cat = catMap.get(cId);
+                    if (!cat) return null;
+                    return {
+                        _id: `odoo-cat-${cId}`,
+                        title: cat.name,
+                        slug: cat.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') // rough slugification
+                    };
+                })
+                .filter(Boolean);
+
+            return {
+                _id: `odoo-${p.id}`,
+                name: p.name,
+                slug: `odoo-${p.id}`,
+                price: p.list_price,
+                stock: p.qty_available ?? 10,
+                images: [
+                    {
+                        _key: `odoo-img-${p.id}`,
+                        asset: {
+                            url: `${ODOO_URL}/web/image/product.template/${p.id}/image_1920`
+                        }
+                    }
+                ],
+                categories: productCategories,
+                isOdoo: true,
+            };
+        });
     }
 }
 

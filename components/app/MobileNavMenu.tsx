@@ -1,32 +1,51 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
-import { 
-  ChevronDown, Sparkles, Percent,
-  Utensils, ShieldCheck, HeartPulse, Bone, Scissors, Trash2, Refrigerator,
-  Bed, Home, Dumbbell, Shield, Shirt, Brain, Car, Baby, CircleDot,
-  Wind, User, Heart, LogIn, LogOut
+import {
+  Baby,
+  Bed,
+  Bone,
+  Brain,
+  Car,
+  ChevronDown,
+  CircleDot,
+  Dumbbell,
+  Heart,
+  HeartPulse,
+  Home,
+  LogOut,
+  Percent,
+  Refrigerator,
+  Scissors,
+  Shield,
+  ShieldCheck,
+  Shirt,
+  Sparkles,
+  Trash2,
+  Utensils,
+  Wind,
 } from "lucide-react";
-import { DEEP_NAV_MENU } from "@/lib/config/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import { signOut, useSession } from "next-auth/react";
+import type { ElementType } from "react";
+import { useState } from "react";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { useState } from "react";
-import { useSession, signOut } from "next-auth/react";
+import { DEEP_NAV_MENU } from "@/lib/config/navigation";
 
 interface MobileNavMenuProps {
   onClose: () => void;
 }
 
 // Icon mapping for categories
-const CATEGORY_ICONS: Record<string, any> = {
+const CATEGORY_ICONS: Record<string, ElementType> = {
   "Dog Food": Utensils,
   "Cat Food": Utensils,
   "Bird Food": Utensils,
-  "Food": Utensils,
+  Food: Utensils,
   "Tick, Flea & Deworming": ShieldCheck,
   "Wellness & Supplements": HeartPulse,
   "Treats & Chews": Bone,
@@ -63,10 +82,38 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
   };
 
   const sections = [
-    { id: "dogs", title: "Shop For Dog", icon: "/icons/minimalist-dog.png", data: DEEP_NAV_MENU.dogs, href: "/shop?category=dogs", iconClass: "" },
-    { id: "cats", title: "Shop For Cat", icon: "/icons/minimalist-cat.png", data: DEEP_NAV_MENU.cats, href: "/shop?category=cats", iconClass: "" },
-    { id: "birds", title: "Shop For Birds", icon: "/icons/minimalist-bird.png", data: DEEP_NAV_MENU.birds, href: "/shop?category=birds", iconClass: "scale-125" },
-    { id: "smallPets", title: "Small Pets", icon: "/icons/minimalist-rabbit.png", data: DEEP_NAV_MENU.smallPets, href: "/shop?category=small-pets", iconClass: "scale-125" },
+    {
+      id: "dogs",
+      title: "Shop For Dog",
+      icon: "/icons/minimalist-dog.png",
+      data: DEEP_NAV_MENU.dogs,
+      href: "/shop?category=dogs",
+      iconClass: "",
+    },
+    {
+      id: "cats",
+      title: "Shop For Cat",
+      icon: "/icons/minimalist-cat.png",
+      data: DEEP_NAV_MENU.cats,
+      href: "/shop?category=cats",
+      iconClass: "",
+    },
+    {
+      id: "birds",
+      title: "Shop For Birds",
+      icon: "/icons/minimalist-bird.png",
+      data: DEEP_NAV_MENU.birds,
+      href: "/shop?category=birds",
+      iconClass: "scale-125",
+    },
+    {
+      id: "smallPets",
+      title: "Small Pets",
+      icon: "/icons/minimalist-rabbit.png",
+      data: DEEP_NAV_MENU.smallPets,
+      href: "/shop?category=small-pets",
+      iconClass: "scale-125",
+    },
   ];
 
   return (
@@ -96,22 +143,30 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
             </div>
             <ChevronDown
               className={`h-4 w-4 transition-transform duration-300 ${
-                openSection === section.id ? "rotate-180 text-amber-600" : "text-zinc-400"
+                openSection === section.id
+                  ? "rotate-180 text-amber-600"
+                  : "text-zinc-400"
               }`}
             />
           </CollapsibleTrigger>
-          <CollapsibleContent className="mt-4 space-y-6 overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
+          <CollapsibleContent className="mt-4 space-y-3 overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
             {section.data.map((group) => {
               const SubIcon = CATEGORY_ICONS[group.title] || CircleDot;
               return (
-                <div key={group.title} className="pl-2">
+                <div
+                  key={group.title}
+                  className="rounded-xl border border-[#6b3e1e]/10 bg-[#fffdfb] p-4 dark:border-zinc-800 dark:bg-zinc-900/70"
+                >
                   <Link
                     href={group.href}
                     onClick={onClose}
                     className="flex items-center gap-3 group/sub"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center">
-                      <SubIcon size={16} className="text-zinc-400 group-hover/sub:text-amber-600 transition-colors" />
+                    <div className="w-9 h-9 rounded-lg bg-[#6b3e1e]/5 dark:bg-amber-950/25 flex items-center justify-center">
+                      <SubIcon
+                        size={18}
+                        className="text-[#6b3e1e] dark:text-amber-500 group-hover/sub:text-amber-600 transition-colors"
+                      />
                     </div>
                     <span className="font-bold text-zinc-800 dark:text-zinc-100 hover:text-amber-600 transition-colors">
                       {group.title}
@@ -132,6 +187,13 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
                 </div>
               );
             })}
+            <Link
+              href={section.href}
+              onClick={onClose}
+              className="flex w-full items-center justify-center rounded-full bg-[#6b3e1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#573017]"
+            >
+              View all {section.title.replace("Shop For ", "")} categories
+            </Link>
           </CollapsibleContent>
         </Collapsible>
       ))}
@@ -153,7 +215,7 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
         </div>
         Grooming Studio
       </Link>
-      
+
       <Link
         href="/shop?sort=new"
         onClick={onClose}
@@ -181,7 +243,7 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
       >
         Locations
       </Link>
-      
+
       <Link
         href="/about"
         onClick={onClose}
@@ -189,7 +251,7 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
       >
         About Stephan's
       </Link>
-      
+
       <Link
         href="/contact"
         onClick={onClose}
@@ -213,9 +275,13 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-widest leading-none">Logged In As</span>
+                <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-widest leading-none">
+                  Logged In As
+                </span>
                 <span className="text-sm font-bold text-zinc-800 dark:text-zinc-100 truncate max-w-[180px]">
-                  {session.user?.name || session.user?.email || "Valued Customer"}
+                  {session.user?.name ||
+                    session.user?.email ||
+                    "Valued Customer"}
                 </span>
               </div>
             </div>
@@ -232,7 +298,8 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
                   width={14}
                   height={14}
                   className="h-3.5 w-3.5 object-contain opacity-70"
-                /> My Orders
+                />{" "}
+                My Orders
               </Link>
               <Link
                 href="/wishlist"
@@ -244,6 +311,7 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
             </div>
 
             <button
+              type="button"
               onClick={() => {
                 signOut();
                 onClose();

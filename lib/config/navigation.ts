@@ -497,3 +497,10 @@ export const DEEP_NAV_MENU = {
     }
   ]
 };
+
+export const FEATURED_NAV_GROUP_TITLES = {
+  dogs: ["Dog Food", "Tick, Flea & Deworming", "Treats & Chews", "Grooming Essentials"],
+  cats: ["Cat Food", "Tick, Flea & Deworming", "Treats & Chews", "Grooming Essentials"],
+  birds: ["Bird Food", "Treats & Supplements", "Homes & Nests", "Perches & Accessories"],
+  smallPets: ["Food", "Wellness & Supplements", "Treats & Chews", "Little Homes"],
+} as const;

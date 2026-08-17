@@ -15,10 +15,11 @@ import { ProductGrid } from "@/components/app/ProductGrid";
 import { ProductFilters } from "@/components/app/ProductFilters";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { SlidersHorizontal, ChevronDown, Beef, Bone, Smile, Tag, Scissors } from "lucide-react";
+import { SlidersHorizontal, ChevronDown, Beef, Bone, Smile, Tag } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
+import { odoo } from "@/lib/odoo/client";
 
 export async function generateMetadata({ searchParams }: ProductsPageProps): Promise<Metadata> {
   const params = await searchParams;
@@ -62,12 +63,14 @@ interface ProductsPageProps {
     minPrice?: string;
     maxPrice?: string;
     inStock?: string;
+    page?: string;
   }>;
 }
 
 export default async function ProductsPage({ searchParams }: ProductsPageProps) {
   const params = await searchParams;
-  const { q, category, brand, color, sort, minPrice, maxPrice, inStock } = params;
+  const { q, category, brand, color, sort, minPrice, maxPrice, inStock, page } = params;
+  const currentPage = parseInt(page || "1", 10);
 
   // Prepare Query Parameters
   const queryParams = {
@@ -83,23 +86,95 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
 
   // Determine which query to use based on sort
   let query: any = FILTER_PRODUCTS_BY_NAME_QUERY;
-
   if (q) query = FILTER_PRODUCTS_BY_RELEVANCE_QUERY;
   if (sort === "price-asc") query = FILTER_PRODUCTS_BY_PRICE_ASC_QUERY;
   else if (sort === "price-desc") query = FILTER_PRODUCTS_BY_PRICE_DESC_QUERY;
   else if (sort === "relevance") query = FILTER_PRODUCTS_BY_RELEVANCE_QUERY;
   else if (sort === "name") query = FILTER_PRODUCTS_BY_NAME_QUERY;
 
-  // Fetch Data in Parallel
-  const [productsResult, categoriesResult, brandsResult] = await Promise.all([
+  // Fetch Data in Parallel (Sanity + Odoo)
+  const [productsResult, sanityCategoriesResult, brandsResult, odooCategories] = await Promise.all([
     sanityFetch({ query, params: queryParams }),
     sanityFetch({ query: ALL_CATEGORIES_QUERY }),
     sanityFetch({ query: ALL_BRANDS_QUERY }),
+    odoo.getPublicCategories().catch(e => { console.error("Odoo categories fetch failed:", e); return []; })
   ]);
 
-  const products = productsResult.data || [];
-  const categories = categoriesResult.data || [];
+  const sanityProducts = productsResult.data || [];
+  const sanityCategories = sanityCategoriesResult.data || [];
   const brands = brandsResult.data || [];
+  
+  // Fetch Odoo Products
+  let odooProductsUnfiltered = [];
+  try {
+    odooProductsUnfiltered = await odoo.getOdooShopProducts(odooCategories || []);
+  } catch (error) {
+    console.error("Failed to fetch Odoo products:", error);
+  }
+
+  // Filter Odoo Products manually to match the query params
+  const odooProducts = odooProductsUnfiltered.filter(p => {
+    if (q && !p.name?.toLowerCase().includes(q.toLowerCase())) return false;
+    if (category && !p.categories.some((c: any) => c.slug === category)) return false;
+    if (inStock && p.stock <= 0) return false;
+    if (minPrice && p.price < Number(minPrice)) return false;
+    if (maxPrice && p.price > Number(maxPrice)) return false;
+    return true;
+  });
+
+  // Merge Odoo and Sanity Categories for the filter sidebar
+  const mappedOdooCategories = (odooCategories || []).map(c => ({
+    _id: `odoo-cat-${c.id}`,
+    title: c.name,
+    slug: { current: c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') }
+  }));
+  
+  // Create a Map to prevent duplicate categories by slug
+  const categoryMap = new Map();
+  [...sanityCategories, ...mappedOdooCategories].forEach(cat => {
+    const slug = cat.slug?.current || cat.slug;
+    if (slug && !categoryMap.has(slug)) {
+      categoryMap.set(slug, cat);
+    }
+  });
+  const allCategories = Array.from(categoryMap.values());
+
+  // Merge products
+  let combinedProducts = [...sanityProducts, ...odooProducts];
+
+  // Re-sort the combined list to ensure Odoo and Sanity products are ordered correctly together
+  if (sort === "price-asc") {
+    combinedProducts.sort((a, b) => (a.price || 0) - (b.price || 0));
+  } else if (sort === "price-desc") {
+    combinedProducts.sort((a, b) => (b.price || 0) - (a.price || 0));
+  } else if (sort === "name") {
+    combinedProducts.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+  }
+
+  // Pagination Logic
+  const itemsPerPage = 12;
+  const totalPages = Math.ceil(combinedProducts.length / itemsPerPage) || 1;
+  
+  // Ensure currentPage is within bounds
+  const validCurrentPage = Math.max(1, Math.min(currentPage, totalPages));
+  
+  const pagedProducts = combinedProducts.slice(
+    (validCurrentPage - 1) * itemsPerPage,
+    validCurrentPage * itemsPerPage
+  );
+
+  // Construct baseUrl for pagination
+  const urlSearchParams = new URLSearchParams();
+  if (q) urlSearchParams.set("q", q);
+  if (category) urlSearchParams.set("category", category);
+  if (brand) urlSearchParams.set("brand", brand);
+  if (sort) urlSearchParams.set("sort", sort);
+  if (minPrice) urlSearchParams.set("minPrice", minPrice);
+  if (maxPrice) urlSearchParams.set("maxPrice", maxPrice);
+  if (inStock) urlSearchParams.set("inStock", "true");
+  
+  const baseSearchString = urlSearchParams.toString();
+  const baseUrl = `/shop${baseSearchString ? `?${baseSearchString}&` : '?'}`;
 
   return (
     <div className="min-h-screen bg-[#FAF7F2] font-sans pb-24 overflow-hidden">
@@ -146,7 +221,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
           <div>
             <h2 className="text-2xl font-serif text-[#222222] mb-1">All Products</h2>
-            <p className="text-sm text-zinc-500 font-medium">Showing {products.length} products</p>
+            <p className="text-sm text-zinc-500 font-medium">Showing {combinedProducts.length} products</p>
           </div>
 
           <div className="flex items-center gap-3 w-full sm:w-auto">
@@ -161,7 +236,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                 <SheetHeader className="mb-6">
                   <SheetTitle className="font-serif text-2xl">Filters</SheetTitle>
                 </SheetHeader>
-                <ProductFilters categories={categories} brands={brands} />
+                <ProductFilters categories={allCategories} brands={brands} />
               </SheetContent>
             </Sheet>
 
@@ -174,7 +249,12 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
 
         {/* Product Grid */}
         <main className="w-full">
-          <ProductGrid products={products} />
+          <ProductGrid 
+            products={pagedProducts} 
+            currentPage={validCurrentPage} 
+            totalPages={totalPages} 
+            baseUrl={baseUrl} 
+          />
         </main>
       </div>
     </div>
