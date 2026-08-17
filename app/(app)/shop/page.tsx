@@ -1,3 +1,4 @@
+import React from "react";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
   ALL_CATEGORIES_QUERY
@@ -126,6 +127,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   const mappedOdooCategories = (odooCategories || []).map(c => ({
     _id: `odoo-cat-${c.id}`,
     title: c.name,
+    displayName: c.display_name,
     slug: { current: c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') }
   }));
   
@@ -138,6 +140,20 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
     }
   });
   const allCategories = Array.from(categoryMap.values());
+
+  const activeCategory = category ? allCategories.find(c => (c.slug?.current || c.slug) === category) : null;
+  
+  // Build Breadcrumbs from Odoo display_name (e.g., "Dogs / Grooming / Nail Care")
+  let breadcrumbs: string[] = [];
+  let eyebrow = "SHOP";
+  if (activeCategory && activeCategory.displayName) {
+    breadcrumbs = activeCategory.displayName.split(' / ');
+    if (breadcrumbs.length > 1) {
+      eyebrow = breadcrumbs[breadcrumbs.length - 2].toUpperCase();
+    }
+  } else if (activeCategory) {
+    breadcrumbs = [activeCategory.title];
+  }
 
   // Merge products
   let combinedProducts = [...sanityProducts, ...odooProducts];
@@ -179,40 +195,67 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   return (
     <div className="min-h-screen bg-[#FAF7F2] font-sans pb-24 overflow-hidden">
       {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-4 pt-12 pb-12 sm:px-6 lg:px-8 text-left">
-        <h3 className="text-xs font-bold tracking-widest text-zinc-900 uppercase mb-6">Shop</h3>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif text-[#222222] leading-[1.1] tracking-tight mb-4 max-w-2xl">
-          Everything they need,<br className="hidden sm:block" />
-          chosen with care.
-        </h1>
-        <p className="text-lg text-zinc-800 font-medium">For the life you share with them.</p>
-      </div>
-
-      {/* Category Icons Strip */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div className="flex items-center justify-start gap-8 sm:gap-16 md:gap-24 overflow-x-auto no-scrollbar pb-6 border-b border-[#EAE3D9]">
-          <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
-            <FoodBowlIcon className="w-10 h-10 text-[#4E2A15]" />
-            <span className="text-sm font-semibold text-[#4E2A15]">Food</span>
-          </Link>
-          <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
-            <BoneIcon className="w-10 h-10 text-[#4E2A15]" />
-            <span className="text-sm font-semibold text-[#4E2A15]">Treats</span>
-          </Link>
-          <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
-            <TeddyBearIcon className="w-10 h-10 text-[#4E2A15]" />
-            <span className="text-sm font-semibold text-[#4E2A15]">Toys</span>
-          </Link>
-          <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
-            <CollarIcon className="w-10 h-10 text-[#4E2A15]" />
-            <span className="text-sm font-semibold text-[#4E2A15]">Accessories</span>
-          </Link>
-          <Link href="/grooming" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
-            <ScissorsBubblesIcon className="w-10 h-10 text-[#4E2A15]" />
-            <span className="text-sm font-semibold text-[#4E2A15]">Grooming</span>
-          </Link>
+      {activeCategory ? (
+        <div className="max-w-7xl mx-auto px-4 pt-8 pb-10 sm:px-6 lg:px-8 text-left border-b border-[#EAE3D9] mb-8">
+          {/* Breadcrumbs */}
+          <div className="flex flex-wrap items-center gap-2 text-[13px] text-zinc-500 font-medium mb-10">
+            <Link href="/shop" className="hover:text-zinc-900 transition-colors">Shop</Link>
+            {breadcrumbs.map((crumb, idx) => (
+              <React.Fragment key={idx}>
+                <span>/</span>
+                <span className={idx === breadcrumbs.length - 1 ? "text-zinc-900" : "hover:text-zinc-900 transition-colors"}>
+                  {crumb}
+                </span>
+              </React.Fragment>
+            ))}
+          </div>
+          
+          <h3 className="text-xs font-bold tracking-[0.2em] text-[#6b3e1e] uppercase mb-4">
+            {eyebrow}
+          </h3>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif text-[#222222] leading-[1.1] tracking-tight mb-4 max-w-2xl">
+            {activeCategory.title}
+          </h1>
+          <p className="text-lg text-zinc-700 font-medium">Everything for comfortable, well-kept paws.</p>
         </div>
-      </div>
+      ) : (
+        <>
+          <div className="max-w-7xl mx-auto px-4 pt-12 pb-12 sm:px-6 lg:px-8 text-left">
+            <h3 className="text-xs font-bold tracking-widest text-zinc-900 uppercase mb-6">Shop</h3>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif text-[#222222] leading-[1.1] tracking-tight mb-4 max-w-2xl">
+              Everything they need,<br className="hidden sm:block" />
+              chosen with care.
+            </h1>
+            <p className="text-lg text-zinc-800 font-medium">For the life you share with them.</p>
+          </div>
+
+          {/* Category Icons Strip (Only show on main shop page) */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+            <div className="flex items-center justify-start gap-8 sm:gap-16 md:gap-24 overflow-x-auto no-scrollbar pb-6 border-b border-[#EAE3D9]">
+              <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
+                <FoodBowlIcon className="w-10 h-10 text-[#4E2A15]" />
+                <span className="text-sm font-semibold text-[#4E2A15]">Food</span>
+              </Link>
+              <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
+                <BoneIcon className="w-10 h-10 text-[#4E2A15]" />
+                <span className="text-sm font-semibold text-[#4E2A15]">Treats</span>
+              </Link>
+              <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
+                <TeddyBearIcon className="w-10 h-10 text-[#4E2A15]" />
+                <span className="text-sm font-semibold text-[#4E2A15]">Toys</span>
+              </Link>
+              <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
+                <CollarIcon className="w-10 h-10 text-[#4E2A15]" />
+                <span className="text-sm font-semibold text-[#4E2A15]">Accessories</span>
+              </Link>
+              <Link href="/grooming" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
+                <ScissorsBubblesIcon className="w-10 h-10 text-[#4E2A15]" />
+                <span className="text-sm font-semibold text-[#4E2A15]">Grooming</span>
+              </Link>
+            </div>
+          </div>
+        </>
+      )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Controls Row */}
