@@ -168,7 +168,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   }
 
   // Pagination Logic
-  const itemsPerPage = 12;
+  const itemsPerPage = 8;
   const totalPages = Math.ceil(combinedProducts.length / itemsPerPage) || 1;
   
   // Ensure currentPage is within bounds
@@ -220,37 +220,48 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
         </div>
       ) : (
         <>
-          <div className="max-w-7xl mx-auto px-4 pt-12 pb-12 sm:px-6 lg:px-8 text-left">
-            <h3 className="text-xs font-bold tracking-widest text-zinc-900 uppercase mb-6">Shop</h3>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif text-[#222222] leading-[1.1] tracking-tight mb-4 max-w-2xl">
-              Everything they need,<br className="hidden sm:block" />
+          <div className="max-w-4xl mx-auto px-4 pt-16 pb-8 sm:px-6 lg:px-8 text-center">
+            <h1 className="text-4xl sm:text-5xl md:text-[54px] font-serif text-[#222222] leading-[1.1] tracking-tight">
+              Everything they need,<br />
               chosen with care.
             </h1>
-            <p className="text-lg text-zinc-800 font-medium">For the life you share with them.</p>
           </div>
 
           {/* Category Icons Strip (Only show on main shop page) */}
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-            <div className="flex items-center justify-start gap-8 sm:gap-16 md:gap-24 overflow-x-auto no-scrollbar pb-6 border-b border-[#EAE3D9]">
-              <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
-                <FoodBowlIcon className="w-10 h-10 text-[#4E2A15]" />
-                <span className="text-sm font-semibold text-[#4E2A15]">Food</span>
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 mt-4">
+            <div className="flex items-center justify-center overflow-x-auto no-scrollbar py-6">
+              <Link href="/shop?category=dogs" className="flex flex-1 flex-col items-center gap-1 group opacity-80 hover:opacity-100 transition-opacity px-2 min-w-[120px]">
+                <FoodBowlIcon className="w-12 h-12 text-[#4E2A15] mb-4" />
+                <span className="text-[11px] font-bold tracking-widest text-[#222] uppercase">Food</span>
+                <span className="text-[13px] text-zinc-500 group-hover:text-[#4E2A15] transition-colors mt-2 flex items-center gap-1">Shop now <span className="font-serif font-light text-lg relative top-[-1px]">&rarr;</span></span>
               </Link>
-              <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
-                <BoneIcon className="w-10 h-10 text-[#4E2A15]" />
-                <span className="text-sm font-semibold text-[#4E2A15]">Treats</span>
+              <div className="w-[1px] h-24 bg-zinc-200 shrink-0 hidden sm:block"></div>
+              
+              <Link href="/shop?category=dogs" className="flex flex-1 flex-col items-center gap-1 group opacity-80 hover:opacity-100 transition-opacity px-2 min-w-[120px]">
+                <BoneIcon className="w-12 h-12 text-[#4E2A15] mb-4" />
+                <span className="text-[11px] font-bold tracking-widest text-[#222] uppercase">Treats</span>
+                <span className="text-[13px] text-zinc-500 group-hover:text-[#4E2A15] transition-colors mt-2 flex items-center gap-1">Shop now <span className="font-serif font-light text-lg relative top-[-1px]">&rarr;</span></span>
               </Link>
-              <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
-                <TeddyBearIcon className="w-10 h-10 text-[#4E2A15]" />
-                <span className="text-sm font-semibold text-[#4E2A15]">Toys</span>
+              <div className="w-[1px] h-24 bg-zinc-200 shrink-0 hidden sm:block"></div>
+              
+              <Link href="/shop?category=dogs" className="flex flex-1 flex-col items-center gap-1 group opacity-80 hover:opacity-100 transition-opacity px-2 min-w-[120px]">
+                <TeddyBearIcon className="w-12 h-12 text-[#4E2A15] mb-4" />
+                <span className="text-[11px] font-bold tracking-widest text-[#222] uppercase">Toys</span>
+                <span className="text-[13px] text-zinc-500 group-hover:text-[#4E2A15] transition-colors mt-2 flex items-center gap-1">Shop now <span className="font-serif font-light text-lg relative top-[-1px]">&rarr;</span></span>
               </Link>
-              <Link href="/shop?category=dogs" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
-                <CollarIcon className="w-10 h-10 text-[#4E2A15]" />
-                <span className="text-sm font-semibold text-[#4E2A15]">Accessories</span>
+              <div className="w-[1px] h-24 bg-zinc-200 shrink-0 hidden sm:block"></div>
+              
+              <Link href="/shop?category=dogs" className="flex flex-1 flex-col items-center gap-1 group opacity-80 hover:opacity-100 transition-opacity px-2 min-w-[120px]">
+                <CollarIcon className="w-12 h-12 text-[#4E2A15] mb-4" />
+                <span className="text-[11px] font-bold tracking-widest text-[#222] uppercase">Accessories</span>
+                <span className="text-[13px] text-zinc-500 group-hover:text-[#4E2A15] transition-colors mt-2 flex items-center gap-1">Shop now <span className="font-serif font-light text-lg relative top-[-1px]">&rarr;</span></span>
               </Link>
-              <Link href="/grooming" className="flex flex-col items-center gap-3 group opacity-70 hover:opacity-100 transition-opacity">
-                <ScissorsBubblesIcon className="w-10 h-10 text-[#4E2A15]" />
-                <span className="text-sm font-semibold text-[#4E2A15]">Grooming</span>
+              <div className="w-[1px] h-24 bg-zinc-200 shrink-0 hidden sm:block"></div>
+              
+              <Link href="/grooming" className="flex flex-1 flex-col items-center gap-1 group opacity-80 hover:opacity-100 transition-opacity px-2 min-w-[120px]">
+                <ScissorsBubblesIcon className="w-12 h-12 text-[#4E2A15] mb-4" />
+                <span className="text-[11px] font-bold tracking-widest text-[#222] uppercase">Grooming</span>
+                <span className="text-[13px] text-zinc-500 group-hover:text-[#4E2A15] transition-colors mt-2 flex items-center gap-1">Book now <span className="font-serif font-light text-lg relative top-[-1px]">&rarr;</span></span>
               </Link>
             </div>
           </div>

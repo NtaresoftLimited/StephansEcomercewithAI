@@ -448,7 +448,7 @@ function SecondaryStickyHeaderInner({
                 id={`mega-menu-${cat.id}`}
                 onMouseEnter={cancelScheduledClose}
                 onMouseLeave={scheduleCategoryClose}
-                className={`absolute left-0 right-0 top-full z-50 max-h-[calc(100vh-10rem)] w-full cursor-default overflow-y-auto border-b border-zinc-200 bg-white/[0.98] normal-case tracking-normal shadow-sm backdrop-blur transition-all duration-200 dark:border-zinc-800 dark:bg-zinc-950/[0.98] ${openCategoryId === cat.id ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0 pointer-events-none"}`}
+                className={`absolute left-0 right-0 top-full z-50 max-h-[calc(100vh-10rem)] w-full cursor-default overflow-y-auto border-b border-zinc-200 bg-white/[0.98] normal-case tracking-normal transition-all duration-200 dark:border-zinc-800 dark:bg-zinc-950/[0.98] ${openCategoryId === cat.id ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0 pointer-events-none"}`}
               >
                 <CategoryMegaMenu
                   animalName={cat.name}
@@ -496,6 +496,13 @@ function SecondaryStickyHeaderInner({
             Store locator
           </Link>
         </div>
+      {/* Apple-style Backdrop Overlay */}
+      <div
+        className={cn(
+          "absolute left-0 right-0 top-full h-[100vh] z-40 bg-zinc-900/10 backdrop-blur-md transition-all duration-300",
+          openCategoryId ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+        )}
+      />
       </div>
     </div>
   );
