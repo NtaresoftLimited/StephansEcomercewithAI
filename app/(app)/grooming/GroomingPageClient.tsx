@@ -168,21 +168,6 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
             name: "Premium",
             desc: "Complete care for a healthier, happier pet.",
             icon: (
-                <div 
-                    className="w-16 h-16 bg-[#6b3e1e]"
-                    style={{ 
-                        maskImage: 'url(/grooming-scissors-bubbles.png)', maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
-                        WebkitMaskImage: 'url(/grooming-scissors-bubbles.png)', WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center' 
-                    }}
-                />
-            ),
-            popular: true
-        },
-        {
-            key: "super_premium",
-            name: "Signature",
-            desc: "The ultimate grooming experience at Stephan's.",
-            icon: (
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-12 h-12">
                     <g transform="rotate(-45 24 24)">
                         <rect x="12" y="22" width="12" height="4" rx="2" stroke="#6b3e1e" strokeWidth="1.8"/>
@@ -195,6 +180,21 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                     <circle cx="16" cy="14" r="2" stroke="#6b3e1e" strokeWidth="1.5"/>
                     <path d="M36 30 C38 28, 40 32, 38 34 C36 36, 40 38, 40 38" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
                 </svg>
+            ),
+            popular: true
+        },
+        {
+            key: "super_premium",
+            name: "Signature",
+            desc: "The ultimate grooming experience at Stephan's.",
+            icon: (
+                <div 
+                    className="w-16 h-16 bg-[#6b3e1e]"
+                    style={{ 
+                        maskImage: 'url(/grooming-scissors-bubbles.png)', maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
+                        WebkitMaskImage: 'url(/grooming-scissors-bubbles.png)', WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center' 
+                    }}
+                />
             ),
             popular: false
         }
