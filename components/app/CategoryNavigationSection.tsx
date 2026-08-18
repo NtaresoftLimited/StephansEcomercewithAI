@@ -4,67 +4,87 @@ import { FoodBowlIcon, BoneIcon, TeddyBearIcon, CollarIcon, ScissorsBubblesIcon 
 
 export const CategoryNavigationSection = () => {
   return (
-    <section className="py-20 md:py-28 bg-[#FAF7F2] border-t border-[#EAE3D9]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#222222] text-center mb-16 leading-tight">
-          Everything they need,<br className="hidden sm:block" />
-          chosen with care.
-        </h2>
+    <section aria-label="Shop by category" className="bg-[#fbf8f5]">
+      <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8">
+        
+        <div className="pt-16 md:pt-24 pb-12 text-center">
+          <h3 className="text-[11px] font-bold tracking-[0.15em] text-[#A66C44] uppercase mb-4">
+            FOR THEIR EVERY DAY
+          </h3>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#222222] leading-tight">
+            Everything they need,<br className="hidden sm:block" />chosen with care.
+          </h2>
+        </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-y-12 gap-x-0 relative">
+        <div className="grid grid-cols-2 border-y border-[#e8e0d9] lg:grid-cols-5">
           
           {/* FOOD */}
-          <Link href="/shop?category=food" className="flex flex-col items-center group relative w-full px-4 text-center md:border-r md:border-[#EAE3D9] last:border-r-0">
-            <div className="h-20 flex items-center justify-center mb-4 transition-transform group-hover:-translate-y-1">
-              <FoodBowlIcon className="w-14 h-14 text-[#4E2A15]" />
-            </div>
-            <h3 className="text-xs font-bold tracking-widest text-[#222222] uppercase mb-2">Food</h3>
-            <span className="text-sm text-zinc-600 flex items-center gap-1 group-hover:text-zinc-900 transition-colors">
-              Shop now <span aria-hidden="true">&rarr;</span>
+          <Link href="/shop?category=food" className="group flex min-h-40 flex-col items-center justify-center px-3 py-6 text-center transition-colors hover:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8b5e3c] focus-visible:ring-inset sm:min-h-44 sm:px-6 border-r border-[#e8e0d9] border-b lg:border-b-0">
+            <span className="relative mb-3 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 text-[#4E2A15]">
+              <FoodBowlIcon className="w-12 h-12" />
+            </span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.13em] text-[#28231f] sm:text-xs">
+              FOOD
+            </span>
+            <span className="mt-3 inline-flex items-center gap-2 text-xs font-medium text-[#5d554f] sm:text-sm">
+              Shop now
+              <span aria-hidden="true" className="text-base leading-none transition-transform duration-300 group-hover:translate-x-1">→</span>
             </span>
           </Link>
 
           {/* TREATS */}
-          <Link href="/shop?category=treats" className="flex flex-col items-center group relative w-full px-4 text-center md:border-r md:border-[#EAE3D9] last:border-r-0">
-            <div className="h-20 flex items-center justify-center mb-4 transition-transform group-hover:-translate-y-1">
-              <BoneIcon className="w-14 h-14 text-[#4E2A15]" />
-            </div>
-            <h3 className="text-xs font-bold tracking-widest text-[#222222] uppercase mb-2">Treats</h3>
-            <span className="text-sm text-zinc-600 flex items-center gap-1 group-hover:text-zinc-900 transition-colors">
-              Shop now <span aria-hidden="true">&rarr;</span>
+          <Link href="/shop?category=treats" className="group flex min-h-40 flex-col items-center justify-center px-3 py-6 text-center transition-colors hover:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8b5e3c] focus-visible:ring-inset sm:min-h-44 sm:px-6 border-b lg:border-b-0 lg:border-r lg:border-[#e8e0d9]">
+            <span className="relative mb-3 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 text-[#4E2A15]">
+              <BoneIcon className="w-12 h-12" />
+            </span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.13em] text-[#28231f] sm:text-xs">
+              TREATS
+            </span>
+            <span className="mt-3 inline-flex items-center gap-2 text-xs font-medium text-[#5d554f] sm:text-sm">
+              Shop now
+              <span aria-hidden="true" className="text-base leading-none transition-transform duration-300 group-hover:translate-x-1">→</span>
             </span>
           </Link>
 
           {/* TOYS */}
-          <Link href="/shop?category=toys" className="flex flex-col items-center group relative w-full px-4 text-center md:border-r md:border-[#EAE3D9] last:border-r-0">
-            <div className="h-20 flex items-center justify-center mb-4 transition-transform group-hover:-translate-y-1">
-              <TeddyBearIcon className="w-14 h-14 text-[#4E2A15]" />
-            </div>
-            <h3 className="text-xs font-bold tracking-widest text-[#222222] uppercase mb-2">Toys</h3>
-            <span className="text-sm text-zinc-600 flex items-center gap-1 group-hover:text-zinc-900 transition-colors">
-              Shop now <span aria-hidden="true">&rarr;</span>
+          <Link href="/shop?category=toys" className="group flex min-h-40 flex-col items-center justify-center px-3 py-6 text-center transition-colors hover:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8b5e3c] focus-visible:ring-inset sm:min-h-44 sm:px-6 border-r border-[#e8e0d9] border-b lg:border-b-0">
+            <span className="relative mb-3 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 text-[#4E2A15]">
+              <TeddyBearIcon className="w-12 h-12" />
+            </span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.13em] text-[#28231f] sm:text-xs">
+              TOYS
+            </span>
+            <span className="mt-3 inline-flex items-center gap-2 text-xs font-medium text-[#5d554f] sm:text-sm">
+              Shop now
+              <span aria-hidden="true" className="text-base leading-none transition-transform duration-300 group-hover:translate-x-1">→</span>
             </span>
           </Link>
 
           {/* ACCESSORIES */}
-          <Link href="/shop?category=accessories" className="flex flex-col items-center group relative w-full px-4 text-center md:border-r md:border-[#EAE3D9] last:border-r-0">
-            <div className="h-20 flex items-center justify-center mb-4 transition-transform group-hover:-translate-y-1">
-              <CollarIcon className="w-14 h-14 text-[#4E2A15]" />
-            </div>
-            <h3 className="text-xs font-bold tracking-widest text-[#222222] uppercase mb-2">Accessories</h3>
-            <span className="text-sm text-zinc-600 flex items-center gap-1 group-hover:text-zinc-900 transition-colors">
-              Shop now <span aria-hidden="true">&rarr;</span>
+          <Link href="/shop?category=accessories" className="group flex min-h-40 flex-col items-center justify-center px-3 py-6 text-center transition-colors hover:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8b5e3c] focus-visible:ring-inset sm:min-h-44 sm:px-6 border-b lg:border-b-0 lg:border-r lg:border-[#e8e0d9]">
+            <span className="relative mb-3 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 text-[#4E2A15]">
+              <CollarIcon className="w-12 h-12" />
+            </span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.13em] text-[#28231f] sm:text-xs">
+              ACCESSORIES
+            </span>
+            <span className="mt-3 inline-flex items-center gap-2 text-xs font-medium text-[#5d554f] sm:text-sm">
+              Shop now
+              <span aria-hidden="true" className="text-base leading-none transition-transform duration-300 group-hover:translate-x-1">→</span>
             </span>
           </Link>
 
           {/* GROOMING */}
-          <Link href="/grooming" className="flex flex-col items-center group relative w-full px-4 text-center">
-            <div className="h-20 flex items-center justify-center mb-4 transition-transform group-hover:-translate-y-1">
-              <ScissorsBubblesIcon className="w-14 h-14 text-[#4E2A15]" />
-            </div>
-            <h3 className="text-xs font-bold tracking-widest text-[#222222] uppercase mb-2">Grooming</h3>
-            <span className="text-sm text-zinc-600 flex items-center gap-1 group-hover:text-zinc-900 transition-colors">
-              Book now <span aria-hidden="true">&rarr;</span>
+          <Link href="/grooming" className="group flex min-h-40 flex-col items-center justify-center px-3 py-6 text-center transition-colors hover:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8b5e3c] focus-visible:ring-inset sm:min-h-44 sm:px-6 col-span-2 lg:col-span-1">
+            <span className="relative mb-3 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 text-[#4E2A15]">
+              <ScissorsBubblesIcon className="w-12 h-12" />
+            </span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.13em] text-[#28231f] sm:text-xs">
+              GROOMING
+            </span>
+            <span className="mt-3 inline-flex items-center gap-2 text-xs font-medium text-[#5d554f] sm:text-sm">
+              Book now
+              <span aria-hidden="true" className="text-base leading-none transition-transform duration-300 group-hover:translate-x-1">→</span>
             </span>
           </Link>
 

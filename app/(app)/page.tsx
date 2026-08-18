@@ -65,7 +65,7 @@ export default async function HomePage({ searchParams }: PageProps) {
   };
 
   // Fetch products with filters (server-side via GROQ) with error handling
-  const products = await sanityFetch({
+  let products = await sanityFetch({
     query: getQuery(),
     params: {
       searchQuery,
@@ -78,6 +78,44 @@ export default async function HomePage({ searchParams }: PageProps) {
       inStock,
     },
   }).then((r: any) => r?.data as any[]).catch(() => [] as any[]);
+
+  // If no search params are provided, it means we are showing default "New Arrivals"
+  // The user requested that these products should not be from the same brand or categories.
+  // We will filter the products to ensure diversity.
+  const isDefaultView = !searchQuery && !categorySlug && !color && !material && !minPrice && !maxPrice;
+  if (isDefaultView && products.length > 0) {
+    const diverseProducts: any[] = [];
+    const seenBrands = new Set<string>();
+    const seenCategories = new Set<string>();
+
+    for (const product of products) {
+      const brandId = product.brand?._id || product.brand?.slug;
+      const categoryId = product.categories?.[0]?._id || product.categories?.[0]?.slug;
+
+      // Check if we already have this brand or category
+      const isDuplicateBrand = brandId && seenBrands.has(brandId);
+      const isDuplicateCategory = categoryId && seenCategories.has(categoryId);
+
+      if (!isDuplicateBrand && !isDuplicateCategory) {
+        diverseProducts.push(product);
+        if (brandId) seenBrands.add(brandId);
+        if (categoryId) seenCategories.add(categoryId);
+      }
+    }
+
+    // If for some reason we filtered out too many and have less than 4, 
+    // we can fill back up with some of the ones we skipped to keep the grid full.
+    if (diverseProducts.length < 8) {
+      for (const product of products) {
+        if (!diverseProducts.find(p => p._id === product._id)) {
+          diverseProducts.push(product);
+          if (diverseProducts.length >= 8) break;
+        }
+      }
+    }
+
+    products = diverseProducts;
+  }
 
   // Fetch categories, pet images, and grooming images in parallel
   const [categories, petImages, groomingImages] = await Promise.all([
@@ -114,8 +152,11 @@ export default async function HomePage({ searchParams }: PageProps) {
       <section className="py-16 md:py-24 bg-background border-t border-border">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
-            <h2 className="text-3xl md:text-4xl font-serif text-[#222222]">
-              New Arrivals
+            <h3 className="text-[11px] font-bold tracking-[0.15em] text-[#A66C44] uppercase mb-4">
+              NEW ARRIVALS
+            </h3>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#222222] leading-tight">
+              Something new, thoughtfully chosen.
             </h2>
           </div>
           <AutoRotatingProductGrid products={products} />

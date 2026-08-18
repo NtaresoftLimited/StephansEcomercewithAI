@@ -10,6 +10,8 @@ import { createGroomingBooking } from "@/lib/actions/grooming";
 import { PRICES, BREED_SIZES, VALID_TIMES, SIZE_LABELS, DOG_PACKAGES, CAT_PACKAGES } from "@/lib/constants/grooming";
 import { formatPrice } from "@/lib/utils";
 import { toast } from "sonner";
+import { GroomingTestimonialsSection } from "@/components/app/grooming/GroomingTestimonialsSection";
+import { NewsletterSection } from "@/components/app/grooming/NewsletterSection";
 
 function useSessionSafe() {
     try {
@@ -479,6 +481,9 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                     <div className="w-16 h-[2px] bg-[#6b3e1e] mt-6"></div>
                 </div>
             </div>
+
+            <GroomingTestimonialsSection />
+            <NewsletterSection />
         </div>
     );
 }
