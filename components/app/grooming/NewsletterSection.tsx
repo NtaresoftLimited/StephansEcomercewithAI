@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 export function NewsletterSection() {
     return (
         <section className="pb-16 pt-8 bg-[#F8F5F0]">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Newsletter Box */}
                 <div className="bg-[#F3EFE9] rounded-3xl overflow-hidden flex flex-col md:flex-row items-center justify-between p-8 md:p-16">
                     <div className="w-full md:w-1/2 max-w-md relative z-10">

@@ -23,7 +23,7 @@ const REVIEWS = [
 export function GroomingTestimonialsSection() {
     return (
         <section className="pt-24 pb-12 bg-[#F8F5F0]">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
                     <h3 className="text-[11px] font-bold tracking-[0.15em] text-[#A66C44] uppercase mb-4">
                         LOVED BY PET PARENTS

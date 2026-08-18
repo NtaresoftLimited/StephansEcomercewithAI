@@ -17,6 +17,8 @@ import { AutoRotatingProductGrid } from "@/components/app/AutoRotatingProductGri
 import { ReviewsSection } from "@/components/app/ReviewsSection";
 import { BrandsSection } from "@/components/app/BrandsSection";
 import { CategoryNavigationSection } from "@/components/app/CategoryNavigationSection";
+import { GroomingTestimonialsSection } from "@/components/app/grooming/GroomingTestimonialsSection";
+import { NewsletterSection } from "@/components/app/grooming/NewsletterSection";
 
 export const revalidate = 3600;
 
@@ -179,6 +181,9 @@ export default async function HomePage({ searchParams }: PageProps) {
       <Suspense fallback={<div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8 py-12 text-center text-muted-foreground">Loading grooming content…</div>}>
         <GroomingSection images={groomingImageUrls} />
       </Suspense>
+
+      <GroomingTestimonialsSection />
+      <NewsletterSection />
     </div>
   );
 }
