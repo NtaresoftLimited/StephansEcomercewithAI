@@ -52,7 +52,7 @@ export default function StoresPage() {
                 </div>
 
                 {/* Brand Overlay - Lighter to show image */}
-                <div className="absolute inset-0 bg-[#6b3e1e] mix-blend-multiply opacity-30" />
+                <div className="absolute inset-0 bg-[#c77e35] mix-blend-multiply opacity-30" />
 
                 {/* Paw Print Pattern Overlay */}
                 <div className="absolute inset-0 opacity-10 pointer-events-none">

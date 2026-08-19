@@ -138,7 +138,7 @@ export function ProductShowcase({ products }: ProductShowcaseProps) {
                                         className={cn(
                                             "h-2 w-2 rounded-full transition-all duration-300",
                                             current === index
-                                                ? "w-6 bg-[#6b3e1e]"
+                                                ? "w-6 bg-[#c77e35]"
                                                 : "bg-zinc-300 hover:bg-zinc-400"
                                         )}
                                         aria-label={`Go to slide ${index + 1}`}
@@ -331,7 +331,7 @@ function MobileProductCard({
                 <div className="flex flex-col items-center gap-1">
                     <button
                         onClick={handleAddToCart}
-                        className="flex h-12 w-12 items-center justify-center rounded-full bg-[#6b3e1e] text-white shadow-lg shadow-[#6b3e1e]/40 transition-transform active:scale-95 border-2 border-white/20"
+                        className="flex h-12 w-12 items-center justify-center rounded-full bg-[#c77e35] text-white shadow-lg shadow-[#c77e35]/40 transition-transform active:scale-95 border-2 border-white/20"
                         aria-label="Add to cart"
                     >
                         <ShoppingCart className="h-5 w-5" />
@@ -468,7 +468,7 @@ function ProductShowcaseCard({ product, onQuickView }: ProductShowcaseCardProps)
                     </button>
                     <button
                         onClick={handleAddToCart}
-                        className="flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-zinc-600 shadow-md transition-all hover:bg-white hover:text-[#6b3e1e] hover:scale-110"
+                        className="flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-zinc-600 shadow-md transition-all hover:bg-white hover:text-[#c77e35] hover:scale-110"
                         aria-label="Add to cart"
                     >
                         <ShoppingCart className="h-5 w-5" />

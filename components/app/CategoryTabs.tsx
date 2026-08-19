@@ -45,8 +45,8 @@ function CategoryTabsInner() {
                         className={`
               flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-all
               ${activeCategory === category.slug
-                                ? "bg-[#6b3e1e] text-white shadow-md"
-                                : "bg-white text-zinc-700 hover:bg-[#6b3e1e]/10 border border-zinc-200"
+                                ? "bg-[#c77e35] text-white shadow-md"
+                                : "bg-white text-zinc-700 hover:bg-[#c77e35]/10 border border-zinc-200"
                             }
             `}
                     >

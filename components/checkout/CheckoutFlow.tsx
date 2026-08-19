@@ -90,7 +90,7 @@ export function CheckoutFlow() {
     return (
         <div className="space-y-8 animate-in fade-in duration-500">
             {/* Step 1: Address */}
-            <section className="bg-white p-6 rounded-2xl border border-zinc-100 shadow-sm transition-all duration-300 ring-2 ring-[#6b3e1e]/10">
+            <section className="bg-white p-6 rounded-2xl border border-zinc-100 shadow-sm transition-all duration-300 ring-2 ring-[#c77e35]/10">
                 <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-3">
                         <Image 

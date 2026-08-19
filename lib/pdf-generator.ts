@@ -36,7 +36,7 @@ export async function generateOrderPDF(order: OrderData, orderNumber: string): P
     const fontRegular = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
     // ─── Colors ───
-    const brandBrown = rgb(0.42, 0.24, 0.12); // #6b3e1e
+    const brandBrown = rgb(0.78, 0.49, 0.21); // #c77e35
     const accentOrange = rgb(0.83, 0.32, 0.13); // #D35122
     const textDark = rgb(0.1, 0.1, 0.1);
     const textMuted = rgb(0.42, 0.45, 0.5);

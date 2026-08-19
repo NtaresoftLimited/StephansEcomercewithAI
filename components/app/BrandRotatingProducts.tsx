@@ -135,7 +135,7 @@ export function BrandRotatingProducts({ products }: BrandRotatingProductsProps) 
             )}>
               {currentGroup.name}
             </h2>
-            <div className="w-16 h-1.5 bg-[#6b3e1e] rounded-full" />
+            <div className="w-16 h-1.5 bg-[#c77e35] rounded-full" />
           </div>
         </div>
 

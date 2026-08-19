@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export function GroomingHero() {
     return (
-        <section className="relative overflow-hidden py-20 px-4 bg-gradient-to-b from-[#6b3e1e]/10 to-transparent">
+        <section className="relative overflow-hidden py-20 px-4 bg-gradient-to-b from-[#c77e35]/10 to-transparent">
             {/* Background pattern */}
             <div className="absolute inset-0 opacity-5">
                 <div className="absolute inset-0" style={{
@@ -15,14 +15,14 @@ export function GroomingHero() {
 
             <div className="relative mx-auto max-w-4xl text-center">
                 <div className="mb-6 flex justify-center">
-                    <div className="rounded-full bg-gradient-to-r from-[#6b3e1e] to-[#8b5a2b] p-4">
+                    <div className="rounded-full bg-gradient-to-r from-[#c77e35] to-[#c77e35] p-4">
                         <Scissors className="h-12 w-12 text-white" />
                     </div>
                 </div>
 
                 <h1 className="mb-4 text-4xl font-bold tracking-tight text-zinc-900 dark:text-white sm:text-5xl md:text-6xl">
                     Pet Grooming{" "}
-                    <span className="bg-gradient-to-r from-[#6b3e1e] to-[#8b5a2b] bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-[#c77e35] to-[#c77e35] bg-clip-text text-transparent">
                         Services
                     </span>
                 </h1>
@@ -35,7 +35,7 @@ export function GroomingHero() {
                 <div className="mt-8 flex flex-wrap justify-center gap-4">
                     <a
                         href="#booking"
-                        className="rounded-full bg-gradient-to-r from-[#6b3e1e] to-[#8b5a2b] px-8 py-3 font-semibold text-white shadow-lg transition-all hover:shadow-xl hover:scale-105 flex items-center gap-2"
+                        className="rounded-full bg-gradient-to-r from-[#c77e35] to-[#c77e35] px-8 py-3 font-semibold text-white shadow-lg transition-all hover:shadow-xl hover:scale-105 flex items-center gap-2"
                     >
                         Book Appointment
                         <Image 
@@ -48,7 +48,7 @@ export function GroomingHero() {
                     </a>
                     <a
                         href="#packages"
-                        className="rounded-full border-2 border-[#6b3e1e] px-8 py-3 font-semibold text-[#6b3e1e] transition-all hover:bg-[#6b3e1e]/10"
+                        className="rounded-full border-2 border-[#c77e35] px-8 py-3 font-semibold text-[#c77e35] transition-all hover:bg-[#c77e35]/10"
                     >
                         View Packages
                     </a>

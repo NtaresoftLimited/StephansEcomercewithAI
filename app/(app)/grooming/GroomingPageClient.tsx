@@ -149,16 +149,16 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
             icon: (
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-12 h-12">
                     <g transform="rotate(-45 24 24)">
-                        <rect x="10" y="22" width="26" height="4" rx="2" stroke="#6b3e1e" strokeWidth="1.8"/>
-                        <line x1="16" y1="26" x2="16" y2="34" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round"/>
-                        <line x1="20" y1="26" x2="20" y2="34" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round"/>
-                        <line x1="24" y1="26" x2="24" y2="34" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round"/>
-                        <line x1="28" y1="26" x2="28" y2="34" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round"/>
-                        <line x1="32" y1="26" x2="32" y2="34" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round"/>
+                        <rect x="10" y="22" width="26" height="4" rx="2" stroke="#c77e35" strokeWidth="1.8"/>
+                        <line x1="16" y1="26" x2="16" y2="34" stroke="#c77e35" strokeWidth="1.8" strokeLinecap="round"/>
+                        <line x1="20" y1="26" x2="20" y2="34" stroke="#c77e35" strokeWidth="1.8" strokeLinecap="round"/>
+                        <line x1="24" y1="26" x2="24" y2="34" stroke="#c77e35" strokeWidth="1.8" strokeLinecap="round"/>
+                        <line x1="28" y1="26" x2="28" y2="34" stroke="#c77e35" strokeWidth="1.8" strokeLinecap="round"/>
+                        <line x1="32" y1="26" x2="32" y2="34" stroke="#c77e35" strokeWidth="1.8" strokeLinecap="round"/>
                     </g>
-                    <circle cx="14" cy="16" r="2" stroke="#6b3e1e" strokeWidth="1.5"/>
-                    <circle cx="20" cy="12" r="1.5" stroke="#6b3e1e" strokeWidth="1.5"/>
-                    <path d="M34 32 C36 30, 38 34, 36 36 C34 38, 38 40, 38 40" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
+                    <circle cx="14" cy="16" r="2" stroke="#c77e35" strokeWidth="1.5"/>
+                    <circle cx="20" cy="12" r="1.5" stroke="#c77e35" strokeWidth="1.5"/>
+                    <path d="M34 32 C36 30, 38 34, 36 36 C34 38, 38 40, 38 40" stroke="#c77e35" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
                 </svg>
             ),
             popular: false
@@ -170,15 +170,15 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
             icon: (
                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-12 h-12">
                     <g transform="rotate(-45 24 24)">
-                        <rect x="12" y="22" width="12" height="4" rx="2" stroke="#6b3e1e" strokeWidth="1.8"/>
-                        <rect x="24" y="16" width="14" height="16" rx="2" stroke="#6b3e1e" strokeWidth="1.8"/>
-                        <line x1="28" y1="20" x2="28" y2="28" stroke="#6b3e1e" strokeWidth="1.5" strokeLinecap="round"/>
-                        <line x1="31" y1="20" x2="31" y2="28" stroke="#6b3e1e" strokeWidth="1.5" strokeLinecap="round"/>
-                        <line x1="34" y1="20" x2="34" y2="28" stroke="#6b3e1e" strokeWidth="1.5" strokeLinecap="round"/>
+                        <rect x="12" y="22" width="12" height="4" rx="2" stroke="#c77e35" strokeWidth="1.8"/>
+                        <rect x="24" y="16" width="14" height="16" rx="2" stroke="#c77e35" strokeWidth="1.8"/>
+                        <line x1="28" y1="20" x2="28" y2="28" stroke="#c77e35" strokeWidth="1.5" strokeLinecap="round"/>
+                        <line x1="31" y1="20" x2="31" y2="28" stroke="#c77e35" strokeWidth="1.5" strokeLinecap="round"/>
+                        <line x1="34" y1="20" x2="34" y2="28" stroke="#c77e35" strokeWidth="1.5" strokeLinecap="round"/>
                     </g>
-                    <circle cx="12" cy="20" r="1.5" stroke="#6b3e1e" strokeWidth="1.5"/>
-                    <circle cx="16" cy="14" r="2" stroke="#6b3e1e" strokeWidth="1.5"/>
-                    <path d="M36 30 C38 28, 40 32, 38 34 C36 36, 40 38, 40 38" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
+                    <circle cx="12" cy="20" r="1.5" stroke="#c77e35" strokeWidth="1.5"/>
+                    <circle cx="16" cy="14" r="2" stroke="#c77e35" strokeWidth="1.5"/>
+                    <path d="M36 30 C38 28, 40 32, 38 34 C36 36, 40 38, 40 38" stroke="#c77e35" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
                 </svg>
             ),
             popular: true
@@ -189,7 +189,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
             desc: "The ultimate grooming experience at Stephan's.",
             icon: (
                 <div 
-                    className="w-16 h-16 bg-[#6b3e1e]"
+                    className="w-16 h-16 bg-[#c77e35]"
                     style={{ 
                         maskImage: 'url(/grooming-scissors-bubbles.png)', maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
                         WebkitMaskImage: 'url(/grooming-scissors-bubbles.png)', WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center' 
@@ -201,10 +201,10 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
     ];
 
     return (
-        <div className="min-h-screen bg-[#F8F5F0] text-[#2A2A2A] font-sans selection:bg-[#6b3e1e]/20">
+        <div className="min-h-screen bg-[#F8F5F0] text-[#2A2A2A] font-sans selection:bg-[#c77e35]/20">
             {/* Header Section */}
             <div className="pt-24 pb-12 px-4 text-center">
-                <p className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-[#6b3e1e] uppercase mb-6">Pet Grooming Studio</p>
+                <p className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-[#c77e35] uppercase mb-6">Pet Grooming Studio</p>
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-[#222222] leading-[1.1] mb-12">
                     Gentle care.<br />Professional grooming.
                 </h1>
@@ -216,14 +216,14 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                         className={`flex items-center gap-3 text-lg md:text-xl font-medium transition-colors relative ${activeTab === 'dog' ? 'text-[#222]' : 'text-[#888]'}`}
                     >
                         <div 
-                            className={`w-8 h-8 md:w-10 md:h-10 bg-[#6b3e1e] transition-opacity ${activeTab === 'dog' ? 'opacity-100' : 'opacity-40'}`}
+                            className={`w-8 h-8 md:w-10 md:h-10 bg-[#c77e35] transition-opacity ${activeTab === 'dog' ? 'opacity-100' : 'opacity-40'}`}
                             style={{ 
                                 maskImage: 'url(/minimalist-dog.png)', maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
                                 WebkitMaskImage: 'url(/minimalist-dog.png)', WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center' 
                             }}
                         />
                         Dogs
-                        {activeTab === 'dog' && <div className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-[#6b3e1e]"></div>}
+                        {activeTab === 'dog' && <div className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-[#c77e35]"></div>}
                     </button>
                     <div className="hidden sm:block w-px h-8 bg-[#E8E0D8]"></div>
                     <button 
@@ -231,14 +231,14 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                         className={`flex items-center gap-3 text-lg md:text-xl font-medium transition-colors relative ${activeTab === 'cat' ? 'text-[#222]' : 'text-[#888]'}`}
                     >
                         <div 
-                            className={`w-8 h-8 md:w-10 md:h-10 bg-[#6b3e1e] transition-opacity ${activeTab === 'cat' ? 'opacity-100' : 'opacity-40'}`}
+                            className={`w-8 h-8 md:w-10 md:h-10 bg-[#c77e35] transition-opacity ${activeTab === 'cat' ? 'opacity-100' : 'opacity-40'}`}
                             style={{ 
                                 maskImage: 'url(/minimalist-cat.png)', maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
                                 WebkitMaskImage: 'url(/minimalist-cat.png)', WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center' 
                             }}
                         />
                         Cats
-                        {activeTab === 'cat' && <div className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-[#6b3e1e]"></div>}
+                        {activeTab === 'cat' && <div className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-[#c77e35]"></div>}
                     </button>
                     <div className="hidden sm:block w-px h-8 bg-[#E8E0D8]"></div>
                     <button 
@@ -246,27 +246,27 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                         className={`flex items-center gap-3 text-lg md:text-xl font-medium transition-colors relative ${activeTab === 'small_animal' ? 'text-[#222]' : 'text-[#888]'}`}
                     >
                         <div 
-                            className={`w-8 h-8 md:w-10 md:h-10 bg-[#6b3e1e] transition-opacity ${activeTab === 'small_animal' ? 'opacity-100' : 'opacity-40'}`}
+                            className={`w-8 h-8 md:w-10 md:h-10 bg-[#c77e35] transition-opacity ${activeTab === 'small_animal' ? 'opacity-100' : 'opacity-40'}`}
                             style={{ 
                                 maskImage: 'url(/minimalist-rabbit.png)', maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
                                 WebkitMaskImage: 'url(/minimalist-rabbit.png)', WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center' 
                             }}
                         />
                         Small Animals
-                        {activeTab === 'small_animal' && <div className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-[#6b3e1e]"></div>}
+                        {activeTab === 'small_animal' && <div className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-[#c77e35]"></div>}
                     </button>
                 </div>
             </div>
 
             {/* Packages Section */}
             <div className="max-w-6xl mx-auto px-4 py-8">
-                <p className="text-[10px] font-bold tracking-[0.15em] text-[#6b3e1e] uppercase text-center mb-10">Choose your grooming experience</p>
+                <p className="text-[10px] font-bold tracking-[0.15em] text-[#c77e35] uppercase text-center mb-10">Choose your grooming experience</p>
                 
                 <div className={`grid grid-cols-1 ${activeTab === 'small_animal' ? 'md:grid-cols-1 max-w-sm mx-auto' : 'md:grid-cols-3'} gap-6`}>
                     {packages.filter(pkg => activeTab === 'small_animal' ? pkg.key === 'super_premium' : true).map((pkg) => (
                         <div key={pkg.key} className={`relative border border-[#E8E0D8] rounded-2xl p-8 md:p-10 text-center bg-[#FDFBF9] hover:shadow-lg transition-shadow duration-300 flex flex-col items-center justify-between`}>
                             {pkg.popular && activeTab !== 'small_animal' && (
-                                <div className="absolute top-4 right-4 bg-[#6b3e1e] text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full uppercase">
+                                <div className="absolute top-4 right-4 bg-[#c77e35] text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full uppercase">
                                     Most Popular
                                 </div>
                             )}
@@ -288,7 +288,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                                     setFormData(f => ({ ...f, package: pkg.key }));
                                     document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' });
                                 }}
-                                className="text-xs font-bold tracking-widest text-[#6b3e1e] uppercase flex items-center gap-2 hover:text-[#4a2a14] transition-colors"
+                                className="text-xs font-bold tracking-widest text-[#c77e35] uppercase flex items-center gap-2 hover:text-[#4a2a14] transition-colors"
                             >
                                 View Details <ArrowRight className="w-3 h-3" />
                             </button>
@@ -299,7 +299,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
 
             {/* Booking Form Section */}
             <div id="booking-form" className="max-w-5xl mx-auto px-4 py-16">
-                <p className="text-[10px] font-bold tracking-[0.15em] text-[#6b3e1e] uppercase text-center mb-4">Book Appointment</p>
+                <p className="text-[10px] font-bold tracking-[0.15em] text-[#c77e35] uppercase text-center mb-4">Book Appointment</p>
                 <h2 className="text-4xl md:text-5xl font-serif text-[#222] text-center mb-12">Let's pamper your pet.</h2>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -310,20 +310,20 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                             placeholder="Pet Name"
                             value={formData.petName}
                             onChange={e => setFormData({ ...formData, petName: e.target.value })}
-                            className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#6b3e1e]"
+                            className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#c77e35]"
                         />
                         <Select
                             value={formData.petType}
                             onValueChange={(value) => setFormData({ ...formData, petType: value as any })}
                         >
-                            <SelectTrigger className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-[26px] text-sm focus:outline-none focus:ring-1 focus:ring-[#6b3e1e] shadow-none flex items-center justify-between">
+                            <SelectTrigger className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-[26px] text-sm focus:outline-none focus:ring-1 focus:ring-[#c77e35] shadow-none flex items-center justify-between">
                                 <SelectValue placeholder="Select Pet Type" />
                             </SelectTrigger>
                             <SelectContent className="rounded-xl border-[#E8E0D8] shadow-lg">
                                 <SelectItem value="dog" className="cursor-pointer focus:bg-[#F4F0EB]">
                                     <div className="flex items-center gap-3">
                                         <div 
-                                            className="w-5 h-5 bg-[#6b3e1e]"
+                                            className="w-5 h-5 bg-[#c77e35]"
                                             style={{ maskImage: 'url(/minimalist-dog.png)', maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center', WebkitMaskImage: 'url(/minimalist-dog.png)', WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center' }}
                                         />
                                         <span className="text-[15px]">Dog</span>
@@ -332,7 +332,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                                 <SelectItem value="cat" className="cursor-pointer focus:bg-[#F4F0EB]">
                                     <div className="flex items-center gap-3">
                                         <div 
-                                            className="w-5 h-5 bg-[#6b3e1e]"
+                                            className="w-5 h-5 bg-[#c77e35]"
                                             style={{ maskImage: 'url(/minimalist-cat.png)', maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center', WebkitMaskImage: 'url(/minimalist-cat.png)', WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center' }}
                                         />
                                         <span className="text-[15px]">Cat</span>
@@ -341,7 +341,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                                 <SelectItem value="small_animal" className="cursor-pointer focus:bg-[#F4F0EB]">
                                     <div className="flex items-center gap-3">
                                         <div 
-                                            className="w-5 h-5 bg-[#6b3e1e]"
+                                            className="w-5 h-5 bg-[#c77e35]"
                                             style={{ maskImage: 'url(/minimalist-rabbit.png)', maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center', WebkitMaskImage: 'url(/minimalist-rabbit.png)', WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center' }}
                                         />
                                         <span className="text-[15px]">Small Animal</span>
@@ -354,7 +354,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                             required
                             value={formData.breedSize}
                             onChange={e => setFormData({ ...formData, breedSize: e.target.value })}
-                            className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#6b3e1e] appearance-none"
+                            className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#c77e35] appearance-none"
                         >
                             <option value="" disabled>Breed Size</option>
                             {BREED_SIZES[formData.petType]?.map(size => (
@@ -366,7 +366,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                             required
                             value={formData.package}
                             onChange={e => setFormData({ ...formData, package: e.target.value })}
-                            className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#6b3e1e] appearance-none"
+                            className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#c77e35] appearance-none"
                         >
                             <option value="" disabled>Service Package</option>
                             {packages.filter(pkg => formData.petType === 'small_animal' ? pkg.key === 'super_premium' : true).map(pkg => (
@@ -380,7 +380,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                                 required
                                 value={formData.appointmentDate}
                                 onChange={handleDateChange}
-                                className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#6b3e1e]"
+                                className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#c77e35]"
                             />
                             <Image 
                                 src="/calendar-stephans.svg" 
@@ -395,7 +395,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                             required
                             value={formData.appointmentTime}
                             onChange={e => setFormData({ ...formData, appointmentTime: e.target.value })}
-                            className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#6b3e1e] appearance-none"
+                            className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#c77e35] appearance-none"
                         >
                             <option value="" disabled>Time</option>
                             {VALID_TIMES.map(time => (
@@ -409,7 +409,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                             placeholder="Your Name"
                             value={formData.customerName}
                             onChange={e => setFormData({ ...formData, customerName: e.target.value })}
-                            className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#6b3e1e]"
+                            className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#c77e35]"
                         />
 
                         <input
@@ -418,14 +418,14 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                             placeholder="Phone Number"
                             value={formData.customerPhone}
                             onChange={e => setFormData({ ...formData, customerPhone: e.target.value })}
-                            className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#6b3e1e]"
+                            className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#c77e35]"
                         />
                     </div>
 
                     <div className="mt-8 bg-[#F4F0EB] rounded-2xl p-6 md:p-10 flex flex-col md:flex-row gap-8 md:gap-12 items-start">
                         <div className="md:w-1/3">
                             <div className="w-16 h-16 bg-[#EBE4DC] rounded-full flex items-center justify-center mb-6">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6b3e1e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c77e35" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                                     <polyline points="14 2 14 8 20 8"></polyline>
                                     <line x1="16" y1="13" x2="8" y2="13"></line>
@@ -447,17 +447,17 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                                 "Aggressive pets may require additional handling."
                             ].map((text, i) => (
                                 <div key={i} className="flex items-start gap-3">
-                                    <Check className="w-4 h-4 text-[#6b3e1e] mt-1 shrink-0" />
+                                    <Check className="w-4 h-4 text-[#c77e35] mt-1 shrink-0" />
                                     <span className="text-sm text-[#444] leading-relaxed">{text}</span>
                                 </div>
                             ))}
 
                             <div className="mt-8 pt-6 border-t border-[#E8E0D8] flex items-center justify-between">
                                 <label className="flex items-center gap-3 cursor-pointer">
-                                    <input type="checkbox" required className="w-4 h-4 accent-[#6b3e1e] rounded" />
+                                    <input type="checkbox" required className="w-4 h-4 accent-[#c77e35] rounded" />
                                     <span className="text-sm text-[#444]">I have read and agree to Stephan's Grooming Policy.</span>
                                 </label>
-                                <button type="button" className="text-xs font-bold text-[#6b3e1e] uppercase flex items-center gap-1 hover:underline">
+                                <button type="button" className="text-xs font-bold text-[#c77e35] uppercase flex items-center gap-1 hover:underline">
                                     Read full policy <ArrowRight className="w-3 h-3" />
                                 </button>
                             </div>
@@ -467,7 +467,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                     {formData.package && formData.breedSize && (
                         <div className="mt-8 p-6 md:p-8 border border-[#E8E0D8] rounded-2xl flex flex-col md:flex-row items-center justify-between bg-white/50 gap-4">
                             <div className="flex flex-col">
-                                <span className="text-xs font-bold tracking-widest text-[#6b3e1e] uppercase mb-1">Estimated Total</span>
+                                <span className="text-xs font-bold tracking-widest text-[#c77e35] uppercase mb-1">Estimated Total</span>
                                 <span className="text-sm text-[#666]">
                                     {formData.petType === 'dog' ? 'Dog' : 'Cat'} • {SIZE_LABELS[formData.breedSize] || formData.breedSize} • {formData.package === 'standard' ? 'Essential' : formData.package === 'premium' ? 'Premium' : 'Signature'} Package
                                 </span>
@@ -500,7 +500,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                     <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif leading-tight drop-shadow-lg text-white text-left">
                         Happy Pet,<br />Happy Home.
                     </h2>
-                    <div className="w-16 h-[2px] bg-[#6b3e1e] mt-6"></div>
+                    <div className="w-16 h-[2px] bg-[#c77e35] mt-6"></div>
                 </div>
             </div>
         </div>

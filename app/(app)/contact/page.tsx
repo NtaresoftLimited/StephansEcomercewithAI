@@ -55,7 +55,7 @@ export default function ContactPage() {
                             {/* Phone Icon */}
                             <div className="mb-5">
                                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M14.5 10C14.5 10 16.5 10 17.5 13C18.5 16 16 17.5 16 17.5C16 17.5 18.5 22.5 23 27C27.5 31.5 32 33 32 33C32 33 33.5 30.5 36.5 31.5C39.5 32.5 39.5 34.5 39.5 34.5C39.5 34.5 39 40 33 40C27 40 10 27 10 15C10 11 14.5 10 14.5 10Z" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <path d="M14.5 10C14.5 10 16.5 10 17.5 13C18.5 16 16 17.5 16 17.5C16 17.5 18.5 22.5 23 27C27.5 31.5 32 33 32 33C32 33 33.5 30.5 36.5 31.5C39.5 32.5 39.5 34.5 39.5 34.5C39.5 34.5 39 40 33 40C27 40 10 27 10 15C10 11 14.5 10 14.5 10Z" stroke="#c77e35" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
                             </div>
                             <h3 className="text-xl font-bold text-[#222222] mb-2">Call Us</h3>
@@ -63,13 +63,13 @@ export default function ContactPage() {
                                 Speak directly with<br />our team.
                             </p>
                             <div className="text-[#222222] text-sm font-semibold mb-1">
-                                <a href="tel:+255786627873" className="hover:text-[#6b3e1e] transition-colors block">+255 786 627 873</a>
-                                <a href="tel:+255769324445" className="hover:text-[#6b3e1e] transition-colors block">+255 769 324 445</a>
+                                <a href="tel:+255786627873" className="hover:text-[#c77e35] transition-colors block">+255 786 627 873</a>
+                                <a href="tel:+255769324445" className="hover:text-[#c77e35] transition-colors block">+255 769 324 445</a>
                             </div>
                             <div className="mt-auto pt-4">
                                 <a
                                     href="tel:+255786627873"
-                                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#222222] hover:text-[#6b3e1e] underline underline-offset-4 transition-colors"
+                                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#222222] hover:text-[#c77e35] underline underline-offset-4 transition-colors"
                                 >
                                     Call Now <ArrowRight className="w-4 h-4" />
                                 </a>
@@ -81,10 +81,10 @@ export default function ContactPage() {
                             {/* WhatsApp Icon */}
                             <div className="mb-5">
                                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M14 34L10 38V14C10 12.8954 10.8954 12 12 12H36C37.1046 12 38 12.8954 38 14V32C38 33.1046 37.1046 34 36 34H14Z" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                                    <path d="M20 22C20 22 21 20 24 20C27 20 28 22 28 22" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round"/>
-                                    <circle cx="19" cy="22" r="1" fill="#6b3e1e"/>
-                                    <circle cx="29" cy="22" r="1" fill="#6b3e1e"/>
+                                    <path d="M14 34L10 38V14C10 12.8954 10.8954 12 12 12H36C37.1046 12 38 12.8954 38 14V32C38 33.1046 37.1046 34 36 34H14Z" stroke="#c77e35" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <path d="M20 22C20 22 21 20 24 20C27 20 28 22 28 22" stroke="#c77e35" strokeWidth="1.8" strokeLinecap="round"/>
+                                    <circle cx="19" cy="22" r="1" fill="#c77e35"/>
+                                    <circle cx="29" cy="22" r="1" fill="#c77e35"/>
                                 </svg>
                             </div>
                             <h3 className="text-xl font-bold text-[#222222] mb-2">WhatsApp</h3>
@@ -96,7 +96,7 @@ export default function ContactPage() {
                                     href="https://wa.me/255786627873"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#222222] hover:text-[#6b3e1e] underline underline-offset-4 transition-colors"
+                                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#222222] hover:text-[#c77e35] underline underline-offset-4 transition-colors"
                                 >
                                     Start a Chat <ArrowRight className="w-4 h-4" />
                                 </a>
@@ -121,7 +121,7 @@ export default function ContactPage() {
                             <div className="mt-auto pt-4">
                                 <a
                                     href="/grooming"
-                                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#222222] hover:text-[#6b3e1e] underline underline-offset-4 transition-colors"
+                                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#222222] hover:text-[#c77e35] underline underline-offset-4 transition-colors"
                                 >
                                     Book Now <ArrowRight className="w-4 h-4" />
                                 </a>
@@ -133,8 +133,8 @@ export default function ContactPage() {
                             {/* Map Pin Icon */}
                             <div className="mb-5">
                                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M24 10C19.0294 10 15 14.0294 15 19C15 26.5 24 38 24 38C24 38 33 26.5 33 19C33 14.0294 28.9706 10 24 10Z" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                                    <circle cx="24" cy="19" r="3.5" stroke="#6b3e1e" strokeWidth="1.8"/>
+                                    <path d="M24 10C19.0294 10 15 14.0294 15 19C15 26.5 24 38 24 38C24 38 33 26.5 33 19C33 14.0294 28.9706 10 24 10Z" stroke="#c77e35" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <circle cx="24" cy="19" r="3.5" stroke="#c77e35" strokeWidth="1.8"/>
                                 </svg>
                             </div>
                             <h3 className="text-xl font-bold text-[#222222] mb-2">Visit Store</h3>
@@ -146,7 +146,7 @@ export default function ContactPage() {
                                     href="https://www.google.com/maps/dir//11+Slipway+Rd,+Dar+es+Salaam,+Tanzania/@-6.7642817,39.2653047,17z/"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#222222] hover:text-[#6b3e1e] underline underline-offset-4 transition-colors"
+                                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#222222] hover:text-[#c77e35] underline underline-offset-4 transition-colors"
                                 >
                                     Get Directions <ArrowRight className="w-4 h-4" />
                                 </a>
@@ -184,8 +184,8 @@ export default function ContactPage() {
                             {/* Envelope Icon */}
                             <div className="mb-5">
                                 <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="8" y="14" width="32" height="22" rx="2" stroke="#6b3e1e" strokeWidth="1.8"/>
-                                    <polyline points="8,14 24,28 40,14" stroke="#6b3e1e" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                                    <rect x="8" y="14" width="32" height="22" rx="2" stroke="#c77e35" strokeWidth="1.8"/>
+                                    <polyline points="8,14 24,28 40,14" stroke="#c77e35" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                                 </svg>
                             </div>
                             <h3 className="text-xl font-bold text-[#222222] mb-2">Send a Message</h3>
@@ -195,7 +195,7 @@ export default function ContactPage() {
                             <div className="mt-auto pt-4">
                                 <button
                                     onClick={() => setShowMessageForm(true)}
-                                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#222222] hover:text-[#6b3e1e] underline underline-offset-4 transition-colors"
+                                    className="inline-flex items-center gap-2 text-sm font-semibold text-[#222222] hover:text-[#c77e35] underline underline-offset-4 transition-colors"
                                 >
                                     Send Message <ArrowRight className="w-4 h-4" />
                                 </button>
@@ -224,7 +224,7 @@ export default function ContactPage() {
                                     required
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                    className="w-full h-11 px-4 rounded-xl border border-[#E0D6CC] bg-[#FAF8F5] text-[#222] placeholder:text-[#aaa] focus:outline-none focus:ring-2 focus:ring-[#6b3e1e]/20 focus:border-[#6b3e1e] transition-colors"
+                                    className="w-full h-11 px-4 rounded-xl border border-[#E0D6CC] bg-[#FAF8F5] text-[#222] placeholder:text-[#aaa] focus:outline-none focus:ring-2 focus:ring-[#c77e35]/20 focus:border-[#c77e35] transition-colors"
                                     placeholder="John Doe"
                                 />
                             </div>
@@ -235,7 +235,7 @@ export default function ContactPage() {
                                     required
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    className="w-full h-11 px-4 rounded-xl border border-[#E0D6CC] bg-[#FAF8F5] text-[#222] placeholder:text-[#aaa] focus:outline-none focus:ring-2 focus:ring-[#6b3e1e]/20 focus:border-[#6b3e1e] transition-colors"
+                                    className="w-full h-11 px-4 rounded-xl border border-[#E0D6CC] bg-[#FAF8F5] text-[#222] placeholder:text-[#aaa] focus:outline-none focus:ring-2 focus:ring-[#c77e35]/20 focus:border-[#c77e35] transition-colors"
                                     placeholder="john@example.com"
                                 />
                             </div>
@@ -246,14 +246,14 @@ export default function ContactPage() {
                                     rows={4}
                                     value={formData.message}
                                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                    className="w-full px-4 py-3 rounded-xl border border-[#E0D6CC] bg-[#FAF8F5] text-[#222] placeholder:text-[#aaa] focus:outline-none focus:ring-2 focus:ring-[#6b3e1e]/20 focus:border-[#6b3e1e] transition-colors resize-none"
+                                    className="w-full px-4 py-3 rounded-xl border border-[#E0D6CC] bg-[#FAF8F5] text-[#222] placeholder:text-[#aaa] focus:outline-none focus:ring-2 focus:ring-[#c77e35]/20 focus:border-[#c77e35] transition-colors resize-none"
                                     placeholder="Tell us how we can help..."
                                 />
                             </div>
                             <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="w-full bg-[#222222] hover:bg-[#6b3e1e] text-white py-3 rounded-xl font-semibold transition-colors disabled:opacity-50"
+                                className="w-full bg-[#222222] hover:bg-[#c77e35] text-white py-3 rounded-xl font-semibold transition-colors disabled:opacity-50"
                             >
                                 {isSubmitting ? "Sending..." : "Send Message"}
                             </button>

@@ -120,7 +120,7 @@ export function BrandProductCard({ product }: BrandProductCardProps) {
       {/* Product Details */}
       <div className="flex-grow p-3 pt-3 flex flex-col">
         <Link className="block mb-1" href={`/shop/${product.slug}`}>
-          <h3 className="font-semibold text-gray-800 text-sm leading-snug line-clamp-2 hover:text-[#6b3e1e] transition-colors duration-200 min-h-[2.5rem]">
+          <h3 className="font-semibold text-gray-800 text-sm leading-snug line-clamp-2 hover:text-[#c77e35] transition-colors duration-200 min-h-[2.5rem]">
             {product.name}
           </h3>
         </Link>
@@ -137,7 +137,7 @@ export function BrandProductCard({ product }: BrandProductCardProps) {
           <button 
             onClick={handleAddToCart}
             disabled={isOutOfStock}
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 px-3 w-full h-8 rounded-lg text-xs font-medium transition-all duration-200 bg-[#6b3e1e] hover:bg-[#5a3319] text-white"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 px-3 w-full h-8 rounded-lg text-xs font-medium transition-all duration-200 bg-[#c77e35] hover:bg-[#5a3319] text-white"
           >
             <ShoppingBag className="h-3.5 w-3.5 text-white" />
             <span>Shop</span>
@@ -146,7 +146,7 @@ export function BrandProductCard({ product }: BrandProductCardProps) {
         <div className="w-1/2">
           <Link 
             href={`/shop/${product.slug}`}
-            className="inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-background hover:bg-accent w-full h-8 px-2 rounded-lg border border-gray-200 hover:border-[#6b3e1e] hover:text-[#6b3e1e] text-xs font-medium transition-all duration-200"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-background hover:bg-accent w-full h-8 px-2 rounded-lg border border-gray-200 hover:border-[#c77e35] hover:text-[#c77e35] text-xs font-medium transition-all duration-200"
           >
             View
           </Link>

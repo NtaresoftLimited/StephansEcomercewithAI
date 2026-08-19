@@ -8,7 +8,7 @@ export const CategoryNavigationSection = () => {
       <div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8">
         
         <div className="pt-16 md:pt-24 pb-12 text-center">
-          <h3 className="text-[11px] font-bold tracking-[0.15em] text-[#A66C44] uppercase mb-4">
+          <h3 className="text-[11px] font-bold tracking-[0.15em] text-[#c77e35] uppercase mb-4">
             FOR THEIR EVERY DAY
           </h3>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#222222] leading-tight">

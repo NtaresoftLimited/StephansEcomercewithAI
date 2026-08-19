@@ -124,7 +124,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                 <div className="px-4 py-4 sm:px-6 sm:pb-6 bg-white sticky top-0 z-10">
                     <div className="relative flex items-center">
                         <div className="relative flex-1">
-                            <div className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[#6b3e1e] flex items-center justify-center z-10">
+                            <div className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[#c77e35] flex items-center justify-center z-10">
                                 <Search className="h-4 w-4 text-white" strokeWidth={3} />
                             </div>
                             <Input
@@ -139,7 +139,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                             />
                             <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
                                 {isSearching ? (
-                                    <Loader2 className="h-5 w-5 animate-spin text-[#6b3e1e]" />
+                                    <Loader2 className="h-5 w-5 animate-spin text-[#c77e35]" />
                                 ) : (
                                     <div className="flex items-center gap-1">
                                         {query && (
@@ -183,7 +183,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                             router.push(`/shop/${product.slug}`);
                                             onClose();
                                         }}
-                                        className="group flex items-center gap-3 p-3 rounded-2xl border border-zinc-100 bg-white hover:border-[#6b3e1e]/20 hover:shadow-md transition-all cursor-pointer relative"
+                                        className="group flex items-center gap-3 p-3 rounded-2xl border border-zinc-100 bg-white hover:border-[#c77e35]/20 hover:shadow-md transition-all cursor-pointer relative"
                                     >
                                         <div className="relative w-16 h-16 rounded-xl bg-zinc-50 shrink-0 overflow-hidden">
                                             {product.images?.[0]?.asset?.url ? (
@@ -210,19 +210,19 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                             )}
                                         </div>
                                         <div className="flex-1 min-w-0 pr-8">
-                                            <h4 className="text-sm font-bold text-zinc-800 leading-snug line-clamp-2 group-hover:text-[#6b3e1e] transition-colors">
+                                            <h4 className="text-sm font-bold text-zinc-800 leading-snug line-clamp-2 group-hover:text-[#c77e35] transition-colors">
                                                 {product.name}
                                             </h4>
                                             <p className="text-xs text-zinc-500 mt-0.5">
                                                 {product.categories?.[0]?.title || "Pet Essentials"}
                                             </p>
-                                            <p className="text-sm font-bold text-[#6b3e1e] mt-1">
+                                            <p className="text-sm font-bold text-[#c77e35] mt-1">
                                                 TSh {product.price?.toLocaleString()}
                                             </p>
                                         </div>
                                         <button
                                             onClick={(e) => handleAddToCart(e, product)}
-                                            className="absolute right-3 bottom-3 w-8 h-8 rounded-full bg-[#6b3e1e] text-white flex items-center justify-center hover:bg-[#5a3419] hover:scale-105 transition-all shadow-sm opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 duration-300"
+                                            className="absolute right-3 bottom-3 w-8 h-8 rounded-full bg-[#c77e35] text-white flex items-center justify-center hover:bg-[#5a3419] hover:scale-105 transition-all shadow-sm opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 duration-300"
                                         >
                                             <ShoppingBag className="h-4 w-4" strokeWidth={2} />
                                         </button>
@@ -234,7 +234,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                             {searchResults.length > 0 && (
                                 <button
                                     onClick={() => handleSearch(query)}
-                                    className="w-full py-3 text-center text-sm font-medium text-[#6b3e1e] hover:bg-[#6b3e1e]/5 rounded-xl transition-colors mt-2"
+                                    className="w-full py-3 text-center text-sm font-medium text-[#c77e35] hover:bg-[#c77e35]/5 rounded-xl transition-colors mt-2"
                                 >
                                     View all matching products
                                 </button>
@@ -245,7 +245,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                         <>
                             {/* Popular Searches */}
                             <div>
-                                <div className="flex items-center gap-2 mb-3 text-[#6b3e1e]">
+                                <div className="flex items-center gap-2 mb-3 text-[#c77e35]">
                                     <TrendingUp className="h-3 w-3" />
                                     <h3 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Popular Searches</h3>
                                 </div>
@@ -254,7 +254,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                         <button
                                             key={search}
                                             onClick={() => handleSearch(search)}
-                                            className="px-4 py-2 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-600 hover:border-[#6b3e1e] hover:text-[#6b3e1e] hover:bg-[#6b3e1e]/5 hover:shadow-sm transition-all"
+                                            className="px-4 py-2 rounded-full border border-zinc-200 bg-white text-xs font-medium text-zinc-600 hover:border-[#c77e35] hover:text-[#c77e35] hover:bg-[#c77e35]/5 hover:shadow-sm transition-all"
                                         >
                                             {search}
                                         </button>
@@ -274,7 +274,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                                     disabled={brandPage === 0}
                                                     className={cn(
                                                         "w-6 h-6 rounded-full border border-zinc-200 flex items-center justify-center transition-all bg-white hover:bg-zinc-50",
-                                                        brandPage === 0 ? "text-zinc-300 cursor-not-allowed border-zinc-100" : "text-[#6b3e1e] hover:border-[#6b3e1e]"
+                                                        brandPage === 0 ? "text-zinc-300 cursor-not-allowed border-zinc-100" : "text-[#c77e35] hover:border-[#c77e35]"
                                                     )}
                                                 >
                                                     <ChevronRight className="h-3 w-3 rotate-180" />
@@ -287,7 +287,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                                     disabled={brandPage >= Math.max(1, Math.ceil(brands.length / 6)) - 1}
                                                     className={cn(
                                                         "w-6 h-6 rounded-full border border-zinc-200 flex items-center justify-center transition-all bg-white hover:bg-zinc-50",
-                                                        brandPage >= Math.max(1, Math.ceil(brands.length / 6)) - 1 ? "text-zinc-300 cursor-not-allowed border-zinc-100" : "text-[#6b3e1e] hover:border-[#6b3e1e]"
+                                                        brandPage >= Math.max(1, Math.ceil(brands.length / 6)) - 1 ? "text-zinc-300 cursor-not-allowed border-zinc-100" : "text-[#c77e35] hover:border-[#c77e35]"
                                                     )}
                                                 >
                                                     <ChevronRight className="h-3 w-3" />
@@ -302,16 +302,16 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                                 onClick={() => handleSearch(brand.name)}
                                                 className="group flex flex-col items-center gap-2 p-2 rounded-2xl hover:bg-white transition-all hover:shadow-sm border border-transparent hover:border-zinc-100"
                                             >
-                                                <div className="w-14 h-14 rounded-xl bg-white border border-zinc-100 flex items-center justify-center group-hover:border-[#6b3e1e]/30 group-hover:bg-[#6b3e1e]/5 transition-all overflow-hidden shadow-sm">
+                                                <div className="w-14 h-14 rounded-xl bg-white border border-zinc-100 flex items-center justify-center group-hover:border-[#c77e35]/30 group-hover:bg-[#c77e35]/5 transition-all overflow-hidden shadow-sm">
                                                     {brand.logo ? (
                                                         <Image src={brand.logo} alt={brand.name} width={40} height={40} className="object-contain p-1" />
                                                     ) : (
-                                                        <span className="font-bold text-xs text-zinc-300 group-hover:text-[#6b3e1e]">
+                                                        <span className="font-bold text-xs text-zinc-300 group-hover:text-[#c77e35]">
                                                             {brand.name.charAt(0)}
                                                         </span>
                                                     )}
                                                 </div>
-                                                <span className="text-[10px] font-bold text-zinc-500 truncate w-full text-center group-hover:text-[#6b3e1e] transition-colors">
+                                                <span className="text-[10px] font-bold text-zinc-500 truncate w-full text-center group-hover:text-[#c77e35] transition-colors">
                                                     {brand.name}
                                                 </span>
                                             </button>
@@ -331,7 +331,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                                 disabled={productPage === 0}
                                                 className={cn(
                                                     "w-6 h-6 rounded-full border border-zinc-200 flex items-center justify-center transition-all bg-white hover:bg-zinc-50",
-                                                    productPage === 0 ? "text-zinc-300 cursor-not-allowed border-zinc-100" : "text-[#6b3e1e] hover:border-[#6b3e1e]"
+                                                    productPage === 0 ? "text-zinc-300 cursor-not-allowed border-zinc-100" : "text-[#c77e35] hover:border-[#c77e35]"
                                                 )}
                                             >
                                                 <ChevronRight className="h-3 w-3 rotate-180" />
@@ -344,7 +344,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                                 disabled={productPage >= Math.max(1, Math.ceil(products.length / 3)) - 1}
                                                 className={cn(
                                                     "w-6 h-6 rounded-full border border-zinc-200 flex items-center justify-center transition-all bg-white hover:bg-zinc-50",
-                                                    productPage >= Math.max(1, Math.ceil(products.length / 3)) - 1 ? "text-zinc-300 cursor-not-allowed border-zinc-100" : "text-[#6b3e1e] hover:border-[#6b3e1e]"
+                                                    productPage >= Math.max(1, Math.ceil(products.length / 3)) - 1 ? "text-zinc-300 cursor-not-allowed border-zinc-100" : "text-[#c77e35] hover:border-[#c77e35]"
                                                 )}
                                             >
                                                 <ChevronRight className="h-3 w-3" />
@@ -368,7 +368,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                                     router.push(`/shop/${product.slug}`);
                                                     onClose();
                                                 }}
-                                                className="group flex items-center gap-3 p-3 rounded-2xl border border-zinc-100 bg-white hover:border-[#6b3e1e]/20 hover:shadow-md transition-all cursor-pointer relative"
+                                                className="group flex items-center gap-3 p-3 rounded-2xl border border-zinc-100 bg-white hover:border-[#c77e35]/20 hover:shadow-md transition-all cursor-pointer relative"
                                             >
                                                 <div className="relative w-14 h-14 rounded-xl bg-zinc-50 shrink-0 overflow-hidden">
                                                     {product.images?.[0]?.asset?.url ? (
@@ -394,19 +394,19 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                                     )}
                                                 </div>
                                                 <div className="flex-1 min-w-0 pr-6">
-                                                    <h4 className="text-xs font-bold text-zinc-800 leading-snug line-clamp-2 group-hover:text-[#6b3e1e] transition-colors">
+                                                    <h4 className="text-xs font-bold text-zinc-800 leading-snug line-clamp-2 group-hover:text-[#c77e35] transition-colors">
                                                         {product.name}
                                                     </h4>
                                                     <p className="text-[10px] text-zinc-500 mt-0.5">
                                                         {product.categories?.[0]?.title || "Pet Essentials"}
                                                     </p>
-                                                    <p className="text-xs font-bold text-[#6b3e1e] mt-0.5">
+                                                    <p className="text-xs font-bold text-[#c77e35] mt-0.5">
                                                         TSh {product.price?.toLocaleString()}
                                                     </p>
                                                 </div>
                                                 <button
                                                     onClick={(e) => handleAddToCart(e, product)}
-                                                    className="absolute right-2 bottom-2 w-6 h-6 rounded-full bg-[#6b3e1e] text-white flex items-center justify-center hover:bg-[#5a3419] hover:scale-110 transition-all shadow-sm opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 duration-300"
+                                                    className="absolute right-2 bottom-2 w-6 h-6 rounded-full bg-[#c77e35] text-white flex items-center justify-center hover:bg-[#5a3419] hover:scale-110 transition-all shadow-sm opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 duration-300"
                                                 >
                                                     <ShoppingBag className="h-3 w-3" strokeWidth={2} />
                                                 </button>

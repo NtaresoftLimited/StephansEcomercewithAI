@@ -70,7 +70,7 @@ export default async function OffersPage({ searchParams }: PageProps) {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-[#6b3e1e] text-white py-16 px-4 text-center">
+      <section className="bg-[#c77e35] text-white py-16 px-4 text-center">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-center gap-2 mb-4 text-amber-400 font-bold uppercase tracking-widest text-xs">
             <Badge className="bg-amber-500 text-white border-none shadow-lg">New Offers</Badge>
@@ -85,13 +85,13 @@ export default async function OffersPage({ searchParams }: PageProps) {
       {/* Breadcrumbs - Refined */}
       <div className="border-b border-zinc-100 bg-zinc-50/50">
         <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8 flex items-center gap-3 text-xs font-medium tracking-wide text-zinc-500">
-          <Link href="/" className="hover:text-[#6b3e1e] transition-colors flex items-center gap-1">
+          <Link href="/" className="hover:text-[#c77e35] transition-colors flex items-center gap-1">
             <Home className="h-3.5 w-3.5" /> Home
           </Link>
           <span className="text-zinc-300">/</span>
-          <Link href="/shop" className="hover:text-[#6b3e1e] transition-colors">Products</Link>
+          <Link href="/shop" className="hover:text-[#c77e35] transition-colors">Products</Link>
           <span className="text-zinc-300">/</span>
-          <span className="text-[#6b3e1e] font-bold uppercase tracking-widest">Offers</span>
+          <span className="text-[#c77e35] font-bold uppercase tracking-widest">Offers</span>
         </div>
       </div>
 

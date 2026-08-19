@@ -34,7 +34,7 @@ export function MobileFooterNav() {
                 className="relative -top-5 flex flex-col items-center justify-center"
                 aria-label="Talk to Sky AI Assistant"
             >
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#6b3e1e] text-white shadow-lg shadow-[#6b3e1e]/40 border-4 border-white dark:border-zinc-950 transition-transform active:scale-95">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#c77e35] text-white shadow-lg shadow-[#c77e35]/40 border-4 border-white dark:border-zinc-950 transition-transform active:scale-95">
                     <Image
                         src="/favicon.png"
                         alt="Sky"

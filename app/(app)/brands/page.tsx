@@ -100,7 +100,7 @@ export default async function BrandsPage() {
                     <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white uppercase tracking-tight">
                       {brand.name}
                     </h2>
-                    <div className="w-12 h-1 bg-[#6b3e1e] rounded-full" />
+                    <div className="w-12 h-1 bg-[#c77e35] rounded-full" />
                   </div>
                   
                   {brand.logo && (

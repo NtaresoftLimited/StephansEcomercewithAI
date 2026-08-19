@@ -41,11 +41,11 @@ export function CartSheet() {
               height={24} 
               className="object-contain"
             />
-            <SheetTitle className="text-xl font-bold text-[#6b3e1e]">Your Cart</SheetTitle>
+            <SheetTitle className="text-xl font-bold text-[#c77e35]">Your Cart</SheetTitle>
           </div>
           <div className="relative">
-            <ShoppingBag className="h-6 w-6 text-[#6b3e1e]" />
-            <span className="absolute -top-1.5 -right-1.5 bg-[#6b3e1e] text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
+            <ShoppingBag className="h-6 w-6 text-[#c77e35]" />
+            <span className="absolute -top-1.5 -right-1.5 bg-[#c77e35] text-white text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
               {totalItems}
             </span>
           </div>

@@ -84,7 +84,7 @@ export function GoogleBusinessProfile() {
     const isOpen = todayHours && todayHours.open !== "Closed";
 
     return (
-        <section className="bg-gradient-to-br from-[#6b3e1e]/5 to-[#6b3e1e]/10 py-16">
+        <section className="bg-gradient-to-br from-[#c77e35]/5 to-[#c77e35]/10 py-16">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-10">
                     <h2 className="text-3xl font-bold text-zinc-900">Visit Our Store</h2>
@@ -106,7 +106,7 @@ export function GoogleBusinessProfile() {
                         />
                         <div className="p-6">
                             <div className="flex items-start gap-3 mb-4">
-                                <MapPin className="h-5 w-5 text-[#6b3e1e] mt-0.5 flex-shrink-0" />
+                                <MapPin className="h-5 w-5 text-[#c77e35] mt-0.5 flex-shrink-0" />
                                 <div>
                                     <p className="font-medium text-zinc-900">{BUSINESS_INFO.address}</p>
                                     <p className="text-sm text-zinc-600">{BUSINESS_INFO.city}, {BUSINESS_INFO.country}</p>
@@ -114,14 +114,14 @@ export function GoogleBusinessProfile() {
                             </div>
 
                             <div className="flex items-center gap-3 mb-4">
-                                <Phone className="h-5 w-5 text-[#6b3e1e] flex-shrink-0" />
-                                <a href={`tel:${BUSINESS_INFO.phone}`} className="text-zinc-900 hover:text-[#6b3e1e]">
+                                <Phone className="h-5 w-5 text-[#c77e35] flex-shrink-0" />
+                                <a href={`tel:${BUSINESS_INFO.phone}`} className="text-zinc-900 hover:text-[#c77e35]">
                                     {BUSINESS_INFO.phone}
                                 </a>
                             </div>
 
                             <div className="flex items-start gap-3">
-                                <Clock className="h-5 w-5 text-[#6b3e1e] mt-0.5 flex-shrink-0" />
+                                <Clock className="h-5 w-5 text-[#c77e35] mt-0.5 flex-shrink-0" />
                                 <div className="flex-1">
                                     <div className="flex items-center justify-between">
                                         <span className={`text-sm font-medium ${isOpen ? "text-green-600" : "text-red-600"}`}>
@@ -149,7 +149,7 @@ export function GoogleBusinessProfile() {
 
                                     <button
                                         onClick={() => setShowAllHours(!showAllHours)}
-                                        className="text-sm text-[#6b3e1e] hover:underline mt-1"
+                                        className="text-sm text-[#c77e35] hover:underline mt-1"
                                     >
                                         {showAllHours ? "Hide hours" : "Show all hours"}
                                     </button>
@@ -157,7 +157,7 @@ export function GoogleBusinessProfile() {
                             </div>
 
                             <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
-                                <Button asChild className="w-4/5 sm:flex-1 bg-[#6b3e1e] hover:bg-[#5a3319]">
+                                <Button asChild className="w-4/5 sm:flex-1 bg-[#c77e35] hover:bg-[#5a3319]">
                                     <a href={BUSINESS_INFO.googleMapsUrl} target="_blank" rel="noopener noreferrer">
                                         <Navigation className="h-4 w-4 mr-2" />
                                         Get Directions
@@ -187,7 +187,7 @@ export function GoogleBusinessProfile() {
                                 href={BUSINESS_INFO.googleMapsUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="text-sm text-[#6b3e1e] hover:underline flex items-center gap-1"
+                                className="text-sm text-[#c77e35] hover:underline flex items-center gap-1"
                             >
                                 View on Google
                                 <ExternalLink className="h-3 w-3" />
@@ -199,8 +199,8 @@ export function GoogleBusinessProfile() {
                                 <div key={index} className="border-b border-zinc-100 pb-4 last:border-0">
                                     <div className="flex items-center justify-between mb-2">
                                         <div className="flex items-center gap-2">
-                                            <div className="h-8 w-8 rounded-full bg-[#6b3e1e]/10 flex items-center justify-center">
-                                                <span className="text-sm font-medium text-[#6b3e1e]">
+                                            <div className="h-8 w-8 rounded-full bg-[#c77e35]/10 flex items-center justify-center">
+                                                <span className="text-sm font-medium text-[#c77e35]">
                                                     {review.author.charAt(0)}
                                                 </span>
                                             </div>

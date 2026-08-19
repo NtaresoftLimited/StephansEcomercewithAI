@@ -42,7 +42,7 @@ export function AnnouncementBar() {
     const announcement = ANNOUNCEMENTS[currentIndex];
 
     return (
-        <div className="bg-[#6b3e1e] text-white h-10 relative flex items-center justify-center z-[60] overflow-hidden">
+        <div className="bg-[#c77e35] text-white h-10 relative flex items-center justify-center z-[60] overflow-hidden">
             <div
                 className={cn(
                     "w-full text-center px-4 transition-all duration-500 ease-in-out transform",

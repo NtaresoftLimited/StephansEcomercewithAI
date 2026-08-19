@@ -223,7 +223,7 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
                     Fill out the form below to schedule a grooming session for your pet
                 </p>
 
-                <form onSubmit={handleSubmit} className="rounded-2xl bg-white dark:bg-zinc-800 shadow-xl p-6 md:p-10 border border-[#6b3e1e]/10">
+                <form onSubmit={handleSubmit} className="rounded-2xl bg-white dark:bg-zinc-800 shadow-xl p-6 md:p-10 border border-[#c77e35]/10">
 
                     {/* Pet Type Selection */}
                     <div className="mb-6">
@@ -235,7 +235,7 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
                                 type="button"
                                 onClick={() => setFormData({ ...formData, petType: "dog", breedSize: "" })}
                                 className={`flex-1 flex items-center justify-center gap-3 rounded-xl border-2 p-5 transition-all ${formData.petType === "dog"
-                                    ? "border-[#6b3e1e] bg-[#6b3e1e]/5"
+                                    ? "border-[#c77e35] bg-[#c77e35]/5"
                                     : "border-zinc-200 dark:border-zinc-700 hover:border-zinc-300"
                                     }`}
                             >
@@ -248,13 +248,13 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
                                         className={`object-contain transition-all ${formData.petType === "dog" ? "opacity-100" : "opacity-40 grayscale"}`}
                                     />
                                 </div>
-                                <span className={`font-bold text-lg ${formData.petType === "dog" ? "text-[#6b3e1e]" : "text-zinc-600"}`}>Dog</span>
+                                <span className={`font-bold text-lg ${formData.petType === "dog" ? "text-[#c77e35]" : "text-zinc-600"}`}>Dog</span>
                             </button>
                             <button
                                 type="button"
                                 onClick={() => setFormData({ ...formData, petType: "cat", breedSize: "" })}
                                 className={`flex-1 flex items-center justify-center gap-3 rounded-xl border-2 p-5 transition-all ${formData.petType === "cat"
-                                    ? "border-[#6b3e1e] bg-[#6b3e1e]/5"
+                                    ? "border-[#c77e35] bg-[#c77e35]/5"
                                     : "border-zinc-200 dark:border-zinc-700 hover:border-zinc-300"
                                     }`}
                             >
@@ -267,7 +267,7 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
                                         className={`object-contain transition-all ${formData.petType === "cat" ? "opacity-100" : "opacity-40 grayscale"}`}
                                     />
                                 </div>
-                                <span className={`font-bold text-lg ${formData.petType === "cat" ? "text-[#6b3e1e]" : "text-zinc-600"}`}>Cat</span>
+                                <span className={`font-bold text-lg ${formData.petType === "cat" ? "text-[#c77e35]" : "text-zinc-600"}`}>Cat</span>
                             </button>
                         </div>
                     </div>
@@ -326,13 +326,13 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
                                         aria-pressed={formData.package === pkg.value}
                                         data-selected={formData.package === pkg.value || undefined}
                                         className={`relative rounded-lg border-2 p-4 text-center transition-all ${formData.package === pkg.value
-                                            ? "border-[#6b3e1e] bg-[#6b3e1e]/10 ring-2 ring-[#6b3e1e]/30 shadow-md"
+                                            ? "border-[#c77e35] bg-[#c77e35]/10 ring-2 ring-[#c77e35]/30 shadow-md"
                                             : "border-zinc-200 dark:border-zinc-700 hover:border-zinc-300"
                                             }`}
                                     >
-                                        <span className={`font-semibold block ${formData.package === pkg.value ? "text-[#6b3e1e]" : ""}`}>{pkg.label}</span>
+                                        <span className={`font-semibold block ${formData.package === pkg.value ? "text-[#c77e35]" : ""}`}>{pkg.label}</span>
                                         {formData.package === pkg.value && (
-                                            <Check className="absolute right-2 top-2 h-4 w-4 text-[#6b3e1e]" />
+                                            <Check className="absolute right-2 top-2 h-4 w-4 text-[#c77e35]" />
                                         )}
                                         {formData.breedSize && (
                                             <span className="text-sm text-zinc-500">
@@ -454,9 +454,9 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
 
                     {/* Price Summary */}
                     {formData.package && formData.breedSize && (
-                        <div className="mt-6 rounded-lg bg-[#6b3e1e]/10 p-4">
+                        <div className="mt-6 rounded-lg bg-[#c77e35]/10 p-4">
                             {/* Breakdown */}
-                            <div className="space-y-2 mb-3 border-b border-[#6b3e1e]/20 pb-3">
+                            <div className="space-y-2 mb-3 border-b border-[#c77e35]/20 pb-3">
                                 <div className="flex justify-between text-sm">
                                     <span className="text-zinc-600 dark:text-zinc-400">
                                         {(formData.petType === 'dog' ? DOG_PACKAGES : CAT_PACKAGES)[formData.package as keyof typeof DOG_PACKAGES]?.name || formData.package}
@@ -485,7 +485,7 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
                                 <span className="font-semibold text-zinc-700 dark:text-zinc-300">
                                     Total Price:
                                 </span>
-                                <span className="text-2xl font-bold text-[#6b3e1e]">
+                                <span className="text-2xl font-bold text-[#c77e35]">
                                     {formatPrice(calculatePrice())}
                                 </span>
                             </div>
@@ -496,7 +496,7 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
                     <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="mt-6 w-full rounded-lg bg-gradient-to-r from-[#6b3e1e] to-[#8b5a2b] py-4 font-bold text-white shadow-lg transition-all hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="mt-6 w-full rounded-lg bg-gradient-to-r from-[#c77e35] to-[#c77e35] py-4 font-bold text-white shadow-lg transition-all hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                         {isSubmitting ? "Booking..." : "Confirm Booking"}
                     </button>

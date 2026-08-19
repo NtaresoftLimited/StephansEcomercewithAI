@@ -65,8 +65,8 @@ export default function BlogPage() {
             <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-16">
-                    <div className="inline-flex items-center justify-center p-3 bg-[#6b3e1e]/10 rounded-full mb-4">
-                        <BookOpen className="h-8 w-8 text-[#6b3e1e]" />
+                    <div className="inline-flex items-center justify-center p-3 bg-[#c77e35]/10 rounded-full mb-4">
+                        <BookOpen className="h-8 w-8 text-[#c77e35]" />
                     </div>
                     <h1 className="text-4xl font-bold text-zinc-900 mb-4">
                         Pet Care Blog
@@ -90,14 +90,14 @@ export default function BlogPage() {
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                 />
                                 <div className="absolute top-4 left-4">
-                                    <span className="inline-block px-3 py-1 bg-[#6b3e1e] text-white text-xs font-semibold rounded-full">
+                                    <span className="inline-block px-3 py-1 bg-[#c77e35] text-white text-xs font-semibold rounded-full">
                                         {post.category}
                                     </span>
                                 </div>
                             </div>
                             <div className="p-6">
                                 <p className="text-xs text-zinc-500 mb-2">{post.date}</p>
-                                <h2 className="text-xl font-bold text-zinc-900 mb-3 group-hover:text-[#6b3e1e] transition-colors">
+                                <h2 className="text-xl font-bold text-zinc-900 mb-3 group-hover:text-[#c77e35] transition-colors">
                                     {post.title}
                                 </h2>
                                 <p className="text-zinc-600 text-sm mb-4 line-clamp-3">
@@ -105,7 +105,7 @@ export default function BlogPage() {
                                 </p>
                                 <Link
                                     href={`/blog/${post.id}`}
-                                    className="inline-flex items-center gap-2 text-[#6b3e1e] hover:text-[#5a3419] font-medium text-sm transition-colors"
+                                    className="inline-flex items-center gap-2 text-[#c77e35] hover:text-[#5a3419] font-medium text-sm transition-colors"
                                 >
                                     Read More
                                     <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -116,14 +116,14 @@ export default function BlogPage() {
                 </div>
 
                 {/* Coming Soon Message */}
-                <div className="mt-16 text-center bg-[#6b3e1e]/5 rounded-2xl p-12 border border-[#6b3e1e]/20">
+                <div className="mt-16 text-center bg-[#c77e35]/5 rounded-2xl p-12 border border-[#c77e35]/20">
                     <h2 className="text-2xl font-bold text-zinc-900 mb-4">
                         More Articles Coming Soon!
                     </h2>
                     <p className="text-zinc-600 max-w-2xl mx-auto">
                         We&apos;re constantly adding new content to help you care for your pets. Subscribe to our newsletter to get notified when we publish new articles.
                     </p>
-                    <button className="mt-6 px-6 py-3 bg-[#6b3e1e] text-white rounded-lg hover:bg-[#5a3419] transition-colors font-medium">
+                    <button className="mt-6 px-6 py-3 bg-[#c77e35] text-white rounded-lg hover:bg-[#5a3419] transition-colors font-medium">
                         Subscribe to Newsletter
                     </button>
                 </div>

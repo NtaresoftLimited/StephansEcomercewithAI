@@ -50,7 +50,7 @@ export default function OrderConfirmationPage() {
                         </Button>
                     </Link>
                     <Link href="/shop">
-                        <Button className="w-full h-12 bg-[#6b3e1e] hover:bg-[#5a3419] text-white font-bold uppercase tracking-wider shadow-md">
+                        <Button className="w-full h-12 bg-[#c77e35] hover:bg-[#5a3419] text-white font-bold uppercase tracking-wider shadow-md">
                             <ShoppingBag className="mr-2 h-4 w-4" />
                             Continue Shopping
                         </Button>

@@ -92,10 +92,10 @@ export function CategoryMegaMenu({
             return (
               <article
                 key={group.title}
-                className="group/card flex flex-col min-h-[200px] gap-4 rounded-xl border border-transparent bg-transparent p-5 transition-all duration-200 hover:border-[#6b3e1e]/10 dark:hover:border-zinc-800"
+                className="group/card flex flex-col min-h-[200px] gap-4 rounded-xl border border-transparent bg-transparent p-5 transition-all duration-200 hover:border-[#c77e35]/10 dark:hover:border-zinc-800"
               >
                 <div className="flex items-center gap-3">
-                  <div className="flex shrink-0 items-center justify-center text-[#6b3e1e] dark:text-amber-500">
+                  <div className="flex shrink-0 items-center justify-center text-[#c77e35] dark:text-amber-500">
                     <Icon aria-hidden="true" className="h-7 w-7 stroke-[1]" />
                   </div>
                   <Link
@@ -126,7 +126,7 @@ export function CategoryMegaMenu({
                     <Link
                       href={group.href}
                       onClick={onNavigate}
-                      className="inline-flex items-center gap-1.5 text-[13px] font-bold uppercase tracking-wider text-[#6b3e1e] transition-colors hover:text-[#9a5d2d] dark:text-amber-500"
+                      className="inline-flex items-center gap-1.5 text-[13px] font-bold uppercase tracking-wider text-[#c77e35] transition-colors hover:text-[#9a5d2d] dark:text-amber-500"
                     >
                       View all
                       <ArrowRight aria-hidden="true" className="h-3.5 w-3.5" />
@@ -142,7 +142,7 @@ export function CategoryMegaMenu({
           <Link
             href={viewAllHref}
             onClick={onNavigate}
-            className="inline-flex items-center gap-2 text-[13px] font-bold uppercase tracking-wider text-[#6b3e1e] hover:text-[#9a5d2d] dark:text-amber-500 transition-colors"
+            className="inline-flex items-center gap-2 text-[13px] font-bold uppercase tracking-wider text-[#c77e35] hover:text-[#9a5d2d] dark:text-amber-500 transition-colors"
           >
             View all {animalName} categories
             <ArrowRight aria-hidden="true" className="h-4 w-4" />

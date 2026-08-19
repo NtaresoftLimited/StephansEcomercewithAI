@@ -96,7 +96,7 @@ export function AddressForm({ onComplete, isProcessing }: AddressFormProps) {
                         placeholder="John"
                         value={formData.firstName}
                         onChange={handleInputChange}
-                        className="h-11 bg-zinc-50 border-zinc-200 focus:ring-[#6b3e1e]"
+                        className="h-11 bg-zinc-50 border-zinc-200 focus:ring-[#c77e35]"
                     />
                 </div>
                 <div className="space-y-2">
@@ -108,7 +108,7 @@ export function AddressForm({ onComplete, isProcessing }: AddressFormProps) {
                         placeholder="Doe"
                         value={formData.lastName}
                         onChange={handleInputChange}
-                        className="h-11 bg-zinc-50 border-zinc-200 focus:ring-[#6b3e1e]"
+                        className="h-11 bg-zinc-50 border-zinc-200 focus:ring-[#c77e35]"
                     />
                 </div>
             </div>
@@ -123,7 +123,7 @@ export function AddressForm({ onComplete, isProcessing }: AddressFormProps) {
                         placeholder="john@example.com"
                         value={formData.email}
                         onChange={handleInputChange}
-                        className="h-11 bg-zinc-50 border-zinc-200 focus:ring-[#6b3e1e]"
+                        className="h-11 bg-zinc-50 border-zinc-200 focus:ring-[#c77e35]"
                     />
                 </div>
                 <div className="space-y-2">
@@ -136,7 +136,7 @@ export function AddressForm({ onComplete, isProcessing }: AddressFormProps) {
                         placeholder="+255..."
                         value={formData.phone}
                         onChange={handleInputChange}
-                        className="h-11 bg-zinc-50 border-zinc-200 focus:ring-[#6b3e1e]"
+                        className="h-11 bg-zinc-50 border-zinc-200 focus:ring-[#c77e35]"
                     />
                 </div>
             </div>
@@ -150,7 +150,7 @@ export function AddressForm({ onComplete, isProcessing }: AddressFormProps) {
                         size="sm"
                         onClick={getUserLocation}
                         disabled={loadingLocation}
-                        className="h-8 text-xs gap-2 border-dashed border-zinc-300 hover:border-[#6b3e1e] hover:text-[#6b3e1e]"
+                        className="h-8 text-xs gap-2 border-dashed border-zinc-300 hover:border-[#c77e35] hover:text-[#c77e35]"
                     >
                         {loadingLocation ? (
                             <Loader2 className="h-3 w-3 animate-spin" />
@@ -166,7 +166,7 @@ export function AddressForm({ onComplete, isProcessing }: AddressFormProps) {
                         placeholder="Street address, apartment, suite, unit, etc."
                     value={formData.address}
                     onChange={handleInputChange}
-                    className="min-h-[100px] bg-zinc-50 border-zinc-200 focus:ring-[#6b3e1e] resize-none"
+                    className="min-h-[100px] bg-zinc-50 border-zinc-200 focus:ring-[#c77e35] resize-none"
                 />
             </div>
 
@@ -174,7 +174,7 @@ export function AddressForm({ onComplete, isProcessing }: AddressFormProps) {
                 <div className="space-y-2">
                     <Label htmlFor="city">City</Label>
                     <Select onValueChange={handleCityChange} value={formData.city}>
-                        <SelectTrigger className="h-11 bg-zinc-50 border-zinc-200 focus:ring-[#6b3e1e]">
+                        <SelectTrigger className="h-11 bg-zinc-50 border-zinc-200 focus:ring-[#c77e35]">
                             <SelectValue placeholder="Select City" />
                         </SelectTrigger>
                         <SelectContent>
@@ -194,7 +194,7 @@ export function AddressForm({ onComplete, isProcessing }: AddressFormProps) {
                         placeholder="Region"
                         value={formData.region}
                         onChange={handleInputChange}
-                        className="h-11 bg-zinc-50 border-zinc-200 focus:ring-[#6b3e1e]"
+                        className="h-11 bg-zinc-50 border-zinc-200 focus:ring-[#c77e35]"
                     />
                 </div>
             </div>

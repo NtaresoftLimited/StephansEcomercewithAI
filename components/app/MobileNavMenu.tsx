@@ -155,17 +155,17 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
               return (
                 <div
                   key={group.title}
-                  className="rounded-xl border border-[#6b3e1e]/10 bg-[#fffdfb] p-4 dark:border-zinc-800 dark:bg-zinc-900/70"
+                  className="rounded-xl border border-[#c77e35]/10 bg-[#fffdfb] p-4 dark:border-zinc-800 dark:bg-zinc-900/70"
                 >
                   <Link
                     href={group.href}
                     onClick={onClose}
                     className="flex items-center gap-3 group/sub"
                   >
-                    <div className="w-9 h-9 rounded-lg bg-[#6b3e1e]/5 dark:bg-amber-950/25 flex items-center justify-center">
+                    <div className="w-9 h-9 rounded-lg bg-[#c77e35]/5 dark:bg-amber-950/25 flex items-center justify-center">
                       <SubIcon
                         size={18}
-                        className="text-[#6b3e1e] dark:text-amber-500 group-hover/sub:text-amber-600 transition-colors"
+                        className="text-[#c77e35] dark:text-amber-500 group-hover/sub:text-amber-600 transition-colors"
                       />
                     </div>
                     <span className="font-bold text-zinc-800 dark:text-zinc-100 hover:text-amber-600 transition-colors">
@@ -190,7 +190,7 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
             <Link
               href={section.href}
               onClick={onClose}
-              className="flex w-full items-center justify-center rounded-full bg-[#6b3e1e] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#573017]"
+              className="flex w-full items-center justify-center rounded-full bg-[#c77e35] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#573017]"
             >
               View all {section.title.replace("Shop For ", "")} categories
             </Link>

@@ -163,7 +163,7 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
                     <div className="flex flex-col p-6 md:p-8">
                         {/* Category */}
                         {product.categories && product.categories.length > 0 && (
-                            <Badge variant="secondary" className="w-fit mb-3 bg-[#6b3e1e]/10 text-[#6b3e1e]">
+                            <Badge variant="secondary" className="w-fit mb-3 bg-[#c77e35]/10 text-[#c77e35]">
                                 {product.categories[0].title}
                             </Badge>
                         )}
@@ -174,7 +174,7 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
                         </h2>
 
                         {/* Price */}
-                        <p className="mt-3 text-3xl font-bold text-[#6b3e1e]">
+                        <p className="mt-3 text-3xl font-bold text-[#c77e35]">
                             {formatPrice(product.price)}
                         </p>
 
@@ -227,7 +227,7 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
                             <Button
                                 onClick={handleAddToCart}
                                 disabled={isOutOfStock}
-                                className="flex-1 h-12 bg-[#6b3e1e] hover:bg-[#5a3318] text-white"
+                                className="flex-1 h-12 bg-[#c77e35] hover:bg-[#5a3318] text-white"
                             >
                                 <ShoppingCart className="mr-2 h-5 w-5" />
                                 {isOutOfStock ? "Out of Stock" : "Add to Cart"}
@@ -249,7 +249,7 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
                         <Link
                             href={`/shop/${product.slug}`}
                             onClick={onClose}
-                            className="mt-4 text-center text-sm font-medium text-[#6b3e1e] hover:underline"
+                            className="mt-4 text-center text-sm font-medium text-[#c77e35] hover:underline"
                         >
                             View Full Details →
                         </Link>

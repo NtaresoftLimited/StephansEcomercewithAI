@@ -22,9 +22,9 @@ function PackageCard({ packageKey, name, prices, services, color, popular, petTy
     const priceEntries = Object.entries(prices);
 
     return (
-        <div className={`relative rounded-2xl bg-white dark:bg-zinc-900 shadow-xl overflow-hidden ${popular ? "ring-2 ring-[#6b3e1e]" : ""}`}>
+        <div className={`relative rounded-2xl bg-white dark:bg-zinc-900 shadow-xl overflow-hidden ${popular ? "ring-2 ring-[#c77e35]" : ""}`}>
             {popular && (
-                <div className="absolute top-0 right-0 bg-[#6b3e1e] text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                <div className="absolute top-0 right-0 bg-[#c77e35] text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
                     MOST POPULAR
                 </div>
             )}
@@ -60,7 +60,7 @@ function PackageCard({ packageKey, name, prices, services, color, popular, petTy
                     <ul className="space-y-2">
                         {services.map((service, index) => (
                             <li key={index} className="flex items-start gap-2 text-sm text-zinc-600 dark:text-zinc-400">
-                                <Check className="h-4 w-4 text-[#6b3e1e] mt-0.5 shrink-0" />
+                                <Check className="h-4 w-4 text-[#c77e35] mt-0.5 shrink-0" />
                                 {service}
                             </li>
                         ))}
@@ -111,7 +111,7 @@ export function GroomingPackages({ prices = PRICES }: GroomingPackagesProps) {
                         <button
                             onClick={() => setActiveTab("dog")}
                             className={`flex items-center gap-3 rounded-full px-8 py-3 font-bold transition-all ${activeTab === "dog"
-                                ? "bg-white dark:bg-zinc-700 text-[#6b3e1e] shadow-lg scale-105"
+                                ? "bg-white dark:bg-zinc-700 text-[#c77e35] shadow-lg scale-105"
                                 : "text-zinc-400 hover:text-zinc-600"
                                 }`}
                         >
@@ -129,7 +129,7 @@ export function GroomingPackages({ prices = PRICES }: GroomingPackagesProps) {
                         <button
                             onClick={() => setActiveTab("cat")}
                             className={`flex items-center gap-3 rounded-full px-8 py-3 font-bold transition-all ${activeTab === "cat"
-                                ? "bg-white dark:bg-zinc-700 text-[#6b3e1e] shadow-lg scale-105"
+                                ? "bg-white dark:bg-zinc-700 text-[#c77e35] shadow-lg scale-105"
                                 : "text-zinc-400 hover:text-zinc-600"
                                 }`}
                         >
@@ -183,18 +183,18 @@ export function GroomingPackages({ prices = PRICES }: GroomingPackagesProps) {
                             { name: "Late Pickup Fee", price: "10,000 TZS", desc: "Per hour charge" },
                             { name: "Emergency Grooming", price: "30,000 TZS", desc: "At 6:00 PM" },
                         ].map((item, i) => (
-                            <div key={i} className="group relative overflow-hidden rounded-xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 p-5 hover:shadow-lg transition-all duration-300 hover:border-[#6b3e1e]/30">
-                                <div className="absolute top-0 left-0 w-1 h-full bg-[#6b3e1e] opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <div key={i} className="group relative overflow-hidden rounded-xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 p-5 hover:shadow-lg transition-all duration-300 hover:border-[#c77e35]/30">
+                                <div className="absolute top-0 left-0 w-1 h-full bg-[#c77e35] opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 <div className="flex justify-between items-start gap-4">
                                     <div>
-                                        <h4 className="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-[#6b3e1e] transition-colors">
+                                        <h4 className="font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-[#c77e35] transition-colors">
                                             {item.name}
                                         </h4>
                                         <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
                                             {item.desc}
                                         </p>
                                     </div>
-                                    <span className="font-bold text-[#6b3e1e] bg-[#6b3e1e]/10 px-3 py-1 rounded-full text-sm whitespace-nowrap">
+                                    <span className="font-bold text-[#c77e35] bg-[#c77e35]/10 px-3 py-1 rounded-full text-sm whitespace-nowrap">
                                         {item.price}
                                     </span>
                                 </div>

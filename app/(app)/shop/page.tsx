@@ -210,7 +210,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
             ))}
           </div>
           
-          <h3 className="text-xs font-bold tracking-[0.2em] text-[#6b3e1e] uppercase mb-4">
+          <h3 className="text-xs font-bold tracking-[0.2em] text-[#c77e35] uppercase mb-4">
             {eyebrow}
           </h3>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-serif text-[#222222] leading-[1.1] tracking-tight mb-4 max-w-2xl">

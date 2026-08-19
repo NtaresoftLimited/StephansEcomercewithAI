@@ -6,7 +6,7 @@ export default function ReturnPolicyPage() {
     return (
         <div className="min-h-screen bg-white">
             {/* Hero Section */}
-            <section className="bg-[#6b3e1e] text-white py-16 px-4 text-center">
+            <section className="bg-[#c77e35] text-white py-16 px-4 text-center">
                 <h1 className="text-4xl md:text-5xl font-bold mb-4">Return Policy</h1>
                 <p className="max-w-2xl mx-auto opacity-90 text-lg">
                     We want you to be completely satisfied with your purchase. Here's how we handle returns and exchanges.
@@ -19,8 +19,8 @@ export default function ReturnPolicyPage() {
                     {/* Eligibility Section */}
                     <div className="bg-zinc-50 rounded-2xl p-8 border border-zinc-100">
                         <div className="flex items-center gap-4 mb-6">
-                            <div className="w-12 h-12 rounded-xl bg-[#6b3e1e]/10 flex items-center justify-center">
-                                <ShieldCheck className="w-6 h-6 text-[#6b3e1e]" />
+                            <div className="w-12 h-12 rounded-xl bg-[#c77e35]/10 flex items-center justify-center">
+                                <ShieldCheck className="w-6 h-6 text-[#c77e35]" />
                             </div>
                             <h2 className="text-2xl font-bold text-zinc-900">Eligibility for Exchange</h2>
                         </div>
@@ -29,15 +29,15 @@ export default function ReturnPolicyPage() {
                         </p>
                         <ul className="grid sm:grid-cols-2 gap-4">
                             <li className="flex items-center gap-3 bg-white p-4 rounded-xl border border-zinc-200">
-                                <span className="w-2 h-2 rounded-full bg-[#6b3e1e]" />
+                                <span className="w-2 h-2 rounded-full bg-[#c77e35]" />
                                 <span className="text-zinc-700">Defective product</span>
                             </li>
                             <li className="flex items-center gap-3 bg-white p-4 rounded-xl border border-zinc-200">
-                                <span className="w-2 h-2 rounded-full bg-[#6b3e1e]" />
+                                <span className="w-2 h-2 rounded-full bg-[#c77e35]" />
                                 <span className="text-zinc-700">Wrong item received</span>
                             </li>
                             <li className="flex items-center gap-3 bg-white p-4 rounded-xl border border-zinc-200">
-                                <span className="w-2 h-2 rounded-full bg-[#6b3e1e]" />
+                                <span className="w-2 h-2 rounded-full bg-[#c77e35]" />
                                 <span className="text-zinc-700">Past its expiry date</span>
                             </li>
                         </ul>
@@ -46,22 +46,22 @@ export default function ReturnPolicyPage() {
                     {/* Key Conditions */}
                     <div className="grid md:grid-cols-3 gap-6">
                         <div className="p-6 rounded-2xl border border-zinc-200 text-center">
-                            <div className="mx-auto w-10 h-10 rounded-full bg-[#6b3e1e]/5 flex items-center justify-center mb-4">
-                                <Clock className="w-5 h-5 text-[#6b3e1e]" />
+                            <div className="mx-auto w-10 h-10 rounded-full bg-[#c77e35]/5 flex items-center justify-center mb-4">
+                                <Clock className="w-5 h-5 text-[#c77e35]" />
                             </div>
                             <h3 className="font-bold mb-1">24-Hour Window</h3>
                             <p className="text-sm text-zinc-500">Exchanges must be requested within 24 hours of purchase.</p>
                         </div>
                         <div className="p-6 rounded-2xl border border-zinc-200 text-center">
-                            <div className="mx-auto w-10 h-10 rounded-full bg-[#6b3e1e]/5 flex items-center justify-center mb-4">
-                                <ArrowLeftRight className="w-5 h-5 text-[#6b3e1e]" />
+                            <div className="mx-auto w-10 h-10 rounded-full bg-[#c77e35]/5 flex items-center justify-center mb-4">
+                                <ArrowLeftRight className="w-5 h-5 text-[#c77e35]" />
                             </div>
                             <h3 className="font-bold mb-1">Exchange Only</h3>
                             <p className="text-sm text-zinc-500">Note: No cash refunds. Valid for item exchange only.</p>
                         </div>
                         <div className="p-6 rounded-2xl border border-zinc-200 text-center">
-                            <div className="mx-auto w-10 h-10 rounded-full bg-[#6b3e1e]/5 flex items-center justify-center mb-4">
-                                <Receipt className="w-5 h-5 text-[#6b3e1e]" />
+                            <div className="mx-auto w-10 h-10 rounded-full bg-[#c77e35]/5 flex items-center justify-center mb-4">
+                                <Receipt className="w-5 h-5 text-[#c77e35]" />
                             </div>
                             <h3 className="font-bold mb-1">Original Receipt</h3>
                             <p className="text-sm text-zinc-500">Valid original receipt must be provided for all requests.</p>
@@ -79,16 +79,16 @@ export default function ReturnPolicyPage() {
                     </div>
 
                     {/* Contact Section */}
-                    <div className="bg-[#6b3e1e]/5 rounded-3xl p-10 text-center border border-[#6b3e1e]/10">
+                    <div className="bg-[#c77e35]/5 rounded-3xl p-10 text-center border border-[#c77e35]/10">
                         <h2 className="text-2xl font-bold mb-4">How to Request a Return</h2>
                         <p className="text-zinc-600 mb-8 max-w-lg mx-auto">
                             To request an exchange, please call us directly with your order number and proof of purchase.
                         </p>
                         <div className="flex flex-wrap justify-center gap-4">
-                            <Button asChild size="lg" className="bg-[#6b3e1e] hover:bg-[#5a3419]">
+                            <Button asChild size="lg" className="bg-[#c77e35] hover:bg-[#5a3419]">
                                 <a href="tel:+255786627873">Call: +255 786 627 873</a>
                             </Button>
-                            <Button asChild variant="outline" size="lg" className="border-[#6b3e1e] text-[#6b3e1e] hover:bg-[#6b3e1e]/5">
+                            <Button asChild variant="outline" size="lg" className="border-[#c77e35] text-[#c77e35] hover:bg-[#c77e35]/5">
                                 <Link href="/contact">Visit Contact Page</Link>
                             </Button>
                         </div>

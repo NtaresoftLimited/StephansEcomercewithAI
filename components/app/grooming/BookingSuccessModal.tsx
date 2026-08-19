@@ -68,7 +68,7 @@ export function BookingSuccessModal({ isOpen, onClose, bookingDetails }: Booking
     return (
         <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
             <DialogContent className="sm:max-w-[450px] p-0 overflow-hidden rounded-3xl border-none shadow-2xl animate-in zoom-in duration-300">
-                <div className="bg-gradient-to-br from-[#6b3e1e] to-[#8b5a2b] p-8 text-center text-white relative">
+                <div className="bg-gradient-to-br from-[#c77e35] to-[#c77e35] p-8 text-center text-white relative">
                     <button 
                         onClick={onClose}
                         className="absolute right-4 top-4 p-1 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
@@ -89,14 +89,14 @@ export function BookingSuccessModal({ isOpen, onClose, bookingDetails }: Booking
                 <div className="p-8 bg-white dark:bg-zinc-900 space-y-6">
                     <div className="grid grid-cols-2 gap-4">
                         <div className="flex items-start gap-3 p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-800">
-                            <Calendar className="h-5 w-5 text-[#6b3e1e] shrink-0 mt-0.5" />
+                            <Calendar className="h-5 w-5 text-[#c77e35] shrink-0 mt-0.5" />
                             <div>
                                 <p className="text-[10px] uppercase tracking-wider text-zinc-400 font-bold">Date</p>
                                 <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">{bookingDetails.date}</p>
                             </div>
                         </div>
                         <div className="flex items-start gap-3 p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-100 dark:border-zinc-800">
-                            <Clock className="h-5 w-5 text-[#6b3e1e] shrink-0 mt-0.5" />
+                            <Clock className="h-5 w-5 text-[#c77e35] shrink-0 mt-0.5" />
                             <div>
                                 <p className="text-[10px] uppercase tracking-wider text-zinc-400 font-bold">Time</p>
                                 <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">{bookingDetails.time}</p>
@@ -111,14 +111,14 @@ export function BookingSuccessModal({ isOpen, onClose, bookingDetails }: Booking
                         </div>
                         <div className="flex justify-between items-center text-sm">
                             <span className="text-zinc-500">Total Price</span>
-                            <span className="text-lg font-bold text-[#6b3e1e]">{formatPrice(bookingDetails.price)}</span>
+                            <span className="text-lg font-bold text-[#c77e35]">{formatPrice(bookingDetails.price)}</span>
                         </div>
                     </div>
 
                     <div className="flex flex-col gap-3 pt-2">
                         <Button 
                             onClick={onClose}
-                            className="w-full h-12 rounded-xl bg-[#6b3e1e] hover:bg-[#5a3419] text-white font-bold"
+                            className="w-full h-12 rounded-xl bg-[#c77e35] hover:bg-[#5a3419] text-white font-bold"
                         >
                             Done
                         </Button>

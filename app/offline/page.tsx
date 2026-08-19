@@ -10,9 +10,9 @@ export default function OfflinePage() {
             <div className="max-w-md w-full text-center">
                 <div className="mb-8 flex justify-center">
                     <div className="relative">
-                        <div className="absolute inset-0 bg-[#6b3e1e]/10 blur-3xl rounded-full" />
-                        <div className="relative bg-white rounded-full p-8 shadow-xl border-4 border-[#6b3e1e]/20">
-                            <WifiOff className="h-20 w-20 text-[#6b3e1e]" strokeWidth={1.5} />
+                        <div className="absolute inset-0 bg-[#c77e35]/10 blur-3xl rounded-full" />
+                        <div className="relative bg-white rounded-full p-8 shadow-xl border-4 border-[#c77e35]/20">
+                            <WifiOff className="h-20 w-20 text-[#c77e35]" strokeWidth={1.5} />
                         </div>
                     </div>
                 </div>
@@ -29,7 +29,7 @@ export default function OfflinePage() {
                 <div className="space-y-3">
                     <Button
                         onClick={() => window.location.reload()}
-                        className="w-full bg-[#6b3e1e] hover:bg-[#5a3419] text-white py-6 rounded-xl font-semibold flex items-center justify-center gap-2"
+                        className="w-full bg-[#c77e35] hover:bg-[#5a3419] text-white py-6 rounded-xl font-semibold flex items-center justify-center gap-2"
                     >
                         <RefreshCcw className="h-5 w-5" />
                         Try Again
@@ -38,7 +38,7 @@ export default function OfflinePage() {
                     <Link href="/" className="block">
                         <Button
                             variant="outline"
-                            className="w-full py-6 rounded-xl font-semibold flex items-center justify-center gap-2 border-[#6b3e1e]/20 text-[#6b3e1e] hover:bg-[#6b3e1e]/5"
+                            className="w-full py-6 rounded-xl font-semibold flex items-center justify-center gap-2 border-[#c77e35]/20 text-[#c77e35] hover:bg-[#c77e35]/5"
                         >
                             <Home className="h-5 w-5" />
                             Go to Homepage

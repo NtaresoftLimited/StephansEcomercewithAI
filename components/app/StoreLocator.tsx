@@ -65,7 +65,7 @@ export function StoreLocator() {
             {/* Sidebar - Store List */}
             <div className="w-full lg:w-1/3 flex flex-col border-r border-zinc-200">
                 <div className="p-4 border-b border-zinc-200 bg-zinc-50">
-                    <h2 className="text-xl font-bold text-[#6b3e1e] mb-4">Find a Store</h2>
+                    <h2 className="text-xl font-bold text-[#c77e35] mb-4">Find a Store</h2>
                     <div className="relative">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400" />
                         <input
@@ -73,7 +73,7 @@ export function StoreLocator() {
                             placeholder="Search by location..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-9 pr-4 py-2 border border-zinc-200 rounded-md focus:outline-none focus:ring-2 focus:ring-[#6b3e1e]/20 focus:border-[#6b3e1e] transition-all"
+                            className="w-full pl-9 pr-4 py-2 border border-zinc-200 rounded-md focus:outline-none focus:ring-2 focus:ring-[#c77e35]/20 focus:border-[#c77e35] transition-all"
                         />
                     </div>
                 </div>
@@ -89,31 +89,31 @@ export function StoreLocator() {
                                 <button
                                     key={store.id}
                                     onClick={() => setSelectedStoreId(store.id)}
-                                    className={`w-full text-left p-4 hover:bg-zinc-50 transition-colors ${selectedStoreId === store.id ? "bg-[#6b3e1e]/5" : ""
+                                    className={`w-full text-left p-4 hover:bg-zinc-50 transition-colors ${selectedStoreId === store.id ? "bg-[#c77e35]/5" : ""
                                         }`}
                                 >
                                     <div className="flex items-start justify-between mb-2">
-                                        <h3 className={`font-semibold ${selectedStoreId === store.id ? "text-[#6b3e1e]" : "text-zinc-900"
+                                        <h3 className={`font-semibold ${selectedStoreId === store.id ? "text-[#c77e35]" : "text-zinc-900"
                                             }`}>
                                             {store.name}
                                         </h3>
                                         {selectedStoreId === store.id && (
-                                            <span className="text-xs bg-[#6b3e1e] text-white px-2 py-0.5 rounded-full">
+                                            <span className="text-xs bg-[#c77e35] text-white px-2 py-0.5 rounded-full">
                                                 Selected
                                             </span>
                                         )}
                                     </div>
                                     <div className="space-y-2 text-sm text-zinc-600">
                                         <div className="flex items-start gap-2">
-                                            <MapPin className="h-4 w-4 shrink-0 mt-0.5 text-[#6b3e1e]" />
+                                            <MapPin className="h-4 w-4 shrink-0 mt-0.5 text-[#c77e35]" />
                                             <span>{store.address}</span>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <Phone className="h-4 w-4 shrink-0 text-[#6b3e1e]" />
+                                            <Phone className="h-4 w-4 shrink-0 text-[#c77e35]" />
                                             <span>{store.phone}</span>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            <Clock className="h-4 w-4 shrink-0 text-[#6b3e1e]" />
+                                            <Clock className="h-4 w-4 shrink-0 text-[#c77e35]" />
                                             <span>{store.hours}</span>
                                         </div>
                                     </div>
@@ -122,7 +122,7 @@ export function StoreLocator() {
                                             href={`https://www.google.com/maps/dir/?api=1&destination=${store.position[0]},${store.position[1]}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="flex items-center gap-1 text-xs font-medium text-[#6b3e1e] hover:underline"
+                                            className="flex items-center gap-1 text-xs font-medium text-[#c77e35] hover:underline"
                                             onClick={(e) => e.stopPropagation()}
                                         >
                                             <Navigation className="h-3 w-3" />
@@ -165,7 +165,7 @@ export function StoreLocator() {
                                         href={`https://www.google.com/maps/dir/?api=1&destination=${store.position[0]},${store.position[1]}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-1 text-xs font-medium text-white bg-[#6b3e1e] px-3 py-1.5 rounded-md hover:bg-[#5a3419] transition-colors"
+                                        className="inline-flex items-center gap-1 text-xs font-medium text-white bg-[#c77e35] px-3 py-1.5 rounded-md hover:bg-[#5a3419] transition-colors"
                                     >
                                         Get Directions
                                     </a>

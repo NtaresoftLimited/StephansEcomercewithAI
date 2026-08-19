@@ -12,8 +12,8 @@ export default function TermsPage() {
             <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <div className="inline-flex items-center justify-center p-3 bg-[#6b3e1e]/10 rounded-full mb-4">
-                        <Scale className="h-8 w-8 text-[#6b3e1e]" />
+                    <div className="inline-flex items-center justify-center p-3 bg-[#c77e35]/10 rounded-full mb-4">
+                        <Scale className="h-8 w-8 text-[#c77e35]" />
                     </div>
                     <h1 className="text-4xl font-bold text-zinc-900 mb-4">
                         Terms & Conditions
@@ -34,7 +34,7 @@ export default function TermsPage() {
 
                     <section className="mb-8">
                         <h2 className="text-2xl font-bold text-zinc-900 mb-4 flex items-center gap-2">
-                            <FileText className="h-6 w-6 text-[#6b3e1e]" />
+                            <FileText className="h-6 w-6 text-[#c77e35]" />
                             1. General Terms
                         </h2>
                         <p className="text-zinc-700 mb-4">
@@ -93,7 +93,7 @@ export default function TermsPage() {
                     <section className="mb-8">
                         <h2 className="text-2xl font-bold text-zinc-900 mb-4">5. Returns and Refunds</h2>
                         <p className="text-zinc-700 mb-4">
-                            Please refer to our <a href="/return-policy" className="text-[#6b3e1e] hover:underline">Return Policy</a> for detailed information about returns and refunds. In summary:
+                            Please refer to our <a href="/return-policy" className="text-[#c77e35] hover:underline">Return Policy</a> for detailed information about returns and refunds. In summary:
                         </p>
                         <ul className="list-disc pl-6 space-y-2 text-zinc-700">
                             <li>Products must be returned within 7 days of delivery</li>
@@ -105,7 +105,7 @@ export default function TermsPage() {
 
                     <section className="mb-8">
                         <h2 className="text-2xl font-bold text-zinc-900 mb-4 flex items-center gap-2">
-                            <Shield className="h-6 w-6 text-[#6b3e1e]" />
+                            <Shield className="h-6 w-6 text-[#c77e35]" />
                             6. Privacy and Data Protection
                         </h2>
                         <p className="text-zinc-700 mb-4">
@@ -159,7 +159,7 @@ export default function TermsPage() {
                         </div>
                     </section>
 
-                    <div className="bg-[#6b3e1e]/5 rounded-lg p-6 mt-12 border border-[#6b3e1e]/20">
+                    <div className="bg-[#c77e35]/5 rounded-lg p-6 mt-12 border border-[#c77e35]/20">
                         <p className="text-sm text-zinc-700 text-center">
                             By using our website and services, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions.
                         </p>

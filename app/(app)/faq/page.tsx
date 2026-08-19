@@ -125,8 +125,8 @@ export default function FAQPage() {
             <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-16">
-                    <div className="inline-flex items-center justify-center p-3 bg-[#6b3e1e]/10 rounded-full mb-4">
-                        <HelpCircle className="h-8 w-8 text-[#6b3e1e]" />
+                    <div className="inline-flex items-center justify-center p-3 bg-[#c77e35]/10 rounded-full mb-4">
+                        <HelpCircle className="h-8 w-8 text-[#c77e35]" />
                     </div>
                     <h1 className="text-4xl font-bold text-zinc-900 mb-4">
                         Frequently Asked Questions
@@ -147,12 +147,12 @@ export default function FAQPage() {
                                 {section.questions.map((faq, faqIdx) => (
                                     <details
                                         key={faqIdx}
-                                        className="group bg-white rounded-lg border border-zinc-200 overflow-hidden hover:border-[#6b3e1e]/30 transition-colors"
+                                        className="group bg-white rounded-lg border border-zinc-200 overflow-hidden hover:border-[#c77e35]/30 transition-colors"
                                     >
                                         <summary className="flex items-center justify-between cursor-pointer p-6 font-semibold text-zinc-900 list-none">
                                             <span className="pr-8">{faq.q}</span>
-                                            <Plus className="h-5 w-5 text-[#6b3e1e] flex-shrink-0 group-open:hidden" />
-                                            <Minus className="h-5 w-5 text-[#6b3e1e] flex-shrink-0 hidden group-open:block" />
+                                            <Plus className="h-5 w-5 text-[#c77e35] flex-shrink-0 group-open:hidden" />
+                                            <Minus className="h-5 w-5 text-[#c77e35] flex-shrink-0 hidden group-open:block" />
                                         </summary>
                                         <div className="px-6 pb-6 pt-2 text-zinc-600 leading-relaxed">
                                             {faq.a}
@@ -165,7 +165,7 @@ export default function FAQPage() {
                 </div>
 
                 {/* Contact CTA */}
-                <div className="mt-16 bg-[#6b3e1e]/5 rounded-2xl p-8 border border-[#6b3e1e]/20 text-center">
+                <div className="mt-16 bg-[#c77e35]/5 rounded-2xl p-8 border border-[#c77e35]/20 text-center">
                     <h2 className="text-2xl font-bold text-zinc-900 mb-3">
                         Still Have Questions?
                     </h2>
@@ -175,7 +175,7 @@ export default function FAQPage() {
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <a
                             href="/contact"
-                            className="inline-flex items-center justify-center px-6 py-3 bg-[#6b3e1e] text-white rounded-lg hover:bg-[#5a3419] transition-colors font-medium"
+                            className="inline-flex items-center justify-center px-6 py-3 bg-[#c77e35] text-white rounded-lg hover:bg-[#5a3419] transition-colors font-medium"
                         >
                             Contact Us
                         </a>
@@ -183,7 +183,7 @@ export default function FAQPage() {
                             href="https://wa.me/255769324445"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center justify-center px-6 py-3 bg-white text-[#6b3e1e] border-2 border-[#6b3e1e] rounded-lg hover:bg-[#6b3e1e] hover:text-white transition-colors font-medium"
+                            className="inline-flex items-center justify-center px-6 py-3 bg-white text-[#c77e35] border-2 border-[#c77e35] rounded-lg hover:bg-[#c77e35] hover:text-white transition-colors font-medium"
                         >
                             Chat on WhatsApp
                         </a>

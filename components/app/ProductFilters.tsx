@@ -170,7 +170,7 @@ function ProductFiltersInner({ categories, brands }: ProductFiltersProps) {
             </div>
             <Link
               href="/shop/offers"
-              className="text-sm leading-5 font-medium text-zinc-600 hover:text-[#6b3e1e] transition-colors"
+              className="text-sm leading-5 font-medium text-zinc-600 hover:text-[#c77e35] transition-colors"
             >
               Today&apos;s Deals
             </Link>
@@ -181,7 +181,7 @@ function ProductFiltersInner({ categories, brands }: ProductFiltersProps) {
             <div className="flex items-center justify-between">
               <span className="text-md leading-5 font-bold text-zinc-900">Categories</span>
               {currentCategory && (
-                <button onClick={() => clearSingleFilter("category")} className="text-[10px] font-bold text-[#6b3e1e] uppercase hover:underline">Clear</button>
+                <button onClick={() => clearSingleFilter("category")} className="text-[10px] font-bold text-[#c77e35] uppercase hover:underline">Clear</button>
               )}
             </div>
             <div className="space-y-1">
@@ -195,7 +195,7 @@ function ProductFiltersInner({ categories, brands }: ProductFiltersProps) {
                   <CollapsibleTrigger asChild>
                     <div className={cn(
                       "flex w-full items-center justify-between p-2 rounded-lg cursor-pointer transition-all",
-                      currentCategory === root.slug ? "bg-[#6b3e1e]/5 text-[#6b3e1e]" : "hover:bg-zinc-50"
+                      currentCategory === root.slug ? "bg-[#c77e35]/5 text-[#c77e35]" : "hover:bg-zinc-50"
                     )}>
                       <span className="text-sm font-semibold">{root.title}</span>
                       <ChevronDown className={cn("h-4 w-4 transition-transform duration-200", openCategories[root.slug] && "rotate-180")} />
@@ -206,7 +206,7 @@ function ProductFiltersInner({ categories, brands }: ProductFiltersProps) {
                       onClick={() => updateParams({ category: currentCategory === root.slug ? null : root.slug })}
                       className={cn(
                         "w-full text-left px-3 py-1.5 rounded-md text-xs transition-colors",
-                        currentCategory === root.slug ? "text-[#6b3e1e] font-bold" : "text-zinc-500 hover:text-zinc-900"
+                        currentCategory === root.slug ? "text-[#c77e35] font-bold" : "text-zinc-500 hover:text-zinc-900"
                       )}
                     >
                       All {root.title}
@@ -218,7 +218,7 @@ function ProductFiltersInner({ categories, brands }: ProductFiltersProps) {
                         className={cn(
                           "w-full text-left px-3 py-1.5 rounded-md text-xs transition-colors",
                           currentCategory === child.slug 
-                            ? "bg-[#6b3e1e] text-white font-medium" 
+                            ? "bg-[#c77e35] text-white font-medium" 
                             : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"
                         )}
                       >
@@ -237,7 +237,7 @@ function ProductFiltersInner({ categories, brands }: ProductFiltersProps) {
             <div className="flex items-center justify-between">
               <span className="text-md leading-5 font-bold text-zinc-900">Brand</span>
               {currentBrand && (
-                <button onClick={() => clearSingleFilter("brand")} className="text-[10px] font-bold text-[#6b3e1e] uppercase hover:underline">Clear</button>
+                <button onClick={() => clearSingleFilter("brand")} className="text-[10px] font-bold text-[#c77e35] uppercase hover:underline">Clear</button>
               )}
             </div>
             <div className="relative">
@@ -247,7 +247,7 @@ function ProductFiltersInner({ categories, brands }: ProductFiltersProps) {
                 placeholder="Search Brand"
                 value={brandSearch}
                 onChange={(e) => setBrandSearch(e.target.value)}
-                className="h-10 w-full rounded-full border border-zinc-200 bg-white pl-10 pr-4 py-2 text-sm outline-none focus:ring-2 focus:ring-[#6b3e1e]/20 transition-all"
+                className="h-10 w-full rounded-full border border-zinc-200 bg-white pl-10 pr-4 py-2 text-sm outline-none focus:ring-2 focus:ring-[#c77e35]/20 transition-all"
               />
             </div>
             <div className="flex flex-col gap-3 max-h-[500px] overflow-y-auto pr-2 scrollbar-hide">
@@ -258,13 +258,13 @@ function ProductFiltersInner({ categories, brands }: ProductFiltersProps) {
                       type="checkbox" 
                       checked={currentBrand === brand.slug}
                       onChange={() => updateParams({ brand: currentBrand === brand.slug ? null : brand.slug })}
-                      className="peer appearance-none size-5 shrink-0 rounded border border-zinc-300 shadow-sm focus-visible:outline-none checked:bg-[#6b3e1e] checked:border-[#6b3e1e] transition-all" 
+                      className="peer appearance-none size-5 shrink-0 rounded border border-zinc-300 shadow-sm focus-visible:outline-none checked:bg-[#c77e35] checked:border-[#c77e35] transition-all" 
                     />
                     <svg className="absolute size-3 text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
                   </div>
                   <span className={cn(
                     "text-sm leading-5 font-medium transition-colors truncate flex-1",
-                    currentBrand === brand.slug ? "text-[#6b3e1e]" : "text-zinc-600 group-hover:text-[#6b3e1e]"
+                    currentBrand === brand.slug ? "text-[#c77e35]" : "text-zinc-600 group-hover:text-[#c77e35]"
                   )}>
                     {brand.name}
                   </span>
@@ -281,20 +281,20 @@ function ProductFiltersInner({ categories, brands }: ProductFiltersProps) {
           <div className="flex flex-col gap-4">
             <div className="flex items-start justify-between">
               <div className="text-md leading-5 font-bold text-zinc-900">Price</div>
-              <span className="text-[10px] font-bold rounded-full bg-[#6b3e1e] px-2 py-0.5 leading-5 text-white">
+              <span className="text-[10px] font-bold rounded-full bg-[#c77e35] px-2 py-0.5 leading-5 text-white">
                 TSh {urlMinPrice.toLocaleString()} - {urlMaxPrice.toLocaleString()}
               </span>
             </div>
             <div className="flex justify-between items-center gap-4">
               <input 
-                className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-center text-sm text-zinc-600 focus:ring-2 focus:ring-[#6b3e1e]/20 outline-none" 
+                className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-center text-sm text-zinc-600 focus:ring-2 focus:ring-[#c77e35]/20 outline-none" 
                 type="text" 
                 value={urlMinPrice}
                 onChange={(e) => updateParams({ minPrice: Number(e.target.value) || 0 })}
               />
               <span className="text-zinc-400">-</span>
               <input 
-                className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-center text-sm text-zinc-600 focus:ring-2 focus:ring-[#6b3e1e]/20 outline-none" 
+                className="w-full rounded-lg border border-zinc-200 px-3 py-2 text-center text-sm text-zinc-600 focus:ring-2 focus:ring-[#c77e35]/20 outline-none" 
                 type="text" 
                 value={urlMaxPrice}
                 onChange={(e) => updateParams({ maxPrice: Number(e.target.value) || 500000 })}
@@ -306,7 +306,7 @@ function ProductFiltersInner({ categories, brands }: ProductFiltersProps) {
                 max={500000}
                 step={1000}
                 onValueChange={([min, max]) => updateParams({ minPrice: min, maxPrice: max })}
-                className="text-[#6b3e1e]"
+                className="text-[#c77e35]"
               />
             </div>
           </div>
@@ -315,7 +315,7 @@ function ProductFiltersInner({ categories, brands }: ProductFiltersProps) {
           {hasActiveFilters && (
             <Button
               onClick={handleClearFilters}
-              className="w-full bg-[#6b3e1e] hover:bg-black text-white rounded-xl py-6 flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-[10px] transition-all"
+              className="w-full bg-[#c77e35] hover:bg-black text-white rounded-xl py-6 flex items-center justify-center gap-2 font-bold uppercase tracking-widest text-[10px] transition-all"
             >
               <RotateCcw className="h-3 w-3" />
               Reset All Filters

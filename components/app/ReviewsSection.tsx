@@ -23,7 +23,7 @@ const REVIEWS = [
     text: "I’m honestly impressed! Stephan’s Pet Store is one of the most organized, clean, and pet-friendly spots I’ve seen in Dar. You can tell there’s real love and effort behind everything from how the space is set up to how they treat the pets and customers. If you’ve got a furry friend, this is the place to visit! 🐶🐾❤️ Rai my fur baby gets treated like a princess here.",
     avatar: null,
     initial: "T",
-    initialBg: "bg-[#A66C44]",
+    initialBg: "bg-[#c77e35]",
     gallery: ["/tina-dog.webp"]
   },
   {
@@ -69,7 +69,7 @@ export function ReviewsSection() {
   return (
     <section className="py-12 md:py-16 bg-[#F9F7F5] overflow-hidden">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h3 className="text-[11px] font-bold tracking-[0.2em] text-[#A66C44] uppercase mb-10 text-center">
+        <h3 className="text-[11px] font-bold tracking-[0.2em] text-[#c77e35] uppercase mb-10 text-center">
           LOVED BY PET PARENTS
         </h3>
         

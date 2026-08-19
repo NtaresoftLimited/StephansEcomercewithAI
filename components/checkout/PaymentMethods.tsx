@@ -72,8 +72,8 @@ export function PaymentMethods({ onSelect, selectedMethodId }: PaymentMethodsPro
                         className={cn(
                             "relative flex items-center gap-4 p-4 rounded-xl border-2 transition-all text-left group hover:scale-[1.02]",
                             selectedMethodId === method.id
-                                ? "border-[#6b3e1e] bg-[#6b3e1e]/5 shadow-sm"
-                                : "border-zinc-100 bg-white hover:border-[#6b3e1e]/30 hover:bg-zinc-50"
+                                ? "border-[#c77e35] bg-[#c77e35]/5 shadow-sm"
+                                : "border-zinc-100 bg-white hover:border-[#c77e35]/30 hover:bg-zinc-50"
                         )}
                     >
                         <div className="h-12 w-12 rounded-lg bg-white border border-zinc-100 flex items-center justify-center shrink-0 overflow-hidden relative">
@@ -97,14 +97,14 @@ export function PaymentMethods({ onSelect, selectedMethodId }: PaymentMethodsPro
                         <div className="flex-1">
                             <span className={cn(
                                 "block font-bold text-sm transition-colors",
-                                selectedMethodId === method.id ? "text-[#6b3e1e]" : "text-zinc-700 group-hover:text-zinc-900"
+                                selectedMethodId === method.id ? "text-[#c77e35]" : "text-zinc-700 group-hover:text-zinc-900"
                             )}>
                                 {method.name}
                             </span>
                         </div>
 
                         {selectedMethodId === method.id && (
-                            <div className="absolute top-3 right-3 h-5 w-5 rounded-full bg-[#6b3e1e] flex items-center justify-center shadow-sm animate-in zoom-in-50">
+                            <div className="absolute top-3 right-3 h-5 w-5 rounded-full bg-[#c77e35] flex items-center justify-center shadow-sm animate-in zoom-in-50">
                                 <Check className="h-3 w-3 text-white" strokeWidth={3} />
                             </div>
                         )}

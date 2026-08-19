@@ -31,7 +31,7 @@ export default function AboutPage() {
         <div className="min-h-screen bg-[#fbf8f5]">
             {/* Hero Section */}
             <section className="mx-auto max-w-4xl px-4 pt-24 pb-20 sm:px-6 lg:px-8 text-center">
-                <h3 className="text-[11px] font-bold tracking-[0.2em] text-[#A66C44] uppercase mb-6">
+                <h3 className="text-[11px] font-bold tracking-[0.2em] text-[#c77e35] uppercase mb-6">
                     ABOUT STEPHAN'S
                 </h3>
                 <h1 className="text-5xl md:text-7xl font-serif text-[#222222] leading-tight mb-8">
@@ -41,7 +41,7 @@ export default function AboutPage() {
                 </h1>
                 
                 <div className="flex justify-center mb-8">
-                    <div className="w-12 h-[1px] bg-[#A66C44]"></div>
+                    <div className="w-12 h-[1px] bg-[#c77e35]"></div>
                 </div>
                 
                 <p className="text-lg md:text-xl text-[#222222] max-w-2xl mx-auto font-medium">
@@ -66,14 +66,14 @@ export default function AboutPage() {
                             />
                         </div>
                         <div className="order-1 md:order-2 flex flex-col items-start justify-center">
-                            <h3 className="text-sm font-medium text-[#A66C44] mb-3">
+                            <h3 className="text-sm font-medium text-[#c77e35] mb-3">
                                 Where it all began.
                             </h3>
                             <h2 className="text-4xl md:text-5xl font-serif text-[#222222] mb-6">
                                 Meet Stephan.
                             </h2>
                             
-                            <div className="w-12 h-[1px] bg-[#A66C44] mb-8"></div>
+                            <div className="w-12 h-[1px] bg-[#c77e35] mb-8"></div>
                             
                             <div className="text-[#222222] space-y-4 text-lg">
                                 <p>Before the store, there was Stephan.</p>
@@ -91,13 +91,13 @@ export default function AboutPage() {
                 </h2>
                 
                 <div className="flex justify-center mb-16">
-                    <div className="w-12 h-[1px] bg-[#A66C44]"></div>
+                    <div className="w-12 h-[1px] bg-[#c77e35]"></div>
                 </div>
                 
                 <div className="grid md:grid-cols-3 gap-12 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-[#e5e0db]">
                     {/* Value 1 */}
                     <div className="flex flex-col items-center pt-8 md:pt-0">
-                        <div className="mb-6 text-[#A66C44]">
+                        <div className="mb-6 text-[#c77e35]">
                             <ShoppingBag strokeWidth={1} className="w-12 h-12" />
                         </div>
                         <h3 className="text-lg font-bold text-[#222222] mb-3">
@@ -110,7 +110,7 @@ export default function AboutPage() {
 
                     {/* Value 2 */}
                     <div className="flex flex-col items-center pt-12 md:pt-0">
-                        <div className="mb-6 text-[#A66C44] flex items-center justify-center h-12 w-12">
+                        <div className="mb-6 text-[#c77e35] flex items-center justify-center h-12 w-12">
                             <Image 
                                 src="/about/grooming-scissors.png" 
                                 alt="Gentle Care" 
@@ -129,7 +129,7 @@ export default function AboutPage() {
 
                     {/* Value 3 */}
                     <div className="flex flex-col items-center pt-12 md:pt-0">
-                        <div className="mb-6 text-[#A66C44]">
+                        <div className="mb-6 text-[#c77e35]">
                             <Heart strokeWidth={1} className="w-12 h-12" />
                         </div>
                         <h3 className="text-lg font-bold text-[#222222] mb-3">
@@ -145,7 +145,7 @@ export default function AboutPage() {
             {/* Footer Hook */}
             <section className="bg-[#f2efe9] border-t border-[#e5e0db]">
                 <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 text-center flex flex-col items-center">
-                    <Heart strokeWidth={1.5} className="w-8 h-8 text-[#A66C44] mb-4" />
+                    <Heart strokeWidth={1.5} className="w-8 h-8 text-[#c77e35] mb-4" />
                     <h2 className="text-3xl md:text-4xl font-serif text-[#222222]">
                         From our pets to yours.
                     </h2>

@@ -42,7 +42,7 @@ export function GroomingSection({ images }: GroomingSectionProps) {
 
             <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 md:py-20">
                 <div className="max-w-xl">
-                    <h3 className="text-[12px] font-bold tracking-[0.2em] text-[#A66C44] uppercase mb-4">
+                    <h3 className="text-[12px] font-bold tracking-[0.2em] text-[#c77e35] uppercase mb-4">
                         GROOMING STUDIO
                     </h3>
                     <h2 className="text-4xl md:text-5xl lg:text-[56px] font-serif text-[#222222] mb-6 leading-tight">

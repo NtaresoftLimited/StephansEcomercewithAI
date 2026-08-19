@@ -39,7 +39,7 @@ export default function AllBrandsPage() {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif text-[#222] mb-6 tracking-tight">
             Trusted Brands
           </h1>
-          <div className="w-12 h-[1px] bg-[#A66C44] mx-auto mb-6"></div>
+          <div className="w-12 h-[1px] bg-[#c77e35] mx-auto mb-6"></div>
           <p className="text-base md:text-lg text-[#555] font-serif">
             Exceptional brands. Thoughtfully selected.
           </p>
@@ -66,11 +66,11 @@ export default function AllBrandsPage() {
               </div>
               
               {/* Explore Link */}
-              <div className="flex items-center gap-3 text-[13px] font-bold text-[#222] transition-colors group-hover:text-[#A66C44] tracking-wide">
-                <span className="border-b-[2px] border-[#EAE3D9] group-hover:border-[#A66C44] pb-0.5 transition-colors">
+              <div className="flex items-center gap-3 text-[13px] font-bold text-[#222] transition-colors group-hover:text-[#c77e35] tracking-wide">
+                <span className="border-b-[2px] border-[#EAE3D9] group-hover:border-[#c77e35] pb-0.5 transition-colors">
                   Explore
                 </span>
-                <ArrowRight className="w-4 h-4 text-[#888] group-hover:text-[#A66C44] transition-colors -ml-1" />
+                <ArrowRight className="w-4 h-4 text-[#888] group-hover:text-[#c77e35] transition-colors -ml-1" />
               </div>
             </Link>
           ))}

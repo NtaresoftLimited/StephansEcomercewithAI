@@ -14,7 +14,7 @@ export const DOG_PACKAGES = {
             "Brush out",
             "Sanitary trim (if needed)",
         ],
-        color: "from-[#8b5a2b] to-[#6b3e1e]",
+        color: "from-[#c77e35] to-[#c77e35]",
     },
     premium: {
         name: "Premium Package",
@@ -32,7 +32,7 @@ export const DOG_PACKAGES = {
             "Nail Trim",
             "Teeth Brushing",
         ],
-        color: "from-[#6b3e1e] to-[#4a2c14]",
+        color: "from-[#c77e35] to-[#c77e35]",
         popular: true,
     },
     super_premium: {
@@ -55,7 +55,7 @@ export const DOG_PACKAGES = {
             "Paw Balm Treatment",
             "Finishing Touches",
         ],
-        color: "from-[#4a2c14] to-[#2d1a0d]",
+        color: "from-[#c77e35] to-[#2d1a0d]",
     },
 };
 
@@ -73,7 +73,7 @@ export const CAT_PACKAGES = {
             "Brush out",
             "Sanitary trim (if needed)",
         ],
-        color: "from-[#8b5a2b] to-[#6b3e1e]",
+        color: "from-[#c77e35] to-[#c77e35]",
     },
     premium: {
         name: "Premium Package",
@@ -89,7 +89,7 @@ export const CAT_PACKAGES = {
             "Nail Trim",
             "Teeth Brushing",
         ],
-        color: "from-[#6b3e1e] to-[#4a2c14]",
+        color: "from-[#c77e35] to-[#c77e35]",
         popular: true,
     },
     super_premium: {
@@ -110,7 +110,7 @@ export const CAT_PACKAGES = {
             "Paw Balm Treatment",
             "Finishing Touches",
         ],
-        color: "from-[#4a2c14] to-[#2d1a0d]",
+        color: "from-[#c77e35] to-[#2d1a0d]",
     },
 };
 
@@ -134,7 +134,7 @@ export const SMALL_ANIMAL_PACKAGES = {
             "Paw Balm Treatment",
             "Finishing Touches",
         ],
-        color: "from-[#4a2c14] to-[#2d1a0d]",
+        color: "from-[#c77e35] to-[#2d1a0d]",
     },
 };
 

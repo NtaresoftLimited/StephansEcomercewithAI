@@ -55,7 +55,7 @@ export function BrandHero() {
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white uppercase">
             Our Brands
           </h1>
-          <div className="w-24 h-1.5 bg-[#6b3e1e] mx-auto rounded-full" />
+          <div className="w-24 h-1.5 bg-[#c77e35] mx-auto rounded-full" />
           <p className="text-lg md:text-xl text-zinc-200 font-medium">
             Discover premium products from our trusted partners.
           </p>

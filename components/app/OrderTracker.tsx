@@ -49,7 +49,7 @@ export function OrderTracker({ status, estimatedDelivery }: OrderTrackerProps) {
 
                 {/* Active Progress Bar */}
                 <div
-                    className="absolute top-5 left-0 h-1 bg-[#6b3e1e] rounded-full transition-all duration-1000 ease-out"
+                    className="absolute top-5 left-0 h-1 bg-[#c77e35] rounded-full transition-all duration-1000 ease-out"
                     style={{ width: `${(activeIndex / (STEPS.length - 1)) * 100}%` }}
                 />
 
@@ -65,7 +65,7 @@ export function OrderTracker({ status, estimatedDelivery }: OrderTrackerProps) {
                                     className={cn(
                                         "w-10 h-10 rounded-full flex items-center justify-center border-4 transition-all duration-500 delay-100",
                                         isCompleted
-                                            ? "bg-[#6b3e1e] border-white ring-2 ring-[#6b3e1e] text-white"
+                                            ? "bg-[#c77e35] border-white ring-2 ring-[#c77e35] text-white"
                                             : "bg-white border-zinc-100 ring-2 ring-zinc-100 text-zinc-300",
                                         isCurrent && "scale-110 shadow-lg"
                                     )}
@@ -75,7 +75,7 @@ export function OrderTracker({ status, estimatedDelivery }: OrderTrackerProps) {
                                 <span
                                     className={cn(
                                         "mt-3 text-xs font-bold uppercase tracking-wider transition-colors duration-300 text-center",
-                                        isCompleted ? "text-[#6b3e1e]" : "text-zinc-300",
+                                        isCompleted ? "text-[#c77e35]" : "text-zinc-300",
                                         isCurrent && "scale-105"
                                     )}
                                 >
