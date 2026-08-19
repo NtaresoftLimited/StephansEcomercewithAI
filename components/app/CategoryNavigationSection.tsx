@@ -20,7 +20,7 @@ export const CategoryNavigationSection = () => {
           
           {/* FOOD */}
           <Link href="/shop?category=food" className="group flex min-h-40 flex-col items-center justify-center px-3 py-6 text-center transition-colors hover:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8b5e3c] focus-visible:ring-inset sm:min-h-44 sm:px-6 border-r border-[#e8e0d9] border-b lg:border-b-0">
-            <span className="relative mb-3 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 text-[#4E2A15]">
+            <span className="relative mb-3 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 text-[#c77e35]">
               <FoodBowlIcon className="w-12 h-12" />
             </span>
             <span className="text-[11px] font-bold uppercase tracking-[0.13em] text-[#28231f] sm:text-xs">
@@ -34,7 +34,7 @@ export const CategoryNavigationSection = () => {
 
           {/* TREATS */}
           <Link href="/shop?category=treats" className="group flex min-h-40 flex-col items-center justify-center px-3 py-6 text-center transition-colors hover:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8b5e3c] focus-visible:ring-inset sm:min-h-44 sm:px-6 border-b lg:border-b-0 lg:border-r lg:border-[#e8e0d9]">
-            <span className="relative mb-3 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 text-[#4E2A15]">
+            <span className="relative mb-3 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 text-[#c77e35]">
               <BoneIcon className="w-12 h-12" />
             </span>
             <span className="text-[11px] font-bold uppercase tracking-[0.13em] text-[#28231f] sm:text-xs">
@@ -48,7 +48,7 @@ export const CategoryNavigationSection = () => {
 
           {/* TOYS */}
           <Link href="/shop?category=toys" className="group flex min-h-40 flex-col items-center justify-center px-3 py-6 text-center transition-colors hover:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8b5e3c] focus-visible:ring-inset sm:min-h-44 sm:px-6 border-r border-[#e8e0d9] border-b lg:border-b-0">
-            <span className="relative mb-3 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 text-[#4E2A15]">
+            <span className="relative mb-3 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 text-[#c77e35]">
               <TeddyBearIcon className="w-12 h-12" />
             </span>
             <span className="text-[11px] font-bold uppercase tracking-[0.13em] text-[#28231f] sm:text-xs">
@@ -62,7 +62,7 @@ export const CategoryNavigationSection = () => {
 
           {/* ACCESSORIES */}
           <Link href="/shop?category=accessories" className="group flex min-h-40 flex-col items-center justify-center px-3 py-6 text-center transition-colors hover:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8b5e3c] focus-visible:ring-inset sm:min-h-44 sm:px-6 border-b lg:border-b-0 lg:border-r lg:border-[#e8e0d9]">
-            <span className="relative mb-3 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 text-[#4E2A15]">
+            <span className="relative mb-3 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 text-[#c77e35]">
               <CollarIcon className="w-12 h-12" />
             </span>
             <span className="text-[11px] font-bold uppercase tracking-[0.13em] text-[#28231f] sm:text-xs">
@@ -76,7 +76,7 @@ export const CategoryNavigationSection = () => {
 
           {/* GROOMING */}
           <Link href="/grooming" className="group flex min-h-40 flex-col items-center justify-center px-3 py-6 text-center transition-colors hover:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8b5e3c] focus-visible:ring-inset sm:min-h-44 sm:px-6 col-span-2 lg:col-span-1">
-            <span className="relative mb-3 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 text-[#4E2A15]">
+            <span className="relative mb-3 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 text-[#c77e35]">
               <ScissorsBubblesIcon className="w-12 h-12" />
             </span>
             <span className="text-[11px] font-bold uppercase tracking-[0.13em] text-[#28231f] sm:text-xs">

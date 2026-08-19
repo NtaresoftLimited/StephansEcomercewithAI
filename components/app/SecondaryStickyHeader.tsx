@@ -192,12 +192,12 @@ function SecondaryStickyHeaderInner({
           : "-top-full -translate-y-[150%] opacity-0 pointer-events-none",
       )}
     >
-            {/* 2. MAIN BRAND HEADER (Redesigned as per FCB) */}
+                  {/* 2. MAIN BRAND HEADER (Redesigned as per FCB) */}
       <div className="border-b border-zinc-100 dark:border-zinc-800 py-3 px-4 sm:px-6 lg:px-8 bg-white dark:bg-zinc-950">
-        <div className="mx-auto max-w-7xl flex items-center justify-between h-14 sm:h-16">
+        <div className="mx-auto max-w-7xl flex items-center justify-between h-14 sm:h-16 relative">
           
           {/* LEFT: Menu (Mobile) & Search */}
-          <div className="flex items-center gap-4 sm:gap-6">
+          <div className="flex-1 flex items-center justify-start gap-4 sm:gap-6">
             <div className="lg:hidden">
               <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
                 <SheetTrigger asChild>
@@ -244,8 +244,23 @@ function SecondaryStickyHeaderInner({
             </button>
           </div>
 
-          {/* RIGHT: User, Bag, Logo */}
-          <div className="flex items-center gap-4 sm:gap-6">
+          {/* CENTER: Logo */}
+          <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
+            <Link href="/" className="flex items-center gap-2 group">
+              <div className="relative h-12 w-[180px] sm:h-14 sm:w-[200px] flex items-center justify-center">
+                <Image
+                  src="/logo.png"
+                  alt="Stephan's Pet Store Logo"
+                  fill
+                  className="object-contain object-center"
+                  priority
+                />
+              </div>
+            </Link>
+          </div>
+
+          {/* RIGHT: User & Bag */}
+          <div className="flex-1 flex items-center justify-end gap-4 sm:gap-6">
             <Link
               href="/login"
               className="hidden sm:flex items-center justify-center group p-2"
@@ -278,27 +293,6 @@ function SecondaryStickyHeaderInner({
                 </span>
               )}
             </Link>
-
-            <div className="pl-4 sm:pl-6 border-l border-zinc-200 dark:border-zinc-800 ml-2">
-              <Link href="/" className="flex items-center gap-2 group">
-                <div className="relative h-10 w-10 sm:h-12 sm:w-12 overflow-hidden">
-                  <Image
-                    src="/favicon.png"
-                    alt="Stephan's Pet Store Logo"
-                    fill
-                    className="object-contain object-center"
-                  />
-                </div>
-                <div className="hidden md:flex flex-col items-start">
-                  <span className="font-serif text-lg font-black tracking-tight text-zinc-900 leading-none">
-                    Stephan's
-                  </span>
-                  <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#c77e35] leading-none mt-1">
-                    Pet Store
-                  </span>
-                </div>
-              </Link>
-            </div>
           </div>
         </div>
       </div>
