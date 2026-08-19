@@ -5,18 +5,23 @@ import React from "react";
 const REVIEWS = [
     {
         id: 1,
-        text: "They always know exactly what my cat needs.",
-        name: "Hamza A."
+        text: "Really friendly and helpful people. And a really big and good organized store for all pet-owners, they have a big sortiment :)",
+        name: "Jennifer Pannagl"
     },
     {
         id: 2,
-        text: "The kind of place you trust with them.",
-        name: "Neema K."
+        text: "Best pet store in Dar! All tools, toys and shelters, many ideas (from their groceries) of how to spoin and/or assist the little companies at home. When I was there with my 3 y/o, the personnel was patient and very helpful, but also and mostly knowledgable. Will definitely return!",
+        name: "Laura Sheïlla INANGOMA"
     },
     {
         id: 3,
-        text: "Beautiful products and genuinely thoughtful service.",
-        name: "Asha M."
+        text: "Amazing place with great customer service! My cats are loving their new supplies.",
+        name: "Mark Hoffmann"
+    },
+    {
+        id: 4,
+        text: "East Africa's Number One Pet Store, A Whole New Different Shopping Experience",
+        name: "Manje Riziq"
     }
 ];
 
@@ -33,17 +38,16 @@ export function GroomingTestimonialsSection() {
                     </h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-16 relative">
-                    {/* Vertical dividers for desktop */}
-                    <div className="hidden md:block absolute top-0 bottom-0 left-[33%] w-px bg-[#E8E0D8]"></div>
-                    <div className="hidden md:block absolute top-0 bottom-0 left-[66%] w-px bg-[#E8E0D8]"></div>
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-y-16 gap-x-8 lg:gap-x-16 relative">
+                    {/* Vertical divider for desktop */}
+                    <div className="hidden md:block absolute top-0 bottom-0 left-[50%] w-px bg-[#E8E0D8]"></div>
 
-                    {REVIEWS.map((review) => (
+                    {REVIEWS.map((review, index) => (
                         <div key={review.id} className="flex flex-col text-center md:text-left px-4 md:px-8">
-                            <div className="flex justify-center md:justify-start gap-1 mb-6 text-[#c77e35]">
+                                                        <div className="flex justify-center md:justify-start gap-1 mb-6 text-[#c77e35]">
                                 {[...Array(5)].map((_, i) => (
-                                    <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                    <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                                     </svg>
                                 ))}
                             </div>
