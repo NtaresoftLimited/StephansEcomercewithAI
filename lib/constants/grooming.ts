@@ -119,7 +119,7 @@ export const SMALL_ANIMAL_PACKAGES = {
         name: "Signature Package",
         prices: {
             hamster: 100000,
-            rabbit: 100000,
+            rabbit: 150000,
             guinea_pig: 100000,
         },
         services: [
@@ -150,7 +150,7 @@ export const PRICES: Record<string, Record<string, Record<string, number>>> = {
         super_premium: { kitten: 75000, adult: 85000 },
     },
     small_animal: {
-        super_premium: { hamster: 100000, rabbit: 100000, guinea_pig: 100000 },
+        super_premium: { hamster: 100000, rabbit: 150000, guinea_pig: 100000 },
     },
 };
 
