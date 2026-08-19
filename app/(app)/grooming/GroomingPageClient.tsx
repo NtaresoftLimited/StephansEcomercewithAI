@@ -469,7 +469,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                             <div className="flex flex-col">
                                 <span className="text-xs font-bold tracking-widest text-[#c77e35] uppercase mb-1">Estimated Total</span>
                                 <span className="text-sm text-[#666]">
-                                    {formData.petType === 'dog' ? 'Dog' : 'Cat'} • {SIZE_LABELS[formData.breedSize] || formData.breedSize} • {formData.package === 'standard' ? 'Essential' : formData.package === 'premium' ? 'Premium' : 'Signature'} Package
+                                    {formData.petType === 'dog' ? 'Dog' : formData.petType === 'cat' ? 'Cat' : 'Small Animal'} • {SIZE_LABELS[formData.breedSize] || formData.breedSize} • {formData.package === 'standard' ? 'Essential' : formData.package === 'premium' ? 'Premium' : 'Signature'} Package
                                 </span>
                             </div>
                             <span className="text-3xl md:text-4xl font-serif text-[#222]">
