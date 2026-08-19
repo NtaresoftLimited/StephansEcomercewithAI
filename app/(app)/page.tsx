@@ -18,7 +18,7 @@ import { AutoRotatingProductGrid } from "@/components/app/AutoRotatingProductGri
 import { ReviewsSection } from "@/components/app/ReviewsSection";
 import { BrandsSection } from "@/components/app/BrandsSection";
 import { CategoryNavigationSection } from "@/components/app/CategoryNavigationSection";
-import { GroomingTestimonialsSection } from "@/components/app/grooming/GroomingTestimonialsSection";
+
 import { NewsletterSection } from "@/components/app/grooming/NewsletterSection";
 
 export const revalidate = 3600;
@@ -187,7 +187,7 @@ export default async function HomePage({ searchParams }: PageProps) {
         <GroomingSection images={groomingImageUrls} />
       </Suspense>
 
-      <GroomingTestimonialsSection />
+      <ReviewsSection />
       <NewsletterSection />
     </div>
   );
