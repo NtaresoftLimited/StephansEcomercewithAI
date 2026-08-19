@@ -383,6 +383,10 @@ export const FILTER_PRODUCTS_BY_RELEVANCE_QUERY = defineQuery(
   `*[${PRODUCT_FILTER_CONDITIONS}] | ${RELEVANCE_SCORE} | order(_score desc, name asc) [0...24] ${FILTERED_PRODUCT_PROJECTION}`
 );
 
+export const NEW_ARRIVALS_QUERY = defineQuery(
+  `*[${PRODUCT_FILTER_CONDITIONS}] | order(_createdAt desc) [0...50] ${FILTERED_PRODUCT_PROJECTION}`
+);
+
 // ============================================
 // Offers: Featured or Discounted Products
 // ============================================

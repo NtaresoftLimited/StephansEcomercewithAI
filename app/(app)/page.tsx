@@ -6,6 +6,7 @@ import {
   FILTER_PRODUCTS_BY_PRICE_ASC_QUERY,
   FILTER_PRODUCTS_BY_PRICE_DESC_QUERY,
   FILTER_PRODUCTS_BY_RELEVANCE_QUERY,
+  NEW_ARRIVALS_QUERY,
 } from "@/lib/sanity/queries/products";
 import { ALL_CATEGORIES_QUERY } from "@/lib/sanity/queries/categories";
 import { HERO_PET_IMAGES_QUERY } from "@/lib/sanity/queries/heroImages";
@@ -47,8 +48,13 @@ export default async function HomePage({ searchParams }: PageProps) {
   const sort = params.sort ?? "name";
   const inStock = params.inStock === "true";
 
+  const isDefaultView = !searchQuery && !categorySlug && !color && !material && !minPrice && !maxPrice;
+
   // Select query based on sort parameter
   const getQuery = () => {
+    if (isDefaultView) {
+      return NEW_ARRIVALS_QUERY;
+    }
     // If searching and sort is relevance, use relevance query
     if (searchQuery && sort === "relevance") {
       return FILTER_PRODUCTS_BY_RELEVANCE_QUERY;
@@ -84,7 +90,6 @@ export default async function HomePage({ searchParams }: PageProps) {
   // If no search params are provided, it means we are showing default "New Arrivals"
   // The user requested that these products should not be from the same brand or categories.
   // We will filter the products to ensure diversity.
-  const isDefaultView = !searchQuery && !categorySlug && !color && !material && !minPrice && !maxPrice;
   if (isDefaultView && products.length > 0) {
     const diverseProducts: any[] = [];
     const seenBrands = new Set<string>();
