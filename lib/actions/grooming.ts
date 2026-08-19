@@ -8,7 +8,7 @@ import { PRICES, VALID_TIMES } from "@/lib/constants/grooming";
 import { formatPrice } from "@/lib/utils";
 
 const bookingSchema = z.object({
-    petType: z.enum(["dog", "cat"]),
+    petType: z.enum(["dog", "cat", "small_animal"]),
     petName: z.string().min(1, "Pet name is required"),
     breedSize: z.string().min(1, "Breed size is required"),
     package: z.string().min(1, "Package is required"),

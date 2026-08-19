@@ -28,10 +28,10 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
     const { data: session, status: authStatus } = useSessionSafe();
     const user = session?.user;
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [activeTab, setActiveTab] = useState<"dog" | "cat">("dog");
+    const [activeTab, setActiveTab] = useState<"dog" | "cat" | "small_animal">("dog");
     
     const [formData, setFormData] = useState({
-        petType: "dog" as "dog" | "cat",
+        petType: "dog" as "dog" | "cat" | "small_animal",
         petName: "",
         breedSize: "",
         package: "",
@@ -114,7 +114,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                    `*Customer Name:* ${formData.customerName}\n` +
                    `*Phone Number:* ${formData.customerPhone}\n\n` +
                    `*PET DETAILS*\n` +
-                   `*Pet Name:* ${formData.petName} (${formData.petType === 'dog' ? 'Dog' : 'Cat'})\n` +
+                   `*Pet Name:* ${formData.petName} (${formData.petType === 'dog' ? 'Dog' : formData.petType === 'cat' ? 'Cat' : 'Small Animal'})\n` +
                    `*Breed Size:* ${sizeLabel}\n\n` +
                    `*SERVICE DETAILS*\n` +
                    `*Selected Package:* ${pkgName}\n` +
@@ -210,13 +210,13 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                 </h1>
 
                 {/* Tabs */}
-                <div className="flex justify-center items-center gap-8 md:gap-16 border-b border-[#E8E0D8] max-w-md mx-auto pb-4">
+                <div className="flex flex-wrap justify-center items-center gap-6 md:gap-12 border-b border-[#E8E0D8] max-w-3xl mx-auto pb-4">
                     <button 
                         onClick={() => { setActiveTab("dog"); setFormData(f => ({ ...f, petType: "dog" })) }}
-                        className={`flex items-center gap-3 text-xl font-medium transition-colors relative ${activeTab === 'dog' ? 'text-[#222]' : 'text-[#888]'}`}
+                        className={`flex items-center gap-3 text-lg md:text-xl font-medium transition-colors relative ${activeTab === 'dog' ? 'text-[#222]' : 'text-[#888]'}`}
                     >
                         <div 
-                            className={`w-10 h-10 bg-[#6b3e1e] transition-opacity ${activeTab === 'dog' ? 'opacity-100' : 'opacity-40'}`}
+                            className={`w-8 h-8 md:w-10 md:h-10 bg-[#6b3e1e] transition-opacity ${activeTab === 'dog' ? 'opacity-100' : 'opacity-40'}`}
                             style={{ 
                                 maskImage: 'url(/minimalist-dog.png)', maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
                                 WebkitMaskImage: 'url(/minimalist-dog.png)', WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center' 
@@ -225,13 +225,13 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                         Dogs
                         {activeTab === 'dog' && <div className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-[#6b3e1e]"></div>}
                     </button>
-                    <div className="w-px h-8 bg-[#E8E0D8]"></div>
+                    <div className="hidden sm:block w-px h-8 bg-[#E8E0D8]"></div>
                     <button 
                         onClick={() => { setActiveTab("cat"); setFormData(f => ({ ...f, petType: "cat" })) }}
-                        className={`flex items-center gap-3 text-xl font-medium transition-colors relative ${activeTab === 'cat' ? 'text-[#222]' : 'text-[#888]'}`}
+                        className={`flex items-center gap-3 text-lg md:text-xl font-medium transition-colors relative ${activeTab === 'cat' ? 'text-[#222]' : 'text-[#888]'}`}
                     >
                         <div 
-                            className={`w-10 h-10 bg-[#6b3e1e] transition-opacity ${activeTab === 'cat' ? 'opacity-100' : 'opacity-40'}`}
+                            className={`w-8 h-8 md:w-10 md:h-10 bg-[#6b3e1e] transition-opacity ${activeTab === 'cat' ? 'opacity-100' : 'opacity-40'}`}
                             style={{ 
                                 maskImage: 'url(/minimalist-cat.png)', maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
                                 WebkitMaskImage: 'url(/minimalist-cat.png)', WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center' 
@@ -240,6 +240,21 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                         Cats
                         {activeTab === 'cat' && <div className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-[#6b3e1e]"></div>}
                     </button>
+                    <div className="hidden sm:block w-px h-8 bg-[#E8E0D8]"></div>
+                    <button 
+                        onClick={() => { setActiveTab("small_animal"); setFormData(f => ({ ...f, petType: "small_animal" })) }}
+                        className={`flex items-center gap-3 text-lg md:text-xl font-medium transition-colors relative ${activeTab === 'small_animal' ? 'text-[#222]' : 'text-[#888]'}`}
+                    >
+                        <div 
+                            className={`w-8 h-8 md:w-10 md:h-10 bg-[#6b3e1e] transition-opacity ${activeTab === 'small_animal' ? 'opacity-100' : 'opacity-40'}`}
+                            style={{ 
+                                maskImage: 'url(/minimalist-rabbit.png)', maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center',
+                                WebkitMaskImage: 'url(/minimalist-rabbit.png)', WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center' 
+                            }}
+                        />
+                        Small Animals
+                        {activeTab === 'small_animal' && <div className="absolute -bottom-[17px] left-0 right-0 h-0.5 bg-[#6b3e1e]"></div>}
+                    </button>
                 </div>
             </div>
 
@@ -247,10 +262,10 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
             <div className="max-w-6xl mx-auto px-4 py-8">
                 <p className="text-[10px] font-bold tracking-[0.15em] text-[#6b3e1e] uppercase text-center mb-10">Choose your grooming experience</p>
                 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {packages.map((pkg) => (
+                <div className={`grid grid-cols-1 ${activeTab === 'small_animal' ? 'md:grid-cols-1 max-w-sm mx-auto' : 'md:grid-cols-3'} gap-6`}>
+                    {packages.filter(pkg => activeTab === 'small_animal' ? pkg.key === 'super_premium' : true).map((pkg) => (
                         <div key={pkg.key} className={`relative border border-[#E8E0D8] rounded-2xl p-8 md:p-10 text-center bg-[#FDFBF9] hover:shadow-lg transition-shadow duration-300 flex flex-col items-center justify-between`}>
-                            {pkg.popular && (
+                            {pkg.popular && activeTab !== 'small_animal' && (
                                 <div className="absolute top-4 right-4 bg-[#6b3e1e] text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full uppercase">
                                     Most Popular
                                 </div>
@@ -323,6 +338,15 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                                         <span className="text-[15px]">Cat</span>
                                     </div>
                                 </SelectItem>
+                                <SelectItem value="small_animal" className="cursor-pointer focus:bg-[#F4F0EB]">
+                                    <div className="flex items-center gap-3">
+                                        <div 
+                                            className="w-5 h-5 bg-[#6b3e1e]"
+                                            style={{ maskImage: 'url(/minimalist-rabbit.png)', maskSize: 'contain', maskRepeat: 'no-repeat', maskPosition: 'center', WebkitMaskImage: 'url(/minimalist-rabbit.png)', WebkitMaskSize: 'contain', WebkitMaskRepeat: 'no-repeat', WebkitMaskPosition: 'center' }}
+                                        />
+                                        <span className="text-[15px]">Small Animal</span>
+                                    </div>
+                                </SelectItem>
                             </SelectContent>
                         </Select>
                         
@@ -333,7 +357,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                             className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#6b3e1e] appearance-none"
                         >
                             <option value="" disabled>Breed Size</option>
-                            {BREED_SIZES[formData.petType].map(size => (
+                            {BREED_SIZES[formData.petType]?.map(size => (
                                 <option key={size.value} value={size.value}>{size.label}</option>
                             ))}
                         </select>
@@ -345,9 +369,9 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                             className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#6b3e1e] appearance-none"
                         >
                             <option value="" disabled>Service Package</option>
-                            <option value="standard">Essential</option>
-                            <option value="premium">Premium</option>
-                            <option value="super_premium">Signature</option>
+                            {packages.filter(pkg => formData.petType === 'small_animal' ? pkg.key === 'super_premium' : true).map(pkg => (
+                                <option key={pkg.key} value={pkg.key}>{pkg.name}</option>
+                            ))}
                         </select>
 
                         <div className="relative">
