@@ -281,20 +281,6 @@ function SecondaryStickyHeaderInner({
             </Sheet>
           </div>
 
-          {/* Logo */}
-          <Link
-            href="/"
-            className="shrink-0 flex items-center"
-            aria-label="Stephan's Pet Store Home"
-          >
-            <Image
-              src="/logo.png"
-              alt="Stephan's Pet Store"
-              width={140}
-              height={40}
-              className="h-9 w-auto dark:invert"
-            />
-          </Link>
 
           {/* Search Bar - Large as requested */}
           <div className="flex-1 max-w-2xl hidden md:flex items-center relative">
@@ -416,6 +402,21 @@ function SecondaryStickyHeaderInner({
               </span>
             </Link>
           </div>
+
+          {/* Logo */}
+          <Link
+            href="/"
+            className="shrink-0 flex items-center ml-auto"
+            aria-label="Stephan's Pet Store Home"
+          >
+            <Image
+              src="/logo.png"
+              alt="Stephan's Pet Store"
+              width={140}
+              height={40}
+              className="h-9 w-auto dark:invert"
+            />
+          </Link>
         </div>
       </div>
 
