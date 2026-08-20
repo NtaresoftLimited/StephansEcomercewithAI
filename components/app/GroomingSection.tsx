@@ -25,7 +25,7 @@ export function GroomingSection({ images }: GroomingSectionProps) {
     const bgImage = "/grooming-banner.png";
 
     return (
-        <section className="w-full bg-[#fdfbf9] relative overflow-hidden">
+        <section className="w-full bg-white relative overflow-hidden">
             {/* Background Image on the right */}
             <div className="absolute inset-0 z-0 flex justify-end">
                 <div className="relative w-full md:w-[65%] h-full">
@@ -36,7 +36,7 @@ export function GroomingSection({ images }: GroomingSectionProps) {
                         className="object-cover object-center"
                     />
                     {/* Gradient Fade from Left */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#fdfbf9] via-[#fdfbf9]/90 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent" />
                 </div>
             </div>
 
