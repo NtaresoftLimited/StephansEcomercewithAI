@@ -18,13 +18,13 @@ const petCategories = [
     name: "Small Animals",
     href: "/shop?category=small-pets",
     icon: "/icons/minimalist-rabbit.png",
-    imageClassName: "scale-[1.2]",
+    imageClassName: "scale-[1.4]",
   },
   {
     name: "Birds",
     href: "/shop?category=birds",
     icon: "/icons/minimalist-bird.png",
-    imageClassName: "scale-[1.2]",
+    imageClassName: "scale-[1.5]",
   },
 ] as const;
 
