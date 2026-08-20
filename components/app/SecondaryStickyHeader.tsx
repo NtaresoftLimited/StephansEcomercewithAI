@@ -192,106 +192,228 @@ function SecondaryStickyHeaderInner({
           : "-top-full -translate-y-[150%] opacity-0 pointer-events-none",
       )}
     >
-                  {/* 2. MAIN BRAND HEADER (Redesigned as per FCB) */}
-      <div className="border-b border-zinc-100 dark:border-zinc-800 py-3 px-4 sm:px-6 lg:px-8 bg-white dark:bg-zinc-950">
-        <div className="mx-auto max-w-7xl flex items-center justify-between h-14 sm:h-16 relative">
-          
-          {/* LEFT: Menu (Mobile) & Search */}
-          <div className="flex-1 flex items-center justify-start gap-4 sm:gap-6">
-            <div className="lg:hidden">
-              <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-                <SheetTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="group -ml-2 text-[#c77e35] hover:bg-transparent hover:text-[#c77e35]"
-                    aria-label="Toggle navigation menu"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="block h-6 w-6 bg-[#c77e35]"
-                      style={{
-                        maskImage: 'url(/icons/icon-hamburger.svg)',
-                        WebkitMaskImage: 'url(/icons/icon-hamburger.svg)',
-                        maskSize: 'contain',
-                        WebkitMaskSize: 'contain',
-                        maskRepeat: 'no-repeat',
-                        WebkitMaskRepeat: 'no-repeat',
-                        maskPosition: 'center',
-                        WebkitMaskPosition: 'center',
-                      }}
-                    />
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="left" className="w-[300px] p-0 sm:w-[350px]">
-                  <MobileNavMenu onClose={() => setIsMobileMenuOpen(false)} />
-                </SheetContent>
-              </Sheet>
-            </div>
-
-            <button
-              onClick={onSearchOpen}
-              className="flex items-center gap-2 group p-2 -ml-2 lg:ml-0"
-              aria-label="Open search"
+      {/* 1. TOP INFO BAR (Call Us, Email, Chat) */}
+      <div className="bg-[#c77e35] text-white py-1.5 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl flex items-center justify-between text-[11px] font-bold tracking-tight">
+          <div className="hidden md:block opacity-90">
+            Now Delivering Across Tanzania
+          </div>
+          <div className="flex items-center gap-5 ml-auto">
+            <a
+              href="tel:+255786627873"
+              className="flex items-center gap-1.5 hover:text-amber-200 transition-colors"
             >
-              <Image 
-                src="/icons/icon-search-glass.png" 
-                alt="Search" 
-                width={20} 
-                height={20} 
-                className="h-5 w-5 object-contain opacity-70 group-hover:opacity-100 transition-opacity" 
-              />
-            </button>
+              <Phone className="h-3 w-3" /> Call Us
+            </a>
+            <a
+              href="mailto:info@stephanspetstore.co.tz"
+              className="flex items-center gap-1.5 hover:text-amber-200 transition-colors"
+            >
+              <Mail className="h-3 w-3" /> Email Us
+            </a>
+            <a
+              href="https://wa.me/255769324445"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 hover:text-green-400 transition-colors"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="h-3.5 w-3.5 fill-current"
+              >
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.353-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.131.57-.074 1.758-.706 2.006-1.388.248-.682.248-1.265.173-1.388-.075-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              Chat With Us
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. MIDDLE BAR (Logo, Search, Actions) */}
+      <div className="border-b border-zinc-100 dark:border-zinc-800 py-3 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl flex items-center gap-4 sm:gap-6">
+          {/* Mobile Menu Trigger */}
+          <div className="lg:hidden">
+            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="group -ml-2 text-[#c77e35] hover:bg-transparent hover:text-[#c77e35]"
+                  aria-label="Toggle navigation menu"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="block h-8 w-8 bg-[#c77e35] opacity-70 transition-opacity group-hover:opacity-100"
+                    style={{
+                      WebkitMaskImage: "url('/line-3.svg')",
+                      maskImage: "url('/line-3.svg')",
+                      WebkitMaskPosition: "center",
+                      maskPosition: "center",
+                      WebkitMaskRepeat: "no-repeat",
+                      maskRepeat: "no-repeat",
+                      WebkitMaskSize: "contain",
+                      maskSize: "contain",
+                    }}
+                  />
+                  <span className="sr-only">Menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent
+                side="left"
+                className="w-full sm:max-w-none bg-white dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800 p-0 overflow-y-auto z-[6000]"
+              >
+                <div className="flex flex-col h-full p-6">
+                  <div className="mb-8">
+                    <Image
+                      src="/logo.png"
+                      alt="Stephan's Pet Store"
+                      width={140}
+                      height={40}
+                      className="h-8 w-auto opacity-90"
+                    />
+                  </div>
+                  <MobileNavMenu onClose={() => setIsMobileMenuOpen(false)} />
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
 
-          {/* CENTER: Logo */}
-          <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
-            <Link href="/" className="flex items-center gap-2 group">
-              <div className="relative h-12 w-[180px] sm:h-14 sm:w-[200px] flex items-center justify-center">
+          {/* Logo */}
+          <Link
+            href="/"
+            className="shrink-0 flex items-center"
+            aria-label="Stephan's Pet Store Home"
+          >
+            <Image
+              src="/logo.png"
+              alt="Stephan's Pet Store"
+              width={140}
+              height={40}
+              className="h-9 w-auto dark:invert"
+            />
+          </Link>
+
+          {/* Search Bar - Large as requested */}
+          <div className="flex-1 max-w-2xl hidden md:flex items-center relative">
+            <div className="flex-1 flex items-center bg-zinc-100 dark:bg-zinc-900 rounded-full border border-zinc-200 dark:border-zinc-800 overflow-hidden transition-all focus-within:ring-2 focus-within:ring-[#c77e35]/20 focus-within:border-[#c77e35]">
+              <Search className="h-4 w-4 text-zinc-400 ml-4 shrink-0" />
+              <input
+                type="text"
+                placeholder="Search For Products, Brands, and More..."
+                className="w-full bg-transparent border-none focus:ring-0 text-[13px] px-3 py-2.5 text-zinc-800 dark:text-zinc-200"
+                onFocus={onSearchOpen}
+                aria-label="Search input"
+              />
+              <button
+                type="button"
+                className="bg-[#c77e35] text-white px-6 py-2.5 text-[12px] font-bold uppercase tracking-wider hover:bg-[#5a3419] transition-colors"
+                aria-label="Search"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+
+          {/* Actions (Login, Location, Wishlist, Bag) */}
+          <div className="flex items-center gap-3 sm:gap-6 ml-auto">
+            {/* Search (Mobile Only) */}
+            <button
+              type="button"
+              onClick={onSearchOpen}
+              className="flex md:hidden flex-col items-center gap-1 group"
+              aria-label="Search products"
+            >
+              <div className="w-8 h-8 rounded-full bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center group-hover:bg-amber-50 dark:group-hover:bg-amber-950/30 transition-colors overflow-hidden">
                 <Image
-                  src="/logo.png"
-                  alt="Stephan's Pet Store Logo"
-                  fill
-                  className="object-contain object-center"
-                  priority
+                  src="/icons/icon-search-glass.png"
+                  alt="Search"
+                  width={16}
+                  height={16}
+                  className="h-4 w-4 object-contain opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all"
                 />
               </div>
-            </Link>
-          </div>
+              <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-tight">
+                Search
+              </span>
+            </button>
 
-          {/* RIGHT: User & Bag */}
-          <div className="flex-1 flex items-center justify-end gap-4 sm:gap-6">
             <Link
               href="/login"
-              className="hidden sm:flex items-center justify-center group p-2"
+              className="hidden md:flex flex-col items-center gap-1 group"
               aria-label="Log in"
             >
-              <Image 
-                src="/icons/icon-profile-user.png" 
-                alt="Sign in" 
-                width={20} 
-                height={20} 
-                className="h-5 w-5 object-contain opacity-70 group-hover:opacity-100 transition-opacity" 
-              />
+              <div className="w-8 h-8 rounded-full bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center group-hover:bg-amber-50 dark:group-hover:bg-amber-950/30 transition-colors">
+                <User className="h-4 w-4 text-zinc-600 dark:text-zinc-400 group-hover:text-amber-600 transition-colors" />
+              </div>
+              <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-tight">
+                Log in
+              </span>
+            </Link>
+
+            <button
+              type="button"
+              onClick={handleTrackLocation}
+              disabled={isLocating}
+              className="hidden md:flex flex-col items-center gap-1 group disabled:opacity-70"
+              aria-label="Track my location"
+            >
+              <div className="w-8 h-8 rounded-full bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center group-hover:bg-amber-50 dark:group-hover:bg-amber-950/30 transition-colors">
+                {isLocating ? (
+                  <Loader2 className="h-4 w-4 text-amber-600 animate-spin" />
+                ) : (
+                  <MapPin
+                    className={cn(
+                      "h-4 w-4 transition-colors",
+                      userLocation
+                        ? "text-amber-600"
+                        : "text-zinc-600 dark:text-zinc-400 group-hover:text-amber-600",
+                    )}
+                  />
+                )}
+              </div>
+              <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-tight truncate max-w-[60px]">
+                {userLocation || "Location"}
+              </span>
+            </button>
+
+            <Link
+              href="/wishlist"
+              className="hidden md:flex flex-col items-center gap-1 group"
+              aria-label="Wishlist"
+            >
+              <div className="w-8 h-8 rounded-full bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center group-hover:bg-amber-50 dark:group-hover:bg-amber-950/30 transition-colors">
+                <Heart className="h-4 w-4 text-zinc-600 dark:text-zinc-400 group-hover:text-amber-600 transition-colors" />
+              </div>
+              <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-tight">
+                Wishlist
+              </span>
             </Link>
 
             <Link
               href="/cart"
-              className="flex items-center justify-center group relative p-2"
+              className="flex flex-col items-center gap-1 group relative"
               aria-label="Open shopping cart"
             >
-              <Image
-                src="/icons/icon-shopping-bag.png"
-                alt="Bag"
-                width={20}
-                height={20}
-                className="h-5 w-5 object-contain opacity-70 group-hover:opacity-100 transition-opacity"
-              />
-              {totalItems > 0 && (
-                <span className="absolute top-0 right-0 flex h-4 w-4 items-center justify-center rounded-full bg-[#c77e35] text-[9px] font-bold text-white shadow-sm ring-2 ring-white dark:ring-zinc-950">
-                  {totalItems > 99 ? "99" : totalItems}
-                </span>
-              )}
+              <div className="w-8 h-8 rounded-full bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center group-hover:bg-amber-50 dark:group-hover:bg-amber-950/30 transition-colors overflow-hidden">
+                <Image
+                  src="/icons/icon-shopping-bag.png"
+                  alt="Bag"
+                  width={16}
+                  height={16}
+                  className="h-4 w-4 object-contain opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all"
+                />
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#c77e35] text-[9px] font-bold text-white ring-2 ring-white dark:ring-zinc-950">
+                    {totalItems}
+                  </span>
+                )}
+              </div>
+              <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-tight">
+                Bag
+              </span>
             </Link>
           </div>
         </div>
