@@ -125,6 +125,20 @@ export function Header() {
               </Sheet>
             </div>
 
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2 shrink-0 transition-opacity hover:opacity-80">
+              <Image
+                src="/logo.png"
+                alt="Stephan's Pet Store"
+                width={160}
+                height={45}
+                className={cn(
+                  "h-7 w-auto transition-all duration-500",
+                  isScrolled ? "scale-95" : "scale-100"
+                )}
+                priority
+              />
+            </Link>
 
             {/* Desktop Navigation - Centered Pill that expands */}
             <div className="hidden lg:flex flex-1 justify-center px-4">
@@ -272,21 +286,6 @@ export function Header() {
                 <span className="sr-only">Open cart</span>
               </Link>
             </div>
-
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 shrink-0 transition-opacity hover:opacity-80">
-              <Image
-                src="/logo.png"
-                alt="Stephan's Pet Store"
-                width={160}
-                height={45}
-                className={cn(
-                  "h-7 w-auto transition-all duration-500",
-                  isScrolled ? "scale-95" : "scale-100"
-                )}
-                priority
-              />
-            </Link>
           </div>
         </header>
       )}
