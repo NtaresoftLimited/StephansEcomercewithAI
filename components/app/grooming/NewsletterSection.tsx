@@ -47,7 +47,7 @@ export function NewsletterSection() {
                             src="/newsletter-toys.jpg" 
                             alt="Pet Toys" 
                             fill 
-                            className="object-contain object-center md:object-right mix-blend-multiply"
+                            className="object-contain object-center md:object-right "
                             sizes="(max-width: 768px) 100vw, 50vw"
                             priority
                         />
