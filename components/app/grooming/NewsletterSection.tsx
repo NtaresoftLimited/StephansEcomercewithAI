@@ -6,10 +6,10 @@ import { ArrowRight } from "lucide-react";
 
 export function NewsletterSection() {
     return (
-        <section className="pb-16 pt-8 bg-[#F8F5F0]">
+        <section className="pb-16 pt-8 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Newsletter Box */}
-                <div className="bg-[#F3EFE9] rounded-3xl overflow-hidden flex flex-col md:flex-row items-center justify-between p-8 md:p-16">
+                <div className="bg-white rounded-3xl overflow-hidden flex flex-col md:flex-row items-center justify-between p-8 md:p-16">
                     <div className="w-full md:w-1/2 max-w-md relative z-10">
                         <h3 className="text-[11px] font-bold tracking-[0.15em] text-[#c77e35] uppercase mb-4">
                             STAY IN THE KNOW
@@ -30,7 +30,7 @@ export function NewsletterSection() {
                             />
                             <button 
                                 type="submit" 
-                                className="bg-[#c77e35] text-white px-8 py-4 rounded-xl text-sm font-bold tracking-wider hover:bg-[#8e5a36] transition-colors"
+                                className="bg-[#c77e35] text-white px-8 py-4 rounded-xl text-sm font-bold tracking-wider hover:bg-[#3e220f] transition-colors"
                             >
                                 Subscribe
                             </button>
