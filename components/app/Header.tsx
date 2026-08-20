@@ -90,10 +90,10 @@ export function Header() {
             <div className="lg:hidden">
               <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="group text-[#c77e35] hover:bg-transparent hover:text-[#c77e35]" aria-label="Toggle navigation menu">
+                  <Button variant="ghost" size="icon" className="group text-[#3e220f] hover:bg-transparent hover:text-[#3e220f]" aria-label="Toggle navigation menu">
                     <span
                       aria-hidden="true"
-                      className="block h-8 w-8 bg-[#c77e35] opacity-70 transition-opacity group-hover:opacity-100"
+                      className="block h-8 w-8 bg-[#3e220f] opacity-70 transition-opacity group-hover:opacity-100"
                       style={{
                         WebkitMaskImage: "url('/line-3.svg')",
                         maskImage: "url('/line-3.svg')",
@@ -158,8 +158,8 @@ export function Header() {
                     className={cn(
                       "absolute transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] z-0",
                       isScrolled
-                        ? "h-[calc(100%-4px)] top-[2px] rounded-lg bg-[#c77e35]/10 dark:bg-zinc-100" // Subtle box when expanded
-                        : "h-[calc(100%-4px)] top-[2px] rounded-full bg-[#c77e35] dark:bg-zinc-100"
+                        ? "h-[calc(100%-4px)] top-[2px] rounded-lg bg-[#3e220f]/10 dark:bg-zinc-100" // Subtle box when expanded
+                        : "h-[calc(100%-4px)] top-[2px] rounded-full bg-[#3e220f] dark:bg-zinc-100"
                     )}
                     style={{
                       left: (hoverRect?.left ?? activeRect?.left ?? 0) + (isScrolled ? 0 : 2),
@@ -190,8 +190,8 @@ export function Header() {
                       className={cn(
                         "text-[13px] font-bold tracking-tight px-6 h-full flex items-center rounded-full transition-all relative z-10 duration-300",
                         isScrolled
-                          ? (isActive || isHovered) ? "text-[#c77e35] dark:text-zinc-100" : "text-zinc-600 dark:text-zinc-400 hover:text-[#c77e35]"
-                          : (isActive || isHovered) ? "text-white dark:text-zinc-900" : "text-[#c77e35] dark:text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-300"
+                          ? (isActive || isHovered) ? "text-[#3e220f] dark:text-zinc-100" : "text-zinc-600 dark:text-zinc-400 hover:text-[#3e220f]"
+                          : (isActive || isHovered) ? "text-white dark:text-zinc-900" : "text-[#3e220f] dark:text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-300"
                       )}
                     >
                       {link.name}
@@ -210,7 +210,7 @@ export function Header() {
             )}>
               <button
                 onClick={() => setIsSearchOpen(true)}
-                className="h-full px-2 text-zinc-600 dark:text-zinc-400 hover:text-[#c77e35] dark:hover:text-zinc-100 transition-all rounded-full hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50 flex items-center justify-center overflow-hidden"
+                className="h-full px-2 text-zinc-600 dark:text-zinc-400 hover:text-[#3e220f] dark:hover:text-zinc-100 transition-all rounded-full hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50 flex items-center justify-center overflow-hidden"
                 aria-label="Search products"
               >
                 <Image
@@ -229,7 +229,7 @@ export function Header() {
                   <div className="flex items-center gap-1 h-full">
                     <Link
                       href="/orders"
-                      className="h-full px-2 text-zinc-600 dark:text-zinc-400 hover:text-[#c77e35] dark:hover:text-zinc-100 transition-all rounded-full hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50 flex items-center justify-center overflow-hidden"
+                      className="h-full px-2 text-zinc-600 dark:text-zinc-400 hover:text-[#3e220f] dark:hover:text-zinc-100 transition-all rounded-full hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50 flex items-center justify-center overflow-hidden"
                       aria-label="My Account"
                     >
                       <Image
@@ -243,7 +243,7 @@ export function Header() {
                     </Link>
                     <button
                       onClick={() => signOut()}
-                      className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-[#c77e35] transition-colors px-2 py-1"
+                      className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-[#3e220f] transition-colors px-2 py-1"
                     >
                       Logout
                     </button>
@@ -251,7 +251,7 @@ export function Header() {
                 ) : (
                   <Link
                     href="/login"
-                    className="h-full px-2 text-zinc-600 dark:text-zinc-400 hover:text-[#c77e35] dark:hover:text-zinc-100 transition-all rounded-full hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50 flex items-center justify-center overflow-hidden"
+                    className="h-full px-2 text-zinc-600 dark:text-zinc-400 hover:text-[#3e220f] dark:hover:text-zinc-100 transition-all rounded-full hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50 flex items-center justify-center overflow-hidden"
                     aria-label="Log in"
                   >
                     <Image
@@ -268,7 +268,7 @@ export function Header() {
 
               <Link
                 href="/cart"
-                className="relative h-full px-2 text-zinc-600 dark:text-zinc-400 hover:text-[#c77e35] dark:hover:text-zinc-100 transition-all rounded-full hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50 group flex items-center justify-center overflow-hidden"
+                className="relative h-full px-2 text-zinc-600 dark:text-zinc-400 hover:text-[#3e220f] dark:hover:text-zinc-100 transition-all rounded-full hover:bg-zinc-100/50 dark:hover:bg-zinc-800/50 group flex items-center justify-center overflow-hidden"
                 aria-label="Open shopping cart"
               >
                 <Image
@@ -279,7 +279,7 @@ export function Header() {
                   className="h-4 w-4 object-contain opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all"
                 />
                 {totalItems > 0 && (
-                  <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#c77e35] text-[9px] font-bold text-white shadow-sm ring-2 ring-white dark:ring-zinc-900 transition-transform group-hover:scale-110">
+                  <span className="absolute right-1 top-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#3e220f] text-[9px] font-bold text-white shadow-sm ring-2 ring-white dark:ring-zinc-900 transition-transform group-hover:scale-110">
                     {totalItems > 99 ? "99" : totalItems}
                   </span>
                 )}

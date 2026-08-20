@@ -193,7 +193,7 @@ function SecondaryStickyHeaderInner({
       )}
     >
       {/* 1. TOP INFO BAR (Call Us, Email, Chat) */}
-      <div className="bg-[#c77e35] text-white py-1.5 px-4 sm:px-6 lg:px-8">
+      <div className="bg-[#3e220f] text-white py-1.5 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl flex items-center justify-between text-[11px] font-bold tracking-tight">
           <div className="hidden md:block opacity-90">
             Now Delivering Across Tanzania
@@ -241,12 +241,12 @@ function SecondaryStickyHeaderInner({
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="group -ml-2 text-[#c77e35] hover:bg-transparent hover:text-[#c77e35]"
+                  className="group -ml-2 text-[#3e220f] hover:bg-transparent hover:text-[#3e220f]"
                   aria-label="Toggle navigation menu"
                 >
                   <span
                     aria-hidden="true"
-                    className="block h-8 w-8 bg-[#c77e35] opacity-70 transition-opacity group-hover:opacity-100"
+                    className="block h-8 w-8 bg-[#3e220f] opacity-70 transition-opacity group-hover:opacity-100"
                     style={{
                       WebkitMaskImage: "url('/line-3.svg')",
                       maskImage: "url('/line-3.svg')",
@@ -298,7 +298,7 @@ function SecondaryStickyHeaderInner({
 
           {/* Search Bar - Large as requested */}
           <div className="flex-1 max-w-2xl hidden md:flex items-center relative">
-            <div className="flex-1 flex items-center bg-zinc-100 dark:bg-zinc-900 rounded-full border border-zinc-200 dark:border-zinc-800 overflow-hidden transition-all focus-within:ring-2 focus-within:ring-[#c77e35]/20 focus-within:border-[#c77e35]">
+            <div className="flex-1 flex items-center bg-zinc-100 dark:bg-zinc-900 rounded-full border border-zinc-200 dark:border-zinc-800 overflow-hidden transition-all focus-within:ring-2 focus-within:ring-[#3e220f]/20 focus-within:border-[#3e220f]">
               <Search className="h-4 w-4 text-zinc-400 ml-4 shrink-0" />
               <input
                 type="text"
@@ -309,7 +309,7 @@ function SecondaryStickyHeaderInner({
               />
               <button
                 type="button"
-                className="bg-[#c77e35] text-white px-6 py-2.5 text-[12px] font-bold uppercase tracking-wider hover:bg-[#5a3419] transition-colors"
+                className="bg-[#3e220f] text-white px-6 py-2.5 text-[12px] font-bold uppercase tracking-wider hover:bg-[#5a3419] transition-colors"
                 aria-label="Search"
               >
                 Search
@@ -406,7 +406,7 @@ function SecondaryStickyHeaderInner({
                   className="h-4 w-4 object-contain opacity-70 group-hover:opacity-100 group-hover:scale-110 transition-all"
                 />
                 {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#c77e35] text-[9px] font-bold text-white ring-2 ring-white dark:ring-zinc-950">
+                  <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#3e220f] text-[9px] font-bold text-white ring-2 ring-white dark:ring-zinc-950">
                     {totalItems}
                   </span>
                 )}
