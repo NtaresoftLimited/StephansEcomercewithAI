@@ -6,9 +6,10 @@ import { ArrowRight } from "lucide-react";
 
 export function NewsletterSection() {
     return (
-        <section className="py-16 bg-white">
+        <section className="pb-16 pt-8 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+                {/* Newsletter Box */}
+                <div className="bg-[#F6F4F1] rounded-3xl overflow-hidden flex flex-col md:flex-row items-center justify-between p-8 md:p-16">
                     <div className="w-full md:w-1/2 max-w-md relative z-10">
                         <h3 className="text-[11px] font-bold tracking-[0.15em] text-[#c77e35] uppercase mb-4">
                             STAY IN THE KNOW
@@ -41,12 +42,12 @@ export function NewsletterSection() {
                         </a>
                     </div>
                     
-                    <div className="w-full md:w-1/2 relative h-[350px] lg:h-[400px]">
+                    <div className="hidden md:block w-1/2 relative h-[350px] lg:h-[400px]">
                         <Image 
                             src="/newsletter-toys.jpg" 
                             alt="Pet Toys" 
                             fill 
-                            className="object-contain object-center md:object-right"
+                            className="object-contain object-center md:object-right mix-blend-multiply"
                             sizes="(max-width: 768px) 100vw, 50vw"
                             priority
                         />

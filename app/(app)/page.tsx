@@ -156,7 +156,7 @@ export default async function HomePage({ searchParams }: PageProps) {
       <PetCategoryStrip />
 
       {/* All Products */}
-      <section className="py-16 md:py-24 bg-background border-t border-border">
+      <section className="py-16 md:py-24 bg-white border-t border-border">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
             <h3 className="text-[11px] font-bold tracking-[0.15em] text-[#c77e35] uppercase mb-4">
