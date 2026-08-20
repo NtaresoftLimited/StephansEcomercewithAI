@@ -9,11 +9,6 @@ const REVIEWS = [
         name: "Jennifer Pannagl",
     },
     {
-        id: 2,
-        text: "Best pet store in Dar! All tools, toys and shelters, many ideas (from their groceries) of how to spoin and/or assist the little companies at home. When I was there with my 3 y/o, the personnel was patient and very helpful, but also and mostly knowledgable. Will definitely return!",
-        name: "Laura Sheïlla INANGOMA",
-    },
-    {
         id: 3,
         text: "Amazing place with great customer service! My cats are loving their new supplies.",
         name: "Mark Hoffmann",
@@ -38,11 +33,10 @@ export function ReviewsSection() {
             </h2>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-8 relative">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-y-12 gap-x-12 relative">
             {/* Vertical dividers for desktop */}
-            <div className="hidden lg:block absolute top-0 bottom-0 left-[25%] w-px bg-[#E8E0D8]"></div>
-            <div className="hidden md:block absolute top-0 bottom-0 left-[50%] w-px bg-[#E8E0D8]"></div>
-            <div className="hidden lg:block absolute top-0 bottom-0 left-[75%] w-px bg-[#E8E0D8]"></div>
+            <div className="hidden md:block absolute top-0 bottom-0 left-[33.33%] w-px bg-[#E8E0D8]"></div>
+            <div className="hidden md:block absolute top-0 bottom-0 left-[66.66%] w-px bg-[#E8E0D8]"></div>
 
             {REVIEWS.map((review) => (
                 <div key={review.id} className="flex flex-col text-center md:text-left px-4">
