@@ -96,7 +96,7 @@ export function CategoryMegaMenu({
               >
                 <div className="flex items-center gap-3">
                   <div className="flex shrink-0 items-center justify-center text-[#c77e35] dark:text-amber-500">
-                    <Icon aria-hidden="true" className="h-7 w-7 stroke-[1]" />
+                    {typeof Icon === 'string' ? ( <div className="h-7 w-7 bg-[#c77e35] dark:bg-amber-500" style={{ WebkitMaskImage: `url('${Icon}')`, maskImage: `url('${Icon}')`, WebkitMaskSize: "contain", maskSize: "contain", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center" }} /> ) : ( <Icon aria-hidden="true" className="h-7 w-7 stroke-[1]" /> )}
                   </div>
                   <Link
                     href={group.href}
