@@ -88,40 +88,48 @@ export default async function HomePage({ searchParams }: PageProps) {
   }).then((r: any) => r?.data as any[]).catch(() => [] as any[]);
 
   // If no search params are provided, it means we are showing default "New Arrivals"
-  // The user requested that these products should not be from the same brand or categories.
-  // We will filter the products to ensure diversity.
+  // Filter and interleave products: 1 Dog, 2 Cat, 3 Small Animal, 4 Bird/Grooming
   if (isDefaultView && products.length > 0) {
-    const diverseProducts: any[] = [];
-    const seenBrands = new Set<string>();
-    const seenCategories = new Set<string>();
+    const dogs: any[] = [];
+    const cats: any[] = [];
+    const smalls: any[] = [];
+    const birdsGrooming: any[] = [];
+    const others: any[] = [];
 
     for (const product of products) {
-      const brandId = product.brand?._id || product.brand?.slug;
-      const categoryId = product.categories?.[0]?._id || product.categories?.[0]?.slug;
+      const categoryNames = product.categories?.map((c: any) => (c.name || "").toLowerCase()) || [];
+      const categorySlugs = product.categories?.map((c: any) => (c.slug?.current || c.slug || "").toLowerCase()) || [];
+      const combined = [...categoryNames, ...categorySlugs].join(" ");
+      const productName = (product.name || "").toLowerCase();
+      const combinedText = combined + " " + productName;
 
-      // Check if we already have this brand or category
-      const isDuplicateBrand = brandId && seenBrands.has(brandId);
-      const isDuplicateCategory = categoryId && seenCategories.has(categoryId);
-
-      if (!isDuplicateBrand && !isDuplicateCategory) {
-        diverseProducts.push(product);
-        if (brandId) seenBrands.add(brandId);
-        if (categoryId) seenCategories.add(categoryId);
+      if (combinedText.includes("dog") || combinedText.includes("puppy")) {
+        dogs.push(product);
+      } else if (combinedText.includes("cat") || combinedText.includes("kitten")) {
+        cats.push(product);
+      } else if (combinedText.includes("small") || combinedText.includes("rabbit") || combinedText.includes("hamster") || combinedText.includes("guinea")) {
+        smalls.push(product);
+      } else if (combinedText.includes("bird") || combinedText.includes("parrot") || combinedText.includes("grooming") || combinedText.includes("shampoo")) {
+        birdsGrooming.push(product);
+      } else {
+        others.push(product);
       }
     }
 
-    // If for some reason we filtered out too many and have less than 4, 
-    // we can fill back up with some of the ones we skipped to keep the grid full.
-    if (diverseProducts.length < 8) {
-      for (const product of products) {
-        if (!diverseProducts.find(p => p._id === product._id)) {
-          diverseProducts.push(product);
-          if (diverseProducts.length >= 8) break;
-        }
-      }
+    const interleaved = [];
+    // Determine how many sets of 4 we can make
+    const maxLen = Math.max(dogs.length, cats.length, smalls.length, birdsGrooming.length, 1);
+    const pages = Math.min(maxLen, 3); // Max 3 pages (12 items) to avoid excessive repeating
+
+    for (let i = 0; i < pages; i++) {
+      // Fallbacks ensure we always have an item, even if a category is completely empty
+      interleaved.push(dogs[i % dogs.length] || others[i % others.length] || products[0]);
+      interleaved.push(cats[i % cats.length] || others[(i + 1) % others.length] || products[1] || products[0]);
+      interleaved.push(smalls[i % smalls.length] || others[(i + 2) % others.length] || products[2] || products[0]);
+      interleaved.push(birdsGrooming[i % birdsGrooming.length] || others[(i + 3) % others.length] || products[3] || products[0]);
     }
 
-    products = diverseProducts;
+    products = interleaved;
   }
 
   // Fetch categories, pet images, and grooming images in parallel
