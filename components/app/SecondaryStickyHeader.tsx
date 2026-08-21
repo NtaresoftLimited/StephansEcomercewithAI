@@ -462,7 +462,7 @@ function SecondaryStickyHeaderInner({
           ))}
 
           <Link
-            href="/brands"
+            href="/allbrands"
             className="flex items-center gap-1.5 hover:text-amber-600 transition-colors h-full border-b-2 border-transparent hover:border-amber-500"
           >
             Brands

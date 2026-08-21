@@ -34,11 +34,7 @@ export function HeroSection() {
                     Everything Your Pet Deserves.
                 </h1>
 
-                {/* Description */}
-                <p className="text-gray-100 text-base md:text-xl max-w-lg mb-8 font-medium">
-                    Premium pet food, accessories, <br className="hidden md:block" />
-                    and professional grooming.
-                </p>
+                
 
                 {/* Buttons */}
                 <div className="flex flex-row items-center justify-center gap-2 sm:gap-4 w-full px-2 sm:px-0">

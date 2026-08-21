@@ -38,17 +38,17 @@ interface CategoryMegaMenuProps {
   onNavigate: () => void;
 }
 
-const CATEGORY_ICONS: Record<string, ElementType> = {
-  "Dog Food": Utensils,
-  "Cat Food": Utensils,
+const CATEGORY_ICONS: Record<string, ElementType | string> = {
+  "Dog Food": "/icons/pet-bowl.png",
+  "Cat Food": "/icons/pet-bowl.png",
   "Bird Food": Utensils,
   Food: Utensils,
-  "Tick, Flea & Deworming": ShieldCheck,
+  "Tick, Flea & Deworming": "/icons/shield-tick.png",
   "Wellness & Supplements": HeartPulse,
-  "Treats & Chews": Bone,
+  "Treats & Chews": "/icons/bone-outline.png",
   "Treats & Supplements": Bone,
   "Oral Care": Sparkles,
-  "Grooming Essentials": Scissors,
+  "Grooming Essentials": "/icons/hairbrush.png",
   "Hygiene & Care": Scissors,
   "Hygiene & Cleaning": Scissors,
   "Clean Living": Trash2,
@@ -85,7 +85,7 @@ export function CategoryMegaMenu({
   return (
     <div className="mx-auto w-full max-w-7xl">
       <div className="bg-white dark:bg-zinc-950">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 lg:p-6 pb-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 -mx-5 py-4 lg:py-6 pb-2">
           {featuredGroups.map((group) => {
             const Icon = CATEGORY_ICONS[group.title] || CircleDot;
 
@@ -138,7 +138,7 @@ export function CategoryMegaMenu({
           })}
         </div>
 
-        <div className="flex justify-start px-6 lg:px-10 pb-6 pt-2">
+        <div className="flex justify-start pb-6 pt-2">
           <Link
             href={viewAllHref}
             onClick={onNavigate}
