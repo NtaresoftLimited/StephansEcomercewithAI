@@ -1,0 +1,5525 @@
+[
+  {
+    "id": 1,
+    "name": "All",
+    "parent_id": false,
+    "complete_name": "All"
+  },
+  {
+    "id": 823,
+    "name": "All /  Both CATS / Grooming Essentials / Paw Care",
+    "parent_id": false,
+    "complete_name": "All /  Both CATS / Grooming Essentials / Paw Care"
+  },
+  {
+    "id": 949,
+    "name": "All /  Both DOGS & CATS / Adhesive Tape / Replacement Tape",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Adhesive Tape / Replacement Tape"
+  },
+  {
+    "id": 876,
+    "name": "All /  Both DOGS & CATS / Adhesive Tape / Replacement Tape",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Adhesive Tape / Replacement Tape"
+  },
+  {
+    "id": 1066,
+    "name": "All /  Both DOGS & CATS / Bowls",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Bowls"
+  },
+  {
+    "id": 838,
+    "name": "All /  Both DOGS & CATS / Clean Living /  Pet Wipes",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Clean Living /  Pet Wipes"
+  },
+  {
+    "id": 980,
+    "name": "All /  Both DOGS & CATS / Clean Living /  Stain Remover",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Clean Living /  Stain Remover"
+  },
+  {
+    "id": 831,
+    "name": "All /  Both DOGS & CATS / Clean Living /  Stain Remover",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Clean Living /  Stain Remover"
+  },
+  {
+    "id": 953,
+    "name": "All /  Both DOGS & CATS / Clean Living /  Stain Remover",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Clean Living /  Stain Remover"
+  },
+  {
+    "id": 830,
+    "name": "All /  Both DOGS & CATS / Clean Living / Pet Roller",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Clean Living / Pet Roller"
+  },
+  {
+    "id": 948,
+    "name": "All /  Both DOGS & CATS / Clean Living / Pet Roller",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Clean Living / Pet Roller"
+  },
+  {
+    "id": 826,
+    "name": "All /  Both DOGS & CATS / Ear Mite / Prevention Products",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Ear Mite / Prevention Products"
+  },
+  {
+    "id": 1074,
+    "name": "All /  Both DOGS & CATS / Ear Mite / Prevention Products",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Ear Mite / Prevention Products"
+  },
+  {
+    "id": 943,
+    "name": "All /  Both DOGS & CATS / Ear Mite / Prevention Products",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Ear Mite / Prevention Products"
+  },
+  {
+    "id": 1099,
+    "name": "All /  Both DOGS & CATS / Grooming Essentials",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Grooming Essentials"
+  },
+  {
+    "id": 824,
+    "name": "All /  Both DOGS & CATS / Grooming Essentials / Paw Care",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Grooming Essentials / Paw Care"
+  },
+  {
+    "id": 935,
+    "name": "All /  Both DOGS & CATS / Grooming Essentials / Paw Care",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Grooming Essentials / Paw Care"
+  },
+  {
+    "id": 825,
+    "name": "All /  Both DOGS & CATS / Grooming Essentials / Paw Care Spray",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Grooming Essentials / Paw Care Spray"
+  },
+  {
+    "id": 934,
+    "name": "All /  Both DOGS & CATS / Grooming Essentials / Paw Care Spray",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Grooming Essentials / Paw Care Spray"
+  },
+  {
+    "id": 827,
+    "name": "All /  Both DOGS & CATS / Grooming Essentials / Pet Perfumes & Sprays",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Grooming Essentials / Pet Perfumes & Sprays"
+  },
+  {
+    "id": 856,
+    "name": "All /  Both DOGS & CATS / Grooming Essentials / Spray",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Grooming Essentials / Spray"
+  },
+  {
+    "id": 893,
+    "name": "All /  Both DOGS & CATS / Grooming Essentials / Spray",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Grooming Essentials / Spray"
+  },
+  {
+    "id": 844,
+    "name": "All /  Both DOGS & CATS / Odor Control",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS & CATS / Odor Control"
+  },
+  {
+    "id": 894,
+    "name": "All /  Both DOGS &CATS / Grooming Essentials / Spray",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS &CATS / Grooming Essentials / Spray"
+  },
+  {
+    "id": 855,
+    "name": "All /  Both DOGS &CATS / Grooming Essentials / Spray",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS &CATS / Grooming Essentials / Spray"
+  },
+  {
+    "id": 839,
+    "name": "All /  Both DOGS, CATS & SMALL PETS / Clean Living /  Pet Wipes",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS, CATS & SMALL PETS / Clean Living /  Pet Wipes"
+  },
+  {
+    "id": 880,
+    "name": "All /  Both DOGS, CATS & SMALL PETS / Clean Living /  Pet Wipes",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS, CATS & SMALL PETS / Clean Living /  Pet Wipes"
+  },
+  {
+    "id": 965,
+    "name": "All /  Both DOGS, CATS & SMALL PETS / Clean Living /  Pet Wipes",
+    "parent_id": false,
+    "complete_name": "All /  Both DOGS, CATS & SMALL PETS / Clean Living /  Pet Wipes"
+  },
+  {
+    "id": 975,
+    "name": "All /  DOGS / Grooming Essentials",
+    "parent_id": false,
+    "complete_name": "All /  DOGS / Grooming Essentials"
+  },
+  {
+    "id": 842,
+    "name": "All /  DOGS / Grooming Essentials",
+    "parent_id": false,
+    "complete_name": "All /  DOGS / Grooming Essentials"
+  },
+  {
+    "id": 829,
+    "name": "All /  DOGS / Grooming Essentials / Paw Care",
+    "parent_id": false,
+    "complete_name": "All /  DOGS / Grooming Essentials / Paw Care"
+  },
+  {
+    "id": 939,
+    "name": "All /  DOGS / Grooming Essentials / Paw Care",
+    "parent_id": false,
+    "complete_name": "All /  DOGS / Grooming Essentials / Paw Care"
+  },
+  {
+    "id": 133,
+    "name": "Add-ons",
+    "parent_id": [
+      1,
+      "All"
+    ],
+    "complete_name": "All / Add-ons"
+  },
+  {
+    "id": 589,
+    "name": "BIRDS",
+    "parent_id": [
+      1,
+      "All"
+    ],
+    "complete_name": "All / BIRDS"
+  },
+  {
+    "id": 590,
+    "name": "Bird Food",
+    "parent_id": [
+      589,
+      "All / BIRDS"
+    ],
+    "complete_name": "All / BIRDS / Bird Food"
+  },
+  {
+    "id": 591,
+    "name": "Budgie & Small Bird Food",
+    "parent_id": [
+      590,
+      "All / BIRDS / Bird Food"
+    ],
+    "complete_name": "All / BIRDS / Bird Food / Budgie & Small Bird Food"
+  },
+  {
+    "id": 592,
+    "name": "Parrot Food",
+    "parent_id": [
+      590,
+      "All / BIRDS / Bird Food"
+    ],
+    "complete_name": "All / BIRDS / Bird Food / Parrot Food"
+  },
+  {
+    "id": 593,
+    "name": "Pellets",
+    "parent_id": [
+      590,
+      "All / BIRDS / Bird Food"
+    ],
+    "complete_name": "All / BIRDS / Bird Food / Pellets"
+  },
+  {
+    "id": 594,
+    "name": "Premium Seed Mixes",
+    "parent_id": [
+      590,
+      "All / BIRDS / Bird Food"
+    ],
+    "complete_name": "All / BIRDS / Bird Food / Premium Seed Mixes"
+  },
+  {
+    "id": 595,
+    "name": "Feeding & Water",
+    "parent_id": [
+      589,
+      "All / BIRDS"
+    ],
+    "complete_name": "All / BIRDS / Feeding & Water"
+  },
+  {
+    "id": 596,
+    "name": "Feeders",
+    "parent_id": [
+      595,
+      "All / BIRDS / Feeding & Water"
+    ],
+    "complete_name": "All / BIRDS / Feeding & Water / Feeders"
+  },
+  {
+    "id": 597,
+    "name": "Feeding Bowls",
+    "parent_id": [
+      595,
+      "All / BIRDS / Feeding & Water"
+    ],
+    "complete_name": "All / BIRDS / Feeding & Water / Feeding Bowls"
+  },
+  {
+    "id": 598,
+    "name": "Water Dispensers",
+    "parent_id": [
+      595,
+      "All / BIRDS / Feeding & Water"
+    ],
+    "complete_name": "All / BIRDS / Feeding & Water / Water Dispensers"
+  },
+  {
+    "id": 599,
+    "name": "Homes & Nests",
+    "parent_id": [
+      589,
+      "All / BIRDS"
+    ],
+    "complete_name": "All / BIRDS / Homes & Nests"
+  },
+  {
+    "id": 600,
+    "name": "Bird Cages",
+    "parent_id": [
+      599,
+      "All / BIRDS / Homes & Nests"
+    ],
+    "complete_name": "All / BIRDS / Homes & Nests / Bird Cages"
+  },
+  {
+    "id": 601,
+    "name": "Cage Covers",
+    "parent_id": [
+      599,
+      "All / BIRDS / Homes & Nests"
+    ],
+    "complete_name": "All / BIRDS / Homes & Nests / Cage Covers"
+  },
+  {
+    "id": 602,
+    "name": "Cage Liners",
+    "parent_id": [
+      599,
+      "All / BIRDS / Homes & Nests"
+    ],
+    "complete_name": "All / BIRDS / Homes & Nests / Cage Liners"
+  },
+  {
+    "id": 603,
+    "name": "Cage Stands",
+    "parent_id": [
+      599,
+      "All / BIRDS / Homes & Nests"
+    ],
+    "complete_name": "All / BIRDS / Homes & Nests / Cage Stands"
+  },
+  {
+    "id": 604,
+    "name": "Hygiene & Care",
+    "parent_id": [
+      589,
+      "All / BIRDS"
+    ],
+    "complete_name": "All / BIRDS / Hygiene & Care"
+  },
+  {
+    "id": 605,
+    "name": "Bird Baths",
+    "parent_id": [
+      604,
+      "All / BIRDS / Hygiene & Care"
+    ],
+    "complete_name": "All / BIRDS / Hygiene & Care / Bird Baths"
+  },
+  {
+    "id": 606,
+    "name": "Feather Care Sprays",
+    "parent_id": [
+      604,
+      "All / BIRDS / Hygiene & Care"
+    ],
+    "complete_name": "All / BIRDS / Hygiene & Care / Feather Care Sprays"
+  },
+  {
+    "id": 607,
+    "name": "Grooming Accessories",
+    "parent_id": [
+      604,
+      "All / BIRDS / Hygiene & Care"
+    ],
+    "complete_name": "All / BIRDS / Hygiene & Care / Grooming Accessories"
+  },
+  {
+    "id": 608,
+    "name": "Litter & Cage Liners",
+    "parent_id": [
+      604,
+      "All / BIRDS / Hygiene & Care"
+    ],
+    "complete_name": "All / BIRDS / Hygiene & Care / Litter & Cage Liners"
+  },
+  {
+    "id": 609,
+    "name": "Perches & Accessories",
+    "parent_id": [
+      589,
+      "All / BIRDS"
+    ],
+    "complete_name": "All / BIRDS / Perches & Accessories"
+  },
+  {
+    "id": 610,
+    "name": "Feeding Bowls & Cups",
+    "parent_id": [
+      609,
+      "All / BIRDS / Perches & Accessories"
+    ],
+    "complete_name": "All / BIRDS / Perches & Accessories / Feeding Bowls & Cups"
+  },
+  {
+    "id": 611,
+    "name": "Ladders & Climbers",
+    "parent_id": [
+      609,
+      "All / BIRDS / Perches & Accessories"
+    ],
+    "complete_name": "All / BIRDS / Perches & Accessories / Ladders & Climbers"
+  },
+  {
+    "id": 612,
+    "name": "Perches & Swings",
+    "parent_id": [
+      609,
+      "All / BIRDS / Perches & Accessories"
+    ],
+    "complete_name": "All / BIRDS / Perches & Accessories / Perches & Swings"
+  },
+  {
+    "id": 613,
+    "name": "Toys & Enrichment",
+    "parent_id": [
+      589,
+      "All / BIRDS"
+    ],
+    "complete_name": "All / BIRDS / Toys & Enrichment"
+  },
+  {
+    "id": 614,
+    "name": "Bells & Interactive Toys",
+    "parent_id": [
+      613,
+      "All / BIRDS / Toys & Enrichment"
+    ],
+    "complete_name": "All / BIRDS / Toys & Enrichment / Bells & Interactive Toys"
+  },
+  {
+    "id": 615,
+    "name": "Climbing Toys",
+    "parent_id": [
+      613,
+      "All / BIRDS / Toys & Enrichment"
+    ],
+    "complete_name": "All / BIRDS / Toys & Enrichment / Climbing Toys"
+  },
+  {
+    "id": 616,
+    "name": "Swings",
+    "parent_id": [
+      613,
+      "All / BIRDS / Toys & Enrichment"
+    ],
+    "complete_name": "All / BIRDS / Toys & Enrichment / Swings"
+  },
+  {
+    "id": 617,
+    "name": "Travel Essentials",
+    "parent_id": [
+      589,
+      "All / BIRDS"
+    ],
+    "complete_name": "All / BIRDS / Travel Essentials"
+  },
+  {
+    "id": 618,
+    "name": "Car Seat Covers",
+    "parent_id": [
+      617,
+      "All / BIRDS / Travel Essentials"
+    ],
+    "complete_name": "All / BIRDS / Travel Essentials / Car Seat Covers"
+  },
+  {
+    "id": 619,
+    "name": "Carrier Bags",
+    "parent_id": [
+      617,
+      "All / BIRDS / Travel Essentials"
+    ],
+    "complete_name": "All / BIRDS / Travel Essentials / Carrier Bags"
+  },
+  {
+    "id": 620,
+    "name": "Carriers",
+    "parent_id": [
+      617,
+      "All / BIRDS / Travel Essentials"
+    ],
+    "complete_name": "All / BIRDS / Travel Essentials / Carriers"
+  },
+  {
+    "id": 621,
+    "name": "Seat Belts & Restraints",
+    "parent_id": [
+      617,
+      "All / BIRDS / Travel Essentials"
+    ],
+    "complete_name": "All / BIRDS / Travel Essentials / Seat Belts & Restraints"
+  },
+  {
+    "id": 622,
+    "name": "Travel Bags",
+    "parent_id": [
+      617,
+      "All / BIRDS / Travel Essentials"
+    ],
+    "complete_name": "All / BIRDS / Travel Essentials / Travel Bags"
+  },
+  {
+    "id": 623,
+    "name": "Travel Cages",
+    "parent_id": [
+      617,
+      "All / BIRDS / Travel Essentials"
+    ],
+    "complete_name": "All / BIRDS / Travel Essentials / Travel Cages"
+  },
+  {
+    "id": 624,
+    "name": "Treats & Supplements",
+    "parent_id": [
+      589,
+      "All / BIRDS"
+    ],
+    "complete_name": "All / BIRDS / Treats & Supplements"
+  },
+  {
+    "id": 625,
+    "name": "Calcium Supplements",
+    "parent_id": [
+      624,
+      "All / BIRDS / Treats & Supplements"
+    ],
+    "complete_name": "All / BIRDS / Treats & Supplements / Calcium Supplements"
+  },
+  {
+    "id": 626,
+    "name": "Fruit & Nut Treats",
+    "parent_id": [
+      624,
+      "All / BIRDS / Treats & Supplements"
+    ],
+    "complete_name": "All / BIRDS / Treats & Supplements / Fruit & Nut Treats"
+  },
+  {
+    "id": 627,
+    "name": "Treat Sticks",
+    "parent_id": [
+      624,
+      "All / BIRDS / Treats & Supplements"
+    ],
+    "complete_name": "All / BIRDS / Treats & Supplements / Treat Sticks"
+  },
+  {
+    "id": 915,
+    "name": "All / Both DOGS &  CATS / Grooming Essentials / Bath & Shampoo",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS &  CATS / Grooming Essentials / Bath & Shampoo"
+  },
+  {
+    "id": 868,
+    "name": "All / Both DOGS &  CATS / Grooming Essentials / Bath & Shampoo",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS &  CATS / Grooming Essentials / Bath & Shampoo"
+  },
+  {
+    "id": 1078,
+    "name": "All / Both DOGS &  CATS / Pet Apparel / Bell",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS &  CATS / Pet Apparel / Bell"
+  },
+  {
+    "id": 1068,
+    "name": "All / Both DOGS &  CATS / Pet Apparel / Cap",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS &  CATS / Pet Apparel / Cap"
+  },
+  {
+    "id": 1052,
+    "name": "All / Both DOGS &  CATS / Pet Apparel / Jackets",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS &  CATS / Pet Apparel / Jackets"
+  },
+  {
+    "id": 1072,
+    "name": "All / Both DOGS &  CATS / Pet Apparel / Ribbon",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS &  CATS / Pet Apparel / Ribbon"
+  },
+  {
+    "id": 837,
+    "name": "All / Both DOGS & CATS /  Clean Living / Pet Wipes",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS & CATS /  Clean Living / Pet Wipes"
+  },
+  {
+    "id": 877,
+    "name": "All / Both DOGS & CATS / Clean Living /  Stain Remover",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS & CATS / Clean Living /  Stain Remover"
+  },
+  {
+    "id": 957,
+    "name": "All / Both DOGS & CATS / Clean Living /  Stain Remover",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS & CATS / Clean Living /  Stain Remover"
+  },
+  {
+    "id": 1064,
+    "name": "All / Both DOGS & CATS / Cooling Mat",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS & CATS / Cooling Mat"
+  },
+  {
+    "id": 1096,
+    "name": "All / Both DOGS & CATS / Food Mat",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS & CATS / Food Mat"
+  },
+  {
+    "id": 883,
+    "name": "All / Both DOGS & CATS / Home & Crates / Crates",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS & CATS / Home & Crates / Crates"
+  },
+  {
+    "id": 1071,
+    "name": "All / Both DOGS & CATS / Measuring Spoon",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS & CATS / Measuring Spoon"
+  },
+  {
+    "id": 1089,
+    "name": "All / Both DOGS & CATS / Pet Apparel / Bandana",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS & CATS / Pet Apparel / Bandana"
+  },
+  {
+    "id": 1053,
+    "name": "All / Both DOGS & CATS / Pet Apparel / Female & Male Panties",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS & CATS / Pet Apparel / Female & Male Panties"
+  },
+  {
+    "id": 1051,
+    "name": "All / Both DOGS & CATS / Pet Apparel / Hoodies, Shirts & T-shirts",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS & CATS / Pet Apparel / Hoodies, Shirts & T-shirts"
+  },
+  {
+    "id": 1081,
+    "name": "All / Both DOGS & CATS / Pet Apparel / Menstrual Diapers",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS & CATS / Pet Apparel / Menstrual Diapers"
+  },
+  {
+    "id": 1049,
+    "name": "All / Both DOGS & CATS / Pet Apparel / Reflective & Safety Wear",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS & CATS / Pet Apparel / Reflective & Safety Wear"
+  },
+  {
+    "id": 1050,
+    "name": "All / Both DOGS & CATS / Pet Apparel / Shoes & Boots",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS & CATS / Pet Apparel / Shoes & Boots"
+  },
+  {
+    "id": 1047,
+    "name": "All / Both DOGS & CATS / Pet Apparel / Sweaters",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS & CATS / Pet Apparel / Sweaters"
+  },
+  {
+    "id": 1048,
+    "name": "All / Both DOGS & CATS / Pet Apparel / Sweaters",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS & CATS / Pet Apparel / Sweaters"
+  },
+  {
+    "id": 840,
+    "name": "All / Both DOGS & CATS, SMALL PETS /  Clean Living / Pet Wipes",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS & CATS, SMALL PETS /  Clean Living / Pet Wipes"
+  },
+  {
+    "id": 1091,
+    "name": "All / Both DOGS & CATS, SMALL PETS /  Clean Living / Pooper Scooper",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS & CATS, SMALL PETS /  Clean Living / Pooper Scooper"
+  },
+  {
+    "id": 1082,
+    "name": "All / Both DOGS / Pet Apparel / Female & Male Panties",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS / Pet Apparel / Female & Male Panties"
+  },
+  {
+    "id": 1084,
+    "name": "All / Both DOGS / Pet Apparel / Menstrual Diapers",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS / Pet Apparel / Menstrual Diapers"
+  },
+  {
+    "id": 1083,
+    "name": "All / Both DOGS / Pet Apparel / Menstrual Diapers L",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS / Pet Apparel / Menstrual Diapers L"
+  },
+  {
+    "id": 970,
+    "name": "All / Both DOGS, CATS & SMALL PETS /  Clean Living / Pet Wipes",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS, CATS & SMALL PETS /  Clean Living / Pet Wipes"
+  },
+  {
+    "id": 881,
+    "name": "All / Both DOGS, CATS & SMALL PETS /  Clean Living / Pet Wipes",
+    "parent_id": false,
+    "complete_name": "All / Both DOGS, CATS & SMALL PETS /  Clean Living / Pet Wipes"
+  },
+  {
+    "id": 866,
+    "name": "All / Both Dog & Cat/ Dilutional Bottle",
+    "parent_id": false,
+    "complete_name": "All / Both Dog & Cat/ Dilutional Bottle"
+  },
+  {
+    "id": 792,
+    "name": "Both Dog and Cat",
+    "parent_id": [
+      1,
+      "All"
+    ],
+    "complete_name": "All / Both Dog and Cat"
+  },
+  {
+    "id": 859,
+    "name": "All / Both Dog and Cat/ Anti Parasitic Spray",
+    "parent_id": false,
+    "complete_name": "All / Both Dog and Cat/ Anti Parasitic Spray"
+  },
+  {
+    "id": 890,
+    "name": "All / Both Dog and Cat/ Anti Parasitic Spray",
+    "parent_id": false,
+    "complete_name": "All / Both Dog and Cat/ Anti Parasitic Spray"
+  },
+  {
+    "id": 857,
+    "name": "All / Both Dog and Cat/ Calming Spray",
+    "parent_id": false,
+    "complete_name": "All / Both Dog and Cat/ Calming Spray"
+  },
+  {
+    "id": 892,
+    "name": "All / Both Dog and Cat/ Calming Spray",
+    "parent_id": false,
+    "complete_name": "All / Both Dog and Cat/ Calming Spray"
+  },
+  {
+    "id": 937,
+    "name": "All / Both Dog and Cat/ Grooming Essentials",
+    "parent_id": false,
+    "complete_name": "All / Both Dog and Cat/ Grooming Essentials"
+  },
+  {
+    "id": 898,
+    "name": "All / Both Dog and Cat/ Grooming Essentials",
+    "parent_id": false,
+    "complete_name": "All / Both Dog and Cat/ Grooming Essentials"
+  },
+  {
+    "id": 887,
+    "name": "All / Both Dog and Cat/ Grooming Essentials",
+    "parent_id": false,
+    "complete_name": "All / Both Dog and Cat/ Grooming Essentials"
+  },
+  {
+    "id": 936,
+    "name": "All / Both Dog and Cat/ Grooming Essentials",
+    "parent_id": false,
+    "complete_name": "All / Both Dog and Cat/ Grooming Essentials"
+  },
+  {
+    "id": 822,
+    "name": "All / Both Dog and Cat/ Grooming Essentials",
+    "parent_id": false,
+    "complete_name": "All / Both Dog and Cat/ Grooming Essentials"
+  },
+  {
+    "id": 891,
+    "name": "All / Both Dog and Cat/ Grooming Essentials/ Spray",
+    "parent_id": false,
+    "complete_name": "All / Both Dog and Cat/ Grooming Essentials/ Spray"
+  },
+  {
+    "id": 860,
+    "name": "All / Both Dog and Cat/ Grooming Essentials/ Spray",
+    "parent_id": false,
+    "complete_name": "All / Both Dog and Cat/ Grooming Essentials/ Spray"
+  },
+  {
+    "id": 862,
+    "name": "All / Both Dog and Cat/ Oral Care/ Dental water",
+    "parent_id": false,
+    "complete_name": "All / Both Dog and Cat/ Oral Care/ Dental water"
+  },
+  {
+    "id": 902,
+    "name": "All / Both Dog and Cat/ Oral Care/ Dental water",
+    "parent_id": false,
+    "complete_name": "All / Both Dog and Cat/ Oral Care/ Dental water"
+  },
+  {
+    "id": 863,
+    "name": "All / Both Dog and Cat/ Oral Care/ Hygiene Gel",
+    "parent_id": false,
+    "complete_name": "All / Both Dog and Cat/ Oral Care/ Hygiene Gel"
+  },
+  {
+    "id": 901,
+    "name": "All / Both Dog and Cat/ Oral Care/ Hygiene Gel",
+    "parent_id": false,
+    "complete_name": "All / Both Dog and Cat/ Oral Care/ Hygiene Gel"
+  },
+  {
+    "id": 1100,
+    "name": "All / CAT/ Home & Crates / Playpens",
+    "parent_id": false,
+    "complete_name": "All / CAT/ Home & Crates / Playpens"
+  },
+  {
+    "id": 628,
+    "name": "CATS",
+    "parent_id": [
+      1,
+      "All"
+    ],
+    "complete_name": "All / CATS"
+  },
+  {
+    "id": 1065,
+    "name": "All / CATS & DOG/ Beds & Blankets / Blankets",
+    "parent_id": false,
+    "complete_name": "All / CATS & DOG/ Beds & Blankets / Blankets"
+  },
+  {
+    "id": 1090,
+    "name": "All / CATS & DOG/ Beds & Blankets / Pillow",
+    "parent_id": false,
+    "complete_name": "All / CATS & DOG/ Beds & Blankets / Pillow"
+  },
+  {
+    "id": 1093,
+    "name": "All / CATS & DOG/ Beds & Blankets / Towel",
+    "parent_id": false,
+    "complete_name": "All / CATS & DOG/ Beds & Blankets / Towel"
+  },
+  {
+    "id": 1062,
+    "name": "All / CATS &DOG/ Beds & Blankets / Mats & Pads",
+    "parent_id": false,
+    "complete_name": "All / CATS &DOG/ Beds & Blankets / Mats & Pads"
+  },
+  {
+    "id": 1061,
+    "name": "All / CATS &DOG/ Beds & Blankets / Mats & Pads",
+    "parent_id": false,
+    "complete_name": "All / CATS &DOG/ Beds & Blankets / Mats & Pads"
+  },
+  {
+    "id": 836,
+    "name": "All / CATS /  Clean Living / Pet Wipes",
+    "parent_id": false,
+    "complete_name": "All / CATS /  Clean Living / Pet Wipes"
+  },
+  {
+    "id": 629,
+    "name": "Beds & Blankets",
+    "parent_id": [
+      628,
+      "All / CATS"
+    ],
+    "complete_name": "All / CATS / Beds & Blankets"
+  },
+  {
+    "id": 630,
+    "name": "Blankets",
+    "parent_id": [
+      629,
+      "All / CATS / Beds & Blankets"
+    ],
+    "complete_name": "All / CATS / Beds & Blankets / Blankets"
+  },
+  {
+    "id": 631,
+    "name": "Cat Beds",
+    "parent_id": [
+      629,
+      "All / CATS / Beds & Blankets"
+    ],
+    "complete_name": "All / CATS / Beds & Blankets / Cat Beds"
+  },
+  {
+    "id": 632,
+    "name": "Dog Beds",
+    "parent_id": [
+      629,
+      "All / CATS / Beds & Blankets"
+    ],
+    "complete_name": "All / CATS / Beds & Blankets / Dog Beds"
+  },
+  {
+    "id": 633,
+    "name": "Mats",
+    "parent_id": [
+      629,
+      "All / CATS / Beds & Blankets"
+    ],
+    "complete_name": "All / CATS / Beds & Blankets / Mats"
+  },
+  {
+    "id": 634,
+    "name": "Mats & Pads",
+    "parent_id": [
+      629,
+      "All / CATS / Beds & Blankets"
+    ],
+    "complete_name": "All / CATS / Beds & Blankets / Mats & Pads"
+  },
+  {
+    "id": 635,
+    "name": "Cat Food",
+    "parent_id": [
+      628,
+      "All / CATS"
+    ],
+    "complete_name": "All / CATS / Cat Food"
+  },
+  {
+    "id": 986,
+    "name": "All / CATS / Cat Food / Adult Cat Food",
+    "parent_id": false,
+    "complete_name": "All / CATS / Cat Food / Adult Cat Food"
+  },
+  {
+    "id": 992,
+    "name": "All / CATS / Cat Food / Adult Cat Food",
+    "parent_id": false,
+    "complete_name": "All / CATS / Cat Food / Adult Cat Food"
+  },
+  {
+    "id": 993,
+    "name": "All / CATS / Cat Food / Adult Cat Food",
+    "parent_id": false,
+    "complete_name": "All / CATS / Cat Food / Adult Cat Food"
+  },
+  {
+    "id": 987,
+    "name": "All / CATS / Cat Food / Adult Cat Food",
+    "parent_id": false,
+    "complete_name": "All / CATS / Cat Food / Adult Cat Food"
+  },
+  {
+    "id": 994,
+    "name": "All / CATS / Cat Food / Adult Cat Food",
+    "parent_id": false,
+    "complete_name": "All / CATS / Cat Food / Adult Cat Food"
+  },
+  {
+    "id": 995,
+    "name": "All / CATS / Cat Food / Adult Cat Food",
+    "parent_id": false,
+    "complete_name": "All / CATS / Cat Food / Adult Cat Food"
+  },
+  {
+    "id": 636,
+    "name": "Adult Cat Food",
+    "parent_id": [
+      635,
+      "All / CATS / Cat Food"
+    ],
+    "complete_name": "All / CATS / Cat Food / Adult Cat Food"
+  },
+  {
+    "id": 1020,
+    "name": "All / CATS / Cat Food / Adult Cat Food",
+    "parent_id": false,
+    "complete_name": "All / CATS / Cat Food / Adult Cat Food"
+  },
+  {
+    "id": 1019,
+    "name": "All / CATS / Cat Food / Adult Cat Food",
+    "parent_id": false,
+    "complete_name": "All / CATS / Cat Food / Adult Cat Food"
+  },
+  {
+    "id": 1017,
+    "name": "All / CATS / Cat Food / Kitten Food",
+    "parent_id": false,
+    "complete_name": "All / CATS / Cat Food / Kitten Food"
+  },
+  {
+    "id": 991,
+    "name": "All / CATS / Cat Food / Kitten Food",
+    "parent_id": false,
+    "complete_name": "All / CATS / Cat Food / Kitten Food"
+  },
+  {
+    "id": 637,
+    "name": "Kitten Food",
+    "parent_id": [
+      635,
+      "All / CATS / Cat Food"
+    ],
+    "complete_name": "All / CATS / Cat Food / Kitten Food"
+  },
+  {
+    "id": 1018,
+    "name": "All / CATS / Cat Food / Kitten Food",
+    "parent_id": false,
+    "complete_name": "All / CATS / Cat Food / Kitten Food"
+  },
+  {
+    "id": 638,
+    "name": "Prescription Diet",
+    "parent_id": [
+      635,
+      "All / CATS / Cat Food"
+    ],
+    "complete_name": "All / CATS / Cat Food / Prescription Diet"
+  },
+  {
+    "id": 639,
+    "name": "Senior Cat Food",
+    "parent_id": [
+      635,
+      "All / CATS / Cat Food"
+    ],
+    "complete_name": "All / CATS / Cat Food / Senior Cat Food"
+  },
+  {
+    "id": 1003,
+    "name": "All / CATS / Cat Food / Wet / Canned Food",
+    "parent_id": false,
+    "complete_name": "All / CATS / Cat Food / Wet / Canned Food"
+  },
+  {
+    "id": 640,
+    "name": "Wet / Canned Food",
+    "parent_id": [
+      635,
+      "All / CATS / Cat Food"
+    ],
+    "complete_name": "All / CATS / Cat Food / Wet / Canned Food"
+  },
+  {
+    "id": 998,
+    "name": "All / CATS / Cat Food / Wet / Canned Food",
+    "parent_id": false,
+    "complete_name": "All / CATS / Cat Food / Wet / Canned Food"
+  },
+  {
+    "id": 1001,
+    "name": "All / CATS / Cat Food / Wet / Canned Food",
+    "parent_id": false,
+    "complete_name": "All / CATS / Cat Food / Wet / Canned Food"
+  },
+  {
+    "id": 997,
+    "name": "All / CATS / Cat Food / Wet / Canned Food",
+    "parent_id": false,
+    "complete_name": "All / CATS / Cat Food / Wet / Canned Food"
+  },
+  {
+    "id": 1002,
+    "name": "All / CATS / Cat Food / Wet / Canned Food",
+    "parent_id": false,
+    "complete_name": "All / CATS / Cat Food / Wet / Canned Food"
+  },
+  {
+    "id": 996,
+    "name": "All / CATS / Cat Food / Wet / Canned Food",
+    "parent_id": false,
+    "complete_name": "All / CATS / Cat Food / Wet / Canned Food"
+  },
+  {
+    "id": 641,
+    "name": "Cat Litter & Clean Living",
+    "parent_id": [
+      628,
+      "All / CATS"
+    ],
+    "complete_name": "All / CATS / Cat Litter & Clean Living"
+  },
+  {
+    "id": 642,
+    "name": "Cat Litter",
+    "parent_id": [
+      641,
+      "All / CATS / Cat Litter & Clean Living"
+    ],
+    "complete_name": "All / CATS / Cat Litter & Clean Living / Cat Litter"
+  },
+  {
+    "id": 955,
+    "name": "All / CATS / Cat Litter & Clean Living / Cat Litter",
+    "parent_id": false,
+    "complete_name": "All / CATS / Cat Litter & Clean Living / Cat Litter"
+  },
+  {
+    "id": 643,
+    "name": "Litter Box Accessories",
+    "parent_id": [
+      641,
+      "All / CATS / Cat Litter & Clean Living"
+    ],
+    "complete_name": "All / CATS / Cat Litter & Clean Living / Litter Box Accessories"
+  },
+  {
+    "id": 644,
+    "name": "Litter Mats",
+    "parent_id": [
+      641,
+      "All / CATS / Cat Litter & Clean Living"
+    ],
+    "complete_name": "All / CATS / Cat Litter & Clean Living / Litter Mats"
+  },
+  {
+    "id": 645,
+    "name": "Litter Trays / Boxes",
+    "parent_id": [
+      641,
+      "All / CATS / Cat Litter & Clean Living"
+    ],
+    "complete_name": "All / CATS / Cat Litter & Clean Living / Litter Trays / Boxes"
+  },
+  {
+    "id": 646,
+    "name": "Pet Roller",
+    "parent_id": [
+      641,
+      "All / CATS / Cat Litter & Clean Living"
+    ],
+    "complete_name": "All / CATS / Cat Litter & Clean Living / Pet Roller"
+  },
+  {
+    "id": 647,
+    "name": "Cat Litter & Hygiene",
+    "parent_id": [
+      628,
+      "All / CATS"
+    ],
+    "complete_name": "All / CATS / Cat Litter & Hygiene"
+  },
+  {
+    "id": 927,
+    "name": "All / CATS / Cat Toys",
+    "parent_id": false,
+    "complete_name": "All / CATS / Cat Toys"
+  },
+  {
+    "id": 648,
+    "name": "Cat Toys",
+    "parent_id": [
+      628,
+      "All / CATS"
+    ],
+    "complete_name": "All / CATS / Cat Toys"
+  },
+  {
+    "id": 649,
+    "name": "Collars & Harnesses",
+    "parent_id": [
+      628,
+      "All / CATS"
+    ],
+    "complete_name": "All / CATS / Collars & Harnesses"
+  },
+  {
+    "id": 650,
+    "name": "Collars",
+    "parent_id": [
+      649,
+      "All / CATS / Collars & Harnesses"
+    ],
+    "complete_name": "All / CATS / Collars & Harnesses / Collars"
+  },
+  {
+    "id": 651,
+    "name": "Decorated Accessories",
+    "parent_id": [
+      649,
+      "All / CATS / Collars & Harnesses"
+    ],
+    "complete_name": "All / CATS / Collars & Harnesses / Decorated Accessories"
+  },
+  {
+    "id": 652,
+    "name": "Harnesses",
+    "parent_id": [
+      649,
+      "All / CATS / Collars & Harnesses"
+    ],
+    "complete_name": "All / CATS / Collars & Harnesses / Harnesses"
+  },
+  {
+    "id": 653,
+    "name": "ID Tags",
+    "parent_id": [
+      649,
+      "All / CATS / Collars & Harnesses"
+    ],
+    "complete_name": "All / CATS / Collars & Harnesses / ID Tags"
+  },
+  {
+    "id": 654,
+    "name": "Leads",
+    "parent_id": [
+      649,
+      "All / CATS / Collars & Harnesses"
+    ],
+    "complete_name": "All / CATS / Collars & Harnesses / Leads"
+  },
+  {
+    "id": 655,
+    "name": "Reflective & Safety Gear",
+    "parent_id": [
+      649,
+      "All / CATS / Collars & Harnesses"
+    ],
+    "complete_name": "All / CATS / Collars & Harnesses / Reflective & Safety Gear"
+  },
+  {
+    "id": 656,
+    "name": "Grooming Essentials",
+    "parent_id": [
+      628,
+      "All / CATS"
+    ],
+    "complete_name": "All / CATS / Grooming Essentials"
+  },
+  {
+    "id": 657,
+    "name": "Bath & Shampoo",
+    "parent_id": [
+      656,
+      "All / CATS / Grooming Essentials"
+    ],
+    "complete_name": "All / CATS / Grooming Essentials / Bath & Shampoo"
+  },
+  {
+    "id": 931,
+    "name": "All / CATS / Grooming Essentials / Bath & Shampoo",
+    "parent_id": false,
+    "complete_name": "All / CATS / Grooming Essentials / Bath & Shampoo"
+  },
+  {
+    "id": 930,
+    "name": "All / CATS / Grooming Essentials / Bath & Shampoo",
+    "parent_id": false,
+    "complete_name": "All / CATS / Grooming Essentials / Bath & Shampoo"
+  },
+  {
+    "id": 919,
+    "name": "All / CATS / Grooming Essentials / Bath & Shampoo",
+    "parent_id": false,
+    "complete_name": "All / CATS / Grooming Essentials / Bath & Shampoo"
+  },
+  {
+    "id": 884,
+    "name": "All / CATS / Grooming Essentials / Bath & Shampoo",
+    "parent_id": false,
+    "complete_name": "All / CATS / Grooming Essentials / Bath & Shampoo"
+  },
+  {
+    "id": 897,
+    "name": "All / CATS / Grooming Essentials / Bath & Shampoo",
+    "parent_id": false,
+    "complete_name": "All / CATS / Grooming Essentials / Bath & Shampoo"
+  },
+  {
+    "id": 885,
+    "name": "All / CATS / Grooming Essentials / Bath & Shampoo",
+    "parent_id": false,
+    "complete_name": "All / CATS / Grooming Essentials / Bath & Shampoo"
+  },
+  {
+    "id": 904,
+    "name": "All / CATS / Grooming Essentials / Bath & Shampoo",
+    "parent_id": false,
+    "complete_name": "All / CATS / Grooming Essentials / Bath & Shampoo"
+  },
+  {
+    "id": 658,
+    "name": "Coat Care",
+    "parent_id": [
+      656,
+      "All / CATS / Grooming Essentials"
+    ],
+    "complete_name": "All / CATS / Grooming Essentials / Coat Care"
+  },
+  {
+    "id": 923,
+    "name": "All / CATS / Grooming Essentials / Coat Care",
+    "parent_id": false,
+    "complete_name": "All / CATS / Grooming Essentials / Coat Care"
+  },
+  {
+    "id": 971,
+    "name": "All / CATS / Grooming Essentials / Coat Care",
+    "parent_id": false,
+    "complete_name": "All / CATS / Grooming Essentials / Coat Care"
+  },
+  {
+    "id": 659,
+    "name": "Ear & Eye Care",
+    "parent_id": [
+      656,
+      "All / CATS / Grooming Essentials"
+    ],
+    "complete_name": "All / CATS / Grooming Essentials / Ear & Eye Care"
+  },
+  {
+    "id": 660,
+    "name": "Nail Care",
+    "parent_id": [
+      656,
+      "All / CATS / Grooming Essentials"
+    ],
+    "complete_name": "All / CATS / Grooming Essentials / Nail Care"
+  },
+  {
+    "id": 661,
+    "name": "Paw Care",
+    "parent_id": [
+      656,
+      "All / CATS / Grooming Essentials"
+    ],
+    "complete_name": "All / CATS / Grooming Essentials / Paw Care"
+  },
+  {
+    "id": 662,
+    "name": "Pet Perfumes & Sprays",
+    "parent_id": [
+      656,
+      "All / CATS / Grooming Essentials"
+    ],
+    "complete_name": "All / CATS / Grooming Essentials / Pet Perfumes & Sprays"
+  },
+  {
+    "id": 905,
+    "name": "All / CATS / Grooming Essentials / Pet Perfumes & Sprays",
+    "parent_id": false,
+    "complete_name": "All / CATS / Grooming Essentials / Pet Perfumes & Sprays"
+  },
+  {
+    "id": 928,
+    "name": "All / CATS / Grooming Essentials / Pet Perfumes & Sprays",
+    "parent_id": false,
+    "complete_name": "All / CATS / Grooming Essentials / Pet Perfumes & Sprays"
+  },
+  {
+    "id": 663,
+    "name": "Wipes & Hygiene",
+    "parent_id": [
+      656,
+      "All / CATS / Grooming Essentials"
+    ],
+    "complete_name": "All / CATS / Grooming Essentials / Wipes & Hygiene"
+  },
+  {
+    "id": 664,
+    "name": "Oral Care",
+    "parent_id": [
+      628,
+      "All / CATS"
+    ],
+    "complete_name": "All / CATS / Oral Care"
+  },
+  {
+    "id": 665,
+    "name": "Dental Oral Sprays & Gels",
+    "parent_id": [
+      664,
+      "All / CATS / Oral Care"
+    ],
+    "complete_name": "All / CATS / Oral Care / Dental Oral Sprays & Gels"
+  },
+  {
+    "id": 666,
+    "name": "Toothbrushes",
+    "parent_id": [
+      664,
+      "All / CATS / Oral Care"
+    ],
+    "complete_name": "All / CATS / Oral Care / Toothbrushes"
+  },
+  {
+    "id": 667,
+    "name": "Toothpaste",
+    "parent_id": [
+      664,
+      "All / CATS / Oral Care"
+    ],
+    "complete_name": "All / CATS / Oral Care / Toothpaste"
+  },
+  {
+    "id": 668,
+    "name": "Water Additives",
+    "parent_id": [
+      664,
+      "All / CATS / Oral Care"
+    ],
+    "complete_name": "All / CATS / Oral Care / Water Additives"
+  },
+  {
+    "id": 669,
+    "name": "Pet Apparel",
+    "parent_id": [
+      628,
+      "All / CATS"
+    ],
+    "complete_name": "All / CATS / Pet Apparel"
+  },
+  {
+    "id": 670,
+    "name": "Accessories",
+    "parent_id": [
+      669,
+      "All / CATS / Pet Apparel"
+    ],
+    "complete_name": "All / CATS / Pet Apparel / Accessories"
+  },
+  {
+    "id": 671,
+    "name": "Cooling Apparel",
+    "parent_id": [
+      669,
+      "All / CATS / Pet Apparel"
+    ],
+    "complete_name": "All / CATS / Pet Apparel / Cooling Apparel"
+  },
+  {
+    "id": 672,
+    "name": "Costumes & Dress-up",
+    "parent_id": [
+      669,
+      "All / CATS / Pet Apparel"
+    ],
+    "complete_name": "All / CATS / Pet Apparel / Costumes & Dress-up"
+  },
+  {
+    "id": 673,
+    "name": "Dresses",
+    "parent_id": [
+      669,
+      "All / CATS / Pet Apparel"
+    ],
+    "complete_name": "All / CATS / Pet Apparel / Dresses"
+  },
+  {
+    "id": 674,
+    "name": "Female & Male Panties",
+    "parent_id": [
+      669,
+      "All / CATS / Pet Apparel"
+    ],
+    "complete_name": "All / CATS / Pet Apparel / Female & Male Panties"
+  },
+  {
+    "id": 675,
+    "name": "Hoodies, Shirts & T-shirts",
+    "parent_id": [
+      669,
+      "All / CATS / Pet Apparel"
+    ],
+    "complete_name": "All / CATS / Pet Apparel / Hoodies, Shirts & T-shirts"
+  },
+  {
+    "id": 676,
+    "name": "Jackets",
+    "parent_id": [
+      669,
+      "All / CATS / Pet Apparel"
+    ],
+    "complete_name": "All / CATS / Pet Apparel / Jackets"
+  },
+  {
+    "id": 677,
+    "name": "Raincoats",
+    "parent_id": [
+      669,
+      "All / CATS / Pet Apparel"
+    ],
+    "complete_name": "All / CATS / Pet Apparel / Raincoats"
+  },
+  {
+    "id": 678,
+    "name": "Reflective & Safety Wear",
+    "parent_id": [
+      669,
+      "All / CATS / Pet Apparel"
+    ],
+    "complete_name": "All / CATS / Pet Apparel / Reflective & Safety Wear"
+  },
+  {
+    "id": 679,
+    "name": "Shoes & Boots",
+    "parent_id": [
+      669,
+      "All / CATS / Pet Apparel"
+    ],
+    "complete_name": "All / CATS / Pet Apparel / Shoes & Boots"
+  },
+  {
+    "id": 680,
+    "name": "Sweaters",
+    "parent_id": [
+      669,
+      "All / CATS / Pet Apparel"
+    ],
+    "complete_name": "All / CATS / Pet Apparel / Sweaters"
+  },
+  {
+    "id": 1028,
+    "name": "All / CATS / Scratchers & Cat Housing",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing"
+  },
+  {
+    "id": 1044,
+    "name": "All / CATS / Scratchers & Cat Housing",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing"
+  },
+  {
+    "id": 1034,
+    "name": "All / CATS / Scratchers & Cat Housing",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing"
+  },
+  {
+    "id": 1032,
+    "name": "All / CATS / Scratchers & Cat Housing",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing"
+  },
+  {
+    "id": 681,
+    "name": "Scratchers & Cat Housing",
+    "parent_id": [
+      628,
+      "All / CATS"
+    ],
+    "complete_name": "All / CATS / Scratchers & Cat Housing"
+  },
+  {
+    "id": 682,
+    "name": "Cat Houses",
+    "parent_id": [
+      681,
+      "All / CATS / Scratchers & Cat Housing"
+    ],
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Cat Houses"
+  },
+  {
+    "id": 683,
+    "name": "Cat Trees & Condo's",
+    "parent_id": [
+      681,
+      "All / CATS / Scratchers & Cat Housing"
+    ],
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Cat Trees & Condo's"
+  },
+  {
+    "id": 1037,
+    "name": "All / CATS / Scratchers & Cat Housing / Floor Mats, Floor Scratches & Pads",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Floor Mats, Floor Scratches & Pads"
+  },
+  {
+    "id": 684,
+    "name": "Floor Mats, Floor Scratches & Pads",
+    "parent_id": [
+      681,
+      "All / CATS / Scratchers & Cat Housing"
+    ],
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Floor Mats, Floor Scratches & Pads"
+  },
+  {
+    "id": 685,
+    "name": "Scratch Pads / Boards",
+    "parent_id": [
+      681,
+      "All / CATS / Scratchers & Cat Housing"
+    ],
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards"
+  },
+  {
+    "id": 1023,
+    "name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards"
+  },
+  {
+    "id": 1026,
+    "name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards"
+  },
+  {
+    "id": 1038,
+    "name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards"
+  },
+  {
+    "id": 1043,
+    "name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards"
+  },
+  {
+    "id": 1046,
+    "name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards"
+  },
+  {
+    "id": 1022,
+    "name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards"
+  },
+  {
+    "id": 1045,
+    "name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards"
+  },
+  {
+    "id": 1039,
+    "name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards"
+  },
+  {
+    "id": 1031,
+    "name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards"
+  },
+  {
+    "id": 1025,
+    "name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratch Pads / Boards"
+  },
+  {
+    "id": 686,
+    "name": "Scratching Posts",
+    "parent_id": [
+      681,
+      "All / CATS / Scratchers & Cat Housing"
+    ],
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratching Posts"
+  },
+  {
+    "id": 1030,
+    "name": "All / CATS / Scratchers & Cat Housing / Scratching Posts",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratching Posts"
+  },
+  {
+    "id": 1036,
+    "name": "All / CATS / Scratchers & Cat Housing / Scratching Posts",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratching Posts"
+  },
+  {
+    "id": 1042,
+    "name": "All / CATS / Scratchers & Cat Housing / Scratching Posts",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratching Posts"
+  },
+  {
+    "id": 1040,
+    "name": "All / CATS / Scratchers & Cat Housing / Scratching Posts",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratching Posts"
+  },
+  {
+    "id": 1035,
+    "name": "All / CATS / Scratchers & Cat Housing / Scratching Posts",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratching Posts"
+  },
+  {
+    "id": 1041,
+    "name": "All / CATS / Scratchers & Cat Housing / Scratching Posts",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratching Posts"
+  },
+  {
+    "id": 1033,
+    "name": "All / CATS / Scratchers & Cat Housing / Scratching Posts",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratching Posts"
+  },
+  {
+    "id": 1029,
+    "name": "All / CATS / Scratchers & Cat Housing / Scratching Posts",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratching Posts"
+  },
+  {
+    "id": 1024,
+    "name": "All / CATS / Scratchers & Cat Housing / Scratching Posts",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratching Posts"
+  },
+  {
+    "id": 1027,
+    "name": "All / CATS / Scratchers & Cat Housing / Scratching Posts",
+    "parent_id": false,
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Scratching Posts"
+  },
+  {
+    "id": 687,
+    "name": "Window Perches / Hammocks",
+    "parent_id": [
+      681,
+      "All / CATS / Scratchers & Cat Housing"
+    ],
+    "complete_name": "All / CATS / Scratchers & Cat Housing / Window Perches / Hammocks"
+  },
+  {
+    "id": 815,
+    "name": "All / CATS / Tick & Flea  / Prevention Products",
+    "parent_id": false,
+    "complete_name": "All / CATS / Tick & Flea  / Prevention Products"
+  },
+  {
+    "id": 978,
+    "name": "All / CATS / Tick & Flea  / Prevention Products",
+    "parent_id": false,
+    "complete_name": "All / CATS / Tick & Flea  / Prevention Products"
+  },
+  {
+    "id": 814,
+    "name": "All / CATS / Tick, Flea  / Prevention Products",
+    "parent_id": false,
+    "complete_name": "All / CATS / Tick, Flea  / Prevention Products"
+  },
+  {
+    "id": 816,
+    "name": "All / CATS / Tick, Flea &  / Tick & Flea Treatments",
+    "parent_id": false,
+    "complete_name": "All / CATS / Tick, Flea &  / Tick & Flea Treatments"
+  },
+  {
+    "id": 688,
+    "name": "Tick, Flea & Deworming",
+    "parent_id": [
+      628,
+      "All / CATS"
+    ],
+    "complete_name": "All / CATS / Tick, Flea & Deworming"
+  },
+  {
+    "id": 689,
+    "name": "Dewormers",
+    "parent_id": [
+      688,
+      "All / CATS / Tick, Flea & Deworming"
+    ],
+    "complete_name": "All / CATS / Tick, Flea & Deworming / Dewormers"
+  },
+  {
+    "id": 690,
+    "name": "Prevention Products",
+    "parent_id": [
+      688,
+      "All / CATS / Tick, Flea & Deworming"
+    ],
+    "complete_name": "All / CATS / Tick, Flea & Deworming / Prevention Products"
+  },
+  {
+    "id": 691,
+    "name": "Tick & Flea Treatments",
+    "parent_id": [
+      688,
+      "All / CATS / Tick, Flea & Deworming"
+    ],
+    "complete_name": "All / CATS / Tick, Flea & Deworming / Tick & Flea Treatments"
+  },
+  {
+    "id": 909,
+    "name": "All / CATS / Tick, Flea / Tick & Flea Treatments",
+    "parent_id": false,
+    "complete_name": "All / CATS / Tick, Flea / Tick & Flea Treatments"
+  },
+  {
+    "id": 819,
+    "name": "All / CATS / Tick, Flea / Tick & Flea Treatments",
+    "parent_id": false,
+    "complete_name": "All / CATS / Tick, Flea / Tick & Flea Treatments"
+  },
+  {
+    "id": 908,
+    "name": "All / CATS / Tick, Flea / Tick & Flea Treatments",
+    "parent_id": false,
+    "complete_name": "All / CATS / Tick, Flea / Tick & Flea Treatments"
+  },
+  {
+    "id": 912,
+    "name": "All / CATS / Tick, Flea / Tick & Flea Treatments",
+    "parent_id": false,
+    "complete_name": "All / CATS / Tick, Flea / Tick & Flea Treatments"
+  },
+  {
+    "id": 1067,
+    "name": "All / Cat / Treats & Chews",
+    "parent_id": false,
+    "complete_name": "All / Cat / Treats & Chews"
+  },
+  {
+    "id": 1088,
+    "name": "All / DOG & CATS / Collars & Harnesses / ID Tags",
+    "parent_id": false,
+    "complete_name": "All / DOG & CATS / Collars & Harnesses / ID Tags"
+  },
+  {
+    "id": 1092,
+    "name": "All / DOG & CATS / Elizabeth Collar",
+    "parent_id": false,
+    "complete_name": "All / DOG & CATS / Elizabeth Collar"
+  },
+  {
+    "id": 1095,
+    "name": "All / DOG & CATS / Feeding & Water / Water Dispensers",
+    "parent_id": false,
+    "complete_name": "All / DOG & CATS / Feeding & Water / Water Dispensers"
+  },
+  {
+    "id": 1098,
+    "name": "All / DOG & CATS / Leash & Harnesses",
+    "parent_id": false,
+    "complete_name": "All / DOG & CATS / Leash & Harnesses"
+  },
+  {
+    "id": 1097,
+    "name": "All / DOG & CATS/ Bowls & Feeders / Food & Water Bowls",
+    "parent_id": false,
+    "complete_name": "All / DOG & CATS/ Bowls & Feeders / Food & Water Bowls"
+  },
+  {
+    "id": 1087,
+    "name": "All / DOG & CATS/ Bowls & Feeders / Multi-purpose / Water Bottle",
+    "parent_id": false,
+    "complete_name": "All / DOG & CATS/ Bowls & Feeders / Multi-purpose / Water Bottle"
+  },
+  {
+    "id": 1076,
+    "name": "All / DOG & CATS/ Feeding & Water / Feeders",
+    "parent_id": false,
+    "complete_name": "All / DOG & CATS/ Feeding & Water / Feeders"
+  },
+  {
+    "id": 1080,
+    "name": "All / DOG & CATS/ Feeding & Water / Water",
+    "parent_id": false,
+    "complete_name": "All / DOG & CATS/ Feeding & Water / Water"
+  },
+  {
+    "id": 1077,
+    "name": "All / DOG & CATS/ Food Storage",
+    "parent_id": false,
+    "complete_name": "All / DOG & CATS/ Food Storage"
+  },
+  {
+    "id": 1085,
+    "name": "All / DOG & CATS/ Milk Feeders",
+    "parent_id": false,
+    "complete_name": "All / DOG & CATS/ Milk Feeders"
+  },
+  {
+    "id": 1073,
+    "name": "All / DOG & CATS/ Travel Essentials / Seat Belts & Restraints",
+    "parent_id": false,
+    "complete_name": "All / DOG & CATS/ Travel Essentials / Seat Belts & Restraints"
+  },
+  {
+    "id": 1086,
+    "name": "All / DOG & CATS/ Water Bottles",
+    "parent_id": false,
+    "complete_name": "All / DOG & CATS/ Water Bottles"
+  },
+  {
+    "id": 1070,
+    "name": "All / DOG / Pet Apparel / Dresses",
+    "parent_id": false,
+    "complete_name": "All / DOG / Pet Apparel / Dresses"
+  },
+  {
+    "id": 1094,
+    "name": "All / DOG/ Beds & Blankets / Mats",
+    "parent_id": false,
+    "complete_name": "All / DOG/ Beds & Blankets / Mats"
+  },
+  {
+    "id": 692,
+    "name": "DOGS",
+    "parent_id": [
+      1,
+      "All"
+    ],
+    "complete_name": "All / DOGS"
+  },
+  {
+    "id": 847,
+    "name": "All / DOGS & CATS / Wellness & Supplements / Calming Supplements",
+    "parent_id": false,
+    "complete_name": "All / DOGS & CATS / Wellness & Supplements / Calming Supplements"
+  },
+  {
+    "id": 983,
+    "name": "All / DOGS & CATS / Wellness & Supplements / Calming Supplements",
+    "parent_id": false,
+    "complete_name": "All / DOGS & CATS / Wellness & Supplements / Calming Supplements"
+  },
+  {
+    "id": 985,
+    "name": "All / DOGS & CATS / Wellness & Supplements / Digestive Support",
+    "parent_id": false,
+    "complete_name": "All / DOGS & CATS / Wellness & Supplements / Digestive Support"
+  },
+  {
+    "id": 849,
+    "name": "All / DOGS & CATS / Wellness & Supplements / Digestive Support",
+    "parent_id": false,
+    "complete_name": "All / DOGS & CATS / Wellness & Supplements / Digestive Support"
+  },
+  {
+    "id": 850,
+    "name": "All / DOGS & CATS / Wellness & Supplements / Hair Ball Control",
+    "parent_id": false,
+    "complete_name": "All / DOGS & CATS / Wellness & Supplements / Hair Ball Control"
+  },
+  {
+    "id": 990,
+    "name": "All / DOGS & CATS / Wellness & Supplements / Hair Ball Control",
+    "parent_id": false,
+    "complete_name": "All / DOGS & CATS / Wellness & Supplements / Hair Ball Control"
+  },
+  {
+    "id": 988,
+    "name": "All / DOGS & CATS / Wellness & Supplements / Joint Support",
+    "parent_id": false,
+    "complete_name": "All / DOGS & CATS / Wellness & Supplements / Joint Support"
+  },
+  {
+    "id": 852,
+    "name": "All / DOGS & CATS / Wellness & Supplements / Joint Support",
+    "parent_id": false,
+    "complete_name": "All / DOGS & CATS / Wellness & Supplements / Joint Support"
+  },
+  {
+    "id": 848,
+    "name": "All / DOGS & CATS / Wellness & Supplements / Skin & Coat Supplements",
+    "parent_id": false,
+    "complete_name": "All / DOGS & CATS / Wellness & Supplements / Skin & Coat Supplements"
+  },
+  {
+    "id": 984,
+    "name": "All / DOGS & CATS / Wellness & Supplements / Skin & Coat Supplements",
+    "parent_id": false,
+    "complete_name": "All / DOGS & CATS / Wellness & Supplements / Skin & Coat Supplements"
+  },
+  {
+    "id": 989,
+    "name": "All / DOGS & CATS / Wellness & Supplements / Supplemental Milk Nutrition",
+    "parent_id": false,
+    "complete_name": "All / DOGS & CATS / Wellness & Supplements / Supplemental Milk Nutrition"
+  },
+  {
+    "id": 851,
+    "name": "All / DOGS & CATS / Wellness & Supplements / Supplemental Milk Nutrition",
+    "parent_id": false,
+    "complete_name": "All / DOGS & CATS / Wellness & Supplements / Supplemental Milk Nutrition"
+  },
+  {
+    "id": 1054,
+    "name": "All / DOGS / Beds & Blankets / Dog Beds",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Beds & Blankets / Dog Beds"
+  },
+  {
+    "id": 693,
+    "name": "Clean Living",
+    "parent_id": [
+      692,
+      "All / DOGS"
+    ],
+    "complete_name": "All / DOGS / Clean Living"
+  },
+  {
+    "id": 956,
+    "name": "All / DOGS / Clean Living / Cleaning Sprays",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Clean Living / Cleaning Sprays"
+  },
+  {
+    "id": 694,
+    "name": "Cleaning Sprays",
+    "parent_id": [
+      693,
+      "All / DOGS / Clean Living"
+    ],
+    "complete_name": "All / DOGS / Clean Living / Cleaning Sprays"
+  },
+  {
+    "id": 907,
+    "name": "All / DOGS / Clean Living / Cleaning Sprays",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Clean Living / Cleaning Sprays"
+  },
+  {
+    "id": 695,
+    "name": "Pet Rollers",
+    "parent_id": [
+      693,
+      "All / DOGS / Clean Living"
+    ],
+    "complete_name": "All / DOGS / Clean Living / Pet Rollers"
+  },
+  {
+    "id": 696,
+    "name": "Spot & Stain Care",
+    "parent_id": [
+      693,
+      "All / DOGS / Clean Living"
+    ],
+    "complete_name": "All / DOGS / Clean Living / Spot & Stain Care"
+  },
+  {
+    "id": 697,
+    "name": "Waste Bags",
+    "parent_id": [
+      693,
+      "All / DOGS / Clean Living"
+    ],
+    "complete_name": "All / DOGS / Clean Living / Waste Bags"
+  },
+  {
+    "id": 698,
+    "name": "Collars, Harnesses & Leads",
+    "parent_id": [
+      692,
+      "All / DOGS"
+    ],
+    "complete_name": "All / DOGS / Collars, Harnesses & Leads"
+  },
+  {
+    "id": 699,
+    "name": "Dog Food",
+    "parent_id": [
+      692,
+      "All / DOGS"
+    ],
+    "complete_name": "All / DOGS / Dog Food"
+  },
+  {
+    "id": 999,
+    "name": "All / DOGS / Dog Food / Adult Dog Food",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Dog Food / Adult Dog Food"
+  },
+  {
+    "id": 1012,
+    "name": "All / DOGS / Dog Food / Adult Dog Food",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Dog Food / Adult Dog Food"
+  },
+  {
+    "id": 1015,
+    "name": "All / DOGS / Dog Food / Adult Dog Food",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Dog Food / Adult Dog Food"
+  },
+  {
+    "id": 981,
+    "name": "All / DOGS / Dog Food / Adult Dog Food",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Dog Food / Adult Dog Food"
+  },
+  {
+    "id": 1014,
+    "name": "All / DOGS / Dog Food / Adult Dog Food",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Dog Food / Adult Dog Food"
+  },
+  {
+    "id": 1013,
+    "name": "All / DOGS / Dog Food / Adult Dog Food",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Dog Food / Adult Dog Food"
+  },
+  {
+    "id": 1000,
+    "name": "All / DOGS / Dog Food / Adult Dog Food",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Dog Food / Adult Dog Food"
+  },
+  {
+    "id": 982,
+    "name": "All / DOGS / Dog Food / Adult Dog Food",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Dog Food / Adult Dog Food"
+  },
+  {
+    "id": 1011,
+    "name": "All / DOGS / Dog Food / Adult Dog Food",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Dog Food / Adult Dog Food"
+  },
+  {
+    "id": 700,
+    "name": "Adult Dog Food",
+    "parent_id": [
+      699,
+      "All / DOGS / Dog Food"
+    ],
+    "complete_name": "All / DOGS / Dog Food / Adult Dog Food"
+  },
+  {
+    "id": 1021,
+    "name": "All / DOGS / Dog Food / Puppy Food",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Dog Food / Puppy Food"
+  },
+  {
+    "id": 1016,
+    "name": "All / DOGS / Dog Food / Puppy Food",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Dog Food / Puppy Food"
+  },
+  {
+    "id": 1006,
+    "name": "All / DOGS / Dog Food / Puppy Food",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Dog Food / Puppy Food"
+  },
+  {
+    "id": 701,
+    "name": "Puppy Food",
+    "parent_id": [
+      699,
+      "All / DOGS / Dog Food"
+    ],
+    "complete_name": "All / DOGS / Dog Food / Puppy Food"
+  },
+  {
+    "id": 702,
+    "name": "Senior Dog Food",
+    "parent_id": [
+      699,
+      "All / DOGS / Dog Food"
+    ],
+    "complete_name": "All / DOGS / Dog Food / Senior Dog Food"
+  },
+  {
+    "id": 703,
+    "name": "Dog Toys",
+    "parent_id": [
+      692,
+      "All / DOGS"
+    ],
+    "complete_name": "All / DOGS / Dog Toys"
+  },
+  {
+    "id": 1008,
+    "name": "All / DOGS / Dogs Food / Wet / Canned Food",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Dogs Food / Wet / Canned Food"
+  },
+  {
+    "id": 1007,
+    "name": "All / DOGS / Dogs Food / Wet / Canned Food",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Dogs Food / Wet / Canned Food"
+  },
+  {
+    "id": 1010,
+    "name": "All / DOGS / Dogs Food / Wet / Canned Food",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Dogs Food / Wet / Canned Food"
+  },
+  {
+    "id": 1004,
+    "name": "All / DOGS / Dogs Food / Wet / Canned Food",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Dogs Food / Wet / Canned Food"
+  },
+  {
+    "id": 854,
+    "name": "All / DOGS / Dogs Food / Wet / Canned Food",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Dogs Food / Wet / Canned Food"
+  },
+  {
+    "id": 1009,
+    "name": "All / DOGS / Dogs Food / Wet / Canned Food",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Dogs Food / Wet / Canned Food"
+  },
+  {
+    "id": 704,
+    "name": "Grooming",
+    "parent_id": [
+      692,
+      "All / DOGS"
+    ],
+    "complete_name": "All / DOGS / Grooming"
+  },
+  {
+    "id": 705,
+    "name": "Health & Wellness",
+    "parent_id": [
+      692,
+      "All / DOGS"
+    ],
+    "complete_name": "All / DOGS / Health & Wellness"
+  },
+  {
+    "id": 706,
+    "name": "Home & Crates",
+    "parent_id": [
+      692,
+      "All / DOGS"
+    ],
+    "complete_name": "All / DOGS / Home & Crates"
+  },
+  {
+    "id": 707,
+    "name": "Cage Cover",
+    "parent_id": [
+      706,
+      "All / DOGS / Home & Crates"
+    ],
+    "complete_name": "All / DOGS / Home & Crates / Cage Cover"
+  },
+  {
+    "id": 708,
+    "name": "Crate Mats & Pads",
+    "parent_id": [
+      706,
+      "All / DOGS / Home & Crates"
+    ],
+    "complete_name": "All / DOGS / Home & Crates / Crate Mats & Pads"
+  },
+  {
+    "id": 709,
+    "name": "Crates",
+    "parent_id": [
+      706,
+      "All / DOGS / Home & Crates"
+    ],
+    "complete_name": "All / DOGS / Home & Crates / Crates"
+  },
+  {
+    "id": 710,
+    "name": "Gates & Barriers",
+    "parent_id": [
+      706,
+      "All / DOGS / Home & Crates"
+    ],
+    "complete_name": "All / DOGS / Home & Crates / Gates & Barriers"
+  },
+  {
+    "id": 711,
+    "name": "Kennels",
+    "parent_id": [
+      706,
+      "All / DOGS / Home & Crates"
+    ],
+    "complete_name": "All / DOGS / Home & Crates / Kennels"
+  },
+  {
+    "id": 712,
+    "name": "Playpens",
+    "parent_id": [
+      706,
+      "All / DOGS / Home & Crates"
+    ],
+    "complete_name": "All / DOGS / Home & Crates / Playpens"
+  },
+  {
+    "id": 713,
+    "name": "Storage & Organizations",
+    "parent_id": [
+      706,
+      "All / DOGS / Home & Crates"
+    ],
+    "complete_name": "All / DOGS / Home & Crates / Storage & Organizations"
+  },
+  {
+    "id": 1101,
+    "name": "All / DOGS / Home & Crates/ kennels",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Home & Crates/ kennels"
+  },
+  {
+    "id": 714,
+    "name": "Pet Treats",
+    "parent_id": [
+      692,
+      "All / DOGS"
+    ],
+    "complete_name": "All / DOGS / Pet Treats"
+  },
+  {
+    "id": 715,
+    "name": "Training & Behavior",
+    "parent_id": [
+      692,
+      "All / DOGS"
+    ],
+    "complete_name": "All / DOGS / Training & Behavior"
+  },
+  {
+    "id": 716,
+    "name": "Anti-Bark Products",
+    "parent_id": [
+      715,
+      "All / DOGS / Training & Behavior"
+    ],
+    "complete_name": "All / DOGS / Training & Behavior / Anti-Bark Products"
+  },
+  {
+    "id": 921,
+    "name": "All / DOGS / Training & Behavior / Behavior Aids",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Training & Behavior / Behavior Aids"
+  },
+  {
+    "id": 717,
+    "name": "Behavior Aids",
+    "parent_id": [
+      715,
+      "All / DOGS / Training & Behavior"
+    ],
+    "complete_name": "All / DOGS / Training & Behavior / Behavior Aids"
+  },
+  {
+    "id": 920,
+    "name": "All / DOGS / Training & Behavior / Behavior Aids",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Training & Behavior / Behavior Aids"
+  },
+  {
+    "id": 718,
+    "name": "Pee Pad Trays",
+    "parent_id": [
+      715,
+      "All / DOGS / Training & Behavior"
+    ],
+    "complete_name": "All / DOGS / Training & Behavior / Pee Pad Trays"
+  },
+  {
+    "id": 966,
+    "name": "All / DOGS / Training & Behavior / Pee Pads / Training Pads",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Training & Behavior / Pee Pads / Training Pads"
+  },
+  {
+    "id": 946,
+    "name": "All / DOGS / Training & Behavior / Pee Pads / Training Pads",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Training & Behavior / Pee Pads / Training Pads"
+  },
+  {
+    "id": 719,
+    "name": "Pee Pads / Training Pads",
+    "parent_id": [
+      715,
+      "All / DOGS / Training & Behavior"
+    ],
+    "complete_name": "All / DOGS / Training & Behavior / Pee Pads / Training Pads"
+  },
+  {
+    "id": 871,
+    "name": "All / DOGS / Training & Behavior/ Behavior aids",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Training & Behavior/ Behavior aids"
+  },
+  {
+    "id": 922,
+    "name": "All / DOGS / Training & Behavior/ Behavior aids",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Training & Behavior/ Behavior aids"
+  },
+  {
+    "id": 1079,
+    "name": "All / DOGS / Training suit",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Training suit"
+  },
+  {
+    "id": 845,
+    "name": "All / DOGS / Wellness & Supplements / Calming Supplements",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Wellness & Supplements / Calming Supplements"
+  },
+  {
+    "id": 846,
+    "name": "All / DOGS / Wellness & Supplements / Skin & Coat Supplements",
+    "parent_id": false,
+    "complete_name": "All / DOGS / Wellness & Supplements / Skin & Coat Supplements"
+  },
+  {
+    "id": 6,
+    "name": "Deliveries",
+    "parent_id": [
+      1,
+      "All"
+    ],
+    "complete_name": "All / Deliveries"
+  },
+  {
+    "id": 793,
+    "name": "Dog",
+    "parent_id": [
+      1,
+      "All"
+    ],
+    "complete_name": "All / Dog"
+  },
+  {
+    "id": 938,
+    "name": "All / Dog / Grooming Essential",
+    "parent_id": false,
+    "complete_name": "All / Dog / Grooming Essential"
+  },
+  {
+    "id": 913,
+    "name": "All / Dog / Grooming Essential",
+    "parent_id": false,
+    "complete_name": "All / Dog / Grooming Essential"
+  },
+  {
+    "id": 914,
+    "name": "All / Dog / Grooming Essential",
+    "parent_id": false,
+    "complete_name": "All / Dog / Grooming Essential"
+  },
+  {
+    "id": 903,
+    "name": "All / Dog / Grooming Essential",
+    "parent_id": false,
+    "complete_name": "All / Dog / Grooming Essential"
+  },
+  {
+    "id": 924,
+    "name": "All / Dog / Grooming Essential",
+    "parent_id": false,
+    "complete_name": "All / Dog / Grooming Essential"
+  },
+  {
+    "id": 929,
+    "name": "All / Dog / Grooming Essential",
+    "parent_id": false,
+    "complete_name": "All / Dog / Grooming Essential"
+  },
+  {
+    "id": 889,
+    "name": "All / Dog / Grooming Essential",
+    "parent_id": false,
+    "complete_name": "All / Dog / Grooming Essential"
+  },
+  {
+    "id": 888,
+    "name": "All / Dog / Grooming Essential",
+    "parent_id": false,
+    "complete_name": "All / Dog / Grooming Essential"
+  },
+  {
+    "id": 886,
+    "name": "All / Dog / Grooming Essential",
+    "parent_id": false,
+    "complete_name": "All / Dog / Grooming Essential"
+  },
+  {
+    "id": 794,
+    "name": "Grooming Essential",
+    "parent_id": [
+      793,
+      "All / Dog"
+    ],
+    "complete_name": "All / Dog / Grooming Essential"
+  },
+  {
+    "id": 959,
+    "name": "All / Dog / Grooming Essential",
+    "parent_id": false,
+    "complete_name": "All / Dog / Grooming Essential"
+  },
+  {
+    "id": 958,
+    "name": "All / Dog / Grooming Essential",
+    "parent_id": false,
+    "complete_name": "All / Dog / Grooming Essential"
+  },
+  {
+    "id": 945,
+    "name": "All / Dog / Grooming Essential",
+    "parent_id": false,
+    "complete_name": "All / Dog / Grooming Essential"
+  },
+  {
+    "id": 944,
+    "name": "All / Dog / Grooming Essential",
+    "parent_id": false,
+    "complete_name": "All / Dog / Grooming Essential"
+  },
+  {
+    "id": 933,
+    "name": "All / Dog / Grooming Essential",
+    "parent_id": false,
+    "complete_name": "All / Dog / Grooming Essential"
+  },
+  {
+    "id": 932,
+    "name": "All / Dog / Grooming Essential",
+    "parent_id": false,
+    "complete_name": "All / Dog / Grooming Essential"
+  },
+  {
+    "id": 974,
+    "name": "All / Dog / Grooming Essential/ Allergy Free",
+    "parent_id": false,
+    "complete_name": "All / Dog / Grooming Essential/ Allergy Free"
+  },
+  {
+    "id": 841,
+    "name": "All / Dog / Grooming Essential/ Allergy Free",
+    "parent_id": false,
+    "complete_name": "All / Dog / Grooming Essential/ Allergy Free"
+  },
+  {
+    "id": 1063,
+    "name": "All / Dog / Treats & Chews",
+    "parent_id": false,
+    "complete_name": "All / Dog / Treats & Chews"
+  },
+  {
+    "id": 1069,
+    "name": "All / Dog/ Pet Apparel / Jackets",
+    "parent_id": false,
+    "complete_name": "All / Dog/ Pet Apparel / Jackets"
+  },
+  {
+    "id": 853,
+    "name": "All / Dogs / Dog Food / Wet / Canned Food",
+    "parent_id": false,
+    "complete_name": "All / Dogs / Dog Food / Wet / Canned Food"
+  },
+  {
+    "id": 1005,
+    "name": "All / Dogs / Dog Food / Wet / Canned Food",
+    "parent_id": false,
+    "complete_name": "All / Dogs / Dog Food / Wet / Canned Food"
+  },
+  {
+    "id": 817,
+    "name": "All / Dogs / Tick, Flea & / Tick & Flea Treatments",
+    "parent_id": false,
+    "complete_name": "All / Dogs / Tick, Flea & / Tick & Flea Treatments"
+  },
+  {
+    "id": 812,
+    "name": "All / Dogs / Tick, Flea & Deworming / Tick & Flea Treatments",
+    "parent_id": false,
+    "complete_name": "All / Dogs / Tick, Flea & Deworming / Tick & Flea Treatments"
+  },
+  {
+    "id": 910,
+    "name": "All / Dogs / Tick, Flea / Tick & Flea Treatments",
+    "parent_id": false,
+    "complete_name": "All / Dogs / Tick, Flea / Tick & Flea Treatments"
+  },
+  {
+    "id": 820,
+    "name": "All / Dogs / Tick, Flea / Tick & Flea Treatments",
+    "parent_id": false,
+    "complete_name": "All / Dogs / Tick, Flea / Tick & Flea Treatments"
+  },
+  {
+    "id": 3,
+    "name": "Expenses",
+    "parent_id": [
+      1,
+      "All"
+    ],
+    "complete_name": "All / Expenses"
+  },
+  {
+    "id": 132,
+    "name": "Grooming",
+    "parent_id": [
+      1,
+      "All"
+    ],
+    "complete_name": "All / Grooming"
+  },
+  {
+    "id": 720,
+    "name": "SMALL PETS",
+    "parent_id": [
+      1,
+      "All"
+    ],
+    "complete_name": "All / SMALL PETS"
+  },
+  {
+    "id": 861,
+    "name": "All / SMALL PETS /  Clean Living / Cage Clean",
+    "parent_id": false,
+    "complete_name": "All / SMALL PETS /  Clean Living / Cage Clean"
+  },
+  {
+    "id": 721,
+    "name": "Bowls & Feeders",
+    "parent_id": [
+      720,
+      "All / SMALL PETS"
+    ],
+    "complete_name": "All / SMALL PETS / Bowls & Feeders"
+  },
+  {
+    "id": 722,
+    "name": "Automatic Feeders",
+    "parent_id": [
+      721,
+      "All / SMALL PETS / Bowls & Feeders"
+    ],
+    "complete_name": "All / SMALL PETS / Bowls & Feeders / Automatic Feeders"
+  },
+  {
+    "id": 723,
+    "name": "Feeders & Dispensers",
+    "parent_id": [
+      721,
+      "All / SMALL PETS / Bowls & Feeders"
+    ],
+    "complete_name": "All / SMALL PETS / Bowls & Feeders / Feeders & Dispensers"
+  },
+  {
+    "id": 724,
+    "name": "Feeding Cups",
+    "parent_id": [
+      721,
+      "All / SMALL PETS / Bowls & Feeders"
+    ],
+    "complete_name": "All / SMALL PETS / Bowls & Feeders / Feeding Cups"
+  },
+  {
+    "id": 725,
+    "name": "Feeding Sets",
+    "parent_id": [
+      721,
+      "All / SMALL PETS / Bowls & Feeders"
+    ],
+    "complete_name": "All / SMALL PETS / Bowls & Feeders / Feeding Sets"
+  },
+  {
+    "id": 726,
+    "name": "Food & Water Bowls",
+    "parent_id": [
+      721,
+      "All / SMALL PETS / Bowls & Feeders"
+    ],
+    "complete_name": "All / SMALL PETS / Bowls & Feeders / Food & Water Bowls"
+  },
+  {
+    "id": 727,
+    "name": "Multi-purpose / Water Bottle",
+    "parent_id": [
+      721,
+      "All / SMALL PETS / Bowls & Feeders"
+    ],
+    "complete_name": "All / SMALL PETS / Bowls & Feeders / Multi-purpose / Water Bottle"
+  },
+  {
+    "id": 728,
+    "name": "Raised Bowls",
+    "parent_id": [
+      721,
+      "All / SMALL PETS / Bowls & Feeders"
+    ],
+    "complete_name": "All / SMALL PETS / Bowls & Feeders / Raised Bowls"
+  },
+  {
+    "id": 729,
+    "name": "Travel Bowls",
+    "parent_id": [
+      721,
+      "All / SMALL PETS / Bowls & Feeders"
+    ],
+    "complete_name": "All / SMALL PETS / Bowls & Feeders / Travel Bowls"
+  },
+  {
+    "id": 730,
+    "name": "Water Dispensers / Bottles",
+    "parent_id": [
+      721,
+      "All / SMALL PETS / Bowls & Feeders"
+    ],
+    "complete_name": "All / SMALL PETS / Bowls & Feeders / Water Dispensers / Bottles"
+  },
+  {
+    "id": 731,
+    "name": "Water Fountains",
+    "parent_id": [
+      721,
+      "All / SMALL PETS / Bowls & Feeders"
+    ],
+    "complete_name": "All / SMALL PETS / Bowls & Feeders / Water Fountains"
+  },
+  {
+    "id": 732,
+    "name": "Food",
+    "parent_id": [
+      720,
+      "All / SMALL PETS"
+    ],
+    "complete_name": "All / SMALL PETS / Food"
+  },
+  {
+    "id": 733,
+    "name": "Guinea Pig Food",
+    "parent_id": [
+      732,
+      "All / SMALL PETS / Food"
+    ],
+    "complete_name": "All / SMALL PETS / Food / Guinea Pig Food"
+  },
+  {
+    "id": 734,
+    "name": "Hamster Food",
+    "parent_id": [
+      732,
+      "All / SMALL PETS / Food"
+    ],
+    "complete_name": "All / SMALL PETS / Food / Hamster Food"
+  },
+  {
+    "id": 735,
+    "name": "Mixed Small Pet Food",
+    "parent_id": [
+      732,
+      "All / SMALL PETS / Food"
+    ],
+    "complete_name": "All / SMALL PETS / Food / Mixed Small Pet Food"
+  },
+  {
+    "id": 736,
+    "name": "Rabbit Food",
+    "parent_id": [
+      732,
+      "All / SMALL PETS / Food"
+    ],
+    "complete_name": "All / SMALL PETS / Food / Rabbit Food"
+  },
+  {
+    "id": 954,
+    "name": "All / SMALL PETS / Hygiene & Cleaning",
+    "parent_id": false,
+    "complete_name": "All / SMALL PETS / Hygiene & Cleaning"
+  },
+  {
+    "id": 737,
+    "name": "Hygiene & Cleaning",
+    "parent_id": [
+      720,
+      "All / SMALL PETS"
+    ],
+    "complete_name": "All / SMALL PETS / Hygiene & Cleaning"
+  },
+  {
+    "id": 738,
+    "name": "Cage Cleaners",
+    "parent_id": [
+      737,
+      "All / SMALL PETS / Hygiene & Cleaning"
+    ],
+    "complete_name": "All / SMALL PETS / Hygiene & Cleaning / Cage Cleaners"
+  },
+  {
+    "id": 739,
+    "name": "Cleaning Accessories",
+    "parent_id": [
+      737,
+      "All / SMALL PETS / Hygiene & Cleaning"
+    ],
+    "complete_name": "All / SMALL PETS / Hygiene & Cleaning / Cleaning Accessories"
+  },
+  {
+    "id": 950,
+    "name": "All / SMALL PETS / Hygiene & Cleaning / Cleaning Accessories",
+    "parent_id": false,
+    "complete_name": "All / SMALL PETS / Hygiene & Cleaning / Cleaning Accessories"
+  },
+  {
+    "id": 740,
+    "name": "Litter & Bedding Cleaners",
+    "parent_id": [
+      737,
+      "All / SMALL PETS / Hygiene & Cleaning"
+    ],
+    "complete_name": "All / SMALL PETS / Hygiene & Cleaning / Litter & Bedding Cleaners"
+  },
+  {
+    "id": 741,
+    "name": "Odor Control",
+    "parent_id": [
+      737,
+      "All / SMALL PETS / Hygiene & Cleaning"
+    ],
+    "complete_name": "All / SMALL PETS / Hygiene & Cleaning / Odor Control"
+  },
+  {
+    "id": 742,
+    "name": "Little Homes",
+    "parent_id": [
+      720,
+      "All / SMALL PETS"
+    ],
+    "complete_name": "All / SMALL PETS / Little Homes"
+  },
+  {
+    "id": 743,
+    "name": "Bedding",
+    "parent_id": [
+      742,
+      "All / SMALL PETS / Little Homes"
+    ],
+    "complete_name": "All / SMALL PETS / Little Homes / Bedding"
+  },
+  {
+    "id": 744,
+    "name": "Cages",
+    "parent_id": [
+      742,
+      "All / SMALL PETS / Little Homes"
+    ],
+    "complete_name": "All / SMALL PETS / Little Homes / Cages"
+  },
+  {
+    "id": 745,
+    "name": "Enclosures",
+    "parent_id": [
+      742,
+      "All / SMALL PETS / Little Homes"
+    ],
+    "complete_name": "All / SMALL PETS / Little Homes / Enclosures"
+  },
+  {
+    "id": 746,
+    "name": "Hutches",
+    "parent_id": [
+      742,
+      "All / SMALL PETS / Little Homes"
+    ],
+    "complete_name": "All / SMALL PETS / Little Homes / Hutches"
+  },
+  {
+    "id": 747,
+    "name": "Wood Shavings",
+    "parent_id": [
+      742,
+      "All / SMALL PETS / Little Homes"
+    ],
+    "complete_name": "All / SMALL PETS / Little Homes / Wood Shavings"
+  },
+  {
+    "id": 748,
+    "name": "Toys & Plays",
+    "parent_id": [
+      720,
+      "All / SMALL PETS"
+    ],
+    "complete_name": "All / SMALL PETS / Toys & Plays"
+  },
+  {
+    "id": 749,
+    "name": "Automated / Motion Toys",
+    "parent_id": [
+      748,
+      "All / SMALL PETS / Toys & Plays"
+    ],
+    "complete_name": "All / SMALL PETS / Toys & Plays / Automated / Motion Toys"
+  },
+  {
+    "id": 750,
+    "name": "Balls",
+    "parent_id": [
+      748,
+      "All / SMALL PETS / Toys & Plays"
+    ],
+    "complete_name": "All / SMALL PETS / Toys & Plays / Balls"
+  },
+  {
+    "id": 751,
+    "name": "Catnip Toys",
+    "parent_id": [
+      748,
+      "All / SMALL PETS / Toys & Plays"
+    ],
+    "complete_name": "All / SMALL PETS / Toys & Plays / Catnip Toys"
+  },
+  {
+    "id": 752,
+    "name": "Chew Toys",
+    "parent_id": [
+      748,
+      "All / SMALL PETS / Toys & Plays"
+    ],
+    "complete_name": "All / SMALL PETS / Toys & Plays / Chew Toys"
+  },
+  {
+    "id": 753,
+    "name": "Climbing & Chewing Toys",
+    "parent_id": [
+      748,
+      "All / SMALL PETS / Toys & Plays"
+    ],
+    "complete_name": "All / SMALL PETS / Toys & Plays / Climbing & Chewing Toys"
+  },
+  {
+    "id": 754,
+    "name": "Exercise Wheels & Balls",
+    "parent_id": [
+      748,
+      "All / SMALL PETS / Toys & Plays"
+    ],
+    "complete_name": "All / SMALL PETS / Toys & Plays / Exercise Wheels & Balls"
+  },
+  {
+    "id": 755,
+    "name": "Fetch Toys",
+    "parent_id": [
+      748,
+      "All / SMALL PETS / Toys & Plays"
+    ],
+    "complete_name": "All / SMALL PETS / Toys & Plays / Fetch Toys"
+  },
+  {
+    "id": 756,
+    "name": "Interactive Toys",
+    "parent_id": [
+      748,
+      "All / SMALL PETS / Toys & Plays"
+    ],
+    "complete_name": "All / SMALL PETS / Toys & Plays / Interactive Toys"
+  },
+  {
+    "id": 757,
+    "name": "Laser Toys",
+    "parent_id": [
+      748,
+      "All / SMALL PETS / Toys & Plays"
+    ],
+    "complete_name": "All / SMALL PETS / Toys & Plays / Laser Toys"
+  },
+  {
+    "id": 758,
+    "name": "Plush Toys",
+    "parent_id": [
+      748,
+      "All / SMALL PETS / Toys & Plays"
+    ],
+    "complete_name": "All / SMALL PETS / Toys & Plays / Plush Toys"
+  },
+  {
+    "id": 759,
+    "name": "Rope Toys",
+    "parent_id": [
+      748,
+      "All / SMALL PETS / Toys & Plays"
+    ],
+    "complete_name": "All / SMALL PETS / Toys & Plays / Rope Toys"
+  },
+  {
+    "id": 760,
+    "name": "Scratching & Activity Toys",
+    "parent_id": [
+      748,
+      "All / SMALL PETS / Toys & Plays"
+    ],
+    "complete_name": "All / SMALL PETS / Toys & Plays / Scratching & Activity Toys"
+  },
+  {
+    "id": 761,
+    "name": "Squeaky Toys",
+    "parent_id": [
+      748,
+      "All / SMALL PETS / Toys & Plays"
+    ],
+    "complete_name": "All / SMALL PETS / Toys & Plays / Squeaky Toys"
+  },
+  {
+    "id": 762,
+    "name": "Teasers & Wand Toys",
+    "parent_id": [
+      748,
+      "All / SMALL PETS / Toys & Plays"
+    ],
+    "complete_name": "All / SMALL PETS / Toys & Plays / Teasers & Wand Toys"
+  },
+  {
+    "id": 763,
+    "name": "Training Toys",
+    "parent_id": [
+      748,
+      "All / SMALL PETS / Toys & Plays"
+    ],
+    "complete_name": "All / SMALL PETS / Toys & Plays / Training Toys"
+  },
+  {
+    "id": 764,
+    "name": "Tunnels & Hideouts",
+    "parent_id": [
+      748,
+      "All / SMALL PETS / Toys & Plays"
+    ],
+    "complete_name": "All / SMALL PETS / Toys & Plays / Tunnels & Hideouts"
+  },
+  {
+    "id": 765,
+    "name": "Water Toys",
+    "parent_id": [
+      748,
+      "All / SMALL PETS / Toys & Plays"
+    ],
+    "complete_name": "All / SMALL PETS / Toys & Plays / Water Toys"
+  },
+  {
+    "id": 766,
+    "name": "Treats & Chews",
+    "parent_id": [
+      720,
+      "All / SMALL PETS"
+    ],
+    "complete_name": "All / SMALL PETS / Treats & Chews"
+  },
+  {
+    "id": 767,
+    "name": "Biscuit Treats",
+    "parent_id": [
+      766,
+      "All / SMALL PETS / Treats & Chews"
+    ],
+    "complete_name": "All / SMALL PETS / Treats & Chews / Biscuit Treats"
+  },
+  {
+    "id": 768,
+    "name": "Biscuits",
+    "parent_id": [
+      766,
+      "All / SMALL PETS / Treats & Chews"
+    ],
+    "complete_name": "All / SMALL PETS / Treats & Chews / Biscuits"
+  },
+  {
+    "id": 769,
+    "name": "Biscuits Treats",
+    "parent_id": [
+      766,
+      "All / SMALL PETS / Treats & Chews"
+    ],
+    "complete_name": "All / SMALL PETS / Treats & Chews / Biscuits Treats"
+  },
+  {
+    "id": 770,
+    "name": "Catnip Treats",
+    "parent_id": [
+      766,
+      "All / SMALL PETS / Treats & Chews"
+    ],
+    "complete_name": "All / SMALL PETS / Treats & Chews / Catnip Treats"
+  },
+  {
+    "id": 771,
+    "name": "Chew Sticks",
+    "parent_id": [
+      766,
+      "All / SMALL PETS / Treats & Chews"
+    ],
+    "complete_name": "All / SMALL PETS / Treats & Chews / Chew Sticks"
+  },
+  {
+    "id": 772,
+    "name": "Crunchy Treats",
+    "parent_id": [
+      766,
+      "All / SMALL PETS / Treats & Chews"
+    ],
+    "complete_name": "All / SMALL PETS / Treats & Chews / Crunchy Treats"
+  },
+  {
+    "id": 773,
+    "name": "Dental Chews",
+    "parent_id": [
+      766,
+      "All / SMALL PETS / Treats & Chews"
+    ],
+    "complete_name": "All / SMALL PETS / Treats & Chews / Dental Chews"
+  },
+  {
+    "id": 774,
+    "name": "Dental Treats",
+    "parent_id": [
+      766,
+      "All / SMALL PETS / Treats & Chews"
+    ],
+    "complete_name": "All / SMALL PETS / Treats & Chews / Dental Treats"
+  },
+  {
+    "id": 775,
+    "name": "Gourmet/Specialty Treats",
+    "parent_id": [
+      766,
+      "All / SMALL PETS / Treats & Chews"
+    ],
+    "complete_name": "All / SMALL PETS / Treats & Chews / Gourmet/Specialty Treats"
+  },
+  {
+    "id": 776,
+    "name": "Liquid / Paste Treats",
+    "parent_id": [
+      766,
+      "All / SMALL PETS / Treats & Chews"
+    ],
+    "complete_name": "All / SMALL PETS / Treats & Chews / Liquid / Paste Treats"
+  },
+  {
+    "id": 777,
+    "name": "Rawhide Chews",
+    "parent_id": [
+      766,
+      "All / SMALL PETS / Treats & Chews"
+    ],
+    "complete_name": "All / SMALL PETS / Treats & Chews / Rawhide Chews"
+  },
+  {
+    "id": 778,
+    "name": "Snacks",
+    "parent_id": [
+      766,
+      "All / SMALL PETS / Treats & Chews"
+    ],
+    "complete_name": "All / SMALL PETS / Treats & Chews / Snacks"
+  },
+  {
+    "id": 779,
+    "name": "Soft Treats",
+    "parent_id": [
+      766,
+      "All / SMALL PETS / Treats & Chews"
+    ],
+    "complete_name": "All / SMALL PETS / Treats & Chews / Soft Treats"
+  },
+  {
+    "id": 780,
+    "name": "Treat Mixes",
+    "parent_id": [
+      766,
+      "All / SMALL PETS / Treats & Chews"
+    ],
+    "complete_name": "All / SMALL PETS / Treats & Chews / Treat Mixes"
+  },
+  {
+    "id": 781,
+    "name": "Wellness & Supplements",
+    "parent_id": [
+      720,
+      "All / SMALL PETS"
+    ],
+    "complete_name": "All / SMALL PETS / Wellness & Supplements"
+  },
+  {
+    "id": 782,
+    "name": "Calming Supplements",
+    "parent_id": [
+      781,
+      "All / SMALL PETS / Wellness & Supplements"
+    ],
+    "complete_name": "All / SMALL PETS / Wellness & Supplements / Calming Supplements"
+  },
+  {
+    "id": 783,
+    "name": "Deworming & Care",
+    "parent_id": [
+      781,
+      "All / SMALL PETS / Wellness & Supplements"
+    ],
+    "complete_name": "All / SMALL PETS / Wellness & Supplements / Deworming & Care"
+  },
+  {
+    "id": 784,
+    "name": "Digestive Support",
+    "parent_id": [
+      781,
+      "All / SMALL PETS / Wellness & Supplements"
+    ],
+    "complete_name": "All / SMALL PETS / Wellness & Supplements / Digestive Support"
+  },
+  {
+    "id": 785,
+    "name": "General Wellness",
+    "parent_id": [
+      781,
+      "All / SMALL PETS / Wellness & Supplements"
+    ],
+    "complete_name": "All / SMALL PETS / Wellness & Supplements / General Wellness"
+  },
+  {
+    "id": 786,
+    "name": "Hairball Control",
+    "parent_id": [
+      781,
+      "All / SMALL PETS / Wellness & Supplements"
+    ],
+    "complete_name": "All / SMALL PETS / Wellness & Supplements / Hairball Control"
+  },
+  {
+    "id": 787,
+    "name": "Joint Support",
+    "parent_id": [
+      781,
+      "All / SMALL PETS / Wellness & Supplements"
+    ],
+    "complete_name": "All / SMALL PETS / Wellness & Supplements / Joint Support"
+  },
+  {
+    "id": 788,
+    "name": "Skin & Coat Supplements",
+    "parent_id": [
+      781,
+      "All / SMALL PETS / Wellness & Supplements"
+    ],
+    "complete_name": "All / SMALL PETS / Wellness & Supplements / Skin & Coat Supplements"
+  },
+  {
+    "id": 789,
+    "name": "Supplemental Milk Nutrition",
+    "parent_id": [
+      781,
+      "All / SMALL PETS / Wellness & Supplements"
+    ],
+    "complete_name": "All / SMALL PETS / Wellness & Supplements / Supplemental Milk Nutrition"
+  },
+  {
+    "id": 790,
+    "name": "Vitamins",
+    "parent_id": [
+      781,
+      "All / SMALL PETS / Wellness & Supplements"
+    ],
+    "complete_name": "All / SMALL PETS / Wellness & Supplements / Vitamins"
+  },
+  {
+    "id": 791,
+    "name": "Vitamins & Multivitamins",
+    "parent_id": [
+      781,
+      "All / SMALL PETS / Wellness & Supplements"
+    ],
+    "complete_name": "All / SMALL PETS / Wellness & Supplements / Vitamins & Multivitamins"
+  },
+  {
+    "id": 2,
+    "name": "Saleable",
+    "parent_id": [
+      1,
+      "All"
+    ],
+    "complete_name": "All / Saleable"
+  },
+  {
+    "id": 4,
+    "name": "Booking Fees",
+    "parent_id": [
+      2,
+      "All / Saleable"
+    ],
+    "complete_name": "All / Saleable / Booking Fees"
+  },
+  {
+    "id": 5,
+    "name": "PoS",
+    "parent_id": [
+      2,
+      "All / Saleable"
+    ],
+    "complete_name": "All / Saleable / PoS"
+  },
+  {
+    "id": 879,
+    "name": "All /Both DOGS & CATS / Ear Mite / Prevention Products",
+    "parent_id": false,
+    "complete_name": "All /Both DOGS & CATS / Ear Mite / Prevention Products"
+  },
+  {
+    "id": 979,
+    "name": "All /Both DOGS & CATS / Ear Mite / Prevention Products",
+    "parent_id": false,
+    "complete_name": "All /Both DOGS & CATS / Ear Mite / Prevention Products"
+  },
+  {
+    "id": 873,
+    "name": "All /Both DOGS & CATS / Grooming Essentials / Pet Perfumes & Sprays",
+    "parent_id": false,
+    "complete_name": "All /Both DOGS & CATS / Grooming Essentials / Pet Perfumes & Sprays"
+  },
+  {
+    "id": 941,
+    "name": "All /Both DOGS & CATS / Grooming Essentials / Pet Perfumes & Sprays",
+    "parent_id": false,
+    "complete_name": "All /Both DOGS & CATS / Grooming Essentials / Pet Perfumes & Sprays"
+  },
+  {
+    "id": 843,
+    "name": "All /CATS / Grooming Essentials",
+    "parent_id": false,
+    "complete_name": "All /CATS / Grooming Essentials"
+  },
+  {
+    "id": 976,
+    "name": "All /CATS / Grooming Essentials",
+    "parent_id": false,
+    "complete_name": "All /CATS / Grooming Essentials"
+  },
+  {
+    "id": 828,
+    "name": "All /CATS / Grooming Essentials / Paw Care",
+    "parent_id": false,
+    "complete_name": "All /CATS / Grooming Essentials / Paw Care"
+  },
+  {
+    "id": 940,
+    "name": "All /CATS / Grooming Essentials / Paw Care",
+    "parent_id": false,
+    "complete_name": "All /CATS / Grooming Essentials / Paw Care"
+  },
+  {
+    "id": 1075,
+    "name": "All /CATS/ Travel Essentials / Carrier Bags",
+    "parent_id": false,
+    "complete_name": "All /CATS/ Travel Essentials / Carrier Bags"
+  },
+  {
+    "id": 875,
+    "name": "All/ Both DOGS & CATS/  First-aid Product/ Styptic Powder",
+    "parent_id": false,
+    "complete_name": "All/ Both DOGS & CATS/  First-aid Product/ Styptic Powder"
+  },
+  {
+    "id": 947,
+    "name": "All/ Both DOGS & CATS/  First-aid Product/ Styptic Powder",
+    "parent_id": false,
+    "complete_name": "All/ Both DOGS & CATS/  First-aid Product/ Styptic Powder"
+  },
+  {
+    "id": 951,
+    "name": "All/ Both DOGS & CATS/ Clean Living/ Stain Remover",
+    "parent_id": false,
+    "complete_name": "All/ Both DOGS & CATS/ Clean Living/ Stain Remover"
+  },
+  {
+    "id": 952,
+    "name": "All/ Both DOGS & CATS/ Clean Living/ Stain Remover",
+    "parent_id": false,
+    "complete_name": "All/ Both DOGS & CATS/ Clean Living/ Stain Remover"
+  },
+  {
+    "id": 942,
+    "name": "All/ Both DOGS & CATS/ Play Style/ Bubble",
+    "parent_id": false,
+    "complete_name": "All/ Both DOGS & CATS/ Play Style/ Bubble"
+  },
+  {
+    "id": 874,
+    "name": "All/ Both DOGS & CATS/ Play Style/ Bubble",
+    "parent_id": false,
+    "complete_name": "All/ Both DOGS & CATS/ Play Style/ Bubble"
+  },
+  {
+    "id": 864,
+    "name": "All/ Both DOGS, CATS & SMALL PETS/ Clean Living/ Spray",
+    "parent_id": false,
+    "complete_name": "All/ Both DOGS, CATS & SMALL PETS/ Clean Living/ Spray"
+  },
+  {
+    "id": 906,
+    "name": "All/ Both DOGS, CATS & SMALL PETS/ Clean Living/ Spray",
+    "parent_id": false,
+    "complete_name": "All/ Both DOGS, CATS & SMALL PETS/ Clean Living/ Spray"
+  },
+  {
+    "id": 869,
+    "name": "All/ Both DOGS, CATS & SMALL PETS/ Grooming Essentials",
+    "parent_id": false,
+    "complete_name": "All/ Both DOGS, CATS & SMALL PETS/ Grooming Essentials"
+  },
+  {
+    "id": 916,
+    "name": "All/ Both DOGS, CATS & SMALL PETS/ Grooming Essentials",
+    "parent_id": false,
+    "complete_name": "All/ Both DOGS, CATS & SMALL PETS/ Grooming Essentials"
+  },
+  {
+    "id": 865,
+    "name": "All/ Both DOGS, CATS and SMALL PETS / Eye care",
+    "parent_id": false,
+    "complete_name": "All/ Both DOGS, CATS and SMALL PETS / Eye care"
+  },
+  {
+    "id": 808,
+    "name": "All/ Both Dog, cat and Small Pets",
+    "parent_id": false,
+    "complete_name": "All/ Both Dog, cat and Small Pets"
+  },
+  {
+    "id": 811,
+    "name": "All/ Both Dog, cat and Small Pets/ Eye care",
+    "parent_id": false,
+    "complete_name": "All/ Both Dog, cat and Small Pets/ Eye care"
+  },
+  {
+    "id": 810,
+    "name": "All/ Both Dog, cat and Small Pets/ Spray",
+    "parent_id": false,
+    "complete_name": "All/ Both Dog, cat and Small Pets/ Spray"
+  },
+  {
+    "id": 870,
+    "name": "All/ CATS/ Flea & Tick/ Spray",
+    "parent_id": false,
+    "complete_name": "All/ CATS/ Flea & Tick/ Spray"
+  },
+  {
+    "id": 917,
+    "name": "All/ CATS/ Flea & Tick/ Spray",
+    "parent_id": false,
+    "complete_name": "All/ CATS/ Flea & Tick/ Spray"
+  },
+  {
+    "id": 926,
+    "name": "All/ CATS/ Training & Behavioral/ Behavioral aids",
+    "parent_id": false,
+    "complete_name": "All/ CATS/ Training & Behavioral/ Behavioral aids"
+  },
+  {
+    "id": 896,
+    "name": "All/ CATS/ Training & Behavioral/ Behavioral aids",
+    "parent_id": false,
+    "complete_name": "All/ CATS/ Training & Behavioral/ Behavioral aids"
+  },
+  {
+    "id": 925,
+    "name": "All/ CATS/ Training & Behavioral/ Behavioral aids",
+    "parent_id": false,
+    "complete_name": "All/ CATS/ Training & Behavioral/ Behavioral aids"
+  },
+  {
+    "id": 872,
+    "name": "All/ CATS/ Training & Behavioral/ Behavioral aids",
+    "parent_id": false,
+    "complete_name": "All/ CATS/ Training & Behavioral/ Behavioral aids"
+  },
+  {
+    "id": 895,
+    "name": "All/ CATS/ Training & Behavioral/ Behavioral aids",
+    "parent_id": false,
+    "complete_name": "All/ CATS/ Training & Behavioral/ Behavioral aids"
+  },
+  {
+    "id": 973,
+    "name": "All/ DOGS/ Oral Care/ Dental care Set",
+    "parent_id": false,
+    "complete_name": "All/ DOGS/ Oral Care/ Dental care Set"
+  },
+  {
+    "id": 878,
+    "name": "All/ DOGS/ Oral Care/ Dental care Set",
+    "parent_id": false,
+    "complete_name": "All/ DOGS/ Oral Care/ Dental care Set"
+  },
+  {
+    "id": 835,
+    "name": "All/ DOGS/ Oral Care/ Dentalcare Set",
+    "parent_id": false,
+    "complete_name": "All/ DOGS/ Oral Care/ Dentalcare Set"
+  },
+  {
+    "id": 834,
+    "name": "All/ DOGS/ Oral Care/ ToothBrush",
+    "parent_id": false,
+    "complete_name": "All/ DOGS/ Oral Care/ ToothBrush"
+  },
+  {
+    "id": 960,
+    "name": "All/ DOGS/ Oral Care/ ToothBrush",
+    "parent_id": false,
+    "complete_name": "All/ DOGS/ Oral Care/ ToothBrush"
+  },
+  {
+    "id": 961,
+    "name": "All/ DOGS/ Oral Care/ ToothBrush",
+    "parent_id": false,
+    "complete_name": "All/ DOGS/ Oral Care/ ToothBrush"
+  },
+  {
+    "id": 972,
+    "name": "All/ DOGS/ Oral Care/ ToothBrush",
+    "parent_id": false,
+    "complete_name": "All/ DOGS/ Oral Care/ ToothBrush"
+  },
+  {
+    "id": 967,
+    "name": "All/ DOGS/ Oral Care/ ToothPaste",
+    "parent_id": false,
+    "complete_name": "All/ DOGS/ Oral Care/ ToothPaste"
+  },
+  {
+    "id": 833,
+    "name": "All/ DOGS/ Oral Care/ ToothPaste",
+    "parent_id": false,
+    "complete_name": "All/ DOGS/ Oral Care/ ToothPaste"
+  },
+  {
+    "id": 964,
+    "name": "All/ DOGS/ Oral Care/ ToothPaste",
+    "parent_id": false,
+    "complete_name": "All/ DOGS/ Oral Care/ ToothPaste"
+  },
+  {
+    "id": 963,
+    "name": "All/ DOGS/ Oral Care/ ToothPaste",
+    "parent_id": false,
+    "complete_name": "All/ DOGS/ Oral Care/ ToothPaste"
+  },
+  {
+    "id": 962,
+    "name": "All/ DOGS/ Oral Care/ ToothPaste",
+    "parent_id": false,
+    "complete_name": "All/ DOGS/ Oral Care/ ToothPaste"
+  },
+  {
+    "id": 968,
+    "name": "All/ DOGS/ Oral Care/ ToothPaste",
+    "parent_id": false,
+    "complete_name": "All/ DOGS/ Oral Care/ ToothPaste"
+  },
+  {
+    "id": 969,
+    "name": "All/ DOGS/ Oral Care/ ToothPaste",
+    "parent_id": false,
+    "complete_name": "All/ DOGS/ Oral Care/ ToothPaste"
+  },
+  {
+    "id": 832,
+    "name": "All/ DOGS/ Oral Care/ Toothpaste",
+    "parent_id": false,
+    "complete_name": "All/ DOGS/ Oral Care/ Toothpaste"
+  },
+  {
+    "id": 882,
+    "name": "All/ DOGS/ Training & Behavioral/ Behavioral Aids",
+    "parent_id": false,
+    "complete_name": "All/ DOGS/ Training & Behavioral/ Behavioral Aids"
+  },
+  {
+    "id": 858,
+    "name": "All/ Dog/ Oral care/ Dental Care Set",
+    "parent_id": false,
+    "complete_name": "All/ Dog/ Oral care/ Dental Care Set"
+  },
+  {
+    "id": 899,
+    "name": "All/ Dog/ Oral care/ Dental Care Set",
+    "parent_id": false,
+    "complete_name": "All/ Dog/ Oral care/ Dental Care Set"
+  },
+  {
+    "id": 900,
+    "name": "All/ Dog/ Oral care/ Dental Care Set",
+    "parent_id": false,
+    "complete_name": "All/ Dog/ Oral care/ Dental Care Set"
+  },
+  {
+    "id": 821,
+    "name": "All/ Dogs/ Flea & Tick / Spray",
+    "parent_id": false,
+    "complete_name": "All/ Dogs/ Flea & Tick / Spray"
+  },
+  {
+    "id": 918,
+    "name": "All/ Dogs/ Flea & Tick / Spray",
+    "parent_id": false,
+    "complete_name": "All/ Dogs/ Flea & Tick / Spray"
+  },
+  {
+    "id": 867,
+    "name": "All/ Dogs/ Tick, Flea, & Deworming/ Spray",
+    "parent_id": false,
+    "complete_name": "All/ Dogs/ Tick, Flea, & Deworming/ Spray"
+  },
+  {
+    "id": 809,
+    "name": "All/ Dogs/ Tick, Flea,& Deworming",
+    "parent_id": false,
+    "complete_name": "All/ Dogs/ Tick, Flea,& Deworming"
+  },
+  {
+    "id": 813,
+    "name": "All/ Dogs/ Tick, Flea,& Deworming/ Flea & Tick Treatments",
+    "parent_id": false,
+    "complete_name": "All/ Dogs/ Tick, Flea,& Deworming/ Flea & Tick Treatments"
+  },
+  {
+    "id": 818,
+    "name": "All/ Dogs/ Tick, Flea/ Flea & Tick Treatments",
+    "parent_id": false,
+    "complete_name": "All/ Dogs/ Tick, Flea/ Flea & Tick Treatments"
+  },
+  {
+    "id": 977,
+    "name": "All/ Dogs/ Tick, Flea/ Flea & Tick Treatments",
+    "parent_id": false,
+    "complete_name": "All/ Dogs/ Tick, Flea/ Flea & Tick Treatments"
+  },
+  {
+    "id": 911,
+    "name": "All/ Dogs/ Tick, Flea/ Flea & Tick Treatments",
+    "parent_id": false,
+    "complete_name": "All/ Dogs/ Tick, Flea/ Flea & Tick Treatments"
+  },
+  {
+    "id": 1055,
+    "name": "All/Dog/Ear care/Ear powder",
+    "parent_id": false,
+    "complete_name": "All/Dog/Ear care/Ear powder"
+  },
+  {
+    "id": 1057,
+    "name": "All/Dog/Grooming Essentials/Bath and Shampoo",
+    "parent_id": false,
+    "complete_name": "All/Dog/Grooming Essentials/Bath and Shampoo"
+  },
+  {
+    "id": 1056,
+    "name": "All/Dog/Grooming/Bath and Shampoo",
+    "parent_id": false,
+    "complete_name": "All/Dog/Grooming/Bath and Shampoo"
+  },
+  {
+    "id": 1060,
+    "name": "All/Dog/Home & Nest/Cage",
+    "parent_id": false,
+    "complete_name": "All/Dog/Home & Nest/Cage"
+  },
+  {
+    "id": 1059,
+    "name": "All/Dog/Home & Nest/Cage",
+    "parent_id": false,
+    "complete_name": "All/Dog/Home & Nest/Cage"
+  },
+  {
+    "id": 807,
+    "name": "All/Dog/Oral care",
+    "parent_id": false,
+    "complete_name": "All/Dog/Oral care"
+  },
+  {
+    "id": 1058,
+    "name": "All/Dog/Training/Bitting pillow",
+    "parent_id": false,
+    "complete_name": "All/Dog/Training/Bitting pillow"
+  },
+  {
+    "id": 1102,
+    "name": "BIRDS",
+    "parent_id": false,
+    "complete_name": "BIRDS"
+  },
+  {
+    "id": 1103,
+    "name": "BIRD FOODS",
+    "parent_id": [
+      1102,
+      "BIRDS"
+    ],
+    "complete_name": "BIRDS / BIRD FOODS"
+  },
+  {
+    "id": 1105,
+    "name": "Parrots",
+    "parent_id": [
+      1103,
+      "BIRDS / BIRD FOODS"
+    ],
+    "complete_name": "BIRDS / BIRD FOODS / Parrots"
+  },
+  {
+    "id": 1104,
+    "name": "Small Bird Foods",
+    "parent_id": [
+      1103,
+      "BIRDS / BIRD FOODS"
+    ],
+    "complete_name": "BIRDS / BIRD FOODS / Small Bird Foods"
+  },
+  {
+    "id": 1106,
+    "name": "BOWLS & FEEDERS",
+    "parent_id": [
+      1102,
+      "BIRDS"
+    ],
+    "complete_name": "BIRDS / BOWLS & FEEDERS"
+  },
+  {
+    "id": 1107,
+    "name": "Feeders",
+    "parent_id": [
+      1106,
+      "BIRDS / BOWLS & FEEDERS"
+    ],
+    "complete_name": "BIRDS / BOWLS & FEEDERS / Feeders"
+  },
+  {
+    "id": 1108,
+    "name": "Feeding Bowls",
+    "parent_id": [
+      1106,
+      "BIRDS / BOWLS & FEEDERS"
+    ],
+    "complete_name": "BIRDS / BOWLS & FEEDERS / Feeding Bowls"
+  },
+  {
+    "id": 1109,
+    "name": "Water Dispenser",
+    "parent_id": [
+      1106,
+      "BIRDS / BOWLS & FEEDERS"
+    ],
+    "complete_name": "BIRDS / BOWLS & FEEDERS / Water Dispenser"
+  },
+  {
+    "id": 1110,
+    "name": "HOME",
+    "parent_id": [
+      1102,
+      "BIRDS"
+    ],
+    "complete_name": "BIRDS / HOME"
+  },
+  {
+    "id": 1111,
+    "name": "Bird Cages",
+    "parent_id": [
+      1110,
+      "BIRDS / HOME"
+    ],
+    "complete_name": "BIRDS / HOME / Bird Cages"
+  },
+  {
+    "id": 1112,
+    "name": "PERCHES & ACCESSORIES",
+    "parent_id": [
+      1102,
+      "BIRDS"
+    ],
+    "complete_name": "BIRDS / PERCHES & ACCESSORIES"
+  },
+  {
+    "id": 1115,
+    "name": "Bell Toys",
+    "parent_id": [
+      1112,
+      "BIRDS / PERCHES & ACCESSORIES"
+    ],
+    "complete_name": "BIRDS / PERCHES & ACCESSORIES / Bell Toys"
+  },
+  {
+    "id": 1113,
+    "name": "Ladders & Climbers",
+    "parent_id": [
+      1112,
+      "BIRDS / PERCHES & ACCESSORIES"
+    ],
+    "complete_name": "BIRDS / PERCHES & ACCESSORIES / Ladders & Climbers"
+  },
+  {
+    "id": 1114,
+    "name": "Perches & Swings",
+    "parent_id": [
+      1112,
+      "BIRDS / PERCHES & ACCESSORIES"
+    ],
+    "complete_name": "BIRDS / PERCHES & ACCESSORIES / Perches & Swings"
+  },
+  {
+    "id": 1116,
+    "name": "CATS",
+    "parent_id": false,
+    "complete_name": "CATS"
+  },
+  {
+    "id": 1132,
+    "name": "BEDS & COMFORT",
+    "parent_id": [
+      1116,
+      "CATS"
+    ],
+    "complete_name": "CATS / BEDS & COMFORT"
+  },
+  {
+    "id": 1133,
+    "name": "Beds",
+    "parent_id": [
+      1132,
+      "CATS / BEDS & COMFORT"
+    ],
+    "complete_name": "CATS / BEDS & COMFORT / Beds"
+  },
+  {
+    "id": 1134,
+    "name": "Blankets",
+    "parent_id": [
+      1132,
+      "CATS / BEDS & COMFORT"
+    ],
+    "complete_name": "CATS / BEDS & COMFORT / Blankets"
+  },
+  {
+    "id": 1135,
+    "name": "Mats & pads",
+    "parent_id": [
+      1132,
+      "CATS / BEDS & COMFORT"
+    ],
+    "complete_name": "CATS / BEDS & COMFORT / Mats & pads"
+  },
+  {
+    "id": 1136,
+    "name": "Rugs",
+    "parent_id": [
+      1132,
+      "CATS / BEDS & COMFORT"
+    ],
+    "complete_name": "CATS / BEDS & COMFORT / Rugs"
+  },
+  {
+    "id": 1126,
+    "name": "BOWLS & FEEDERS",
+    "parent_id": [
+      1116,
+      "CATS"
+    ],
+    "complete_name": "CATS / BOWLS & FEEDERS"
+  },
+  {
+    "id": 1129,
+    "name": "Elevated Bowls",
+    "parent_id": [
+      1126,
+      "CATS / BOWLS & FEEDERS"
+    ],
+    "complete_name": "CATS / BOWLS & FEEDERS / Elevated Bowls"
+  },
+  {
+    "id": 1130,
+    "name": "Feeders & Water Dispensers",
+    "parent_id": [
+      1126,
+      "CATS / BOWLS & FEEDERS"
+    ],
+    "complete_name": "CATS / BOWLS & FEEDERS / Feeders & Water Dispensers"
+  },
+  {
+    "id": 1127,
+    "name": "Food Bowls",
+    "parent_id": [
+      1126,
+      "CATS / BOWLS & FEEDERS"
+    ],
+    "complete_name": "CATS / BOWLS & FEEDERS / Food Bowls"
+  },
+  {
+    "id": 1131,
+    "name": "Travel Bowls & Water Bottles",
+    "parent_id": [
+      1126,
+      "CATS / BOWLS & FEEDERS"
+    ],
+    "complete_name": "CATS / BOWLS & FEEDERS / Travel Bowls & Water Bottles"
+  },
+  {
+    "id": 1128,
+    "name": "Water Fountains",
+    "parent_id": [
+      1126,
+      "CATS / BOWLS & FEEDERS"
+    ],
+    "complete_name": "CATS / BOWLS & FEEDERS / Water Fountains"
+  },
+  {
+    "id": 1117,
+    "name": "CAT FOOD",
+    "parent_id": [
+      1116,
+      "CATS"
+    ],
+    "complete_name": "CATS / CAT FOOD"
+  },
+  {
+    "id": 1118,
+    "name": "Adult Cat Food",
+    "parent_id": [
+      1117,
+      "CATS / CAT FOOD"
+    ],
+    "complete_name": "CATS / CAT FOOD / Adult Cat Food"
+  },
+  {
+    "id": 1119,
+    "name": "Kitten Food",
+    "parent_id": [
+      1117,
+      "CATS / CAT FOOD"
+    ],
+    "complete_name": "CATS / CAT FOOD / Kitten Food"
+  },
+  {
+    "id": 1121,
+    "name": "Prescription Diet",
+    "parent_id": [
+      1117,
+      "CATS / CAT FOOD"
+    ],
+    "complete_name": "CATS / CAT FOOD / Prescription Diet"
+  },
+  {
+    "id": 1120,
+    "name": "Senior Cat Food",
+    "parent_id": [
+      1117,
+      "CATS / CAT FOOD"
+    ],
+    "complete_name": "CATS / CAT FOOD / Senior Cat Food"
+  },
+  {
+    "id": 1122,
+    "name": "Wet Food",
+    "parent_id": [
+      1117,
+      "CATS / CAT FOOD"
+    ],
+    "complete_name": "CATS / CAT FOOD / Wet Food"
+  },
+  {
+    "id": 1179,
+    "name": "CAT FURNITURE & SCRATCHERS",
+    "parent_id": [
+      1116,
+      "CATS"
+    ],
+    "complete_name": "CATS / CAT FURNITURE & SCRATCHERS"
+  },
+  {
+    "id": 1180,
+    "name": "Cat Houses",
+    "parent_id": [
+      1179,
+      "CATS / CAT FURNITURE & SCRATCHERS"
+    ],
+    "complete_name": "CATS / CAT FURNITURE & SCRATCHERS / Cat Houses"
+  },
+  {
+    "id": 1181,
+    "name": "Cat Trees",
+    "parent_id": [
+      1179,
+      "CATS / CAT FURNITURE & SCRATCHERS"
+    ],
+    "complete_name": "CATS / CAT FURNITURE & SCRATCHERS / Cat Trees"
+  },
+  {
+    "id": 1182,
+    "name": "Scratching Mats",
+    "parent_id": [
+      1179,
+      "CATS / CAT FURNITURE & SCRATCHERS"
+    ],
+    "complete_name": "CATS / CAT FURNITURE & SCRATCHERS / Scratching Mats"
+  },
+  {
+    "id": 1183,
+    "name": "Scratching Pads & Boards",
+    "parent_id": [
+      1179,
+      "CATS / CAT FURNITURE & SCRATCHERS"
+    ],
+    "complete_name": "CATS / CAT FURNITURE & SCRATCHERS / Scratching Pads & Boards"
+  },
+  {
+    "id": 1184,
+    "name": "Window Perches",
+    "parent_id": [
+      1179,
+      "CATS / CAT FURNITURE & SCRATCHERS"
+    ],
+    "complete_name": "CATS / CAT FURNITURE & SCRATCHERS / Window Perches"
+  },
+  {
+    "id": 1137,
+    "name": "CAT LITTER & CLEAN LIVING",
+    "parent_id": [
+      1116,
+      "CATS"
+    ],
+    "complete_name": "CATS / CAT LITTER & CLEAN LIVING"
+  },
+  {
+    "id": 1138,
+    "name": "Cat Litter",
+    "parent_id": [
+      1137,
+      "CATS / CAT LITTER & CLEAN LIVING"
+    ],
+    "complete_name": "CATS / CAT LITTER & CLEAN LIVING / Cat Litter"
+  },
+  {
+    "id": 1139,
+    "name": "Litter Boxes & Trays",
+    "parent_id": [
+      1137,
+      "CATS / CAT LITTER & CLEAN LIVING"
+    ],
+    "complete_name": "CATS / CAT LITTER & CLEAN LIVING / Litter Boxes & Trays"
+  },
+  {
+    "id": 1141,
+    "name": "Litter Mats",
+    "parent_id": [
+      1137,
+      "CATS / CAT LITTER & CLEAN LIVING"
+    ],
+    "complete_name": "CATS / CAT LITTER & CLEAN LIVING / Litter Mats"
+  },
+  {
+    "id": 1140,
+    "name": "Litter Scoops",
+    "parent_id": [
+      1137,
+      "CATS / CAT LITTER & CLEAN LIVING"
+    ],
+    "complete_name": "CATS / CAT LITTER & CLEAN LIVING / Litter Scoops"
+  },
+  {
+    "id": 1142,
+    "name": "Waste Bags",
+    "parent_id": [
+      1137,
+      "CATS / CAT LITTER & CLEAN LIVING"
+    ],
+    "complete_name": "CATS / CAT LITTER & CLEAN LIVING / Waste Bags"
+  },
+  {
+    "id": 1143,
+    "name": "CAT TOYS",
+    "parent_id": [
+      1116,
+      "CATS"
+    ],
+    "complete_name": "CATS / CAT TOYS"
+  },
+  {
+    "id": 1145,
+    "name": "Balls & Chases",
+    "parent_id": [
+      1143,
+      "CATS / CAT TOYS"
+    ],
+    "complete_name": "CATS / CAT TOYS / Balls & Chases"
+  },
+  {
+    "id": 1147,
+    "name": "Electronic Toys",
+    "parent_id": [
+      1143,
+      "CATS / CAT TOYS"
+    ],
+    "complete_name": "CATS / CAT TOYS / Electronic Toys"
+  },
+  {
+    "id": 1144,
+    "name": "Interactive Toys",
+    "parent_id": [
+      1143,
+      "CATS / CAT TOYS"
+    ],
+    "complete_name": "CATS / CAT TOYS / Interactive Toys"
+  },
+  {
+    "id": 1146,
+    "name": "Plush and Soft Toys",
+    "parent_id": [
+      1143,
+      "CATS / CAT TOYS"
+    ],
+    "complete_name": "CATS / CAT TOYS / Plush and Soft Toys"
+  },
+  {
+    "id": 1148,
+    "name": "Scratching Toys",
+    "parent_id": [
+      1143,
+      "CATS / CAT TOYS"
+    ],
+    "complete_name": "CATS / CAT TOYS / Scratching Toys"
+  },
+  {
+    "id": 1149,
+    "name": "Tunnels",
+    "parent_id": [
+      1143,
+      "CATS / CAT TOYS"
+    ],
+    "complete_name": "CATS / CAT TOYS / Tunnels"
+  },
+  {
+    "id": 1150,
+    "name": "COLLARS, HARNESSES & LEADS",
+    "parent_id": [
+      1116,
+      "CATS"
+    ],
+    "complete_name": "CATS / COLLARS, HARNESSES & LEADS"
+  },
+  {
+    "id": 1154,
+    "name": "Bells & Charms",
+    "parent_id": [
+      1150,
+      "CATS / COLLARS, HARNESSES & LEADS"
+    ],
+    "complete_name": "CATS / COLLARS, HARNESSES & LEADS / Bells & Charms"
+  },
+  {
+    "id": 1151,
+    "name": "Collars",
+    "parent_id": [
+      1150,
+      "CATS / COLLARS, HARNESSES & LEADS"
+    ],
+    "complete_name": "CATS / COLLARS, HARNESSES & LEADS / Collars"
+  },
+  {
+    "id": 1155,
+    "name": "Decorative Accessories",
+    "parent_id": [
+      1150,
+      "CATS / COLLARS, HARNESSES & LEADS"
+    ],
+    "complete_name": "CATS / COLLARS, HARNESSES & LEADS / Decorative Accessories"
+  },
+  {
+    "id": 1152,
+    "name": "Harnesses",
+    "parent_id": [
+      1150,
+      "CATS / COLLARS, HARNESSES & LEADS"
+    ],
+    "complete_name": "CATS / COLLARS, HARNESSES & LEADS / Harnesses"
+  },
+  {
+    "id": 1153,
+    "name": "Leads",
+    "parent_id": [
+      1150,
+      "CATS / COLLARS, HARNESSES & LEADS"
+    ],
+    "complete_name": "CATS / COLLARS, HARNESSES & LEADS / Leads"
+  },
+  {
+    "id": 1156,
+    "name": "GROOMING ESSENTIALS",
+    "parent_id": [
+      1116,
+      "CATS"
+    ],
+    "complete_name": "CATS / GROOMING ESSENTIALS"
+  },
+  {
+    "id": 1157,
+    "name": "Bath & Shampoo",
+    "parent_id": [
+      1156,
+      "CATS / GROOMING ESSENTIALS"
+    ],
+    "complete_name": "CATS / GROOMING ESSENTIALS / Bath & Shampoo"
+  },
+  {
+    "id": 1158,
+    "name": "Combs & Brushes",
+    "parent_id": [
+      1156,
+      "CATS / GROOMING ESSENTIALS"
+    ],
+    "complete_name": "CATS / GROOMING ESSENTIALS / Combs & Brushes"
+  },
+  {
+    "id": 1159,
+    "name": "Nail Care",
+    "parent_id": [
+      1156,
+      "CATS / GROOMING ESSENTIALS"
+    ],
+    "complete_name": "CATS / GROOMING ESSENTIALS / Nail Care"
+  },
+  {
+    "id": 1160,
+    "name": "Paw Care",
+    "parent_id": [
+      1156,
+      "CATS / GROOMING ESSENTIALS"
+    ],
+    "complete_name": "CATS / GROOMING ESSENTIALS / Paw Care"
+  },
+  {
+    "id": 1162,
+    "name": "Pet Hair Removers",
+    "parent_id": [
+      1156,
+      "CATS / GROOMING ESSENTIALS"
+    ],
+    "complete_name": "CATS / GROOMING ESSENTIALS / Pet Hair Removers"
+  },
+  {
+    "id": 1161,
+    "name": "Pet Perfumes & Sprays",
+    "parent_id": [
+      1156,
+      "CATS / GROOMING ESSENTIALS"
+    ],
+    "complete_name": "CATS / GROOMING ESSENTIALS / Pet Perfumes & Sprays"
+  },
+  {
+    "id": 1163,
+    "name": "Pet Wipes",
+    "parent_id": [
+      1156,
+      "CATS / GROOMING ESSENTIALS"
+    ],
+    "complete_name": "CATS / GROOMING ESSENTIALS / Pet Wipes"
+  },
+  {
+    "id": 1194,
+    "name": "MILK & MILK FEEDER",
+    "parent_id": [
+      1116,
+      "CATS"
+    ],
+    "complete_name": "CATS / MILK & MILK FEEDER"
+  },
+  {
+    "id": 1195,
+    "name": "Goat Milk powder",
+    "parent_id": [
+      1194,
+      "CATS / MILK & MILK FEEDER"
+    ],
+    "complete_name": "CATS / MILK & MILK FEEDER / Goat Milk powder"
+  },
+  {
+    "id": 1197,
+    "name": "Milk Feeders",
+    "parent_id": [
+      1194,
+      "CATS / MILK & MILK FEEDER"
+    ],
+    "complete_name": "CATS / MILK & MILK FEEDER / Milk Feeders"
+  },
+  {
+    "id": 1196,
+    "name": "Pet Milk",
+    "parent_id": [
+      1194,
+      "CATS / MILK & MILK FEEDER"
+    ],
+    "complete_name": "CATS / MILK & MILK FEEDER / Pet Milk"
+  },
+  {
+    "id": 1189,
+    "name": "NUTRITIONAL SUPPLEMENTS",
+    "parent_id": [
+      1116,
+      "CATS"
+    ],
+    "complete_name": "CATS / NUTRITIONAL SUPPLEMENTS"
+  },
+  {
+    "id": 1191,
+    "name": "Calming Support",
+    "parent_id": [
+      1189,
+      "CATS / NUTRITIONAL SUPPLEMENTS"
+    ],
+    "complete_name": "CATS / NUTRITIONAL SUPPLEMENTS / Calming Support"
+  },
+  {
+    "id": 1193,
+    "name": "Hairball Control",
+    "parent_id": [
+      1189,
+      "CATS / NUTRITIONAL SUPPLEMENTS"
+    ],
+    "complete_name": "CATS / NUTRITIONAL SUPPLEMENTS / Hairball Control"
+  },
+  {
+    "id": 1190,
+    "name": "Joint & Mobility",
+    "parent_id": [
+      1189,
+      "CATS / NUTRITIONAL SUPPLEMENTS"
+    ],
+    "complete_name": "CATS / NUTRITIONAL SUPPLEMENTS / Joint & Mobility"
+  },
+  {
+    "id": 1192,
+    "name": "Skin & Coat",
+    "parent_id": [
+      1189,
+      "CATS / NUTRITIONAL SUPPLEMENTS"
+    ],
+    "complete_name": "CATS / NUTRITIONAL SUPPLEMENTS / Skin & Coat"
+  },
+  {
+    "id": 1164,
+    "name": "ORAL CARE",
+    "parent_id": [
+      1116,
+      "CATS"
+    ],
+    "complete_name": "CATS / ORAL CARE"
+  },
+  {
+    "id": 1165,
+    "name": "Dental Sprays",
+    "parent_id": [
+      1164,
+      "CATS / ORAL CARE"
+    ],
+    "complete_name": "CATS / ORAL CARE / Dental Sprays"
+  },
+  {
+    "id": 1166,
+    "name": "Dental Water",
+    "parent_id": [
+      1164,
+      "CATS / ORAL CARE"
+    ],
+    "complete_name": "CATS / ORAL CARE / Dental Water"
+  },
+  {
+    "id": 1167,
+    "name": "Toothbrushes",
+    "parent_id": [
+      1164,
+      "CATS / ORAL CARE"
+    ],
+    "complete_name": "CATS / ORAL CARE / Toothbrushes"
+  },
+  {
+    "id": 1168,
+    "name": "Toothpaste",
+    "parent_id": [
+      1164,
+      "CATS / ORAL CARE"
+    ],
+    "complete_name": "CATS / ORAL CARE / Toothpaste"
+  },
+  {
+    "id": 1169,
+    "name": "PET APPAREL",
+    "parent_id": [
+      1116,
+      "CATS"
+    ],
+    "complete_name": "CATS / PET APPAREL"
+  },
+  {
+    "id": 1171,
+    "name": "Costumes & Dress-Up",
+    "parent_id": [
+      1169,
+      "CATS / PET APPAREL"
+    ],
+    "complete_name": "CATS / PET APPAREL / Costumes & Dress-Up"
+  },
+  {
+    "id": 1173,
+    "name": "Diapers & Sanitary Wear",
+    "parent_id": [
+      1169,
+      "CATS / PET APPAREL"
+    ],
+    "complete_name": "CATS / PET APPAREL / Diapers & Sanitary Wear"
+  },
+  {
+    "id": 1172,
+    "name": "Dresses",
+    "parent_id": [
+      1169,
+      "CATS / PET APPAREL"
+    ],
+    "complete_name": "CATS / PET APPAREL / Dresses"
+  },
+  {
+    "id": 1170,
+    "name": "Fashion Accessories",
+    "parent_id": [
+      1169,
+      "CATS / PET APPAREL"
+    ],
+    "complete_name": "CATS / PET APPAREL / Fashion Accessories"
+  },
+  {
+    "id": 1178,
+    "name": "Footwear",
+    "parent_id": [
+      1169,
+      "CATS / PET APPAREL"
+    ],
+    "complete_name": "CATS / PET APPAREL / Footwear"
+  },
+  {
+    "id": 1174,
+    "name": "Hoodies, T-Shirts & Shirts",
+    "parent_id": [
+      1169,
+      "CATS / PET APPAREL"
+    ],
+    "complete_name": "CATS / PET APPAREL / Hoodies, T-Shirts & Shirts"
+  },
+  {
+    "id": 1175,
+    "name": "Jackets & Sweaters",
+    "parent_id": [
+      1169,
+      "CATS / PET APPAREL"
+    ],
+    "complete_name": "CATS / PET APPAREL / Jackets & Sweaters"
+  },
+  {
+    "id": 1176,
+    "name": "Raincoats",
+    "parent_id": [
+      1169,
+      "CATS / PET APPAREL"
+    ],
+    "complete_name": "CATS / PET APPAREL / Raincoats"
+  },
+  {
+    "id": 1177,
+    "name": "Safety Wear",
+    "parent_id": [
+      1169,
+      "CATS / PET APPAREL"
+    ],
+    "complete_name": "CATS / PET APPAREL / Safety Wear"
+  },
+  {
+    "id": 1185,
+    "name": "TICK, FLEA & DEWORMING",
+    "parent_id": [
+      1116,
+      "CATS"
+    ],
+    "complete_name": "CATS / TICK, FLEA & DEWORMING"
+  },
+  {
+    "id": 1186,
+    "name": "Dewormers",
+    "parent_id": [
+      1185,
+      "CATS / TICK, FLEA & DEWORMING"
+    ],
+    "complete_name": "CATS / TICK, FLEA & DEWORMING / Dewormers"
+  },
+  {
+    "id": 1188,
+    "name": "Tick & Flea Prevention",
+    "parent_id": [
+      1185,
+      "CATS / TICK, FLEA & DEWORMING"
+    ],
+    "complete_name": "CATS / TICK, FLEA & DEWORMING / Tick & Flea Prevention"
+  },
+  {
+    "id": 1187,
+    "name": "Tick & flea Treatments",
+    "parent_id": [
+      1185,
+      "CATS / TICK, FLEA & DEWORMING"
+    ],
+    "complete_name": "CATS / TICK, FLEA & DEWORMING / Tick & flea Treatments"
+  },
+  {
+    "id": 1123,
+    "name": "TREATS",
+    "parent_id": [
+      1116,
+      "CATS"
+    ],
+    "complete_name": "CATS / TREATS"
+  },
+  {
+    "id": 1124,
+    "name": "Crunchy Treats",
+    "parent_id": [
+      1123,
+      "CATS / TREATS"
+    ],
+    "complete_name": "CATS / TREATS / Crunchy Treats"
+  },
+  {
+    "id": 1125,
+    "name": "Soft Treats",
+    "parent_id": [
+      1123,
+      "CATS / TREATS"
+    ],
+    "complete_name": "CATS / TREATS / Soft Treats"
+  },
+  {
+    "id": 1198,
+    "name": "DOGS",
+    "parent_id": false,
+    "complete_name": "DOGS"
+  },
+  {
+    "id": 1217,
+    "name": "BEDS & COMFORT",
+    "parent_id": [
+      1198,
+      "DOGS"
+    ],
+    "complete_name": "DOGS / BEDS & COMFORT"
+  },
+  {
+    "id": 1218,
+    "name": "Beds",
+    "parent_id": [
+      1217,
+      "DOGS / BEDS & COMFORT"
+    ],
+    "complete_name": "DOGS / BEDS & COMFORT / Beds"
+  },
+  {
+    "id": 1219,
+    "name": "Blankets",
+    "parent_id": [
+      1217,
+      "DOGS / BEDS & COMFORT"
+    ],
+    "complete_name": "DOGS / BEDS & COMFORT / Blankets"
+  },
+  {
+    "id": 1220,
+    "name": "Mats & Pads",
+    "parent_id": [
+      1217,
+      "DOGS / BEDS & COMFORT"
+    ],
+    "complete_name": "DOGS / BEDS & COMFORT / Mats & Pads"
+  },
+  {
+    "id": 1221,
+    "name": "Rugs",
+    "parent_id": [
+      1217,
+      "DOGS / BEDS & COMFORT"
+    ],
+    "complete_name": "DOGS / BEDS & COMFORT / Rugs"
+  },
+  {
+    "id": 1211,
+    "name": "BOWLS & FEEDERS",
+    "parent_id": [
+      1198,
+      "DOGS"
+    ],
+    "complete_name": "DOGS / BOWLS & FEEDERS"
+  },
+  {
+    "id": 1214,
+    "name": "Elevated Bowls",
+    "parent_id": [
+      1211,
+      "DOGS / BOWLS & FEEDERS"
+    ],
+    "complete_name": "DOGS / BOWLS & FEEDERS / Elevated Bowls"
+  },
+  {
+    "id": 1215,
+    "name": "Food & Water Dispensers",
+    "parent_id": [
+      1211,
+      "DOGS / BOWLS & FEEDERS"
+    ],
+    "complete_name": "DOGS / BOWLS & FEEDERS / Food & Water Dispensers"
+  },
+  {
+    "id": 1212,
+    "name": "Food Bowls",
+    "parent_id": [
+      1211,
+      "DOGS / BOWLS & FEEDERS"
+    ],
+    "complete_name": "DOGS / BOWLS & FEEDERS / Food Bowls"
+  },
+  {
+    "id": 1216,
+    "name": "Travel Bowls & Water Bottles",
+    "parent_id": [
+      1211,
+      "DOGS / BOWLS & FEEDERS"
+    ],
+    "complete_name": "DOGS / BOWLS & FEEDERS / Travel Bowls & Water Bottles"
+  },
+  {
+    "id": 1213,
+    "name": "Water Fountains",
+    "parent_id": [
+      1211,
+      "DOGS / BOWLS & FEEDERS"
+    ],
+    "complete_name": "DOGS / BOWLS & FEEDERS / Water Fountains"
+  },
+  {
+    "id": 1235,
+    "name": "COLLARS, HARNESSES & LEADS",
+    "parent_id": [
+      1198,
+      "DOGS"
+    ],
+    "complete_name": "DOGS / COLLARS, HARNESSES & LEADS"
+  },
+  {
+    "id": 1239,
+    "name": "Collar Charms",
+    "parent_id": [
+      1235,
+      "DOGS / COLLARS, HARNESSES & LEADS"
+    ],
+    "complete_name": "DOGS / COLLARS, HARNESSES & LEADS / Collar Charms"
+  },
+  {
+    "id": 1236,
+    "name": "Collars",
+    "parent_id": [
+      1235,
+      "DOGS / COLLARS, HARNESSES & LEADS"
+    ],
+    "complete_name": "DOGS / COLLARS, HARNESSES & LEADS / Collars"
+  },
+  {
+    "id": 1240,
+    "name": "Decorative Accessories",
+    "parent_id": [
+      1235,
+      "DOGS / COLLARS, HARNESSES & LEADS"
+    ],
+    "complete_name": "DOGS / COLLARS, HARNESSES & LEADS / Decorative Accessories"
+  },
+  {
+    "id": 1237,
+    "name": "Harnesses",
+    "parent_id": [
+      1235,
+      "DOGS / COLLARS, HARNESSES & LEADS"
+    ],
+    "complete_name": "DOGS / COLLARS, HARNESSES & LEADS / Harnesses"
+  },
+  {
+    "id": 1238,
+    "name": "Leads",
+    "parent_id": [
+      1235,
+      "DOGS / COLLARS, HARNESSES & LEADS"
+    ],
+    "complete_name": "DOGS / COLLARS, HARNESSES & LEADS / Leads"
+  },
+  {
+    "id": 1199,
+    "name": "FOOD",
+    "parent_id": [
+      1198,
+      "DOGS"
+    ],
+    "complete_name": "DOGS / FOOD"
+  },
+  {
+    "id": 1200,
+    "name": "Adult Dog Food",
+    "parent_id": [
+      1199,
+      "DOGS / FOOD"
+    ],
+    "complete_name": "DOGS / FOOD / Adult Dog Food"
+  },
+  {
+    "id": 1203,
+    "name": "Prescription Diets",
+    "parent_id": [
+      1199,
+      "DOGS / FOOD"
+    ],
+    "complete_name": "DOGS / FOOD / Prescription Diets"
+  },
+  {
+    "id": 1201,
+    "name": "Puppy Food",
+    "parent_id": [
+      1199,
+      "DOGS / FOOD"
+    ],
+    "complete_name": "DOGS / FOOD / Puppy Food"
+  },
+  {
+    "id": 1202,
+    "name": "Senior Dog food",
+    "parent_id": [
+      1199,
+      "DOGS / FOOD"
+    ],
+    "complete_name": "DOGS / FOOD / Senior Dog food"
+  },
+  {
+    "id": 1204,
+    "name": "Wet Food",
+    "parent_id": [
+      1199,
+      "DOGS / FOOD"
+    ],
+    "complete_name": "DOGS / FOOD / Wet Food"
+  },
+  {
+    "id": 1241,
+    "name": "GROOMING ESSENTIAL",
+    "parent_id": [
+      1198,
+      "DOGS"
+    ],
+    "complete_name": "DOGS / GROOMING ESSENTIAL"
+  },
+  {
+    "id": 1242,
+    "name": "Bath & Shampoo",
+    "parent_id": [
+      1241,
+      "DOGS / GROOMING ESSENTIAL"
+    ],
+    "complete_name": "DOGS / GROOMING ESSENTIAL / Bath & Shampoo"
+  },
+  {
+    "id": 1243,
+    "name": "Combs & Brushes",
+    "parent_id": [
+      1241,
+      "DOGS / GROOMING ESSENTIAL"
+    ],
+    "complete_name": "DOGS / GROOMING ESSENTIAL / Combs & Brushes"
+  },
+  {
+    "id": 1244,
+    "name": "Nail Care",
+    "parent_id": [
+      1241,
+      "DOGS / GROOMING ESSENTIAL"
+    ],
+    "complete_name": "DOGS / GROOMING ESSENTIAL / Nail Care"
+  },
+  {
+    "id": 1245,
+    "name": "Paw Care",
+    "parent_id": [
+      1241,
+      "DOGS / GROOMING ESSENTIAL"
+    ],
+    "complete_name": "DOGS / GROOMING ESSENTIAL / Paw Care"
+  },
+  {
+    "id": 1247,
+    "name": "Pet Hair Removers",
+    "parent_id": [
+      1241,
+      "DOGS / GROOMING ESSENTIAL"
+    ],
+    "complete_name": "DOGS / GROOMING ESSENTIAL / Pet Hair Removers"
+  },
+  {
+    "id": 1246,
+    "name": "Pet Perfumes & Sprays",
+    "parent_id": [
+      1241,
+      "DOGS / GROOMING ESSENTIAL"
+    ],
+    "complete_name": "DOGS / GROOMING ESSENTIAL / Pet Perfumes & Sprays"
+  },
+  {
+    "id": 1248,
+    "name": "Pet Wipes",
+    "parent_id": [
+      1241,
+      "DOGS / GROOMING ESSENTIAL"
+    ],
+    "complete_name": "DOGS / GROOMING ESSENTIAL / Pet Wipes"
+  },
+  {
+    "id": 1264,
+    "name": "HOME & CRATES",
+    "parent_id": [
+      1198,
+      "DOGS"
+    ],
+    "complete_name": "DOGS / HOME & CRATES"
+  },
+  {
+    "id": 1268,
+    "name": "Barriers & Gates",
+    "parent_id": [
+      1264,
+      "DOGS / HOME & CRATES"
+    ],
+    "complete_name": "DOGS / HOME & CRATES / Barriers & Gates"
+  },
+  {
+    "id": 1266,
+    "name": "Crates",
+    "parent_id": [
+      1264,
+      "DOGS / HOME & CRATES"
+    ],
+    "complete_name": "DOGS / HOME & CRATES / Crates"
+  },
+  {
+    "id": 1265,
+    "name": "Houses",
+    "parent_id": [
+      1264,
+      "DOGS / HOME & CRATES"
+    ],
+    "complete_name": "DOGS / HOME & CRATES / Houses"
+  },
+  {
+    "id": 1267,
+    "name": "Travel Essentials",
+    "parent_id": [
+      1264,
+      "DOGS / HOME & CRATES"
+    ],
+    "complete_name": "DOGS / HOME & CRATES / Travel Essentials"
+  },
+  {
+    "id": 1278,
+    "name": "MILK & MILK FEEDER",
+    "parent_id": [
+      1198,
+      "DOGS"
+    ],
+    "complete_name": "DOGS / MILK & MILK FEEDER"
+  },
+  {
+    "id": 1279,
+    "name": "Goat Milk Powder",
+    "parent_id": [
+      1278,
+      "DOGS / MILK & MILK FEEDER"
+    ],
+    "complete_name": "DOGS / MILK & MILK FEEDER / Goat Milk Powder"
+  },
+  {
+    "id": 1281,
+    "name": "Milk Feeders",
+    "parent_id": [
+      1278,
+      "DOGS / MILK & MILK FEEDER"
+    ],
+    "complete_name": "DOGS / MILK & MILK FEEDER / Milk Feeders"
+  },
+  {
+    "id": 1280,
+    "name": "Pet Milk",
+    "parent_id": [
+      1278,
+      "DOGS / MILK & MILK FEEDER"
+    ],
+    "complete_name": "DOGS / MILK & MILK FEEDER / Pet Milk"
+  },
+  {
+    "id": 1273,
+    "name": "NUTRITIONAL SUPPLEMENTS",
+    "parent_id": [
+      1198,
+      "DOGS"
+    ],
+    "complete_name": "DOGS / NUTRITIONAL SUPPLEMENTS"
+  },
+  {
+    "id": 1275,
+    "name": "Calming Support",
+    "parent_id": [
+      1273,
+      "DOGS / NUTRITIONAL SUPPLEMENTS"
+    ],
+    "complete_name": "DOGS / NUTRITIONAL SUPPLEMENTS / Calming Support"
+  },
+  {
+    "id": 1277,
+    "name": "Hairball Control",
+    "parent_id": [
+      1273,
+      "DOGS / NUTRITIONAL SUPPLEMENTS"
+    ],
+    "complete_name": "DOGS / NUTRITIONAL SUPPLEMENTS / Hairball Control"
+  },
+  {
+    "id": 1274,
+    "name": "Joint & Mobility",
+    "parent_id": [
+      1273,
+      "DOGS / NUTRITIONAL SUPPLEMENTS"
+    ],
+    "complete_name": "DOGS / NUTRITIONAL SUPPLEMENTS / Joint & Mobility"
+  },
+  {
+    "id": 1276,
+    "name": "Skin & Coat",
+    "parent_id": [
+      1273,
+      "DOGS / NUTRITIONAL SUPPLEMENTS"
+    ],
+    "complete_name": "DOGS / NUTRITIONAL SUPPLEMENTS / Skin & Coat"
+  },
+  {
+    "id": 1249,
+    "name": "ORAL CARE",
+    "parent_id": [
+      1198,
+      "DOGS"
+    ],
+    "complete_name": "DOGS / ORAL CARE"
+  },
+  {
+    "id": 1250,
+    "name": "Dental Sprays",
+    "parent_id": [
+      1249,
+      "DOGS / ORAL CARE"
+    ],
+    "complete_name": "DOGS / ORAL CARE / Dental Sprays"
+  },
+  {
+    "id": 1251,
+    "name": "Dental Water",
+    "parent_id": [
+      1249,
+      "DOGS / ORAL CARE"
+    ],
+    "complete_name": "DOGS / ORAL CARE / Dental Water"
+  },
+  {
+    "id": 1252,
+    "name": "Toothbrushes",
+    "parent_id": [
+      1249,
+      "DOGS / ORAL CARE"
+    ],
+    "complete_name": "DOGS / ORAL CARE / Toothbrushes"
+  },
+  {
+    "id": 1253,
+    "name": "Toothpaste",
+    "parent_id": [
+      1249,
+      "DOGS / ORAL CARE"
+    ],
+    "complete_name": "DOGS / ORAL CARE / Toothpaste"
+  },
+  {
+    "id": 1254,
+    "name": "PET APPAREL",
+    "parent_id": [
+      1198,
+      "DOGS"
+    ],
+    "complete_name": "DOGS / PET APPAREL"
+  },
+  {
+    "id": 1256,
+    "name": "Costumes & Dress-Up",
+    "parent_id": [
+      1254,
+      "DOGS / PET APPAREL"
+    ],
+    "complete_name": "DOGS / PET APPAREL / Costumes & Dress-Up"
+  },
+  {
+    "id": 1258,
+    "name": "Diapers & Sanitary Wear",
+    "parent_id": [
+      1254,
+      "DOGS / PET APPAREL"
+    ],
+    "complete_name": "DOGS / PET APPAREL / Diapers & Sanitary Wear"
+  },
+  {
+    "id": 1257,
+    "name": "Dresses",
+    "parent_id": [
+      1254,
+      "DOGS / PET APPAREL"
+    ],
+    "complete_name": "DOGS / PET APPAREL / Dresses"
+  },
+  {
+    "id": 1255,
+    "name": "Fashion Accessories",
+    "parent_id": [
+      1254,
+      "DOGS / PET APPAREL"
+    ],
+    "complete_name": "DOGS / PET APPAREL / Fashion Accessories"
+  },
+  {
+    "id": 1263,
+    "name": "Footwear",
+    "parent_id": [
+      1254,
+      "DOGS / PET APPAREL"
+    ],
+    "complete_name": "DOGS / PET APPAREL / Footwear"
+  },
+  {
+    "id": 1259,
+    "name": "Hoodies, T-Shirts & Shirts",
+    "parent_id": [
+      1254,
+      "DOGS / PET APPAREL"
+    ],
+    "complete_name": "DOGS / PET APPAREL / Hoodies, T-Shirts & Shirts"
+  },
+  {
+    "id": 1260,
+    "name": "Jackets & Sweaters",
+    "parent_id": [
+      1254,
+      "DOGS / PET APPAREL"
+    ],
+    "complete_name": "DOGS / PET APPAREL / Jackets & Sweaters"
+  },
+  {
+    "id": 1261,
+    "name": "Raincoats",
+    "parent_id": [
+      1254,
+      "DOGS / PET APPAREL"
+    ],
+    "complete_name": "DOGS / PET APPAREL / Raincoats"
+  },
+  {
+    "id": 1262,
+    "name": "Safety Wear",
+    "parent_id": [
+      1254,
+      "DOGS / PET APPAREL"
+    ],
+    "complete_name": "DOGS / PET APPAREL / Safety Wear"
+  },
+  {
+    "id": 1222,
+    "name": "POTTY TRAINING & CLEAN LIVING",
+    "parent_id": [
+      1198,
+      "DOGS"
+    ],
+    "complete_name": "DOGS / POTTY TRAINING & CLEAN LIVING"
+  },
+  {
+    "id": 1228,
+    "name": "Deodorizing Sprays",
+    "parent_id": [
+      1222,
+      "DOGS / POTTY TRAINING & CLEAN LIVING"
+    ],
+    "complete_name": "DOGS / POTTY TRAINING & CLEAN LIVING / Deodorizing Sprays"
+  },
+  {
+    "id": 1224,
+    "name": "Pee Training Pads",
+    "parent_id": [
+      1222,
+      "DOGS / POTTY TRAINING & CLEAN LIVING"
+    ],
+    "complete_name": "DOGS / POTTY TRAINING & CLEAN LIVING / Pee Training Pads"
+  },
+  {
+    "id": 1227,
+    "name": "Poop Bags",
+    "parent_id": [
+      1222,
+      "DOGS / POTTY TRAINING & CLEAN LIVING"
+    ],
+    "complete_name": "DOGS / POTTY TRAINING & CLEAN LIVING / Poop Bags"
+  },
+  {
+    "id": 1226,
+    "name": "Poop Scoopers",
+    "parent_id": [
+      1222,
+      "DOGS / POTTY TRAINING & CLEAN LIVING"
+    ],
+    "complete_name": "DOGS / POTTY TRAINING & CLEAN LIVING / Poop Scoopers"
+  },
+  {
+    "id": 1223,
+    "name": "Potty Trays",
+    "parent_id": [
+      1222,
+      "DOGS / POTTY TRAINING & CLEAN LIVING"
+    ],
+    "complete_name": "DOGS / POTTY TRAINING & CLEAN LIVING / Potty Trays"
+  },
+  {
+    "id": 1225,
+    "name": "Puppy Training Sprays",
+    "parent_id": [
+      1222,
+      "DOGS / POTTY TRAINING & CLEAN LIVING"
+    ],
+    "complete_name": "DOGS / POTTY TRAINING & CLEAN LIVING / Puppy Training Sprays"
+  },
+  {
+    "id": 1269,
+    "name": "TICK, FLEA & DEWORMING",
+    "parent_id": [
+      1198,
+      "DOGS"
+    ],
+    "complete_name": "DOGS / TICK, FLEA & DEWORMING"
+  },
+  {
+    "id": 1270,
+    "name": "Dewormers",
+    "parent_id": [
+      1269,
+      "DOGS / TICK, FLEA & DEWORMING"
+    ],
+    "complete_name": "DOGS / TICK, FLEA & DEWORMING / Dewormers"
+  },
+  {
+    "id": 1272,
+    "name": "Tick & Flea Prevention",
+    "parent_id": [
+      1269,
+      "DOGS / TICK, FLEA & DEWORMING"
+    ],
+    "complete_name": "DOGS / TICK, FLEA & DEWORMING / Tick & Flea Prevention"
+  },
+  {
+    "id": 1271,
+    "name": "Tick & Flea Treatments",
+    "parent_id": [
+      1269,
+      "DOGS / TICK, FLEA & DEWORMING"
+    ],
+    "complete_name": "DOGS / TICK, FLEA & DEWORMING / Tick & Flea Treatments"
+  },
+  {
+    "id": 1229,
+    "name": "TOYS",
+    "parent_id": [
+      1198,
+      "DOGS"
+    ],
+    "complete_name": "DOGS / TOYS"
+  },
+  {
+    "id": 1230,
+    "name": "Chew Toys",
+    "parent_id": [
+      1229,
+      "DOGS / TOYS"
+    ],
+    "complete_name": "DOGS / TOYS / Chew Toys"
+  },
+  {
+    "id": 1231,
+    "name": "Fetch Toys",
+    "parent_id": [
+      1229,
+      "DOGS / TOYS"
+    ],
+    "complete_name": "DOGS / TOYS / Fetch Toys"
+  },
+  {
+    "id": 1232,
+    "name": "Interactive Toys",
+    "parent_id": [
+      1229,
+      "DOGS / TOYS"
+    ],
+    "complete_name": "DOGS / TOYS / Interactive Toys"
+  },
+  {
+    "id": 1233,
+    "name": "Plush Toys",
+    "parent_id": [
+      1229,
+      "DOGS / TOYS"
+    ],
+    "complete_name": "DOGS / TOYS / Plush Toys"
+  },
+  {
+    "id": 1234,
+    "name": "Squeaky Toys",
+    "parent_id": [
+      1229,
+      "DOGS / TOYS"
+    ],
+    "complete_name": "DOGS / TOYS / Squeaky Toys"
+  },
+  {
+    "id": 1282,
+    "name": "TRAINING & BEHAVIOR",
+    "parent_id": [
+      1198,
+      "DOGS"
+    ],
+    "complete_name": "DOGS / TRAINING & BEHAVIOR"
+  },
+  {
+    "id": 1284,
+    "name": "Handling Gloves",
+    "parent_id": [
+      1282,
+      "DOGS / TRAINING & BEHAVIOR"
+    ],
+    "complete_name": "DOGS / TRAINING & BEHAVIOR / Handling Gloves"
+  },
+  {
+    "id": 1283,
+    "name": "Muzzles",
+    "parent_id": [
+      1282,
+      "DOGS / TRAINING & BEHAVIOR"
+    ],
+    "complete_name": "DOGS / TRAINING & BEHAVIOR / Muzzles"
+  },
+  {
+    "id": 1285,
+    "name": "Pet Repellents",
+    "parent_id": [
+      1282,
+      "DOGS / TRAINING & BEHAVIOR"
+    ],
+    "complete_name": "DOGS / TRAINING & BEHAVIOR / Pet Repellents"
+  },
+  {
+    "id": 1205,
+    "name": "TREATS",
+    "parent_id": [
+      1198,
+      "DOGS"
+    ],
+    "complete_name": "DOGS / TREATS"
+  },
+  {
+    "id": 1208,
+    "name": "Biscuits",
+    "parent_id": [
+      1205,
+      "DOGS / TREATS"
+    ],
+    "complete_name": "DOGS / TREATS / Biscuits"
+  },
+  {
+    "id": 1206,
+    "name": "Crunchy Treats",
+    "parent_id": [
+      1205,
+      "DOGS / TREATS"
+    ],
+    "complete_name": "DOGS / TREATS / Crunchy Treats"
+  },
+  {
+    "id": 1207,
+    "name": "Dental Treats",
+    "parent_id": [
+      1205,
+      "DOGS / TREATS"
+    ],
+    "complete_name": "DOGS / TREATS / Dental Treats"
+  },
+  {
+    "id": 1209,
+    "name": "Freeze-Dried Treats",
+    "parent_id": [
+      1205,
+      "DOGS / TREATS"
+    ],
+    "complete_name": "DOGS / TREATS / Freeze-Dried Treats"
+  },
+  {
+    "id": 1210,
+    "name": "Training Treats",
+    "parent_id": [
+      1205,
+      "DOGS / TREATS"
+    ],
+    "complete_name": "DOGS / TREATS / Training Treats"
+  },
+  {
+    "id": 1286,
+    "name": "SMALL ANIMALS",
+    "parent_id": false,
+    "complete_name": "SMALL ANIMALS"
+  },
+  {
+    "id": 1291,
+    "name": "BOWLS & FEEDERS",
+    "parent_id": [
+      1286,
+      "SMALL ANIMALS"
+    ],
+    "complete_name": "SMALL ANIMALS / BOWLS & FEEDERS"
+  },
+  {
+    "id": 1292,
+    "name": "Feeders & Dispensers",
+    "parent_id": [
+      1291,
+      "SMALL ANIMALS / BOWLS & FEEDERS"
+    ],
+    "complete_name": "SMALL ANIMALS / BOWLS & FEEDERS / Feeders & Dispensers"
+  },
+  {
+    "id": 1293,
+    "name": "Food & Water Bowls",
+    "parent_id": [
+      1291,
+      "SMALL ANIMALS / BOWLS & FEEDERS"
+    ],
+    "complete_name": "SMALL ANIMALS / BOWLS & FEEDERS / Food & Water Bowls"
+  },
+  {
+    "id": 1287,
+    "name": "FOOD",
+    "parent_id": [
+      1286,
+      "SMALL ANIMALS"
+    ],
+    "complete_name": "SMALL ANIMALS / FOOD"
+  },
+  {
+    "id": 1289,
+    "name": "Guinea Pig",
+    "parent_id": [
+      1287,
+      "SMALL ANIMALS / FOOD"
+    ],
+    "complete_name": "SMALL ANIMALS / FOOD / Guinea Pig"
+  },
+  {
+    "id": 1288,
+    "name": "Hamster",
+    "parent_id": [
+      1287,
+      "SMALL ANIMALS / FOOD"
+    ],
+    "complete_name": "SMALL ANIMALS / FOOD / Hamster"
+  },
+  {
+    "id": 1290,
+    "name": "Rabbit",
+    "parent_id": [
+      1287,
+      "SMALL ANIMALS / FOOD"
+    ],
+    "complete_name": "SMALL ANIMALS / FOOD / Rabbit"
+  },
+  {
+    "id": 1297,
+    "name": "HOME & HABITAT",
+    "parent_id": [
+      1286,
+      "SMALL ANIMALS"
+    ],
+    "complete_name": "SMALL ANIMALS / HOME & HABITAT"
+  },
+  {
+    "id": 1298,
+    "name": "Beds",
+    "parent_id": [
+      1297,
+      "SMALL ANIMALS / HOME & HABITAT"
+    ],
+    "complete_name": "SMALL ANIMALS / HOME & HABITAT / Beds"
+  },
+  {
+    "id": 1299,
+    "name": "Cages & Habitats",
+    "parent_id": [
+      1297,
+      "SMALL ANIMALS / HOME & HABITAT"
+    ],
+    "complete_name": "SMALL ANIMALS / HOME & HABITAT / Cages & Habitats"
+  },
+  {
+    "id": 1301,
+    "name": "Hammocks",
+    "parent_id": [
+      1297,
+      "SMALL ANIMALS / HOME & HABITAT"
+    ],
+    "complete_name": "SMALL ANIMALS / HOME & HABITAT / Hammocks"
+  },
+  {
+    "id": 1300,
+    "name": "Tunnels",
+    "parent_id": [
+      1297,
+      "SMALL ANIMALS / HOME & HABITAT"
+    ],
+    "complete_name": "SMALL ANIMALS / HOME & HABITAT / Tunnels"
+  },
+  {
+    "id": 1294,
+    "name": "HYGIENE & CARE",
+    "parent_id": [
+      1286,
+      "SMALL ANIMALS"
+    ],
+    "complete_name": "SMALL ANIMALS / HYGIENE & CARE"
+  },
+  {
+    "id": 1295,
+    "name": "Cage Cleaners",
+    "parent_id": [
+      1294,
+      "SMALL ANIMALS / HYGIENE & CARE"
+    ],
+    "complete_name": "SMALL ANIMALS / HYGIENE & CARE / Cage Cleaners"
+  },
+  {
+    "id": 1296,
+    "name": "Odor Control",
+    "parent_id": [
+      1294,
+      "SMALL ANIMALS / HYGIENE & CARE"
+    ],
+    "complete_name": "SMALL ANIMALS / HYGIENE & CARE / Odor Control"
+  },
+  {
+    "id": 1302,
+    "name": "TOYS",
+    "parent_id": [
+      1286,
+      "SMALL ANIMALS"
+    ],
+    "complete_name": "SMALL ANIMALS / TOYS"
+  },
+  {
+    "id": 1305,
+    "name": "Climbing Toys",
+    "parent_id": [
+      1302,
+      "SMALL ANIMALS / TOYS"
+    ],
+    "complete_name": "SMALL ANIMALS / TOYS / Climbing Toys"
+  },
+  {
+    "id": 1304,
+    "name": "Exercise Wheels",
+    "parent_id": [
+      1302,
+      "SMALL ANIMALS / TOYS"
+    ],
+    "complete_name": "SMALL ANIMALS / TOYS / Exercise Wheels"
+  },
+  {
+    "id": 1303,
+    "name": "Tunnels & Hideaways",
+    "parent_id": [
+      1302,
+      "SMALL ANIMALS / TOYS"
+    ],
+    "complete_name": "SMALL ANIMALS / TOYS / Tunnels & Hideaways"
+  },
+  {
+    "id": 806,
+    "name": "scrath",
+    "parent_id": false,
+    "complete_name": "scrath"
+  }
+]

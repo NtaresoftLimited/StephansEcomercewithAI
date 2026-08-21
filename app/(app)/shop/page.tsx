@@ -116,7 +116,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   // Filter Odoo Products manually to match the query params
   const odooProducts = odooProductsUnfiltered.filter(p => {
     if (q && !p.name?.toLowerCase().includes(q.toLowerCase())) return false;
-    if (category && !p.categories.some((c: any) => c.slug === category)) return false;
+    if (category) { const t = category.endsWith('s') ? category.slice(0,-1) : category; if (!p.categories.some((c: any) => c.slug === category || c.slug.includes(t) || c.title?.toLowerCase().includes(t)) && !p.name?.toLowerCase().includes(t)) return false; }
     if (inStock && p.stock <= 0) return false;
     if (minPrice && p.price < Number(minPrice)) return false;
     if (maxPrice && p.price > Number(maxPrice)) return false;

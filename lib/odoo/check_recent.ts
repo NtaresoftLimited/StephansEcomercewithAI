@@ -1,0 +1,1 @@
+import { odoo } from './client'; async function checkRecent() { try { const res = await odoo.searchRead('grooming.appointment', [], ['id', 'pet_name', 'preferred_time', 'appointment_date'], 5); console.log(res); } catch(e) { console.error(e); } } checkRecent();
