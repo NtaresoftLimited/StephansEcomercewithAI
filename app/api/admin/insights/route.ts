@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import { generateText, gateway } from "ai";
 import { client } from "@/sanity/lib/client";
 import {
