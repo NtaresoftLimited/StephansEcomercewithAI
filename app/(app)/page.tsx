@@ -14,7 +14,7 @@ import { GROOMING_IMAGES_QUERY } from "@/lib/sanity/queries/groomingImages";
 import { HeroSection } from "@/components/app/HeroSection";
 import { PetCategoryStrip } from "@/components/app/PetCategoryStrip";
 import { GroomingSection } from "@/components/app/GroomingSection";
-import { AutoRotatingProductGrid } from "@/components/app/AutoRotatingProductGrid";
+import { ProductCard } from "@/components/app/ProductCard";
 import { ReviewsSection } from "@/components/app/ReviewsSection";
 import { BrandsSection } from "@/components/app/BrandsSection";
 import { CategoryNavigationSection } from "@/components/app/CategoryNavigationSection";
@@ -97,7 +97,7 @@ export default async function HomePage({ searchParams }: PageProps) {
     const others: any[] = [];
 
     for (const product of products) {
-      const categoryNames = product.categories?.map((c: any) => (c.name || "").toLowerCase()) || [];
+      const categoryNames = product.categories?.map((c: any) => (c.title || c.name || "").toLowerCase()) || [];
       const categorySlugs = product.categories?.map((c: any) => (c.slug?.current || c.slug || "").toLowerCase()) || [];
       const combined = [...categoryNames, ...categorySlugs].join(" ");
       const productName = (product.name || "").toLowerCase();
@@ -116,20 +116,41 @@ export default async function HomePage({ searchParams }: PageProps) {
       }
     }
 
-    const interleaved = [];
-    // Determine how many sets of 4 we can make
-    const maxLen = Math.max(dogs.length, cats.length, smalls.length, birdsGrooming.length, 1);
-    const pages = Math.min(maxLen, 3); // Max 3 pages (12 items) to avoid excessive repeating
+    const uniqueProducts = new Set<string>();
+    const selected = [];
 
-    for (let i = 0; i < pages; i++) {
-      // Fallbacks ensure we always have an item, even if a category is completely empty
-      interleaved.push(dogs[i % dogs.length] || others[i % others.length] || products[0]);
-      interleaved.push(cats[i % cats.length] || others[(i + 1) % others.length] || products[1] || products[0]);
-      interleaved.push(smalls[i % smalls.length] || others[(i + 2) % others.length] || products[2] || products[0]);
-      interleaved.push(birdsGrooming[i % birdsGrooming.length] || others[(i + 3) % others.length] || products[3] || products[0]);
-    }
+    const getUniqueProduct = (list: any[], fallbackList: any[]) => {
+      for (const p of list) {
+        if (!uniqueProducts.has(p._id)) {
+          uniqueProducts.add(p._id);
+          return p;
+        }
+      }
+      for (const p of fallbackList) {
+        if (!uniqueProducts.has(p._id)) {
+          uniqueProducts.add(p._id);
+          return p;
+        }
+      }
+      for (const p of products) {
+        if (!uniqueProducts.has(p._id)) {
+          uniqueProducts.add(p._id);
+          return p;
+        }
+      }
+      return null;
+    };
 
-    products = interleaved;
+    const p1 = getUniqueProduct(dogs, others);
+    if (p1) selected.push(p1);
+    const p2 = getUniqueProduct(cats, others);
+    if (p2) selected.push(p2);
+    const p3 = getUniqueProduct(smalls, others);
+    if (p3) selected.push(p3);
+    const p4 = getUniqueProduct(birdsGrooming, others);
+    if (p4) selected.push(p4);
+
+    products = selected;
   }
 
   // Fetch categories, pet images, and grooming images in parallel
@@ -174,7 +195,11 @@ export default async function HomePage({ searchParams }: PageProps) {
               Something new, thoughtfully chosen.
             </h2>
           </div>
-          <AutoRotatingProductGrid products={products} />
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {products.slice(0, 4).map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
+          </div>
           
           <div className="mt-12 flex justify-center">
             <Link href="/shop" className="inline-flex items-center justify-center px-8 py-3 rounded-md border border-[#dddddd] hover:border-[#222222] transition-colors text-sm font-semibold text-[#222222] gap-2">

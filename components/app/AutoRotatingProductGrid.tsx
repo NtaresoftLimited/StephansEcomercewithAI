@@ -42,17 +42,8 @@ export function AutoRotatingProductGrid({ products }: AutoRotatingProductGridPro
     const [timeLeft, setTimeLeft] = useState(30);
     const [isTransitioning, setIsTransitioning] = useState(false);
 
-    // Ensure brand-first ordering regardless of source sort
-    const sortedProducts = useMemo(() => {
-        return [...products].sort((a, b) => {
-            const aHas = a && (a as any).brand ? 1 : 0;
-            const bHas = b && (b as any).brand ? 1 : 0;
-            if (bHas !== aHas) return bHas - aHas;
-            const an = (a.name || "").toString().toLowerCase();
-            const bn = (b.name || "").toString().toLowerCase();
-            return an.localeCompare(bn);
-        });
-    }, [products]);
+    // Use products in the exact order they were provided
+    const sortedProducts = products;
 
     // Grid configuration
     const ITEMS_PER_PAGE = 4; // Show 4 items per page
