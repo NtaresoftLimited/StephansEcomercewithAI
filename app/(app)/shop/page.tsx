@@ -193,7 +193,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   const baseUrl = `/shop${baseSearchString ? `?${baseSearchString}&` : '?'}`;
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] font-sans pb-24 overflow-hidden">
+    <div className="min-h-screen bg-[#FAF7F2] font-sans overflow-hidden">
       {/* Hero Section */}
       {activeCategory ? (
         <div className="max-w-7xl mx-auto px-4 pt-8 pb-10 sm:px-6 lg:px-8 text-left border-b border-[#EAE3D9] mb-8">
@@ -231,35 +231,35 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
           <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 mb-16 mt-4">
             <div className="flex items-center justify-between overflow-x-auto no-scrollbar py-6 md:px-8">
               <Link href="/shop?category=dogs" className="flex flex-col items-center gap-1 group opacity-80 hover:opacity-100 transition-opacity px-2 sm:px-6 shrink-0 min-w-[130px]">
-                <FoodBowlIcon className="w-12 h-12 text-[#4E2A15] mb-4" />
+                <div className="w-12 h-12 bg-[#c77e35] mb-4 mx-auto" style={{ WebkitMaskImage: 'url(/categories/Food_Stephans.png)', maskImage: 'url(/categories/Food_Stephans.png)', WebkitMaskSize: 'contain', maskSize: 'contain', WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat', WebkitMaskPosition: 'center', maskPosition: 'center' }}></div>
                 <span className="text-[11px] font-bold tracking-widest text-[#222] uppercase">Food</span>
                 <span className="text-[13px] text-zinc-500 group-hover:text-[#4E2A15] transition-colors mt-2 flex items-center gap-1">Shop now <span className="font-serif font-light text-lg relative top-[-1px]">&rarr;</span></span>
               </Link>
               <div className="w-[1px] h-20 bg-[#EAE3D9] shrink-0 hidden sm:block"></div>
               
               <Link href="/shop?category=dogs" className="flex flex-col items-center gap-1 group opacity-80 hover:opacity-100 transition-opacity px-2 sm:px-6 shrink-0 min-w-[130px]">
-                <BoneIcon className="w-12 h-12 text-[#4E2A15] mb-4" />
+                <div className="w-12 h-12 bg-[#c77e35] mb-4 mx-auto" style={{ WebkitMaskImage: 'url(/categories/Treats_Stephans.png)', maskImage: 'url(/categories/Treats_Stephans.png)', WebkitMaskSize: 'contain', maskSize: 'contain', WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat', WebkitMaskPosition: 'center', maskPosition: 'center' }}></div>
                 <span className="text-[11px] font-bold tracking-widest text-[#222] uppercase">Treats</span>
                 <span className="text-[13px] text-zinc-500 group-hover:text-[#4E2A15] transition-colors mt-2 flex items-center gap-1">Shop now <span className="font-serif font-light text-lg relative top-[-1px]">&rarr;</span></span>
               </Link>
               <div className="w-[1px] h-20 bg-[#EAE3D9] shrink-0 hidden sm:block"></div>
               
               <Link href="/shop?category=dogs" className="flex flex-col items-center gap-1 group opacity-80 hover:opacity-100 transition-opacity px-2 sm:px-6 shrink-0 min-w-[130px]">
-                <TeddyBearIcon className="w-12 h-12 text-[#4E2A15] mb-4" />
+                <div className="w-12 h-12 bg-[#c77e35] mb-4 mx-auto" style={{ WebkitMaskImage: 'url(/categories/Toys_Stephans.png)', maskImage: 'url(/categories/Toys_Stephans.png)', WebkitMaskSize: 'contain', maskSize: 'contain', WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat', WebkitMaskPosition: 'center', maskPosition: 'center' }}></div>
                 <span className="text-[11px] font-bold tracking-widest text-[#222] uppercase">Toys</span>
                 <span className="text-[13px] text-zinc-500 group-hover:text-[#4E2A15] transition-colors mt-2 flex items-center gap-1">Shop now <span className="font-serif font-light text-lg relative top-[-1px]">&rarr;</span></span>
               </Link>
               <div className="w-[1px] h-20 bg-[#EAE3D9] shrink-0 hidden sm:block"></div>
               
               <Link href="/shop?category=dogs" className="flex flex-col items-center gap-1 group opacity-80 hover:opacity-100 transition-opacity px-2 sm:px-6 shrink-0 min-w-[130px]">
-                <CollarIcon className="w-12 h-12 text-[#4E2A15] mb-4" />
+                <div className="w-12 h-12 bg-[#c77e35] mb-4 mx-auto" style={{ WebkitMaskImage: 'url(/categories/Accessories_Stephans.png)', maskImage: 'url(/categories/Accessories_Stephans.png)', WebkitMaskSize: 'contain', maskSize: 'contain', WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat', WebkitMaskPosition: 'center', maskPosition: 'center' }}></div>
                 <span className="text-[11px] font-bold tracking-widest text-[#222] uppercase">Accessories</span>
                 <span className="text-[13px] text-zinc-500 group-hover:text-[#4E2A15] transition-colors mt-2 flex items-center gap-1">Shop now <span className="font-serif font-light text-lg relative top-[-1px]">&rarr;</span></span>
               </Link>
               <div className="w-[1px] h-20 bg-[#EAE3D9] shrink-0 hidden sm:block"></div>
               
               <Link href="/grooming" className="flex flex-col items-center gap-1 group opacity-80 hover:opacity-100 transition-opacity px-2 sm:px-6 shrink-0 min-w-[130px]">
-                <ScissorsBubblesIcon className="w-12 h-12 text-[#4E2A15] mb-4" />
+                <div className="w-12 h-12 bg-[#c77e35] mb-4 mx-auto" style={{ WebkitMaskImage: 'url(/categories/Grooming_Scissors.png)', maskImage: 'url(/categories/Grooming_Scissors.png)', WebkitMaskSize: 'contain', maskSize: 'contain', WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat', WebkitMaskPosition: 'center', maskPosition: 'center' }}></div>
                 <span className="text-[11px] font-bold tracking-widest text-[#222] uppercase">Grooming</span>
                 <span className="text-[13px] text-zinc-500 group-hover:text-[#4E2A15] transition-colors mt-2 flex items-center gap-1">Book now <span className="font-serif font-light text-lg relative top-[-1px]">&rarr;</span></span>
               </Link>
@@ -268,6 +268,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
         </>
       )}
 
+      <div className="w-full bg-white pt-8 pb-24 border-t border-[#EAE3D9]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Controls Row */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
@@ -308,6 +309,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
             baseUrl={baseUrl} 
           />
         </main>
+      </div>
       </div>
     </div>
   );

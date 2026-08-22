@@ -11,6 +11,7 @@ import { absoluteUrl, truncateDescription } from "@/lib/seo";
 
 interface BrandPageProps {
     params: Promise<{ slug: string }>;
+    searchParams: Promise<{ page?: string }>;
 }
 
 async function fetchBrand(slug: string) {
@@ -111,8 +112,12 @@ export async function generateMetadata(props: BrandPageProps): Promise<Metadata>
     };
 }
 
+import { ProductGrid } from "@/components/app/ProductGrid";
+
 export default async function BrandPage(props: BrandPageProps) {
     const { slug } = await props.params;
+    const searchParamsResolved = await props.searchParams;
+    const currentPage = Number(searchParamsResolved?.page) || 1;
     const slugLower = slug.toLowerCase();
 
     // 1. Fetch brand from Sanity
@@ -204,6 +209,13 @@ export default async function BrandPage(props: BrandPageProps) {
         }] : [],
         category: null
     }));
+    
+    // Pagination
+    const itemsPerPage = 8;
+    const totalPages = Math.ceil(mappedProducts.length / itemsPerPage) || 1;
+    const validCurrentPage = Math.max(1, Math.min(currentPage, totalPages));
+    const pagedProducts = mappedProducts.slice((validCurrentPage - 1) * itemsPerPage, validCurrentPage * itemsPerPage);
+    const baseUrl = `/brands/${slug}?`;
 
     return (
         <div className="min-h-screen bg-background pt-20">
@@ -306,10 +318,13 @@ export default async function BrandPage(props: BrandPageProps) {
                 </div>
 
                 {mappedProducts.length > 0 ? (
-                    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                        {mappedProducts.map((product) => (
-                            <ProductCard key={product._id} product={product} />
-                        ))}
+                    <div className="w-full">
+                        <ProductGrid 
+                            products={pagedProducts} 
+                            currentPage={validCurrentPage} 
+                            totalPages={totalPages} 
+                            baseUrl={baseUrl} 
+                        />
                     </div>
                 ) : (
                     <div className="text-center py-24 bg-zinc-50 rounded-2xl border border-zinc-100">
