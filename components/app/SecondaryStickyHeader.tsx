@@ -421,7 +421,7 @@ function SecondaryStickyHeaderInner({
 
       {/* 3. BOTTOM BAR (Navigation) */}
       <div className="relative hidden lg:block bg-white dark:bg-zinc-950 px-4 sm:px-6 lg:px-8 border-t border-zinc-100 dark:border-zinc-800">
-        <div className="mx-auto max-w-7xl flex items-center justify-center h-11 gap-8 relative text-[15px] font-bold text-zinc-700 dark:text-zinc-200">
+        <div className="w-full mx-auto max-w-7xl flex items-center justify-center h-11 gap-8 relative text-[15px] font-bold text-zinc-700 dark:text-zinc-200">
           {categories.map((cat) => (
             <div
               role="none"
