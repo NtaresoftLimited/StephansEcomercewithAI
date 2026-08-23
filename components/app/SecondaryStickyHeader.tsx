@@ -421,7 +421,7 @@ function SecondaryStickyHeaderInner({
 
       {/* 3. BOTTOM BAR (Navigation) */}
       <div className="relative hidden lg:block bg-white dark:bg-zinc-950 px-4 sm:px-6 lg:px-8 border-t border-zinc-100 dark:border-zinc-800">
-        <div className="mx-auto max-w-7xl flex items-center h-11 gap-8 text-[15px] font-bold text-zinc-700 dark:text-zinc-200">
+        <div className="mx-auto max-w-7xl flex items-center justify-center h-11 gap-8 relative text-[15px] font-bold text-zinc-700 dark:text-zinc-200">
           {categories.map((cat) => (
             <div
               role="none"
@@ -484,7 +484,7 @@ function SecondaryStickyHeaderInner({
 
           <Link
             href="/stores"
-            className="ml-auto text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors h-full flex items-center border-b-2 border-transparent hover:border-zinc-500 gap-2"
+            className="absolute right-0 text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors h-full flex items-center border-b-2 border-transparent hover:border-zinc-500 gap-2"
           >
             <Image
               src="/favicon.png"
