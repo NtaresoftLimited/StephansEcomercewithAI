@@ -3,8 +3,8 @@ import { odoo } from "@/lib/odoo/client";
 import { createClient } from "@sanity/client";
 
 const sanityClient = createClient({
-    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
+    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'ubqcgegx',
+    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
     apiVersion: "2025-12-05",
     useCdn: false,
     token: process.env.SANITY_API_WRITE_TOKEN,

@@ -214,7 +214,7 @@ function ImageThumbnail({
     const match = assetRef.match(/^image-([a-zA-Z0-9]+)-(\d+x\d+)-(\w+)$/);
     if (match) {
       const [, id, dimensions, format] = match;
-      imageUrl = `https://cdn.sanity.io/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/${id}-${dimensions}.${format}`;
+      imageUrl = `https://cdn.sanity.io/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'ubqcgegx'}/${process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'}/${id}-${dimensions}.${format}`;
     }
   }
 
