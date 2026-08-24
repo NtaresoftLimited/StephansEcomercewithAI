@@ -42,18 +42,19 @@ const CATEGORY_ICONS: Record<string, ElementType | string> = {
   "Dog Food": "/icons/pet-bowl.png",
   "Cat Food": "/icons/pet-bowl.png",
   "Bird Food": Utensils,
-  Food: Utensils,
+  Food: "/icons/pet-bowl.png",
   "Tick, Flea & Deworming": "/icons/shield-tick.png",
   "Wellness & Supplements": HeartPulse,
   "Treats & Chews": "/icons/bone-outline.png",
-  "Treats & Supplements": Bone,
+  Treats: "/icons/bone-outline.png",
+  "Treats & Supplements": "/icons/bone-outline.png",
   "Oral Care": Sparkles,
   "Grooming Essentials": "/icons/hairbrush.png",
   "Hygiene & Care": Scissors,
   "Hygiene & Cleaning": Scissors,
   "Clean Living": Trash2,
   "Cat Litter & Clean Living": Trash2,
-  "Bowls & Feeders": Refrigerator,
+  "Bowls & Feeders": "/icons/pet-bowl.png",
   "Beds & Blankets": Bed,
   "Home & Crates": Home,
   "Homes & Nests": Home,
@@ -83,7 +84,7 @@ export function CategoryMegaMenu({
     .filter((group): group is MenuGroup => Boolean(group));
 
   return (
-    <div className="mx-auto w-full max-w-7xl">
+    <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="bg-white dark:bg-zinc-950">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 -mx-5 py-4 lg:py-6 pb-2">
           {featuredGroups.map((group) => {
