@@ -86,10 +86,15 @@ async function runSync() {
                 .replace(/[^a-z0-9]+/g, "-")
                 .replace(/^-+|-+$/g, "") + `-${product.id}`;
 
-            // 1. Handle Category
+            // 1. Handle Category — use only the leaf name from Odoo's full path
+            //    e.g. "DOGS / TREATS / Crunchy Treats" → "Crunchy Treats"
             let categoryRef = undefined;
             if (product.categ_id && Array.isArray(product.categ_id)) {
-                const catId = await getOrCreateCategory(product.categ_id[1]);
+                const fullPath = product.categ_id[1] as string;
+                const leafName = fullPath.includes(' / ')
+                    ? fullPath.split(' / ').pop()!
+                    : fullPath;
+                const catId = await getOrCreateCategory(leafName);
                 categoryRef = { _type: "reference", _ref: catId };
             }
 
