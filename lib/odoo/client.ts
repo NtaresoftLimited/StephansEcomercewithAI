@@ -111,7 +111,7 @@ export class OdooClient {
                 headers: { "Content-Type": "application/json" },
                 body,
                 credentials: "omit", // Ensure NO cookies are leaked from server context
-                signal: AbortSignal.timeout(20000)
+                signal: AbortSignal.timeout(60000)
             });
 
             if (!response.ok) {
