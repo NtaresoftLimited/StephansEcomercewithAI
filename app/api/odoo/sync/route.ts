@@ -41,6 +41,23 @@ async function getOrCreateCategory(name: string) {
     return created._id;
 }
 
+async function getOrCreateBrand(name: string) {
+    const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+    
+    const existing = await sanityClient.fetch(
+        `*[_type == "brand" && slug.current == $slug][0]`,
+        { slug }
+    );
+    if (existing) return existing._id;
+
+    const created = await sanityClient.create({
+        _type: "brand",
+        name: name,
+        slug: { _type: "slug", current: slug },
+    });
+    return created._id;
+}
+
 async function uploadOdooImage(base64: string, filename: string) {
     if (!base64 || base64.length < 100) return null;
 
@@ -68,6 +85,7 @@ async function runSync() {
             "list_price",
             "description_sale",
             "categ_id",
+            "brand_id",
             "qty_available",
             "image_1920",
             "product_variant_ids"
@@ -125,6 +143,13 @@ async function runSync() {
             });
 
             if (categoryRef) patch.set({ categories: [categoryRef] });
+            
+            // Handle Brand
+            if (product.brand_id && Array.isArray(product.brand_id)) {
+                const brandId = await getOrCreateBrand(product.brand_id[1]);
+                patch.set({ brand: { _type: "reference", _ref: brandId } });
+            }
+
             if (imageAssetId) {
                 patch.setIfMissing({ images: [] });
                 patch.insert("replace", "images[0]", [{

@@ -33,7 +33,7 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
     const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     const [formData, setFormData] = useState({
-        petType: "dog" as "dog" | "cat",
+        petType: "dog" as "dog" | "cat" | "small_animal",
         petName: "",
         breedSize: "",
         package: "",
@@ -62,9 +62,9 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
         const urlPetType = (searchParams.get("petType") || "").trim();
         const urlSize = (searchParams.get("size") || "").trim();
         const validPackages = new Set(["standard", "premium", "super_premium"]);
-        const validPetTypes = new Set(["dog", "cat"]);
+        const validPetTypes = new Set(["dog", "cat", "small_animal"]);
         const next: Partial<typeof formData> = {};
-        const petTypeToUse = validPetTypes.has(urlPetType) ? (urlPetType as "dog" | "cat") : undefined;
+        const petTypeToUse = validPetTypes.has(urlPetType) ? (urlPetType as "dog" | "cat" | "small_animal") : undefined;
         if (petTypeToUse) next.petType = petTypeToUse;
         if (petTypeToUse) next.breedSize = "";
         if (validPackages.has(urlPackage)) {
