@@ -41,8 +41,9 @@ export const CAT_PACKAGES = {
     standard: {
         name: "Essential Package",
         prices: {
-            kitten: 45000,
-            adult: 60000,
+            kitten: 60000,
+            adult: 70000,
+            senior: 80000,
         },
         services: [
             "Warm Deep Clean bath",
@@ -55,8 +56,9 @@ export const CAT_PACKAGES = {
     super_premium: {
         name: "Signature Package",
         prices: {
-            kitten: 75000,
-            adult: 85000,
+            kitten: 80000,
+            adult: 90000,
+            senior: 100000,
         },
         services: [
             "Warm Deep Clean bath",
@@ -106,8 +108,8 @@ export const PRICES: Record<string, Record<string, Record<string, number>>> = {
         super_premium: { small: 80000, medium: 90000, large: 100000 },
     },
     cat: {
-        standard: { kitten: 45000, adult: 60000 },
-        super_premium: { kitten: 75000, adult: 85000 },
+        standard: { kitten: 60000, adult: 70000, senior: 80000 },
+        super_premium: { kitten: 80000, adult: 90000, senior: 100000 },
     },
     small_animal: {
         super_premium: { hamster: 100000, junior_rabbit: 100000, adult_rabbit: 150000, guinea_pig: 100000 },
@@ -121,8 +123,9 @@ export const BREED_SIZES = {
         { value: "large", label: "Large Breeds" },
     ],
     cat: [
-        { value: "kitten", label: "Kitten (2-7 months)" },
-        { value: "adult", label: "Adult Cat (7+ months)" },
+        { value: "kitten", label: "Kitten: Birth - (0 - 12 Months)" },
+        { value: "adult", label: "Adult Cat - (1 Year)" },
+        { value: "senior", label: "Senior Cat - (7+ Years)" },
     ],
     small_animal: [
         { value: "hamster", label: "Hamster" },
@@ -136,8 +139,9 @@ export const SIZE_LABELS: Record<string, string> = {
     small: "Small",
     medium: "Medium",
     large: "Large",
-    kitten: "Kitten (2-7 months)",
-    adult: "Adult Cat (7+ months)",
+    kitten: "Kitten: Birth - (0 - 12 Months)",
+    adult: "Adult Cat - (1 Year)",
+    senior: "Senior Cat - (7+ Years)",
     hamster: "Hamster",
     junior_rabbit: "Junior Rabbit (0 - 6 month)",
     adult_rabbit: "Adult Rabbit (6 months +)",
