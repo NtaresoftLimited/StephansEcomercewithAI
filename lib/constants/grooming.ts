@@ -1,116 +1,78 @@
 export const DOG_PACKAGES = {
     standard: {
-        name: "Standard Package",
+        name: "Essential Package",
         prices: {
-            mini: 45000,
-            small: 50000,
-            medium: 60000,
-            large: 70000,
-        },
-        services: [
-            "Warm bath",
-            "Blow dry",
-            "Ear cleaning",
-            "Brush out",
-            "Sanitary trim (if needed)",
-        ],
-        color: "from-[#c77e35] to-[#c77e35]",
-    },
-    premium: {
-        name: "Premium Package",
-        prices: {
-            mini: 50000,
             small: 60000,
             medium: 70000,
             large: 80000,
         },
         services: [
-            "Warm Deep Clean Bath",
-            "Blow dry",
+            "Warm Deep Clean bath",
+            "Blow Dry",
             "Ear cleaning",
-            "Full Hair Cut or Styling",
-            "Nail Trim",
-            "Teeth Brushing",
+            "Full Coat Brush Out & Sanitary trim (Private area & Belly)",
         ],
         color: "from-[#c77e35] to-[#c77e35]",
-        popular: true,
     },
     super_premium: {
-        name: "Super Premium Package",
+        name: "Signature Package",
         prices: {
-            mini: 60000,
-            small: 70000,
-            medium: 80000,
-            large: 90000,
+            small: 80000,
+            medium: 90000,
+            large: 100000,
         },
         services: [
-            "Warm Deep Clean Bath",
-            "Blow dry",
-            "Ear cleaning",
-            "Full Hair Cut or Styling",
-            "Nail Trim",
-            "Teeth Brushing",
+            "Warm Deep Clean bath",
+            "Blow Dry",
+            "Ear care",
+            "Nail Care",
+            "Dental Care",
             "De-shedding",
+            "Full Hair Cut or Styling",
             "Flea & Tick Treatment",
-            "Paw Balm Treatment",
-            "Finishing Touches",
+            "Paw Balm Treatment & Finishing Touches",
         ],
         color: "from-[#c77e35] to-[#2d1a0d]",
+        popular: true,
     },
 };
 
 export const CAT_PACKAGES = {
     standard: {
-        name: "Standard Package",
+        name: "Essential Package",
         prices: {
-            kitten: 45000,
-            adult: 60000,
+            small: 60000,
+            medium: 70000,
+            large: 80000,
         },
         services: [
-            "Warm bath",
-            "Blow dry",
+            "Warm Deep Clean bath",
+            "Blow Dry",
             "Ear cleaning",
-            "Brush out",
-            "Sanitary trim (if needed)",
+            "Full Coat Brush Out & Sanitary trim (Private area & Belly)",
         ],
         color: "from-[#c77e35] to-[#c77e35]",
-    },
-    premium: {
-        name: "Premium Package",
-        prices: {
-            kitten: 60000,
-            adult: 75000,
-        },
-        services: [
-            "Warm Deep Clean Bath",
-            "Blow dry",
-            "Ear cleaning",
-            "Full Hair Cut or Styling",
-            "Nail Trim",
-            "Teeth Brushing",
-        ],
-        color: "from-[#c77e35] to-[#c77e35]",
-        popular: true,
     },
     super_premium: {
-        name: "Super Premium Package",
+        name: "Signature Package",
         prices: {
-            kitten: 75000,
-            adult: 85000,
+            small: 80000,
+            medium: 90000,
+            large: 100000,
         },
         services: [
-            "Warm Deep Clean Bath",
-            "Blow dry",
-            "Ear cleaning",
-            "Full Hair Cut or Styling",
-            "Nail Trim",
-            "Teeth Brushing",
+            "Warm Deep Clean bath",
+            "Blow Dry",
+            "Ear care",
+            "Nail Care",
+            "Dental Care",
             "De-shedding",
+            "Full Hair Cut or Styling",
             "Flea & Tick Treatment",
-            "Paw Balm Treatment",
-            "Finishing Touches",
+            "Paw Balm Treatment & Finishing Touches",
         ],
         color: "from-[#c77e35] to-[#2d1a0d]",
+        popular: true,
     },
 };
 
@@ -136,19 +98,18 @@ export const SMALL_ANIMAL_PACKAGES = {
             "Finishing Touches",
         ],
         color: "from-[#c77e35] to-[#2d1a0d]",
+        popular: true,
     },
 };
 
 export const PRICES: Record<string, Record<string, Record<string, number>>> = {
     dog: {
-        standard: { mini: 45000, small: 50000, medium: 60000, large: 70000 },
-        premium: { mini: 50000, small: 60000, medium: 70000, large: 80000 },
-        super_premium: { mini: 60000, small: 70000, medium: 80000, large: 90000 },
+        standard: { small: 60000, medium: 70000, large: 80000 },
+        super_premium: { small: 80000, medium: 90000, large: 100000 },
     },
     cat: {
-        standard: { kitten: 45000, adult: 60000 },
-        premium: { kitten: 60000, adult: 75000 },
-        super_premium: { kitten: 75000, adult: 85000 },
+        standard: { small: 60000, medium: 70000, large: 80000 },
+        super_premium: { small: 80000, medium: 90000, large: 100000 },
     },
     small_animal: {
         super_premium: { hamster: 100000, junior_rabbit: 100000, adult_rabbit: 150000, guinea_pig: 100000 },
@@ -157,33 +118,30 @@ export const PRICES: Record<string, Record<string, Record<string, number>>> = {
 
 export const BREED_SIZES = {
     dog: [
-        { value: "mini", label: "Mini Breeds" },
         { value: "small", label: "Small Breeds" },
         { value: "medium", label: "Medium Breeds" },
         { value: "large", label: "Large Breeds" },
     ],
     cat: [
-        { value: "kitten", label: "Kitten (2-7 months)" },
-        { value: "adult", label: "Adult Cat (7+ months)" },
+        { value: "small", label: "Small Cats" },
+        { value: "medium", label: "Medium Cats" },
+        { value: "large", label: "Large Cats" },
     ],
     small_animal: [
         { value: "hamster", label: "Hamster" },
-        { value: "junior_rabbit", label: "Junior Rabbit" },
-        { value: "adult_rabbit", label: "Adult Rabbit" },
+        { value: "junior_rabbit", label: "Junior Rabbit (0 - 6 month)" },
+        { value: "adult_rabbit", label: "Adult Rabbit (6 months +)" },
         { value: "guinea_pig", label: "Guinea Pig" },
     ],
 };
 
 export const SIZE_LABELS: Record<string, string> = {
-    mini: "Mini Breeds",
-    small: "Small Breeds",
-    medium: "Medium Breeds",
-    large: "Large Breeds",
-    kitten: "Kittens (2-7 months)",
-    adult: "Adults (7+ months)",
+    small: "Small",
+    medium: "Medium",
+    large: "Large",
     hamster: "Hamster",
-    junior_rabbit: "Junior Rabbit",
-    adult_rabbit: "Adult Rabbit",
+    junior_rabbit: "Junior Rabbit (0 - 6 month)",
+    adult_rabbit: "Adult Rabbit (6 months +)",
     guinea_pig: "Guinea Pig",
 };
 
@@ -206,5 +164,4 @@ export const VALID_TIMES = [
     { value: "16:30", label: "4:30 PM" },
     { value: "17:00", label: "5:00 PM" },
     { value: "17:30", label: "5:30 PM" },
-    { value: "18:00", label: "6:00 PM (Emergency)" },
 ];
