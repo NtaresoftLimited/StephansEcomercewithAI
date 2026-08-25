@@ -41,9 +41,8 @@ export const CAT_PACKAGES = {
     standard: {
         name: "Essential Package",
         prices: {
-            small: 60000,
-            medium: 70000,
-            large: 80000,
+            kitten: 45000,
+            adult: 60000,
         },
         services: [
             "Warm Deep Clean bath",
@@ -56,9 +55,8 @@ export const CAT_PACKAGES = {
     super_premium: {
         name: "Signature Package",
         prices: {
-            small: 80000,
-            medium: 90000,
-            large: 100000,
+            kitten: 75000,
+            adult: 85000,
         },
         services: [
             "Warm Deep Clean bath",
@@ -108,8 +106,8 @@ export const PRICES: Record<string, Record<string, Record<string, number>>> = {
         super_premium: { small: 80000, medium: 90000, large: 100000 },
     },
     cat: {
-        standard: { small: 60000, medium: 70000, large: 80000 },
-        super_premium: { small: 80000, medium: 90000, large: 100000 },
+        standard: { kitten: 45000, adult: 60000 },
+        super_premium: { kitten: 75000, adult: 85000 },
     },
     small_animal: {
         super_premium: { hamster: 100000, junior_rabbit: 100000, adult_rabbit: 150000, guinea_pig: 100000 },
@@ -123,9 +121,8 @@ export const BREED_SIZES = {
         { value: "large", label: "Large Breeds" },
     ],
     cat: [
-        { value: "small", label: "Small Cats" },
-        { value: "medium", label: "Medium Cats" },
-        { value: "large", label: "Large Cats" },
+        { value: "kitten", label: "Kitten (2-7 months)" },
+        { value: "adult", label: "Adult Cat (7+ months)" },
     ],
     small_animal: [
         { value: "hamster", label: "Hamster" },
@@ -139,6 +136,8 @@ export const SIZE_LABELS: Record<string, string> = {
     small: "Small",
     medium: "Medium",
     large: "Large",
+    kitten: "Kitten (2-7 months)",
+    adult: "Adult Cat (7+ months)",
     hamster: "Hamster",
     junior_rabbit: "Junior Rabbit (0 - 6 month)",
     adult_rabbit: "Adult Rabbit (6 months +)",
