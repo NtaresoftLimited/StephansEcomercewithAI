@@ -42,15 +42,15 @@ interface MobileNavMenuProps {
 
 // Icon mapping for categories
 const CustomTreatsIcon = (props: any) => (
-  <div style={{ width: props.size || 18, height: props.size || 18, position: 'relative' }}>
-    <Image 
-      src="/icons/Treats_Stephans.png" 
-      alt="Treats" 
-      fill 
-      className="object-contain" 
-      style={{ filter: 'var(--tw-invert) sepia(1) hue-rotate(350deg) saturate(3) brightness(0.8)' }}
-    />
-  </div>
+  <div className={props.className} style={{ width: props.size || 18, height: props.size || 18, WebkitMaskImage: `url('/icons/Treats_Stephans.png')`, maskImage: `url('/icons/Treats_Stephans.png')`, WebkitMaskSize: "contain", maskSize: "contain", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center", backgroundColor: "currentColor" }} />
+);
+
+const CustomBirdHouseIcon = (props: any) => (
+  <div className={props.className} style={{ width: props.size || 18, height: props.size || 18, WebkitMaskImage: `url('/icons/bird-house.png')`, maskImage: `url('/icons/bird-house.png')`, WebkitMaskSize: "contain", maskSize: "contain", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center", backgroundColor: "currentColor" }} />
+);
+
+const CustomSmallPetsHomeIcon = (props: any) => (
+  <div className={props.className} style={{ width: props.size || 18, height: props.size || 18, WebkitMaskImage: `url('/icons/small-pets-home.png')`, maskImage: `url('/icons/small-pets-home.png')`, WebkitMaskSize: "contain", maskSize: "contain", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center", backgroundColor: "currentColor" }} />
 );
 
 const CATEGORY_ICONS: Record<string, ElementType> = {
@@ -73,6 +73,8 @@ const CATEGORY_ICONS: Record<string, ElementType> = {
   "Home & Crates": Home,
   "Homes & Nests": Home,
   "Little Homes": Home,
+  "Home & Habitat": CustomSmallPetsHomeIcon,
+  "Home": CustomBirdHouseIcon,
   "Scratchers & Housing": Home,
   "Toys & Plays": Dumbbell,
   "Toys & Enrichment": Dumbbell,

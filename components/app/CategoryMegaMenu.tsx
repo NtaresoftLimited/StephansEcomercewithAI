@@ -59,6 +59,8 @@ const CATEGORY_ICONS: Record<string, ElementType | string> = {
   "Home & Crates": Home,
   "Homes & Nests": Home,
   "Little Homes": Home,
+  "Home & Habitat": "/icons/small-pets-home.png",
+  "Home": "/icons/bird-house.png",
   "Scratchers & Cat Housing": Home,
   "Toys & Plays": Dumbbell,
   "Toys & Enrichment": Dumbbell,

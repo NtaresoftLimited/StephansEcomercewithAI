@@ -356,44 +356,44 @@ export const DEEP_NAV_MENU = {
       title: "Food",
       href: "/shop?category=small-animals-food",
       items: [
-        { name: "Hamster", href: "/shop?category=hamster-food" },
-        { name: "Guinea Pig", href: "/shop?category=guinea-pig-food" },
-        { name: "Rabbit", href: "/shop?category=rabbit-food" }
+        { name: "Hamster", href: "/shop?category=small-animals-food-hamster" },
+        { name: "Guinea Pig", href: "/shop?category=small-animals-food-guinea-pig" },
+        { name: "Rabbit", href: "/shop?category=small-animals-food-rabbit" }
       ]
     },
     {
       title: "Bowls & Feeders",
       href: "/shop?category=small-animals-bowls-feeders",
       items: [
-        { name: "Feeders & Dispensers", href: "/shop?category=feeders-dispensers" },
-        { name: "Food & Water Bowls", href: "/shop?category=food-water-bowls" }
+        { name: "Feeders & Dispensers", href: "/shop?category=small-animals-bowls-feeders-feeders-dispensers" },
+        { name: "Food & Water Bowls", href: "/shop?category=small-animals-bowls-feeders-food-water-bowls" }
       ]
     },
     {
       title: "Hygiene & Care",
       href: "/shop?category=small-animals-hygiene-care",
       items: [
-        { name: "Cage Cleaners", href: "/shop?category=cage-cleaners" },
-        { name: "Odor Control", href: "/shop?category=odor-control" }
+        { name: "Cage Cleaners", href: "/shop?category=small-animals-hygiene-care-cage-cleaners" },
+        { name: "Odor Control", href: "/shop?category=small-animals-hygiene-care-odor-control" }
       ]
     },
     {
       title: "Home & Habitat",
       href: "/shop?category=small-animals-home-habitat",
       items: [
-        { name: "Beds", href: "/shop?category=beds" },
-        { name: "Cages & Habitats", href: "/shop?category=cages-habitats" },
-        { name: "Tunnels", href: "/shop?category=tunnels" },
-        { name: "Hammocks", href: "/shop?category=hammocks" }
+        { name: "Beds", href: "/shop?category=small-animals-home-habitat-beds" },
+        { name: "Cages & Habitats", href: "/shop?category=small-animals-home-habitat-cages-habitats" },
+        { name: "Tunnels", href: "/shop?category=small-animals-home-habitat-tunnels" },
+        { name: "Hammocks", href: "/shop?category=small-animals-home-habitat-hammocks" }
       ]
     },
     {
       title: "Toys",
       href: "/shop?category=small-animals-toys",
       items: [
-        { name: "Tunnels & Hideaways", href: "/shop?category=tunnels-hideaways" },
-        { name: "Exercise Wheels", href: "/shop?category=exercise-wheels" },
-        { name: "Climbing Toys", href: "/shop?category=climbing-toys" }
+        { name: "Tunnels & Hideaways", href: "/shop?category=small-animals-toys-tunnels-hideaways" },
+        { name: "Exercise Wheels", href: "/shop?category=small-animals-toys-exercise-wheels" },
+        { name: "Climbing Toys", href: "/shop?category=small-animals-toys-climbing-toys" }
       ]
     }
   ]

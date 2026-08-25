@@ -69,6 +69,15 @@ async function fetchBrand(slug: string) {
         };
     }
 
+    if (slugLower === 'summit10') {
+        return {
+            name: "Summit10",
+            description: "Premium nutrition for your pets.",
+            logo: null,
+            banner: null
+        };
+    }
+
     return null;
 }
 
