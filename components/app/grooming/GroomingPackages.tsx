@@ -9,7 +9,7 @@ import { PRICES, DOG_PACKAGES, CAT_PACKAGES, SIZE_LABELS } from "@/lib/constants
 import { formatPrice } from "@/lib/utils";
 
 interface PackageCardProps {
-    packageKey: "standard" | "premium" | "super_premium";
+    packageKey: "standard" | "super_premium";
     name: string;
     prices: Record<string, number>;
     services: string[];
@@ -85,7 +85,7 @@ interface GroomingPackagesProps {
 export function GroomingPackages({ prices = PRICES }: GroomingPackagesProps) {
     const [activeTab, setActiveTab] = useState<"dog" | "cat">("dog");
 
-    const getPackage = (petType: "dog" | "cat", pkgKey: "standard" | "premium" | "super_premium") => {
+    const getPackage = (petType: "dog" | "cat", pkgKey: "standard" | "super_premium") => {
         const pkgData = petType === "dog" ? DOG_PACKAGES[pkgKey] : CAT_PACKAGES[pkgKey];
         const dynamicPrices = prices?.[petType]?.[pkgKey];
 
@@ -148,17 +148,15 @@ export function GroomingPackages({ prices = PRICES }: GroomingPackagesProps) {
                 </div>
 
                 {/* Package Cards */}
-                <div className="grid gap-6 md:grid-cols-3">
+                <div className="grid gap-6 md:grid-cols-2 max-w-4xl mx-auto">
                     {activeTab === "dog" ? (
                         <>
                             <PackageCard petType="dog" packageKey="standard" {...getPackage("dog", "standard")} />
-                            <PackageCard petType="dog" packageKey="premium" {...getPackage("dog", "premium")} />
                             <PackageCard petType="dog" packageKey="super_premium" {...getPackage("dog", "super_premium")} />
                         </>
                     ) : (
                         <>
                             <PackageCard petType="cat" packageKey="standard" {...getPackage("cat", "standard")} />
-                            <PackageCard petType="cat" packageKey="premium" {...getPackage("cat", "premium")} />
                             <PackageCard petType="cat" packageKey="super_premium" {...getPackage("cat", "super_premium")} />
                         </>
                     )}
@@ -176,12 +174,15 @@ export function GroomingPackages({ prices = PRICES }: GroomingPackagesProps) {
                     
                     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         {[
-                            { name: "Express Grooming", price: "30,000 TZS", desc: "Priority service" },
-                            { name: "De-tangling Fee", price: "30,000 TZS", desc: "For matted fur" },
+                            { name: "Nail Care", price: "20,000 TZS", desc: "Trimming & filing" },
+                            { name: "Ear Care", price: "20,000 TZS", desc: "Cleaning & plucking" },
+                            { name: "Express Grooming", price: "50,000 TZS", desc: "Priority service" },
+                            { name: "De-tangling Hair", price: "50,000 TZS", desc: "For matted fur" },
                             { name: "Handling Fee", price: "10,000 TZS", desc: "For difficult pets" },
-                            { name: "Sedation Fee", price: "5,000 TZS", desc: "Vet supervision required" },
+                            { name: "Sedation Fee", price: "10,000 TZS", desc: "Vet supervision required" },
                             { name: "Late Pickup Fee", price: "10,000 TZS", desc: "Per hour charge" },
-                            { name: "Emergency Grooming", price: "30,000 TZS", desc: "At 6:00 PM" },
+                            { name: "Consultation", price: "20,000 TZS", desc: "Expert advice" },
+                            { name: "Emergency Grooming", price: "50,000 TZS", desc: "After 6:00 PM" },
                         ].map((item, i) => (
                             <div key={i} className="group relative overflow-hidden rounded-xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 p-5 hover:shadow-lg transition-all duration-300 hover:border-[#c77e35]/30">
                                 <div className="absolute top-0 left-0 w-1 h-full bg-[#c77e35] opacity-0 group-hover:opacity-100 transition-opacity"></div>
