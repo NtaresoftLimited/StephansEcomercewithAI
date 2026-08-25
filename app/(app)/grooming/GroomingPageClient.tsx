@@ -164,26 +164,6 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
             popular: false
         },
         {
-            key: "premium",
-            name: "Premium",
-            desc: "Complete care for a healthier, happier pet.",
-            icon: (
-                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-12 h-12">
-                    <g transform="rotate(-45 24 24)">
-                        <rect x="12" y="22" width="12" height="4" rx="2" stroke="#c77e35" strokeWidth="1.8"/>
-                        <rect x="24" y="16" width="14" height="16" rx="2" stroke="#c77e35" strokeWidth="1.8"/>
-                        <line x1="28" y1="20" x2="28" y2="28" stroke="#c77e35" strokeWidth="1.5" strokeLinecap="round"/>
-                        <line x1="31" y1="20" x2="31" y2="28" stroke="#c77e35" strokeWidth="1.5" strokeLinecap="round"/>
-                        <line x1="34" y1="20" x2="34" y2="28" stroke="#c77e35" strokeWidth="1.5" strokeLinecap="round"/>
-                    </g>
-                    <circle cx="12" cy="20" r="1.5" stroke="#c77e35" strokeWidth="1.5"/>
-                    <circle cx="16" cy="14" r="2" stroke="#c77e35" strokeWidth="1.5"/>
-                    <path d="M36 30 C38 28, 40 32, 38 34 C36 36, 40 38, 40 38" stroke="#c77e35" strokeWidth="1.8" strokeLinecap="round" fill="none"/>
-                </svg>
-            ),
-            popular: true
-        },
-        {
             key: "super_premium",
             name: "Signature",
             desc: "The ultimate grooming experience at Stephan's.",
@@ -196,7 +176,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                     }}
                 />
             ),
-            popular: false
+            popular: true
         }
     ];
 
@@ -262,7 +242,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
             <div className="max-w-6xl mx-auto px-4 py-8">
                 <p className="text-[10px] font-bold tracking-[0.15em] text-[#c77e35] uppercase text-center mb-10">Choose your grooming experience</p>
                 
-                <div className={`grid grid-cols-1 ${activeTab === 'small_animal' ? 'md:grid-cols-1 max-w-sm mx-auto' : 'md:grid-cols-3'} gap-6`}>
+                <div className={`grid grid-cols-1 ${activeTab === 'small_animal' ? 'md:grid-cols-1 max-w-sm' : 'md:grid-cols-2 max-w-4xl'} mx-auto gap-6`}>
                     {packages.filter(pkg => activeTab === 'small_animal' ? pkg.key === 'super_premium' : true).map((pkg) => (
                         <div key={pkg.key} className={`relative border border-[#E8E0D8] rounded-2xl p-8 md:p-10 text-center bg-[#FDFBF9] hover:shadow-lg transition-shadow duration-300 flex flex-col items-center justify-between`}>
                             {pkg.popular && activeTab !== 'small_animal' && (
