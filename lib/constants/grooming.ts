@@ -123,14 +123,14 @@ export const BREED_SIZES = {
         { value: "large", label: "Large Breeds" },
     ],
     cat: [
-        { value: "kitten", label: "Kitten - (2 - 7 Months)" },
-        { value: "adult", label: "Adult Cat - (7+ Months)" },
+        { value: "kitten", label: "Kitten - (2 - 12 Months)" },
+        { value: "adult", label: "Adult Cat - (1+ Year)" },
         { value: "senior", label: "Senior Cat - (5+ Years)" },
     ],
     small_animal: [
         { value: "hamster", label: "Hamster" },
-        { value: "junior_rabbit", label: "Junior Rabbit (0 - 6 month)" },
-        { value: "adult_rabbit", label: "Adult Rabbit (6 months +)" },
+        { value: "junior_rabbit", label: "Junior Rabbit (0 - 6 months)" },
+        { value: "adult_rabbit", label: "Adult Rabbit (6months +)" },
         { value: "guinea_pig", label: "Guinea Pig" },
     ],
 };
@@ -139,12 +139,12 @@ export const SIZE_LABELS: Record<string, string> = {
     small: "Small",
     medium: "Medium",
     large: "Large",
-    kitten: "Kitten - (2 - 7 Months)",
-    adult: "Adult Cat - (7+ Months)",
+    kitten: "Kitten - (2 - 12 Months)",
+    adult: "Adult Cat - (1+ Year)",
     senior: "Senior Cat - (5+ Years)",
     hamster: "Hamster",
-    junior_rabbit: "Junior Rabbit (0 - 6 month)",
-    adult_rabbit: "Adult Rabbit (6 months +)",
+    junior_rabbit: "Junior Rabbit (0 - 6 months)",
+    adult_rabbit: "Adult Rabbit (6months +)",
     guinea_pig: "Guinea Pig",
 };
 
