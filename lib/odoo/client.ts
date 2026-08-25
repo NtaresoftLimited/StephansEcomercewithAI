@@ -353,8 +353,11 @@ export class OdooClient {
                 images: [
                     {
                         _key: `odoo-img-${p.id}`,
+                        _type: "image",
                         asset: {
-                            url: `${ODOO_URL}/web/image/product.template/${p.id}/image_1920`
+                            _ref: `image-odoo-${p.id}`,
+                            _type: "reference",
+                            url: `https://erp.stephanspetstore.co.tz/web/image/product.template/${p.id}/image_1920`
                         }
                     }
                 ],
@@ -366,4 +369,3 @@ export class OdooClient {
 }
 
 export const odoo = new OdooClient();
-
