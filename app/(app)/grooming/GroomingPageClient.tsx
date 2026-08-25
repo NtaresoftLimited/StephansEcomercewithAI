@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { Check, Scissors, Paintbrush, Wand2, ArrowRight } from "lucide-react";
+import { Check, Scissors, Paintbrush, Wand2, ArrowRight, Sparkles } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { createGroomingBooking } from "@/lib/actions/grooming";
-import { PRICES, BREED_SIZES, VALID_TIMES, SIZE_LABELS, DOG_PACKAGES, CAT_PACKAGES } from "@/lib/constants/grooming";
+import { PRICES, BREED_SIZES, VALID_TIMES, SIZE_LABELS, DOG_PACKAGES, CAT_PACKAGES, SMALL_ANIMAL_PACKAGES } from "@/lib/constants/grooming";
 import { formatPrice } from "@/lib/utils";
 import { toast } from "sonner";
 
@@ -244,7 +244,14 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                 
                 <div className={`grid grid-cols-1 ${activeTab === 'small_animal' ? 'md:grid-cols-1 max-w-sm' : 'md:grid-cols-2 max-w-4xl'} mx-auto gap-6`}>
                     {packages.filter(pkg => activeTab === 'small_animal' ? pkg.key === 'super_premium' : true).map((pkg) => (
-                        <div key={pkg.key} className={`relative border border-[#E8E0D8] rounded-2xl p-8 md:p-10 text-center bg-[#FDFBF9] hover:shadow-lg transition-shadow duration-300 flex flex-col items-center justify-between`}>
+                        <div 
+                            key={pkg.key} 
+                            onClick={() => {
+                                setFormData(f => ({ ...f, package: pkg.key }));
+                                document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' });
+                            }}
+                            className={`relative border border-[#E8E0D8] rounded-2xl p-8 md:p-10 text-center bg-[#FDFBF9] hover:shadow-lg transition-shadow duration-300 flex flex-col items-center justify-between cursor-pointer`}
+                        >
                             {pkg.popular && activeTab !== 'small_animal' && (
                                 <div className="absolute top-4 right-4 bg-[#c77e35] text-white text-[10px] font-bold tracking-wider px-3 py-1 rounded-full uppercase">
                                     Most Popular
@@ -263,15 +270,11 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                                 <p className="text-xl font-serif text-[#222]">{formatPrice(getMinPrice(pkg.key))}</p>
                             </div>
 
-                            <button 
-                                onClick={() => {
-                                    setFormData(f => ({ ...f, package: pkg.key }));
-                                    document.getElementById('booking-form')?.scrollIntoView({ behavior: 'smooth' });
-                                }}
-                                className="text-xs font-bold tracking-widest text-[#c77e35] uppercase flex items-center gap-2 hover:text-[#4a2a14] transition-colors"
+                            <span 
+                                className="text-xs font-bold tracking-widest text-[#c77e35] uppercase flex items-center gap-2 group-hover:text-[#4a2a14] transition-colors"
                             >
                                 View Details <ArrowRight className="w-3 h-3" />
-                            </button>
+                            </span>
                         </div>
                     ))}
                 </div>
@@ -401,6 +404,27 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                             className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#c77e35]"
                         />
                     </div>
+
+                    {formData.package && (
+                        <div className="mt-8 bg-white border border-[#E8E0D8] rounded-2xl p-6 md:p-10 shadow-sm">
+                            <h3 className="text-xl font-serif text-[#222] mb-6 flex items-center gap-3">
+                                <Sparkles className="w-5 h-5 text-[#c77e35]" />
+                                What's included in your {formData.package === 'standard' ? 'Essential' : 'Signature'} Package
+                            </h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {(
+                                    formData.petType === 'dog' ? DOG_PACKAGES[formData.package as keyof typeof DOG_PACKAGES]?.services :
+                                    formData.petType === 'cat' ? CAT_PACKAGES[formData.package as keyof typeof CAT_PACKAGES]?.services :
+                                    SMALL_ANIMAL_PACKAGES[formData.package as keyof typeof SMALL_ANIMAL_PACKAGES]?.services
+                                )?.map((service: string, i: number) => (
+                                    <div key={i} className="flex items-start gap-3">
+                                        <Check className="w-4 h-4 text-[#c77e35] mt-1 shrink-0" />
+                                        <span className="text-sm text-[#444] leading-relaxed">{service}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
 
                     <div className="mt-8 bg-[#F4F0EB] rounded-2xl p-6 md:p-10 flex flex-col md:flex-row gap-8 md:gap-12 items-start">
                         <div className="md:w-1/3">
