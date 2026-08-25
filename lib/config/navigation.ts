@@ -2,7 +2,7 @@ export const DEEP_NAV_MENU = {
   dogs: [
     {
       title: "Food",
-      href: "/shop?category=dog-food",
+      href: "/shop?category=dogs-food",
       items: [
         { name: "Adult Dog Food", href: "/shop?category=adult-dog-food" },
         { name: "Puppy Food", href: "/shop?category=puppy-food" },
@@ -13,7 +13,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Treats",
-      href: "/shop?category=dog-treats",
+      href: "/shop?category=dogs-treats",
       items: [
         { name: "Crunchy Treats", href: "/shop?category=crunchy-treats" },
         { name: "Dental Treats", href: "/shop?category=dental-treats" },
@@ -24,7 +24,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Bowls & Feeders",
-      href: "/shop?category=dog-bowls-feeders",
+      href: "/shop?category=dogs-bowls-feeders",
       items: [
         { name: "Food Bowls", href: "/shop?category=food-bowls" },
         { name: "Water Fountains", href: "/shop?category=water-fountains" },
@@ -35,7 +35,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Beds & Comfort",
-      href: "/shop?category=dog-beds-comfort",
+      href: "/shop?category=dogs-beds-comfort",
       items: [
         { name: "Beds", href: "/shop?category=beds" },
         { name: "Blankets", href: "/shop?category=blankets" },
@@ -57,7 +57,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Toys",
-      href: "/shop?category=dog-toys",
+      href: "/shop?category=dogs-toys",
       items: [
         { name: "Chew Toys", href: "/shop?category=chew-toys" },
         { name: "Fetch Toys", href: "/shop?category=fetch-toys" },
@@ -68,7 +68,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Collars, Harnesses & Leads",
-      href: "/shop?category=dog-collars-harnesses-leads",
+      href: "/shop?category=dogs-collars-harnesses-leads",
       items: [
         { name: "Collars", href: "/shop?category=collars" },
         { name: "Harnesses", href: "/shop?category=harnesses" },
@@ -79,7 +79,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Grooming Essentials",
-      href: "/shop?category=dog-grooming-essentials",
+      href: "/shop?category=dogs-grooming-essentials",
       items: [
         { name: "Bath & Shampoo", href: "/shop?category=bath-shampoo" },
         { name: "Combs & Brushes", href: "/shop?category=combs-brushes" },
@@ -92,7 +92,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Oral Care",
-      href: "/shop?category=dog-oral-care",
+      href: "/shop?category=dogs-oral-care",
       items: [
         { name: "Dental Sprays", href: "/shop?category=dental-sprays" },
         { name: "Dental Water", href: "/shop?category=dental-water" },
@@ -102,7 +102,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Pet Apparel",
-      href: "/shop?category=dog-pet-apparel",
+      href: "/shop?category=dogs-pet-apparel",
       items: [
         { name: "Fashion Accessories", href: "/shop?category=fashion-accessories" },
         { name: "Costumes & Dress-Up", href: "/shop?category=costumes-dress-up" },
@@ -117,7 +117,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Home & Crates",
-      href: "/shop?category=dog-home-crates",
+      href: "/shop?category=dogs-home-crates",
       items: [
         { name: "Houses", href: "/shop?category=houses" },
         { name: "Crates", href: "/shop?category=crates" },
@@ -127,7 +127,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Tick, Flea & Deworming",
-      href: "/shop?category=dog-tick-flea-deworming",
+      href: "/shop?category=dogs-tick-flea-deworming",
       items: [
         { name: "Dewormers", href: "/shop?category=dewormers" },
         { name: "Tick & Flea Treatments", href: "/shop?category=tick-flea-treatments" },
@@ -136,7 +136,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Nutritional Supplements",
-      href: "/shop?category=dog-nutritional-supplements",
+      href: "/shop?category=dogs-nutritional-supplements",
       items: [
         { name: "Joint & Mobility", href: "/shop?category=joint-mobility" },
         { name: "Calming Support", href: "/shop?category=calming-support" },
@@ -146,7 +146,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Milk & Milk Feeder",
-      href: "/shop?category=dog-milk-milk-feeder",
+      href: "/shop?category=dogs-milk-milk-feeder",
       items: [
         { name: "Goat Milk Powder", href: "/shop?category=goat-milk-powder" },
         { name: "Pet Milk", href: "/shop?category=pet-milk" },
@@ -155,7 +155,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Training & Behavior",
-      href: "/shop?category=dog-training-behavior",
+      href: "/shop?category=dogs-training-behavior",
       items: [
         { name: "Muzzles", href: "/shop?category=muzzles" },
         { name: "Handling Gloves", href: "/shop?category=handling-gloves" },
@@ -166,7 +166,7 @@ export const DEEP_NAV_MENU = {
   cats: [
     {
       title: "Cat Food",
-      href: "/shop?category=cat-food",
+      href: "/shop?category=cats-food",
       items: [
         { name: "Adult Cat Food", href: "/shop?category=adult-cat-food" },
         { name: "Kitten Food", href: "/shop?category=kitten-food" },
@@ -177,7 +177,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Treats",
-      href: "/shop?category=cat-treats",
+      href: "/shop?category=cats-treats",
       items: [
         { name: "Crunchy Treats", href: "/shop?category=crunchy-treats" },
         { name: "Soft Treats", href: "/shop?category=soft-treats" }
@@ -185,7 +185,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Bowls & Feeders",
-      href: "/shop?category=cat-bowls-feeders",
+      href: "/shop?category=cats-bowls-feeders",
       items: [
         { name: "Food Bowls", href: "/shop?category=food-bowls" },
         { name: "Water Fountains", href: "/shop?category=water-fountains" },
@@ -196,7 +196,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Beds & Comfort",
-      href: "/shop?category=cat-beds-comfort",
+      href: "/shop?category=cats-beds-comfort",
       items: [
         { name: "Beds", href: "/shop?category=beds" },
         { name: "Blankets", href: "/shop?category=blankets" },
@@ -206,9 +206,9 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Cat Litter & Clean Living",
-      href: "/shop?category=cat-litter-clean-living",
+      href: "/shop?category=cats-litter-clean-living",
       items: [
-        { name: "Cat Litter", href: "/shop?category=cat-litter" },
+        { name: "Cat Litter", href: "/shop?category=cats-litter" },
         { name: "Litter Boxes & Trays", href: "/shop?category=litter-boxes-trays" },
         { name: "Litter Scoops", href: "/shop?category=litter-scoops" },
         { name: "Litter Mats", href: "/shop?category=litter-mats" },
@@ -217,7 +217,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Cat Toys",
-      href: "/shop?category=cat-toys",
+      href: "/shop?category=cats-toys",
       items: [
         { name: "Interactive Toys", href: "/shop?category=interactive-toys" },
         { name: "Balls & Chases", href: "/shop?category=balls-chases" },
@@ -229,7 +229,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Collars, Harnesses & Leads",
-      href: "/shop?category=cat-collars-harnesses-leads",
+      href: "/shop?category=cats-collars-harnesses-leads",
       items: [
         { name: "Collars", href: "/shop?category=collars" },
         { name: "Harnesses", href: "/shop?category=harnesses" },
@@ -240,7 +240,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Grooming Essentials",
-      href: "/shop?category=cat-grooming-essentials",
+      href: "/shop?category=cats-grooming-essentials",
       items: [
         { name: "Bath & Shampoo", href: "/shop?category=bath-shampoo" },
         { name: "Combs & Brushes", href: "/shop?category=combs-brushes" },
@@ -253,7 +253,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Oral Care",
-      href: "/shop?category=cat-oral-care",
+      href: "/shop?category=cats-oral-care",
       items: [
         { name: "Dental Sprays", href: "/shop?category=dental-sprays" },
         { name: "Dental Water", href: "/shop?category=dental-water" },
@@ -263,7 +263,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Pet Apparel",
-      href: "/shop?category=cat-pet-apparel",
+      href: "/shop?category=cats-pet-apparel",
       items: [
         { name: "Fashion Accessories", href: "/shop?category=fashion-accessories" },
         { name: "Costumes & Dress-Up", href: "/shop?category=costumes-dress-up" },
@@ -278,10 +278,10 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Cat Furniture & Scratchers",
-      href: "/shop?category=cat-furniture-scratchers",
+      href: "/shop?category=cats-furniture-scratchers",
       items: [
-        { name: "Cat Houses", href: "/shop?category=cat-houses" },
-        { name: "Cat Trees", href: "/shop?category=cat-trees" },
+        { name: "Cat Houses", href: "/shop?category=cats-houses" },
+        { name: "Cat Trees", href: "/shop?category=cats-trees" },
         { name: "Scratching Mats", href: "/shop?category=scratching-mats" },
         { name: "Scratching Pads & Boards", href: "/shop?category=scratching-pads-boards" },
         { name: "Window Perches", href: "/shop?category=window-perches" }
@@ -289,7 +289,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Tick, Flea & Deworming",
-      href: "/shop?category=cat-tick-flea-deworming",
+      href: "/shop?category=cats-tick-flea-deworming",
       items: [
         { name: "Dewormers", href: "/shop?category=dewormers" },
         { name: "Tick & flea treatments", href: "/shop?category=tick-flea-treatments" },
@@ -298,7 +298,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Nutritional Supplements",
-      href: "/shop?category=cat-nutritional-supplements",
+      href: "/shop?category=cats-nutritional-supplements",
       items: [
         { name: "Joint & Mobility", href: "/shop?category=joint-mobility" },
         { name: "Calming Support", href: "/shop?category=calming-support" },
@@ -308,7 +308,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Milk & Milk Feeder",
-      href: "/shop?category=cat-milk-milk-feeder",
+      href: "/shop?category=cats-milk-milk-feeder",
       items: [
         { name: "Goat Milk powder", href: "/shop?category=goat-milk-powder" },
         { name: "Pet Milk", href: "/shop?category=pet-milk" },
@@ -319,7 +319,7 @@ export const DEEP_NAV_MENU = {
   birds: [
     {
       title: "Bird Foods",
-      href: "/shop?category=bird-foods",
+      href: "/shop?category=birds-foods",
       items: [
         { name: "Small Bird Foods", href: "/shop?category=small-bird-foods" },
         { name: "Parrots", href: "/shop?category=parrots" }
@@ -327,7 +327,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Bowls & Feeders",
-      href: "/shop?category=bird-bowls-feeders",
+      href: "/shop?category=birds-bowls-feeders",
       items: [
         { name: "Feeders", href: "/shop?category=feeders" },
         { name: "Feeding Bowls", href: "/shop?category=feeding-bowls" },
@@ -336,9 +336,9 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Home",
-      href: "/shop?category=bird-home",
+      href: "/shop?category=birds-home",
       items: [
-        { name: "Bird Cages", href: "/shop?category=bird-cages" }
+        { name: "Bird Cages", href: "/shop?category=birds-cages" }
       ]
     },
     {
@@ -354,7 +354,7 @@ export const DEEP_NAV_MENU = {
   smallPets: [
     {
       title: "Food",
-      href: "/shop?category=small-pet-food",
+      href: "/shop?category=small-animals-food",
       items: [
         { name: "Hamster", href: "/shop?category=hamster-food" },
         { name: "Guinea Pig", href: "/shop?category=guinea-pig-food" },
@@ -363,7 +363,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Bowls & Feeders",
-      href: "/shop?category=small-pet-bowls-feeders",
+      href: "/shop?category=small-animals-bowls-feeders",
       items: [
         { name: "Feeders & Dispensers", href: "/shop?category=feeders-dispensers" },
         { name: "Food & Water Bowls", href: "/shop?category=food-water-bowls" }
@@ -371,7 +371,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Hygiene & Care",
-      href: "/shop?category=small-pet-hygiene-care",
+      href: "/shop?category=small-animals-hygiene-care",
       items: [
         { name: "Cage Cleaners", href: "/shop?category=cage-cleaners" },
         { name: "Odor Control", href: "/shop?category=odor-control" }
@@ -379,7 +379,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Home & Habitat",
-      href: "/shop?category=small-pet-home-habitat",
+      href: "/shop?category=small-animals-home-habitat",
       items: [
         { name: "Beds", href: "/shop?category=beds" },
         { name: "Cages & Habitats", href: "/shop?category=cages-habitats" },
@@ -389,7 +389,7 @@ export const DEEP_NAV_MENU = {
     },
     {
       title: "Toys",
-      href: "/shop?category=small-pet-toys",
+      href: "/shop?category=small-animals-toys",
       items: [
         { name: "Tunnels & Hideaways", href: "/shop?category=tunnels-hideaways" },
         { name: "Exercise Wheels", href: "/shop?category=exercise-wheels" },

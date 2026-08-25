@@ -41,6 +41,18 @@ interface MobileNavMenuProps {
 }
 
 // Icon mapping for categories
+const CustomTreatsIcon = (props: any) => (
+  <div style={{ width: props.size || 18, height: props.size || 18, position: 'relative' }}>
+    <Image 
+      src="/icons/Treats_Stephans.png" 
+      alt="Treats" 
+      fill 
+      className="object-contain" 
+      style={{ filter: 'var(--tw-invert) sepia(1) hue-rotate(350deg) saturate(3) brightness(0.8)' }}
+    />
+  </div>
+);
+
 const CATEGORY_ICONS: Record<string, ElementType> = {
   "Dog Food": Utensils,
   "Cat Food": Utensils,
@@ -48,8 +60,9 @@ const CATEGORY_ICONS: Record<string, ElementType> = {
   Food: Utensils,
   "Tick, Flea & Deworming": ShieldCheck,
   "Wellness & Supplements": HeartPulse,
-  "Treats & Chews": Bone,
-  "Treats & Supplements": Bone,
+  "Treats & Chews": CustomTreatsIcon,
+  "Treats & Supplements": CustomTreatsIcon,
+  "Treats": CustomTreatsIcon,
   "Oral Care": Sparkles,
   "Grooming Essentials": Scissors,
   "Hygiene & Care": Scissors,

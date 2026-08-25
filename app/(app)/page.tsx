@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { sanityFetch } from "@/sanity/lib/live";
+import { OdooClient } from "@/lib/odoo/client";
 import {
   FILTER_PRODUCTS_BY_NAME_QUERY,
   FILTER_PRODUCTS_BY_PRICE_ASC_QUERY,
@@ -21,7 +22,7 @@ import { CategoryNavigationSection } from "@/components/app/CategoryNavigationSe
 
 import { NewsletterSection } from "@/components/app/grooming/NewsletterSection";
 
-export const revalidate = 3600;
+export const revalidate = 60;
 
 interface PageProps {
   searchParams: Promise<{
@@ -73,7 +74,7 @@ export default async function HomePage({ searchParams }: PageProps) {
   };
 
   // Fetch products with filters (server-side via GROQ) with error handling
-  let products = await sanityFetch({
+  const sanityProducts = await sanityFetch({
     query: getQuery(),
     params: {
       searchQuery,
@@ -87,7 +88,21 @@ export default async function HomePage({ searchParams }: PageProps) {
     },
   }).then((r: any) => r?.data as any[]).catch(() => [] as any[]);
 
-  // If no search params are provided, it means we are showing default "New Arrivals"
+  let odooProducts: any[] = [];
+  try {
+    const odoo = new OdooClient();
+    const publicCategories = await odoo.getPublicCategories().catch(e => { console.error("Odoo categories fetch failed:", e); return []; });
+    odooProducts = await odoo.getOdooShopProducts(publicCategories);
+  } catch (error) {
+    console.error("Failed to fetch Odoo products:", error);
+  }
+
+  // Sort Odoo products by sales_count (Top Products) and take top 50 to mix
+  const topOdooProducts = [...odooProducts].sort((a, b) => (b.sales_count || 0) - (a.sales_count || 0)).slice(0, 50);
+  
+  let products = [...sanityProducts, ...topOdooProducts];
+
+  // If no search params are provided, it means we are showing default "New Arrivals / Top Products"
   // Filter and interleave products: 1 Dog, 2 Cat, 3 Small Animal, 4 Bird/Grooming
   if (isDefaultView && products.length > 0) {
     const dogs: any[] = [];
@@ -95,6 +110,9 @@ export default async function HomePage({ searchParams }: PageProps) {
     const smalls: any[] = [];
     const birdsGrooming: any[] = [];
     const others: any[] = [];
+
+    // Shuffle products array so they keep changing
+    products = products.sort(() => 0.5 - Math.random());
 
     for (const product of products) {
       const categoryNames = product.categories?.map((c: any) => (c.title || c.name || "").toLowerCase()) || [];
@@ -107,7 +125,7 @@ export default async function HomePage({ searchParams }: PageProps) {
         dogs.push(product);
       } else if (combinedText.includes("cat") || combinedText.includes("kitten")) {
         cats.push(product);
-      } else if (combinedText.includes("small") || combinedText.includes("rabbit") || combinedText.includes("hamster") || combinedText.includes("guinea")) {
+      } else if (combinedText.includes("small") || combinedText.includes("rabbit") || combinedText.includes("hamster") || combinedText.includes("guinea") || combinedText.includes("reptile")) {
         smalls.push(product);
       } else if (combinedText.includes("bird") || combinedText.includes("parrot") || combinedText.includes("grooming") || combinedText.includes("shampoo")) {
         birdsGrooming.push(product);
@@ -117,26 +135,30 @@ export default async function HomePage({ searchParams }: PageProps) {
     }
 
     const uniqueProducts = new Set<string>();
+    const uniqueNames = new Set<string>();
     const selected = [];
 
     const getUniqueProduct = (list: any[], fallbackList: any[]) => {
-      for (const p of list) {
-        if (!uniqueProducts.has(p._id)) {
-          uniqueProducts.add(p._id);
-          return p;
+      const isUnique = (p: any) => {
+        if (!p.name) return false;
+        // get first two words as a fingerprint to avoid picking variants of the same product
+        const nameFingerprint = p.name.toLowerCase().split(' ').slice(0, 2).join(' ');
+        if (uniqueProducts.has(p._id) || uniqueNames.has(nameFingerprint)) {
+          return false;
         }
+        uniqueProducts.add(p._id);
+        uniqueNames.add(nameFingerprint);
+        return true;
+      };
+
+      for (const p of list) {
+        if (isUnique(p)) return p;
       }
       for (const p of fallbackList) {
-        if (!uniqueProducts.has(p._id)) {
-          uniqueProducts.add(p._id);
-          return p;
-        }
+        if (isUnique(p)) return p;
       }
       for (const p of products) {
-        if (!uniqueProducts.has(p._id)) {
-          uniqueProducts.add(p._id);
-          return p;
-        }
+        if (isUnique(p)) return p;
       }
       return null;
     };

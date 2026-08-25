@@ -175,8 +175,8 @@ function SecondaryStickyHeaderInner({
     },
     {
       name: "Small Pets",
-      href: "/shop?category=small-pets",
-      id: "small-pets",
+      href: "/shop?category=small-animals",
+      id: "smallPets",
       menu: DEEP_NAV_MENU.smallPets,
       featuredTitles: FEATURED_NAV_GROUP_TITLES.smallPets,
     },
@@ -421,80 +421,84 @@ function SecondaryStickyHeaderInner({
 
       {/* 3. BOTTOM BAR (Navigation) */}
       <div className="hidden lg:block bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-800">
-        <div className="w-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-center h-11 gap-8 text-[15px] font-bold text-zinc-700 dark:text-zinc-200">
-          {categories.map((cat) => (
-            <div
-              role="none"
-              key={cat.id}
-              className={`group h-full flex items-center border-b-2 border-transparent transition-colors ${openCategoryId === cat.id ? "border-[#9a5d2d]" : "hover:border-[#9a5d2d]"}`}
-              onMouseEnter={() => openCategory(cat.id)}
-              onMouseLeave={scheduleCategoryClose}
-            >
-              <button
-                type="button"
-                aria-expanded={openCategoryId === cat.id}
-                aria-controls={`mega-menu-${cat.id}`}
-                onClick={() => pinCategoryOpen(cat.id)}
-                className="flex h-full items-center gap-1.5 transition-colors hover:text-[#8b4f22] focus-visible:outline-none focus-visible:text-[#8b4f22]"
-              >
-                {cat.name}
-                <ChevronDown
-                  className={`h-3.5 w-3.5 text-zinc-400 transition-transform duration-200 ${openCategoryId === cat.id ? "rotate-180 text-[#8b4f22]" : ""}`}
-                />
-              </button>
-
-              <section
-                aria-label={`${cat.name} product categories`}
-                id={`mega-menu-${cat.id}`}
-                onMouseEnter={cancelScheduledClose}
+        <div className="w-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-11 text-[15px] font-bold text-zinc-700 dark:text-zinc-200">
+          <div className="flex-1"></div>
+          <div className="flex items-center justify-center gap-8 shrink-0 h-full">
+            {categories.map((cat) => (
+              <div
+                role="none"
+                key={cat.id}
+                className={`group h-full flex items-center border-b-2 border-transparent transition-colors ${openCategoryId === cat.id ? "border-[#9a5d2d]" : "hover:border-[#9a5d2d]"}`}
+                onMouseEnter={() => openCategory(cat.id)}
                 onMouseLeave={scheduleCategoryClose}
-                className={`absolute left-0 right-0 top-full z-50 max-h-[calc(100vh-10rem)] w-full cursor-default overflow-y-auto border-b border-zinc-200 bg-white/[0.98] normal-case tracking-normal transition-all duration-200 dark:border-zinc-800 dark:bg-zinc-950/[0.98] ${openCategoryId === cat.id ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0 pointer-events-none"}`}
               >
-                <CategoryMegaMenu
-                  animalName={cat.name}
-                  groups={cat.menu}
-                  featuredTitles={cat.featuredTitles}
-                  viewAllHref={cat.href}
-                  onNavigate={closeCategoryMenu}
-                />
-              </section>
-            </div>
-          ))}
+                <button
+                  type="button"
+                  aria-expanded={openCategoryId === cat.id}
+                  aria-controls={`mega-menu-${cat.id}`}
+                  onClick={() => pinCategoryOpen(cat.id)}
+                  className="flex h-full items-center gap-1.5 transition-colors hover:text-[#8b4f22] focus-visible:outline-none focus-visible:text-[#8b4f22]"
+                >
+                  {cat.name}
+                  <ChevronDown
+                    className={`h-3.5 w-3.5 text-zinc-400 transition-transform duration-200 ${openCategoryId === cat.id ? "rotate-180 text-[#8b4f22]" : ""}`}
+                  />
+                </button>
 
-          <Link
-            href="/allbrands"
-            className="flex items-center gap-1.5 hover:text-amber-600 transition-colors h-full border-b-2 border-transparent hover:border-amber-500"
-          >
-            Brands
-          </Link>
+                <section
+                  aria-label={`${cat.name} product categories`}
+                  id={`mega-menu-${cat.id}`}
+                  onMouseEnter={cancelScheduledClose}
+                  onMouseLeave={scheduleCategoryClose}
+                  className={`absolute left-0 right-0 top-full z-50 max-h-[calc(100vh-10rem)] w-full cursor-default overflow-y-auto border-b border-zinc-200 bg-white/[0.98] normal-case tracking-normal transition-all duration-200 dark:border-zinc-800 dark:bg-zinc-950/[0.98] ${openCategoryId === cat.id ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0 pointer-events-none"}`}
+                >
+                  <CategoryMegaMenu
+                    animalName={cat.name}
+                    groups={cat.menu}
+                    featuredTitles={cat.featuredTitles}
+                    viewAllHref={cat.href}
+                    onNavigate={closeCategoryMenu}
+                  />
+                </section>
+              </div>
+            ))}
 
-          <Link
-            href="/grooming"
-            className="flex items-center gap-1.5 hover:text-emerald-600 transition-colors h-full border-b-2 border-transparent hover:border-emerald-500"
-          >
-            <Image
-              src="/about/grooming-scissors.png"
-              alt="Grooming"
-              width={16}
-              height={16}
-              className="h-[16px] w-[16px] object-contain"
-            />{" "}
-            Grooming
-          </Link>
+            <Link
+              href="/allbrands"
+              className="flex items-center gap-1.5 hover:text-amber-600 transition-colors h-full border-b-2 border-transparent hover:border-amber-500"
+            >
+              Brands
+            </Link>
 
-          <Link
-            href="/stores"
-            className="absolute right-0 text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors h-full flex items-center border-b-2 border-transparent hover:border-zinc-500 gap-2"
-          >
-            <Image
-              src="/favicon.png"
-              alt="Stores"
-              width={16}
-              height={16}
-              className="opacity-80 group-hover:opacity-100 transition-opacity"
-            />
-            Store locator
-          </Link>
+            <Link
+              href="/grooming"
+              className="flex items-center gap-1.5 hover:text-emerald-600 transition-colors h-full border-b-2 border-transparent hover:border-emerald-500"
+            >
+              <Image
+                src="/about/grooming-scissors.png"
+                alt="Grooming"
+                width={16}
+                height={16}
+                className="h-[16px] w-[16px] object-contain"
+              />{" "}
+              Grooming
+            </Link>
+          </div>
+          <div className="flex-1 flex justify-end h-full">
+            <Link
+              href="/stores"
+              className="text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors h-full flex items-center border-b-2 border-transparent hover:border-zinc-500 gap-2"
+            >
+              <Image
+                src="/favicon.png"
+                alt="Stores"
+                width={16}
+                height={16}
+                className="opacity-80 group-hover:opacity-100 transition-opacity"
+              />
+              Store locator
+            </Link>
+          </div>
         </div>
       {/* Apple-style Backdrop Overlay */}
       <div

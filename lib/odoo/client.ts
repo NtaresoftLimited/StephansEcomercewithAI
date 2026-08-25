@@ -274,7 +274,6 @@ export class OdooClient {
             [
                 ["brand_id", "=", brandId],
                 ["sale_ok", "=", true],
-                ["is_published", "=", true],
                 ["active", "=", true]
             ],
             [
@@ -293,7 +292,7 @@ export class OdooClient {
      */
     async getPublicCategories(): Promise<any[]> {
         return this.searchRead(
-            "product.public.category",
+            "product.category",
             [],
             ["id", "name", "display_name", "parent_id"]
         );
@@ -307,15 +306,15 @@ export class OdooClient {
             "product.template",
             [
                 ["sale_ok", "=", true],
-                ["is_published", "=", true],
                 ["active", "=", true]
             ],
             [
                 "id",
                 "name",
                 "list_price",
-                "public_categ_ids",
-                "qty_available"
+                "categ_id",
+                "qty_available",
+                "sales_count"
             ]
         );
         
@@ -323,17 +322,26 @@ export class OdooClient {
         const catMap = new Map(publicCategories.map(c => [c.id, c]));
 
         return products.map(p => {
-            const productCategories = (p.public_categ_ids || [])
-                .map((cId: number) => {
-                    const cat = catMap.get(cId);
-                    if (!cat) return null;
-                    return {
-                        _id: `odoo-cat-${cId}`,
-                        title: cat.name,
-                        slug: cat.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') // rough slugification
-                    };
-                })
-                .filter(Boolean);
+            const productCategories: any[] = [];
+            if (p.categ_id) {
+                let currentCatId = p.categ_id[0];
+                while (currentCatId) {
+                    const cat = catMap.get(currentCatId);
+                    if (cat) {
+                        // Generate slug from display_name which contains the full path "DOGS / FOOD" -> "dogs-food"
+                        const slug = (cat.display_name || cat.name).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+                        productCategories.push({
+                            _id: `odoo-cat-${currentCatId}`,
+                            title: cat.name,
+                            displayName: cat.display_name,
+                            slug: slug
+                        });
+                        currentCatId = cat.parent_id ? cat.parent_id[0] : null;
+                    } else {
+                        currentCatId = null;
+                    }
+                }
+            }
 
             return {
                 _id: `odoo-${p.id}`,
@@ -341,6 +349,7 @@ export class OdooClient {
                 slug: `odoo-${p.id}`,
                 price: p.list_price,
                 stock: p.qty_available ?? 10,
+                sales_count: p.sales_count ?? 0,
                 images: [
                     {
                         _key: `odoo-img-${p.id}`,
