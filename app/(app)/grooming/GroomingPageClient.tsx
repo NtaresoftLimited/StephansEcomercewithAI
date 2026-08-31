@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import { Check, Scissors, Paintbrush, Wand2, ArrowRight, Sparkles } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { createGroomingBooking } from "@/lib/actions/grooming";
@@ -461,9 +462,9 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                                     <input type="checkbox" required className="w-4 h-4 accent-[#c77e35] rounded" />
                                     <span className="text-sm text-[#444]">I have read and agree to Stephan's Grooming Policy.</span>
                                 </label>
-                                <button type="button" className="text-xs font-bold text-[#c77e35] uppercase flex items-center gap-1 hover:underline">
+                                <Link href="/grooming-policy" className="text-xs font-bold text-[#c77e35] uppercase flex items-center gap-1 hover:underline">
                                     Read full policy <ArrowRight className="w-3 h-3" />
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>

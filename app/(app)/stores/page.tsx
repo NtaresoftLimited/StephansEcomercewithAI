@@ -1,10 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useState } from "react";
-
-import Image from "next/image";
-import { PawPrint } from "lucide-react";
+import { ArrowRight, MapPin, Plus } from "lucide-react";
 
 // Dynamically import the StoreLocator component to avoid SSR issues with Leaflet
 const StoreLocator = dynamic(
@@ -12,7 +9,7 @@ const StoreLocator = dynamic(
     {
         ssr: false,
         loading: () => (
-            <div className="h-[600px] w-full bg-zinc-100 animate-pulse rounded-lg flex items-center justify-center">
+            <div className="h-[500px] w-full bg-[#f4f1eb] animate-pulse rounded-3xl flex items-center justify-center">
                 <div className="text-zinc-400">Loading Map...</div>
             </div>
         ),
@@ -20,67 +17,82 @@ const StoreLocator = dynamic(
 );
 
 export default function StoresPage() {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        setMousePosition({ x, y });
-    };
-
     return (
-        <main className="min-h-screen bg-white">
-            <div
-                className="relative w-full py-24 text-center text-white overflow-hidden"
-                onMouseMove={handleMouseMove}
-            >
-                {/* Animated Background Image */}
-                <div
-                    className="absolute inset-0 transition-transform duration-300 ease-out"
-                    style={{
-                        transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px) scale(1.1)`,
-                    }}
-                >
-                    <Image
-                        src="/Jonas walking Sky outside Stephan’s Pet Store.png"
-                        alt="Stephan's Pet Store Locations"
-                        fill
-                        className="object-cover grayscale animate-[zoom_20s_ease-in-out_infinite_alternate]"
-                        priority
-                    />
+        <main className="min-h-screen bg-[#faf8f5] text-zinc-900 font-sans pb-24">
+            <div className="mx-auto max-w-5xl px-4 pt-24 sm:px-6 lg:px-8">
+                {/* Header Section */}
+                <div className="text-center mb-16">
+                    <p className="text-[11px] font-bold tracking-[0.2em] text-[#7a6458] uppercase mb-6 flex items-center justify-center gap-4">
+                        <span className="w-8 h-[1px] bg-[#d3cec4]"></span>
+                        Store Locator
+                        <span className="w-8 h-[1px] bg-[#d3cec4]"></span>
+                    </p>
+                    <h1 className="text-5xl md:text-[3.5rem] text-zinc-900 font-serif tracking-tight">
+                        Find us in Dar es Salaam.
+                    </h1>
                 </div>
 
-                {/* Brand Overlay - Lighter to show image */}
-                <div className="absolute inset-0 bg-[#c77e35] mix-blend-multiply opacity-30" />
+                {/* Cards Section */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-24">
+                    {/* Masaki Card */}
+                    <div className="bg-[#fcfaf8] border border-[#eeebe5] rounded-[2rem] p-12 flex flex-col items-center text-center shadow-[0_2px_10px_rgba(0,0,0,0.02)] transition-shadow">
+                        <div className="w-14 h-14 bg-[#f2ede7] rounded-full flex items-center justify-center mb-8">
+                            <MapPin className="w-6 h-6 text-[#4a3f39]" strokeWidth={1.5} />
+                        </div>
+                        <h2 className="text-[1.75rem] font-serif mb-2 text-[#1a1818]">MASAKI</h2>
+                        <p className="text-sm font-medium text-[#7a6458] mb-8">Main Store</p>
+                        
+                        <p className="text-[15px] text-[#3a3532] mb-1">11 Slipway Rd, Masaki</p>
+                        <p className="text-[15px] text-[#3a3532] mb-10">Dar es Salaam</p>
 
-                {/* Paw Print Pattern Overlay */}
-                <div className="absolute inset-0 opacity-10 pointer-events-none">
-                    <div className="grid grid-cols-6 gap-8 p-4 rotate-12 scale-150 animate-[float_15s_ease-in-out_infinite]">
-                        {Array.from({ length: 24 }).map((_, i) => (
-                            <PawPrint key={i} className="w-16 h-16 text-white" />
-                        ))}
+                        <div className="w-full border-t border-[#eeebe5] mb-8"></div>
+
+                        <a 
+                            href="https://www.google.com/maps/dir/?api=1&destination=-6.7452,39.2825" 
+                            target="_blank" rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-[13px] font-bold tracking-[0.1em] text-[#4a3f39] hover:text-[#7a6458] uppercase mb-6 transition-colors"
+                        >
+                            GET DIRECTIONS <ArrowRight className="w-4 h-4 ml-1" />
+                        </a>
+                        <button className="flex items-center gap-2 text-[14px] font-medium text-[#5a524e] hover:text-[#1a1818] transition-colors">
+                            Store details <Plus className="w-4 h-4" />
+                        </button>
+                    </div>
+
+                    {/* Mikocheni Card */}
+                    <div className="bg-[#fcfaf8] border border-[#eeebe5] rounded-[2rem] p-12 flex flex-col items-center text-center shadow-[0_2px_10px_rgba(0,0,0,0.02)] transition-shadow">
+                        <div className="w-14 h-14 bg-[#f2ede7] rounded-full flex items-center justify-center mb-8">
+                            <MapPin className="w-6 h-6 text-[#4a3f39]" strokeWidth={1.5} />
+                        </div>
+                        <h2 className="text-[1.75rem] font-serif mb-2 text-[#1a1818]">MIKOCHENI</h2>
+                        <div className="h-[20px] mb-8"></div> {/* Spacer to match Masaki's "Main Store" */}
+                        
+                        <p className="text-[15px] text-[#3a3532] mb-1">58 Mikocheni A</p>
+                        <p className="text-[15px] text-[#3a3532] mb-10">Dar es Salaam</p>
+
+                        <div className="w-full border-t border-[#eeebe5] mb-8"></div>
+
+                        <a 
+                            href="https://www.google.com/maps/dir/?api=1&destination=-6.7733,39.2699" 
+                            target="_blank" rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-[13px] font-bold tracking-[0.1em] text-[#4a3f39] hover:text-[#7a6458] uppercase mb-6 transition-colors"
+                        >
+                            GET DIRECTIONS <ArrowRight className="w-4 h-4 ml-1" />
+                        </a>
+                        <button className="flex items-center gap-2 text-[14px] font-medium text-[#5a524e] hover:text-[#1a1818] transition-colors">
+                            Store details <Plus className="w-4 h-4" />
+                        </button>
                     </div>
                 </div>
-                <div className="pointer-events-none absolute inset-0">
-                    <PawPrint className="absolute left-8 top-10 w-8 h-8 text-white animate-float" />
-                    <PawPrint className="absolute right-12 top-20 w-10 h-10 text-white animate-float-delayed" />
-                    <PawPrint className="absolute left-1/2 bottom-16 w-9 h-9 text-white animate-float" />
+
+                {/* Map Section */}
+                <div className="text-center mb-10">
+                    <h2 className="text-[2rem] font-serif text-[#1a1818]">Our locations</h2>
                 </div>
 
-                <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6 drop-shadow-md animate-[fadeIn_1s_ease-in]">
-                        Our Locations
-                    </h1>
-                    <p className="text-xl text-white/95 max-w-2xl mx-auto font-medium drop-shadow-sm animate-[fadeIn_1.5s_ease-in]">
-                        Find a Stephan's Pet Store near you. Visit us for premium pet products,
-                        grooming services, and expert advice.
-                    </p>
+                <div className="w-full h-[450px] rounded-[1.5rem] overflow-hidden shadow-sm border border-[#eeebe5]">
+                    <StoreLocator />
                 </div>
-            </div>
-
-            <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-                <StoreLocator />
             </div>
         </main>
     );

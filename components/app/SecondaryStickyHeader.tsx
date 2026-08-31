@@ -234,82 +234,85 @@ function SecondaryStickyHeaderInner({
       {/* 2. MIDDLE BAR (Logo, Search, Actions) */}
       <div className="border-b border-zinc-100 dark:border-zinc-800 py-3 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl flex items-center gap-4 sm:gap-6">
-          {/* Mobile Menu Trigger */}
-          <div className="lg:hidden">
-            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-              <SheetTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="group -ml-2 text-[#3e220f] hover:bg-transparent hover:text-[#3e220f]"
-                  aria-label="Toggle navigation menu"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="block h-8 w-8 bg-[#3e220f] opacity-70 transition-opacity group-hover:opacity-100"
-                    style={{
-                      WebkitMaskImage: "url('/line-3.svg')",
-                      maskImage: "url('/line-3.svg')",
-                      WebkitMaskPosition: "center",
-                      maskPosition: "center",
-                      WebkitMaskRepeat: "no-repeat",
-                      maskRepeat: "no-repeat",
-                      WebkitMaskSize: "contain",
-                      maskSize: "contain",
-                    }}
-                  />
-                  <span className="sr-only">Menu</span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent
-                side="left"
-                className="w-full sm:max-w-none bg-white dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800 p-0 overflow-y-auto z-[6000]"
-              >
-                <div className="flex flex-col h-full p-6">
-                  <div className="mb-8">
-                    <Image
-                      src="/logo.png"
-                      alt="Stephan's Pet Store"
-                      width={140}
-                      height={40}
-                      className="h-8 w-auto opacity-90"
+          {/* Left Section: Mobile Menu & Logo */}
+          <div className="flex-1 flex items-center gap-4 justify-start">
+            {/* Mobile Menu Trigger */}
+            <div className="lg:hidden">
+              <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+                <SheetTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="group -ml-2 text-[#3e220f] hover:bg-transparent hover:text-[#3e220f]"
+                    aria-label="Toggle navigation menu"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="block h-8 w-8 bg-[#3e220f] opacity-70 transition-opacity group-hover:opacity-100"
+                      style={{
+                        WebkitMaskImage: "url('/line-3.svg')",
+                        maskImage: "url('/line-3.svg')",
+                        WebkitMaskPosition: "center",
+                        maskPosition: "center",
+                        WebkitMaskRepeat: "no-repeat",
+                        maskRepeat: "no-repeat",
+                        WebkitMaskSize: "contain",
+                        maskSize: "contain",
+                      }}
                     />
+                    <span className="sr-only">Menu</span>
+                  </Button>
+                </SheetTrigger>
+                <SheetContent
+                  side="left"
+                  className="w-full sm:max-w-none bg-white dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800 p-0 overflow-y-auto z-[6000]"
+                >
+                  <div className="flex flex-col h-full p-6">
+                    <div className="mb-8">
+                      <Image
+                        src="/logo.png"
+                        alt="Stephan's Pet Store"
+                        width={140}
+                        height={40}
+                        className="h-8 w-auto opacity-90"
+                      />
+                    </div>
+                    <MobileNavMenu onClose={() => setIsMobileMenuOpen(false)} />
                   </div>
-                  <MobileNavMenu onClose={() => setIsMobileMenuOpen(false)} />
-                </div>
-              </SheetContent>
-            </Sheet>
+                </SheetContent>
+              </Sheet>
+            </div>
+
+            {/* Logo */}
+            <Link
+              href="/"
+              className="shrink-0 flex items-center"
+              aria-label="Stephan's Pet Store Home"
+            >
+              <Image
+                src="/logo.png"
+                alt="Stephan's Pet Store"
+                width={140}
+                height={40}
+                className="h-9 w-auto dark:invert"
+              />
+            </Link>
           </div>
 
-          {/* Logo */}
-          <Link
-            href="/"
-            className="shrink-0 flex items-center"
-            aria-label="Stephan's Pet Store Home"
-          >
-            <Image
-              src="/logo.png"
-              alt="Stephan's Pet Store"
-              width={140}
-              height={40}
-              className="h-9 w-auto dark:invert"
-            />
-          </Link>
-
-          {/* Search Bar - Large as requested */}
-          <div className="flex-1 max-w-2xl hidden md:flex items-center relative">
-            <div className="flex-1 flex items-center bg-zinc-100 dark:bg-zinc-900 rounded-full border border-zinc-200 dark:border-zinc-800 overflow-hidden transition-all focus-within:ring-2 focus-within:ring-[#3e220f]/20 focus-within:border-[#3e220f]">
+          {/* Center Section: Search Bar - Centered */}
+          <div className="flex-[2] max-w-3xl hidden md:flex justify-center items-center relative px-4">
+            <div className="w-full flex items-center bg-zinc-100 dark:bg-zinc-900 rounded-full border border-zinc-200 dark:border-zinc-800 overflow-hidden transition-all focus-within:ring-2 focus-within:ring-[#3e220f]/20 focus-within:border-[#3e220f]">
               <Search className="h-4 w-4 text-zinc-400 ml-4 shrink-0" />
               <input
                 type="text"
                 placeholder="Search For Products, Brands, and More..."
-                className="w-full bg-transparent border-none focus:ring-0 text-[13px] px-3 py-2.5 text-zinc-800 dark:text-zinc-200"
+                className="w-full bg-transparent border-none focus:ring-0 text-[13px] px-3 py-2.5 text-zinc-800 dark:text-zinc-200 outline-none"
                 onFocus={onSearchOpen}
                 aria-label="Search input"
               />
               <button
                 type="button"
-                className="bg-[#3e220f] text-white px-6 py-2.5 text-[12px] font-bold uppercase tracking-wider hover:bg-[#5a3419] transition-colors"
+                className="bg-[#3e220f] text-white px-6 py-2.5 text-[12px] font-bold uppercase tracking-wider hover:bg-[#5a3419] transition-colors shrink-0"
                 aria-label="Search"
               >
                 Search
@@ -317,8 +320,8 @@ function SecondaryStickyHeaderInner({
             </div>
           </div>
 
-          {/* Actions (Login, Location, Wishlist, Bag) */}
-          <div className="flex items-center gap-3 sm:gap-6 ml-auto">
+          {/* Right Section: Actions (Login, Location, Wishlist, Bag) */}
+          <div className="flex-1 flex items-center justify-end gap-3 sm:gap-6">
             {/* Search (Mobile Only) */}
             <button
               type="button"

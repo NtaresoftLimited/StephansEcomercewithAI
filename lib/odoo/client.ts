@@ -26,6 +26,7 @@ export class OdooClient {
             const response = await fetch(`${ODOO_URL}/jsonrpc`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
+                next: { revalidate: 60 },
                 body: JSON.stringify({
                     jsonrpc: "2.0",
                     method: "call",
@@ -72,6 +73,7 @@ export class OdooClient {
             const response = await fetch(`${ODOO_URL}/jsonrpc`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
+                next: { revalidate: 60 },
                 body: JSON.stringify({
                     jsonrpc: "2.0",
                     method: "call",
@@ -109,6 +111,7 @@ export class OdooClient {
             const response = await fetch(`${ODOO_URL}/jsonrpc`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
+                next: { revalidate: 60 },
                 body,
                 credentials: "omit", // Ensure NO cookies are leaked from server context
                 signal: AbortSignal.timeout(60000)
