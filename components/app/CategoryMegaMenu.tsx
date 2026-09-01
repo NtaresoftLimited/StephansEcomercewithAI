@@ -112,7 +112,7 @@ export function CategoryMegaMenu({
 
                 <div className="flex min-w-0 flex-1 flex-col pl-10">
                   <ul className="mt-1 space-y-2.5">
-                    {group.items.slice(0, 4).map((item) => (
+                    {group.items.map((item) => (
                       <li key={item.name}>
                         <Link
                           href={item.href}
