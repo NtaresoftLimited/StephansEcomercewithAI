@@ -89,7 +89,10 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <div className="group relative h-full flex flex-col transition-all duration-300">
-      <Link className="block relative flex-grow flex flex-col" href={`/shop/${product.slug}`}>
+      <div 
+        onClick={handleAddToCart}
+        className="cursor-pointer block relative flex-grow flex flex-col"
+      >
         {/* Product Image */}
         <div className="aspect-[4/5] sm:aspect-square w-full rounded-2xl bg-[#F4F1EA] flex items-center justify-center overflow-hidden p-6 md:p-8 mb-4">
           <div className="relative w-full h-full">
@@ -126,7 +129,7 @@ export function ProductCard({ product }: ProductCardProps) {
             </span>
           </div>
         </div>
-      </Link>
+      </div>
 
       {/* Action Button: Shopping Bag icon on bottom right */}
       <button 

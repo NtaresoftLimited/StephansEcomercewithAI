@@ -114,7 +114,7 @@ export function CategoryNav({ activeCategory }: CategoryNavProps) {
                             >
                                 {/* Main category button */}
                                 <Link
-                                    href={`/?category=${category.slug}`}
+                                    href={`/shop/${category.slug}`}
                                     className={`flex items-center gap-1 px-3 py-2 text-sm font-medium hover:bg-white/10 rounded-md transition-colors whitespace-nowrap ${activeCategory === category.slug ? "bg-white/20" : ""
                                         }`}
                                 >
@@ -130,7 +130,7 @@ export function CategoryNav({ activeCategory }: CategoryNavProps) {
                                         {category.subcategories.map((subcat) => (
                                             <Link
                                                 key={subcat.slug}
-                                                href={`/?category=${category.slug}&sub=${subcat.slug}`}
+                                                href={`/shop/${category.slug}&sub=${subcat.slug}`}
                                                 className="block px-4 py-2 text-sm hover:bg-white/10 transition-colors"
                                             >
                                                 {subcat.name}

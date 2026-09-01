@@ -22,32 +22,38 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { odoo } from "@/lib/odoo/client";
 
-export async function generateMetadata({ searchParams }: ProductsPageProps): Promise<Metadata> {
-  const params = await searchParams;
-  const category = params?.category;
+export async function generateMetadata(props: ProductsPageProps): Promise<Metadata> {
+  const searchParams = await props.searchParams;
+  const pathParams = await props.params;
   
-  if (category) {
-    const formattedCategory = category.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+  // Use path parameter if it exists, otherwise use search param
+  const categoryParam = (pathParams?.categorySlug?.[0]) || searchParams?.category;
+  
+  if (categoryParam) {
+    const formattedCategory = categoryParam.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
     const rootCategoryTitles: Record<string, string> = {
       dogs: "Dog Supplies",
       cats: "Cat Supplies",
       birds: "Bird Supplies",
       "small-pets": "Small Pet Supplies",
     };
-    const titleCategory = rootCategoryTitles[category] ?? formattedCategory;
-
+    
+    const title = rootCategoryTitles[categoryParam] 
+      ? `${rootCategoryTitles[categoryParam]} - Food, Toys & Accessories | Stephan's`
+      : `${formattedCategory} Products | Stephan's Pet Store`;
+      
     return {
-      title: `${rootCategoryTitles[category] ? titleCategory : `Buy ${titleCategory}`} in Dar es Salaam`,
-      description: `Shop premium ${titleCategory.toLowerCase()} and other pet supplies at Stephan's Pet Store in Dar es Salaam. Fast delivery available!`,
+      title,
+      description: `Shop our wide selection of ${formattedCategory} products. Find the best food, toys, and accessories for your pet at Stephan's.`,
       alternates: {
-        canonical: `/shop?category=${category}`,
+        canonical: `/shop/${categoryParam}`,
       },
     };
   }
 
   return {
-    title: "Pet Shop Dar es Salaam | Pet Food, Accessories & Supplies",
-    description: "Shop pet food, beds, toys, grooming products and accessories in Dar es Salaam. Stephan's Pet Store offers premium supplies for dogs, cats, birds and small pets.",
+    title: "All Products - Food, Toys, Beds & Accessories | Stephan's",
+    description: "Browse our complete catalog of pet supplies. From premium nutrition to cozy beds and fun toys, find exactly what your pet needs.",
     alternates: {
       canonical: "/shop",
     },
@@ -55,6 +61,9 @@ export async function generateMetadata({ searchParams }: ProductsPageProps): Pro
 }
 
 interface ProductsPageProps {
+  params: Promise<{
+    categorySlug?: string[];
+  }>;
   searchParams: Promise<{
     q?: string;
     category?: string;
@@ -68,9 +77,13 @@ interface ProductsPageProps {
   }>;
 }
 
-export default async function ProductsPage({ searchParams }: ProductsPageProps) {
-  const params = await searchParams;
-  const { q, category, brand, color, sort, minPrice, maxPrice, inStock, page } = params;
+export default async function ProductsPage(props: ProductsPageProps) {
+  const searchParams = await props.searchParams;
+  const pathParams = await props.params;
+  
+  const { q, brand, color, sort, minPrice, maxPrice, inStock, page } = searchParams;
+  const category = (pathParams?.categorySlug?.[0]) || searchParams.category;
+  
   const currentPage = parseInt(page || "1", 10);
 
   // Prepare Query Parameters
@@ -182,7 +195,6 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   // Construct baseUrl for pagination
   const urlSearchParams = new URLSearchParams();
   if (q) urlSearchParams.set("q", q);
-  if (category) urlSearchParams.set("category", category);
   if (brand) urlSearchParams.set("brand", brand);
   if (sort) urlSearchParams.set("sort", sort);
   if (minPrice) urlSearchParams.set("minPrice", minPrice);
@@ -190,7 +202,10 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   if (inStock) urlSearchParams.set("inStock", "true");
   
   const baseSearchString = urlSearchParams.toString();
-  const baseUrl = `/shop${baseSearchString ? `?${baseSearchString}&` : '?'}`;
+  
+  // If there's a category, the path is /shop/[category]
+  const basePath = category ? `/shop/${category}` : `/shop`;
+  const baseUrl = `${basePath}${baseSearchString ? `?${baseSearchString}&` : '?'}`;
 
   return (
     <div className="min-h-screen bg-[#FAF7F2] font-sans overflow-hidden">

@@ -86,7 +86,7 @@ function ProductFiltersInner({ categories, brands }: ProductFiltersProps) {
       if (root[slug]) {
         const navItems = DEEP_NAV_MENU[navKey];
         navItems.forEach(section => {
-          const sectionSlug = section.href.split('category=')[1];
+          const sectionSlug = section.href.split('/shop/')[1];
           if (sectionSlug && !root[slug].children.some(c => c.slug === sectionSlug)) {
             // ONLY add if it has products (check in linkedCategories)
             const sanityCat = linkedCategories.find(c => c.slug === sectionSlug);
@@ -96,7 +96,7 @@ function ProductFiltersInner({ categories, brands }: ProductFiltersProps) {
           }
           // Also add sub-items if they have products
           section.items.forEach(item => {
-            const itemSlug = item.href.split('category=')[1];
+            const itemSlug = item.href.split('/shop/')[1];
             if (itemSlug && !root[slug].children.some(c => c.slug === itemSlug)) {
               const sanityCat = linkedCategories.find(c => c.slug === itemSlug);
               if (sanityCat) {

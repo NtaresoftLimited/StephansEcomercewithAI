@@ -129,11 +129,11 @@ export function Footer() {
             <h4 className="text-[#4E2A15] font-bold text-sm tracking-widest uppercase mb-3">Shop</h4>
             <div className="w-8 h-px bg-[#4E2A15] mb-8"></div>
             <div className="flex flex-col gap-6 text-[15px] text-[#4E2A15]">
-              <Link href="/shop?category=dogs" className="hover:text-amber-700 transition-colors whitespace-nowrap">Dogs</Link>
-              <Link href="/shop?category=cats" className="hover:text-amber-700 transition-colors whitespace-nowrap">Cats</Link>
-              <Link href="/shop?category=small-pets" className="hover:text-amber-700 transition-colors whitespace-nowrap">Small Animals</Link>
-              <Link href="/shop?category=pet-food" className="hover:text-amber-700 transition-colors whitespace-nowrap">Pet Food</Link>
-              <Link href="/shop?category=accessories" className="hover:text-amber-700 transition-colors whitespace-nowrap">Accessories</Link>
+              <Link href="/shop/dogs" className="hover:text-amber-700 transition-colors whitespace-nowrap">Dogs</Link>
+              <Link href="/shop/cats" className="hover:text-amber-700 transition-colors whitespace-nowrap">Cats</Link>
+              <Link href="/shop/small-pets" className="hover:text-amber-700 transition-colors whitespace-nowrap">Small Animals</Link>
+              <Link href="/shop/pet-food" className="hover:text-amber-700 transition-colors whitespace-nowrap">Pet Food</Link>
+              <Link href="/shop/accessories" className="hover:text-amber-700 transition-colors whitespace-nowrap">Accessories</Link>
             </div>
           </div>
 
