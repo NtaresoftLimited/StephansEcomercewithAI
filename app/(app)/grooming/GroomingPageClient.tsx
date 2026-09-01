@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Check, Scissors, Paintbrush, Wand2, ArrowRight, Sparkles } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { createGroomingBooking } from "@/lib/actions/grooming";
+import { createGroomingBooking, getTakenTimeSlots } from "@/lib/actions/grooming";
 import { PRICES, BREED_SIZES, VALID_TIMES, SIZE_LABELS, DOG_PACKAGES, CAT_PACKAGES, SMALL_ANIMAL_PACKAGES } from "@/lib/constants/grooming";
 import { formatPrice } from "@/lib/utils";
 import { toast } from "sonner";
@@ -30,6 +30,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
     const user = session?.user;
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [activeTab, setActiveTab] = useState<"dog" | "cat" | "small_animal">("dog");
+    const [takenTimes, setTakenTimes] = useState<string[]>([]);
     
     const [formData, setFormData] = useState({
         petType: "dog" as "dog" | "cat" | "small_animal",
@@ -50,6 +51,27 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
             }));
         }
     }, [user]);
+
+    useEffect(() => {
+        if (!formData.appointmentDate) {
+            setTakenTimes([]);
+            return;
+        }
+        let isMounted = true;
+        getTakenTimeSlots(formData.appointmentDate).then((res) => {
+            if (isMounted && res.success && res.takenTimes) {
+                setTakenTimes(res.takenTimes);
+                // If currently selected time is now taken, clear it
+                setFormData(prev => {
+                    if (res.takenTimes?.includes(prev.appointmentTime)) {
+                        return { ...prev, appointmentTime: "" };
+                    }
+                    return prev;
+                });
+            }
+        });
+        return () => { isMounted = false; };
+    }, [formData.appointmentDate]);
 
     const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const dateStr = e.target.value;
@@ -382,9 +404,14 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                             className="w-full bg-white/50 border border-[#E8E0D8] rounded-xl px-5 py-4 text-sm focus:outline-none focus:ring-1 focus:ring-[#c77e35] appearance-none"
                         >
                             <option value="" disabled>Time</option>
-                            {VALID_TIMES.map(time => (
-                                <option key={time.value} value={time.value}>{time.label}</option>
-                            ))}
+                            {VALID_TIMES.map(time => {
+                                const isTaken = takenTimes.includes(time.value);
+                                return (
+                                    <option key={time.value} value={time.value} disabled={isTaken}>
+                                        {time.label} {isTaken ? "(Booked)" : ""}
+                                    </option>
+                                );
+                            })}
                         </select>
 
                         <input

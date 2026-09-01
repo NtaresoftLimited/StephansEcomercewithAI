@@ -269,3 +269,33 @@ export async function getMyGroomingBookings(userId: string) {
         return { success: false, error: "Failed to fetch bookings", bookings: [] };
     }
 }
+
+export async function getTakenTimeSlots(dateStr: string) {
+    try {
+        if (!dateStr) return { success: true, takenTimes: [] };
+        
+        const start = new Date(dateStr);
+        start.setHours(0, 0, 0, 0);
+        const end = new Date(dateStr);
+        end.setHours(23, 59, 59, 999);
+        
+        // Find all bookings for this day that are not cancelled
+        const bookings = await client.fetch(
+            `*[_type == "groomingBooking" && appointmentDate >= $start && appointmentDate <= $end && status != "cancelled"] { appointmentDate }`,
+            { start: start.toISOString(), end: end.toISOString() }
+        );
+        
+        // Extract time (HH:MM) from the ISO string
+        const takenTimes = bookings.map((b: any) => {
+            const d = new Date(b.appointmentDate);
+            const hh = String(d.getHours()).padStart(2, '0');
+            const mm = String(d.getMinutes()).padStart(2, '0');
+            return `${hh}:${mm}`;
+        });
+
+        return { success: true, takenTimes };
+    } catch (e) {
+        console.error("Failed to fetch taken slots:", e);
+        return { success: false, takenTimes: [] };
+    }
+}

@@ -102,7 +102,7 @@ async function syncMissingProducts() {
             const batchProducts = await odoo.searchRead(
                 "product.template",
                 [["id", "in", batchIds]],
-                ["name", "list_price", "description_sale", "categ_id", "qty_available", "image_1920", "id", "product_variant_count", "brand_id"],
+                ["name", "list_price", "description_sale", "categ_id", "qty_available", "image_1920", "id", "product_variant_count", ],
                 batchSize
             );
 
