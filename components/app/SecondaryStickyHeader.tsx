@@ -153,28 +153,28 @@ function SecondaryStickyHeaderInner({
 
   const categories = [
     {
-      name: "Dogs",
+      name: "DOG",
       href: "/shop?category=dogs",
       id: "dogs",
       menu: DEEP_NAV_MENU.dogs,
       featuredTitles: FEATURED_NAV_GROUP_TITLES.dogs,
     },
     {
-      name: "Cats",
+      name: "CAT",
       href: "/shop?category=cats",
       id: "cats",
       menu: DEEP_NAV_MENU.cats,
       featuredTitles: FEATURED_NAV_GROUP_TITLES.cats,
     },
     {
-      name: "Birds",
+      name: "BIRDS",
       href: "/shop?category=birds",
       id: "birds",
       menu: DEEP_NAV_MENU.birds,
       featuredTitles: FEATURED_NAV_GROUP_TITLES.birds,
     },
     {
-      name: "Small Pets",
+      name: "SMALL ANIMALS",
       href: "/shop?category=small-animals",
       id: "smallPets",
       menu: DEEP_NAV_MENU.smallPets,
@@ -424,7 +424,7 @@ function SecondaryStickyHeaderInner({
 
       {/* 3. BOTTOM BAR (Navigation) */}
       <div className="hidden lg:block bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-800">
-        <div className="w-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-11 text-[15px] font-bold text-zinc-700 dark:text-zinc-200">
+        <div className="w-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-11 text-[13px] font-bold tracking-[0.1em] text-zinc-700 dark:text-zinc-200 uppercase">
           <div className="flex-1"></div>
           <div className="flex items-center justify-center gap-8 shrink-0 h-full">
             {categories.map((cat) => (
@@ -470,7 +470,7 @@ function SecondaryStickyHeaderInner({
               href="/allbrands"
               className="flex items-center gap-1.5 hover:text-amber-600 transition-colors h-full border-b-2 border-transparent hover:border-amber-500"
             >
-              Brands
+              BRANDS
             </Link>
 
             <Link
@@ -484,7 +484,7 @@ function SecondaryStickyHeaderInner({
                 height={16}
                 className="h-[16px] w-[16px] object-contain"
               />{" "}
-              Grooming
+              GROOMING
             </Link>
           </div>
           <div className="flex-1 flex justify-end h-full">
