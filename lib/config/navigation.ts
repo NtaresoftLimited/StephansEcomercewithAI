@@ -159,7 +159,8 @@ export const DEEP_NAV_MENU = {
       items: [
         { name: "Muzzles", href: "/shop/muzzles" },
         { name: "Handling Gloves", href: "/shop/handling-gloves" },
-        { name: "Pet Repellents", href: "/shop/pet-repellents" }
+        { name: "Pet Repellents", href: "/shop/pet-repellents" },
+        { name: "Training Equipment", href: "/shop/training-equipment" }
       ]
     }
   ],
@@ -313,6 +314,13 @@ export const DEEP_NAV_MENU = {
         { name: "Goat Milk powder", href: "/shop/goat-milk-powder" },
         { name: "Pet Milk", href: "/shop/pet-milk" },
         { name: "Milk Feeders", href: "/shop/milk-feeders" }
+      ]
+    },
+    {
+      title: "Home & Crates",
+      href: "/shop/cats-home-crates",
+      items: [
+        { name: "Traveling Essentials", href: "/shop/cats-traveling-essentials" }
       ]
     }
   ],
