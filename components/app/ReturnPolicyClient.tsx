@@ -8,28 +8,28 @@ import Link from "next/link";
 const POLICIES = [
     {
         id: "eligible",
-        title: "Eligible items",
+        title: "Items",
         subtitle: "Defective · Expired · Incorrect item",
         icon: Package,
         content: "An item may qualify for exchange if it is defective, expired at the time it was sold or delivered, or if you received a different item from the one you purchased or ordered.\n\nPlease contact us as soon as you notice the issue. Our team may ask to inspect the item, packaging, batch or expiry information, or photos before confirming the exchange.\n\n• Defective or damaged product not caused by misuse after purchase.\n• Product that was already expired when sold or delivered.\n• Incorrect item supplied or delivered by Stephan's Pet Store."
     },
     {
         id: "time",
-        title: "24-hour window",
+        title: "24 - Hour Window",
         subtitle: "Requests within 24 hours of purchase",
         icon: Clock,
         content: "For in-store purchases, please notify us of an exchange request within 24 hours of purchase. For delivered orders, please notify us within 24 hours of delivery.\n\nThe 24-hour window applies to notifying us of the problem. Once your request has been recorded, our team will advise you on when and where the item should be brought or returned for inspection."
     },
     {
         id: "exchange",
-        title: "Exchange only",
+        title: "Exchange Only",
         subtitle: "No cash refunds",
         icon: ArrowRightLeft,
         content: "If your request is approved, we will exchange the item for the same product where stock is available.\n\nIf the same product is unavailable, our team will discuss an appropriate replacement option with you. We do not provide cash refunds for items accepted under this exchange policy, except where a refund is required by applicable law or where Stephan's Pet Store cancels a paid order before fulfilment."
     },
     {
         id: "receipt",
-        title: "Original receipt",
+        title: "Original Receipt",
         subtitle: "Required for all exchange requests",
         icon: Receipt,
         content: "Please provide the original store receipt when requesting an exchange. For online or delivered orders, a valid digital order confirmation, invoice or order number may be used as proof of purchase.\n\nWithout proof that the item was purchased from Stephan's Pet Store, we may be unable to approve the exchange."
