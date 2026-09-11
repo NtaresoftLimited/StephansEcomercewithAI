@@ -87,7 +87,9 @@ export const DEEP_NAV_MENU = {
         { name: "Paw Care", href: "/shop/paw-care" },
         { name: "Pet Perfumes & Sprays", href: "/shop/pet-perfumes-sprays" },
         { name: "Pet Hair Removers", href: "/shop/pet-hair-removers" },
-        { name: "Pet Wipes", href: "/shop/pet-wipes" }
+        { name: "Pet Wipes", href: "/shop/pet-wipes" },
+        { name: "Ear Care", href: "/shop/ear-care" },
+        { name: "Eye Care", href: "/shop/eye-care" }
       ]
     },
     {
@@ -249,7 +251,9 @@ export const DEEP_NAV_MENU = {
         { name: "Paw Care", href: "/shop/paw-care" },
         { name: "Pet Perfumes & Sprays", href: "/shop/pet-perfumes-sprays" },
         { name: "Pet Hair Removers", href: "/shop/pet-hair-removers" },
-        { name: "Pet Wipes", href: "/shop/pet-wipes" }
+        { name: "Pet Wipes", href: "/shop/pet-wipes" },
+        { name: "Ear Care", href: "/shop/ear-care" },
+        { name: "Eye Care", href: "/shop/eye-care" }
       ]
     },
     {
@@ -320,7 +324,8 @@ export const DEEP_NAV_MENU = {
       title: "Home & Crates",
       href: "/shop/cats-home-crates",
       items: [
-        { name: "Traveling Essentials", href: "/shop/cats-traveling-essentials" }
+        { name: "Traveling Essentials", href: "/shop/cats-traveling-essentials" },
+        { name: "Barriers & Gates", href: "/shop/cats-barriers-gates" }
       ]
     }
   ],
