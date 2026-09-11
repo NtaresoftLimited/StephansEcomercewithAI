@@ -426,7 +426,7 @@ function SecondaryStickyHeaderInner({
       <div className="hidden lg:block bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-800">
         <div className="w-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-11 text-[13px] font-bold tracking-[0.1em] text-zinc-700 dark:text-zinc-200 uppercase">
           <div className="flex-1"></div>
-          <div className="flex items-center justify-center gap-8 shrink-0 h-full">
+          <div className="flex items-center justify-center gap-8 shrink-0 h-full relative">
             {categories.map((cat) => (
               <div
                 role="none"
@@ -453,15 +453,17 @@ function SecondaryStickyHeaderInner({
                   id={`mega-menu-${cat.id}`}
                   onMouseEnter={cancelScheduledClose}
                   onMouseLeave={scheduleCategoryClose}
-                  className={`absolute left-0 right-0 top-full z-50 max-h-[calc(100vh-10rem)] w-full cursor-default overflow-y-auto border-b border-zinc-200 bg-white/[0.98] normal-case tracking-normal transition-all duration-200 dark:border-zinc-800 dark:bg-zinc-950/[0.98] ${openCategoryId === cat.id ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0 pointer-events-none"}`}
+                  className={`absolute left-0 top-full z-50 w-[850px] max-w-[90vw] cursor-default transition-all duration-200 ${openCategoryId === cat.id ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0 pointer-events-none"}`}
                 >
-                  <CategoryMegaMenu
-                    animalName={cat.name}
-                    groups={cat.menu}
-                    featuredTitles={cat.featuredTitles}
-                    viewAllHref={cat.href}
-                    onNavigate={closeCategoryMenu}
-                  />
+                  <div className="rounded-b-2xl shadow-[0_12px_40px_rgb(0,0,0,0.12)] bg-white/95 backdrop-blur-md border border-t-0 border-zinc-200/60 dark:border-zinc-800/60 dark:bg-zinc-950/95 overflow-hidden normal-case tracking-normal max-h-[calc(100vh-110px)] overflow-y-auto flex flex-col">
+                    <CategoryMegaMenu
+                      animalName={cat.name}
+                      groups={cat.menu}
+                      featuredTitles={cat.featuredTitles}
+                      viewAllHref={cat.href}
+                      onNavigate={closeCategoryMenu}
+                    />
+                  </div>
                 </section>
               </div>
             ))}
