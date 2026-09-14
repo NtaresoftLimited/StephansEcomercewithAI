@@ -453,7 +453,7 @@ function SecondaryStickyHeaderInner({
                   id={`mega-menu-${cat.id}`}
                   onMouseEnter={cancelScheduledClose}
                   onMouseLeave={scheduleCategoryClose}
-                  className={`absolute left-0 top-full z-50 w-full cursor-default transition-all duration-200 ${openCategoryId === cat.id ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0 pointer-events-none"}`}
+                  className={`absolute left-1/2 -translate-x-1/2 top-full z-50 w-auto min-w-[600px] max-w-[90vw] cursor-default transition-all duration-200 ${openCategoryId === cat.id ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0 pointer-events-none"}`}
                 >
                   <div className="rounded-b-2xl shadow-[0_12px_40px_rgb(0,0,0,0.12)] bg-white/95 backdrop-blur-md border border-t-0 border-zinc-200/60 dark:border-zinc-800/60 dark:bg-zinc-950/95 overflow-hidden normal-case tracking-normal max-h-[calc(100vh-110px)] overflow-y-auto flex flex-col">
                     <CategoryMegaMenu
@@ -524,3 +524,5 @@ export function SecondaryStickyHeader(props: SecondaryStickyHeaderProps) {
     </Suspense>
   );
 }
+
+
