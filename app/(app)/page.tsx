@@ -10,6 +10,7 @@ import {
   NEW_ARRIVALS_QUERY,
 } from "@/lib/sanity/queries/products";
 import { ALL_CATEGORIES_QUERY } from "@/lib/sanity/queries/categories";
+import { cleanCatalogProducts } from "@/lib/catalog/clean-products";
 import { HERO_PET_IMAGES_QUERY } from "@/lib/sanity/queries/heroImages";
 import { GROOMING_IMAGES_QUERY } from "@/lib/sanity/queries/groomingImages";
 import { HeroSection } from "@/components/app/HeroSection";
@@ -100,7 +101,7 @@ export default async function HomePage({ searchParams }: PageProps) {
   // Sort Odoo products by sales_count (Top Products) and take top 50 to mix
   const topOdooProducts = [...odooProducts].sort((a, b) => (b.sales_count || 0) - (a.sales_count || 0)).slice(0, 50);
   
-  let products = [...sanityProducts, ...topOdooProducts];
+  let products = cleanCatalogProducts([...sanityProducts, ...topOdooProducts]);
 
   // If no search params are provided, it means we are showing default "New Arrivals / Top Products"
   // Filter and interleave products: 1 Dog, 2 Cat, 3 Small Animal, 4 Bird/Grooming

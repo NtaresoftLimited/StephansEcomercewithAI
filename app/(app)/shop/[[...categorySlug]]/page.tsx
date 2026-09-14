@@ -12,6 +12,7 @@ import {
   FILTER_PRODUCTS_BY_PRICE_DESC_QUERY,
   FILTER_PRODUCTS_BY_RELEVANCE_QUERY
 } from "@/lib/sanity/queries/products";
+import { cleanCatalogProducts } from "@/lib/catalog/clean-products";
 import { ProductGrid } from "@/components/app/ProductGrid";
 import { ProductFilters } from "@/components/app/ProductFilters";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -169,7 +170,7 @@ export default async function ProductsPage(props: ProductsPageProps) {
   }
 
   // Merge products
-  let combinedProducts = [...sanityProducts, ...odooProducts];
+  let combinedProducts = cleanCatalogProducts([...sanityProducts, ...odooProducts]);
 
   // Re-sort the combined list to ensure Odoo and Sanity products are ordered correctly together
   if (sort === "price-asc") {

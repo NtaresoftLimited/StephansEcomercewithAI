@@ -294,11 +294,35 @@ export class OdooClient {
      * Get all website public categories (product.public.category)
      */
     async getPublicCategories(): Promise<any[]> {
-        return this.searchRead(
+        const categories = await this.searchRead(
             "product.category",
             [],
             ["id", "name", "display_name", "parent_id"]
         );
+
+        // The database also contains accounting categories, an obsolete
+        // All/Cats/Dogs tree, and one-off placeholder categories. Only expose
+        // descendants of the four canonical shop roots on the website.
+        const categoryById = new Map(categories.map(category => [category.id, category]));
+        const canonicalRoots = new Set(
+            categories
+                .filter(category =>
+                    !category.parent_id &&
+                    ["BIRDS", "CATS", "DOGS", "SMALL ANIMALS"].includes(category.name)
+                )
+                .map(category => category.id)
+        );
+
+        return categories.filter(category => {
+            let current = category;
+            const visited = new Set<number>();
+            while (current && !visited.has(current.id)) {
+                if (canonicalRoots.has(current.id)) return true;
+                visited.add(current.id);
+                current = current.parent_id ? categoryById.get(current.parent_id[0]) : undefined;
+            }
+            return false;
+        });
     }
 
     /**
@@ -309,7 +333,8 @@ export class OdooClient {
             "product.template",
             [
                 ["sale_ok", "=", true],
-                ["active", "=", true]
+                ["active", "=", true],
+                ["image_128", "!=", false]
             ],
             [
                 "id",
@@ -324,7 +349,7 @@ export class OdooClient {
         // Create category lookup map for faster mapping
         const catMap = new Map(publicCategories.map(c => [c.id, c]));
 
-        return products.map(p => {
+        const normalizedProducts = products.map(p => {
             const productCategories: any[] = [];
             if (p.categ_id) {
                 let currentCatId = p.categ_id[0];
@@ -368,6 +393,20 @@ export class OdooClient {
                 isOdoo: true,
             };
         });
+
+        // Prevent duplicate Odoo templates from producing duplicate cards.
+        // Prefer the record with sales, then stock, then the older record.
+        const bestByName = new Map<string, any>();
+        for (const product of normalizedProducts) {
+            const key = product.name.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+            const existing = bestByName.get(key);
+            const productScore = (product.sales_count || 0) * 1_000_000 + (product.stock || 0);
+            const existingScore = existing
+                ? (existing.sales_count || 0) * 1_000_000 + (existing.stock || 0)
+                : -1;
+            if (!existing || productScore > existingScore) bestByName.set(key, product);
+        }
+        return Array.from(bestByName.values());
     }
 }
 
