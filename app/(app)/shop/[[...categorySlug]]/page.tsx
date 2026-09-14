@@ -141,7 +141,7 @@ export default async function ProductsPage(props: ProductsPageProps) {
     _id: `odoo-cat-${c.id}`,
     title: c.name,
     displayName: c.display_name,
-    slug: { current: c.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') }
+    slug: { current: (c.display_name || c.name).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') }
   }));
   
   // Create a Map to prevent duplicate categories by slug
