@@ -171,7 +171,12 @@ export default async function BrandPage(props: BrandPageProps) {
         if (odooBrandId) {
             odooProducts = await odoo.searchRead(
                 "product.template",
-                [["brand_id", "=", odooBrandId], ["active", "=", true]],
+                [
+                    ["brand_id", "=", odooBrandId], 
+                    ["active", "=", true], 
+                    ["sale_ok", "=", true],
+                    ["image_128", "!=", false]
+                ],
                 ["id", "name", "list_price", "default_code", "image_512", "qty_available"],
                 200
             );
@@ -179,17 +184,29 @@ export default async function BrandPage(props: BrandPageProps) {
 
         // 3.5 Fallback: Search by name if no products found by brand ID
         if (odooProducts.length === 0) {
-            console.log(`No products found for brand ID ${odooBrandId}, falling back to name search for: ${brand.name}`);
+            let searchTerm = brand.name;
+            if (slugLower === 'summit10') searchTerm = 'Summit 10';
+            else if (slugLower === 'tropicat' || slugLower === 'tropidog') searchTerm = 'Tropi';
+            
+            console.log(`No products found for brand ID ${odooBrandId}, falling back to name search for: ${searchTerm}`);
             odooProducts = await odoo.searchRead(
                 "product.template",
                 [
-                    ["name", "ilike", brand.name],
+                    ["name", "ilike", searchTerm],
                     ["active", "=", true],
-                    ["sale_ok", "=", true]
+                    ["sale_ok", "=", true],
+                    ["image_128", "!=", false]
                 ],
                 ["id", "name", "list_price", "default_code", "image_512", "qty_available"],
                 200
             );
+            
+            // Filter if Tropi to match specific categories or just name
+            if (slugLower === 'tropicat') {
+                odooProducts = odooProducts.filter((p: any) => p.name.toLowerCase().includes('cat') || p.name.toLowerCase().includes('kitten') || p.name.toLowerCase().includes('purr'));
+            } else if (slugLower === 'tropidog') {
+                odooProducts = odooProducts.filter((p: any) => p.name.toLowerCase().includes('dog') || p.name.toLowerCase().includes('puppy'));
+            }
         }
     } catch (e) {
         console.error("Odoo fetch failed:", e);
@@ -214,7 +231,7 @@ export default async function BrandPage(props: BrandPageProps) {
         stock: p.qty_available,
         images: p.image_512 ? [{
             _key: 'main',
-            asset: { url: `data:image/png;base64,${p.image_512}` }
+            asset: { url: `https://erp.stephanspetstore.co.tz/web/image/product.template/${p.id}/image_1920` }
         }] : [],
         category: null
     }));
