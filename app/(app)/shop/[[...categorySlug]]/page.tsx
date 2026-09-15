@@ -137,15 +137,29 @@ export default async function ProductsPage(props: ProductsPageProps) {
     return true;
   });
 
-  // Merge Odoo and Sanity Categories for the filter sidebar
-  const mappedOdooCategories = (odooCategories || []).map(c => ({
-    _id: `odoo-cat-${c.id}`,
-    title: c.name,
-    displayName: c.display_name,
-    slug: { current: (c.display_name || c.name).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') }
-  }));
+    // Merge Odoo and Sanity Categories for the filter sidebar
+  const mappedOdooCategories = (odooCategories || []).map((c: any) => {
+    let parentCategory = null;
+    if (c.parent_id && Array.isArray(c.parent_id)) {
+        const parentId = c.parent_id[0];
+        const parentOdooCat = odooCategories.find((oc: any) => oc.id === parentId);
+        if (parentOdooCat) {
+            parentCategory = {
+                title: parentOdooCat.name,
+                slug: { current: (parentOdooCat.display_name || parentOdooCat.name).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') }
+            };
+        }
+    }
+    return {
+        _id: `odoo-cat-${c.id}`,
+        title: c.name,
+        displayName: c.display_name,
+        slug: { current: (c.display_name || c.name).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') },
+        parentCategory
+    };
+  });
   
-  // Create a Map to prevent duplicate categories by slug
+// Create a Map to prevent duplicate categories by slug
   const categoryMap = new Map();
   [...sanityCategories, ...mappedOdooCategories].forEach(cat => {
     const slug = cat.slug?.current || cat.slug;
