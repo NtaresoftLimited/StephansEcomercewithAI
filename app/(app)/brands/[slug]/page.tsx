@@ -169,17 +169,21 @@ export default async function BrandPage(props: BrandPageProps) {
         }
 
         if (odooBrandId) {
-            odooProducts = await odoo.searchRead(
-                "product.template",
-                [
-                    ["brand_id", "=", odooBrandId], 
-                    ["active", "=", true], 
-                    ["sale_ok", "=", true],
-                    ["image_128", "!=", false]
-                ],
-                ["id", "name", "list_price", "default_code", "image_512", "qty_available"],
-                200
-            );
+            try {
+                odooProducts = await odoo.searchRead(
+                    "product.template",
+                    [
+                        ["brand_id", "=", odooBrandId], 
+                        ["active", "=", true], 
+                        ["sale_ok", "=", true],
+                        ["image_128", "!=", false]
+                    ],
+                    ["id", "name", "list_price", "default_code", "image_512", "qty_available"],
+                    200
+                );
+            } catch (err: any) {
+                console.log(`Failed to fetch by brand_id (module might be missing): ${err.message}`);
+            }
         }
 
         // 3.5 Fallback: Search by name if no products found by brand ID
