@@ -85,7 +85,7 @@ async function runSync() {
             "list_price",
             "description_sale",
             "categ_id",
-            "brand_id",
+            
             "qty_available",
             "image_1920",
             "product_variant_ids"
