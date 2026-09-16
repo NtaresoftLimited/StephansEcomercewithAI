@@ -99,6 +99,21 @@ const localBusinessJsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "WebSite",
+      "@id": "https://www.stephanspetstore.co.tz/#website",
+      "url": "https://www.stephanspetstore.co.tz",
+      "name": "Stephan's Pet Store",
+      "description": "Tanzania's leading pet store. Shop premium pet food, accessories, dog beds, dog cages, grooming services & more.",
+      "publisher": {
+        "@id": "https://www.stephanspetstore.co.tz/#store-masaki"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://www.stephanspetstore.co.tz/shop?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
       "@type": "PetStore",
       "@id": "https://www.stephanspetstore.co.tz/#store-masaki",
       "name": "Stephan's Pet Store - Masaki Branch",
