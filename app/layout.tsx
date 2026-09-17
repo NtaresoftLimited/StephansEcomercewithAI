@@ -79,12 +79,6 @@ export const metadata: Metadata = {
     apple: "/favicon.png",
     shortcut: "/favicon.png",
   },
-  manifest: "/manifest.json",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: "Stephan's Pet Store",
-  },
   verification: {
     // Add your verification codes here
     // google: "your-google-verification-code",
