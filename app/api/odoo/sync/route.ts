@@ -95,6 +95,7 @@ async function runSync() {
 
     let synced = 0;
     let errors = 0;
+    let errorDetails: any[] = [];
 
     for (const product of odooProducts) {
         try {
@@ -164,9 +165,10 @@ async function runSync() {
         } catch (err) {
             console.error(`Failed to sync product ${product.name}:`, err);
             errors++;
+            if (errorDetails.length < 5) errorDetails.push({ name: product.name, error: err?.message || String(err) });
         }
     }
-    return { synced, errors, total: odooProducts.length };
+    return { synced, errors, total: odooProducts.length, errorDetails };
 }
 
 export async function POST(request: Request) {
@@ -218,3 +220,4 @@ export async function GET(request: Request) {
         );
     }
 }
+
