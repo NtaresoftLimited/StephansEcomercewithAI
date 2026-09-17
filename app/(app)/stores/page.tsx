@@ -65,9 +65,11 @@ export default function StoresPage() {
                             <MapPin className="w-6 h-6 text-[#4a3f39]" strokeWidth={1.5} />
                         </div>
                         <h2 className="text-[1.75rem] font-serif mb-2 text-[#1a1818]">MIKOCHENI</h2>
-                        <div className="h-[20px] mb-8"></div> {/* Spacer to match Masaki's "Main Store" */}
+                        <div className="h-[20px] mb-8 flex items-center justify-center">
+                            <p className="text-[15px] text-[#8a7e78]">Branch</p>
+                        </div>
                         
-                        <p className="text-[15px] text-[#3a3532] mb-1">58 Mikocheni A</p>
+                        <p className="text-[15px] text-[#3a3532] mb-1">59 Mikocheni A</p>
                         <p className="text-[15px] text-[#3a3532] mb-10">Dar es Salaam</p>
 
                         <div className="w-full border-t border-[#eeebe5] mb-8"></div>

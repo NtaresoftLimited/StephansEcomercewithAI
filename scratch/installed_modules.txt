@@ -1,0 +1,221 @@
+=== Installed Modules ===
+sale_management: Sales
+simplify_access_management: Simplify Access Management
+account: Invoicing
+advanced_web_domain_widget: Advanced Web Domain Widget
+crm: CRM
+website: Website
+stock: Inventory
+accountant: Accounting
+purchase: Purchase
+point_of_sale: Point of Sale
+website_sale: eCommerce
+hr: Employees
+grooming: Pet Grooming Services
+knowledge: Knowledge
+whatsapp: WhatsApp Messaging
+wise_pos_stock: POS Stock
+mail: Discuss
+contacts: Contacts
+calendar: Calendar
+social: Social Marketing
+approvals: Approvals
+appointment: Appointments
+survey: Surveys
+stock_barcode: Barcode
+hr_skills: Skills Management
+pos_discount: Point of Sale Discounts
+pos_epson_printer: POS Epson Printer
+pos_loyalty: Point of Sale - Coupons & Loyalty
+pos_sale: POS - Sales
+pos_sale_loyalty: POS - Sales Loyality
+pos_settle_due: Point of Sale Settle Due
+pos_hr_preparation_display: PoS Preparation Display HR
+pos_preparation_display: PoS Preparation Display
+stock_account: WMS Accounting
+account_accountant: Invoicing
+account_asset: Assets Management
+account_loans: Loans Management
+quality: Quality Base
+website_crm: Contact Form
+website_crm_sms: Send SMS to Visitor with leads
+website_sms: Send SMS to Visitor
+website_sale_dashboard: Website Sales Dashboard
+purchase_stock: Purchase Stock
+account_auto_transfer: Account Automatic Transfers
+account_bank_statement_extract: Account Bank Statement Extract
+account_bank_statement_import: Account Bank Statement Import
+account_bank_statement_import_camt: Import CAMT Bank Statement
+account_bank_statement_import_csv: Import CSV Bank Statement
+account_bank_statement_import_ofx: Import OFX Bank Statement
+account_base_import: Accounting Import
+account_disallowed_expenses: Disallowed Expenses
+account_edi_ubl_cii: Import/Export electronic invoices with UBL/CII
+account_external_tax: 3rd Party Tax Calculation
+account_extract: Account Extract
+account_followup: Payment Follow-up Management
+account_invoice_extract: Account Invoice Extract
+account_invoice_extract_purchase: Account Invoice Extract Purchase
+account_online_synchronization: Online Bank Statement Synchronization
+account_payment: Payment - Account
+account_reports: Accounting Reports
+analytic: Analytic Accounting
+analytic_enterprise: Analytic Accounting Enterprise
+appointment_account_payment: Pay to Book
+appointment_google_calendar: Appointment Google Calendar
+approvals_purchase: Approvals - Purchase
+attachment_indexation: Attachments List and Document Indexation
+auth_signup: Signup
+auth_totp: Two-Factor Authentication (TOTP)
+auth_totp_mail: 2FA Invite mail
+auth_totp_portal: TOTPortal
+barcodes: Barcode
+barcodes_gs1_nomenclature: Barcode - GS1 Nomenclature
+base: Base
+base_geolocalize: Partners Geolocation
+base_import: Base import
+base_import_module: Base import module
+base_install_request: Base - Module Install Request
+base_setup: Initial Setup Tools
+bi_pos_paid_posted_order_delete: POS Order Delete/ Delete POS Paid Order
+bus: IM Bus
+calendar_sms: Calendar - SMS
+contacts_enterprise: Contacts Enterprise
+crm_enterprise: CRM enterprise
+crm_iap_enrich: Lead Enrichment
+crm_iap_mine: Lead Generation
+crm_sms: SMS in CRM
+currency_rate_live: Live Currency Exchange Rate
+custom_receipts_for_pos: POS Receipt Design
+delivery: Delivery Costs
+digest: KPI Digests
+digest_enterprise: Digest Enterprise
+gamification_sale_crm: CRM Gamification
+google_account: Google Users
+google_calendar: Google Calendar
+google_gmail: Google Gmail
+google_recaptcha: Google reCAPTCHA integration
+hr_calendar: Display Working Hours in Calendar
+hr_gamification: HR Gamification
+hr_gantt: Employees in Gantt
+hr_hourly_cost: Employee Hourly Wage
+hr_mobile: Employees in Mobile
+hr_org_chart: HR Org Chart
+hr_skills_survey: Skills Certification
+html_editor: HTML Editor
+iap: In-App Purchases
+iap_crm: IAP / CRM
+iap_extract: Iap Extract
+iap_mail: IAP / Mail
+l10n_tz_account: Tanzania - Accounting
+l10n_tz_reports: Tanzania - Accounting Reports
+link_tracker: Link Tracker
+loyalty: Coupons & Loyalty
+mail_bot: OdooBot
+mail_bot_hr: OdooBot - HR
+mail_enterprise: Mail Enterprise
+mail_mobile: Mail Mobile
+partner_autocomplete: Partner Autocomplete
+payment: Payment Engine
+portal_rating: Portal Rating
+pos_account_reports: pos_account_reports
+pos_barcodelookup: POS - Barcode Lookup
+pos_dynamic_discount: POS Dynamic Discount in Amount and Percentage
+pos_enterprise: Point of Sale enterprise
+pos_hr: POS - HR
+pos_hr_mobile: POS Barcode in Mobile
+pos_online_payment: Point of Sale online payment
+privacy_lookup: Privacy
+product: Products & Pricelists
+product_barcodelookup: Product Barcode Lookup
+purchase_edi_ubl_bis3: Import/Export electronic orders with UBL
+rating: Customer Rating
+resource: Resource
+resource_mail: Resource Mail
+sale: Sales
+sale_account_accountant: Sale Accounting
+sale_async_emails: Sales - Async Emails
+sale_crm: Opportunity to Quotation
+sale_edi_ubl: Import electronic orders with UBL
+sale_external_tax: 3rd Party Tax Calculation for Sale
+sale_loyalty: Sale Loyalty
+sale_loyalty_delivery: Sale Loyalty - Delivery
+sale_pdf_quote_builder: Sales PDF Quotation Builder
+sale_purchase: Sale Purchase
+sale_purchase_stock: MTO Sale <-> Purchase
+sale_sms: Sale - SMS
+sale_stock: Sales and Warehouse Management
+sales_team: Sales Teams
+sms: SMS gateway
+snailmail: Snail Mail
+snailmail_account: Snail Mail - Account
+snailmail_account_followup: Snail Mail Follow-Up
+social_crm: Leads statistics and generation on social
+social_facebook: Social Facebook
+social_instagram: Social Instagram
+social_linkedin: Social LinkedIn
+social_media: Social Media
+social_push_notifications: Social Push Notifications
+social_sale: Sale statistics on social
+social_twitter: Social X
+social_youtube: Social YouTube
+spreadsheet: Spreadsheet
+spreadsheet_account: Spreadsheet Accounting Formulas
+spreadsheet_dashboard: Spreadsheet dashboard
+spreadsheet_dashboard_account: Spreadsheet dashboard for accounting
+spreadsheet_dashboard_account_accountant: Spreadsheet dashboard for accounting
+spreadsheet_dashboard_crm: Spreadsheet dashboard for CRM
+spreadsheet_dashboard_edition: Spreadsheet dashboard edition
+spreadsheet_dashboard_pos_hr: Spreadsheet dashboard for point of sale
+spreadsheet_dashboard_purchase_stock: Spreadsheet dashboard for purchases
+spreadsheet_dashboard_sale: Spreadsheet dashboard for sales
+spreadsheet_dashboard_stock: Spreadsheet dashboard for stock
+spreadsheet_dashboard_stock_account: Spreadsheet dashboard for stock
+spreadsheet_dashboard_website_sale: Spreadsheet dashboard for eCommerce
+spreadsheet_edition: Spreadsheet
+spreadsheet_sale_management: Sale order spreadsheet
+stock_accountant: Stock Accounting
+stock_delivery: Delivery - Stock
+stock_enterprise: Stock enterprise
+stock_sms: Stock - SMS
+uom: Units of measure
+utm: UTM Trackers
+web: Web
+web_cohort: Cohort View
+web_editor: Web Editor
+web_enterprise: Web Enterprise
+web_gantt: Web Gantt
+web_grid: Grid View
+web_hierarchy: Web Hierarchy
+web_map: Map View
+web_mobile: Mobile
+web_tour: Tours
+web_unsplash: Unsplash Image Library
+website_enterprise: Website Enterprise
+website_knowledge: Knowledge Website
+website_links: Link Tracker
+website_mail: Website Mail
+website_partner: Website Partner
+website_payment: Website Payment
+website_product_barcodelookup: Product Barcode Lookup for eCommerce
+website_sale_external_tax: External calculation for Ecommerce
+website_sale_loyalty: Coupons, Promotions, Gift Card and Loyalty for eCommerce
+website_sale_stock: Product Availability
+whatsapp_account: Whatsapp Accounting
+whatsapp_connector: WhatsApp Connector (UltraMsg)
+whatsapp_delivery: WhatsApp-Delivery
+whatsapp_payment: Whatsapp-Payment
+whatsapp_pos: WhatsApp-POS
+whatsapp_sale: WhatsApp-Sale
+whatsapp_website_sale: WhatsApp-eCommerce
+gamification: Gamification
+website_appointment: Website Appointments
+payment_custom: Payment Provider: Custom Payment Modes
+appointment_hr: Employees on Appointments
+appointment_crm: Appointment Lead Generation
+appointment_sms: Appointment SMS
+website_appointment_crm: Website Appointment Lead Enrichment
+portal: Customer Portal
+onboarding: Onboarding Toolbox
+http_routing: Web Routing
+phone_validation: Phone Numbers Validation

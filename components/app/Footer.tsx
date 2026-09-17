@@ -189,7 +189,7 @@ export function Footer() {
               </div>
               <div className="flex items-start gap-4">
                 <MapPin className="w-[18px] h-[18px] mt-1 shrink-0 text-[#6B5A4D]" />
-                <span className="leading-relaxed whitespace-nowrap">58 Mikocheni A, Dar es Salaam</span>
+                <span className="leading-relaxed whitespace-nowrap">59 Mikocheni A, Dar es Salaam</span>
               </div>
               <div className="flex items-center gap-4">
                 <Mail className="w-[18px] h-[18px] shrink-0 text-[#6B5A4D]" />

@@ -151,7 +151,7 @@ const localBusinessJsonLd = {
       "image": "https://www.stephanspetstore.co.tz/logo.png",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "58 Mikocheni A",
+        "streetAddress": "59 Mikocheni A",
         "addressLocality": "Dar es Salaam",
         "addressCountry": "TZ"
       },

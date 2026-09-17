@@ -31,7 +31,7 @@ export default function CheckoutPage() {
                             <MapPin className="h-4 w-4 text-zinc-400 shrink-0 mt-0.5" />
                             <div className="space-y-1">
                                 <p className="leading-tight font-medium text-zinc-700">11 Slipway Rd, Masaki</p>
-                                <p className="leading-tight font-medium text-zinc-700">58 Mikocheni A, Dar es Salaam</p>
+                                <p className="leading-tight font-medium text-zinc-700">59 Mikocheni A, Dar es Salaam</p>
                             </div>
                         </div>
                     </div>
