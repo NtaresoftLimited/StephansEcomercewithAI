@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { cn, formatPrice } from "@/lib/utils";
 import { useCartActions } from "@/lib/store/cart-store-provider";
 import { useWishlistActions, useIsInWishlist } from "@/lib/store/wishlist-store-provider";
+import { PackageOpen } from "lucide-react";
 
 interface Product {
   _id: string;
@@ -37,16 +38,12 @@ interface ProductCardProps {
   product: Product;
 }
 
-const getOptimizedSanityUrl = (url: string | null, size = 400): string | null => {
-  if (!url || !url.includes("cdn.sanity.io")) return url;
-  const sep = url.includes("?") ? "&" : "?";
-  return `${url}${sep}w=${size}&h=${size}&fit=clip&q=75&auto=format`;
-};
 
 export function ProductCard({ product }: ProductCardProps) {
   const { addItem } = useCartActions();
   const { toggleItem } = useWishlistActions();
   const isInWishlist = useIsInWishlist(product._id);
+  const [imageError, setImageError] = useState(false);
 
   const images = product.images ?? [];
   const mainImageUrl = images[0]?.asset?.url;
@@ -96,18 +93,19 @@ export function ProductCard({ product }: ProductCardProps) {
         {/* Product Image */}
         <div className="aspect-[4/5] sm:aspect-square w-full rounded-2xl bg-[#F4F1EA] flex items-center justify-center overflow-hidden p-6 md:p-8 mb-4">
           <div className="relative w-full h-full">
-            {mainImageUrl ? (
+            {mainImageUrl && !imageError ? (
               <Image 
                 alt={product.name ?? "Product"} 
-                src={getOptimizedSanityUrl(mainImageUrl) ?? mainImageUrl}
+                src={mainImageUrl}
                 fill
                 className="object-contain transition-transform duration-500 group-hover:scale-105 mix-blend-multiply"
                 sizes="(max-width: 768px) 50vw, (max-width: 1280px) 25vw, 15vw"
-                unoptimized
+                onError={() => setImageError(true)}
               />
             ) : (
-              <div className="flex h-full items-center justify-center text-zinc-300">
-                <span className="text-[10px] font-bold uppercase">No Image</span>
+              <div className="flex h-full flex-col items-center justify-center text-zinc-300 gap-2">
+                <PackageOpen className="w-8 h-8 text-zinc-200" strokeWidth={1} />
+                <span className="text-[9px] font-bold uppercase tracking-wider text-zinc-300">No Image</span>
               </div>
             )}
           </div>

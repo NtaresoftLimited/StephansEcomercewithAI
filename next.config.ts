@@ -58,24 +58,26 @@ if (process.env.NODE_ENV === "production") {
     runtimeCaching: [
       {
         urlPattern: /^https:\/\/cdn\.sanity\.io\/.*/i,
-        handler: "CacheFirst",
+        handler: "NetworkFirst",
         options: {
           cacheName: "sanity-images",
           expiration: {
-            maxEntries: 64,
-            maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+            maxEntries: 100,
+            maxAgeSeconds: 6 * 60 * 60, // 6 hours
           },
+          networkTimeoutSeconds: 5,
         },
       },
       {
         urlPattern: /\/_next\/image\?url=.+/i,
-        handler: "CacheFirst",
+        handler: "NetworkFirst",
         options: {
           cacheName: "next-images",
           expiration: {
-            maxEntries: 64,
-            maxAgeSeconds: 24 * 60 * 60, // 24 hours
+            maxEntries: 100,
+            maxAgeSeconds: 6 * 60 * 60, // 6 hours
           },
+          networkTimeoutSeconds: 5,
         },
       },
       {
