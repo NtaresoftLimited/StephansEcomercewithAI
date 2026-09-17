@@ -85,11 +85,13 @@ async function runSync() {
     const activeOdooIds = new Set(activeOdooProductsFast.map(p => p.id));
 
     // Fetch all Odoo-linked products from Sanity
-    const sanityOdooProducts = await sanityClient.fetch(
+    const sanityOdooProducts: Array<{ _id: string; odooId?: number; odooLastModified?: string; hasImage: boolean }> = await sanityClient.fetch(
         `*[_type == "product" && (defined(odooId) || _id match "odoo-*")]{_id, odooId, odooLastModified, "hasImage": defined(images[0].asset)}`
     );
 
-    const sanityProductsMap = new Map(sanityOdooProducts.map((p: any) => [p._id, p]));
+    const sanityProductsMap = new Map<string, { _id: string; odooId?: number; odooLastModified?: string; hasImage: boolean }>(
+        sanityOdooProducts.map(p => [p._id, p])
+    );
 
 
     let deleted = 0;
