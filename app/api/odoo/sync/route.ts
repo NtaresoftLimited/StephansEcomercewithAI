@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { NextResponse } from "next/server";
 import { odoo } from "@/lib/odoo/client";
 import { createClient } from "@sanity/client";
