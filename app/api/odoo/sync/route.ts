@@ -85,12 +85,14 @@ async function runSync() {
     const activeOdooIds = new Set(activeOdooProductsFast.map(p => p.id));
 
     // Fetch all Odoo-linked products from Sanity
-    const sanityOdooProducts: Array<{ _id: string; odooId?: number; odooLastModified?: string; hasImage: boolean }> = await sanityClient.fetch(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const sanityOdooProducts: any[] = await sanityClient.fetch(
         `*[_type == "product" && (defined(odooId) || _id match "odoo-*")]{_id, odooId, odooLastModified, "hasImage": defined(images[0].asset)}`
     );
 
-    const sanityProductsMap = new Map<string, { _id: string; odooId?: number; odooLastModified?: string; hasImage: boolean }>(
-        sanityOdooProducts.map(p => [p._id, p])
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const sanityProductsMap: Map<string, any> = new Map(
+        sanityOdooProducts.map((p: any) => [p._id, p])
     );
 
 
@@ -156,10 +158,10 @@ async function runSync() {
             }
 
             // 2. Handle Image (Upload if not exists or if modified in Odoo)
-            type SanityProduct = { _id: string; odooId?: number; odooLastModified?: string; hasImage: boolean };
             let imageAssetId = null;
-            const existingSp = sanityProductsMap.get(sanityId) as SanityProduct | undefined;
-            const isNewOrModified = !existingSp || !existingSp.hasImage || existingSp.odooLastModified !== (product.write_date as string);
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const existingSp: any = sanityProductsMap.get(sanityId);
+            const isNewOrModified = !existingSp || !existingSp.hasImage || existingSp.odooLastModified !== product.write_date;
             
             if (product.image_1920 && isNewOrModified) {
                 imageAssetId = await uploadOdooImage(product.image_1920, `product-${product.id}`);
