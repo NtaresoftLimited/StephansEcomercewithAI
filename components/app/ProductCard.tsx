@@ -36,10 +36,11 @@ interface Product {
 
 interface ProductCardProps {
   product: Product;
+  priority?: boolean;
 }
 
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, priority = false }: ProductCardProps) {
   const { addItem } = useCartActions();
   const { toggleItem } = useWishlistActions();
   const isInWishlist = useIsInWishlist(product._id);
@@ -98,8 +99,9 @@ export function ProductCard({ product }: ProductCardProps) {
                 alt={product.name ?? "Product"} 
                 src={mainImageUrl}
                 fill
+                priority={priority}
                 className="object-contain transition-transform duration-500 group-hover:scale-105 mix-blend-multiply"
-                sizes="(max-width: 768px) 50vw, (max-width: 1280px) 25vw, 15vw"
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 onError={() => setImageError(true)}
               />
             ) : (
