@@ -86,8 +86,11 @@ async function runSync() {
 
     // Fetch all Odoo-linked products from Sanity
     const sanityOdooProducts = await sanityClient.fetch(
-        `*[_type == "product" && (defined(odooId) || _id match "odoo-*")]{_id, odooId}`
+        `*[_type == "product" && (defined(odooId) || _id match "odoo-*")]{_id, odooId, "hasImage": defined(images[0].asset)}`
     );
+
+    const sanityProductsMap = new Map(sanityOdooProducts.map((p: any) => [p._id, p]));
+
 
     let deleted = 0;
     // Check which Sanity products are no longer active in Odoo
@@ -122,8 +125,8 @@ async function runSync() {
             "qty_available",
             "image_1920",
             "product_variant_ids"
-        ],
-        50 // Reduced limit for safer sync with images
+        ]
+        // Removed limit of 50 so we sync ALL products
     );
 
     let synced = 0;
@@ -149,9 +152,10 @@ async function runSync() {
                 categoryRef = { _type: "reference", _ref: catId };
             }
 
-            // 2. Handle Image (Upload if not exists optionally, but here we upload main)
+            // 2. Handle Image (Upload if not exists)
             let imageAssetId = null;
-            if (product.image_1920) {
+            const existingSp = sanityProductsMap.get(sanityId);
+            if (product.image_1920 && (!existingSp || !existingSp.hasImage)) {
                 imageAssetId = await uploadOdooImage(product.image_1920, `product-${product.id}`);
             }
 
