@@ -156,9 +156,10 @@ async function runSync() {
             }
 
             // 2. Handle Image (Upload if not exists or if modified in Odoo)
+            type SanityProduct = { _id: string; odooId?: number; odooLastModified?: string; hasImage: boolean };
             let imageAssetId = null;
-            const existingSp = sanityProductsMap.get(sanityId);
-            const isNewOrModified = !existingSp || !existingSp.hasImage || existingSp.odooLastModified !== product.write_date;
+            const existingSp = sanityProductsMap.get(sanityId) as SanityProduct | undefined;
+            const isNewOrModified = !existingSp || !existingSp.hasImage || existingSp.odooLastModified !== (product.write_date as string);
             
             if (product.image_1920 && isNewOrModified) {
                 imageAssetId = await uploadOdooImage(product.image_1920, `product-${product.id}`);
