@@ -86,7 +86,7 @@ async function runSync() {
 
     // Fetch all Odoo-linked products from Sanity
     const sanityOdooProducts = await sanityClient.fetch(
-        `*[_type == "product" && (defined(odooId) || _id match "odoo-*")]{_id, odooId, "hasImage": defined(images[0].asset)}`
+        `*[_type == "product" && (defined(odooId) || _id match "odoo-*")]{_id, odooId, odooLastModified, "hasImage": defined(images[0].asset)}`
     );
 
     const sanityProductsMap = new Map(sanityOdooProducts.map((p: any) => [p._id, p]));
@@ -124,7 +124,8 @@ async function runSync() {
             "categ_id",
             "qty_available",
             "image_1920",
-            "product_variant_ids"
+            "product_variant_ids",
+            "write_date"
         ]
         // Removed limit of 50 so we sync ALL products
     );
@@ -152,10 +153,12 @@ async function runSync() {
                 categoryRef = { _type: "reference", _ref: catId };
             }
 
-            // 2. Handle Image (Upload if not exists)
+            // 2. Handle Image (Upload if not exists or if modified in Odoo)
             let imageAssetId = null;
             const existingSp = sanityProductsMap.get(sanityId);
-            if (product.image_1920 && (!existingSp || !existingSp.hasImage)) {
+            const isNewOrModified = !existingSp || !existingSp.hasImage || existingSp.odooLastModified !== product.write_date;
+            
+            if (product.image_1920 && isNewOrModified) {
                 imageAssetId = await uploadOdooImage(product.image_1920, `product-${product.id}`);
             }
 
@@ -173,6 +176,7 @@ async function runSync() {
                 description: product.description_sale || product.name,
                 stock: Math.max(0, Math.floor(product.qty_available || 0)),
                 odooId: product.id,
+                odooLastModified: product.write_date,
             });
 
             if (categoryRef) patch.set({ categories: [categoryRef] });

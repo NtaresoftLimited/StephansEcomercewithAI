@@ -55,6 +55,13 @@ export const productType = defineType({
       description: "Internal Odoo ID for syncing",
     }),
     defineField({
+      name: "odooLastModified",
+      type: "string",
+      group: "details",
+      hidden: true,
+      description: "Used internally by the sync script to detect image changes in Odoo",
+    }),
+    defineField({
       name: "categories",
       title: "Categories",
       type: "array",
