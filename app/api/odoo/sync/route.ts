@@ -75,17 +75,50 @@ async function uploadOdooImage(base64: string, filename: string) {
 }
 
 async function runSync() {
-    // Fetch products from Odoo with more fields
+    // 1. Handle Deletions first
+    // Fetch ALL active product IDs from Odoo (lightweight query)
+    const activeOdooProductsFast = await odoo.searchRead(
+        "product.template",
+        [["sale_ok", "=", true], ["active", "=", true]],
+        ["id"]
+    );
+    const activeOdooIds = new Set(activeOdooProductsFast.map(p => p.id));
+
+    // Fetch all Odoo-linked products from Sanity
+    const sanityOdooProducts = await sanityClient.fetch(
+        `*[_type == "product" && (defined(odooId) || _id match "odoo-*")]{_id, odooId}`
+    );
+
+    let deleted = 0;
+    // Check which Sanity products are no longer active in Odoo
+    for (const sp of sanityOdooProducts) {
+        // Extract ID either from odooId field or from the _id string
+        let idToCheck = sp.odooId;
+        if (!idToCheck && sp._id.startsWith("odoo-")) {
+            idToCheck = parseInt(sp._id.replace("odoo-", ""), 10);
+        }
+
+        if (idToCheck && !activeOdooIds.has(idToCheck)) {
+            try {
+                await sanityClient.delete(sp._id);
+                console.log(`Deleted archived Odoo product from Sanity: ${sp._id}`);
+                deleted++;
+            } catch (err) {
+                console.error(`Failed to delete archived product ${sp._id}:`, err);
+            }
+        }
+    }
+
+    // 2. Fetch products from Odoo with more fields for updating
     const odooProducts = await odoo.searchRead(
         "product.template",
-        [["sale_ok", "=", true]],
+        [["sale_ok", "=", true], ["active", "=", true]],
         [
             "id",
             "name",
             "list_price",
             "description_sale",
             "categ_id",
-            
             "qty_available",
             "image_1920",
             "product_variant_ids"
@@ -106,7 +139,6 @@ async function runSync() {
                 .replace(/^-+|-+$/g, "") + `-${product.id}`;
 
             // 1. Handle Category — use only the leaf name from Odoo's full path
-            //    e.g. "DOGS / TREATS / Crunchy Treats" → "Crunchy Treats"
             let categoryRef = undefined;
             if (product.categ_id && Array.isArray(product.categ_id)) {
                 const fullPath = product.categ_id[1] as string;
@@ -122,10 +154,6 @@ async function runSync() {
             if (product.image_1920) {
                 imageAssetId = await uploadOdooImage(product.image_1920, `product-${product.id}`);
             }
-
-            // 3. Handle Variants (Optional detail)
-            // For now, mapping base stock and price. 
-            // In a full sync, we'd fetch product.product variants here.
 
             // 4. Create or Update (Non-destructive)
             await sanityClient.createIfNotExists({
@@ -168,7 +196,7 @@ async function runSync() {
             if (errorDetails.length < 5) errorDetails.push({ name: product.name, error: err?.message || String(err) });
         }
     }
-    return { synced, errors, total: odooProducts.length, errorDetails };
+    return { synced, deleted, errors, total: odooProducts.length, errorDetails };
 }
 
 export async function POST(request: Request) {
