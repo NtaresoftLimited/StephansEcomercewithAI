@@ -202,6 +202,14 @@ export default async function ProductsPage(props: ProductsPageProps) {
     combinedProducts.sort((a, b) => (b.price || 0) - (a.price || 0));
   } else if (sort === "name") {
     combinedProducts.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+  } else if (!sort || sort === "featured" || sort === "relevance") {
+    // Deterministic mix based on name string sum to shuffle products while keeping pagination stable
+    combinedProducts.sort((a, b) => {
+      const hashA = (a.name || a._id || "").split("").reduce((acc: number, char: string) => acc + char.charCodeAt(0), 0);
+      const hashB = (b.name || b._id || "").split("").reduce((acc: number, char: string) => acc + char.charCodeAt(0), 0);
+      const diff = (hashA % 13) - (hashB % 13);
+      return diff !== 0 ? diff : hashA - hashB;
+    });
   }
 
   // Pagination Logic

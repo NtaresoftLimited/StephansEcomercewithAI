@@ -119,10 +119,17 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           <h3 className="text-sm font-semibold text-[#222222] leading-snug mb-1">
             {product.name}
           </h3>
-          {/* Subtitle placeholder - normally this would come from variant or short description */}
-          {product.brand?.name && (
-            <p className="text-xs text-zinc-500 mb-3">{product.brand.name}</p>
-          )}
+          
+          <div className="flex flex-col gap-0.5 mb-3">
+            {product.brand?.name && (
+              <p className="text-[10px] font-bold tracking-widest text-[#c77e35] uppercase">{product.brand.name}</p>
+            )}
+            {product.categories && product.categories.length > 0 && (
+              <p className="text-[11px] text-zinc-500 line-clamp-1">
+                {product.categories.map((c: any) => c.title || c.name).filter(Boolean).join(", ")}
+              </p>
+            )}
+          </div>
           
           <div className="mt-auto pt-2 flex items-center justify-between">
             <span className="text-sm font-semibold text-[#4E2A15]">
