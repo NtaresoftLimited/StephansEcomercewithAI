@@ -107,37 +107,17 @@ export default async function ProductsPage(props: ProductsPageProps) {
   else if (sort === "relevance") query = FILTER_PRODUCTS_BY_RELEVANCE_QUERY;
   else if (sort === "name") query = FILTER_PRODUCTS_BY_NAME_QUERY;
 
-  // Fetch Data in Parallel (Sanity + Odoo)
-  const [productsResult, sanityCategoriesResult, brandsResult, odooCategories] = await Promise.all([
-    sanityFetch({ query, params: queryParams }),
+  // Fetch Data in Parallel (Sanity + Odoo Categories)
+  const [sanityCategoriesResult, brandsResult, odooCategories] = await Promise.all([
     sanityFetch({ query: ALL_CATEGORIES_QUERY }),
     sanityFetch({ query: ALL_BRANDS_QUERY }),
     odoo.getPublicCategories().catch(e => { console.error("Odoo categories fetch failed:", e); return []; })
   ]);
 
-  const sanityProducts = productsResult.data || [];
   const sanityCategories = sanityCategoriesResult.data || [];
   const brands = brandsResult.data || [];
-  
-  // Fetch Odoo Products
-  let odooProductsUnfiltered = [];
-  try {
-    odooProductsUnfiltered = await odoo.getOdooShopProducts(odooCategories || []);
-  } catch (error) {
-    console.error("Failed to fetch Odoo products:", error);
-  }
 
-  // Filter Odoo Products manually to match the query params
-  const odooProducts = odooProductsUnfiltered.filter(p => {
-    if (q && !p.name?.toLowerCase().includes(q.toLowerCase())) return false;
-    if (category) { const t = category.endsWith('s') ? category.slice(0,-1) : category; if (!p.categories.some((c: any) => c.slug === category || c.slug.includes(t) || c.title?.toLowerCase().includes(t)) && !p.name?.toLowerCase().includes(t)) return false; }
-    if (inStock && p.stock <= 0) return false;
-    if (minPrice && p.price < Number(minPrice)) return false;
-    if (maxPrice && p.price > Number(maxPrice)) return false;
-    return true;
-  });
-
-    // Merge Odoo and Sanity Categories for the filter sidebar
+  // Merge Odoo and Sanity Categories for the filter sidebar
   const mappedOdooCategories = (odooCategories || []).map((c: any) => {
     let parentCategory = null;
     if (c.parent_id && Array.isArray(c.parent_id)) {
@@ -170,6 +150,32 @@ export default async function ProductsPage(props: ProductsPageProps) {
   const allCategories = Array.from(categoryMap.values());
 
   const activeCategory = category ? allCategories.find(c => (c.slug?.current || c.slug) === category) : null;
+  
+  // Calculate leaf slug for Sanity since Sanity only stores leaf category names
+  const leafSlug = activeCategory ? activeCategory.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') : category;
+  queryParams.categorySlug = leafSlug || "";
+  
+  // Fetch Sanity Products using the resolved leaf slug
+  const productsResult = await sanityFetch({ query, params: queryParams });
+  const sanityProducts = productsResult.data || [];
+
+  // Fetch Odoo Products
+  let odooProductsUnfiltered: any[] = [];
+  try {
+    odooProductsUnfiltered = await odoo.getOdooShopProducts(odooCategories || []);
+  } catch (error) {
+    console.error("Failed to fetch Odoo products:", error);
+  }
+
+  // Filter Odoo Products manually to match the query params
+  const odooProducts = odooProductsUnfiltered.filter((p: any) => {
+    if (q && !p.name?.toLowerCase().includes(q.toLowerCase())) return false;
+    if (category) { const t = category.endsWith('s') ? category.slice(0,-1) : category; if (!p.categories.some((c: any) => c.slug === category || c.slug.includes(t) || c.title?.toLowerCase().includes(t)) && !p.name?.toLowerCase().includes(t)) return false; }
+    if (inStock && p.stock <= 0) return false;
+    if (minPrice && p.price < Number(minPrice)) return false;
+    if (maxPrice && p.price > Number(maxPrice)) return false;
+    return true;
+  });
   
   // Build Breadcrumbs from Odoo display_name (e.g., "Dogs / Grooming / Nail Care")
   let breadcrumbs: string[] = [];
