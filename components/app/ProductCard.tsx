@@ -100,6 +100,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
                 src={mainImageUrl}
                 fill
                 priority={priority}
+                unoptimized
                 className="object-contain transition-transform duration-500 group-hover:scale-105 mix-blend-multiply"
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 onError={() => setImageError(true)}
