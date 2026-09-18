@@ -6,14 +6,17 @@ import { LOW_STOCK_THRESHOLD } from "@/lib/constants/stock";
 // ============================================
 
 /** Common filter conditions for product filtering */
-const PRODUCT_FILTER_CONDITIONS = `
-  _type == "product"
+export const PRODUCT_FILTER_CONDITIONS = `
+  _type == 'product'
   && price > 0
-  && ($categorySlug == "" || 
+  && ($categorySlug == '' || 
       $categorySlug in categories[]->slug.current || 
       $categorySlug in categories[]->parentCategory->slug.current || 
-      $categorySlug in categories[]->parentCategory->parentCategory->slug.current)
-  && ($brandSlug == "" || brand->slug.current == $brandSlug)
+      $categorySlug in categories[]->parentCategory->parentCategory->slug.current ||
+      $categoryLeafSlug in categories[]->slug.current || 
+      $categoryLeafSlug in categories[]->parentCategory->slug.current || 
+      $categoryLeafSlug in categories[]->parentCategory->parentCategory->slug.current)
+  && ($brandSlug == '' || brand->slug.current == $brandSlug)
   && ($color == "" || color == $color)
   && ($material == "" || material == $material)
   && ($minPrice == 0 || price >= $minPrice)
@@ -69,13 +72,16 @@ const OFFERS_FILTER_CONDITIONS = `
   && ($categorySlug == "" || 
       $categorySlug in categories[]->slug.current || 
       $categorySlug in categories[]->parentCategory->slug.current || 
-      $categorySlug in categories[]->parentCategory->parentCategory->slug.current)
+      $categorySlug in categories[]->parentCategory->parentCategory->slug.current ||
+      $categoryLeafSlug in categories[]->slug.current || 
+      $categoryLeafSlug in categories[]->parentCategory->slug.current || 
+      $categoryLeafSlug in categories[]->parentCategory->parentCategory->slug.current)
+  && ($brandSlug == "" || brand->slug.current == $brandSlug)
   && ($color == "" || color == $color)
   && ($material == "" || material == $material)
   && ($minPrice == 0 || price >= $minPrice)
   && ($maxPrice == 0 || price <= $maxPrice)
   && ($searchQuery == "" || name match $searchQuery + "*" || description match $searchQuery + "*")
-  && ($brandSlug == "" || brand->slug.current == $brandSlug)
   && ($inStock == false || stock > 0)
 `;
 

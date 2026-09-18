@@ -88,9 +88,10 @@ export default async function ProductsPage(props: ProductsPageProps) {
   const currentPage = parseInt(page || "1", 10);
 
   // Prepare Query Parameters
-  const queryParams = {
+  const queryParams: any = {
     searchQuery: q || "",
     categorySlug: category || "",
+    categoryLeafSlug: "",
     brandSlug: brand || "",
     minPrice: minPrice ? Number(minPrice) : 0,
     maxPrice: maxPrice ? Number(maxPrice) : 0,
@@ -153,7 +154,8 @@ export default async function ProductsPage(props: ProductsPageProps) {
   
   // Calculate leaf slug for Sanity since Sanity only stores leaf category names
   const leafSlug = activeCategory ? activeCategory.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') : category;
-  queryParams.categorySlug = leafSlug || "";
+  queryParams.categorySlug = category || "";
+  queryParams.categoryLeafSlug = leafSlug || "";
   
   // Fetch Sanity Products using the resolved leaf slug
   const productsResult = await sanityFetch({ query, params: queryParams });

@@ -8,6 +8,7 @@ async function run() {
       $categorySlug in categories[]->slug.current || 
       $categorySlug in categories[]->parentCategory->slug.current || 
       $categorySlug in categories[]->parentCategory->parentCategory->slug.current)
+  && ($inStock == false || stock > 0)
 `;
   const FILTERED_PRODUCT_PROJECTION = `{
     name,
@@ -16,10 +17,10 @@ async function run() {
   
   const query = `*[${PRODUCT_FILTER_CONDITIONS}] | order(name asc) ${FILTERED_PRODUCT_PROJECTION}`;
   
-  const p1 = await sanity.fetch(query, { categorySlug: 'dogs-bowls-feeders-food-bowls' });
+  const p1 = await sanity.fetch(query, { categorySlug: 'dogs-bowls-feeders-food-bowls', inStock: false });
   console.log('With long slug:', p1.length);
   
-  const p2 = await sanity.fetch(query, { categorySlug: 'food-bowls' });
-  console.log('With leaf slug (food-bowls):', p2.length);
+  const p2 = await sanity.fetch(query, { categorySlug: 'adult-dog-food', inStock: false });
+  console.log('With leaf slug (adult-dog-food):', p2.length);
 }
 run();
