@@ -266,41 +266,54 @@ export default async function ProductsPage(props: ProductsPageProps) {
           </div>
 
           {/* Category Icons Strip (Only show on main shop page) */}
-          <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 mb-16 mt-4">
-            <div className="flex items-center justify-between overflow-x-auto no-scrollbar py-6 md:px-8">
-              <Link href="/shop/food" className="flex flex-col items-center gap-1 group opacity-80 hover:opacity-100 transition-opacity px-2 sm:px-6 shrink-0 min-w-[130px]">
-                <div className="w-12 h-12 bg-[#c77e35] mb-4 mx-auto" style={{ WebkitMaskImage: 'url(/categories/Food_Stephans.png)', maskImage: 'url(/categories/Food_Stephans.png)', WebkitMaskSize: 'contain', maskSize: 'contain', WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat', WebkitMaskPosition: 'center', maskPosition: 'center' }}></div>
-                <span className="text-[11px] font-bold tracking-widest text-[#222] uppercase">Food</span>
-                <span className="text-[13px] text-zinc-500 group-hover:text-[#4E2A15] transition-colors mt-2 flex items-center gap-1">Shop now <span className="font-serif font-light text-lg relative top-[-1px]">&rarr;</span></span>
-              </Link>
-              <div className="w-[1px] h-20 bg-[#EAE3D9] shrink-0 hidden sm:block"></div>
+          <div className="w-full max-w-[1200px] mx-auto mb-16 mt-4">
+            <div className="grid grid-cols-2 border-y border-[#e8e0d9] lg:grid-cols-5">
               
-              <Link href="/shop/treats" className="flex flex-col items-center gap-1 group opacity-80 hover:opacity-100 transition-opacity px-2 sm:px-6 shrink-0 min-w-[130px]">
-                <div className="w-12 h-12 bg-[#c77e35] mb-4 mx-auto" style={{ WebkitMaskImage: 'url(/categories/Treats_Stephans.png)', maskImage: 'url(/categories/Treats_Stephans.png)', WebkitMaskSize: 'contain', maskSize: 'contain', WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat', WebkitMaskPosition: 'center', maskPosition: 'center' }}></div>
-                <span className="text-[11px] font-bold tracking-widest text-[#222] uppercase">Treats</span>
-                <span className="text-[13px] text-zinc-500 group-hover:text-[#4E2A15] transition-colors mt-2 flex items-center gap-1">Shop now <span className="font-serif font-light text-lg relative top-[-1px]">&rarr;</span></span>
+              {/* FOOD */}
+              <Link href="/shop/food" className="group flex min-h-40 flex-col items-center justify-center px-3 py-6 text-center transition-colors hover:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8b5e3c] focus-visible:ring-inset sm:min-h-44 sm:px-6 border-r border-[#e8e0d9] border-b lg:border-b-0">
+                <span className="relative mb-3 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 text-[#c77e35]">
+                  <div className="w-full h-full bg-[#c77e35]" style={{ WebkitMaskImage: 'url(/categories/Food_Stephans.png)', maskImage: 'url(/categories/Food_Stephans.png)', WebkitMaskPosition: 'center', maskPosition: 'center', WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat', WebkitMaskSize: 'contain', maskSize: 'contain' }} />
+                </span>
+                <span className="text-[11px] font-bold uppercase tracking-[0.13em] text-[#28231f] sm:text-xs">FOOD</span>
+                <span className="mt-3 inline-flex items-center gap-2 text-xs font-medium text-[#5d554f] sm:text-sm">Shop now <span aria-hidden="true" className="text-base leading-none transition-transform duration-300 group-hover:translate-x-1">→</span></span>
               </Link>
-              <div className="w-[1px] h-20 bg-[#EAE3D9] shrink-0 hidden sm:block"></div>
-              
-              <Link href="/shop/toys" className="flex flex-col items-center gap-1 group opacity-80 hover:opacity-100 transition-opacity px-2 sm:px-6 shrink-0 min-w-[130px]">
-                <div className="w-12 h-12 bg-[#c77e35] mb-4 mx-auto" style={{ WebkitMaskImage: 'url(/categories/Toys_Stephans.png)', maskImage: 'url(/categories/Toys_Stephans.png)', WebkitMaskSize: 'contain', maskSize: 'contain', WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat', WebkitMaskPosition: 'center', maskPosition: 'center' }}></div>
-                <span className="text-[11px] font-bold tracking-widest text-[#222] uppercase">Toys</span>
-                <span className="text-[13px] text-zinc-500 group-hover:text-[#4E2A15] transition-colors mt-2 flex items-center gap-1">Shop now <span className="font-serif font-light text-lg relative top-[-1px]">&rarr;</span></span>
+
+              {/* TREATS */}
+              <Link href="/shop/treats" className="group flex min-h-40 flex-col items-center justify-center px-3 py-6 text-center transition-colors hover:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8b5e3c] focus-visible:ring-inset sm:min-h-44 sm:px-6 border-b lg:border-b-0 lg:border-r lg:border-[#e8e0d9]">
+                <span className="relative mb-3 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 text-[#c77e35]">
+                  <div className="w-full h-full bg-[#c77e35]" style={{ WebkitMaskImage: 'url(/categories/Treats_Stephans.png)', maskImage: 'url(/categories/Treats_Stephans.png)', WebkitMaskPosition: 'center', maskPosition: 'center', WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat', WebkitMaskSize: 'contain', maskSize: 'contain' }} />
+                </span>
+                <span className="text-[11px] font-bold uppercase tracking-[0.13em] text-[#28231f] sm:text-xs">TREATS</span>
+                <span className="mt-3 inline-flex items-center gap-2 text-xs font-medium text-[#5d554f] sm:text-sm">Shop now <span aria-hidden="true" className="text-base leading-none transition-transform duration-300 group-hover:translate-x-1">→</span></span>
               </Link>
-              <div className="w-[1px] h-20 bg-[#EAE3D9] shrink-0 hidden sm:block"></div>
-              
-              <Link href="/shop/accessories" className="flex flex-col items-center gap-1 group opacity-80 hover:opacity-100 transition-opacity px-2 sm:px-6 shrink-0 min-w-[130px]">
-                <div className="w-12 h-12 bg-[#c77e35] mb-4 mx-auto" style={{ WebkitMaskImage: 'url(/categories/Accessories_Stephans.png)', maskImage: 'url(/categories/Accessories_Stephans.png)', WebkitMaskSize: 'contain', maskSize: 'contain', WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat', WebkitMaskPosition: 'center', maskPosition: 'center' }}></div>
-                <span className="text-[11px] font-bold tracking-widest text-[#222] uppercase">Accessories</span>
-                <span className="text-[13px] text-zinc-500 group-hover:text-[#4E2A15] transition-colors mt-2 flex items-center gap-1">Shop now <span className="font-serif font-light text-lg relative top-[-1px]">&rarr;</span></span>
+
+              {/* TOYS */}
+              <Link href="/shop/toys" className="group flex min-h-40 flex-col items-center justify-center px-3 py-6 text-center transition-colors hover:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8b5e3c] focus-visible:ring-inset sm:min-h-44 sm:px-6 border-r border-[#e8e0d9] border-b lg:border-b-0">
+                <span className="relative mb-3 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 text-[#c77e35]">
+                  <div className="w-full h-full bg-[#c77e35]" style={{ WebkitMaskImage: 'url(/categories/Toys_Stephans.png)', maskImage: 'url(/categories/Toys_Stephans.png)', WebkitMaskPosition: 'center', maskPosition: 'center', WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat', WebkitMaskSize: 'contain', maskSize: 'contain' }} />
+                </span>
+                <span className="text-[11px] font-bold uppercase tracking-[0.13em] text-[#28231f] sm:text-xs">TOYS</span>
+                <span className="mt-3 inline-flex items-center gap-2 text-xs font-medium text-[#5d554f] sm:text-sm">Shop now <span aria-hidden="true" className="text-base leading-none transition-transform duration-300 group-hover:translate-x-1">→</span></span>
               </Link>
-              <div className="w-[1px] h-20 bg-[#EAE3D9] shrink-0 hidden sm:block"></div>
-              
-              <Link href="/grooming" className="flex flex-col items-center gap-1 group opacity-80 hover:opacity-100 transition-opacity px-2 sm:px-6 shrink-0 min-w-[130px]">
-                <div className="w-12 h-12 bg-[#c77e35] mb-4 mx-auto" style={{ WebkitMaskImage: 'url(/categories/Grooming_Scissors.png)', maskImage: 'url(/categories/Grooming_Scissors.png)', WebkitMaskSize: 'contain', maskSize: 'contain', WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat', WebkitMaskPosition: 'center', maskPosition: 'center' }}></div>
-                <span className="text-[11px] font-bold tracking-widest text-[#222] uppercase">Grooming</span>
-                <span className="text-[13px] text-zinc-500 group-hover:text-[#4E2A15] transition-colors mt-2 flex items-center gap-1">Book now <span className="font-serif font-light text-lg relative top-[-1px]">&rarr;</span></span>
+
+              {/* ACCESSORIES */}
+              <Link href="/shop/accessories" className="group flex min-h-40 flex-col items-center justify-center px-3 py-6 text-center transition-colors hover:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8b5e3c] focus-visible:ring-inset sm:min-h-44 sm:px-6 border-b lg:border-b-0 lg:border-r lg:border-[#e8e0d9]">
+                <span className="relative mb-3 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 text-[#c77e35]">
+                  <div className="w-full h-full bg-[#c77e35]" style={{ WebkitMaskImage: 'url(/categories/Accessories_Stephans.png)', maskImage: 'url(/categories/Accessories_Stephans.png)', WebkitMaskPosition: 'center', maskPosition: 'center', WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat', WebkitMaskSize: 'contain', maskSize: 'contain' }} />
+                </span>
+                <span className="text-[11px] font-bold uppercase tracking-[0.13em] text-[#28231f] sm:text-xs">ACCESSORIES</span>
+                <span className="mt-3 inline-flex items-center gap-2 text-xs font-medium text-[#5d554f] sm:text-sm">Shop now <span aria-hidden="true" className="text-base leading-none transition-transform duration-300 group-hover:translate-x-1">→</span></span>
               </Link>
+
+              {/* GROOMING */}
+              <Link href="/grooming" className="group flex min-h-40 flex-col items-center justify-center px-3 py-6 text-center transition-colors hover:bg-white/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8b5e3c] focus-visible:ring-inset sm:min-h-44 sm:px-6 col-span-2 lg:col-span-1">
+                <span className="relative mb-3 flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1 text-[#c77e35]">
+                  <div className="w-full h-full bg-[#c77e35]" style={{ WebkitMaskImage: 'url(/categories/Grooming_Scissors.png)', maskImage: 'url(/categories/Grooming_Scissors.png)', WebkitMaskPosition: 'center', maskPosition: 'center', WebkitMaskRepeat: 'no-repeat', maskRepeat: 'no-repeat', WebkitMaskSize: 'contain', maskSize: 'contain' }} />
+                </span>
+                <span className="text-[11px] font-bold uppercase tracking-[0.13em] text-[#28231f] sm:text-xs">GROOMING</span>
+                <span className="mt-3 inline-flex items-center gap-2 text-xs font-medium text-[#5d554f] sm:text-sm">Book now <span aria-hidden="true" className="text-base leading-none transition-transform duration-300 group-hover:translate-x-1">→</span></span>
+              </Link>
+
             </div>
           </div>
         </>
