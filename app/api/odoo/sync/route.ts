@@ -59,22 +59,6 @@ async function getOrCreateBrand(name: string) {
     return created._id;
 }
 
-async function uploadOdooImage(base64: string, filename: string) {
-    if (!base64 || base64.length < 100) return null;
-
-    try {
-        const buffer = Buffer.from(base64, "base64");
-        const asset = await sanityClient.assets.upload("image", buffer, {
-            filename: `${filename}.jpg`,
-            contentType: "image/jpeg"
-        });
-        return asset._id;
-    } catch (error) {
-        console.error("Image upload failed:", error);
-        return null;
-    }
-}
-
 async function runSync() {
     // 1. Handle Deletions first
     // Fetch ALL active product IDs from Odoo (lightweight query)
@@ -159,14 +143,11 @@ async function runSync() {
             }
 
             // 2. Handle Image (Upload if not exists or if modified in Odoo)
-            let imageAssetId = null;
+            // IMAGE SYNC DISABLED: Do not sync images from Odoo to prevent overwriting Sanity images with Odoo placeholders.
+            const imageAssetId = null;
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const existingSp: any = sanityProductsMap.get(sanityId);
             const isNewOrModified = !existingSp || !existingSp.hasImage || existingSp.odooLastModified !== product.write_date;
-            
-            if (product.image_1920 && isNewOrModified) {
-                imageAssetId = await uploadOdooImage(product.image_1920, `product-${product.id}`);
-            }
 
             // 4. Create or Update (Non-destructive)
             await sanityClient.createIfNotExists({
