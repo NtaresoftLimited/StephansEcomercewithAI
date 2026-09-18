@@ -101,7 +101,7 @@ export function CategoryMegaMenu({
   const displayGroups = isExpanded ? groups : featuredGroups;
 
   return (
-    <div className={`flex flex-col transition-all duration-300 ${isExpanded ? 'w-[750px] max-w-full' : 'w-[550px] max-w-full'}`}>
+    <div className={`flex flex-col transition-all duration-300 ${isExpanded ? 'w-[850px] max-w-full' : 'w-[650px] max-w-full'}`}>
       <div className={`p-4 ${isExpanded ? 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4' : 'grid grid-cols-1 md:grid-cols-2 gap-4'}`}>
         {displayGroups.map((group) => {
           const Icon = CATEGORY_ICONS[group.title] || CircleDot;
@@ -114,20 +114,20 @@ export function CategoryMegaMenu({
           return (
             <article
               key={group.title}
-              className={`flex flex-col items-center text-center bg-white dark:bg-zinc-950 rounded-xl border border-zinc-100 dark:border-zinc-800 overflow-hidden transition-all duration-200 hover:shadow-md ${isExpanded ? 'p-3' : 'p-4'}`}
+              className={`flex flex-col items-center text-center bg-white dark:bg-zinc-950 rounded-xl border border-zinc-100 dark:border-zinc-800 overflow-hidden transition-all duration-200 hover:shadow-md relative ${isExpanded ? 'p-3' : 'p-4'}`}
             >
-              <div className="flex flex-col items-center gap-2 mb-3">
-                <div className="flex shrink-0 items-center justify-center text-[#5c3e2e] dark:text-amber-500">
+              <div className="w-full flex items-center justify-center relative mb-3 min-h-[24px]">
+                <div className="absolute left-0 flex shrink-0 items-center justify-center text-[#5c3e2e] dark:text-amber-500">
                   {typeof Icon === 'string' ? ( 
                     <div className="h-6 w-6 bg-[#5c3e2e] dark:bg-amber-500" style={{ WebkitMaskImage: `url('${Icon}')`, maskImage: `url('${Icon}')`, WebkitMaskSize: "contain", maskSize: "contain", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat", WebkitMaskPosition: "center", maskPosition: "center" }} /> 
-                  ) : ( 
-                    <Icon aria-hidden="true" className="h-6 w-6 stroke-[1.5]" /> 
+                  ) : (
+                    <Icon aria-hidden="true" className="h-6 w-6" />
                   )}
                 </div>
                 <Link
                   href={group.href}
                   onClick={onNavigate}
-                  className="text-[15px] font-bold text-zinc-900 transition-colors hover:text-[#8b4f22] dark:text-white dark:hover:text-amber-500 leading-tight"
+                  className="text-[15px] font-bold text-zinc-900 transition-colors hover:text-[#8b4f22] dark:text-white dark:hover:text-amber-500 leading-tight px-8"
                 >
                   {group.title}
                 </Link>
@@ -140,7 +140,7 @@ export function CategoryMegaMenu({
                       <Link
                         href={item.href}
                         onClick={onNavigate}
-                        className="inline-block text-[13px] text-zinc-600 transition-colors hover:text-[#8b4f22] dark:text-zinc-400 dark:hover:text-amber-500 w-full"
+                        className="text-[13px] text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200 transition-colors line-clamp-2 leading-snug"
                       >
                         {item.name}
                       </Link>
@@ -152,7 +152,7 @@ export function CategoryMegaMenu({
                   {hasMoreItems ? (
                     <button
                       onClick={() => toggleGroup(group.title)}
-                      className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[#5c3e2e] hover:text-[#8b4f22] dark:text-amber-500 dark:hover:text-amber-400 transition-colors"
+                      className="inline-flex items-center justify-center gap-1.5 text-[13px] font-medium text-[#5c3e2e] hover:text-[#8b4f22] dark:text-amber-500 dark:hover:text-amber-400 transition-colors"
                     >
                       {isGroupExpanded ? `Show less` : `View all`}
                       <ChevronDown aria-hidden="true" className={`h-3.5 w-3.5 transition-transform duration-200 ${isGroupExpanded ? 'rotate-180' : ''}`} />
