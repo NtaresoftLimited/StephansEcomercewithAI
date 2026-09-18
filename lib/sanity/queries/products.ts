@@ -9,7 +9,6 @@ import { LOW_STOCK_THRESHOLD } from "@/lib/constants/stock";
 const PRODUCT_FILTER_CONDITIONS = `
   _type == "product"
   && price > 0
-  && stock > 0
   && ($categorySlug == "" || 
       $categorySlug in categories[]->slug.current || 
       $categorySlug in categories[]->parentCategory->slug.current || 
@@ -63,7 +62,6 @@ const RELEVANCE_SCORE = `score(
 const OFFERS_FILTER_CONDITIONS = `
   _type == "product"
   && price > 0
-  && stock > 0
   && (
     featured == true
     || count(variants[defined(compareAtPrice) && compareAtPrice > price]) > 0
