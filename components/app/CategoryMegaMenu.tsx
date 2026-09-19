@@ -88,10 +88,18 @@ export function CategoryMegaMenu({
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
 
   const toggleGroup = (title: string) => {
-    setExpandedGroups(prev => ({
-      
-      [title]: !prev[title]
-    }));
+    setExpandedGroups(prev => {
+      const isCurrentlyExpanded = prev[title];
+      return {
+        ...prev,
+        [title]: !isCurrentlyExpanded
+      };
+    });
+    
+    // Also expand the whole mega menu to 950px when an inner group is expanded
+    if (!isExpanded) {
+      setIsExpanded(true);
+    }
   };
 
   const featuredGroups = featuredTitles
