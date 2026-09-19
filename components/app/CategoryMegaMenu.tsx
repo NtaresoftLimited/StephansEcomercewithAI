@@ -109,7 +109,7 @@ export function CategoryMegaMenu({
   const displayGroups = isExpanded ? groups : featuredGroups;
 
   return (
-    <div className={`flex flex-col transition-all duration-300 ${isExpanded ? 'w-[950px] max-w-full' : 'w-[650px] max-w-full'}`}>
+    <div className={`flex flex-col transition-all duration-300 ${isExpanded ? 'w-[1280px] max-w-full' : 'w-[650px] max-w-full'}`}>
       <div className={`p-4 ${isExpanded ? 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4' : 'grid grid-cols-1 md:grid-cols-2 gap-4'}`}>
         {displayGroups.map((group) => {
           const Icon = CATEGORY_ICONS[group.title] || CircleDot;
