@@ -168,13 +168,12 @@ export function productJsonLd(product: any) {
       url,
       priceCurrency: "TZS",
       price: product.price,
-      availability:
-        Number(product.stock || 0) > 0
-          ? "https://schema.org/InStock"
-          : "https://schema.org/OutOfStock",
+      availability: "https://schema.org/InStock",
       itemCondition: "https://schema.org/NewCondition",
       seller: {
-        "@id": `${SITE_URL}/#localbusiness`,
+        "@type": "PetStore",
+        name: BUSINESS_NAME,
+        url: SITE_URL,
       },
     },
   };

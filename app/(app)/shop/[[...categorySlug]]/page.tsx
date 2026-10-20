@@ -8,17 +8,26 @@ import {
   ALL_BRANDS_QUERY
 } from "@/lib/sanity/queries/brands";
 import {
+  PRODUCT_BY_SLUG_QUERY,
+  PRODUCTS_BY_CATEGORY_QUERY,
   FILTER_PRODUCTS_BY_NAME_QUERY,
   FILTER_PRODUCTS_BY_PRICE_ASC_QUERY,
   FILTER_PRODUCTS_BY_PRICE_DESC_QUERY,
   FILTER_PRODUCTS_BY_RELEVANCE_QUERY
 } from "@/lib/sanity/queries/products";
+import { ProductGallery } from "@/components/app/ProductGallery";
+import { ProductInfo } from "@/components/app/ProductInfo";
+import { ProductTabs } from "@/components/app/ProductTabs";
+import { ProductCard } from "@/components/app/ProductCard";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { absoluteUrl, buildProductDescription } from "@/lib/seo";
+import { breadcrumbJsonLd, productJsonLd } from "@/lib/structured-data";
 import { cleanCatalogProducts } from "@/lib/catalog/clean-products";
 import { ProductGrid } from "@/components/app/ProductGrid";
 import { ProductFilters } from "@/components/app/ProductFilters";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { SlidersHorizontal, ChevronDown } from "lucide-react";
+import { SlidersHorizontal, ChevronDown, ChevronRight } from "lucide-react";
 import { FoodBowlIcon, BoneIcon, TeddyBearIcon, CollarIcon, ScissorsBubblesIcon } from "@/components/app/CustomIcons";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -32,6 +41,44 @@ export async function generateMetadata(props: ProductsPageProps): Promise<Metada
   const categoryParam = (pathParams?.categorySlug?.[0]) || searchParams?.category;
   
   if (categoryParam) {
+    if (pathParams?.categorySlug?.length === 1) {
+      try {
+        const { data: product } = await sanityFetch({
+          query: PRODUCT_BY_SLUG_QUERY,
+          params: { slug: categoryParam },
+        });
+
+        if (product) {
+          const path = `/shop/${product.slug || categoryParam}`;
+          const productName = product.name || "Pet Product";
+          const description = buildProductDescription(product);
+          const imageUrl = product.images?.[0]?.asset?.url;
+
+          return {
+            title: `${productName} | Stephan's Pet Store - Dar es Salaam`,
+            description,
+            alternates: {
+              canonical: path,
+            },
+            openGraph: {
+              type: "website",
+              url: absoluteUrl(path),
+              title: `${productName} | Stephan's Pet Store`,
+              description,
+              images: imageUrl ? [{ url: imageUrl, alt: productName }] : undefined,
+            },
+            twitter: {
+              card: "summary_large_image",
+              title: `${productName} | Stephan's Pet Store`,
+              description,
+              images: imageUrl ? [imageUrl] : undefined,
+            },
+          };
+        }
+      } catch (e) {
+        // Fallback to category metadata
+      }
+    }
     const formattedCategory = categoryParam.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
     const rootCategoryTitles: Record<string, string> = {
       dogs: "Dog Supplies",
@@ -82,7 +129,105 @@ interface ProductsPageProps {
 export default async function ProductsPage(props: ProductsPageProps) {
   const searchParams = await props.searchParams;
   const pathParams = await props.params;
-  
+
+  // Single Product Route: /shop/[product-slug]
+  if (pathParams?.categorySlug?.length === 1 && !searchParams?.category) {
+    const candidateSlug = pathParams.categorySlug[0];
+    try {
+      const { data: product } = await sanityFetch({
+        query: PRODUCT_BY_SLUG_QUERY,
+        params: { slug: candidateSlug },
+      });
+
+      if (product) {
+        const category = product.categories?.[0];
+        let relatedProducts: any[] = [];
+        if (category?.slug) {
+          try {
+            const { data: relatedProductsRaw } = await sanityFetch({
+              query: PRODUCTS_BY_CATEGORY_QUERY,
+              params: { categorySlug: category.slug },
+            });
+            relatedProducts = (relatedProductsRaw || [])
+              .filter((p: any) => p._id !== product._id)
+              .slice(0, 4);
+          } catch (e) {
+            // ignore related error
+          }
+        }
+
+        const breadcrumbs = [
+          { name: "Home", url: "/" },
+          { name: "Shop", url: "/shop" },
+          ...(category ? [{ name: category.title, url: `/shop/${category.slug}` }] : []),
+          { name: product.name, url: `/shop/${product.slug || candidateSlug}` },
+        ];
+
+        return (
+          <div className="min-h-screen bg-zinc-50 dark:bg-zinc-900 pt-20">
+            <JsonLd data={[productJsonLd(product), breadcrumbJsonLd(breadcrumbs)]} />
+            <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 scale-[0.9] origin-top">
+              {/* Breadcrumbs */}
+              <div className="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400 mb-8 overflow-x-auto whitespace-nowrap scrollbar-hide">
+                <Link href="/" className="hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
+                  Home
+                </Link>
+                <ChevronRight className="w-4 h-4 flex-shrink-0" />
+                <Link href="/shop" className="hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
+                  Shop
+                </Link>
+                {category && (
+                  <>
+                    <ChevronRight className="w-4 h-4 flex-shrink-0" />
+                    <Link
+                      href={`/shop/${category.slug}`}
+                      className="hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors capitalize"
+                    >
+                      {category.title}
+                    </Link>
+                  </>
+                )}
+                <ChevronRight className="w-4 h-4 flex-shrink-0" />
+                <span className="font-medium text-zinc-900 dark:text-zinc-50 truncate">
+                  {product.name}
+                </span>
+              </div>
+
+              <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-16 relative items-start">
+                {/* Left Column: Image Gallery & Tabs */}
+                <div className="flex flex-col gap-12 min-w-0">
+                  <ProductGallery images={product.images} productName={product.name} />
+                  <ProductTabs product={product} />
+                </div>
+
+                {/* Right Column: Sticky Product Info */}
+                <div className="lg:sticky lg:top-24 h-fit">
+                  <ProductInfo product={product} />
+                </div>
+              </div>
+
+              {/* Related Products */}
+              {relatedProducts.length > 0 && (
+                <div className="mt-24 border-t border-zinc-200 dark:border-zinc-800 pt-16">
+                  <h2 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-8 uppercase text-center">
+                    You May Also Like
+                  </h2>
+                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                    {relatedProducts.map((related: any) => (
+                      <ProductCard key={related._id} product={related} />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      }
+    } catch (e) {
+      // Fall through to category list
+    }
+  }
+
   const { q, brand, color, sort, minPrice, maxPrice, inStock, page } = searchParams;
   const category = (pathParams?.categorySlug?.[0]) || searchParams.category;
   

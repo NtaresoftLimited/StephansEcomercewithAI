@@ -84,8 +84,8 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
 
   return (
     <div className="group relative h-full flex flex-col transition-all duration-300">
-      <div 
-        onClick={handleAddToCart}
+      <Link 
+        href={product.slug ? `/shop/${product.slug}` : "#"}
         className="cursor-pointer block relative flex-grow flex flex-col"
       >
         {/* Product Image */}
@@ -134,7 +134,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
             </span>
           </div>
         </div>
-      </div>
+      </Link>
 
       {/* Action Button: Shopping Bag icon on bottom right */}
       <button 
