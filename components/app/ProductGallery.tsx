@@ -3,6 +3,7 @@
 import { useState, useRef, MouseEvent } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { sanityImageUrl } from "@/lib/sanity-image";
 // import type { PRODUCT_BY_SLUG_QUERYResult } from "@/sanity.types";
 
 // type ProductImages = NonNullable<
@@ -60,7 +61,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
           {selectedImage?.asset?.url ? (
             <>
               <Image
-                src={selectedImage.asset.url}
+                src={sanityImageUrl(selectedImage.asset.url, 1000) ?? selectedImage.asset.url}
                 alt={productName ?? "Product image"}
                 fill
                 className={cn(
@@ -121,7 +122,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
             >
               {image.asset?.url ? (
                 <Image
-                  src={image.asset.url}
+                  src={sanityImageUrl(image.asset.url, 160) ?? image.asset.url}
                   alt={`${productName} thumbnail ${index + 1}`}
                   fill
                   className="object-contain p-2 transition-transform duration-300 group-hover:scale-110"

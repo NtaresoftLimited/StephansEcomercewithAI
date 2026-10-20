@@ -84,7 +84,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const categoryRoutes = categories
     .filter((category) => category.slug)
     .map((category) =>
-      toSitemapUrl(`/shop?category=${category.slug}`, category._updatedAt, "weekly", 0.8),
+      toSitemapUrl(`/shop/${category.slug}`, category._updatedAt, "weekly", 0.8),
     );
 
   return [...staticRoutes, ...productRoutes, ...brandRoutes, ...categoryRoutes];

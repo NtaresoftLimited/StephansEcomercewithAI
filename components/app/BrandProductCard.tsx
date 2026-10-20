@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { cn, formatPrice } from "@/lib/utils";
 import { useCartActions } from "@/lib/store/cart-store-provider";
 import { useWishlistActions, useIsInWishlist } from "@/lib/store/wishlist-store-provider";
+import { sanityImageUrl } from "@/lib/sanity-image";
 
 interface Product {
   _id: string;
@@ -42,7 +43,8 @@ export function BrandProductCard({ product }: BrandProductCardProps) {
   const isInWishlist = useIsInWishlist(product._id);
 
   const images = product.images ?? [];
-  const mainImageUrl = images[0]?.asset?.url;
+  const rawImageUrl = images[0]?.asset?.url;
+  const mainImageUrl = sanityImageUrl(rawImageUrl, 480) ?? rawImageUrl;
 
   const stock = product.stock ?? 0;
   const isOutOfStock = false;
