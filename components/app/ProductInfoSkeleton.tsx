@@ -23,8 +23,7 @@ export function ProductInfoSkeleton() {
         <Skeleton className="h-4 w-2/3" />
       </div>
 
-      {/* Stock Badge */}
-      <Skeleton className="h-6 w-20" />
+
 
       {/* Product Details */}
       <div className="space-y-3 border-t border-zinc-200 pt-6 dark:border-zinc-800">

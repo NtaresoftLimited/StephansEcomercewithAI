@@ -49,7 +49,7 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
     const images = product.images ?? [];
     const mainImage = images[currentImageIndex]?.asset?.url ?? images[0]?.asset?.url;
     const stock = product.stock ?? 100;
-    const isOutOfStock = stock <= 0;
+    const isOutOfStock = false;
 
     const handleAddToCart = () => {
         if (isOutOfStock) return;
@@ -185,16 +185,7 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
                             </p>
                         )}
 
-                        {/* Stock Status */}
-                        <div className="mt-4">
-                            {isOutOfStock ? (
-                                <span className="text-sm font-medium text-red-600">Out of Stock</span>
-                            ) : stock < 10 ? (
-                                <span className="text-sm font-medium text-amber-600">Only {stock} left!</span>
-                            ) : (
-                                <span className="text-sm font-medium text-green-600">In Stock</span>
-                            )}
-                        </div>
+                        
 
                         {/* Quantity Selector */}
                         {!isOutOfStock && (
@@ -212,7 +203,7 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
                                         {quantity}
                                     </span>
                                     <button
-                                        onClick={() => setQuantity((q) => Math.min(stock, q + 1))}
+                                        onClick={() => setQuantity((q) => q + 1)}
                                         className="flex h-10 w-10 items-center justify-center text-zinc-600 hover:bg-zinc-50"
                                         aria-label="Increase quantity"
                                     >
@@ -226,11 +217,11 @@ export function QuickViewModal({ product, isOpen, onClose }: QuickViewModalProps
                         <div className="mt-6 flex gap-3">
                             <Button
                                 onClick={handleAddToCart}
-                                disabled={isOutOfStock}
+                                
                                 className="flex-1 h-12 bg-[#c77e35] hover:bg-[#5a3318] text-white"
                             >
                                 <ShoppingCart className="mr-2 h-5 w-5" />
-                                {isOutOfStock ? "Out of Stock" : "Add to Cart"}
+                                Add to Cart
                             </Button>
                             <Button
                                 variant="outline"

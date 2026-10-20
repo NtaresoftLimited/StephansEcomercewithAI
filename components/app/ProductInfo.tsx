@@ -210,7 +210,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
                   <button
                     type="button"
                     className="px-3 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors border-l border-zinc-200 dark:border-zinc-800"
-                    onClick={() => setQuantity(prev => (currentStock > prev ? prev + 1 : prev))}
+                    onClick={() => setQuantity(prev => prev + 1)}
                   >
                     <span className="text-zinc-400 font-bold">+</span>
                   </button>
@@ -334,15 +334,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
                   <span className="text-sm font-extrabold text-[#D35122]">
                     {formatPrice(currentPrice)}
                   </span>
-                  {currentStock > 0 ? (
-                    <Badge variant="outline" className="text-[10px] h-4 bg-emerald-50 text-emerald-600 border-emerald-100 dark:bg-emerald-950/30 dark:text-emerald-400 dark:border-emerald-900/50">
-                      In Stock
-                    </Badge>
-                  ) : (
-                    <Badge variant="outline" className="text-[10px] h-4 bg-red-50 text-red-600 border-red-100 dark:bg-red-950/30 dark:text-red-400 dark:border-red-900/50">
-                      Out of Stock
-                    </Badge>
-                  )}
+                  
                 </div>
               </div>
             </div>
@@ -376,7 +368,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
                   <button
                     type="button"
                     className="px-2 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors border-l border-zinc-200 dark:border-zinc-800"
-                    onClick={() => setQuantity(prev => (currentStock > prev ? prev + 1 : prev))}
+                    onClick={() => setQuantity(prev => prev + 1)}
                   >
                     <Plus className="w-3 h-3 text-zinc-400" />
                   </button>

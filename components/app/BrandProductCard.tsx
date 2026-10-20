@@ -45,15 +45,12 @@ export function BrandProductCard({ product }: BrandProductCardProps) {
   const mainImageUrl = images[0]?.asset?.url;
 
   const stock = product.stock ?? 0;
-  const isOutOfStock = stock <= 0;
+  const isOutOfStock = false;
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (isOutOfStock) {
-      toast.error("Item is currently out of stock");
-      return;
-    }
+
     addItem({
       productId: product._id,
       name: product.name ?? "Product",
@@ -136,7 +133,7 @@ export function BrandProductCard({ product }: BrandProductCardProps) {
         <div className="w-1/2">
           <button 
             onClick={handleAddToCart}
-            disabled={isOutOfStock}
+            
             className="inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 px-3 w-full h-8 rounded-lg text-xs font-medium transition-all duration-200 bg-[#c77e35] hover:bg-[#5a3319] text-white"
           >
             <ShoppingBag className="h-3.5 w-3.5 text-white" />

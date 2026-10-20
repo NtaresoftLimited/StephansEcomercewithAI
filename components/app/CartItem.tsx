@@ -92,7 +92,7 @@ export function CartItem({ item, stockInfo }: CartItemProps) {
 
         {/* Stock Badge & Quantity Controls */}
         <div className="mt-2 flex flex-row justify-between items-center gap-2">
-          <StockBadge productId={item.productId} stock={currentStock} />
+          
           {!isOutOfStock && (
             <div className="w-32 flex self-end ml-auto">
               <AddToCartButton

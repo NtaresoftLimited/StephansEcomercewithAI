@@ -50,15 +50,12 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
   const mainImageUrl = images[0]?.asset?.url;
 
   const stock = product.stock ?? 0;
-  const isOutOfStock = stock <= 0;
+  const isOutOfStock = false;
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (isOutOfStock) {
-      toast.error("Item is currently out of stock");
-      return;
-    }
+
     addItem({
       productId: product._id,
       name: product.name ?? "Product",
@@ -142,7 +139,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
       {/* Action Button: Shopping Bag icon on bottom right */}
       <button 
         onClick={handleAddToCart}
-        disabled={isOutOfStock}
+        
         className="absolute bottom-0 right-0 z-20 p-2 rounded-full hover:bg-black/5 transition-colors duration-200 disabled:pointer-events-none disabled:opacity-50 text-[#222222]"
         aria-label="Add to cart"
       >

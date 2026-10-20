@@ -35,8 +35,8 @@ export function AddToCartButton({
   const router = useRouter();
 
   const quantityInCart = cartItem?.quantity ?? 0;
-  const isOutOfStock = stock <= 0;
-  const isAtMax = quantityInCart >= stock;
+  const isOutOfStock = false;
+  const isAtMax = false;
 
   const handleAdd = () => {
     addItem({ productId, name, price, image }, quantity);
@@ -45,9 +45,7 @@ export function AddToCartButton({
   };
 
   const handleIncrement = () => {
-    if (quantityInCart < stock) {
-      updateQuantity(productId, quantityInCart + 1);
-    }
+    updateQuantity(productId, quantityInCart + 1);
   };
 
   const handleDecrement = () => {
@@ -56,18 +54,7 @@ export function AddToCartButton({
     }
   };
 
-  // Out of stock
-  if (isOutOfStock) {
-    return (
-      <Button
-        disabled
-        variant="secondary"
-        className={cn("h-11 w-full", className)}
-      >
-        Out of Stock
-      </Button>
-    );
-  }
+
 
   // Not in cart OR showQuantityControls is false - show simple Add button
   if (quantityInCart === 0 || !showQuantityControls) {
@@ -103,7 +90,7 @@ export function AddToCartButton({
         size="icon"
         className="h-full flex-1 rounded-l-none disabled:opacity-20"
         onClick={handleIncrement}
-        disabled={isAtMax}
+        
       >
         <Plus className="h-4 w-4" />
       </Button>
