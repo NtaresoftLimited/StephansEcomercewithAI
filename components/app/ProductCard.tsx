@@ -46,6 +46,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
   const { toggleItem } = useWishlistActions();
   const isInWishlist = useIsInWishlist(product._id);
   const [imageError, setImageError] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const images = product.images ?? [];
   const rawImageUrl = images[0]?.asset?.url;
@@ -94,16 +95,25 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
         <div className="aspect-[4/5] sm:aspect-square w-full rounded-2xl bg-[#F4F1EA] flex items-center justify-center overflow-hidden p-6 md:p-8 mb-4">
           <div className="relative w-full h-full">
             {mainImageUrl && !imageError ? (
-              <Image 
-                alt={product.name ?? "Product"} 
-                src={mainImageUrl}
-                fill
-                priority={priority}
-                unoptimized
-                className="object-contain transition-transform duration-500 group-hover:scale-105 mix-blend-multiply"
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                onError={() => setImageError(true)}
-              />
+              <>
+                {!isLoaded && (
+                  <div className="absolute inset-0 rounded-xl bg-black/5 animate-pulse" />
+                )}
+                <Image 
+                  alt={product.name ?? "Product"} 
+                  src={mainImageUrl}
+                  fill
+                  priority={priority}
+                  unoptimized
+                  onLoad={() => setIsLoaded(true)}
+                  className={cn(
+                    "object-contain transition-all duration-500 group-hover:scale-105 mix-blend-multiply",
+                    isLoaded ? "opacity-100" : "opacity-0"
+                  )}
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  onError={() => setImageError(true)}
+                />
+              </>
             ) : (
               <div className="flex h-full flex-col items-center justify-center text-zinc-300 gap-2">
                 <PackageOpen className="w-8 h-8 text-zinc-200" strokeWidth={1} />

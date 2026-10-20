@@ -9,6 +9,6 @@ export const { sanityFetch, SanityLive } = defineLive({
   serverToken: process.env.SANITY_API_READ_TOKEN,
   browserToken: process.env.SANITY_API_READ_TOKEN,
   fetchOptions: {
-    revalidate: 60,
+    revalidate: 300,
   },
 });

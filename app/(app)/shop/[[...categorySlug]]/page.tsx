@@ -33,6 +33,8 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { odoo } from "@/lib/odoo/client";
 
+export const revalidate = 300;
+
 export async function generateMetadata(props: ProductsPageProps): Promise<Metadata> {
   const searchParams = await props.searchParams;
   const pathParams = await props.params;
@@ -307,23 +309,23 @@ export default async function ProductsPage(props: ProductsPageProps) {
   const productsResult = await sanityFetch({ query, params: queryParams });
   const sanityProducts = productsResult.data || [];
 
-  // Fetch Odoo Products
-  let odooProductsUnfiltered: any[] = [];
-  try {
-    odooProductsUnfiltered = await odoo.getOdooShopProducts(odooCategories || []);
-  } catch (error) {
-    console.error("Failed to fetch Odoo products:", error);
+  // Fetch Odoo Products (Fallback only if Sanity returns no products, avoiding heavy network delay)
+  let odooProducts: any[] = [];
+  if (sanityProducts.length === 0) {
+    try {
+      const odooProductsUnfiltered = await odoo.getOdooShopProducts(odooCategories || []);
+      odooProducts = odooProductsUnfiltered.filter((p: any) => {
+        if (q && !p.name?.toLowerCase().includes(q.toLowerCase())) return false;
+        if (category) { const t = category.endsWith('s') ? category.slice(0,-1) : category; if (!p.categories.some((c: any) => c.slug === category || c.slug.includes(t) || c.title?.toLowerCase().includes(t)) && !p.name?.toLowerCase().includes(t)) return false; }
+        if (inStock && p.stock <= 0) return false;
+        if (minPrice && p.price < Number(minPrice)) return false;
+        if (maxPrice && p.price > Number(maxPrice)) return false;
+        return true;
+      });
+    } catch (error) {
+      console.error("Failed to fetch Odoo fallback products:", error);
+    }
   }
-
-  // Filter Odoo Products manually to match the query params
-  const odooProducts = odooProductsUnfiltered.filter((p: any) => {
-    if (q && !p.name?.toLowerCase().includes(q.toLowerCase())) return false;
-    if (category) { const t = category.endsWith('s') ? category.slice(0,-1) : category; if (!p.categories.some((c: any) => c.slug === category || c.slug.includes(t) || c.title?.toLowerCase().includes(t)) && !p.name?.toLowerCase().includes(t)) return false; }
-    if (inStock && p.stock <= 0) return false;
-    if (minPrice && p.price < Number(minPrice)) return false;
-    if (maxPrice && p.price > Number(maxPrice)) return false;
-    return true;
-  });
   
   // Build Breadcrumbs from Odoo display_name (e.g., "Dogs / Grooming / Nail Care")
   let breadcrumbs: string[] = [];

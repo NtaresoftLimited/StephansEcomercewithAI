@@ -23,7 +23,7 @@ import { CategoryNavigationSection } from "@/components/app/CategoryNavigationSe
 
 import { NewsletterSection } from "@/components/app/grooming/NewsletterSection";
 
-export const revalidate = 60;
+export const revalidate = 300;
 
 interface PageProps {
   searchParams: Promise<{
