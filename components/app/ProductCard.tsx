@@ -51,6 +51,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
   const images = product.images ?? [];
   const rawImageUrl = images[0]?.asset?.url;
   const mainImageUrl = sanityImageUrl(rawImageUrl, 480) ?? rawImageUrl;
+  const productSlug = typeof product.slug === "string" ? product.slug : (product.slug as any)?.current || "";
 
   const stock = product.stock ?? 0;
   const isOutOfStock = false;
@@ -88,7 +89,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
   return (
     <div className="group relative h-full flex flex-col transition-all duration-300">
       <Link 
-        href={product.slug ? `/shop/${product.slug}` : "#"}
+        href={productSlug ? `/shop/${productSlug}` : "#"}
         className="cursor-pointer block relative flex-grow flex flex-col"
       >
         {/* Product Image */}
@@ -135,7 +136,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
             )}
             {product.categories && product.categories.length > 0 && (
               <p className="text-[11px] text-zinc-500 line-clamp-1">
-                {product.categories.map((c: any) => c.title || c.name).filter(Boolean).join(", ")}
+                {product.categories.map((c: any) => c?.title || c?.name).filter(Boolean).join(", ")}
               </p>
             )}
           </div>

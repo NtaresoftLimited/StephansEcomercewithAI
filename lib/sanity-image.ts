@@ -8,7 +8,7 @@ export function sanityImageUrl(
   width = 600,
   quality = 75,
 ): string | undefined {
-  if (!url) return undefined;
+  if (typeof url !== "string" || !url) return undefined;
   if (!url.includes("cdn.sanity.io/images/")) return url;
   if (url.includes("?")) return url;
   return `${url}?w=${width}&fit=max&auto=format&q=${quality}`;
