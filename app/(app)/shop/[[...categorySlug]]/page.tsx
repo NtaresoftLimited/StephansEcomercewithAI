@@ -24,10 +24,7 @@ import { absoluteUrl, buildProductDescription } from "@/lib/seo";
 import { breadcrumbJsonLd, productJsonLd } from "@/lib/structured-data";
 import { cleanCatalogProducts } from "@/lib/catalog/clean-products";
 import { ProductGrid } from "@/components/app/ProductGrid";
-import { ProductFilters } from "@/components/app/ProductFilters";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { SlidersHorizontal, ChevronDown, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { FoodBowlIcon, BoneIcon, TeddyBearIcon, CollarIcon, ScissorsBubblesIcon } from "@/components/app/CustomIcons";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -425,28 +422,6 @@ export default async function ProductsPage(props: ProductsPageProps) {
           <div>
             <h2 className="text-2xl font-serif text-[#222222] mb-1">All Products</h2>
             <p className="text-sm text-zinc-500 font-medium">Showing {combinedProducts.length} products</p>
-          </div>
-
-          <div className="flex items-center gap-3 w-full sm:w-auto">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="outline" className="flex-1 sm:flex-none border-[#EAE3D9] bg-transparent hover:bg-white rounded-full h-10 px-6 flex items-center gap-2 text-[#4E2A15]">
-                  <SlidersHorizontal className="w-4 h-4" />
-                  <span className="font-semibold text-sm">Filter</span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px] overflow-y-auto">
-                <SheetHeader className="mb-6">
-                  <SheetTitle className="font-serif text-2xl">Filters</SheetTitle>
-                </SheetHeader>
-                <ProductFilters categories={allCategories} brands={brands} />
-              </SheetContent>
-            </Sheet>
-
-            <Button variant="outline" className="flex-1 sm:flex-none border-[#EAE3D9] bg-transparent hover:bg-white rounded-full h-10 px-6 flex items-center justify-between gap-3 min-w-[200px] text-[#4E2A15]">
-              <span className="font-semibold text-sm">Sort by: <span className="font-normal">Featured</span></span>
-              <ChevronDown className="w-4 h-4" />
-            </Button>
           </div>
         </div>
 
