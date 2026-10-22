@@ -177,6 +177,42 @@ export function ProductInfo({ product }: ProductInfoProps) {
       {/* Purchase Box - CMS Style */}
       <div ref={purchaseBoxRef} className="border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 mb-8 bg-white dark:bg-zinc-900/30 shadow-sm transition-all hover:shadow-md">
         <div className="flex flex-col gap-4">
+                    {/* Variant / Size Selector */}
+          {variants.length > 0 && (
+            <div className="flex flex-col gap-2 pb-3 border-b border-zinc-100 dark:border-zinc-800">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold uppercase tracking-wider text-zinc-500">
+                  Select Size: <span className="text-zinc-900 dark:text-zinc-100 font-extrabold">{selectedVariant?.name || "Choose Size"}</span>
+                </span>
+                {selectedVariant?.weight && (
+                  <span className="text-[11px] font-medium text-zinc-500 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded">
+                    {selectedVariant.weight}
+                  </span>
+                )}
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {variants.map((v: any) => {
+                  const isSelected = (v._key || v.name) === (selectedVariant?._key || selectedVariantId);
+                  return (
+                    <button
+                      key={v._key || v.name}
+                      type="button"
+                      onClick={() => setSelectedVariantId(v._key || v.name)}
+                      className={cn(
+                        "px-3.5 py-2 rounded-lg text-xs font-bold border transition-all duration-200",
+                        isSelected
+                          ? "bg-[#1A1A1E] text-white border-[#1A1A1E] shadow-sm scale-[1.02]"
+                          : "bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 border-zinc-200 dark:border-zinc-700 hover:border-zinc-400"
+                      )}
+                    >
+                      {v.name}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
           {/* Header Row: Price and QTY */}
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div className="flex flex-col">
@@ -219,7 +255,8 @@ export function ProductInfo({ product }: ProductInfoProps) {
               <button
                 onClick={() => {
                   const pageUrl = typeof window !== 'undefined' ? window.location.href : '';
-                  const msg = encodeURIComponent(`Hi, I would like to order: ${product.name} - ${pageUrl}`);
+                  const variantText = selectedVariant ? ` (Size: ${selectedVariant.name})` : '';
+                  const msg = encodeURIComponent(`Hi, I would like to order: ${product.name}${variantText} - ${pageUrl}`);
                   window.open(`https://wa.me/255769324445?text=${msg}`, '_blank');
                 }}
                 className="flex items-center gap-1.5 text-[#25D366] hover:opacity-80 transition-all group"
@@ -244,11 +281,12 @@ export function ProductInfo({ product }: ProductInfoProps) {
               Buy Now
             </button>
             <AddToCartButton
-              productId={product._id}
-              name={product.name ?? "Unknown Product"}
+              productId={selectedVariant ? `${product._id}-${selectedVariant._key || selectedVariant.name}` : product._id}
+              name={selectedVariant ? `${product.name} (${selectedVariant.name})` : (product.name ?? "Unknown Product")}
               price={currentPrice}
               image={imageUrl ?? undefined}
               stock={currentStock ?? 0}
+              quantity={quantity}
               className="h-14 flex-1 text-sm font-bold tracking-widest uppercase bg-[#E8F3FF] text-[#0080FF] hover:bg-[#D8E9FF] rounded-lg shadow-none transition-all active:scale-[0.98]"
             />
           </div>

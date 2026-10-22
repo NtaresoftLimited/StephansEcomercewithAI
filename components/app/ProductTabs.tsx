@@ -44,7 +44,7 @@ export function ProductTabs({ product }: ProductTabsProps) {
                 {activeTab === "description" && (
                     <div className="prose prose-sm md:prose-base prose-zinc dark:prose-invert max-w-none text-zinc-600 dark:text-zinc-400 leading-relaxed animate-in fade-in slide-in-from-bottom-2">
                         {product.description ? (
-                            <p>{product.description}</p>
+                            <div className="whitespace-pre-line leading-relaxed space-y-3">{product.description}</div>
                         ) : (
                             <p className="italic text-zinc-400">No description available for this product.</p>
                         )}
