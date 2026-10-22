@@ -3,11 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ShoppingBag, Heart } from "lucide-react";
-import { toast } from "sonner";
 import { cn, formatPrice } from "@/lib/utils";
-import { useCartActions } from "@/lib/store/cart-store-provider";
-import { useWishlistActions, useIsInWishlist } from "@/lib/store/wishlist-store-provider";
 import { PackageOpen } from "lucide-react";
 import { sanityImageUrl } from "@/lib/sanity-image";
 
@@ -42,9 +38,6 @@ interface ProductCardProps {
 
 
 export function ProductCard({ product, priority = false }: ProductCardProps) {
-  const { addItem } = useCartActions();
-  const { toggleItem } = useWishlistActions();
-  const isInWishlist = useIsInWishlist(product._id);
   const [imageError, setImageError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -53,38 +46,6 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
   const mainImageUrl = sanityImageUrl(rawImageUrl, 480) ?? rawImageUrl;
   const productSlug = typeof product.slug === "string" ? product.slug : (product.slug as any)?.current || "";
 
-  const stock = product.stock ?? 0;
-  const isOutOfStock = false;
-
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    addItem({
-      productId: product._id,
-      name: product.name ?? "Product",
-      price: product.price ?? 0,
-      image: mainImageUrl ?? undefined,
-    });
-    toast.success("Added to cart");
-  };
-
-  const handleToggleWishlist = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const added = toggleItem({
-      productId: product._id,
-      name: product.name ?? "Product",
-      price: product.price ?? 0,
-      image: mainImageUrl ?? undefined,
-      slug: product.slug ?? "",
-    });
-    if (added) {
-      toast.success("Added to wishlist!");
-    } else {
-      toast.info("Removed from wishlist");
-    }
-  };
 
   return (
     <div className="group relative h-full flex flex-col transition-all duration-300">
@@ -148,18 +109,6 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           </div>
         </div>
       </Link>
-
-      {/* Action Button: Shopping Bag icon on bottom right */}
-      <button 
-        onClick={handleAddToCart}
-        
-        className="absolute bottom-0 right-0 z-20 p-2 rounded-full hover:bg-black/5 transition-colors duration-200 disabled:pointer-events-none disabled:opacity-50 text-[#222222]"
-        aria-label="Add to cart"
-      >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-           <path d="M16 11V7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7V11M5 9H19L20 21H4L5 9Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-      </button>
     </div>
   );
 }
