@@ -2,7 +2,7 @@
 /**
  * Odoo JSON-RPC Client for integration
  * Uses fresh authentication for each request to avoid stale session issues
- * in serverless environments (Vercel).
+ * in serverless / edge environments.
  */
 
 const ODOO_URL = process.env.ODOO_URL || "https://erp.stephanspetstore.co.tz";
@@ -127,7 +127,7 @@ export class OdooClient {
             if (data.error) {
                 const errMsg = data.error.data?.message || data.error.message || JSON.stringify(data.error);
                 console.error(`❌ Odoo Business Error [${model}.${method}]:`, errMsg);
-                // Log the full error for debugging in Vercel logs
+                // Log the full error for debugging in server logs
                 console.log(`🔍 Raw Odoo Error Data: ${JSON.stringify(data.error).substring(0, 500)}`);
                 throw new Error(errMsg);
             }

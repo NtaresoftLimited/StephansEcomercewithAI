@@ -520,29 +520,18 @@ export function createGetMyOrdersTool(userId: string | null) {
 
 ## 🚢 Deployment
 
-### Deploy to Vercel
+### Deploy to Cloudflare Pages
 
-#### Option 1: Vercel CLI
-
-```bash
-# Install Vercel CLI
-pnpm install -g vercel
-
-# Deploy
-vercel
-```
-
-#### Option 2: GitHub Integration
-
-1. Push your code to GitHub
-2. Go to [vercel.com/new](https://vercel.com/new)
-3. Import your repository
-4. Add environment variables
-5. Deploy!
+1. Push your code to GitHub (`preview` or `main`)
+2. In Cloudflare Dashboard, navigate to **Workers & Pages** -> **Create application** -> **Pages** -> **Connect to Git**
+3. Select your repository
+4. Framework preset: **Next.js**
+5. Add your environment variables under **Settings** -> **Environment variables**
+6. Deploy!
 
 ### Post-Deployment Checklist
 
-- [ ] All environment variables set in Vercel dashboard
+- [ ] All environment variables set in Cloudflare Pages dashboard
 - [ ] Update Stripe webhook URL to production: `https://yourdomain.com/api/webhooks/stripe`
 - [ ] Add production domain to Clerk allowed origins
 - [ ] Add production domain to Sanity CORS origins
@@ -550,7 +539,7 @@ vercel
 
 ### Monitoring
 
-- **Vercel Analytics** — Performance and usage metrics
+- **Cloudflare Web Analytics** — Performance and traffic metrics
 - **Sanity Studio** — Content management at `/studio`
 - **Stripe Dashboard** — Payment monitoring
 - **Clerk Dashboard** — User analytics

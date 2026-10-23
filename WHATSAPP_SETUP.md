@@ -4,7 +4,7 @@ This application uses UltraMsg API to send WhatsApp confirmation messages for gr
 
 ## Required Environment Variables
 
-Add these to your `.env.local` file (and Vercel environment variables for production):
+Add these to your `.env.local` file (and Cloudflare Pages environment variables for production):
 
 ```bash
 # UltraMsg WhatsApp API
@@ -82,10 +82,10 @@ If WhatsApp messages aren't sending:
 
 ## Production Deployment
 
-When deploying to Vercel:
+When deploying to Cloudflare Pages:
 
-1. Go to Vercel project settings
-2. Navigate to Environment Variables
+1. Go to Cloudflare Dashboard -> Workers & Pages -> your project
+2. Navigate to Settings -> Environment Variables
 3. Add the UltraMsg credentials:
    - `ULTRAMSG_INSTANCE_ID`
    - `ULTRAMSG_TOKEN`

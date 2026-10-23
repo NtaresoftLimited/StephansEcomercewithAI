@@ -219,11 +219,13 @@ export async function POST(request: Request) {
 export async function GET(request: Request) {
     const url = new URL(request.url);
     const secret = url.searchParams.get("secret");
-    const cronHeader = request.headers.get("x-vercel-cron");
+    const cronHeader = request.headers.get("cf-cron-trigger") || request.headers.get("x-cron-trigger") || request.headers.get("x-vercel-cron");
+    const authHeader = request.headers.get("authorization");
     const cronSecret = process.env.CRON_SECRET;
 
-    // For manual browser trigger, check secret
-    const authorized = (cronHeader && cronHeader.length > 0) || (cronSecret && secret === cronSecret);
+    // For manual browser or cron trigger, check secret or bearer token
+    const isBearerAuthorized = cronSecret ? authHeader === `Bearer ${cronSecret}` : false;
+    const authorized = (cronHeader && cronHeader.length > 0) || (cronSecret && secret === cronSecret) || isBearerAuthorized;
 
     if (!authorized && process.env.NODE_ENV === "production") {
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
