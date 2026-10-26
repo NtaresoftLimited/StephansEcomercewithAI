@@ -3,13 +3,7 @@
 import {
   AlertTriangle,
   ArrowRight,
-  Award,
-  Headphones,
-  Heart,
-  Leaf,
   Search,
-  ShieldCheck,
-  Truck,
   X,
 } from "lucide-react";
 import Image from "next/image";
@@ -19,18 +13,6 @@ import { CartItem } from "@/components/app/CartItem";
 import { CartSummary } from "@/components/app/CartSummary";
 import { useCartStock } from "@/lib/hooks/useCartStock";
 import { useCartItems, useTotalItems } from "@/lib/store/cart-store-provider";
-
-const leftPromises = [
-  { icon: Award, label: "Premium\nQuality" },
-  { icon: Heart, label: "Trusted by\nPet Parents" },
-  { icon: Truck, label: "Reliable\nDelivery" },
-];
-
-const rightPromises = [
-  { icon: Leaf, label: "Carefully Selected\nProducts" },
-  { icon: ShieldCheck, label: "Safe & Secure\nCheckout" },
-  { icon: Headphones, label: "We're Here to Help\nAlways" },
-];
 
 export function CartPageClient() {
   const items = useCartItems();
@@ -57,21 +39,6 @@ export function CartPageClient() {
               Premium products, trusted brands, and exceptional care for happy
               pets and happy homes.
             </p>
-          </div>
-
-          {/* Bottom: Left Promises */}
-          <div className="grid grid-cols-3 divide-x divide-[#d8d2c6] pt-8">
-            {leftPromises.map((promise, i) => (
-              <div
-                key={i}
-                className={`flex flex-col items-start justify-start text-left ${i === 0 ? 'pr-4' : 'px-4'}`}
-              >
-                <promise.icon className="mb-3 h-6 w-6 text-[#2d2a24] stroke-[1.5]" />
-                <span className="whitespace-pre-line text-[12px] font-medium text-[#4a453e]">
-                  {promise.label}
-                </span>
-              </div>
-            ))}
           </div>
         </aside>
       </div>
@@ -160,23 +127,6 @@ export function CartPageClient() {
             <div className="mt-10 border-t border-[#e6e2d8] pt-8">
               <CartSummary hasStockIssues={hasStockIssues} />
             </div>
-          </div>
-        )}
-
-        {/* Bottom Right Promises */}
-        {items.length === 0 && (
-          <div className="mt-16 grid grid-cols-3 divide-x divide-[#d8d2c6] border-t border-[#e6e2d8] pt-10">
-            {rightPromises.map((promise, i) => (
-              <div
-                key={i}
-                className={`flex flex-col items-start justify-start text-left ${i === 0 ? 'pr-4' : 'px-4'}`}
-              >
-                <promise.icon className="mb-3 h-6 w-6 text-[#2d2a24] stroke-[1.5]" />
-                <span className="whitespace-pre-line text-[11px] font-medium text-[#4a453e]">
-                  {promise.label}
-                </span>
-              </div>
-            ))}
           </div>
         )}
       </div>
