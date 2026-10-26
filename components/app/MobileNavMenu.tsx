@@ -119,7 +119,7 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
       icon: "/icons/minimalist-bird.png",
       data: DEEP_NAV_MENU.birds,
       href: "/shop?category=birds",
-      iconClass: "scale-125",
+      iconClass: "",
     },
     {
       id: "smallPets",
@@ -127,7 +127,7 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
       icon: "/icons/minimalist-rabbit.png",
       data: DEEP_NAV_MENU.smallPets,
       href: "/shop?category=small-pets",
-      iconClass: "scale-125",
+      iconClass: "",
     },
   ];
 

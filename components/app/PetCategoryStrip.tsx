@@ -6,25 +6,25 @@ const petCategories = [
     name: "Dogs",
     href: "/shop?category=dogs",
     icon: "/icons/minimalist-dog.png",
-    imageClassName: "scale-[1.2]",
+    imageClassName: "scale-[1.15]",
   },
   {
     name: "Cats",
     href: "/shop?category=cats",
     icon: "/icons/minimalist-cat.png",
-    imageClassName: "scale-[1.2]",
+    imageClassName: "scale-[1.15]",
   },
   {
     name: "Small Animals",
     href: "/shop?category=small-pets",
-    icon: "/icons/small-animal-new.png",
-    imageClassName: "scale-[1.4]",
+    icon: "/icons/minimalist-rabbit.png",
+    imageClassName: "scale-[1.15]",
   },
   {
     name: "Birds",
     href: "/shop?category=birds",
-    icon: "/icons/birds-new.png",
-    imageClassName: "scale-[1.5]",
+    icon: "/icons/minimalist-bird.png",
+    imageClassName: "scale-[1.15]",
   },
 ] as const;
 
@@ -49,7 +49,7 @@ export function PetCategoryStrip() {
                   alt=""
                   fill
                   sizes="(max-width: 640px) 56px, 64px"
-                  className={`object-contain transition-transform duration-300 group-hover:-translate-y-1 mix-blend-multiply ${category.imageClassName}`}
+                  className={`object-contain transition-transform duration-300 group-hover:-translate-y-1 ${category.imageClassName}`}
                 />
               </span>
               <span className="text-[11px] font-bold uppercase tracking-[0.13em] text-[#28231f] sm:text-xs">
