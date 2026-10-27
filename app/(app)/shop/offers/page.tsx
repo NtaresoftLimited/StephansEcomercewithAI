@@ -58,7 +58,7 @@ export default async function OffersPage({ searchParams }: PageProps) {
   };
 
   const [productsResult, categoriesResult, brandsResult] = await Promise.all([
-    sanityFetch({ query: getQuery(), params: { searchQuery, categorySlug, color, material, minPrice, maxPrice, inStock } }),
+    sanityFetch({ query: getQuery(), params: { searchQuery, categorySlug, categoryLeafSlug: "", brandSlug: "", color, material, minPrice, maxPrice, inStock } }),
     sanityFetch({ query: ALL_CATEGORIES_QUERY }),
     sanityFetch({ query: ALL_BRANDS_QUERY }),
   ]);

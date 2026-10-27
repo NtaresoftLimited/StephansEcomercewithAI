@@ -80,6 +80,7 @@ export default async function HomePage({ searchParams }: PageProps) {
     params: {
       searchQuery,
       categorySlug,
+      categoryLeafSlug: "",
       brandSlug: "",
       color,
       material,
@@ -87,7 +88,10 @@ export default async function HomePage({ searchParams }: PageProps) {
       maxPrice,
       inStock,
     },
-  }).then((r: any) => r?.data as any[]).catch(() => [] as any[]);
+  }).then((r: any) => r?.data as any[]).catch((e: any) => {
+    console.error("Sanity fetch failed in HomePage:", e);
+    return [] as any[];
+  });
 
   let odooProducts: any[] = [];
   try {
