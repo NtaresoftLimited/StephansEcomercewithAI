@@ -1,12 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { Heart, ShoppingCart, Eye } from "lucide-react";
-import { cn, formatPrice } from "@/lib/utils";
-import { useCartActions } from "@/lib/store/cart-store-provider";
-import { useWishlistActions, useIsInWishlist } from "@/lib/store/wishlist-store-provider";
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 import { ProductCard } from "@/components/app/ProductCard";
 
 interface Product {
@@ -16,7 +11,7 @@ interface Product {
     price: number | null;
     description?: string | null;
     images: Array<{
-        _key: string; // Updated to match ProductCard expectations
+        _key: string;
         asset: {
             url: string | null;
         } | null;
@@ -39,54 +34,53 @@ interface AutoRotatingProductGridProps {
 
 export function AutoRotatingProductGrid({ products }: AutoRotatingProductGridProps) {
     const [currentPage, setCurrentPage] = useState(0);
-    const [timeLeft, setTimeLeft] = useState(30);
     const [isTransitioning, setIsTransitioning] = useState(false);
+    const [isPaused, setIsPaused] = useState(false);
 
-    // Use products in the exact order they were provided
-    const sortedProducts = products;
+    // Grid configuration: 4 items per page / rotation
+    const ITEMS_PER_PAGE = 4;
+    const totalPages = Math.ceil(products.length / ITEMS_PER_PAGE);
 
-    // Grid configuration
-    const ITEMS_PER_PAGE = 4; // Show 4 items per page
-    const totalPages = Math.ceil(sortedProducts.length / ITEMS_PER_PAGE);
-
-    // Auto-rotation effect
+    // Auto-rotation effect: changes every 20 seconds
     useEffect(() => {
-        if (sortedProducts.length <= ITEMS_PER_PAGE) return;
+        if (totalPages <= 1 || isPaused) return;
 
-        const timer = setInterval(() => {
-            setTimeLeft((prev) => {
-                if (prev <= 1) {
-                    handlePageChange((currentPage + 1) % totalPages);
-                    return 10; // slightly faster rotation for fewer items? or keep 30. Let's keep 30
-                }
-                return prev - 1;
-            });
-        }, 1000); // tick every second
+        const interval = setInterval(() => {
+            setIsTransitioning(true);
+            setTimeout(() => {
+                setCurrentPage((prev) => (prev + 1) % totalPages);
+                setIsTransitioning(false);
+            }, 300); // 300ms fade transition
+        }, 20000); // Exactly 20 seconds
 
-        return () => clearInterval(timer);
-    }, [currentPage, totalPages, sortedProducts.length]);
+        return () => clearInterval(interval);
+    }, [totalPages, isPaused]);
 
     const handlePageChange = (newPage: number) => {
+        if (newPage === currentPage) return;
         setIsTransitioning(true);
         setTimeout(() => {
             setCurrentPage(newPage);
             setIsTransitioning(false);
-            setTimeLeft(30);
-        }, 300); // Wait for fade out
+        }, 300);
     };
 
     // Current slice of products
-    const currentProducts = sortedProducts.slice(
+    const currentProducts = products.slice(
         currentPage * ITEMS_PER_PAGE,
         (currentPage + 1) * ITEMS_PER_PAGE
     );
 
-    if (sortedProducts.length === 0) {
+    if (products.length === 0) {
         return null;
     }
 
     return (
-        <div className="w-full">
+        <div 
+            className="w-full"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+        >
             {/* Grid */}
             <div
                 className={cn(
@@ -99,7 +93,25 @@ export function AutoRotatingProductGrid({ products }: AutoRotatingProductGridPro
                 ))}
             </div>
 
-            {/* Pagination Dots removed per request */}
+            {/* Subtle rotation page indicators */}
+            {totalPages > 1 && (
+                <div className="mt-8 flex justify-center items-center gap-2">
+                    {Array.from({ length: totalPages }).map((_, idx) => (
+                        <button
+                            key={idx}
+                            type="button"
+                            onClick={() => handlePageChange(idx)}
+                            aria-label={`Go to slide ${idx + 1}`}
+                            className={cn(
+                                "h-1.5 rounded-full transition-all duration-300",
+                                idx === currentPage 
+                                    ? "w-6 bg-[#3e220f]" 
+                                    : "w-1.5 bg-[#eae3d9] hover:bg-[#c77e35]"
+                            )}
+                        />
+                    ))}
+                </div>
+            )}
         </div>
     );
 }

@@ -17,6 +17,7 @@ import { HeroSection } from "@/components/app/HeroSection";
 import { PetCategoryStrip } from "@/components/app/PetCategoryStrip";
 import { GroomingSection } from "@/components/app/GroomingSection";
 import { ProductCard } from "@/components/app/ProductCard";
+import { AutoRotatingProductGrid } from "@/components/app/AutoRotatingProductGrid";
 import { ReviewsSection } from "@/components/app/ReviewsSection";
 import { BrandsSection } from "@/components/app/BrandsSection";
 import { CategoryNavigationSection } from "@/components/app/CategoryNavigationSection";
@@ -168,16 +169,35 @@ export default async function HomePage({ searchParams }: PageProps) {
       return null;
     };
 
-    const p1 = getUniqueProduct(dogs, others);
-    if (p1) selected.push(p1);
-    const p2 = getUniqueProduct(cats, others);
-    if (p2) selected.push(p2);
-    const p3 = getUniqueProduct(smalls, others);
-    if (p3) selected.push(p3);
-    const p4 = getUniqueProduct(birdsGrooming, others);
-    if (p4) selected.push(p4);
+    const balancedProducts: any[] = [];
+    const maxRounds = 5; // Up to 5 slides (20 products) rotating every 20s
+    for (let r = 0; r < maxRounds; r++) {
+      const p1 = getUniqueProduct(dogs, others);
+      const p2 = getUniqueProduct(cats, others);
+      const p3 = getUniqueProduct(smalls, others);
+      const p4 = getUniqueProduct(birdsGrooming, others);
 
-    products = selected;
+      const round = [p1, p2, p3, p4].filter(Boolean);
+      if (round.length === 4) {
+        balancedProducts.push(...round);
+      } else {
+        break;
+      }
+    }
+
+    if (balancedProducts.length >= 8) {
+      products = balancedProducts;
+    } else {
+      const p1 = getUniqueProduct(dogs, others);
+      if (p1) selected.push(p1);
+      const p2 = getUniqueProduct(cats, others);
+      if (p2) selected.push(p2);
+      const p3 = getUniqueProduct(smalls, others);
+      if (p3) selected.push(p3);
+      const p4 = getUniqueProduct(birdsGrooming, others);
+      if (p4) selected.push(p4);
+      products = selected.length > 0 ? selected : products;
+    }
   }
 
   // Fetch categories, pet images, and grooming images in parallel
@@ -222,11 +242,7 @@ export default async function HomePage({ searchParams }: PageProps) {
               Something new, thoughtfully chosen.
             </h2>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {products.slice(0, 4).map((product) => (
-              <ProductCard key={product._id} product={product} />
-            ))}
-          </div>
+          <AutoRotatingProductGrid products={products} />
           
           <div className="mt-12 flex justify-center">
             <Link href="/shop" className="inline-flex items-center justify-center px-8 py-3 rounded-md border border-[#dddddd] hover:border-[#222222] transition-colors text-sm font-semibold text-[#222222] gap-2">
