@@ -54,7 +54,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
         className="cursor-pointer block relative flex-grow flex flex-col"
       >
         {/* Product Image */}
-        <div className="aspect-[4/5] sm:aspect-square w-full rounded-2xl bg-[#F4F1EA] flex items-center justify-center overflow-hidden p-6 md:p-8 mb-4">
+        <div className="aspect-[4/5] sm:aspect-square w-full rounded-2xl bg-white border border-[#EAE3D9] flex items-center justify-center overflow-hidden p-6 md:p-8 mb-4 shadow-sm">
           <div className="relative w-full h-full">
             {mainImageUrl && !imageError ? (
               <>

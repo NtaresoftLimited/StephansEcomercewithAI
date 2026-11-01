@@ -101,7 +101,7 @@ export default function WishlistPage() {
                 {/* Image */}
                 <Link
                   href={item.slug ? `/shop/${item.slug}` : "/shop"}
-                  className="aspect-square w-full rounded-xl bg-[#F4F1EA] flex items-center justify-center overflow-hidden mb-3 relative"
+                  className="aspect-square w-full rounded-xl bg-white border border-[#EAE3D9] flex items-center justify-center overflow-hidden mb-3 relative"
                 >
                   {item.image ? (
                     <Image
