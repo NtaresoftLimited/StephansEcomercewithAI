@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
-import { Check, Star, RefreshCw, Info, MessageCircle, Users, Heart, Share2, Truck, ShieldCheck, RotateCcw, CreditCard, ExternalLink, ShoppingBag, Minus, Plus } from "lucide-react";
+import { Check, Star, RefreshCw, Info, MessageCircle, Heart, Share2, Truck, ShieldCheck, RotateCcw, CreditCard, ExternalLink, ShoppingBag, Minus, Plus } from "lucide-react";
 import { AddToCartButton } from "@/components/app/AddToCartButton";
 import { AskAISimilarButton } from "@/components/app/AskAISimilarButton";
 import { StockBadge } from "@/components/app/StockBadge";
@@ -20,8 +20,6 @@ export function ProductInfo({ product }: ProductInfoProps) {
     product.variants?.[0]?._key || null
   );
 
-  // Live Visitors state
-  const [liveVisitors, setLiveVisitors] = useState<number | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [showStickyBar, setShowStickyBar] = useState(false);
@@ -30,28 +28,14 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
   useEffect(() => {
     setMounted(true);
-    // Generate a random initial number between 15 and 45
-    setLiveVisitors(Math.floor(Math.random() * 30) + 15);
 
-    // Randomly update the number every 5-15 seconds to simulate activity
-    const interval = setInterval(() => {
-      setLiveVisitors(prev => {
-        if (!prev) return 20;
-        const change = Math.random() > 0.5 ? 1 : -1;
-        // Keep between 10 and 50
-        return Math.max(10, Math.min(50, prev + change * Math.floor(Math.random() * 3 + 1)));
-      });
-    }, Math.floor(Math.random() * 10000) + 5000);
-
-    // Intersection Observer for sticky bar visibility
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Show sticky bar when the purchase box is NOT visible (scrolled past)
         setShowStickyBar(!entry.isIntersecting);
       },
       {
         threshold: 0,
-        rootMargin: "-100px 0px 0px 0px" // Trigger slightly before it's completely gone
+        rootMargin: "-100px 0px 0px 0px",
       }
     );
 
@@ -60,7 +44,6 @@ export function ProductInfo({ product }: ProductInfoProps) {
     }
 
     return () => {
-      clearInterval(interval);
       if (purchaseBoxRef.current) {
         observer.unobserve(purchaseBoxRef.current);
       }
@@ -128,18 +111,6 @@ export function ProductInfo({ product }: ProductInfoProps) {
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-4 mt-4">
-          {/* Rating Section */}
-          <div className="flex items-center gap-2 hidden">
-            <div className="flex text-[#D35122]">
-              {[1, 2, 3, 4, 5].map((star) => (
-                <Star key={star} className="w-3.5 h-3.5 fill-current" />
-              ))}
-            </div>
-            <span className="text-sm font-bold text-zinc-900 dark:text-zinc-50">5.0</span>
-            <span className="text-xs font-medium text-zinc-500 uppercase tracking-widest">
-              (128 Reviews)
-            </span>
-          </div>
 
           {/* SKU Section */}
           {product.sku && (
@@ -161,18 +132,6 @@ export function ProductInfo({ product }: ProductInfoProps) {
           )}
         </div>
       </div>
-
-      {/* Live Visitors Alert */}
-      {liveVisitors !== null && (
-        <div className="mb-6 flex items-center gap-2 text-sm text-[#D35122] font-medium bg-[#D35122]/10 dark:bg-[#D35122]/20 py-2 px-4 rounded-full w-fit border border-[#D35122]/20 shadow-sm backdrop-blur-sm">
-          <div className="relative flex h-3 w-3 items-center justify-center">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D35122] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D35122]"></span>
-          </div>
-          <Users className="w-4 h-4 ml-1" />
-          <span className="animate-in fade-in slide-in-from-bottom-1">{liveVisitors} people are viewing this right now</span>
-        </div>
-      )}
 
       {/* Pricing Header */}
       <div className="mb-3">
