@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -10,7 +8,7 @@ export function HeroSection() {
             {/* Background Image */}
             <div className="absolute inset-0 z-0 bg-[#111111]">
                 <Image
-                    src="/hero-stephans.png"
+                    src="/hero-stephans.webp"
                     alt="Happy pet, happy home"
                     fill
                     className="object-cover object-bottom opacity-80 brightness-[0.65]"

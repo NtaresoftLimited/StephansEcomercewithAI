@@ -10,10 +10,11 @@ import {
 import {
   PRODUCT_BY_SLUG_QUERY,
   PRODUCTS_BY_CATEGORY_QUERY,
-  FILTER_PRODUCTS_BY_NAME_QUERY,
-  FILTER_PRODUCTS_BY_PRICE_ASC_QUERY,
-  FILTER_PRODUCTS_BY_PRICE_DESC_QUERY,
-  FILTER_PRODUCTS_BY_RELEVANCE_QUERY
+  PAGINATED_PRODUCTS_BY_NAME_QUERY,
+  PAGINATED_PRODUCTS_BY_PRICE_ASC_QUERY,
+  PAGINATED_PRODUCTS_BY_PRICE_DESC_QUERY,
+  PAGINATED_PRODUCTS_BY_RELEVANCE_QUERY,
+  FILTERED_PRODUCTS_COUNT_QUERY,
 } from "@/lib/sanity/queries/products";
 import { ProductGallery } from "@/components/app/ProductGallery";
 import { ProductInfo } from "@/components/app/ProductInfo";
@@ -24,11 +25,13 @@ import { absoluteUrl, buildProductDescription } from "@/lib/seo";
 import { breadcrumbJsonLd, productJsonLd } from "@/lib/structured-data";
 import { cleanCatalogProducts } from "@/lib/catalog/clean-products";
 import { ProductGrid } from "@/components/app/ProductGrid";
+import { ShopFilterSidebar } from "@/components/app/ShopFilterSidebar";
+import { ShopToolbar } from "@/components/app/ShopToolbar";
 import { ChevronRight } from "lucide-react";
 import { FoodBowlIcon, BoneIcon, TeddyBearIcon, CollarIcon, ScissorsBubblesIcon } from "@/components/app/CustomIcons";
 import { Metadata } from "next";
 import Link from "next/link";
-import { odoo } from "@/lib/odoo/client";
+import { getCachedOdooCatalog, getCachedOdooCategories } from "@/lib/catalog/server-catalog";
 
 export const revalidate = 300;
 
@@ -163,9 +166,9 @@ export default async function ProductsPage(props: ProductsPageProps) {
         ];
 
         return (
-          <div className="min-h-screen bg-zinc-50 dark:bg-zinc-900 pt-20">
+          <div className="min-h-screen bg-[#FAF7F2] dark:bg-zinc-950 pt-20">
             <JsonLd data={[productJsonLd(product), breadcrumbJsonLd(breadcrumbs)]} />
-            <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 scale-[0.9] origin-top">
+            <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
               {/* Breadcrumbs */}
               <div className="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400 mb-8 overflow-x-auto whitespace-nowrap scrollbar-hide">
                 <Link href="/" className="hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
@@ -192,11 +195,11 @@ export default async function ProductsPage(props: ProductsPageProps) {
                 </span>
               </div>
 
-              <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_420px] lg:gap-16 relative items-start">
+              <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_440px] lg:gap-14 relative items-start">
                 {/* Left Column: Image Gallery & Tabs */}
-                <div className="flex flex-col gap-12 min-w-0">
+                <div className="flex flex-col gap-10 min-w-0">
                   <ProductGallery images={product.images} productName={product.name} />
-                  <ProductTabs product={product} />
+                  <ProductTabs product={product} relatedProducts={relatedProducts} />
                 </div>
 
                 {/* Right Column: Sticky Product Info */}
@@ -204,20 +207,6 @@ export default async function ProductsPage(props: ProductsPageProps) {
                   <ProductInfo product={product} />
                 </div>
               </div>
-
-              {/* Related Products */}
-              {relatedProducts.length > 0 && (
-                <div className="mt-24 border-t border-zinc-200 dark:border-zinc-800 pt-16">
-                  <h2 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-8 uppercase text-center">
-                    You May Also Like
-                  </h2>
-                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                    {relatedProducts.map((related: any) => (
-                      <ProductCard key={related._id} product={related} />
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         );
@@ -231,6 +220,8 @@ export default async function ProductsPage(props: ProductsPageProps) {
   const category = (pathParams?.categorySlug?.[0]) || searchParams.category;
   
   const currentPage = parseInt(page || "1", 10);
+  const itemsPerPage = 8;
+  const requestedPage = Number.isFinite(currentPage) ? Math.max(1, currentPage) : 1;
 
   // Prepare Query Parameters
   const queryParams: any = {
@@ -243,21 +234,23 @@ export default async function ProductsPage(props: ProductsPageProps) {
     inStock: inStock === "true",
     color: color || "",
     material: "", // Default
+    start: (requestedPage - 1) * itemsPerPage,
+    end: requestedPage * itemsPerPage,
   };
 
   // Determine which query to use based on sort
-  let query: any = FILTER_PRODUCTS_BY_NAME_QUERY;
-  if (q) query = FILTER_PRODUCTS_BY_RELEVANCE_QUERY;
-  if (sort === "price-asc") query = FILTER_PRODUCTS_BY_PRICE_ASC_QUERY;
-  else if (sort === "price-desc") query = FILTER_PRODUCTS_BY_PRICE_DESC_QUERY;
-  else if (sort === "relevance") query = FILTER_PRODUCTS_BY_RELEVANCE_QUERY;
-  else if (sort === "name") query = FILTER_PRODUCTS_BY_NAME_QUERY;
+  let query: any = PAGINATED_PRODUCTS_BY_NAME_QUERY;
+  if (q) query = PAGINATED_PRODUCTS_BY_RELEVANCE_QUERY;
+  if (sort === "price-asc") query = PAGINATED_PRODUCTS_BY_PRICE_ASC_QUERY;
+  else if (sort === "price-desc") query = PAGINATED_PRODUCTS_BY_PRICE_DESC_QUERY;
+  else if (sort === "relevance") query = PAGINATED_PRODUCTS_BY_RELEVANCE_QUERY;
+  else if (sort === "name") query = PAGINATED_PRODUCTS_BY_NAME_QUERY;
 
   // Fetch Data in Parallel (Sanity + Odoo Categories)
   const [sanityCategoriesResult, brandsResult, odooCategories] = await Promise.all([
     sanityFetch({ query: ALL_CATEGORIES_QUERY }),
     sanityFetch({ query: ALL_BRANDS_QUERY }),
-    odoo.getPublicCategories().catch(e => { console.error("Odoo categories fetch failed:", e); return []; })
+    getCachedOdooCategories().catch(e => { console.error("Odoo categories fetch failed:", e); return []; })
   ]);
 
   const sanityCategories = sanityCategoriesResult.data || [];
@@ -302,15 +295,19 @@ export default async function ProductsPage(props: ProductsPageProps) {
   queryParams.categorySlug = category || "";
   queryParams.categoryLeafSlug = leafSlug || "";
   
-  // Fetch Sanity Products using the resolved leaf slug
-  const productsResult = await sanityFetch({ query, params: queryParams });
+  // Fetch only the requested eight records and a lightweight count in parallel.
+  const [productsResult, countResult] = await Promise.all([
+    sanityFetch({ query, params: queryParams }),
+    sanityFetch({ query: FILTERED_PRODUCTS_COUNT_QUERY, params: queryParams }),
+  ]);
   const sanityProducts = productsResult.data || [];
+  let totalProductCount = Number(countResult.data || 0);
 
   // Fetch Odoo Products (Fallback only if Sanity returns no products, avoiding heavy network delay)
   let odooProducts: any[] = [];
-  if (sanityProducts.length === 0) {
+  if (sanityProducts.length === 0 && totalProductCount === 0) {
     try {
-      const odooProductsUnfiltered = await odoo.getOdooShopProducts(odooCategories || []);
+      const { products: odooProductsUnfiltered } = await getCachedOdooCatalog();
       odooProducts = odooProductsUnfiltered.filter((p: any) => {
         if (q && !p.name?.toLowerCase().includes(q.toLowerCase())) return false;
         if (category) { const t = category.endsWith('s') ? category.slice(0,-1) : category; if (!p.categories.some((c: any) => c.slug === category || c.slug.includes(t) || c.title?.toLowerCase().includes(t)) && !p.name?.toLowerCase().includes(t)) return false; }
@@ -319,6 +316,7 @@ export default async function ProductsPage(props: ProductsPageProps) {
         if (maxPrice && p.price > Number(maxPrice)) return false;
         return true;
       });
+      totalProductCount = odooProducts.length;
     } catch (error) {
       console.error("Failed to fetch Odoo fallback products:", error);
     }
@@ -339,14 +337,15 @@ export default async function ProductsPage(props: ProductsPageProps) {
   // Merge products
   let combinedProducts = cleanCatalogProducts([...sanityProducts, ...odooProducts]);
 
-  // Re-sort the combined list to ensure Odoo and Sanity products are ordered correctly together
+  // Odoo fallback results still need local ordering. Sanity results are already
+  // ordered and sliced at the data source.
   if (sort === "price-asc") {
     combinedProducts.sort((a, b) => (a.price || 0) - (b.price || 0));
   } else if (sort === "price-desc") {
     combinedProducts.sort((a, b) => (b.price || 0) - (a.price || 0));
   } else if (sort === "name") {
     combinedProducts.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
-  } else if (!sort || sort === "featured" || sort === "relevance") {
+  } else if (odooProducts.length > 0 && (!sort || sort === "featured" || sort === "relevance")) {
     // Deterministic mix based on name string sum to shuffle products while keeping pagination stable
     combinedProducts.sort((a, b) => {
       const hashA = (a.name || a._id || "").split("").reduce((acc: number, char: string) => acc + char.charCodeAt(0), 0);
@@ -356,17 +355,17 @@ export default async function ProductsPage(props: ProductsPageProps) {
     });
   }
 
-  // Pagination Logic
-  const itemsPerPage = 8;
-  const totalPages = Math.ceil(combinedProducts.length / itemsPerPage) || 1;
+  const totalPages = Math.ceil(totalProductCount / itemsPerPage) || 1;
   
   // Ensure currentPage is within bounds
-  const validCurrentPage = Math.max(1, Math.min(currentPage, totalPages));
+  const validCurrentPage = Math.max(1, Math.min(requestedPage, totalPages));
   
-  const pagedProducts = combinedProducts.slice(
-    (validCurrentPage - 1) * itemsPerPage,
-    validCurrentPage * itemsPerPage
-  );
+  const pagedProducts = odooProducts.length > 0
+    ? combinedProducts.slice(
+        (validCurrentPage - 1) * itemsPerPage,
+        validCurrentPage * itemsPerPage,
+      )
+    : combinedProducts;
 
   // Construct baseUrl for pagination
   const urlSearchParams = new URLSearchParams();
@@ -415,26 +414,36 @@ export default async function ProductsPage(props: ProductsPageProps) {
         </>
       )}
 
-      <div className="w-full bg-white pt-8 pb-24 border-t border-[#EAE3D9]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top Controls Row */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
-          <div>
-            <h2 className="text-2xl font-serif text-[#222222] mb-1">All Products</h2>
-            <p className="text-sm text-zinc-500 font-medium">Showing {combinedProducts.length} products</p>
+      <div className="w-full bg-[#FAF7F2] dark:bg-zinc-950 pt-8 pb-24 border-t border-[#EAE3D9] dark:border-zinc-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8 items-start">
+            {/* Left Sidebar: Categories Filter */}
+            <div className="hidden lg:block sticky top-24">
+              <ShopFilterSidebar 
+                categories={allCategories} 
+                activeCategorySlug={category || ""} 
+              />
+            </div>
+
+            {/* Right Main Content: Toolbar & Grid */}
+            <div className="min-w-0 flex flex-col">
+              <ShopToolbar 
+                totalCount={totalProductCount} 
+                currentSort={sort || "relevance"}
+                itemsPerPage={itemsPerPage}
+              />
+
+              <main className="w-full">
+                <ProductGrid 
+                  products={pagedProducts} 
+                  currentPage={validCurrentPage} 
+                  totalPages={totalPages} 
+                  baseUrl={baseUrl} 
+                />
+              </main>
+            </div>
           </div>
         </div>
-
-        {/* Product Grid */}
-        <main className="w-full">
-          <ProductGrid 
-            products={pagedProducts} 
-            currentPage={validCurrentPage} 
-            totalPages={totalPages} 
-            baseUrl={baseUrl} 
-          />
-        </main>
-      </div>
       </div>
     </div>
   );

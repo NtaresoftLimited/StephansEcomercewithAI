@@ -114,7 +114,7 @@ export class OdooClient {
                 next: { revalidate: 300 },
                 body,
                 credentials: "omit", // Ensure NO cookies are leaked from server context
-                signal: AbortSignal.timeout(60000)
+                signal: AbortSignal.timeout(15000)
             });
 
             if (!response.ok) {

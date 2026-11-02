@@ -1,124 +1,66 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { sanityFetch } from "@/sanity/lib/live";
-import { OdooClient } from "@/lib/odoo/client";
-import {
-  FILTER_PRODUCTS_BY_NAME_QUERY,
-  FILTER_PRODUCTS_BY_PRICE_ASC_QUERY,
-  FILTER_PRODUCTS_BY_PRICE_DESC_QUERY,
-  FILTER_PRODUCTS_BY_RELEVANCE_QUERY,
-  NEW_ARRIVALS_QUERY,
-} from "@/lib/sanity/queries/products";
-import { ALL_CATEGORIES_QUERY } from "@/lib/sanity/queries/categories";
+import { getCachedOdooCatalog } from "@/lib/catalog/server-catalog";
+import { NEW_ARRIVALS_QUERY } from "@/lib/sanity/queries/products";
 import { cleanCatalogProducts } from "@/lib/catalog/clean-products";
-import { HERO_PET_IMAGES_QUERY } from "@/lib/sanity/queries/heroImages";
-import { GROOMING_IMAGES_QUERY } from "@/lib/sanity/queries/groomingImages";
 import { HeroSection } from "@/components/app/HeroSection";
 import { PetCategoryStrip } from "@/components/app/PetCategoryStrip";
 import { GroomingSection } from "@/components/app/GroomingSection";
-import { ProductCard } from "@/components/app/ProductCard";
 import { AutoRotatingProductGrid } from "@/components/app/AutoRotatingProductGrid";
 import { ReviewsSection } from "@/components/app/ReviewsSection";
-import { BrandsSection } from "@/components/app/BrandsSection";
 import { CategoryNavigationSection } from "@/components/app/CategoryNavigationSection";
-
 import { NewsletterSection } from "@/components/app/grooming/NewsletterSection";
 
 export const revalidate = 300;
 
-interface PageProps {
-  searchParams: Promise<{
-    q?: string;
-    category?: string;
-    color?: string;
-    material?: string;
-    minPrice?: string;
-    maxPrice?: string;
-    sort?: string;
-    inStock?: string;
-  }>;
-}
+export default async function HomePage() {
+  // Sanity and the cached Odoo fallback are independent. Start both together
+  // so Odoo authentication/RPC never creates a serial request waterfall.
+  const [sanityProducts, odooCatalog] = await Promise.all([
+    sanityFetch({
+      query: NEW_ARRIVALS_QUERY,
+      params: {
+        searchQuery: "",
+        categorySlug: "",
+        categoryLeafSlug: "",
+        brandSlug: "",
+        color: "",
+        material: "",
+        minPrice: 0,
+        maxPrice: 0,
+        inStock: false,
+      },
+    }).then((r: any) => (r?.data || []) as any[]).catch((e: any) => {
+      console.error("Sanity fetch failed in HomePage:", e);
+      return [] as any[];
+    }),
+    getCachedOdooCatalog().catch((error) => {
+      console.error("Cached Odoo catalog fetch failed:", error);
+      return { categories: [], products: [] };
+    }),
+  ]);
 
-export default async function HomePage({ searchParams }: PageProps) {
-  const params = await searchParams;
-
-  const searchQuery = params.q ?? "";
-  const categorySlug = params.category ?? "";
-  const color = params.color ?? "";
-  const material = params.material ?? "";
-  const minPrice = Number(params.minPrice) || 0;
-  const maxPrice = Number(params.maxPrice) || 0;
-  const sort = params.sort ?? "name";
-  const inStock = params.inStock === "true";
-
-  const isDefaultView = !searchQuery && !categorySlug && !color && !material && !minPrice && !maxPrice;
-
-  // Select query based on sort parameter
-  const getQuery = () => {
-    if (isDefaultView) {
-      return NEW_ARRIVALS_QUERY;
-    }
-    // If searching and sort is relevance, use relevance query
-    if (searchQuery && sort === "relevance") {
-      return FILTER_PRODUCTS_BY_RELEVANCE_QUERY;
-    }
-
-    switch (sort) {
-      case "price_asc":
-        return FILTER_PRODUCTS_BY_PRICE_ASC_QUERY;
-      case "price_desc":
-        return FILTER_PRODUCTS_BY_PRICE_DESC_QUERY;
-      case "relevance":
-        return FILTER_PRODUCTS_BY_RELEVANCE_QUERY;
-      default:
-        return FILTER_PRODUCTS_BY_NAME_QUERY;
-    }
-  };
-
-  // Fetch products with filters (server-side via GROQ) with error handling
-  const sanityProducts = await sanityFetch({
-    query: getQuery(),
-    params: {
-      searchQuery,
-      categorySlug,
-      categoryLeafSlug: "",
-      brandSlug: "",
-      color,
-      material,
-      minPrice,
-      maxPrice,
-      inStock,
-    },
-  }).then((r: any) => r?.data as any[]).catch((e: any) => {
-    console.error("Sanity fetch failed in HomePage:", e);
-    return [] as any[];
-  });
-
-  let odooProducts: any[] = [];
-  try {
-    const odoo = new OdooClient();
-    const publicCategories = await odoo.getPublicCategories().catch(e => { console.error("Odoo categories fetch failed:", e); return []; });
-    odooProducts = await odoo.getOdooShopProducts(publicCategories);
-  } catch (error) {
-    console.error("Failed to fetch Odoo products:", error);
-  }
+  const odooProducts = odooCatalog.products;
 
   // Sort Odoo products by sales_count (Top Products) and take top 50 to mix
   const topOdooProducts = [...odooProducts].sort((a, b) => (b.sales_count || 0) - (a.sales_count || 0)).slice(0, 50);
   
   let products = cleanCatalogProducts([...sanityProducts, ...topOdooProducts]);
 
-  // If no search params are provided, it means we are showing default "New Arrivals / Top Products"
-  // Filter and interleave products: 1 Dog, 2 Cat, 3 Small Animal, 4 Bird/Grooming
-  if (isDefaultView && products.length > 0) {
+  // Interleave curated products: 1 Dog, 2 Cat, 3 Small Animal, 4 Bird/Grooming
+  if (products.length > 0) {
     const dogs: any[] = [];
     const cats: any[] = [];
     const smalls: any[] = [];
     const birdsGrooming: any[] = [];
     const others: any[] = [];
 
-    // Shuffle products array so they keep changing
-    products = products.sort(() => 0.5 - Math.random());
+    // Stable mix keeps the rendered output cacheable while retaining variety.
+    const stableProductHash = (product: any) => String(product._id || product.name || "")
+      .split("")
+      .reduce((sum: number, char: string) => ((sum * 31) + char.charCodeAt(0)) >>> 0, 0);
+    products = [...products].sort((a, b) => stableProductHash(a) - stableProductHash(b));
 
     for (const product of products) {
       const categoryNames = product.categories?.map((c: any) => (c.title || c.name || "").toLowerCase()) || [];
@@ -200,26 +142,6 @@ export default async function HomePage({ searchParams }: PageProps) {
     }
   }
 
-  // Fetch categories, pet images, and grooming images in parallel
-  const [categories, petImages, groomingImages] = await Promise.all([
-    sanityFetch({ query: ALL_CATEGORIES_QUERY })
-      .then((r: any) => r?.data as any[])
-      .catch(() => [] as any[]),
-    sanityFetch({ query: HERO_PET_IMAGES_QUERY })
-      .then((r: any) => r?.data)
-      .catch(() => null),
-    sanityFetch({ query: GROOMING_IMAGES_QUERY })
-      .then((r: any) => r?.data as any[])
-      .catch(() => [] as any[]),
-  ]);
-
-  // Extract image URLs
-  const dogImages = petImages?.dogImages?.map((img: any) => img.url).filter((url: any): url is string => !!url) ?? [];
-  const catImages = petImages?.catImages?.map((img: any) => img.url).filter((url: any): url is string => !!url) ?? [];
-  const birdImages = petImages?.birdImages?.map((img: any) => img.url).filter((url: any): url is string => !!url) ?? [];
-  const fishImages = petImages?.fishImages?.map((img: any) => img.url).filter((url: any): url is string => !!url) ?? [];
-  const groomingImageUrls = groomingImages?.map((img: any) => img.url).filter((url: any): url is string => !!url) ?? [];
-
   return (
     <div className="min-h-screen bg-background">
       {/* Main Hero */}
@@ -260,7 +182,7 @@ export default async function HomePage({ searchParams }: PageProps) {
 
       {/* Grooming Section */}
       <Suspense fallback={<div className="mx-auto max-w-[1600px] px-4 sm:px-6 lg:px-8 py-12 text-center text-muted-foreground">Loading grooming content…</div>}>
-        <GroomingSection images={groomingImageUrls} />
+        <GroomingSection />
       </Suspense>
 
       <ReviewsSection />

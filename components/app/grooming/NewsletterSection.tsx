@@ -1,8 +1,7 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { NewsletterForm } from "./NewsletterForm";
 
 export function NewsletterSection() {
     return (
@@ -21,20 +20,7 @@ export function NewsletterSection() {
                             A considered note on what's new,<br />what's special, and what's worth knowing.
                         </p>
                         
-                        <form className="flex flex-col sm:flex-row gap-3 mb-6" onSubmit={(e) => e.preventDefault()}>
-                            <input 
-                                type="email" 
-                                placeholder="Your email address" 
-                                className="flex-1 rounded-xl border border-[#E8E0D8] px-5 py-4 focus:outline-none focus:ring-1 focus:ring-[#c77e35] bg-white text-sm shadow-sm"
-                                required
-                            />
-                            <button 
-                                type="submit" 
-                                className="bg-[#c77e35] text-white px-8 py-4 rounded-xl text-sm font-bold tracking-wider hover:bg-[#3e220f] transition-colors"
-                            >
-                                Subscribe
-                            </button>
-                        </form>
+                        <NewsletterForm />
                         
                         <a href="https://wa.me/255769324445" className="inline-flex items-center gap-2 text-sm text-[#222] hover:text-[#c77e35] transition-colors font-medium">
                             <Image src="/whatsapp-color.svg" alt="WhatsApp" width={24} height={24} className="w-6 h-6" />
@@ -44,12 +30,11 @@ export function NewsletterSection() {
                     
                     <div className="hidden md:block w-1/2 relative h-[350px] lg:h-[400px]">
                         <Image 
-                            src="/newsletter-toys.jpg" 
+                            src="/newsletter-toys.webp" 
                             alt="Pet Toys" 
                             fill 
                             className="object-contain object-center md:object-right "
                             sizes="(max-width: 768px) 100vw, 50vw"
-                            priority
                         />
                     </div>
                 </div>

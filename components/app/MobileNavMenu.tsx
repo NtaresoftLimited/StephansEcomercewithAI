@@ -221,7 +221,7 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
       >
         <div className="h-5 w-5 shrink-0 flex items-center justify-center overflow-visible">
           <Image
-            src="/about/grooming-scissors.png"
+            src="/about/grooming-scissors.webp"
             alt="Grooming Studio"
             width={20}
             height={20}

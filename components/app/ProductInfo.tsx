@@ -102,7 +102,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
               className={cn(
                 "p-3 rounded-full border transition-all duration-300",
                 isWishlisted
-                  ? "bg-red-50 border-red-200 text-red-500 shadow-sm"
+                  ? "bg-red-50 border-red-200 text-red-500 shadow-none"
                   : "bg-white border-zinc-200 text-zinc-400 hover:text-red-500 hover:border-red-200 dark:bg-zinc-900 dark:border-zinc-800"
               )}
             >
@@ -174,10 +174,18 @@ export function ProductInfo({ product }: ProductInfoProps) {
         </div>
       )}
 
-      {/* Purchase Box - CMS Style */}
-      <div ref={purchaseBoxRef} className="border border-zinc-200 dark:border-zinc-800 rounded-xl p-4 mb-8 bg-white dark:bg-zinc-900/30 shadow-sm transition-all hover:shadow-md">
+      {/* Pricing Header */}
+      <div className="mb-3">
+        <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">Pricing</span>
+        <div className="mt-1.5 inline-flex items-center gap-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800/80 px-4 py-2.5 text-base font-bold text-zinc-900 dark:text-zinc-100">
+          {(currentPrice ?? 0).toLocaleString('en-US')} TZS <span className="text-xs font-normal text-zinc-500">/Pc</span>
+        </div>
+      </div>
+
+      {/* Purchase Box - Dashed border, flat, NO shadow */}
+      <div ref={purchaseBoxRef} className="border border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl p-5 mb-8 bg-white dark:bg-zinc-950 shadow-none">
         <div className="flex flex-col gap-4">
-                    {/* Variant / Size Selector */}
+          {/* Variant / Size Selector */}
           {variants.length > 0 && (
             <div className="flex flex-col gap-2 pb-3 border-b border-zinc-100 dark:border-zinc-800">
               <div className="flex items-center justify-between">
@@ -199,9 +207,9 @@ export function ProductInfo({ product }: ProductInfoProps) {
                       type="button"
                       onClick={() => setSelectedVariantId(v._key || v.name)}
                       className={cn(
-                        "px-3.5 py-2 rounded-lg text-xs font-bold border transition-all duration-200",
+                        "px-3.5 py-2 rounded-lg text-xs font-bold border transition-colors shadow-none",
                         isSelected
-                          ? "bg-[#1A1A1E] text-white border-[#1A1A1E] shadow-sm scale-[1.02]"
+                          ? "bg-[#18181b] text-white border-[#18181b]"
                           : "bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 border-zinc-200 dark:border-zinc-700 hover:border-zinc-400"
                       )}
                     >
@@ -213,70 +221,56 @@ export function ProductInfo({ product }: ProductInfoProps) {
             </div>
           )}
 
-          {/* Header Row: Price and QTY */}
-          <div className="flex items-center justify-between flex-wrap gap-4">
+          {/* Price, Stock and QTY Row */}
+          <div className="flex items-start justify-between gap-4">
             <div className="flex flex-col">
-              <span className="text-4xl font-extrabold text-zinc-900 dark:text-zinc-50">
-                {formatPrice(currentPrice)}
+              <span className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-zinc-50 tracking-tight">
+                {(currentPrice ?? 0).toLocaleString('en-US')} TZS
               </span>
-              <div className="mt-2 flex flex-col gap-1">
-                <p className="text-xs text-zinc-400 font-medium tracking-wide">
-                  Minimum order qty <span className="font-bold text-zinc-900 dark:text-zinc-100">{product.min_qty || 1}</span>
-                </p>
+              <div className="mt-1 flex items-center gap-2">
+                <span className="text-xs font-bold text-[#8B1D42] dark:text-rose-400">
+                  {currentStock > 0 ? `${currentStock} available` : "Out of stock"}
+                </span>
               </div>
+              <p className="text-[11px] text-zinc-400 mt-0.5">
+                Minimum order qty <span className="font-bold text-zinc-800 dark:text-zinc-200">{product.min_qty || 1}</span>
+              </p>
             </div>
 
-            <div className="flex flex-col items-end gap-3">
-              <div className="flex items-center gap-4">
-                <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">QTY</span>
-                <div className="flex items-center border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden h-10">
-                  <button
-                    type="button"
-                    className="px-3 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors border-r border-zinc-200 dark:border-zinc-800"
-                    onClick={() => setQuantity(prev => Math.max(product.min_qty || 1, prev - 1))}
-                  >
-                    <span className="text-zinc-400 font-bold">−</span>
-                  </button>
-                  <input
-                    type="number"
-                    value={quantity}
-                    readOnly
-                    className="w-10 text-center text-sm font-bold bg-transparent border-none appearance-none"
-                  />
-                  <button
-                    type="button"
-                    className="px-3 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors border-l border-zinc-200 dark:border-zinc-800"
-                    onClick={() => setQuantity(prev => prev + 1)}
-                  >
-                    <span className="text-zinc-400 font-bold">+</span>
-                  </button>
-                </div>
+            {/* QTY Stepper */}
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold uppercase text-zinc-400 tracking-wider">QTY</span>
+              <div className="flex items-center rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 overflow-hidden h-9">
+                <button
+                  type="button"
+                  className="px-2.5 h-full hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-600 transition-colors"
+                  onClick={() => setQuantity(prev => Math.max(product.min_qty || 1, prev - 1))}
+                >
+                  <span className="text-zinc-500 font-bold">−</span>
+                </button>
+                <span className="w-8 text-center text-xs font-bold text-zinc-900 dark:text-zinc-100">
+                  {quantity}
+                </span>
+                <button
+                  type="button"
+                  className="px-2.5 h-full hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-600 transition-colors"
+                  onClick={() => setQuantity(prev => prev + 1)}
+                >
+                  <span className="text-zinc-500 font-bold">+</span>
+                </button>
               </div>
-              <button
-                onClick={() => {
-                  const pageUrl = typeof window !== 'undefined' ? window.location.href : '';
-                  const variantText = selectedVariant ? ` (Size: ${selectedVariant.name})` : '';
-                  const msg = encodeURIComponent(`Hi, I would like to order: ${product.name}${variantText} - ${pageUrl}`);
-                  window.open(`https://wa.me/255769324445?text=${msg}`, '_blank');
-                }}
-                className="flex items-center gap-1.5 text-[#25D366] hover:opacity-80 transition-all group"
-              >
-                <MessageCircle className="w-4 h-4 fill-current transition-transform group-hover:scale-110" />
-                <span className="text-sm font-semibold">Order Via WhatsApp</span>
-              </button>
             </div>
           </div>
 
-          {/* Divider */}
-          <div className="border-t border-dashed border-zinc-200 dark:border-zinc-800 my-2" />
-
-          {/* Selected Product Summary removed as requested */}
-
-          {/* Action Buttons */}
-          <div className="flex flex-col md:flex-row gap-4 mt-2">
+          {/* Action Buttons: Buy Now & Add to Cart */}
+          <div className="flex flex-row items-center gap-3 pt-2">
             <button
-              onClick={() => {/* Buy Now logic would go here if implemented, for now it matches UI */ }}
-              className="h-14 flex-1 text-sm font-bold tracking-widest uppercase bg-[#1A1A1E] text-white hover:bg-[#2A2A2E] rounded-lg transition-all active:scale-[0.98]"
+              type="button"
+              onClick={() => {
+                const pageUrl = typeof window !== 'undefined' ? window.location.href : '';
+                window.location.href = `/cart`;
+              }}
+              className="h-12 flex-1 text-sm font-bold tracking-wider bg-[#18181b] hover:bg-[#27272a] text-white rounded-xl transition-colors shadow-none"
             >
               Buy Now
             </button>
@@ -287,14 +281,27 @@ export function ProductInfo({ product }: ProductInfoProps) {
               image={imageUrl ?? undefined}
               stock={currentStock ?? 0}
               quantity={quantity}
-              className="h-14 flex-1 text-sm font-bold tracking-widest uppercase bg-[#E8F3FF] text-[#0080FF] hover:bg-[#D8E9FF] rounded-lg shadow-none transition-all active:scale-[0.98]"
-            />
+              showQuantityControls={false}
+              className="h-12 flex-1 text-sm font-bold tracking-wider bg-[#F7EBF0] hover:bg-[#F0DFE6] text-[#8B1D42] rounded-xl shadow-none transition-colors border-0 flex items-center justify-center"
+            >
+              Add to cart ({String(quantity).padStart(2, '0')})
+            </AddToCartButton>
           </div>
+
+          {/* WhatsApp Direct Order Button */}
+          <a
+            href={`https://wa.me/255769324445?text=${encodeURIComponent(
+              `Hi, I would like to order: ${product.name}${selectedVariant ? ` (${selectedVariant.name})` : ''} - Qty: ${quantity} - ${typeof window !== 'undefined' ? window.location.href : ''}`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full h-12 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm rounded-xl flex items-center justify-center gap-2 transition-colors shadow-none"
+          >
+            <MessageCircle className="w-5 h-5 fill-current" />
+            Order via WhatsApp Direct
+          </a>
         </div>
       </div>
-
-
-
 
       {/* Trust Badges Section */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 hidden">

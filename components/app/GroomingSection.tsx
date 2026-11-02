@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -22,7 +20,7 @@ const getOptimizedSanityUrl = (url: string, size = 1200): string => {
 
 export function GroomingSection({ images }: GroomingSectionProps) {
     // Use the provided image from the user for the banner
-    const bgImage = "/grooming-banner.png";
+    const bgImage = "/grooming-banner.webp";
 
     return (
         <section className="w-full bg-white relative overflow-hidden">

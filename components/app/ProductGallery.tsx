@@ -4,14 +4,9 @@ import { useState, useRef, MouseEvent } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { sanityImageUrl } from "@/lib/sanity-image";
-// import type { PRODUCT_BY_SLUG_QUERYResult } from "@/sanity.types";
-
-// type ProductImages = NonNullable<
-//   NonNullable<PRODUCT_BY_SLUG_QUERYResult>["images"]
-// >;
 
 interface ProductGalleryProps {
-  images: any[] | null; // ProductImages | null;
+  images: any[] | null;
   productName: string | null;
 }
 
@@ -39,8 +34,8 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
 
   if (!images || images.length === 0) {
     return (
-      <div className="flex aspect-square items-center justify-center rounded-xl border border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-800">
-        <span className="text-zinc-400">No images available</span>
+      <div className="flex aspect-square items-center justify-center rounded-2xl border border-zinc-200/90 bg-white dark:border-zinc-800 dark:bg-zinc-900 shadow-none">
+        <span className="text-zinc-400 text-sm">No images available</span>
       </div>
     );
   }
@@ -53,7 +48,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
       <div className="flex-1 w-full max-w-2xl mx-auto">
         <div
           ref={imgContainerRef}
-          className="relative aspect-square w-full overflow-hidden rounded-2xl border-2 border-zinc-100 bg-white dark:border-zinc-800 dark:bg-zinc-900 cursor-crosshair group shadow-sm transition-all duration-300 hover:shadow-md"
+          className="relative aspect-square w-full overflow-hidden rounded-2xl border border-zinc-200/90 bg-white dark:border-zinc-800 dark:bg-zinc-950 cursor-crosshair group shadow-none transition-colors"
           onMouseMove={handleMouseMove}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
@@ -75,12 +70,12 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
                 priority
               />
               {/* Zoom Indicator */}
-              <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                <div className="bg-white/90 dark:bg-zinc-800/90 backdrop-blur-md rounded-full p-3 shadow-lg border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300">
+              <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                <div className="bg-white/90 dark:bg-zinc-800/90 backdrop-blur-md rounded-full p-2.5 border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 shadow-none">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
+                    width="20"
+                    height="20"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -106,18 +101,18 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
 
       {/* Thumbnail Strip */}
       {images.length > 1 && (
-        <div className="flex gap-3 overflow-x-auto pb-4 lg:w-[100px] lg:flex-col lg:overflow-y-auto lg:pb-0 scrollbar-hide">
+        <div className="flex gap-3 overflow-x-auto pb-4 lg:w-[90px] lg:flex-col lg:overflow-y-auto lg:pb-0 scrollbar-hide">
           {images.map((image, index) => (
             <button
-              key={image._key}
+              key={image._key || index}
               type="button"
               onClick={() => setSelectedIndex(index)}
               aria-label={`View image ${index + 1}`}
               className={cn(
-                "relative aspect-square w-20 lg:w-full flex-shrink-0 overflow-hidden rounded-xl border-2 transition-all duration-300 bg-zinc-50 dark:bg-zinc-900 group",
+                "relative aspect-square w-18 lg:w-full flex-shrink-0 overflow-hidden rounded-xl border transition-colors bg-white dark:bg-zinc-900 group shadow-none",
                 selectedIndex === index
-                  ? "border-zinc-900 scale-95 dark:border-zinc-100"
-                  : "border-zinc-100 dark:border-zinc-800 opacity-60 hover:opacity-100 hover:border-zinc-300 dark:hover:border-zinc-600"
+                  ? "border-[#8B1D42] dark:border-rose-400 ring-1 ring-[#8B1D42]/30"
+                  : "border-zinc-200 dark:border-zinc-800 opacity-70 hover:opacity-100 hover:border-zinc-300 dark:hover:border-zinc-700"
               )}
             >
               {image.asset?.url ? (
@@ -125,8 +120,8 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
                   src={sanityImageUrl(image.asset.url, 160) ?? image.asset.url}
                   alt={`${productName} thumbnail ${index + 1}`}
                   fill
-                  className="object-contain p-2 transition-transform duration-300 group-hover:scale-110"
-                  sizes="100px"
+                  className="object-contain p-2 transition-transform duration-300 group-hover:scale-105"
+                  sizes="90px"
                 />
               ) : (
                 <div className="flex h-full items-center justify-center text-[10px] text-zinc-400">

@@ -387,8 +387,29 @@ export const FILTER_PRODUCTS_BY_RELEVANCE_QUERY = defineQuery(
   `*[${PRODUCT_FILTER_CONDITIONS}] | ${RELEVANCE_SCORE} | order(_score desc, name asc) ${FILTERED_PRODUCT_PROJECTION}`
 );
 
+/** Paginated storefront queries. Keep product payloads bounded to one page. */
+export const PAGINATED_PRODUCTS_BY_NAME_QUERY = defineQuery(
+  `*[${PRODUCT_FILTER_CONDITIONS}] | order(defined(brand) desc, name asc) [$start...$end] ${FILTERED_PRODUCT_PROJECTION}`
+);
+
+export const PAGINATED_PRODUCTS_BY_PRICE_ASC_QUERY = defineQuery(
+  `*[${PRODUCT_FILTER_CONDITIONS}] | order(price asc) [$start...$end] ${FILTERED_PRODUCT_PROJECTION}`
+);
+
+export const PAGINATED_PRODUCTS_BY_PRICE_DESC_QUERY = defineQuery(
+  `*[${PRODUCT_FILTER_CONDITIONS}] | order(price desc) [$start...$end] ${FILTERED_PRODUCT_PROJECTION}`
+);
+
+export const PAGINATED_PRODUCTS_BY_RELEVANCE_QUERY = defineQuery(
+  `*[${PRODUCT_FILTER_CONDITIONS}] | ${RELEVANCE_SCORE} | order(_score desc, name asc) [$start...$end] ${FILTERED_PRODUCT_PROJECTION}`
+);
+
+export const FILTERED_PRODUCTS_COUNT_QUERY = defineQuery(
+  `count(*[${PRODUCT_FILTER_CONDITIONS}])`
+);
+
 export const NEW_ARRIVALS_QUERY = defineQuery(
-  `*[${PRODUCT_FILTER_CONDITIONS}] | order(_createdAt desc) ${FILTERED_PRODUCT_PROJECTION}`
+  `*[${PRODUCT_FILTER_CONDITIONS}] | order(_createdAt desc) [0...60] ${FILTERED_PRODUCT_PROJECTION}`
 );
 
 // ============================================

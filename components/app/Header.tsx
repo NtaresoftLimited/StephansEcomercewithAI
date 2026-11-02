@@ -7,9 +7,18 @@ import { usePathname } from "next/navigation";
 import { ShoppingBag, User, Search, X } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
 import { useCartActions, useTotalItems } from "@/lib/store/cart-store-provider";
-import { SearchModal } from "./SearchModal";
+import dynamic from "next/dynamic";
 import { SecondaryStickyHeader } from "./SecondaryStickyHeader";
-import { MobileNavMenu } from "./MobileNavMenu";
+
+const SearchModal = dynamic(
+  () => import("./SearchModal").then((mod) => mod.SearchModal),
+  { ssr: false }
+);
+
+const MobileNavMenu = dynamic(
+  () => import("./MobileNavMenu").then((mod) => mod.MobileNavMenu),
+  { ssr: false }
+);
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";

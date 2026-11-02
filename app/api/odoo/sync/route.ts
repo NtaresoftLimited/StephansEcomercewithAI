@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { NextResponse } from "next/server";
+import { revalidateTag, revalidatePath } from "next/cache";
 import { odoo } from "@/lib/odoo/client";
 import { createClient } from "@sanity/client";
 
@@ -191,6 +192,7 @@ async function runSync() {
             if (errorDetails.length < 5) errorDetails.push({ name: product.name, error: err?.message || String(err) });
         }
     }
+    try { revalidateTag("odoo-catalog", "default"); revalidatePath("/"); revalidatePath("/shop"); } catch (e) { console.error("Cache revalidation failed:", e); }
     return { synced, deleted, errors, total: odooProducts.length, errorDetails };
 }
 

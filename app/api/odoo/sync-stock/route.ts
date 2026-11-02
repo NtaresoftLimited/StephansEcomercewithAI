@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidateTag, revalidatePath } from "next/cache";
 import { odoo } from "@/lib/odoo/client";
 import { createClient } from "@sanity/client";
 
@@ -103,6 +104,7 @@ async function runStockSync() {
     if (synced > 0 || hidden > 0) {
         await transaction.commit();
         console.log(`📦 Transaction committed.`);
+        try { revalidateTag("odoo-catalog", "default"); revalidatePath("/"); revalidatePath("/shop"); } catch (e) { console.error("Cache revalidation failed:", e); }
     }
 
     const summary = {

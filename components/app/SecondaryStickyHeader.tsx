@@ -22,7 +22,12 @@ import {
 } from "@/lib/config/navigation";
 import { useTotalItems } from "@/lib/store/cart-store-provider";
 import { cn } from "@/lib/utils";
-import { CategoryMegaMenu } from "./CategoryMegaMenu";
+import dynamic from "next/dynamic";
+
+const CategoryMegaMenu = dynamic(
+  () => import("./CategoryMegaMenu").then((mod) => mod.CategoryMegaMenu),
+  { ssr: false }
+);
 import { MobileNavMenu } from "./MobileNavMenu";
 
 interface SecondaryStickyHeaderProps {
@@ -480,7 +485,7 @@ function SecondaryStickyHeaderInner({
               className="flex items-center gap-1.5 hover:text-emerald-600 transition-colors h-full border-b-2 border-transparent hover:border-emerald-500"
             >
               <Image
-                src="/about/grooming-scissors.png"
+                src="/about/grooming-scissors.webp"
                 alt="Grooming"
                 width={16}
                 height={16}
