@@ -61,7 +61,6 @@
     "react-leaflet": "^5.0.0",
     "react-markdown": "^10.1.0",
     "sanity": "^4.20.3",
-    "sharp": "^0.35.5",
     "sonner": "^2.0.7",
     "stripe": "^20.0.0",
     "styled-components": "^6.1.19",
