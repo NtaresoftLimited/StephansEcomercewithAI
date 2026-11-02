@@ -136,10 +136,35 @@ export default async function ProductsPage(props: ProductsPageProps) {
   if (pathParams?.categorySlug?.length === 1 && !searchParams?.category) {
     const candidateSlug = pathParams.categorySlug[0];
     try {
-      const { data: product } = await sanityFetch({
-        query: PRODUCT_BY_SLUG_QUERY,
-        params: { slug: candidateSlug },
-      });
+      let product: any = null;
+      try {
+        const { data: sanityProduct } = await sanityFetch({
+          query: PRODUCT_BY_SLUG_QUERY,
+          params: { slug: candidateSlug },
+        });
+        product = sanityProduct;
+      } catch (e) {
+        // Continue to fallback
+      }
+
+      // Fallback: check Odoo catalog if not found in Sanity
+      if (!product) {
+        try {
+          const { products: odooProducts } = await getCachedOdooCatalog();
+          const match = odooProducts.find(
+            (p: any) =>
+              p.slug === candidateSlug ||
+              p._id === candidateSlug ||
+              p.slug === `odoo-${candidateSlug}` ||
+              p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') === candidateSlug
+          );
+          if (match) {
+            product = match;
+          }
+        } catch (e) {
+          // Continue
+        }
+      }
 
       if (product) {
         const category = product.categories?.[0];

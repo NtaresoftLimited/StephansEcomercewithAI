@@ -262,66 +262,17 @@ export function ProductInfo({ product }: ProductInfoProps) {
         </div>
       </div>
 
-      {/* Trust Badges Section */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8 hidden">
-        {[
-          { icon: Truck, label: "Free Shipping", desc: "For orders over 50k" },
-          { icon: CreditCard, label: "Secure Payment", desc: "100% Secure" },
-          { icon: ShieldCheck, label: "Warranty", desc: "Authentic products" },
-          { icon: RotateCcw, label: "Easy Return", desc: "7 days easy return" },
-        ].map((item, i) => (
-          <div key={i} className="flex flex-col items-center text-center p-4 rounded-xl border border-zinc-100 dark:border-zinc-800 bg-white dark:bg-zinc-900/20 shadow-sm transition-all hover:shadow-md">
-            <item.icon className="w-6 h-6 text-[#D35122] mb-2" />
-            <span className="text-[10px] font-bold uppercase tracking-tighter text-zinc-900 dark:text-zinc-50">{item.label}</span>
-            <span className="text-[9px] text-zinc-400 mt-1">{item.desc}</span>
-          </div>
-        ))}
-      </div>
-
-      {/* Estimate Shipping Section */}
-      <div className="mb-8 p-4 rounded-xl border border-dashed border-zinc-200 dark:border-zinc-800 flex items-center gap-3 hidden">
-        <Truck className="w-5 h-5 text-zinc-400" />
-        <div>
-          <span className="text-xs font-medium text-zinc-500">Estimate Shipping Time</span>
-          <p className="text-sm font-bold text-zinc-900 dark:text-zinc-50">3 - 5 Days</p>
-        </div>
-      </div>
-
-      {/* Seller Section */}
-      <div className="mb-8 p-6 rounded-2xl border border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 flex items-center justify-between hidden">
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-full bg-[#D35122] text-white flex items-center justify-center font-bold text-xl ring-4 ring-white dark:ring-zinc-800 shadow-lg">
-            S
-          </div>
-          <div>
-            <div className="flex items-center gap-1.5">
-              <span className="text-sm font-bold text-zinc-900 dark:text-zinc-50">Sold by Stephan's Pet Store</span>
-              <Check className="w-3.5 h-3.5 text-white bg-blue-500 rounded-full p-0.5" strokeWidth={4} />
-            </div>
-            <Link href="/about" className="text-xs text-[#D35122] font-semibold hover:underline">
-              Visit Store
-            </Link>
-          </div>
-        </div>
-        <Link
-          href="/contact"
-          className="px-4 py-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg text-xs font-bold uppercase text-zinc-900 dark:text-white shadow-sm hover:shadow-md transition-all"
-        >
-          Message Seller
-        </Link>
-      </div>
-
-      {/* Sticky Add to Cart Bar - Rendered in Portal to escape scale-[0.9] transform */}
+      {/* Sticky Add to Cart Bar - Rendered in Portal */}
       {mounted && createPortal(
         <div className={cn(
-          "fixed bottom-0 left-0 right-0 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 z-[100] transition-all duration-500 transform w-screen",
-          showStickyBar ? "translate-y-0 opacity-100 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]" : "translate-y-full opacity-0 pointer-events-none"
+          "fixed bottom-0 left-0 right-0 bg-white dark:bg-zinc-950 border-t border-zinc-200 dark:border-zinc-800 z-[100] transition-all duration-300 transform w-screen shadow-none",
+          showStickyBar ? "translate-y-0 opacity-100" : "translate-y-full opacity-0 pointer-events-none"
         )}>
           <div className="w-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
             {/* Left: Product Info (Desktop only) */}
             <div className="hidden md:flex items-center gap-4 flex-1 min-w-0">
               {imageUrl && (
-                <div className="relative h-12 w-12 rounded-lg border border-zinc-100 dark:border-zinc-800 overflow-hidden flex-shrink-0 bg-white">
+                <div className="relative h-12 w-12 rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden flex-shrink-0 bg-white dark:bg-zinc-900 shadow-none">
                   <Image
                     src={imageUrl}
                     alt={product.name}
@@ -331,14 +282,13 @@ export function ProductInfo({ product }: ProductInfoProps) {
                 </div>
               )}
               <div className="min-w-0">
-                <h3 className="text-sm font-bold text-zinc-900 dark:text-zinc-50 truncate">
+                <h3 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50 truncate">
                   {product.name}
                 </h3>
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-extrabold text-[#D35122]">
-                    {formatPrice(currentPrice)}
+                  <span className="text-sm font-bold text-zinc-900 dark:text-zinc-100">
+                    {formatPrice(currentPrice, "TZS")}
                   </span>
-                  
                 </div>
               </div>
             </div>
@@ -348,45 +298,44 @@ export function ProductInfo({ product }: ProductInfoProps) {
               {/* Price (Mobile only) */}
               <div className="flex flex-col md:hidden">
                 <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Total</span>
-                <span className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
-                  {formatPrice(currentPrice * quantity)}
+                <span className="text-base font-bold text-zinc-900 dark:text-zinc-50">
+                  {formatPrice(currentPrice * quantity, "TZS")}
                 </span>
               </div>
   
               <div className="flex items-center gap-3">
                 {/* QTY Selector (Desktop only) */}
-                <div className="hidden sm:flex items-center border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden h-10 bg-white dark:bg-zinc-900">
+                <div className="hidden sm:flex items-center border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden h-10 bg-white dark:bg-zinc-900 shadow-none">
                   <button
                     type="button"
-                    className="px-2 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors border-r border-zinc-200 dark:border-zinc-800"
+                    className="px-2.5 h-full hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors border-r border-zinc-200 dark:border-zinc-800 text-zinc-500"
                     onClick={() => setQuantity(prev => Math.max(product.min_qty || 1, prev - 1))}
                   >
-                    <Minus className="w-3 h-3 text-zinc-400" />
+                    <Minus className="w-3.5 h-3.5" />
                   </button>
-                  <input
-                    type="number"
-                    value={quantity}
-                    readOnly
-                    className="w-8 text-center text-xs font-bold bg-transparent border-none appearance-none"
-                  />
+                  <span className="w-8 text-center text-xs font-bold text-zinc-900 dark:text-zinc-100">
+                    {quantity}
+                  </span>
                   <button
                     type="button"
-                    className="px-2 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors border-l border-zinc-200 dark:border-zinc-800"
+                    className="px-2.5 h-full hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors border-l border-zinc-200 dark:border-zinc-800 text-zinc-500"
                     onClick={() => setQuantity(prev => prev + 1)}
                   >
-                    <Plus className="w-3 h-3 text-zinc-400" />
+                    <Plus className="w-3.5 h-3.5" />
                   </button>
                 </div>
   
                 <AddToCartButton
-                  productId={product._id}
-                  name={product.name ?? "Unknown Product"}
+                  productId={selectedVariant ? `${product._id}-${selectedVariant._key || selectedVariant.name}` : product._id}
+                  name={selectedVariant ? `${product.name} (${selectedVariant.name})` : (product.name ?? "Unknown Product")}
                   price={currentPrice}
                   image={imageUrl ?? undefined}
                   stock={currentStock ?? 0}
-                  className="h-10 sm:h-11 px-6 sm:px-8 text-xs font-bold tracking-widest uppercase bg-[#D35122] text-white hover:bg-[#B54218] rounded-lg shadow-sm transition-all active:scale-[0.98] min-w-[140px]"
+                  quantity={quantity}
+                  showQuantityControls={false}
+                  className="h-10 sm:h-11 px-6 sm:px-8 text-xs font-bold tracking-wider bg-[#8B1D42] text-white hover:bg-[#721735] rounded-xl shadow-none transition-colors"
                 >
-                  Add to Cart
+                  Add to Cart ({String(quantity).padStart(2, '0')})
                 </AddToCartButton>
               </div>
             </div>
