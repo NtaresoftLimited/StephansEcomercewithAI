@@ -228,7 +228,7 @@ export default async function ProductsPage(props: ProductsPageProps) {
                 </div>
 
                 {/* Right Column: Sticky Product Info */}
-                <div className="lg:sticky lg:top-24 h-fit">
+                <div className="lg:sticky lg:top-[160px] h-fit">
                   <ProductInfo product={product} />
                 </div>
               </div>

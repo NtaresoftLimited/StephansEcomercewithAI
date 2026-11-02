@@ -4,12 +4,18 @@ import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
-import { Check, Star, RefreshCw, Info, MessageCircle, Heart, Share2, Truck, ShieldCheck, RotateCcw, CreditCard, ExternalLink, ShoppingBag, Minus, Plus } from "lucide-react";
+import { 
+  RefreshCw, 
+  Heart, 
+  Share2, 
+  Copy, 
+  Minus, 
+  Plus, 
+  MessageCircle 
+} from "lucide-react";
 import { AddToCartButton } from "@/components/app/AddToCartButton";
-import { AskAISimilarButton } from "@/components/app/AskAISimilarButton";
-import { StockBadge } from "@/components/app/StockBadge";
 import { formatPrice, cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
+import { toast } from "sonner";
 
 interface ProductInfoProps {
   product: any;
@@ -53,110 +59,177 @@ export function ProductInfo({ product }: ProductInfoProps) {
   const variants = product.variants || [];
   const selectedVariant = variants.find((v: any) => v._key === selectedVariantId) || null;
 
-  // Determine current price and stock based on selection
+  // Determine current price based on selection
   const currentPrice = selectedVariant ? selectedVariant.price : product.price;
-  const currentStock = selectedVariant ? selectedVariant.stock : product.stock;
-  const imageUrl = product.images?.[0]?.asset?.url;
+  const currentStock = selectedVariant ? selectedVariant.stock : (product.stock ?? 10);
+  const imageUrl = product.images?.[0]?.asset?.url || (typeof product.images?.[0] === "string" ? product.images?.[0] : product.images?.[0]?.url);
+  const brandName = product.brand?.name || "Stephan's";
+  const brandSlug = product.brand?.slug?.current || product.brand?.slug || "";
+  const sku = product.sku || product._id?.slice(-8).toUpperCase() || "H370BIT";
+
+  const handleShare = () => {
+    if (typeof navigator !== "undefined" && navigator.share) {
+      navigator.share({
+        title: product.name,
+        url: window.location.href,
+      }).catch(() => {});
+    } else if (typeof navigator !== "undefined") {
+      navigator.clipboard.writeText(window.location.href);
+      toast.success("Link copied to clipboard!");
+    }
+  };
+
+  const handleCopySku = () => {
+    if (typeof navigator !== "undefined") {
+      navigator.clipboard.writeText(sku);
+      toast.success("SKU copied to clipboard!");
+    }
+  };
 
   return (
-    <div className="flex flex-col animate-in fade-in w-full">
-      {/* Header Section */}
-      <div className="mb-6 border-b border-zinc-100 dark:border-zinc-800 pb-6">
-        {/* Brand Link */}
-        {product.brand && (
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-xs font-bold uppercase tracking-widest text-zinc-400">Brand</span>
-            <Link
-              href={`/brands/${product.brand.slug?.current || product.brand.slug}`}
-              className="text-xs font-bold uppercase tracking-widest text-[#D35122] hover:underline"
-            >
-              {product.brand.name}
-            </Link>
-          </div>
+    <div className="flex flex-col w-full text-left">
+      {/* 1. Top Utility Actions: Compare, Wishlist, Share */}
+      <div className="flex items-center justify-end gap-5 mb-4 text-xs font-normal text-zinc-500 dark:text-zinc-400">
+        <button
+          type="button"
+          onClick={() => toast.success("Added to compare list")}
+          className="flex items-center gap-1.5 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+        >
+          <RefreshCw className="w-3.5 h-3.5" />
+          <span>Compare</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            setIsWishlisted(!isWishlisted);
+            toast.success(isWishlisted ? "Removed from Wishlist" : "Added to Wishlist");
+          }}
+          className="flex items-center gap-1.5 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+        >
+          <Heart className={cn("w-3.5 h-3.5", isWishlisted && "fill-red-500 text-red-500")} />
+          <span>Wishlist</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={handleShare}
+          className="flex items-center gap-1.5 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+        >
+          <Share2 className="w-3.5 h-3.5" />
+          <span>Share</span>
+        </button>
+      </div>
+
+      {/* 2. Product Name */}
+      <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-2 leading-snug">
+        {product.name}
+      </h1>
+
+      {/* 3. Brand Row */}
+      <div className="flex items-center gap-2 mb-2 text-sm">
+        <span className="text-zinc-900 dark:text-zinc-100 font-normal">Brand</span>
+        {brandSlug ? (
+          <Link
+            href={`/brands/${brandSlug}`}
+            className="font-semibold text-[#8B1D42] hover:underline"
+          >
+            {brandName}
+          </Link>
+        ) : (
+          <span className="font-semibold text-[#8B1D42]">
+            {brandName}
+          </span>
         )}
+      </div>
 
-        <div className="flex justify-between items-start gap-4 mb-4">
-          <h1 className="text-xl md:text-2xl font-semibold tracking-normal leading-tight text-zinc-900 dark:text-zinc-50">
-            {product.name}
-          </h1>
-          <div className="flex gap-2 shrink-0">
-            <button
-              onClick={() => setIsWishlisted(!isWishlisted)}
-              className={cn(
-                "p-3 rounded-full border transition-all duration-300",
-                isWishlisted
-                  ? "bg-red-50 border-red-200 text-red-500 shadow-none"
-                  : "bg-white border-zinc-200 text-zinc-400 hover:text-red-500 hover:border-red-200 dark:bg-zinc-900 dark:border-zinc-800"
-              )}
-            >
-              <Heart className={cn("w-5 h-5", isWishlisted && "fill-current")} />
-            </button>
-            <button
-              onClick={() => {
-                if (navigator.share) {
-                  navigator.share({
-                    title: product.name,
-                    url: window.location.href,
-                  });
-                } else {
-                  navigator.clipboard.writeText(window.location.href);
-                  alert("Link copied to clipboard!");
-                }
-              }}
-              className="p-3 rounded-full border border-zinc-200 bg-white text-zinc-400 hover:text-zinc-900 hover:border-zinc-300 transition-all dark:bg-zinc-900 dark:border-zinc-800 dark:hover:text-zinc-100 dark:hover:border-zinc-700"
-            >
-              <Share2 className="w-5 h-5" />
-            </button>
-          </div>
+      {/* 4. Rating & SKU Row */}
+      <div className="flex items-center justify-between gap-4 mb-5 text-sm">
+        <div className="flex items-center gap-1">
+          <div className="flex text-zinc-300 text-sm">☆☆☆☆☆</div>
+          <span className="font-bold text-zinc-900 dark:text-zinc-100 text-sm">0</span>
+          <span className="text-zinc-400 text-sm">/5.0</span>
+          <span className="text-zinc-400 text-xs ml-0.5">(0 reviews)</span>
         </div>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 mt-4">
-
-          {/* SKU Section */}
-          {product.sku && (
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-zinc-400 uppercase tracking-widest">SKU</span>
-              <code className="text-xs font-bold text-zinc-900 dark:text-zinc-50 bg-zinc-100 dark:bg-zinc-800 px-2 py-1 rounded">
-                {product.sku}
-              </code>
-              <button
-                onClick={() => {
-                  navigator.clipboard.writeText(product.sku);
-                  alert("SKU copied!");
-                }}
-                className="text-zinc-400 hover:text-[#D35122] transition-colors"
-              >
-                <Share2 className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          )}
+        <div className="flex items-center gap-2 text-xs">
+          <span className="text-zinc-400 font-medium">SKU</span>
+          <span className="font-semibold text-zinc-800 dark:text-zinc-200 uppercase">{sku}</span>
+          <button
+            type="button"
+            onClick={handleCopySku}
+            className="text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors"
+            title="Copy SKU"
+          >
+            <Copy className="w-3.5 h-3.5" />
+          </button>
         </div>
       </div>
 
-      {/* Pricing Header */}
-      <div className="mb-3">
-        <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">Pricing</span>
-        <div className="mt-1.5 inline-flex items-center gap-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800/80 px-4 py-2.5 text-base font-bold text-zinc-900 dark:text-zinc-100">
-          {(currentPrice ?? 0).toLocaleString('en-US')} TZS <span className="text-xs font-normal text-zinc-500">/Pc</span>
+      {/* 5. Pricing Section (Muted label + Full-width soft-gray rounded card) */}
+      <div className="mb-4">
+        <span className="text-sm font-semibold text-zinc-500 dark:text-zinc-400 block mb-2">
+          Pricing
+        </span>
+        <div className="w-full rounded-2xl bg-zinc-100/90 dark:bg-zinc-900 px-6 py-4 flex items-baseline">
+          <span className="text-2xl font-bold text-zinc-900 dark:text-zinc-50 tracking-tight">
+            {(currentPrice ?? 0).toLocaleString('en-US')} TZS
+          </span>
+          <span className="text-sm font-normal text-zinc-500 ml-1.5">
+            /Pc
+          </span>
         </div>
       </div>
 
-      {/* Purchase Box - Dashed border, flat, NO shadow */}
-      <div ref={purchaseBoxRef} className="border border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl p-5 mb-8 bg-white dark:bg-zinc-950 shadow-none">
+      {/* 6. Purchase Card - Dashed Border, Flat, NO Shadow */}
+      <div
+        ref={purchaseBoxRef}
+        className="border border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl p-6 mb-8 bg-white dark:bg-zinc-950 shadow-none"
+      >
         <div className="flex flex-col gap-4">
-          {/* Variant / Size Selector */}
-          {variants.length > 0 && (
-            <div className="flex flex-col gap-2 pb-3 border-b border-zinc-100 dark:border-zinc-800">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold uppercase tracking-wider text-zinc-500">
-                  Select Size: <span className="text-zinc-900 dark:text-zinc-100 font-extrabold">{selectedVariant?.name || "Choose Size"}</span>
+          {/* Price & Quantity Row */}
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex flex-col">
+              <span className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-zinc-50 tracking-tight">
+                {(currentPrice ?? 0).toLocaleString('en-US')} TZS
+              </span>
+              {/* Note: Available/Stock text deleted and removed as requested */}
+              <p className="text-xs text-zinc-400 mt-1">
+                Minimum order qty <span className="font-bold text-zinc-800 dark:text-zinc-200">{product.min_qty || 1}</span>
+              </p>
+            </div>
+
+            {/* QTY Stepper */}
+            <div className="flex items-center gap-3">
+              <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">QTY</span>
+              <div className="flex items-center rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 h-10 px-1 shadow-none">
+                <button
+                  type="button"
+                  className="w-8 h-full flex items-center justify-center text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors"
+                  onClick={() => setQuantity(prev => Math.max(product.min_qty || 1, prev - 1))}
+                >
+                  <Minus className="w-3.5 h-3.5" />
+                </button>
+                <span className="w-8 text-center text-sm font-bold text-zinc-900 dark:text-zinc-100">
+                  {quantity}
                 </span>
-                {selectedVariant?.weight && (
-                  <span className="text-[11px] font-medium text-zinc-500 bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 rounded">
-                    {selectedVariant.weight}
-                  </span>
-                )}
+                <button
+                  type="button"
+                  className="w-8 h-full flex items-center justify-center text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors"
+                  onClick={() => setQuantity(prev => prev + 1)}
+                >
+                  <Plus className="w-3.5 h-3.5" />
+                </button>
               </div>
+            </div>
+          </div>
+
+          {/* Optional Variants Selector */}
+          {variants.length > 0 && (
+            <div className="flex flex-col gap-2 pt-3 border-t border-zinc-100 dark:border-zinc-800">
+              <span className="text-xs font-semibold text-zinc-500">
+                Variation: <strong className="text-zinc-900 dark:text-zinc-100">{selectedVariant?.name || "Choose"}</strong>
+              </span>
               <div className="flex flex-wrap gap-2">
                 {variants.map((v: any) => {
                   const isSelected = (v._key || v.name) === (selectedVariant?._key || selectedVariantId);
@@ -166,7 +239,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
                       type="button"
                       onClick={() => setSelectedVariantId(v._key || v.name)}
                       className={cn(
-                        "px-3.5 py-2 rounded-lg text-xs font-bold border transition-colors shadow-none",
+                        "px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors shadow-none",
                         isSelected
                           ? "bg-[#18181b] text-white border-[#18181b]"
                           : "bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 border-zinc-200 dark:border-zinc-700 hover:border-zinc-400"
@@ -180,56 +253,14 @@ export function ProductInfo({ product }: ProductInfoProps) {
             </div>
           )}
 
-          {/* Price, Stock and QTY Row */}
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex flex-col">
-              <span className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-zinc-50 tracking-tight">
-                {(currentPrice ?? 0).toLocaleString('en-US')} TZS
-              </span>
-              <div className="mt-1 flex items-center gap-2">
-                <span className="text-xs font-bold text-[#8B1D42] dark:text-rose-400">
-                  {currentStock > 0 ? `${currentStock} available` : "Out of stock"}
-                </span>
-              </div>
-              <p className="text-[11px] text-zinc-400 mt-0.5">
-                Minimum order qty <span className="font-bold text-zinc-800 dark:text-zinc-200">{product.min_qty || 1}</span>
-              </p>
-            </div>
-
-            {/* QTY Stepper */}
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase text-zinc-400 tracking-wider">QTY</span>
-              <div className="flex items-center rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 overflow-hidden h-9">
-                <button
-                  type="button"
-                  className="px-2.5 h-full hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-600 transition-colors"
-                  onClick={() => setQuantity(prev => Math.max(product.min_qty || 1, prev - 1))}
-                >
-                  <span className="text-zinc-500 font-bold">−</span>
-                </button>
-                <span className="w-8 text-center text-xs font-bold text-zinc-900 dark:text-zinc-100">
-                  {quantity}
-                </span>
-                <button
-                  type="button"
-                  className="px-2.5 h-full hover:bg-zinc-200 dark:hover:bg-zinc-800 text-zinc-600 transition-colors"
-                  onClick={() => setQuantity(prev => prev + 1)}
-                >
-                  <span className="text-zinc-500 font-bold">+</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Action Buttons: Buy Now & Add to Cart */}
-          <div className="flex flex-row items-center gap-3 pt-2">
+          {/* Action Buttons: Buy Now & Add to Cart (01) */}
+          <div className="grid grid-cols-2 gap-4 mt-2">
             <button
               type="button"
               onClick={() => {
-                const pageUrl = typeof window !== 'undefined' ? window.location.href : '';
                 window.location.href = `/cart`;
               }}
-              className="h-12 flex-1 text-sm font-bold tracking-wider bg-[#18181b] hover:bg-[#27272a] text-white rounded-xl transition-colors shadow-none"
+              className="h-12 w-full text-sm font-bold bg-[#18181b] hover:bg-[#27272a] text-white rounded-xl transition-colors shadow-none flex items-center justify-center"
             >
               Buy Now
             </button>
@@ -241,7 +272,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
               stock={currentStock ?? 0}
               quantity={quantity}
               showQuantityControls={false}
-              className="h-12 flex-1 text-sm font-bold tracking-wider bg-[#F7EBF0] hover:bg-[#F0DFE6] text-[#8B1D42] rounded-xl shadow-none transition-colors border-0 flex items-center justify-center"
+              className="h-12 w-full text-sm font-bold bg-[#F7EBF0] hover:bg-[#F0DFE6] text-[#8B1D42] rounded-xl shadow-none transition-colors border-0 flex items-center justify-center"
             >
               Add to cart ({String(quantity).padStart(2, '0')})
             </AddToCartButton>
@@ -292,7 +323,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
                 </div>
               </div>
             </div>
-  
+
             {/* Right: Actions */}
             <div className="flex items-center gap-3 sm:gap-6 w-full md:w-auto justify-between md:justify-end">
               {/* Price (Mobile only) */}
@@ -302,7 +333,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
                   {formatPrice(currentPrice * quantity, "TZS")}
                 </span>
               </div>
-  
+
               <div className="flex items-center gap-3">
                 {/* QTY Selector (Desktop only) */}
                 <div className="hidden sm:flex items-center border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden h-10 bg-white dark:bg-zinc-900 shadow-none">
@@ -324,7 +355,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
                     <Plus className="w-3.5 h-3.5" />
                   </button>
                 </div>
-  
+
                 <AddToCartButton
                   productId={selectedVariant ? `${product._id}-${selectedVariant._key || selectedVariant.name}` : product._id}
                   name={selectedVariant ? `${product.name} (${selectedVariant.name})` : (product.name ?? "Unknown Product")}
