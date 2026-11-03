@@ -487,7 +487,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                             <div className="mt-8 pt-6 border-t border-[#E8E0D8] flex items-center justify-between">
                                 <label className="flex items-center gap-3 cursor-pointer">
                                     <input type="checkbox" required className="w-4 h-4 accent-[#c77e35] rounded" />
-                                    <span className="text-sm text-[#444]">I have read and agree to Stephan's Grooming Policy.</span>
+                                    <span className="text-sm text-[#444]">I have read and agreed. <span className="text-red-500 font-bold">*</span></span>
                                 </label>
                                 <Link href="/grooming-policy" className="text-xs font-bold text-[#c77e35] uppercase flex items-center gap-1 hover:underline">
                                     Read full policy <ArrowRight className="w-3 h-3" />
