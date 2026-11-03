@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { writeClient } from "@/sanity/lib/client";
 import { generateOrderPDF } from "@/lib/pdf-generator";
+import { auth } from "@/auth";
 
 interface OrderItem {
     name: string;
@@ -45,16 +46,21 @@ export async function POST(request: Request) {
         const orderNumber = generateOrderNumber();
         console.log(`🎫 Order number: ${orderNumber}`);
 
+        const session = await auth();
+        const sessionUserId = session?.user?.id || "guest";
+        const sessionEmail = session?.user?.email;
+
         // 1. Save to Sanity
         console.log("💾 Saving to Sanity...");
         const sanityOrder = await writeClient.create({
             _type: "order",
             orderNumber,
             orderDate: new Date().toISOString(),
+            createdAt: new Date().toISOString(),
             status: "pending",
             total: body.total,
-            email: body.customer.email || "customer@example.com",
-            userId: "guest",
+            email: body.customer.email || sessionEmail || "customer@example.com",
+            userId: sessionUserId,
             customerName: `${body.customer.firstName} ${body.customer.lastName}`,
             phone: body.customer.phone,
             address: {

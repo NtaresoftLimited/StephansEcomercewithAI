@@ -4,66 +4,110 @@ import { writeClient } from "@/sanity/lib/client";
 
 export async function POST(request: Request) {
   try {
-    const { name, email, password } = await request.json();
+    const { name, email, password, phone } = await request.json();
 
     if (!name || !email || !password) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Missing required fields (Name, Email, Password)" },
+        { status: 400 }
+      );
     }
 
-    // 1. Check if user already exists in Odoo
-    // We'll use search_read on res.users or res.partner
-    // Actually, Odoo's res.users is for logins, res.partner is for customers
-    // To allow login, we need a res.user.
+    const normalizedEmail = String(email).trim().toLowerCase();
+    const cleanedName = String(name).trim();
+    const cleanedPhone = phone ? String(phone).trim() : "";
 
-    // Using the admin Odoo client to create the user
-    console.log("Creating user in Odoo...");
-    
-    // First check if partner exists
-    const existingPartners = await odoo.searchRead("res.partner", [["email", "=", email]], ["id"]);
+    // 1. Check if an active or inactive user already exists with this login
+    const existingUsers = await odoo.executeKw(
+      "res.users",
+      "search_read",
+      [[["login", "=", normalizedEmail]]],
+      { fields: ["id", "partner_id", "active"], limit: 1, context: { active_test: false } }
+    );
+
+    if (Array.isArray(existingUsers) && existingUsers.length > 0) {
+      return NextResponse.json(
+        { error: "An account with this email already exists. Please sign in." },
+        { status: 409 }
+      );
+    }
+
+    // 2. Find existing partner by email or create a new customer partner
+    const existingPartners = await odoo.searchRead(
+      "res.partner",
+      [["email", "=", normalizedEmail]],
+      ["id"],
+      1
+    );
+
     let partnerId: number;
-
     if (existingPartners.length > 0) {
       partnerId = existingPartners[0].id;
     } else {
-      // Create new partner
-      partnerId = await odoo.executeKw("res.partner", "create", [{
-        name,
-        email,
-        customer_rank: 1,
-      }]);
+      partnerId = await odoo.executeKw("res.partner", "create", [
+        {
+          name: cleanedName,
+          email: normalizedEmail,
+          ...(cleanedPhone ? { phone: cleanedPhone } : {}),
+          customer_rank: 1,
+        },
+      ]);
     }
 
-    // Now create a User for this partner so they can login via XML-RPC
-    // Note: Creating res.users might require specific permissions or configurations in Odoo
-    // Alternatively, we can just use the email as login and set a password.
-    // Odoo's 'sign up' usually handles this.
-    // For this implementation, we assume we can create res.users
-    try {
-      await odoo.executeKw("res.users", "create", [{
-        name,
-        login: email,
-        partner_id: partnerId,
-        password: password,
-        groups_id: [[6, 0, []]] // Minimal groups (Internal User usually, but maybe Portal)
-      }]);
-    } catch (e: any) {
-       // If fail, maybe user already exists
-       console.warn("User creation in Odoo failed (might already exist):", e.message);
-    }
+    // 3. Look up base.group_portal so web signups are strictly Portal Users (never internal ERP staff)
+    const portalGroupData = await odoo.searchRead(
+      "ir.model.data",
+      [
+        ["module", "=", "base"],
+        ["name", "=", "group_portal"],
+      ],
+      ["res_id"],
+      1
+    );
+    const portalGroupId =
+      portalGroupData.length > 0 && portalGroupData[0].res_id
+        ? portalGroupData[0].res_id
+        : 10;
 
-    // 2. Create in Sanity
-    console.log("Creating user in Sanity...");
+    // 4. Create the Portal User in Odoo with password
+    await odoo.executeKw(
+      "res.users",
+      "create",
+      [
+        {
+          name: cleanedName,
+          login: normalizedEmail,
+          email: normalizedEmail,
+          partner_id: partnerId,
+          password: password,
+          groups_id: [[6, 0, [portalGroupId]]],
+          active: true,
+        },
+      ],
+      {
+        context: {
+          no_reset_password: true,
+          mail_create_nosubscribe: true,
+        },
+      }
+    );
+
+    // 5. Sync Customer record in Sanity
     const sanityUser = await writeClient.create({
       _type: "customer",
-      name,
-      email,
+      name: cleanedName,
+      email: normalizedEmail,
       odooPartnerId: partnerId,
       userId: partnerId.toString(),
+      createdAt: new Date().toISOString(),
     });
 
     return NextResponse.json({ success: true, userId: sanityUser._id });
   } catch (error: any) {
     console.error("Registration error:", error);
-    return NextResponse.json({ error: error.message || "Failed to register" }, { status: 500 });
+    return NextResponse.json(
+      { error: error.message || "Failed to register account" },
+      { status: 500 }
+    );
   }
 }

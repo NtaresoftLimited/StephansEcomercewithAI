@@ -1,21 +1,59 @@
 import { defineQuery } from "next-sanity";
 
 /**
- * Get orders by user ID
- * Used on orders list page
+ * Get orders by user ID or verified phone number
+ * Used on Customer Portal & orders list page
  */
 export const ORDERS_BY_USER_QUERY = defineQuery(`*[
   _type == "order"
-  && userId == $userId
+  && (userId == $userId || ($phone != "" && phone == $phone))
 ] | order(createdAt desc) {
   _id,
   orderNumber,
   total,
   status,
   createdAt,
+  customerName,
+  phone,
+  address,
+  orderDataJson,
+  items[]{
+    _key,
+    quantity,
+    priceAtPurchase,
+    productName,
+    "productRef": product._ref,
+    "resolvedName": coalesce(product->name, productName),
+    "resolvedImage": product->images[0].asset->url
+  },
   "itemCount": count(items),
-  "itemNames": items[].product->name,
+  "itemNames": items[]{ "name": coalesce(product->name, productName) }.name,
   "itemImages": items[].product->images[0].asset->url
+}`);
+
+/**
+ * Get grooming bookings by user ID or verified phone number
+ * Used on Customer Portal grooming tab
+ */
+export const GROOMING_BOOKINGS_BY_USER_QUERY = defineQuery(`*[
+  _type == "groomingBooking"
+  && (userId == $userId || ($phone != "" && customerPhone == $phone))
+] | order(appointmentDate desc) {
+  _id,
+  bookingNumber,
+  customerName,
+  customerPhone,
+  customerEmail,
+  petType,
+  petName,
+  breedSize,
+  package,
+  price,
+  additionalServices,
+  appointmentDate,
+  specialNotes,
+  status,
+  createdAt
 }`);
 
 /**
@@ -30,10 +68,15 @@ export const ORDER_BY_ID_QUERY = defineQuery(`*[
   orderNumber,
   userId,
   email,
+  customerName,
+  phone,
+  orderDataJson,
   items[]{
     _key,
     quantity,
     priceAtPurchase,
+    productName,
+    "productRef": product._ref,
     product->{
       _id,
       name,

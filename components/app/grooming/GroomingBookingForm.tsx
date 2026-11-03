@@ -49,10 +49,17 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
     // Initialize customer info from session when it becomes available
     useEffect(() => {
         if (user) {
+            const rawName = (user.name || "").trim();
+            const cleanName = rawName.startsWith("Customer (") || rawName === "Guest Shopper" ? "" : rawName;
+            const rawEmail = user.email || "";
+            const cleanEmail = rawEmail.endsWith("@whatsapp.stephanspetstore.co.tz") ? "" : rawEmail;
+            const userPhone = (user as any).phone || "";
+
             setFormData(prev => ({
                 ...prev,
-                customerName: prev.customerName || user.name || "",
-                customerEmail: prev.customerEmail || user.email || "",
+                customerName: prev.customerName || cleanName,
+                customerEmail: prev.customerEmail || cleanEmail,
+                customerPhone: prev.customerPhone || userPhone,
             }));
         }
     }, [user]);
@@ -61,6 +68,8 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
         const urlPackage = (searchParams.get("package") || "").trim();
         const urlPetType = (searchParams.get("petType") || "").trim();
         const urlSize = (searchParams.get("size") || "").trim();
+        const urlPetName = (searchParams.get("petName") || "").trim();
+        const urlDetangling = (searchParams.get("detangling") || "").trim();
         const validPackages = new Set(["standard", "premium", "super_premium"]);
         const validPetTypes = new Set(["dog", "cat", "small_animal"]);
         const next: Partial<typeof formData> = {};
@@ -73,6 +82,12 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
         const sizeSet = new Set((petTypeToUse || formData.petType) && BREED_SIZES[petTypeToUse || formData.petType].map((s) => s.value));
         if (urlSize && sizeSet.has(urlSize)) {
             next.breedSize = urlSize;
+        }
+        if (urlPetName) {
+            next.petName = urlPetName;
+        }
+        if (urlDetangling === "1" || urlDetangling === "true") {
+            next.detangling = true;
         }
         if (Object.keys(next).length > 0) {
             setFormData((prev) => ({ ...prev, ...next }));

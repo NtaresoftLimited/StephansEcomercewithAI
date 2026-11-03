@@ -13,6 +13,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense, useEffect, useRef, useState } from "react";
+import { useSession, signOut } from "next-auth/react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -39,6 +40,7 @@ function SecondaryStickyHeaderInner({
   isScrolled,
   onSearchOpen,
 }: SecondaryStickyHeaderProps) {
+  const { data: session, status } = useSession();
   const totalItems = useTotalItems();
   const [isLocating, setIsLocating] = useState(false);
   const [userLocation, setUserLocation] = useState<string | null>(null);
@@ -348,18 +350,33 @@ function SecondaryStickyHeaderInner({
               </span>
             </button>
 
-            <Link
-              href="/login"
-              className="hidden md:flex flex-col items-center gap-1 group"
-              aria-label="Log in"
-            >
-              <div className="w-8 h-8 rounded-full bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center group-hover:bg-amber-50 dark:group-hover:bg-amber-950/30 transition-colors">
-                <User className="h-4 w-4 text-zinc-600 dark:text-zinc-400 group-hover:text-amber-600 transition-colors" />
-              </div>
-              <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-tight">
-                Log in
-              </span>
-            </Link>
+            {status === "authenticated" ? (
+              <Link
+                href="/orders"
+                className="hidden md:flex flex-col items-center gap-1 group"
+                aria-label="My Account"
+              >
+                <div className="w-8 h-8 rounded-full bg-amber-50 dark:bg-amber-950/30 flex items-center justify-center group-hover:bg-amber-100 transition-colors">
+                  <User className="h-4 w-4 text-[#8b4f22] dark:text-amber-400 transition-colors" />
+                </div>
+                <span className="text-[10px] font-bold text-[#8b4f22] dark:text-amber-400 uppercase tracking-tight truncate max-w-[72px]">
+                  {session?.user?.isGuest ? "Guest" : "Account"}
+                </span>
+              </Link>
+            ) : (
+              <Link
+                href="/login"
+                className="hidden md:flex flex-col items-center gap-1 group"
+                aria-label="Log in"
+              >
+                <div className="w-8 h-8 rounded-full bg-zinc-50 dark:bg-zinc-900 flex items-center justify-center group-hover:bg-amber-50 dark:group-hover:bg-amber-950/30 transition-colors">
+                  <User className="h-4 w-4 text-zinc-600 dark:text-zinc-400 group-hover:text-amber-600 transition-colors" />
+                </div>
+                <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-tight">
+                  Log in
+                </span>
+              </Link>
+            )}
 
             <button
               type="button"
