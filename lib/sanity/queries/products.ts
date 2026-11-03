@@ -46,7 +46,8 @@ const FILTERED_PRODUCT_PROJECTION = `{
   },
   brand->{
     name,
-    "slug": slug.current
+    "slug": slug.current,
+    "logo": logo.asset->url
   },
   material,
   color,
@@ -118,7 +119,8 @@ export const ALL_PRODUCTS_QUERY = defineQuery(`*[
   },
   brand->{
     name,
-    "slug": slug.current
+    "slug": slug.current,
+    "logo": logo.asset->url
   },
   material,
   color,
@@ -179,7 +181,8 @@ export const PRODUCTS_WITH_BRANDS_QUERY = defineQuery(`*[
   },
   brand->{
     name,
-    "slug": slug.current
+    "slug": slug.current,
+    "logo": logo.asset->url
   },
   categories[]->{
     title
@@ -219,7 +222,8 @@ export const PRODUCTS_BY_CATEGORY_QUERY = defineQuery(`*[
   },
   brand->{
     name,
-    "slug": slug.current
+    "slug": slug.current,
+    "logo": logo.asset->url
   },
   material,
   color,
@@ -254,7 +258,8 @@ export const PRODUCTS_BY_BRAND_QUERY = defineQuery(`*[
   },
   brand->{
     name,
-    "slug": slug.current
+    "slug": slug.current,
+    "logo": logo.asset->url
   },
   price,
   stock
@@ -288,7 +293,8 @@ export const PRODUCT_BY_SLUG_QUERY = defineQuery(`*[
   },
   brand->{
     name,
-    "slug": slug.current
+    "slug": slug.current,
+    "logo": logo.asset->url
   },
   material,
   color,

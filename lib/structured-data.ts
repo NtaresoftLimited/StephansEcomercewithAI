@@ -147,7 +147,7 @@ export function productJsonLd(product: any) {
   const url = absoluteUrl(`/shop/${slug}`);
   const image = product.images?.[0]?.asset?.url;
   const sku = product.variants?.find((variant: any) => variant?.sku)?.sku || product._id;
-  const brandName = product.brand?.name || BUSINESS_NAME;
+  const brandName = product.brand?.name || null;
   const description = buildProductDescription(product);
 
   return {
@@ -158,10 +158,14 @@ export function productJsonLd(product: any) {
     description,
     sku,
     image: image ? [image] : undefined,
-    brand: {
-      "@type": "Brand",
-      name: brandName,
-    },
+    ...(brandName
+      ? {
+          brand: {
+            "@type": "Brand",
+            name: brandName,
+          },
+        }
+      : {}),
     category: product.categories?.map((category: any) => category.title).filter(Boolean).join(" > "),
     offers: {
       "@type": "Offer",

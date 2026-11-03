@@ -55,7 +55,7 @@ async function fetchBrand(slug: string) {
         return {
             name: "Tropidog",
             description: "High quality food for dogs.",
-            logo: null,
+            logo: "/brands/TropiDog_logo.svg",
             banner: "/Banners/Tropidog Banner.jpg"
         };
     }
@@ -64,7 +64,7 @@ async function fetchBrand(slug: string) {
         return {
             name: "Tropicat",
             description: "High quality food for cats.",
-            logo: null,
+            logo: "/brands/TropiCat_logo.svg",
             banner: "/Banners/Tropicat Banner.jpg"
         };
     }
@@ -73,7 +73,7 @@ async function fetchBrand(slug: string) {
         return {
             name: "Summit10",
             description: "Premium nutrition for your pets.",
-            logo: null,
+            logo: "/brands/Summit-10.svg",
             banner: null
         };
     }

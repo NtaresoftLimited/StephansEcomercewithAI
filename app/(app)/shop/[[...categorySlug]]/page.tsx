@@ -191,21 +191,21 @@ export default async function ProductsPage(props: ProductsPageProps) {
         ];
 
         return (
-          <div className="min-h-screen bg-white dark:bg-zinc-950 pt-6 sm:pt-10">
+          <div className="min-h-screen bg-white dark:bg-zinc-950 pt-4 sm:pt-8">
             <JsonLd data={[productJsonLd(product), breadcrumbJsonLd(breadcrumbs)]} />
-            <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
               {/* Breadcrumbs */}
-              <div className="flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400 mb-8 overflow-x-auto whitespace-nowrap scrollbar-hide">
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mb-6 overflow-x-auto whitespace-nowrap scrollbar-hide">
                 <Link href="/" className="hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
                   Home
                 </Link>
-                <ChevronRight className="w-4 h-4 flex-shrink-0" />
+                <ChevronRight className="w-3.5 h-3.5 flex-shrink-0" />
                 <Link href="/shop" className="hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">
                   Shop
                 </Link>
                 {category && (
                   <>
-                    <ChevronRight className="w-4 h-4 flex-shrink-0" />
+                    <ChevronRight className="w-3.5 h-3.5 flex-shrink-0" />
                     <Link
                       href={`/shop/${category.slug}`}
                       className="hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors capitalize"
@@ -214,21 +214,21 @@ export default async function ProductsPage(props: ProductsPageProps) {
                     </Link>
                   </>
                 )}
-                <ChevronRight className="w-4 h-4 flex-shrink-0" />
+                <ChevronRight className="w-3.5 h-3.5 flex-shrink-0" />
                 <span className="font-medium text-zinc-900 dark:text-zinc-50 truncate">
                   {product.name}
                 </span>
               </div>
 
-              <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_440px] lg:gap-14 relative items-start">
+              <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-10 relative items-start">
                 {/* Left Column: Image Gallery & Tabs */}
-                <div className="flex flex-col gap-10 min-w-0">
+                <div className="flex flex-col gap-8 min-w-0">
                   <ProductGallery images={product.images} productName={product.name} />
                   <ProductTabs product={product} relatedProducts={relatedProducts} />
                 </div>
 
                 {/* Right Column: Sticky Product Info */}
-                <div className="lg:sticky lg:top-[160px] h-fit">
+                <div className="lg:sticky lg:top-[150px] h-fit">
                   <ProductInfo product={product} />
                 </div>
               </div>

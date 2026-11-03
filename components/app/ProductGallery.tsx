@@ -96,24 +96,24 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
 
   return (
     <>
-      <div className="flex flex-col-reverse gap-4 lg:flex-row lg:items-start w-full">
+      <div className="flex flex-col-reverse gap-3 lg:flex-row lg:items-start w-full">
         {/* Left Vertical Thumbnails Strip */}
         {normalizedImages.length > 1 && (
-          <div className="relative flex flex-row lg:flex-col items-center flex-shrink-0 lg:w-20 gap-2">
+          <div className="relative flex flex-row lg:flex-col items-center flex-shrink-0 lg:w-16 gap-2">
             {/* Previous / Up Arrow */}
             <button
               type="button"
               onClick={handlePrevImage}
               aria-label="Previous image"
-              className="hidden lg:flex h-8 w-full items-center justify-center rounded-lg border border-zinc-200/80 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-500 hover:text-zinc-900 hover:border-zinc-300 dark:hover:text-zinc-100 transition-colors cursor-pointer shadow-none"
+              className="hidden lg:flex h-7 w-full items-center justify-center rounded-lg border border-zinc-200/80 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-500 hover:text-zinc-900 hover:border-zinc-300 dark:hover:text-zinc-100 transition-colors cursor-pointer shadow-none"
             >
-              <ChevronUp className="w-4 h-4" />
+              <ChevronUp className="w-3.5 h-3.5" />
             </button>
 
             {/* Thumbnail List */}
             <div
               ref={thumbContainerRef}
-              className="flex gap-2.5 overflow-x-auto w-full pb-1 lg:flex-col lg:overflow-y-auto lg:max-h-[440px] lg:pb-0 scrollbar-hide scroll-smooth"
+              className="flex gap-2 overflow-x-auto w-full pb-1 lg:flex-col lg:overflow-y-auto lg:max-h-[380px] lg:pb-0 scrollbar-hide scroll-smooth"
             >
               {normalizedImages.map((image, index) => {
                 const isSelected = selectedIndex === index;
@@ -127,7 +127,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
                     onClick={() => selectImage(index)}
                     aria-label={`View image ${index + 1}`}
                     className={cn(
-                      "relative aspect-square w-18 lg:w-full flex-shrink-0 overflow-hidden rounded-xl border bg-white dark:bg-zinc-950 transition-all duration-200 shadow-none cursor-pointer",
+                      "relative aspect-square w-16 lg:w-full flex-shrink-0 overflow-hidden rounded-xl border bg-white dark:bg-zinc-950 transition-all duration-200 shadow-none cursor-pointer",
                       isSelected
                         ? "border-zinc-900 dark:border-zinc-100 opacity-100"
                         : "border-zinc-200/80 dark:border-zinc-800 opacity-65 hover:opacity-100 hover:border-zinc-300 dark:hover:border-zinc-700"
@@ -138,7 +138,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
                       alt={`${productName} thumbnail ${index + 1}`}
                       fill
                       className="object-contain p-2 transition-transform duration-200"
-                      sizes="90px"
+                      sizes="80px"
                     />
                   </button>
                 );
@@ -150,9 +150,9 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
               type="button"
               onClick={handleNextImage}
               aria-label="Next image"
-              className="hidden lg:flex h-8 w-full items-center justify-center rounded-lg border border-zinc-200/80 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-500 hover:text-zinc-900 hover:border-zinc-300 dark:hover:text-zinc-100 transition-colors cursor-pointer shadow-none"
+              className="hidden lg:flex h-7 w-full items-center justify-center rounded-lg border border-zinc-200/80 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-500 hover:text-zinc-900 hover:border-zinc-300 dark:hover:text-zinc-100 transition-colors cursor-pointer shadow-none"
             >
-              <ChevronDown className="w-4 h-4" />
+              <ChevronDown className="w-3.5 h-3.5" />
             </button>
           </div>
         )}
@@ -161,7 +161,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
         <div className="flex-1 w-full min-w-0">
           <div
             ref={imgContainerRef}
-            className="relative aspect-square w-full overflow-hidden rounded-2xl border border-zinc-200/80 bg-white dark:border-zinc-800 dark:bg-zinc-950 cursor-crosshair group shadow-none transition-colors"
+            className="relative aspect-square w-full max-h-[460px] overflow-hidden rounded-2xl border border-zinc-200/80 bg-white dark:border-zinc-800 dark:bg-zinc-950 cursor-crosshair group shadow-none transition-colors"
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -173,8 +173,8 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
                   alt={productName ?? "Product image"}
                   fill
                   className={cn(
-                    "object-contain p-6 transition-transform duration-300 ease-out translate-z-0",
-                    isZoomed ? "scale-150" : "scale-100"
+                    "object-contain p-10 sm:p-14 transition-transform duration-300 ease-out translate-z-0",
+                    isZoomed ? "scale-135" : "scale-100"
                   )}
                   style={{
                     transformOrigin: isZoomed ? backgroundPosition : "center center",

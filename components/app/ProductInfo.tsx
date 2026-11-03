@@ -17,6 +17,7 @@ import {
 import { AddToCartButton } from "@/components/app/AddToCartButton";
 import { useCartActions } from "@/lib/store/cart-store-provider";
 import { useWishlistActions, useIsInWishlist } from "@/lib/store/wishlist-store-provider";
+import { resolveProductBrand } from "@/lib/catalog/brand-resolver";
 import { formatPrice, cn } from "@/lib/utils";
 import { toast } from "sonner";
 
@@ -72,8 +73,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
   const currentPrice = selectedVariant ? selectedVariant.price : product.price;
   const currentStock = selectedVariant ? selectedVariant.stock : (product.stock ?? 10);
   const imageUrl = product.images?.[0]?.asset?.url || (typeof product.images?.[0] === "string" ? product.images?.[0] : product.images?.[0]?.url);
-  const brandName = product.brand?.name || "Stephan's";
-  const brandSlug = product.brand?.slug?.current || product.brand?.slug || "";
+  const resolvedBrand = resolveProductBrand(product);
   const sku = product.sku || product._id?.slice(-8).toUpperCase() || "SP-001";
   const productSlug = typeof product.slug === "string" ? product.slug : product.slug?.current || "";
 
@@ -138,74 +138,89 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
   return (
     <div className="flex flex-col w-full text-left">
-      {/* 1. Top Utility Actions: Compare, Wishlist, Share */}
-      <div className="flex items-center justify-end gap-4 mb-4 text-xs font-medium text-zinc-500 dark:text-zinc-400">
-        <button
-          type="button"
-          onClick={handleToggleCompare}
-          className={cn(
-            "inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border transition-colors cursor-pointer",
-            isCompared
-              ? "border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900"
-              : "border-zinc-200/80 bg-white text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
-          )}
-        >
-          <RefreshCw className="w-3.5 h-3.5" />
-          <span>Compare</span>
-        </button>
+      {/* 1. Top Row: Original Brand Logo (Left, if available) & Utility Actions (Right) */}
+      <div className="flex items-center justify-between gap-3 mb-3">
+        {resolvedBrand?.logo ? (
+          resolvedBrand.slug ? (
+            <Link
+              href={`/brands/${resolvedBrand.slug}`}
+              aria-label={resolvedBrand.name}
+              className="inline-flex items-center shrink-0 hover:opacity-85 transition-opacity"
+            >
+              <Image
+                src={resolvedBrand.logo}
+                alt={resolvedBrand.name}
+                width={96}
+                height={32}
+                className="h-6 sm:h-7 w-auto object-contain"
+              />
+            </Link>
+          ) : (
+            <div className="inline-flex items-center shrink-0">
+              <Image
+                src={resolvedBrand.logo}
+                alt={resolvedBrand.name}
+                width={96}
+                height={32}
+                className="h-6 sm:h-7 w-auto object-contain"
+              />
+            </div>
+          )
+        ) : (
+          <div />
+        )}
 
-        <button
-          type="button"
-          onClick={handleToggleWishlist}
-          className={cn(
-            "inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border transition-colors cursor-pointer",
-            isInWishlist
-              ? "border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900"
-              : "border-zinc-200/80 bg-white text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
-          )}
-        >
-          <Heart className={cn("w-3.5 h-3.5", isInWishlist && "fill-current")} />
-          <span>Wishlist</span>
-        </button>
+        <div className="flex items-center justify-end gap-2 text-xs font-medium text-zinc-500 dark:text-zinc-400">
+          <button
+            type="button"
+            onClick={handleToggleCompare}
+            className={cn(
+              "inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border transition-colors cursor-pointer",
+              isCompared
+                ? "border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900"
+                : "border-zinc-200/80 bg-white text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
+            )}
+          >
+            <RefreshCw className="w-3.5 h-3.5" />
+            <span>Compare</span>
+          </button>
 
-        <button
-          type="button"
-          onClick={handleShare}
-          className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-zinc-200/80 bg-white text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 transition-colors cursor-pointer"
-        >
-          <Share2 className="w-3.5 h-3.5" />
-          <span>Share</span>
-        </button>
+          <button
+            type="button"
+            onClick={handleToggleWishlist}
+            className={cn(
+              "inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border transition-colors cursor-pointer",
+              isInWishlist
+                ? "border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900"
+                : "border-zinc-200/80 bg-white text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
+            )}
+          >
+            <Heart className={cn("w-3.5 h-3.5", isInWishlist && "fill-current")} />
+            <span>Wishlist</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={handleShare}
+            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-zinc-200/80 bg-white text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 transition-colors cursor-pointer"
+          >
+            <Share2 className="w-3.5 h-3.5" />
+            <span>Share</span>
+          </button>
+        </div>
       </div>
 
       {/* 2. Product Name */}
-      <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-2 leading-snug">
+      <h1 className="text-lg sm:text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50 mb-2.5 leading-snug">
         {product.name}
       </h1>
 
-      {/* 3. Brand Row */}
-      <div className="flex items-center gap-2 mb-3 text-sm">
-        <span className="text-zinc-500 dark:text-zinc-400 font-normal">Brand</span>
-        {brandSlug ? (
-          <Link
-            href={`/brands/${brandSlug}`}
-            className="font-semibold text-zinc-900 dark:text-zinc-100 hover:text-[#3e220f] underline-offset-4 hover:underline transition-colors"
-          >
-            {brandName}
-          </Link>
-        ) : (
-          <span className="font-semibold text-zinc-900 dark:text-zinc-100">
-            {brandName}
-          </span>
-        )}
-      </div>
-
-      {/* 4. Rating & SKU Row */}
-      <div className="flex items-center justify-between gap-4 pb-5 mb-6 border-b border-zinc-200/80 dark:border-zinc-800 text-sm">
+      {/* 3. Rating & SKU Row */}
+      <div className="flex items-center justify-between gap-4 pb-4 mb-5 border-b border-zinc-200/80 dark:border-zinc-800 text-xs">
         <div className="flex items-center gap-1.5">
-          <div className="flex text-zinc-300 dark:text-zinc-700 text-sm tracking-tight">☆☆☆☆☆</div>
-          <span className="font-bold text-zinc-900 dark:text-zinc-100 text-sm">0</span>
-          <span className="text-zinc-400 text-sm">/5.0</span>
+          <div className="flex text-zinc-300 dark:text-zinc-700 text-xs tracking-tight">☆☆☆☆☆</div>
+          <span className="font-bold text-zinc-900 dark:text-zinc-100 text-xs">0</span>
+          <span className="text-zinc-400 text-xs">/5.0</span>
           <span className="text-zinc-400 text-xs">(0 reviews)</span>
         </div>
 
@@ -223,37 +238,37 @@ export function ProductInfo({ product }: ProductInfoProps) {
         </div>
       </div>
 
-      {/* 5. Purchase Area - Neutral Minimalist Container */}
+      {/* 4. Purchase Area - Neutral Minimalist Container */}
       <div
         ref={purchaseBoxRef}
-        className="rounded-2xl border border-zinc-200/80 dark:border-zinc-800 p-6 mb-8 bg-white dark:bg-zinc-950 shadow-none"
+        className="rounded-2xl border border-zinc-200/80 dark:border-zinc-800 p-5 mb-6 bg-white dark:bg-zinc-950 shadow-none"
       >
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-4">
           {/* Price & Quantity Row */}
           <div className="flex items-center justify-between gap-4">
-            <span className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-zinc-50 tracking-tight">
+            <span className="text-xl sm:text-2xl font-extrabold text-zinc-900 dark:text-zinc-50 tracking-tight">
               {(currentPrice ?? 0).toLocaleString('en-US')} TZS
             </span>
 
             {/* QTY Stepper */}
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2">
               <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">QTY</span>
-              <div className="flex items-center rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 h-10 px-1 shadow-none">
+              <div className="flex items-center rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 h-9 px-1 shadow-none">
                 <button
                   type="button"
                   aria-label="Decrease quantity"
-                  className="w-8 h-full flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors cursor-pointer"
+                  className="w-7 h-full flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors cursor-pointer"
                   onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
                 >
                   <Minus className="w-3.5 h-3.5" />
                 </button>
-                <span className="w-8 text-center text-sm font-bold text-zinc-900 dark:text-zinc-100">
+                <span className="w-7 text-center text-xs font-bold text-zinc-900 dark:text-zinc-100">
                   {quantity}
                 </span>
                 <button
                   type="button"
                   aria-label="Increase quantity"
-                  className="w-8 h-full flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors cursor-pointer"
+                  className="w-7 h-full flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors cursor-pointer"
                   onClick={() => setQuantity(prev => prev + 1)}
                 >
                   <Plus className="w-3.5 h-3.5" />
@@ -292,11 +307,11 @@ export function ProductInfo({ product }: ProductInfoProps) {
           )}
 
           {/* Action Buttons: Minimalist Brand Colors */}
-          <div className="grid grid-cols-2 gap-3.5">
+          <div className="grid grid-cols-2 gap-3">
             <button
               type="button"
               onClick={handleBuyNow}
-              className="h-12 w-full text-sm font-semibold bg-[#3e220f] hover:bg-[#2a170a] text-white rounded-xl transition-colors shadow-none flex items-center justify-center cursor-pointer"
+              className="h-11 w-full text-xs sm:text-sm font-semibold bg-[#3e220f] hover:bg-[#2a170a] text-white rounded-xl transition-colors shadow-none flex items-center justify-center cursor-pointer"
             >
               Buy Now
             </button>
@@ -308,7 +323,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
               stock={currentStock ?? 0}
               quantity={quantity}
               showQuantityControls={false}
-              className="h-12 w-full text-sm font-semibold bg-zinc-100 hover:bg-zinc-200/80 text-zinc-900 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:text-zinc-100 border border-zinc-200/80 dark:border-zinc-800 rounded-xl shadow-none transition-colors flex items-center justify-center cursor-pointer"
+              className="h-11 w-full text-xs sm:text-sm font-semibold bg-zinc-100 hover:bg-zinc-200/80 text-zinc-900 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:text-zinc-100 border border-zinc-200/80 dark:border-zinc-800 rounded-xl shadow-none transition-colors flex items-center justify-center cursor-pointer"
             >
               Add to cart ({String(quantity).padStart(2, '0')})
             </AddToCartButton>
@@ -321,14 +336,14 @@ export function ProductInfo({ product }: ProductInfoProps) {
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full h-12 bg-white hover:bg-zinc-50 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-800 font-semibold text-sm rounded-xl flex items-center justify-center gap-2.5 transition-colors shadow-none"
+            className="w-full h-11 bg-white hover:bg-zinc-50 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-800 font-semibold text-xs sm:text-sm rounded-xl flex items-center justify-center gap-2 transition-colors shadow-none"
           >
             <Image
               src="/whatsapp-official.png"
               alt="WhatsApp"
-              width={22}
-              height={22}
-              className="w-5.5 h-5.5 object-contain shrink-0"
+              width={20}
+              height={20}
+              className="w-5 h-5 object-contain shrink-0"
             />
             <span>Order via WhatsApp Direct</span>
           </a>

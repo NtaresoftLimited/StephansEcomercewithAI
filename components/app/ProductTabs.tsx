@@ -6,6 +6,7 @@ import Link from "next/link";
 import { cn, formatPrice } from "@/lib/utils";
 import { Frown, ArrowRight, PackageOpen } from "lucide-react";
 import { sanityImageUrl } from "@/lib/sanity-image";
+import { resolveProductBrand } from "@/lib/catalog/brand-resolver";
 
 interface ProductTabsProps {
   product: any;
@@ -24,7 +25,8 @@ export function ProductTabs({ product, relatedProducts = [] }: ProductTabsProps)
     { id: "frequently", label: "Frequently Bought" },
   ];
 
-  const brandName = product.brand?.name || "Stephan's";
+  const resolvedBrand = resolveProductBrand(product);
+  const brandName = resolvedBrand?.name || null;
   const categoryTitle = product.categories?.[0]?.title || product.categories?.[0]?.name || "Pet Supplies";
   const sku = product.sku || product._id?.slice(-8).toUpperCase() || "SP-001";
   const material = product.material || "Premium Quality";
@@ -65,7 +67,15 @@ export function ProductTabs({ product, relatedProducts = [] }: ProductTabsProps)
                 {product.name}
               </h2>
               <p className="text-xs md:text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-                Authentic <strong className="text-zinc-800 dark:text-zinc-200">{brandName}</strong> supplies directly from <strong className="text-zinc-800 dark:text-zinc-200">Stephan&apos;s Pet Store</strong>. Engineered for optimal comfort, durability, and care.
+                {brandName ? (
+                  <>
+                    Authentic <strong className="text-zinc-800 dark:text-zinc-200">{brandName}</strong> supplies directly from <strong className="text-zinc-800 dark:text-zinc-200">Stephan&apos;s Pet Store</strong>. Engineered for optimal comfort, durability, and care.
+                  </>
+                ) : (
+                  <>
+                    Authentic pet supplies directly from <strong className="text-zinc-800 dark:text-zinc-200">Stephan&apos;s Pet Store</strong>. Engineered for optimal comfort, durability, and care.
+                  </>
+                )}
               </p>
             </div>
 
@@ -78,10 +88,12 @@ export function ProductTabs({ product, relatedProducts = [] }: ProductTabsProps)
               <div className="overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-800">
                 <table className="w-full text-left text-xs md:text-sm border-collapse">
                   <tbody>
-                    <tr className="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/70 dark:bg-zinc-900/40">
-                      <td className="w-1/3 p-3 font-semibold text-zinc-900 dark:text-zinc-100">Brand</td>
-                      <td className="w-2/3 p-3 text-zinc-700 dark:text-zinc-300">{brandName}</td>
-                    </tr>
+                    {brandName && (
+                      <tr className="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/70 dark:bg-zinc-900/40">
+                        <td className="w-1/3 p-3 font-semibold text-zinc-900 dark:text-zinc-100">Brand</td>
+                        <td className="w-2/3 p-3 text-zinc-700 dark:text-zinc-300">{brandName}</td>
+                      </tr>
+                    )}
                     <tr className="border-b border-zinc-200 dark:border-zinc-800">
                       <td className="w-1/3 p-3 font-semibold text-zinc-900 dark:text-zinc-100">Product Type</td>
                       <td className="w-2/3 p-3 text-zinc-700 dark:text-zinc-300 uppercase">{categoryTitle}</td>
