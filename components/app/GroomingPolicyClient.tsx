@@ -47,7 +47,7 @@ const POLICIES: PolicyItem[] = [
         id: "ready",
         title: "When they're\nready.",
         icon: Clock,
-        content: "Once your pet is ready, we’ll let you know.\n\nWe kindly ask that pets are collected within one hour of notification. A late pickup fee may apply when collection is delayed beyond this window."
+        content: "Once your pet is ready, we’ll let you know.\n\nWe kindly ask that pets are collected within one hour of notification. After this, a late pickup fee of TSh 20,000 per hour applies when collection is delayed beyond this window."
     }
 ];
 

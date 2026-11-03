@@ -45,7 +45,7 @@ export function GroomingPolicy() {
                             <p className="text-zinc-600 dark:text-zinc-400 text-sm">
                                 Once the grooming session is complete, we&apos;ll notify you. To maintain a calm and
                                 stress-free environment for other pets, please pick up your pet within <strong className="text-[#c77e35]">1 hour
-                                    of notification</strong>. A late pickup fee of <strong className="text-[#c77e35]">10,000 TZS per hour</strong> applies
+                                    of notification</strong>. A late pickup fee of <strong className="text-[#c77e35]">20,000 TZS per hour</strong> applies
                                 if pickup is delayed beyond this window.
                             </p>
                         </div>
