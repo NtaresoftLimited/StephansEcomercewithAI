@@ -10,8 +10,7 @@ import {
   Share2, 
   Copy, 
   Minus, 
-  Plus, 
-  MessageCircle 
+  Plus 
 } from "lucide-react";
 import { AddToCartButton } from "@/components/app/AddToCartButton";
 import { formatPrice, cn } from "@/lib/utils";
@@ -144,7 +143,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
       {/* 4. Rating & SKU Row */}
-      <div className="flex items-center justify-between gap-4 mb-5 text-sm">
+      <div className="flex items-center justify-between gap-4 mb-6 text-sm">
         <div className="flex items-center gap-1">
           <div className="flex text-zinc-300 text-sm">☆☆☆☆☆</div>
           <span className="font-bold text-zinc-900 dark:text-zinc-100 text-sm">0</span>
@@ -166,38 +165,17 @@ export function ProductInfo({ product }: ProductInfoProps) {
         </div>
       </div>
 
-      {/* 5. Pricing Section (Muted label + Full-width soft-gray rounded card) */}
-      <div className="mb-4">
-        <span className="text-sm font-semibold text-zinc-500 dark:text-zinc-400 block mb-2">
-          Pricing
-        </span>
-        <div className="w-full rounded-2xl bg-zinc-100/90 dark:bg-zinc-900 px-6 py-4 flex items-baseline">
-          <span className="text-2xl font-bold text-zinc-900 dark:text-zinc-50 tracking-tight">
-            {(currentPrice ?? 0).toLocaleString('en-US')} TZS
-          </span>
-          <span className="text-sm font-normal text-zinc-500 ml-1.5">
-            /Pc
-          </span>
-        </div>
-      </div>
-
-      {/* 6. Purchase Card - Dashed Border, Flat, NO Shadow */}
+      {/* 5. Purchase Card - Dashed Border, Flat, NO Shadow (Pricing /Pc, Out of stock, Minimum order qty removed) */}
       <div
         ref={purchaseBoxRef}
         className="border border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl p-6 mb-8 bg-white dark:bg-zinc-950 shadow-none"
       >
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-5">
           {/* Price & Quantity Row */}
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex flex-col">
-              <span className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-zinc-50 tracking-tight">
-                {(currentPrice ?? 0).toLocaleString('en-US')} TZS
-              </span>
-              {/* Note: Available/Stock text deleted and removed as requested */}
-              <p className="text-xs text-zinc-400 mt-1">
-                Minimum order qty <span className="font-bold text-zinc-800 dark:text-zinc-200">{product.min_qty || 1}</span>
-              </p>
-            </div>
+          <div className="flex items-center justify-between gap-4">
+            <span className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-zinc-50 tracking-tight">
+              {(currentPrice ?? 0).toLocaleString('en-US')} TZS
+            </span>
 
             {/* QTY Stepper */}
             <div className="flex items-center gap-3">
@@ -206,7 +184,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
                 <button
                   type="button"
                   className="w-8 h-full flex items-center justify-center text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors"
-                  onClick={() => setQuantity(prev => Math.max(product.min_qty || 1, prev - 1))}
+                  onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
                 >
                   <Minus className="w-3.5 h-3.5" />
                 </button>
@@ -254,7 +232,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
           )}
 
           {/* Action Buttons: Buy Now & Add to Cart (01) */}
-          <div className="grid grid-cols-2 gap-4 mt-2">
+          <div className="grid grid-cols-2 gap-4">
             <button
               type="button"
               onClick={() => {
@@ -278,17 +256,23 @@ export function ProductInfo({ product }: ProductInfoProps) {
             </AddToCartButton>
           </div>
 
-          {/* WhatsApp Direct Order Button */}
+          {/* WhatsApp Direct Order Button - Using Original WhatsApp Icon PNG with Original Colors */}
           <a
             href={`https://wa.me/255769324445?text=${encodeURIComponent(
               `Hi, I would like to order: ${product.name}${selectedVariant ? ` (${selectedVariant.name})` : ''} - Qty: ${quantity} - ${typeof window !== 'undefined' ? window.location.href : ''}`
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full h-12 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm rounded-xl flex items-center justify-center gap-2 transition-colors shadow-none"
+            className="w-full h-12 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm rounded-xl flex items-center justify-center gap-2.5 transition-colors shadow-none"
           >
-            <MessageCircle className="w-5 h-5 fill-current" />
-            Order via WhatsApp Direct
+            <Image
+              src="/whatsapp-official.png"
+              alt="WhatsApp"
+              width={24}
+              height={24}
+              className="w-6 h-6 object-contain shrink-0"
+            />
+            <span>Order via WhatsApp Direct</span>
           </a>
         </div>
       </div>
@@ -340,7 +324,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
                   <button
                     type="button"
                     className="px-2.5 h-full hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors border-r border-zinc-200 dark:border-zinc-800 text-zinc-500"
-                    onClick={() => setQuantity(prev => Math.max(product.min_qty || 1, prev - 1))}
+                    onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
                   >
                     <Minus className="w-3.5 h-3.5" />
                   </button>

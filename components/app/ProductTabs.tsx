@@ -14,7 +14,7 @@ interface ProductTabsProps {
 
 export function ProductTabs({ product, relatedProducts = [] }: ProductTabsProps) {
   const [activeTab, setActiveTab] = useState<
-    "description" | "related" | "reviews" | "frequently" | "seller"
+    "description" | "related" | "reviews" | "frequently"
   >("description");
 
   const tabs = [
@@ -22,14 +22,12 @@ export function ProductTabs({ product, relatedProducts = [] }: ProductTabsProps)
     { id: "related", label: "Related products" },
     { id: "reviews", label: "Reviews & Ratings" },
     { id: "frequently", label: "Frequently Bought" },
-    { id: "seller", label: "More from this Seller" },
   ];
 
   const brandName = product.brand?.name || "Stephan's";
   const categoryTitle = product.categories?.[0]?.title || product.categories?.[0]?.name || "Pet Supplies";
   const sku = product.sku || product._id?.slice(-8).toUpperCase() || "SP-001";
   const material = product.material || "Premium Quality";
-  const inStock = (product.stock ?? 1) > 0;
   const priceFormatted = formatPrice(product.price, "TZS");
 
   return (
@@ -97,24 +95,14 @@ export function ProductTabs({ product, relatedProducts = [] }: ProductTabsProps)
                       <td className="w-2/3 p-3 text-zinc-700 dark:text-zinc-300">{material}</td>
                     </tr>
                     <tr className="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/70 dark:bg-zinc-900/40">
-                      <td className="w-1/3 p-3 font-semibold text-zinc-900 dark:text-zinc-100">Availability</td>
-                      <td className="w-2/3 p-3">
-                        {inStock ? (
-                          <span className="text-emerald-600 dark:text-emerald-400 font-medium">In Stock</span>
-                        ) : (
-                          <span className="text-rose-500 font-medium">Out of Stock</span>
-                        )}
-                      </td>
-                    </tr>
-                    <tr className="border-b border-zinc-200 dark:border-zinc-800">
                       <td className="w-1/3 p-3 font-semibold text-zinc-900 dark:text-zinc-100">Selling Price</td>
                       <td className="w-2/3 p-3 font-semibold text-zinc-900 dark:text-zinc-100">{priceFormatted}</td>
                     </tr>
-                    <tr className="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/70 dark:bg-zinc-900/40">
+                    <tr className="border-b border-zinc-200 dark:border-zinc-800">
                       <td className="w-1/3 p-3 font-semibold text-zinc-900 dark:text-zinc-100">Supplier</td>
                       <td className="w-2/3 p-3 text-zinc-700 dark:text-zinc-300">Stephan&apos;s Pet Store Official</td>
                     </tr>
-                    <tr>
+                    <tr className="bg-zinc-50/70 dark:bg-zinc-900/40">
                       <td className="w-1/3 p-3 font-semibold text-zinc-900 dark:text-zinc-100">Condition</td>
                       <td className="w-2/3 p-3 text-zinc-700 dark:text-zinc-300">Brand New - 100% Genuine</td>
                     </tr>
@@ -232,24 +220,6 @@ export function ProductTabs({ product, relatedProducts = [] }: ProductTabsProps)
               </p>
               <Frown className="w-12 h-12 stroke-[1.2] text-zinc-300 dark:text-zinc-600" />
             </div>
-          </div>
-        )}
-
-        {/* 5. More From This Seller Tab */}
-        {activeTab === "seller" && (
-          <div className="animate-in fade-in duration-200 space-y-4">
-            <h3 className="text-base font-bold text-zinc-900 dark:text-zinc-100">
-              More from Stephan&apos;s Pet Store
-            </h3>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400">
-              Explore the full selection of authentic veterinary supplies, organic pet food, and accessories curated with love in Tanzania.
-            </p>
-            <Link
-              href="/shop"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#8B1D42] hover:underline pt-2"
-            >
-              Browse complete store catalog <ArrowRight className="w-4 h-4" />
-            </Link>
           </div>
         )}
 
