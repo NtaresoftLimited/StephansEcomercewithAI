@@ -29,8 +29,8 @@ export function GroomingPolicy() {
                             </div>
                             <p className="text-zinc-600 dark:text-zinc-400 text-sm">
                                 Pets showing anxiety or aggression may require extra care, time, or restraint—an
-                                additional <strong className="text-[#c77e35]">handling fee of 10,000 TZS</strong> may apply. If needed, a mild sedative
-                                may be recommended (with your consent and under veterinary supervision, <strong className="text-[#c77e35]">costing 5,000 TZS</strong>).
+                                additional <strong className="text-[#c77e35]">handling fee of 50,000 TZS</strong> may apply. If needed, a mild sedative
+                                may be recommended (with your consent and under veterinary supervision, <strong className="text-[#c77e35]">costing 50,000 TZS</strong>).
                             </p>
                         </div>
 

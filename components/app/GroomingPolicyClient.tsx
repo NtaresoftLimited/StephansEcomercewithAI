@@ -1,10 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, Home, Calendar, Scissors, Clock, X } from "lucide-react";
+import { ArrowRight, Home, Calendar, Scissors, Clock } from "lucide-react";
 import { Dialog, DialogContent, DialogTitle, DialogClose } from "@/components/ui/dialog";
 
-const POLICIES = [
+interface PolicyItem {
+    id: string;
+    title: string;
+    icon: any;
+    subtitle?: string;
+    fees?: { service: string; fee: string }[];
+    notice?: string;
+    content: string;
+    tagline?: string;
+}
+
+const POLICIES: PolicyItem[] = [
     {
         id: "private",
         title: "Private\nappointment.",
@@ -21,7 +32,16 @@ const POLICIES = [
         id: "during",
         title: "During\ntheir groom.",
         icon: Scissors,
-        content: "Every pet and every coat is different. If we find matting or tangles, we may recommend additional de-matting, a shorter trim or other care where necessary to keep your pet comfortable.\n\nSome pets may need a little more patience or support during grooming. Additional handling may be recommended where necessary. If your pet becomes too stressed or grooming becomes unsafe, we may gently adjust, pause or stop the service.\n\nYour pet’s wellbeing always comes first. If we notice anything during grooming that we feel you should know about, we’ll let you know and may recommend veterinary attention where appropriate.\n\nIf fleas or ticks are found during grooming, we may recommend appropriate treatment.\n\nDe-matting, additional handling, sedation or other care may carry an additional fee when required. Where possible, we’ll discuss this with you first."
+        subtitle: "ADDITIONAL CARE & FEES",
+        fees: [
+            { service: "Moderate Detangling", fee: "TSh 100,000" },
+            { service: "Intensive Detangling", fee: "TSh 150,000" },
+            { service: "Handling Fee", fee: "TSh 50,000" },
+            { service: "Sedation Fee", fee: "TSh 50,000" }
+        ],
+        notice: "Any additional care and fees will be discussed and agreed with you before proceeding.",
+        content: "Every pet and every coat is different. Tangled or matted coats require extra time and careful attention. Our team will assess your pet’s coat and explain the level of care needed.\n\nSome pets need a little more patience or support during grooming. Additional handling may be recommended to keep your pet and our team safe. Where sedation is considered necessary, it requires veterinary assessment and administration.\n\nYour pet’s wellbeing always comes first. If your pet becomes too stressed or grooming becomes unsafe, we may gently adjust, pause or stop the service.\n\nIf we notice anything during grooming that you should know about, we’ll let you know and may recommend veterinary attention where appropriate.\n\nIf fleas or ticks are found during grooming, we may recommend appropriate treatment.",
+        tagline: "“Your pet’s comfort. Our priority.”"
     },
     {
         id: "ready",
@@ -32,7 +52,7 @@ const POLICIES = [
 ];
 
 export function GroomingPolicyClient() {
-    const [selectedPolicy, setSelectedPolicy] = useState<typeof POLICIES[0] | null>(null);
+    const [selectedPolicy, setSelectedPolicy] = useState<PolicyItem | null>(null);
 
     return (
         <div className="min-h-screen bg-[#faf8f5] text-zinc-900 font-sans pb-24 pt-32 px-4">
@@ -72,16 +92,56 @@ export function GroomingPolicyClient() {
             </div>
 
             <Dialog open={!!selectedPolicy} onOpenChange={(open) => !open && setSelectedPolicy(null)}>
-                <DialogContent className="sm:max-w-md bg-[#faf8f5] p-8 border-[#eeebe5] rounded-3xl shadow-xl">
-                    <DialogTitle className="text-2xl font-serif text-[#1a1818] mb-4 text-center whitespace-pre-line">
-                        {selectedPolicy?.title.replace('\n', ' ')}
-                    </DialogTitle>
-                    <div className="w-8 h-px bg-[#d8d2cb] mx-auto mb-6"></div>
-                    <div className="text-[#3a3532] space-y-4 text-center leading-relaxed">
-                        {selectedPolicy?.content.split('\n\n').map((paragraph, i) => (
-                            <p key={i}>{paragraph}</p>
-                        ))}
+                <DialogContent className="sm:max-w-xl max-h-[90vh] overflow-y-auto bg-[#faf8f5] p-6 sm:p-8 border-[#eeebe5] rounded-3xl shadow-xl">
+                    <div className={selectedPolicy?.fees ? "text-left" : "text-center"}>
+                        <DialogTitle className="text-2xl font-serif text-[#1a1818] whitespace-pre-line">
+                            {selectedPolicy?.title.replace('\n', ' ')}
+                        </DialogTitle>
+                        
+                        {selectedPolicy?.subtitle && (
+                            <div className="text-xs font-bold tracking-[0.15em] text-[#7a6458] uppercase mt-2 mb-4">
+                                {selectedPolicy.subtitle}
+                            </div>
+                        )}
+
+                        <div className={`w-12 h-px bg-[#d8d2cb] mb-6 ${selectedPolicy?.fees ? "" : "mx-auto"}`}></div>
+
+                        {selectedPolicy?.fees && (
+                            <div className="mb-6 rounded-2xl bg-white border border-[#eeebe5] overflow-hidden shadow-sm">
+                                <div className="grid grid-cols-2 px-5 py-3 bg-[#f7f4ef] border-b border-[#eeebe5] text-xs font-bold uppercase tracking-wider text-[#7a6458]">
+                                    <span>Service</span>
+                                    <span className="text-right">Fee</span>
+                                </div>
+                                <div className="divide-y divide-[#eeebe5]">
+                                    {selectedPolicy.fees.map((f, i) => (
+                                        <div key={i} className="grid grid-cols-2 px-5 py-3.5 text-sm">
+                                            <span className="font-medium text-[#2d2825]">{f.service}</span>
+                                            <span className="font-semibold text-[#1a1818] text-right">{f.fee}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {selectedPolicy?.notice && (
+                            <div className="mb-6 p-4 rounded-xl bg-[#f5efe9] border border-[#e8dfd5] text-sm text-[#4a3f39] font-medium leading-relaxed">
+                                {selectedPolicy.notice}
+                            </div>
+                        )}
+
+                        <div className={`text-[#3a3532] space-y-4 leading-relaxed text-sm sm:text-base ${selectedPolicy?.fees ? "text-left" : "text-center"}`}>
+                            {selectedPolicy?.content.split('\n\n').map((paragraph, i) => (
+                                <p key={i}>{paragraph}</p>
+                            ))}
+                        </div>
+
+                        {selectedPolicy?.tagline && (
+                            <div className="mt-8 pt-6 border-t border-[#eeebe5] text-center font-serif italic text-lg sm:text-xl text-[#3a3532]">
+                                {selectedPolicy.tagline}
+                            </div>
+                        )}
                     </div>
+
                     <div className="mt-8 flex justify-center">
                         <DialogClose asChild>
                             <button className="bg-[#4a3f39] hover:bg-[#3a3532] text-white px-8 py-3 rounded-full text-sm font-bold tracking-wider uppercase transition-colors">
