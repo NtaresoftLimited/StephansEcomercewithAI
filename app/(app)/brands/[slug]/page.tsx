@@ -289,50 +289,21 @@ export default async function BrandPage(props: BrandPageProps) {
                     </div>
                 )}
 
-                {/* Brand identity overlay */}
-                <div className="absolute inset-0 flex flex-col justify-end pb-6 md:pb-8">
+                {/* Brand identity overlay (Hero logo removed per brand design) */}
+                <div className="absolute inset-0 flex flex-col justify-end pb-6 md:pb-8 pointer-events-none">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <div className="flex items-end gap-6">
-                            {/* Logo Rendering */}
-                            {((brand as any).__odooLogo || brand.logo) && (
-                                <div className="relative w-24 h-24 md:w-32 md:h-32 bg-white rounded-2xl shadow-xl flex-shrink-0 border border-zinc-100 flex items-center justify-center -mb-2 z-10 overflow-hidden">
-                                    {(() => {
-                                        const odooLogo = (brand as any).__odooLogo as string | null;
-                                        let logoSrc = brand.logo;
-
-                                        // If using Odoo logo (base64)
-                                        if (odooLogo && !logoSrc) {
-                                            logoSrc = `data:image/png;base64,${odooLogo}`;
-                                        }
-
-                                        // If local file or URL, use directly
-                                        return (
-                                            <Image
-                                                src={logoSrc}
-                                                alt={`${brand.name} logo`}
-                                                fill
-                                                className="object-contain object-left p-3"
-                                                sizes="(max-width: 768px) 96px, 128px"
-                                                priority
-                                            />
-                                        );
-                                    })()}
-                                </div>
+                        <div className="pb-1">
+                            {!brand.banner && (
+                                <h1 className="text-4xl md:text-5xl font-bold mb-2 text-zinc-800">
+                                    {brand.name}
+                                </h1>
                             )}
 
-                            <div className="pb-1">
-                                {!brand.logo && !(brand as any).__odooLogo && (
-                                    <h1 className={`text-4xl md:text-5xl font-bold mb-2 ${brand.banner ? "text-white drop-shadow-md" : "text-zinc-800"}`}>
-                                        {brand.name}
-                                    </h1>
-                                )}
-
-                                {brand.description && (
-                                    <p className={`max-w-xl text-sm md:text-base font-medium leading-relaxed ${brand.banner ? "text-white drop-shadow" : "text-zinc-600"}`}>
-                                        {brand.description}
-                                    </p>
-                                )}
-                            </div>
+                            {brand.description && (
+                                <p className={`max-w-xl text-sm md:text-base font-medium leading-relaxed ${brand.banner ? "text-white drop-shadow" : "text-zinc-600"}`}>
+                                    {brand.description}
+                                </p>
+                            )}
                         </div>
                     </div>
                 </div>

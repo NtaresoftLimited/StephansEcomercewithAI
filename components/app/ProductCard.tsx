@@ -122,22 +122,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
             {product.name}
           </h3>
           
-          {/* Stock status */}
-          <div className="mt-1">
-            {isInStock ? (
-              <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">In Stock</span>
-            ) : (
-              <span className="text-xs font-semibold text-rose-500">Out of Stock</span>
-            )}
-          </div>
 
-          {/* Star rating */}
-          <div className="flex items-center gap-1 mt-1">
-            <div className="flex text-amber-400 text-xs tracking-tighter">
-              ★★★★☆
-            </div>
-            <span className="text-[11px] text-zinc-400 font-medium">({reviewCount})</span>
-          </div>
           
           {/* Price */}
           <div className="mt-auto pt-2 flex items-baseline gap-2">
