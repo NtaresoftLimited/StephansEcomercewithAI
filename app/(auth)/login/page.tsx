@@ -379,32 +379,30 @@ function LoginContent() {
           )}
         </div>
 
-        {/* Feature Highlights Grid (Shown on main Welcome screen) */}
+        {/* Feature Highlights Plain List (No boxes, lines, or shadows - clean plain layout) */}
         {!isPasswordScreen && (
-          <div className="grid grid-cols-2 gap-2.5 rounded-xl border border-zinc-200/80 bg-white p-3 dark:border-zinc-800 dark:bg-zinc-900">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-3 px-1 py-1 text-left">
             {ACCOUNT_BENEFITS.map((perk) => {
               const Icon = perk.icon;
               return (
                 <div
                   key={perk.label}
-                  className="flex items-center gap-2.5 rounded-lg border border-zinc-200/60 bg-white p-2.5 text-left shadow-[0_1px_2px_rgb(0,0,0,0.02)] dark:border-zinc-800 dark:bg-zinc-900/60"
+                  className="flex items-center gap-2"
                 >
                   {perk.imageSrc ? (
                     <Image
                       src={perk.imageSrc}
                       alt={perk.label}
-                      width={18}
-                      height={18}
+                      width={16}
+                      height={16}
                       className="h-4 w-4 object-contain shrink-0"
                     />
                   ) : Icon ? (
                     <Icon className="h-4 w-4 text-[#8b4f22] dark:text-amber-400 shrink-0" />
                   ) : null}
-                  <div className="min-w-0 flex-1">
-                    <p className="text-xs font-bold leading-tight text-[#3e220f] dark:text-zinc-100 truncate">
-                      {perk.label}
-                    </p>
-                  </div>
+                  <span className="text-xs font-bold text-[#3e220f] dark:text-zinc-100 truncate">
+                    {perk.label}
+                  </span>
                 </div>
               );
             })}
