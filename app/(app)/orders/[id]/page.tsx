@@ -4,7 +4,7 @@ import Image from "next/image";
 import { auth } from "@/auth";
 import { ArrowLeft, CreditCard, MapPin, Download } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { sanityFetch } from "@/sanity/lib/live";
+import { client } from "@/sanity/lib/client";
 import { ORDER_BY_ID_QUERY } from "@/lib/sanity/queries/orders";
 import { getOrderStatus } from "@/lib/constants/orderStatus";
 import { formatPrice, formatDate } from "@/lib/utils";
@@ -28,10 +28,11 @@ export default async function OrderDetailPage({ params }: OrderPageProps) {
   const userId = session?.user?.id;
   const userPhone = session?.user?.phone;
 
-  const { data: order } = await sanityFetch({
-    query: ORDER_BY_ID_QUERY,
-    params: { id },
-  });
+  const order = await client.fetch(
+    ORDER_BY_ID_QUERY,
+    { id },
+    { cache: "no-store" }
+  ).catch(() => null);
 
   // Verify order exists and belongs to current user (by userId or verified phone)
   const belongsToUser =

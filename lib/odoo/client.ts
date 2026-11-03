@@ -893,7 +893,10 @@ export class OdooClient {
      */
     async resolveCustomerPartnerIds(partnerId?: number, phone?: string): Promise<number[]> {
         const partnerIds = new Set<number>();
-        if (partnerId) partnerIds.add(partnerId);
+        if (partnerId) {
+            partnerIds.add(partnerId);
+            return Array.from(partnerIds);
+        }
 
         if (phone) {
             try {

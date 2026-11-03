@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
-import { sanityFetch } from "@/sanity/lib/live";
+import { client } from "@/sanity/lib/client";
 import {
   ORDERS_BY_USER_QUERY,
   GROOMING_BOOKINGS_BY_USER_QUERY,
@@ -33,7 +33,13 @@ export default async function OrdersPage() {
     ? ""
     : rawEmail;
 
-  // Fetch Sanity data and Odoo ERP data in parallel (resolving partnerIds once)
+  // Safe timeout helper to protect Cloudflare Worker resource limits
+  const withTimeout = <T,>(promise: Promise<T>, ms: number, fallback: T): Promise<T> =>
+    Promise.race([
+      promise,
+      new Promise<T>((resolve) => setTimeout(() => resolve(fallback), ms)),
+    ]);
+
   const emptyOdooResult: [
     Awaited<ReturnType<typeof odoo.getCustomerPosOrders>>,
     Awaited<ReturnType<typeof odoo.getCustomerGroomingAppointments>>
@@ -57,20 +63,35 @@ export default async function OrdersPage() {
       : Promise.resolve(emptyOdooResult);
 
   const [
-    { data: onlineOrders },
-    { data: sanityGroomingBookings },
+    onlineOrdersResult,
+    sanityGroomingBookingsResult,
     [posOrders, odooGroomingAppointments],
   ] = await Promise.all([
-    sanityFetch({
-      query: ORDERS_BY_USER_QUERY,
-      params: { userId, phone: userPhone },
-    }),
-    sanityFetch({
-      query: GROOMING_BOOKINGS_BY_USER_QUERY,
-      params: { userId, phone: userPhone },
-    }),
-    odooPromise,
+    client
+      .fetch(
+        ORDERS_BY_USER_QUERY,
+        { userId, phone: userPhone },
+        { cache: "no-store" }
+      )
+      .catch((err) => {
+        console.warn("Could not fetch online orders from Sanity:", err);
+        return [];
+      }),
+    client
+      .fetch(
+        GROOMING_BOOKINGS_BY_USER_QUERY,
+        { userId, phone: userPhone },
+        { cache: "no-store" }
+      )
+      .catch((err) => {
+        console.warn("Could not fetch grooming bookings from Sanity:", err);
+        return [];
+      }),
+    withTimeout(odooPromise, 3500, emptyOdooResult),
   ]);
+
+  const onlineOrders = Array.isArray(onlineOrdersResult) ? onlineOrdersResult : [];
+  const sanityGroomingBookings = Array.isArray(sanityGroomingBookingsResult) ? sanityGroomingBookingsResult : [];
 
   // Merge Sanity grooming bookings and Odoo ERP grooming appointments by bookingNumber
   const groomingMap = new Map<string, PortalGroomingAppointment>();
