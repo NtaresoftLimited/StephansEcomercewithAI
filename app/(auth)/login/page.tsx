@@ -38,22 +38,18 @@ const ACCOUNT_BENEFITS = [
   {
     icon: Zap,
     label: "Check Out Faster",
-    detail: "Pre-filled delivery & contact details",
   },
   {
     icon: Receipt,
-    label: "View Orders & POS Receipts",
-    detail: "Online orders + Masaki & Mikocheni store receipts",
+    label: "View Orders",
   },
   {
     icon: Heart,
-    label: "Manage Wish Lists",
-    detail: "Save your pet's favorite food, treats & gear",
+    label: "Wish Lists",
   },
   {
     icon: Scissors,
-    label: "Grooming & Account Details",
-    detail: "Keep your profile & pet bookings up to date",
+    label: "Grooming",
   },
 ];
 
@@ -387,17 +383,14 @@ function LoginContent() {
               return (
                 <div
                   key={perk.label}
-                  className="flex items-start gap-2.5 rounded-lg bg-white/80 p-2.5 text-left shadow-[0_1px_2px_rgb(0,0,0,0.02)] dark:bg-zinc-900/60"
+                  className="flex items-center gap-2.5 rounded-lg bg-white/80 p-2.5 text-left shadow-[0_1px_2px_rgb(0,0,0,0.02)] dark:bg-zinc-900/60"
                 >
-                  <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-[#c77e35]/10 text-[#8b4f22] dark:bg-amber-500/10 dark:text-amber-400">
+                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#c77e35]/10 text-[#8b4f22] dark:bg-amber-500/10 dark:text-amber-400">
                     <Icon className="h-3.5 w-3.5" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="text-[11px] font-bold leading-tight text-[#3e220f] dark:text-zinc-100">
+                    <p className="text-xs font-bold leading-tight text-[#3e220f] dark:text-zinc-100">
                       {perk.label}
-                    </p>
-                    <p className="mt-0.5 text-[10px] leading-snug text-zinc-500 dark:text-zinc-400">
-                      {perk.detail}
                     </p>
                   </div>
                 </div>
@@ -705,12 +698,12 @@ function LoginContent() {
                   {loading ? (
                     <>
                       <Loader2 className="h-4 w-4 shrink-0 animate-spin" />
-                      <span>Sending WhatsApp Code...</span>
+                      <span>Sending Code...</span>
                     </>
                   ) : (
                     <>
                       <MessageCircle className="h-5 w-5 shrink-0" />
-                      <span>Send 6-Digit Code via WhatsApp</span>
+                      <span>Send Code</span>
                     </>
                   )}
                 </button>

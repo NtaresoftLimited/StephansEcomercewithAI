@@ -59,11 +59,18 @@ export function ProductInfo({ product }: ProductInfoProps) {
   }, []);
 
   const variants = product.variants || [];
-  const selectedVariant = variants.find((v: any) => v._key === selectedVariantId) || null;
+  // Only show variation selector when there are genuinely multiple distinct variants
+  const distinctVariantNames = new Set(
+    variants.map((v: any) => v?.name?.trim()).filter(Boolean)
+  );
+  const hasMultipleVariants = variants.length > 1 && distinctVariantNames.size > 1;
+  const selectedVariant = hasMultipleVariants
+    ? (variants.find((v: any) => (v._key || v.name) === selectedVariantId) || variants[0] || null)
+    : null;
 
   // Determine current price based on selection
-  const currentPrice = selectedVariant ? selectedVariant.price : product.price;
-  const currentStock = selectedVariant ? selectedVariant.stock : (product.stock ?? 10);
+  const currentPrice = (selectedVariant ? selectedVariant.price : null) ?? product.price ?? product.variants?.[0]?.price ?? 0;
+  const currentStock = (selectedVariant ? selectedVariant.stock : null) ?? product.stock ?? product.variants?.[0]?.stock ?? 10;
   const imageUrl = product.images?.[0]?.asset?.url || (typeof product.images?.[0] === "string" ? product.images?.[0] : product.images?.[0]?.url);
   const resolvedBrand = resolveProductBrand(product);
   const sku = product.sku || product._id?.slice(-8).toUpperCase() || "SP-001";
@@ -260,8 +267,8 @@ export function ProductInfo({ product }: ProductInfoProps) {
             </div>
           </div>
 
-          {/* Optional Variants Selector */}
-          {variants.length > 0 && (
+          {/* Optional Variants Selector - only show when genuine multiple variants exist */}
+          {hasMultipleVariants && (
             <div className="flex flex-col gap-2 pt-3 border-t border-zinc-100 dark:border-zinc-800">
               <span className="text-xs font-semibold text-zinc-500">
                 Variation: <strong className="text-zinc-900 dark:text-zinc-100">{selectedVariant?.name || "Choose"}</strong>
