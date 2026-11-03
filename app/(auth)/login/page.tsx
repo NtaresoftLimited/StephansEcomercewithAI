@@ -34,7 +34,11 @@ import {
 type AuthMode = "odoo" | "whatsapp";
 type OdooStep = "identifier" | "login_password" | "create_password";
 
-const ACCOUNT_BENEFITS = [
+const ACCOUNT_BENEFITS: Array<{
+  icon?: any;
+  imageSrc?: string;
+  label: string;
+}> = [
   {
     icon: Zap,
     label: "Check Out Faster",
@@ -48,7 +52,7 @@ const ACCOUNT_BENEFITS = [
     label: "Wish Lists",
   },
   {
-    icon: Scissors,
+    imageSrc: "/about/grooming-scissors.png",
     label: "Grooming",
   },
 ];
@@ -377,19 +381,27 @@ function LoginContent() {
 
         {/* Feature Highlights Grid (Shown on main Welcome screen) */}
         {!isPasswordScreen && (
-          <div className="grid grid-cols-2 gap-2.5 rounded-xl border border-[#c77e35]/15 bg-[#faf6f0]/70 p-3 dark:border-zinc-800 dark:bg-zinc-800/40">
+          <div className="grid grid-cols-2 gap-2.5 rounded-xl border border-zinc-200/80 bg-white p-3 dark:border-zinc-800 dark:bg-zinc-900">
             {ACCOUNT_BENEFITS.map((perk) => {
               const Icon = perk.icon;
               return (
                 <div
                   key={perk.label}
-                  className="flex items-center gap-2.5 rounded-lg bg-white/80 p-2.5 text-left shadow-[0_1px_2px_rgb(0,0,0,0.02)] dark:bg-zinc-900/60"
+                  className="flex items-center gap-2.5 rounded-lg border border-zinc-200/60 bg-white p-2.5 text-left shadow-[0_1px_2px_rgb(0,0,0,0.02)] dark:border-zinc-800 dark:bg-zinc-900/60"
                 >
-                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#c77e35]/10 text-[#8b4f22] dark:bg-amber-500/10 dark:text-amber-400">
-                    <Icon className="h-3.5 w-3.5" />
-                  </div>
+                  {perk.imageSrc ? (
+                    <Image
+                      src={perk.imageSrc}
+                      alt={perk.label}
+                      width={18}
+                      height={18}
+                      className="h-4 w-4 object-contain shrink-0"
+                    />
+                  ) : Icon ? (
+                    <Icon className="h-4 w-4 text-[#8b4f22] dark:text-amber-400 shrink-0" />
+                  ) : null}
                   <div className="min-w-0 flex-1">
-                    <p className="text-xs font-bold leading-tight text-[#3e220f] dark:text-zinc-100">
+                    <p className="text-xs font-bold leading-tight text-[#3e220f] dark:text-zinc-100 truncate">
                       {perk.label}
                     </p>
                   </div>
@@ -436,7 +448,13 @@ function LoginContent() {
                 : "text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200"
             }`}
           >
-            <MessageCircle className="h-4 w-4 shrink-0" />
+            <Image
+              src="/whatsapp-official.png"
+              alt="WhatsApp"
+              width={16}
+              height={16}
+              className="h-4 w-4 object-contain shrink-0"
+            />
             <span className="leading-none">WhatsApp OTP</span>
           </button>
         </div>
@@ -702,7 +720,13 @@ function LoginContent() {
                     </>
                   ) : (
                     <>
-                      <MessageCircle className="h-5 w-5 shrink-0" />
+                      <Image
+                        src="/whatsapp-official.png"
+                        alt="WhatsApp"
+                        width={20}
+                        height={20}
+                        className="h-5 w-5 object-contain shrink-0"
+                      />
                       <span>Send Code</span>
                     </>
                   )}
