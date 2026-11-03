@@ -193,7 +193,7 @@ export default async function ProductsPage(props: ProductsPageProps) {
         return (
           <div className="min-h-screen bg-white dark:bg-zinc-950 pt-4 sm:pt-8">
             <JsonLd data={[productJsonLd(product), breadcrumbJsonLd(breadcrumbs)]} />
-            <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
               {/* Breadcrumbs */}
               <div className="flex items-center gap-2 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mb-6 overflow-x-auto whitespace-nowrap scrollbar-hide">
                 <Link href="/" className="hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors">

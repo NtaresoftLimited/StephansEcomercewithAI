@@ -5,15 +5,7 @@ import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { 
-  RefreshCw, 
-  Heart, 
-  Share2, 
-  Copy, 
-  Minus, 
-  Plus,
-  Check
-} from "lucide-react";
+import { RefreshCw, Heart, Copy, Minus, Plus, Check } from "lucide-react";
 import { AddToCartButton } from "@/components/app/AddToCartButton";
 import { useCartActions } from "@/lib/store/cart-store-provider";
 import { useWishlistActions, useIsInWishlist } from "@/lib/store/wishlist-store-provider";
@@ -197,15 +189,6 @@ export function ProductInfo({ product }: ProductInfoProps) {
           >
             <Heart className={cn("w-3.5 h-3.5", isInWishlist && "fill-current")} />
             <span>Wishlist</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={handleShare}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-zinc-200/80 bg-white text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 transition-colors cursor-pointer"
-          >
-            <Share2 className="w-3.5 h-3.5" />
-            <span>Share</span>
           </button>
         </div>
       </div>
