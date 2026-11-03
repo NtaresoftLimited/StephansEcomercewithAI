@@ -191,7 +191,7 @@ export default async function ProductsPage(props: ProductsPageProps) {
         ];
 
         return (
-          <div className="min-h-screen bg-[#FAF7F2] dark:bg-zinc-950 pt-20">
+          <div className="min-h-screen bg-white dark:bg-zinc-950 pt-6 sm:pt-10">
             <JsonLd data={[productJsonLd(product), breadcrumbJsonLd(breadcrumbs)]} />
             <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
               {/* Breadcrumbs */}

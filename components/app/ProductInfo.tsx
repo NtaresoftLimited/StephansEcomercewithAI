@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { 
@@ -10,9 +11,12 @@ import {
   Share2, 
   Copy, 
   Minus, 
-  Plus 
+  Plus,
+  Check
 } from "lucide-react";
 import { AddToCartButton } from "@/components/app/AddToCartButton";
+import { useCartActions } from "@/lib/store/cart-store-provider";
+import { useWishlistActions, useIsInWishlist } from "@/lib/store/wishlist-store-provider";
 import { formatPrice, cn } from "@/lib/utils";
 import { toast } from "sonner";
 
@@ -21,12 +25,18 @@ interface ProductInfoProps {
 }
 
 export function ProductInfo({ product }: ProductInfoProps) {
+  const router = useRouter();
+  const { addItem } = useCartActions();
+  const { toggleItem } = useWishlistActions();
+  const isInWishlist = useIsInWishlist(product?._id ?? "");
+
   const [selectedVariantId, setSelectedVariantId] = useState<string | null>(
     product.variants?.[0]?._key || null
   );
 
   const [quantity, setQuantity] = useState(1);
-  const [isWishlisted, setIsWishlisted] = useState(false);
+  const [isCompared, setIsCompared] = useState(false);
+  const [copiedSku, setCopiedSku] = useState(false);
   const [showStickyBar, setShowStickyBar] = useState(false);
   const [mounted, setMounted] = useState(false);
   const purchaseBoxRef = useRef<HTMLDivElement>(null);
@@ -64,7 +74,33 @@ export function ProductInfo({ product }: ProductInfoProps) {
   const imageUrl = product.images?.[0]?.asset?.url || (typeof product.images?.[0] === "string" ? product.images?.[0] : product.images?.[0]?.url);
   const brandName = product.brand?.name || "Stephan's";
   const brandSlug = product.brand?.slug?.current || product.brand?.slug || "";
-  const sku = product.sku || product._id?.slice(-8).toUpperCase() || "H370BIT";
+  const sku = product.sku || product._id?.slice(-8).toUpperCase() || "SP-001";
+  const productSlug = typeof product.slug === "string" ? product.slug : product.slug?.current || "";
+
+  const handleToggleWishlist = () => {
+    const added = toggleItem({
+      productId: product._id,
+      name: product.name ?? "Product",
+      price: currentPrice ?? 0,
+      image: imageUrl ?? undefined,
+      slug: productSlug,
+    });
+    if (added) {
+      toast.success("Added to wishlist");
+    } else {
+      toast.info("Removed from wishlist");
+    }
+  };
+
+  const handleToggleCompare = () => {
+    const next = !isCompared;
+    setIsCompared(next);
+    if (next) {
+      toast.success("Added to compare list");
+    } else {
+      toast.info("Removed from compare list");
+    }
+  };
 
   const handleShare = () => {
     if (typeof navigator !== "undefined" && navigator.share) {
@@ -74,25 +110,45 @@ export function ProductInfo({ product }: ProductInfoProps) {
       }).catch(() => {});
     } else if (typeof navigator !== "undefined") {
       navigator.clipboard.writeText(window.location.href);
-      toast.success("Link copied to clipboard!");
+      toast.success("Product link copied to clipboard");
     }
   };
 
   const handleCopySku = () => {
     if (typeof navigator !== "undefined") {
       navigator.clipboard.writeText(sku);
-      toast.success("SKU copied to clipboard!");
+      setCopiedSku(true);
+      toast.success("SKU copied to clipboard");
+      setTimeout(() => setCopiedSku(false), 2000);
     }
+  };
+
+  const handleBuyNow = () => {
+    addItem(
+      {
+        productId: selectedVariant ? `${product._id}-${selectedVariant._key || selectedVariant.name}` : product._id,
+        name: selectedVariant ? `${product.name} (${selectedVariant.name})` : (product.name ?? "Product"),
+        price: currentPrice ?? 0,
+        image: imageUrl ?? undefined,
+      },
+      quantity
+    );
+    router.push("/checkout");
   };
 
   return (
     <div className="flex flex-col w-full text-left">
       {/* 1. Top Utility Actions: Compare, Wishlist, Share */}
-      <div className="flex items-center justify-end gap-5 mb-4 text-xs font-normal text-zinc-500 dark:text-zinc-400">
+      <div className="flex items-center justify-end gap-4 mb-4 text-xs font-medium text-zinc-500 dark:text-zinc-400">
         <button
           type="button"
-          onClick={() => toast.success("Added to compare list")}
-          className="flex items-center gap-1.5 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+          onClick={handleToggleCompare}
+          className={cn(
+            "inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border transition-colors cursor-pointer",
+            isCompared
+              ? "border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900"
+              : "border-zinc-200/80 bg-white text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
+          )}
         >
           <RefreshCw className="w-3.5 h-3.5" />
           <span>Compare</span>
@@ -100,20 +156,22 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
         <button
           type="button"
-          onClick={() => {
-            setIsWishlisted(!isWishlisted);
-            toast.success(isWishlisted ? "Removed from Wishlist" : "Added to Wishlist");
-          }}
-          className="flex items-center gap-1.5 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+          onClick={handleToggleWishlist}
+          className={cn(
+            "inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border transition-colors cursor-pointer",
+            isInWishlist
+              ? "border-zinc-900 bg-zinc-900 text-white dark:border-zinc-100 dark:bg-zinc-100 dark:text-zinc-900"
+              : "border-zinc-200/80 bg-white text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
+          )}
         >
-          <Heart className={cn("w-3.5 h-3.5", isWishlisted && "fill-red-500 text-red-500")} />
+          <Heart className={cn("w-3.5 h-3.5", isInWishlist && "fill-current")} />
           <span>Wishlist</span>
         </button>
 
         <button
           type="button"
           onClick={handleShare}
-          className="flex items-center gap-1.5 hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+          className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-zinc-200/80 bg-white text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 transition-colors cursor-pointer"
         >
           <Share2 className="w-3.5 h-3.5" />
           <span>Share</span>
@@ -126,29 +184,29 @@ export function ProductInfo({ product }: ProductInfoProps) {
       </h1>
 
       {/* 3. Brand Row */}
-      <div className="flex items-center gap-2 mb-2 text-sm">
-        <span className="text-zinc-900 dark:text-zinc-100 font-normal">Brand</span>
+      <div className="flex items-center gap-2 mb-3 text-sm">
+        <span className="text-zinc-500 dark:text-zinc-400 font-normal">Brand</span>
         {brandSlug ? (
           <Link
             href={`/brands/${brandSlug}`}
-            className="font-semibold text-[#8B1D42] hover:underline"
+            className="font-semibold text-zinc-900 dark:text-zinc-100 hover:text-[#3e220f] underline-offset-4 hover:underline transition-colors"
           >
             {brandName}
           </Link>
         ) : (
-          <span className="font-semibold text-[#8B1D42]">
+          <span className="font-semibold text-zinc-900 dark:text-zinc-100">
             {brandName}
           </span>
         )}
       </div>
 
       {/* 4. Rating & SKU Row */}
-      <div className="flex items-center justify-between gap-4 mb-6 text-sm">
-        <div className="flex items-center gap-1">
-          <div className="flex text-zinc-300 text-sm">☆☆☆☆☆</div>
+      <div className="flex items-center justify-between gap-4 pb-5 mb-6 border-b border-zinc-200/80 dark:border-zinc-800 text-sm">
+        <div className="flex items-center gap-1.5">
+          <div className="flex text-zinc-300 dark:text-zinc-700 text-sm tracking-tight">☆☆☆☆☆</div>
           <span className="font-bold text-zinc-900 dark:text-zinc-100 text-sm">0</span>
           <span className="text-zinc-400 text-sm">/5.0</span>
-          <span className="text-zinc-400 text-xs ml-0.5">(0 reviews)</span>
+          <span className="text-zinc-400 text-xs">(0 reviews)</span>
         </div>
 
         <div className="flex items-center gap-2 text-xs">
@@ -157,18 +215,18 @@ export function ProductInfo({ product }: ProductInfoProps) {
           <button
             type="button"
             onClick={handleCopySku}
-            className="text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors"
+            className="p-1 rounded-md text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 dark:hover:text-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
             title="Copy SKU"
           >
-            <Copy className="w-3.5 h-3.5" />
+            {copiedSku ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
           </button>
         </div>
       </div>
 
-      {/* 5. Purchase Card - Dashed Border, Flat, NO Shadow (Pricing /Pc, Out of stock, Minimum order qty removed) */}
+      {/* 5. Purchase Area - Neutral Minimalist Container */}
       <div
         ref={purchaseBoxRef}
-        className="border border-dashed border-zinc-300 dark:border-zinc-700 rounded-2xl p-6 mb-8 bg-white dark:bg-zinc-950 shadow-none"
+        className="rounded-2xl border border-zinc-200/80 dark:border-zinc-800 p-6 mb-8 bg-white dark:bg-zinc-950 shadow-none"
       >
         <div className="flex flex-col gap-5">
           {/* Price & Quantity Row */}
@@ -178,12 +236,13 @@ export function ProductInfo({ product }: ProductInfoProps) {
             </span>
 
             {/* QTY Stepper */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5">
               <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">QTY</span>
               <div className="flex items-center rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 h-10 px-1 shadow-none">
                 <button
                   type="button"
-                  className="w-8 h-full flex items-center justify-center text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors"
+                  aria-label="Decrease quantity"
+                  className="w-8 h-full flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors cursor-pointer"
                   onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
                 >
                   <Minus className="w-3.5 h-3.5" />
@@ -193,7 +252,8 @@ export function ProductInfo({ product }: ProductInfoProps) {
                 </span>
                 <button
                   type="button"
-                  className="w-8 h-full flex items-center justify-center text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors"
+                  aria-label="Increase quantity"
+                  className="w-8 h-full flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors cursor-pointer"
                   onClick={() => setQuantity(prev => prev + 1)}
                 >
                   <Plus className="w-3.5 h-3.5" />
@@ -217,10 +277,10 @@ export function ProductInfo({ product }: ProductInfoProps) {
                       type="button"
                       onClick={() => setSelectedVariantId(v._key || v.name)}
                       className={cn(
-                        "px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors shadow-none",
+                        "px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors shadow-none cursor-pointer",
                         isSelected
-                          ? "bg-[#18181b] text-white border-[#18181b]"
-                          : "bg-white dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 border-zinc-200 dark:border-zinc-700 hover:border-zinc-400"
+                          ? "bg-[#3e220f] text-white border-[#3e220f]"
+                          : "bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-200 border-zinc-200 dark:border-zinc-700 hover:border-zinc-400"
                       )}
                     >
                       {v.name}
@@ -231,14 +291,12 @@ export function ProductInfo({ product }: ProductInfoProps) {
             </div>
           )}
 
-          {/* Action Buttons: Buy Now & Add to Cart (01) */}
-          <div className="grid grid-cols-2 gap-4">
+          {/* Action Buttons: Minimalist Brand Colors */}
+          <div className="grid grid-cols-2 gap-3.5">
             <button
               type="button"
-              onClick={() => {
-                window.location.href = `/cart`;
-              }}
-              className="h-12 w-full text-sm font-bold bg-[#18181b] hover:bg-[#27272a] text-white rounded-xl transition-colors shadow-none flex items-center justify-center"
+              onClick={handleBuyNow}
+              className="h-12 w-full text-sm font-semibold bg-[#3e220f] hover:bg-[#2a170a] text-white rounded-xl transition-colors shadow-none flex items-center justify-center cursor-pointer"
             >
               Buy Now
             </button>
@@ -250,27 +308,27 @@ export function ProductInfo({ product }: ProductInfoProps) {
               stock={currentStock ?? 0}
               quantity={quantity}
               showQuantityControls={false}
-              className="h-12 w-full text-sm font-bold bg-[#F7EBF0] hover:bg-[#F0DFE6] text-[#8B1D42] rounded-xl shadow-none transition-colors border-0 flex items-center justify-center"
+              className="h-12 w-full text-sm font-semibold bg-zinc-100 hover:bg-zinc-200/80 text-zinc-900 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:text-zinc-100 border border-zinc-200/80 dark:border-zinc-800 rounded-xl shadow-none transition-colors flex items-center justify-center cursor-pointer"
             >
               Add to cart ({String(quantity).padStart(2, '0')})
             </AddToCartButton>
           </div>
 
-          {/* WhatsApp Direct Order Button - Using Original WhatsApp Icon PNG with Original Colors */}
+          {/* WhatsApp Direct Order Button - Minimalist Neutral Button with Original Full-Color WhatsApp PNG */}
           <a
             href={`https://wa.me/255769324445?text=${encodeURIComponent(
               `Hi, I would like to order: ${product.name}${selectedVariant ? ` (${selectedVariant.name})` : ''} - Qty: ${quantity} - ${typeof window !== 'undefined' ? window.location.href : ''}`
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full h-12 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm rounded-xl flex items-center justify-center gap-2.5 transition-colors shadow-none"
+            className="w-full h-12 bg-white hover:bg-zinc-50 dark:bg-zinc-900 dark:hover:bg-zinc-800 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-800 font-semibold text-sm rounded-xl flex items-center justify-center gap-2.5 transition-colors shadow-none"
           >
             <Image
               src="/whatsapp-official.png"
               alt="WhatsApp"
-              width={24}
-              height={24}
-              className="w-6 h-6 object-contain shrink-0"
+              width={22}
+              height={22}
+              className="w-5.5 h-5.5 object-contain shrink-0"
             />
             <span>Order via WhatsApp Direct</span>
           </a>
@@ -348,7 +406,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
                   stock={currentStock ?? 0}
                   quantity={quantity}
                   showQuantityControls={false}
-                  className="h-10 sm:h-11 px-6 sm:px-8 text-xs font-bold tracking-wider bg-[#8B1D42] text-white hover:bg-[#721735] rounded-xl shadow-none transition-colors"
+                  className="h-10 sm:h-11 px-6 sm:px-8 text-xs font-semibold tracking-wider bg-[#3e220f] text-white hover:bg-[#2a170a] rounded-xl shadow-none transition-colors"
                 >
                   Add to Cart ({String(quantity).padStart(2, '0')})
                 </AddToCartButton>

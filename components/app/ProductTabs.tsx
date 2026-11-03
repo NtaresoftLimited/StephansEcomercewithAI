@@ -42,13 +42,13 @@ export function ProductTabs({ product, relatedProducts = [] }: ProductTabsProps)
             className={cn(
               "relative pb-3 text-sm font-semibold tracking-wide whitespace-nowrap transition-colors",
               activeTab === tab.id
-                ? "text-[#8B1D42] dark:text-rose-400 font-bold"
+                ? "text-zinc-900 dark:text-zinc-100 font-bold"
                 : "text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
             )}
           >
             {tab.label}
             {activeTab === tab.id && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#8B1D42] dark:bg-rose-400" />
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#3e220f] dark:bg-zinc-100" />
             )}
           </button>
         ))}

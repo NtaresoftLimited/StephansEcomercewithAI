@@ -20,6 +20,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
   const [backgroundPosition, setBackgroundPosition] = useState("0% 0%");
   const imgContainerRef = useRef<HTMLDivElement>(null);
   const thumbContainerRef = useRef<HTMLDivElement>(null);
+  const thumbRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   const normalizedImages = (images || []).map((img, idx) => {
     const url = img?.asset?.url || (typeof img === "string" ? img : img?.url) || "";
@@ -28,6 +29,24 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
       url,
     };
   }).filter(img => Boolean(img.url));
+
+  const selectImage = useCallback((index: number) => {
+    if (normalizedImages.length === 0) return;
+    const nextIdx = (index + normalizedImages.length) % normalizedImages.length;
+    setSelectedIndex(nextIdx);
+    const btn = thumbRefs.current[nextIdx];
+    if (btn && thumbContainerRef.current) {
+      btn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+    }
+  }, [normalizedImages.length]);
+
+  const handlePrevImage = useCallback(() => {
+    selectImage(selectedIndex - 1);
+  }, [selectImage, selectedIndex]);
+
+  const handleNextImage = useCallback(() => {
+    selectImage(selectedIndex + 1);
+  }, [selectImage, selectedIndex]);
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!imgContainerRef.current) return;
@@ -43,31 +62,13 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
     setBackgroundPosition("0% 0%");
   };
 
-  const scrollThumbnails = (direction: "up" | "down" | "left" | "right") => {
-    if (!thumbContainerRef.current) return;
-    const scrollAmount = 100;
-    if (direction === "up") {
-      thumbContainerRef.current.scrollBy({ top: -scrollAmount, behavior: "smooth" });
-    } else if (direction === "down") {
-      thumbContainerRef.current.scrollBy({ top: scrollAmount, behavior: "smooth" });
-    } else if (direction === "left") {
-      thumbContainerRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-    } else if (direction === "right") {
-      thumbContainerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    }
-  };
-
   // Keyboard navigation for Lightbox
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (!lightboxOpen) return;
     if (e.key === "Escape") setLightboxOpen(false);
-    if (e.key === "ArrowLeft") {
-      setSelectedIndex(prev => (prev > 0 ? prev - 1 : normalizedImages.length - 1));
-    }
-    if (e.key === "ArrowRight") {
-      setSelectedIndex(prev => (prev < normalizedImages.length - 1 ? prev + 1 : 0));
-    }
-  }, [lightboxOpen, normalizedImages.length]);
+    if (e.key === "ArrowLeft") handlePrevImage();
+    if (e.key === "ArrowRight") handleNextImage();
+  }, [lightboxOpen, handlePrevImage, handleNextImage]);
 
   useEffect(() => {
     if (lightboxOpen) {
@@ -84,7 +85,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
 
   if (normalizedImages.length === 0) {
     return (
-      <div className="flex aspect-square items-center justify-center rounded-2xl border border-zinc-200/90 bg-white dark:border-zinc-800 dark:bg-zinc-950 shadow-none">
+      <div className="flex aspect-square items-center justify-center rounded-2xl border border-zinc-200/80 bg-white dark:border-zinc-800 dark:bg-zinc-950 shadow-none">
         <span className="text-zinc-400 text-sm">No images available</span>
       </div>
     );
@@ -96,25 +97,23 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
   return (
     <>
       <div className="flex flex-col-reverse gap-4 lg:flex-row lg:items-start w-full">
-        {/* Left Thumbnails Slider (Inspired by Dukanikwetu Image Gallery) */}
+        {/* Left Vertical Thumbnails Strip */}
         {normalizedImages.length > 1 && (
-          <div className="relative flex flex-col items-center flex-shrink-0 lg:w-20 xl:w-22">
-            {/* Scroll Up Button (Desktop) */}
-            {normalizedImages.length > 4 && (
-              <button
-                type="button"
-                onClick={() => scrollThumbnails("up")}
-                aria-label="Scroll thumbnails up"
-                className="hidden lg:flex w-full items-center justify-center py-1 mb-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors"
-              >
-                <ChevronUp className="w-5 h-5" />
-              </button>
-            )}
+          <div className="relative flex flex-row lg:flex-col items-center flex-shrink-0 lg:w-20 gap-2">
+            {/* Previous / Up Arrow */}
+            <button
+              type="button"
+              onClick={handlePrevImage}
+              aria-label="Previous image"
+              className="hidden lg:flex h-8 w-full items-center justify-center rounded-lg border border-zinc-200/80 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-500 hover:text-zinc-900 hover:border-zinc-300 dark:hover:text-zinc-100 transition-colors cursor-pointer shadow-none"
+            >
+              <ChevronUp className="w-4 h-4" />
+            </button>
 
             {/* Thumbnail List */}
             <div
               ref={thumbContainerRef}
-              className="flex gap-2.5 overflow-x-auto w-full pb-2 lg:flex-col lg:overflow-y-auto lg:max-h-[500px] lg:pb-0 scrollbar-hide scroll-smooth"
+              className="flex gap-2.5 overflow-x-auto w-full pb-1 lg:flex-col lg:overflow-y-auto lg:max-h-[440px] lg:pb-0 scrollbar-hide scroll-smooth"
             >
               {normalizedImages.map((image, index) => {
                 const isSelected = selectedIndex === index;
@@ -123,21 +122,22 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
                 return (
                   <button
                     key={image.id}
+                    ref={(el) => { thumbRefs.current[index] = el; }}
                     type="button"
-                    onClick={() => setSelectedIndex(index)}
+                    onClick={() => selectImage(index)}
                     aria-label={`View image ${index + 1}`}
                     className={cn(
-                      "relative aspect-square w-18 lg:w-full flex-shrink-0 overflow-hidden rounded-xl border bg-white dark:bg-zinc-900 transition-all duration-200 shadow-none cursor-pointer",
+                      "relative aspect-square w-18 lg:w-full flex-shrink-0 overflow-hidden rounded-xl border bg-white dark:bg-zinc-950 transition-all duration-200 shadow-none cursor-pointer",
                       isSelected
-                        ? "border-[#8B1D42] ring-2 ring-[#8B1D42]/30 opacity-100"
-                        : "border-zinc-200 dark:border-zinc-800 opacity-60 hover:opacity-100 hover:border-zinc-300 dark:hover:border-zinc-700"
+                        ? "border-zinc-900 dark:border-zinc-100 opacity-100"
+                        : "border-zinc-200/80 dark:border-zinc-800 opacity-65 hover:opacity-100 hover:border-zinc-300 dark:hover:border-zinc-700"
                     )}
                   >
                     <Image
                       src={thumbUrl}
                       alt={`${productName} thumbnail ${index + 1}`}
                       fill
-                      className="object-contain p-2 transition-transform duration-200 hover:scale-105"
+                      className="object-contain p-2 transition-transform duration-200"
                       sizes="90px"
                     />
                   </button>
@@ -145,17 +145,15 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
               })}
             </div>
 
-            {/* Scroll Down Button (Desktop) */}
-            {normalizedImages.length > 4 && (
-              <button
-                type="button"
-                onClick={() => scrollThumbnails("down")}
-                aria-label="Scroll thumbnails down"
-                className="hidden lg:flex w-full items-center justify-center py-1 mt-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 transition-colors"
-              >
-                <ChevronDown className="w-5 h-5" />
-              </button>
-            )}
+            {/* Next / Down Arrow */}
+            <button
+              type="button"
+              onClick={handleNextImage}
+              aria-label="Next image"
+              className="hidden lg:flex h-8 w-full items-center justify-center rounded-lg border border-zinc-200/80 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-500 hover:text-zinc-900 hover:border-zinc-300 dark:hover:text-zinc-100 transition-colors cursor-pointer shadow-none"
+            >
+              <ChevronDown className="w-4 h-4" />
+            </button>
           </div>
         )}
 
@@ -163,7 +161,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
         <div className="flex-1 w-full min-w-0">
           <div
             ref={imgContainerRef}
-            className="relative aspect-square w-full overflow-hidden rounded-2xl border border-zinc-200/90 bg-white dark:border-zinc-800 dark:bg-zinc-950 cursor-crosshair group shadow-none transition-colors"
+            className="relative aspect-square w-full overflow-hidden rounded-2xl border border-zinc-200/80 bg-white dark:border-zinc-800 dark:bg-zinc-950 cursor-crosshair group shadow-none transition-colors"
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -185,7 +183,35 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
                   priority
                 />
 
-                {/* Dukanikwetu-style Expandable "Click to Enlarge" Pill */}
+                {/* Previous / Next Overlay Arrows on Main Gallery Image */}
+                {normalizedImages.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handlePrevImage();
+                      }}
+                      aria-label="Previous image"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full border border-zinc-200/90 dark:border-zinc-700 bg-white/95 dark:bg-zinc-900/95 text-zinc-700 dark:text-zinc-200 flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-[#3e220f] hover:text-white hover:border-[#3e220f] transition-all duration-200 shadow-none cursor-pointer z-10"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleNextImage();
+                      }}
+                      aria-label="Next image"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full border border-zinc-200/90 dark:border-zinc-700 bg-white/95 dark:bg-zinc-900/95 text-zinc-700 dark:text-zinc-200 flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-[#3e220f] hover:text-white hover:border-[#3e220f] transition-all duration-200 shadow-none cursor-pointer z-10"
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </>
+                )}
+
+                {/* Expandable "Click to Enlarge" Pill */}
                 <button
                   type="button"
                   onClick={() => setLightboxOpen(true)}
@@ -224,7 +250,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
           {normalizedImages.length > 1 && (
             <button
               type="button"
-              onClick={() => setSelectedIndex(prev => (prev > 0 ? prev - 1 : normalizedImages.length - 1))}
+              onClick={handlePrevImage}
               aria-label="Previous image"
               className="absolute left-4 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer z-20 shadow-none border-0"
             >
@@ -249,7 +275,7 @@ export function ProductGallery({ images, productName }: ProductGalleryProps) {
           {normalizedImages.length > 1 && (
             <button
               type="button"
-              onClick={() => setSelectedIndex(prev => (prev < normalizedImages.length - 1 ? prev + 1 : 0))}
+              onClick={handleNextImage}
               aria-label="Next image"
               className="absolute right-4 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer z-20 shadow-none border-0"
             >
