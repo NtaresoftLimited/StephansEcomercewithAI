@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -86,6 +86,18 @@ function LoginContent() {
 
   const digitCount = odooPassword.replace(/\D/g, "").length;
   const isPasswordValidLength = digitCount >= 4;
+
+  // Handle any auth error query parameter gracefully
+  useEffect(() => {
+    const errorParam = searchParams.get("error");
+    if (errorParam) {
+      if (errorParam === "CredentialsSignin") {
+        toast.error("Invalid login credentials. Please try again.");
+      } else if (errorParam !== "Configuration") {
+        toast.info("Please sign in to access your account.");
+      }
+    }
+  }, [searchParams]);
 
   // Step 1: Check Phone Number or Email in Odoo
   async function handleOdooIdentifierContinue(

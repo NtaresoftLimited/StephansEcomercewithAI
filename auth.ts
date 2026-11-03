@@ -82,9 +82,14 @@ async function resolveOrSyncCustomer(params: {
   }
 }
 
+const AUTH_SECRET =
+  process.env.AUTH_SECRET ||
+  process.env.NEXTAUTH_SECRET ||
+  "2c9969d0ec724d6c9d0f95b2ef638b9f";
+
 export const { handlers, auth, signIn, signOut } = NextAuth({
   trustHost: true,
-  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
+  secret: AUTH_SECRET,
   providers: [
     // 1. Native Odoo Email & Password Provider
     Credentials({
@@ -230,5 +235,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   pages: {
     signIn: "/login",
+    error: "/login",
   },
 });
