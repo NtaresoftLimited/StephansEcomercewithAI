@@ -1,4 +1,4 @@
-import React from "react";
+import React, { cache } from "react";
 import { CategoryNavigationSection } from "@/components/app/CategoryNavigationSection";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
@@ -35,6 +35,16 @@ import { getCachedOdooCatalog, getCachedOdooCategories } from "@/lib/catalog/ser
 
 export const revalidate = 300;
 
+// Metadata and the product page request the same record. React cache keeps
+// that lookup to one Sanity round trip for a render.
+const getSanityProduct = cache(async (slug: string) => {
+  const { data } = await sanityFetch({
+    query: PRODUCT_BY_SLUG_QUERY,
+    params: { slug },
+  });
+  return data;
+});
+
 export async function generateMetadata(props: ProductsPageProps): Promise<Metadata> {
   const searchParams = await props.searchParams;
   const pathParams = await props.params;
@@ -45,10 +55,7 @@ export async function generateMetadata(props: ProductsPageProps): Promise<Metada
   if (categoryParam) {
     if (pathParams?.categorySlug?.length === 1) {
       try {
-        const { data: product } = await sanityFetch({
-          query: PRODUCT_BY_SLUG_QUERY,
-          params: { slug: categoryParam },
-        });
+        const product = await getSanityProduct(categoryParam);
 
         if (product) {
           const path = `/shop/${product.slug || categoryParam}`;
@@ -138,11 +145,7 @@ export default async function ProductsPage(props: ProductsPageProps) {
     try {
       let product: any = null;
       try {
-        const { data: sanityProduct } = await sanityFetch({
-          query: PRODUCT_BY_SLUG_QUERY,
-          params: { slug: candidateSlug },
-        });
-        product = sanityProduct;
+        product = await getSanityProduct(candidateSlug);
       } catch (e) {
         // Continue to fallback
       }

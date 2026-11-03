@@ -30,6 +30,7 @@ const bookingSchema = z.object({
     customerPhone: z.string().min(1, "Phone number is required"),
     specialNotes: z.string().optional(),
     detangling: z.boolean().optional(),
+    detanglingType: z.enum(["none", "moderate", "intensive"]).optional(),
     userId: z.string().optional().nullable(),
 }).refine((data) => {
     const now = new Date();
@@ -95,8 +96,11 @@ export async function createGroomingBooking(rawData: GroomingBookingData) {
         if (basePrice === undefined) throw new Error(`Invalid breed size: "${data.breedSize}" for package "${data.package}"`);
 
         let finalPrice = basePrice;
-        if (data.detangling) {
-            finalPrice += 30000;
+        const detanglingType = data.detanglingType || (data.detangling ? "moderate" : "none");
+        if (detanglingType === "moderate") {
+            finalPrice += 100000;
+        } else if (detanglingType === "intensive") {
+            finalPrice += 150000;
         }
         console.log(`   ✅ Price calculated: ${finalPrice} TZS`);
 
@@ -122,8 +126,10 @@ export async function createGroomingBooking(rawData: GroomingBookingData) {
 
         const bookingNumber = `GRM-${Date.now().toString(36).toUpperCase()}-${uuidv4().slice(0, 4).toUpperCase()}`;
         const additionalServices: string[] = [];
-        if (data.detangling) {
-            additionalServices.push("detangling");
+        if (detanglingType === "moderate") {
+            additionalServices.push("detangling", "moderate_detangling");
+        } else if (detanglingType === "intensive") {
+            additionalServices.push("detangling", "intensive_detangling");
         }
 
         // 4. Create in Sanity
@@ -164,9 +170,15 @@ export async function createGroomingBooking(rawData: GroomingBookingData) {
                 console.log(`   🔗 Using Odoo Partner ID from session: ${odooPartnerId}`);
             }
 
+            const detanglingNote = detanglingType !== "none" 
+                ? `[Detangling: ${detanglingType === "intensive" ? "Intensive (+150,000 TZS)" : "Moderate (+100,000 TZS)"}]` 
+                : "";
+            const mergedNotes = [data.specialNotes, detanglingNote].filter(Boolean).join(" ");
+
             await pushBookingToOdoo({
                 ...data,
-                detangling: data.detangling || false,
+                specialNotes: mergedNotes,
+                detangling: detanglingType !== "none",
                 price: finalPrice,
                 bookingNumber,
                 appointmentDate: appointmentDateTime.toISOString(),

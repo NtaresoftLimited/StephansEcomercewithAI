@@ -30,7 +30,6 @@ const nextConfig: NextConfig = {
   // Empty turbopack config to silence the warning
   turbopack: {},
   images: {
-    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",

@@ -97,7 +97,9 @@ export const groomingBookingType = defineType({
             of: [{ type: "string" }],
             options: {
                 list: [
-                    { title: "Detangling Hair (+30,000 TZS)", value: "detangling" },
+                    { title: "Moderate Detangling (+100,000 TZS)", value: "moderate_detangling" },
+                    { title: "Intensive Detangling (+150,000 TZS)", value: "intensive_detangling" },
+                    { title: "Detangling Hair (Legacy)", value: "detangling" },
                 ],
             },
         }),

@@ -202,7 +202,7 @@ export const PRODUCTS_BY_CATEGORY_QUERY = defineQuery(`*[
     $categorySlug in categories[]->parentCategory->slug.current || 
     $categorySlug in categories[]->parentCategory->parentCategory->slug.current
   )
-] | order(name asc) {
+] | order(name asc) [0...5] {
   _id,
   name,
   "slug": slug.current,
@@ -227,6 +227,7 @@ export const PRODUCTS_BY_CATEGORY_QUERY = defineQuery(`*[
   },
   material,
   color,
+  price,
   stock
 }`);
 

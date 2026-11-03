@@ -52,7 +52,7 @@ const ACCOUNT_BENEFITS: Array<{
     label: "Wish Lists",
   },
   {
-    imageSrc: "/about/grooming-scissors.png",
+    imageSrc: "/about/grooming-scissors.webp",
     label: "Grooming",
   },
 ];

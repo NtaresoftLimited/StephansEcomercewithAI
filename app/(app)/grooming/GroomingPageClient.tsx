@@ -8,7 +8,7 @@ import Link from "next/link";
 import { Check, Scissors, Paintbrush, Wand2, ArrowRight, Sparkles } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { createGroomingBooking, getTakenTimeSlots } from "@/lib/actions/grooming";
-import { PRICES, BREED_SIZES, VALID_TIMES, SIZE_LABELS, DOG_PACKAGES, CAT_PACKAGES, SMALL_ANIMAL_PACKAGES } from "@/lib/constants/grooming";
+import { PRICES, BREED_SIZES, VALID_TIMES, SIZE_LABELS, DOG_PACKAGES, CAT_PACKAGES, SMALL_ANIMAL_PACKAGES, DETANGLING_OPTIONS, DETANGLING_PRICES, DetanglingType } from "@/lib/constants/grooming";
 import { formatPrice } from "@/lib/utils";
 import { toast } from "sonner";
 
@@ -41,6 +41,7 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
         appointmentTime: "",
         customerName: "",
         customerPhone: "",
+        detanglingType: "none" as DetanglingType,
     });
 
     useEffect(() => {
@@ -99,6 +100,8 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
             try {
                 const result = await createGroomingBooking({
                     ...formData,
+                    detangling: formData.detanglingType !== "none",
+                    detanglingType: formData.detanglingType,
                     userId: user?.id,
                 });
                 if (result.success && result.bookingNumber) {
@@ -120,7 +123,10 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
             const sizeLabel = SIZE_LABELS[formData.breedSize] || formData.breedSize;
             const petTypeLabel = formData.petType === 'dog' ? 'Dog 🐕' : 'Cat 🐈';
             const basePrice = prices[formData.petType]?.[formData.package]?.[formData.breedSize] || 0;
-            const totalPrice = basePrice;
+            const detanglingFee = DETANGLING_PRICES[formData.detanglingType] || 0;
+            const totalPrice = basePrice + detanglingFee;
+            const detanglingLabel = formData.detanglingType === 'moderate' ? 'Moderate Detangling (+100,000 TZS)' :
+                                    formData.detanglingType === 'intensive' ? 'Intensive Detangling (+150,000 TZS)' : 'None';
 
             let formattedDate = formData.appointmentDate;
             try {
@@ -141,10 +147,12 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                    `*Breed Size:* ${sizeLabel}\n\n` +
                    `*SERVICE DETAILS*\n` +
                    `*Selected Package:* ${pkgName}\n` +
+                   `*Detangling:* ${detanglingLabel}\n` +
                    `*Preferred Date:* ${formattedDate}\n` +
                    `*Preferred Time:* ${formData.appointmentTime}\n\n` +
                    `*PRICE SUMMARY*\n` +
                    `  - Package Price: ${formatPrice(basePrice)}\n` +
+                   (detanglingFee > 0 ? `  - Detangling (${formData.detanglingType === 'moderate' ? 'Moderate' : 'Intensive'}): ${formatPrice(detanglingFee)}\n` : '') +
                    `----------------------------------\n` +
                    `*Total Amount:* ${formatPrice(totalPrice)}\n\n`;
 
@@ -301,6 +309,37 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                         </div>
                     ))}
                 </div>
+
+                {/* Extra Care / Detangling Highlights */}
+                <div className="mt-12 bg-white/60 border border-[#E8E0D8] rounded-2xl p-6 md:p-8 max-w-4xl mx-auto shadow-sm">
+                    <div className="text-center mb-6">
+                        <p className="text-[10px] font-bold tracking-[0.15em] text-[#c77e35] uppercase mb-1">Specialized Care</p>
+                        <h3 className="text-2xl font-serif text-[#222]">Detangling & Matting Treatment</h3>
+                        <p className="text-xs text-[#666] max-w-md mx-auto mt-1">
+                            For pets requiring extra groomer time and gentle, specialized de-matting solutions.
+                        </p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="p-5 rounded-xl border border-[#E8E0D8] bg-[#FDFBF9] flex items-center justify-between">
+                            <div>
+                                <h4 className="font-bold text-sm text-[#222] uppercase tracking-wide">Moderate Detangling</h4>
+                                <p className="text-xs text-[#666] mt-0.5">For mild to moderate coat knots & tangles</p>
+                            </div>
+                            <span className="text-lg font-serif font-bold text-[#c77e35] whitespace-nowrap ml-4">
+                                100,000/=
+                            </span>
+                        </div>
+                        <div className="p-5 rounded-xl border border-[#E8E0D8] bg-[#FDFBF9] flex items-center justify-between">
+                            <div>
+                                <h4 className="font-bold text-sm text-[#222] uppercase tracking-wide">Intensive Detangling</h4>
+                                <p className="text-xs text-[#666] mt-0.5">For dense, severe matting requiring deep restoration</p>
+                            </div>
+                            <span className="text-lg font-serif font-bold text-[#c77e35] whitespace-nowrap ml-4">
+                                150,000/=
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             {/* Booking Form Section */}
@@ -454,6 +493,50 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                         </div>
                     )}
 
+                    {/* Detangling Care Add-on */}
+                    <div className="mt-8 bg-white border border-[#E8E0D8] rounded-2xl p-6 md:p-8 shadow-sm">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                            <div>
+                                <h3 className="text-xl font-serif text-[#222] flex items-center gap-2">
+                                    <Scissors className="w-5 h-5 text-[#c77e35]" />
+                                    Detangling Treatment
+                                </h3>
+                                <p className="text-xs text-[#666] mt-1">
+                                    Specialized matting & knot removal treatment to gently restore your pet's coat.
+                                </p>
+                            </div>
+                            <span className="text-[11px] font-bold tracking-wider text-[#c77e35] uppercase bg-[#c77e35]/10 px-3 py-1 rounded-full w-fit">
+                                Optional Add-on
+                            </span>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            {DETANGLING_OPTIONS.map((opt) => {
+                                const isSelected = formData.detanglingType === opt.value;
+                                return (
+                                    <button
+                                        key={opt.value}
+                                        type="button"
+                                        onClick={() => setFormData({ ...formData, detanglingType: opt.value as DetanglingType })}
+                                        className={`p-4 rounded-xl text-left border transition-all flex flex-col justify-between ${
+                                            isSelected
+                                                ? "border-[#c77e35] bg-[#c77e35]/5 ring-1 ring-[#c77e35]"
+                                                : "border-[#E8E0D8] bg-white hover:border-[#c77e35]/50"
+                                        }`}
+                                    >
+                                        <div className="flex items-center justify-between mb-2">
+                                            <span className="text-sm font-bold text-[#222]">{opt.label}</span>
+                                            <span className={`text-xs font-bold ${isSelected ? "text-[#c77e35]" : "text-[#666]"}`}>
+                                                {opt.price === 0 ? "None" : `+${formatPrice(opt.price)}`}
+                                            </span>
+                                        </div>
+                                        <p className="text-xs text-[#666] leading-relaxed">{opt.description}</p>
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
+
                     <div className="mt-8 bg-[#F4F0EB] rounded-2xl p-6 md:p-10 flex flex-col md:flex-row gap-8 md:gap-12 items-start">
                         <div className="md:w-1/3">
                             <div className="w-16 h-16 bg-[#EBE4DC] rounded-full flex items-center justify-center mb-6">
@@ -502,11 +585,22 @@ export function GroomingPageClient({ prices = PRICES }: GroomingPageClientProps)
                                 <span className="text-xs font-bold tracking-widest text-[#c77e35] uppercase mb-1">Estimated Total</span>
                                 <span className="text-sm text-[#666]">
                                     {formData.petType === 'dog' ? 'Dog' : formData.petType === 'cat' ? 'Cat' : 'Small Animal'} • {SIZE_LABELS[formData.breedSize] || formData.breedSize} • {formData.package === 'standard' ? 'Essential' : formData.package === 'premium' ? 'Premium' : 'Signature'} Package
+                                    {formData.detanglingType !== 'none' && ` • ${formData.detanglingType === 'moderate' ? 'Moderate' : 'Intensive'} Detangling`}
                                 </span>
                             </div>
-                            <span className="text-3xl md:text-4xl font-serif text-[#222]">
-                                {formatPrice(prices[formData.petType]?.[formData.package]?.[formData.breedSize] || 0)}
-                            </span>
+                            <div className="flex flex-col items-end">
+                                <span className="text-3xl md:text-4xl font-serif text-[#222]">
+                                    {formatPrice(
+                                        (prices[formData.petType]?.[formData.package]?.[formData.breedSize] || 0) +
+                                        (DETANGLING_PRICES[formData.detanglingType] || 0)
+                                    )}
+                                </span>
+                                {formData.detanglingType !== 'none' && (
+                                    <span className="text-xs text-[#c77e35] font-medium mt-0.5">
+                                        Includes +{formatPrice(DETANGLING_PRICES[formData.detanglingType])} detangling
+                                    </span>
+                                )}
+                            </div>
                         </div>
                     )}
 

@@ -206,7 +206,7 @@ function resolveGroomingPrice(appt: PortalGroomingAppointment): number {
     PRICES[petKey]?.[appt.package]?.[appt.breedSize] ||
     PRICES[petKey]?.["standard"]?.["medium"] ||
     60000;
-  return base + (appt.detangling ? 30000 : 0);
+  return base + (appt.detangling ? 100000 : 0);
 }
 
 export function CustomerPortalClient({

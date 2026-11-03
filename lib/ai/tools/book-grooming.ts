@@ -16,13 +16,18 @@ const PRICES: Record<string, Record<string, Record<string, number>>> = {
     },
 };
 
-const DETANGLING_FEE = 30000;
+const DETANGLING_FEES: Record<string, number> = {
+    none: 0,
+    moderate: 100000,
+    intensive: 150000,
+};
 
 import { formatPrice } from "@/lib/utils";
 
-function calculatePrice(petType: string, packageType: string, breedSize: string, detangling: boolean): number {
+function calculatePrice(petType: string, packageType: string, breedSize: string, detanglingType?: string, detangling?: boolean): number {
     const basePrice = PRICES[petType]?.[packageType]?.[breedSize] || 0;
-    return basePrice + (detangling ? DETANGLING_FEE : 0);
+    const fee = detanglingType ? (DETANGLING_FEES[detanglingType] || 0) : (detangling ? 100000 : 0);
+    return basePrice + fee;
 }
 
 const bookGroomingSchema = z.object({
@@ -33,7 +38,8 @@ const bookGroomingSchema = z.object({
     appointmentDate: z.string().describe("Appointment date in YYYY-MM-DD format"),
     appointmentTime: z.string().describe("Appointment time in HH:mm format (e.g., '14:00' for 2pm)"),
     customerPhone: z.string().describe("Customer's phone number"),
-    detangling: z.boolean().default(false).describe("Whether to add detangling service (+30,000 TZS)"),
+    detangling: z.boolean().default(false).describe("Whether to add detangling service"),
+    detanglingType: z.enum(["none", "moderate", "intensive"]).default("none").describe("Detangling tier: 'moderate' (100,000 TZS) or 'intensive' (150,000 TZS)"),
     specialNotes: z.string().optional().describe("Any special notes or instructions"),
 });
 
@@ -231,7 +237,8 @@ export const getGroomingPricesTool = tool({
         return {
             prices,
             additionalServices: [
-                { name: "Detangling", price: formatPrice(DETANGLING_FEE) },
+                { name: "Moderate Detangling", price: formatPrice(100000) },
+                { name: "Intensive Detangling", price: formatPrice(150000) },
             ],
             note: "Prices are in Tanzania Shillings (TZS). Visit /grooming to book online.",
         };

@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import { Calendar, Clock, Check } from "lucide-react";
 import Image from "next/image";
 import { createGroomingBooking } from "@/lib/actions/grooming";
-import { PRICES, BREED_SIZES, VALID_TIMES, SIZE_LABELS, DOG_PACKAGES, CAT_PACKAGES } from "@/lib/constants/grooming";
+import { PRICES, BREED_SIZES, VALID_TIMES, SIZE_LABELS, DOG_PACKAGES, CAT_PACKAGES, DETANGLING_OPTIONS, DETANGLING_PRICES, DetanglingType } from "@/lib/constants/grooming";
 
 import { formatPrice } from "@/lib/utils";
 import { toast } from "sonner";
@@ -44,6 +44,7 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
         customerPhone: "",
         specialNotes: "",
         detangling: false,
+        detanglingType: "none" as DetanglingType,
     });
 
     // Initialize customer info from session when it becomes available
@@ -86,7 +87,11 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
         if (urlPetName) {
             next.petName = urlPetName;
         }
-        if (urlDetangling === "1" || urlDetangling === "true") {
+        if (urlDetangling === "intensive" || urlDetangling === "150000") {
+            next.detanglingType = "intensive";
+            next.detangling = true;
+        } else if (urlDetangling === "moderate" || urlDetangling === "100000" || urlDetangling === "1" || urlDetangling === "true") {
+            next.detanglingType = "moderate";
             next.detangling = true;
         }
         if (Object.keys(next).length > 0) {
@@ -98,7 +103,7 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
     const calculatePrice = () => {
         if (!formData.package || !formData.breedSize) return 0;
         const basePrice = prices[formData.petType]?.[formData.package]?.[formData.breedSize] || 0;
-        const detanglingFee = formData.detangling ? 30000 : 0;
+        const detanglingFee = DETANGLING_PRICES[formData.detanglingType] || (formData.detangling ? 100000 : 0);
         return basePrice + detanglingFee;
     };
 
@@ -133,6 +138,8 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
             try {
                 const result = await createGroomingBooking({
                     ...formData,
+                    detangling: formData.detanglingType !== "none" || formData.detangling,
+                    detanglingType: formData.detanglingType !== "none" ? formData.detanglingType : (formData.detangling ? "moderate" : "none"),
                     userId: user?.id,
                 });
                 
@@ -157,9 +164,10 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
                             
             const sizeLabel = SIZE_LABELS[formData.breedSize] || formData.breedSize;
             const petTypeLabel = formData.petType === 'dog' ? 'Dog 🐕' : 'Cat 🐈';
-            const extraServices = formData.detangling ? 'Detangling Service (+30,000 TZS)' : 'None';
+            const detanglingFee = DETANGLING_PRICES[formData.detanglingType] || (formData.detangling ? 100000 : 0);
+            const extraServices = formData.detanglingType === 'intensive' ? 'Intensive Detangling (+150,000 TZS)' :
+                                 (formData.detanglingType === 'moderate' || formData.detangling) ? 'Moderate Detangling (+100,000 TZS)' : 'None';
             const basePrice = prices[formData.petType]?.[formData.package]?.[formData.breedSize] || 0;
-            const detanglingFee = formData.detangling ? 30000 : 0;
             const totalPrice = basePrice + detanglingFee;
 
             let formattedDate = formData.appointmentDate;
@@ -224,6 +232,7 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
             customerPhone: "",
             specialNotes: "",
             detangling: false,
+            detanglingType: "none",
         });
     };
 
@@ -437,19 +446,40 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
                             />
                         </div>
 
-                        {/* Additional Services */}
+                        {/* Detangling Services */}
                         <div className="md:col-span-2">
-                            <label className="flex items-center gap-3 cursor-pointer">
-                                <input
-                                    type="checkbox"
-                                    checked={formData.detangling}
-                                    onChange={(e) => setFormData({ ...formData, detangling: e.target.checked })}
-                                    className="h-5 w-5 rounded border-zinc-300 text-amber-500 focus:ring-amber-500"
-                                />
-                                <span className="text-zinc-700 dark:text-zinc-300">
-                                    Add Detangling Service (+30,000 TZS)
-                                </span>
+                            <label className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300 mb-2">
+                                Detangling Treatment (Optional)
                             </label>
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                {DETANGLING_OPTIONS.map((opt) => {
+                                    const isSelected = formData.detanglingType === opt.value;
+                                    return (
+                                        <button
+                                            key={opt.value}
+                                            type="button"
+                                            onClick={() => setFormData({ 
+                                                ...formData, 
+                                                detanglingType: opt.value as DetanglingType,
+                                                detangling: opt.value !== "none" 
+                                            })}
+                                            className={`p-3 rounded-lg border text-left transition-all flex flex-col justify-between ${
+                                                isSelected
+                                                    ? "border-[#c77e35] bg-[#c77e35]/10 ring-1 ring-[#c77e35]"
+                                                    : "border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-700 hover:border-[#c77e35]/50"
+                                            }`}
+                                        >
+                                            <div className="flex items-center justify-between w-full mb-1">
+                                                <span className="text-xs font-bold text-zinc-900 dark:text-white">{opt.label}</span>
+                                                <span className={`text-[11px] font-bold ${isSelected ? "text-[#c77e35]" : "text-zinc-500"}`}>
+                                                    {opt.price === 0 ? "None" : `+${formatPrice(opt.price)}`}
+                                                </span>
+                                            </div>
+                                            <p className="text-[11px] text-zinc-500 dark:text-zinc-400">{opt.description}</p>
+                                        </button>
+                                    );
+                                })}
+                            </div>
                         </div>
 
                         {/* Special Notes */}
@@ -484,13 +514,13 @@ export function GroomingBookingForm({ prices = PRICES }: GroomingBookingFormProp
                                         {formatPrice(PRICES[formData.petType]?.[formData.package]?.[formData.breedSize] || 0)}
                                     </span>
                                 </div>
-                                {formData.detangling && (
+                                {(formData.detanglingType !== "none" || formData.detangling) && (
                                     <div className="flex justify-between text-sm">
                                         <span className="text-zinc-600 dark:text-zinc-400">
-                                            Detangling Fee
+                                            Detangling Fee ({formData.detanglingType === "intensive" ? "Intensive" : "Moderate"})
                                         </span>
                                         <span className="font-medium text-zinc-900 dark:text-zinc-100">
-                                            {formatPrice(30000)}
+                                            {formatPrice(DETANGLING_PRICES[formData.detanglingType] || 100000)}
                                         </span>
                                     </div>
                                 )}

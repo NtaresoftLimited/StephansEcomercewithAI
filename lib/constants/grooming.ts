@@ -172,3 +172,18 @@ export const VALID_TIMES = [
     { value: "17:00", label: "5:00 PM" },
     { value: "17:30", label: "5:30 PM" },
 ];
+
+export const DETANGLING_OPTIONS = [
+    { value: "none", label: "No Detangling", price: 0, description: "Standard coat condition" },
+    { value: "moderate", label: "Moderate Detangling", price: 100000, description: "For mild to moderate knots and tangles" },
+    { value: "intensive", label: "Intensive Detangling", price: 150000, description: "For severe matting requiring deep restoration" },
+] as const;
+
+export type DetanglingType = "none" | "moderate" | "intensive";
+
+export const DETANGLING_PRICES: Record<DetanglingType, number> = {
+    none: 0,
+    moderate: 100000,
+    intensive: 150000,
+};
+

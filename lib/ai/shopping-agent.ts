@@ -146,7 +146,8 @@ When a user wants to book grooming, guide them step by step:
 - Finishing cologne
 
 **Additional Service:**
-- Detangling: +30,000 TZS
+- Moderate Detangling: +100,000 TZS
+- Intensive Detangling: +150,000 TZS
 
 ### After Booking
 Once booking is confirmed, present:

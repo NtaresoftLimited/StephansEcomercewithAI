@@ -112,7 +112,7 @@ export default function AboutPage() {
                     <div className="flex flex-col items-center pt-12 md:pt-0">
                         <div className="mb-6 text-[#c77e35] flex items-center justify-center h-12 w-12">
                             <Image 
-                                src="/about/grooming-scissors.png" 
+                                src="/about/grooming-scissors.webp" 
                                 alt="Gentle Care" 
                                 width={48} 
                                 height={48} 
