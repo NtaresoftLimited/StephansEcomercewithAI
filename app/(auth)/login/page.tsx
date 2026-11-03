@@ -62,7 +62,7 @@ function LoginContent() {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/orders";
 
-  const [mode, setMode] = useState<AuthMode>("odoo");
+  const [mode, setMode] = useState<AuthMode>("whatsapp");
   const [loading, setLoading] = useState(false);
   const [guestLoading, setGuestLoading] = useState(false);
 
@@ -411,29 +411,12 @@ function LoginContent() {
           </div>
         )}
 
-        {/* Auth Method Switcher (Odoo Account vs WhatsApp OTP) */}
+        {/* Auth Method Switcher (WhatsApp vs Email) */}
         <div
           role="tablist"
           aria-label="Sign in method"
           className="grid grid-cols-2 gap-1.5 rounded-xl bg-zinc-100/90 p-1.5 dark:bg-zinc-800/80"
         >
-          <button
-            type="button"
-            role="tab"
-            aria-selected={mode === "odoo"}
-            onClick={() => {
-              setMode("odoo");
-              setLoading(false);
-            }}
-            className={`inline-flex h-10 items-center justify-center gap-2 rounded-lg px-3 text-xs font-bold uppercase tracking-wider transition-all ${
-              mode === "odoo"
-                ? "bg-white text-[#3e220f] shadow-xs dark:bg-zinc-900 dark:text-amber-400"
-                : "text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200"
-            }`}
-          >
-            <Mail className="h-4 w-4 shrink-0" />
-            <span className="leading-none">Odoo Account</span>
-          </button>
           <button
             type="button"
             role="tab"
@@ -455,7 +438,30 @@ function LoginContent() {
               height={16}
               className="h-4 w-4 object-contain shrink-0"
             />
-            <span className="leading-none">WhatsApp OTP</span>
+            <span className="leading-none">WhatsApp</span>
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={mode === "odoo"}
+            onClick={() => {
+              setMode("odoo");
+              setLoading(false);
+            }}
+            className={`inline-flex h-10 items-center justify-center gap-2 rounded-lg px-3 text-xs font-bold uppercase tracking-wider transition-all ${
+              mode === "odoo"
+                ? "bg-white text-[#3e220f] shadow-xs dark:bg-zinc-900 dark:text-amber-400"
+                : "text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200"
+            }`}
+          >
+            <Image
+              src="/email-official.png"
+              alt="Email"
+              width={16}
+              height={16}
+              className="h-4 w-4 object-contain shrink-0"
+            />
+            <span className="leading-none">Email</span>
           </button>
         </div>
 
@@ -703,10 +709,7 @@ function LoginContent() {
                     setWaDisplayPhone(formattedDisplay);
                   }}
                 />
-                <p className="px-2 text-left text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
-                  We&apos;ll send a 6-digit one-time code to your WhatsApp and
-                  link your in-store POS receipts &amp; orders.
-                </p>
+
 
                 <button
                   type="submit"
