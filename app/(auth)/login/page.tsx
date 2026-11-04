@@ -29,6 +29,7 @@ import {
   Eye,
   EyeOff,
   Check,
+  ArrowLeft,
 } from "lucide-react";
 
 type AuthMode = "odoo" | "whatsapp";
@@ -670,7 +671,18 @@ function LoginContent() {
                   </div>
                 )}
 
-                {/* Pill-shaped Continue Button matching reference screenshot */}
+                                  <div className="flex items-center justify-between px-1">
+                    <label className="flex items-center gap-2 cursor-pointer text-xs text-zinc-600 dark:text-zinc-400 select-none">
+                      <input
+                        type="checkbox"
+                        defaultChecked
+                        className="rounded border-zinc-300 text-[#3e220f] focus:ring-[#3e220f]"
+                      />
+                      <span>Remember Me</span>
+                    </label>
+                  </div>
+
+                  {/* Pill-shaped Continue Button matching reference screenshot */}
                 <button
                   type="submit"
                   disabled={
@@ -876,6 +888,30 @@ function LoginContent() {
             password.
           </p>
         </div>
+
+        {/* Register Link matching Dukanikwetu UX */}
+        <div className="border-t border-zinc-100 dark:border-zinc-800 pt-3 text-center">
+          <p className="text-xs text-zinc-500 dark:text-zinc-400">
+            Don&apos;t have an account?{" "}
+            <Link
+              href="/register"
+              className="font-bold text-[#c77e35] hover:text-[#3e220f] hover:underline dark:hover:text-amber-400"
+            >
+              Register Now
+            </Link>
+          </p>
+        </div>
+      </div>
+
+      {/* Return to shop / back link matching Dukanikwetu */}
+      <div className="mt-4 text-center">
+        <Link
+          href="/shop"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 transition-colors"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" />
+          <span>Back to Previous Page / Return to Shop</span>
+        </Link>
       </div>
     </div>
   );

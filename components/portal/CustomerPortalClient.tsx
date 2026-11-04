@@ -993,6 +993,105 @@ export function CustomerPortalClient({
                     </div>
                   )}
                 </div>
+
+                {/* Dashboard Wishlist Showcase matching Dukanikwetu */}
+                <div className="rounded-2xl border border-zinc-200/80 bg-white p-5 sm:p-6 dark:border-zinc-800 dark:bg-zinc-950">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                      <Heart className="h-4 w-4 text-rose-500" />
+                      <h3 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100">
+                        My Wish List ({wishlistItems.length})
+                      </h3>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setActiveSection("wishlist")}
+                      className="text-xs font-semibold text-zinc-900 hover:underline dark:text-zinc-100 cursor-pointer"
+                    >
+                      View All →
+                    </button>
+                  </div>
+
+                  {wishlistItems.length === 0 ? (
+                    <div className="py-8 text-center rounded-xl border border-dashed border-zinc-100 dark:border-zinc-800">
+                      <Heart className="mx-auto h-7 w-7 text-zinc-300 mb-1.5" />
+                      <p className="text-xs text-zinc-500">
+                        There isn&apos;t anything saved to your wishlist yet.
+                      </p>
+                      <Link
+                        href="/shop"
+                        className="mt-2.5 inline-flex h-9 items-center justify-center rounded-xl bg-[#3e220f] px-4 text-xs font-semibold text-white hover:bg-[#2a170a]"
+                      >
+                        Explore Products
+                      </Link>
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      {wishlistItems.slice(0, 4).map((item) => (
+                        <div
+                          key={item.productId}
+                          className="group relative flex flex-col justify-between rounded-xl border border-zinc-200/80 bg-white p-3 dark:border-zinc-800 dark:bg-zinc-900 hover:shadow-xs transition-shadow"
+                        >
+                          <div>
+                            <div className="relative aspect-square w-full rounded-lg bg-zinc-50 overflow-hidden mb-2">
+                              {item.image ? (
+                                <Image
+                                  src={item.image}
+                                  alt={item.name}
+                                  fill
+                                  className="object-contain p-1.5 group-hover:scale-105 transition-transform"
+                                />
+                              ) : (
+                                <div className="flex h-full w-full items-center justify-center text-xs text-zinc-400">
+                                  🐾
+                                </div>
+                              )}
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  removeFromWishlist(item.productId);
+                                  toast.info(`Removed ${item.name} from wishlist`);
+                                }}
+                                title="Remove"
+                                className="absolute top-1.5 right-1.5 flex h-6 w-6 items-center justify-center rounded-md bg-white/90 border border-zinc-200 text-zinc-400 hover:text-red-500 cursor-pointer"
+                              >
+                                <Trash2 className="h-3 w-3" />
+                              </button>
+                            </div>
+                            <Link
+                              href={`/shop/${item.slug || item.productId}`}
+                              className="text-xs font-bold text-zinc-800 dark:text-zinc-200 line-clamp-1 hover:underline block"
+                            >
+                              {item.name}
+                            </Link>
+                            <p className="font-mono text-xs font-bold text-zinc-900 dark:text-zinc-100 mt-1">
+                              {formatPrice(item.price)}
+                            </p>
+                          </div>
+
+                          <button
+                            type="button"
+                            onClick={() => {
+                              addToCart(
+                                {
+                                  productId: item.productId,
+                                  name: item.name,
+                                  price: item.price,
+                                  image: item.image,
+                                },
+                                1
+                              );
+                              toast.success(`${item.name} added to cart!`);
+                            }}
+                            className="mt-2.5 w-full rounded-lg bg-[#3e220f] py-1.5 text-[11px] font-semibold text-white hover:bg-[#2a170a] transition-colors cursor-pointer"
+                          >
+                            Add to Cart
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </>
             )}
 
