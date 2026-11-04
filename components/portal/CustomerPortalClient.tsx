@@ -23,7 +23,16 @@ import {
   LogOut,
   ChevronRight,
   Package,
+  Edit3,
 } from "lucide-react";
+import {
+  UserAddress,
+  getSavedAddresses,
+  deleteAddress,
+  setDefaultShippingAddress,
+  setDefaultBillingAddress,
+} from "@/lib/address-book";
+import { AddressModal } from "@/components/checkout/AddressModal";
 import { toast } from "sonner";
 import { formatPrice, formatDate, formatOrderNumber } from "@/lib/utils";
 import { SIZE_LABELS, PRICES } from "@/lib/constants/grooming";
@@ -229,6 +238,17 @@ export function CustomerPortalClient({
   const latestOrderWithAddress = onlineOrders.find(
     (o) => o.address?.line1 || o.address?.city
   );
+
+  const [addressList, setAddressList] = useState<UserAddress[]>([]);
+  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+  const [addressToEdit, setAddressToEdit] = useState<UserAddress | null>(null);
+
+  useEffect(() => {
+    setAddressList(getSavedAddresses());
+    const handleSync = () => setAddressList(getSavedAddresses());
+    window.addEventListener("sps-address-book-updated", handleSync);
+    return () => window.removeEventListener("sps-address-book-updated", handleSync);
+  }, []);
 
   const [savedAddress, setSavedAddress] = useState<SavedDeliveryAddress>({
     firstName: nameParts[0] || "",
