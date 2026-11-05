@@ -9,9 +9,6 @@ export function normalizeCatalogProductName(name: unknown): string {
 }
 
 function hasUsableImage(product: any): boolean {
-  // Odoo products have already been restricted to records with image_128.
-  if (product?.isOdoo) return true;
-
   return Array.isArray(product?.images) && product.images.some((image: any) => {
     const asset = image?.asset;
     const value = image?.url || asset?.url || asset?._ref || asset?._id || "";

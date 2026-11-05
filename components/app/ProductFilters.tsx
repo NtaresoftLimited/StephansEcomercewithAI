@@ -41,7 +41,6 @@ function ProductFiltersInner({ categories, brands }: ProductFiltersProps) {
   const currentColor = searchParams.get("color") ?? "";
   const urlMinPrice = Number(searchParams.get("minPrice")) || 0;
   const urlMaxPrice = Number(searchParams.get("maxPrice")) || 500000;
-  const currentInStock = searchParams.get("inStock") === "true";
 
   // Local state for UI
   const [brandSearch, setBrandSearch] = useState("");
@@ -155,7 +154,7 @@ function ProductFiltersInner({ categories, brands }: ProductFiltersProps) {
   );
 
   const isPriceActive = urlMinPrice > 0 || urlMaxPrice < 500000;
-  const hasActiveFilters = !!(currentSearch || currentCategory || currentBrand || currentColor || isPriceActive || currentInStock);
+  const hasActiveFilters = !!(currentSearch || currentCategory || currentBrand || currentColor || isPriceActive);
 
   return (
     <div className="flex flex-col gap-6">

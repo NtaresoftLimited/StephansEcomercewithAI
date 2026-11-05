@@ -45,6 +45,13 @@ const getSanityProduct = cache(async (slug: string) => {
   return data;
 });
 
+async function withTimeout<T>(promise: Promise<T>, fallback: T, milliseconds = 2500): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((resolve) => setTimeout(() => resolve(fallback), milliseconds)),
+  ]);
+}
+
 export async function generateMetadata(props: ProductsPageProps): Promise<Metadata> {
   const searchParams = await props.searchParams;
   const pathParams = await props.params;
@@ -130,7 +137,6 @@ interface ProductsPageProps {
     sort?: string;
     minPrice?: string;
     maxPrice?: string;
-    inStock?: string;
     page?: string;
   }>;
 }
@@ -244,7 +250,7 @@ export default async function ProductsPage(props: ProductsPageProps) {
     }
   }
 
-  const { q, brand, color, sort, minPrice, maxPrice, inStock, page } = searchParams;
+  const { q, brand, color, sort, minPrice, maxPrice, page } = searchParams;
   const category = (pathParams?.categorySlug?.[0]) || searchParams.category;
   
   const currentPage = parseInt(page || "1", 10);
@@ -259,7 +265,7 @@ export default async function ProductsPage(props: ProductsPageProps) {
     brandSlug: brand || "",
     minPrice: minPrice ? Number(minPrice) : 0,
     maxPrice: maxPrice ? Number(maxPrice) : 0,
-    inStock: inStock === "true",
+    inStock: false,
     color: color || "",
     material: "", // Default
     start: (requestedPage - 1) * itemsPerPage,
@@ -278,7 +284,12 @@ export default async function ProductsPage(props: ProductsPageProps) {
   const [sanityCategoriesResult, brandsResult, odooCategories] = await Promise.all([
     sanityFetch({ query: ALL_CATEGORIES_QUERY }),
     sanityFetch({ query: ALL_BRANDS_QUERY }),
-    getCachedOdooCategories().catch(e => { console.error("Odoo categories fetch failed:", e); return []; })
+    // Odoo enriches the sidebar, but it must never hold up the product grid
+    // during a cold ERP connection. Sanity categories remain the immediate fallback.
+    withTimeout(
+      getCachedOdooCategories().catch(e => { console.error("Odoo categories fetch failed:", e); return []; }),
+      []
+    )
   ]);
 
   const sanityCategories = sanityCategoriesResult.data || [];
@@ -339,7 +350,6 @@ export default async function ProductsPage(props: ProductsPageProps) {
       odooProducts = odooProductsUnfiltered.filter((p: any) => {
         if (q && !p.name?.toLowerCase().includes(q.toLowerCase())) return false;
         if (category) { const t = category.endsWith('s') ? category.slice(0,-1) : category; if (!p.categories.some((c: any) => c.slug === category || c.slug.includes(t) || c.title?.toLowerCase().includes(t)) && !p.name?.toLowerCase().includes(t)) return false; }
-        if (inStock && p.stock <= 0) return false;
         if (minPrice && p.price < Number(minPrice)) return false;
         if (maxPrice && p.price > Number(maxPrice)) return false;
         return true;
@@ -402,7 +412,6 @@ export default async function ProductsPage(props: ProductsPageProps) {
   if (sort) urlSearchParams.set("sort", sort);
   if (minPrice) urlSearchParams.set("minPrice", minPrice);
   if (maxPrice) urlSearchParams.set("maxPrice", maxPrice);
-  if (inStock) urlSearchParams.set("inStock", "true");
   
   const baseSearchString = urlSearchParams.toString();
   

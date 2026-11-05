@@ -9,6 +9,7 @@ import { LOW_STOCK_THRESHOLD } from "@/lib/constants/stock";
 export const PRODUCT_FILTER_CONDITIONS = `
   _type == 'product'
   && price > 0
+  && defined(images[0].asset)
   && ($categorySlug == '' || 
       $categorySlug in categories[]->slug.current || 
       $categorySlug in categories[]->parentCategory->slug.current || 
@@ -23,7 +24,6 @@ export const PRODUCT_FILTER_CONDITIONS = `
   && ($maxPrice == 0 || price <= $maxPrice)
   && ($searchQuery == "" || name match $searchQuery + "*" || description match $searchQuery + "*" || brand->name match $searchQuery + "*")
   && ($brandSlug == "" || brand->slug.current == $brandSlug)
-  && ($inStock == false || stock > 0)
 `;
 
 /** Projection for filtered product lists (includes multiple images for hover) */
@@ -66,10 +66,8 @@ const RELEVANCE_SCORE = `score(
 const OFFERS_FILTER_CONDITIONS = `
   _type == "product"
   && price > 0
-  && (
-    featured == true
-    || count(variants[defined(compareAtPrice) && compareAtPrice > price]) > 0
-  )
+  && defined(images[0].asset)
+  && featured == true
   && ($categorySlug == "" || 
       $categorySlug in categories[]->slug.current || 
       $categorySlug in categories[]->parentCategory->slug.current || 
@@ -83,7 +81,6 @@ const OFFERS_FILTER_CONDITIONS = `
   && ($minPrice == 0 || price >= $minPrice)
   && ($maxPrice == 0 || price <= $maxPrice)
   && ($searchQuery == "" || name match $searchQuery + "*" || description match $searchQuery + "*")
-  && ($inStock == false || stock > 0)
 `;
 
 // ============================================
@@ -97,7 +94,7 @@ const OFFERS_FILTER_CONDITIONS = `
 export const ALL_PRODUCTS_QUERY = defineQuery(`*[
   _type == "product"
   && price > 0
-  && stock > 0
+  && defined(images[0].asset)
 ] | order(name asc) {
   _id,
   name,
@@ -136,7 +133,8 @@ export const ALL_PRODUCTS_QUERY = defineQuery(`*[
 export const FEATURED_PRODUCTS_QUERY = defineQuery(`*[
   _type == "product"
   && featured == true
-  && stock > 0
+  && price > 0
+  && defined(images[0].asset)
 ] | order(name asc) [0...12] {
   _id,
   name,
@@ -166,7 +164,7 @@ export const PRODUCTS_WITH_BRANDS_QUERY = defineQuery(`*[
   _type == "product"
   && defined(brand)
   && price > 0
-  && stock > 0
+  && defined(images[0].asset)
 ] | order(name asc) {
   _id,
   name,
@@ -196,7 +194,7 @@ export const PRODUCTS_WITH_BRANDS_QUERY = defineQuery(`*[
 export const PRODUCTS_BY_CATEGORY_QUERY = defineQuery(`*[
   _type == "product"
   && price > 0
-  && stock > 0
+  && defined(images[0].asset)
   && (
     $categorySlug in categories[]->slug.current || 
     $categorySlug in categories[]->parentCategory->slug.current || 
@@ -237,7 +235,7 @@ export const PRODUCTS_BY_CATEGORY_QUERY = defineQuery(`*[
 export const PRODUCTS_BY_BRAND_QUERY = defineQuery(`*[
   _type == "product"
   && price > 0
-  && stock > 0
+  && defined(images[0].asset)
   && brand->slug.current == $brandSlug
 ] | order(name asc) {
   _id,
@@ -328,7 +326,7 @@ export const PRODUCT_BY_SLUG_QUERY = defineQuery(`*[
 export const SEARCH_PRODUCTS_QUERY = defineQuery(`*[
   _type == "product"
   && price > 0
-  && stock > 0
+  && defined(images[0].asset)
   && (
     name match $searchQuery + "*"
     || description match $searchQuery + "*"
@@ -520,7 +518,7 @@ export const OUT_OF_STOCK_PRODUCTS_QUERY = defineQuery(`*[
 export const AI_SEARCH_PRODUCTS_QUERY = defineQuery(`*[
   _type == "product"
   && price > 0
-  && stock > 0
+  && defined(images[0].asset)
   && (
     $searchQuery == ""
     || name match $searchQuery + "*"

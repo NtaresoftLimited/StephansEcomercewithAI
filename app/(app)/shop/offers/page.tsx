@@ -23,7 +23,6 @@ interface PageProps {
     minPrice?: string;
     maxPrice?: string;
     sort?: string;
-    inStock?: string;
   }>;
 }
 
@@ -37,7 +36,6 @@ export default async function OffersPage({ searchParams }: PageProps) {
   const minPrice = Number(params.minPrice) || 0;
   const maxPrice = Number(params.maxPrice) || 0;
   const sort = params.sort ?? "popular";
-  const inStock = params.inStock === "true";
 
   const getQuery = () => {
     if (searchQuery && sort === "relevance") {
@@ -58,7 +56,7 @@ export default async function OffersPage({ searchParams }: PageProps) {
   };
 
   const [productsResult, categoriesResult, brandsResult] = await Promise.all([
-    sanityFetch({ query: getQuery(), params: { searchQuery, categorySlug, categoryLeafSlug: "", brandSlug: "", color, material, minPrice, maxPrice, inStock } }),
+    sanityFetch({ query: getQuery(), params: { searchQuery, categorySlug, categoryLeafSlug: "", brandSlug: "", color, material, minPrice, maxPrice, inStock: false } }),
     sanityFetch({ query: ALL_CATEGORIES_QUERY }),
     sanityFetch({ query: ALL_BRANDS_QUERY }),
   ]);

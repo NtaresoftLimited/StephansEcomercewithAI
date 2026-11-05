@@ -46,9 +46,6 @@ export function BrandProductCard({ product }: BrandProductCardProps) {
   const rawImageUrl = images[0]?.asset?.url;
   const mainImageUrl = sanityImageUrl(rawImageUrl, 480) ?? rawImageUrl;
 
-  const stock = product.stock ?? 0;
-  const isOutOfStock = false;
-
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();

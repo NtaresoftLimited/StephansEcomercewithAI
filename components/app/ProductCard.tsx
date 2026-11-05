@@ -12,7 +12,6 @@ interface Product {
   name: string | null;
   slug: string | null;
   price: number | null;
-  originalPrice?: number | null;
   stock?: number | null;
   description?: string | null;
   images: Array<{
@@ -47,26 +46,10 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
   const mainImageUrl = sanityImageUrl(rawImageUrl, 480) ?? rawImageUrl;
   const productSlug = typeof product.slug === "string" ? product.slug : (product.slug as any)?.current || "";
 
-  // Deterministic review count based on ID
-  const hash = Math.abs((product._id || product.name || "0").split("").reduce((a, c) => a + c.charCodeAt(0), 0));
-  const reviewCount = (hash % 380) + 24;
-  const discountPercent = product.originalPrice && product.price && product.originalPrice > product.price
-    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
-    : (hash % 10 === 0 ? 15 : hash % 7 === 0 ? 10 : 0);
-
-  const isInStock = (product.stock ?? 1) > 0;
-
   return (
     <div className="group relative h-full flex flex-col rounded-2xl border border-zinc-200/90 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 transition-colors hover:border-zinc-300 dark:hover:border-zinc-700 shadow-none">
-      {/* Top action row: Discount badge on left, Wishlist on right */}
-      <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between pointer-events-none">
-        {discountPercent > 0 ? (
-          <span className="pointer-events-auto rounded-md bg-[#EF4444] px-2 py-0.5 text-[11px] font-bold text-white tracking-wide">
-            {discountPercent}%
-          </span>
-        ) : (
-          <span />
-        )}
+      {/* Wishlist action */}
+      <div className="absolute top-4 right-4 z-10 pointer-events-none">
         <button 
           type="button"
           onClick={(e) => {
@@ -129,11 +112,6 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
             <span className="text-base font-bold text-zinc-900 dark:text-zinc-50">
               {formatPrice(product.price, "Tsh")}
             </span>
-            {product.originalPrice && product.originalPrice > (product.price ?? 0) && (
-              <span className="text-xs text-zinc-400 line-through">
-                {formatPrice(product.originalPrice, "Tsh")}
-              </span>
-            )}
           </div>
         </div>
       </Link>
