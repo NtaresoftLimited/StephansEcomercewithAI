@@ -35,6 +35,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { DEEP_NAV_MENU } from "@/lib/config/navigation";
+import { useLucyNavigation } from "@/lib/navigation/use-lucy-navigation";
 
 interface MobileNavMenuProps {
   onClose: () => void;
@@ -91,12 +92,13 @@ const CATEGORY_ICONS: Record<string, ElementType> = {
 export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
   const { data: session, status } = useSession();
   const [openSection, setOpenSection] = useState<string | null>(null);
+  const lucyCategories = useLucyNavigation();
 
   const toggleSection = (section: string) => {
     setOpenSection(openSection === section ? null : section);
   };
 
-  const sections = [
+  const fallbackSections = [
     {
       id: "dogs",
       title: "Shop For Dog",
@@ -130,6 +132,23 @@ export function MobileNavMenu({ onClose }: MobileNavMenuProps) {
       iconClass: "",
     },
   ];
+  const iconById: Record<string, string> = {
+    dogs: "/icons/minimalist-dog.png",
+    cats: "/icons/minimalist-cat.png",
+    birds: "/icons/minimalist-bird.png",
+    smallPets: "/icons/minimalist-rabbit.png",
+    "small-animals": "/icons/minimalist-rabbit.png",
+  };
+  const sections = lucyCategories.length
+    ? lucyCategories.map((category) => ({
+        id: category.id,
+        title: `Shop For ${category.name.replace(/s$/i, "")}`,
+        icon: iconById[category.id] || "/icons/minimalist-dog.png",
+        data: category.menu,
+        href: category.href,
+        iconClass: "",
+      }))
+    : fallbackSections;
 
   return (
     <nav className="flex flex-col gap-4">

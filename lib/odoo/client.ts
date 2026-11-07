@@ -805,6 +805,23 @@ export class OdooClient {
         });
     }
 
+    /** Published header and mega-menu entries managed from the Odoo LuCy app. */
+    async getLucyWebsiteNavigation(): Promise<any[]> {
+        try {
+            const result = await this.executeKw(
+                "lucy.website.navigation",
+                "get_published_navigation",
+                []
+            );
+            return Array.isArray(result) ? result : [];
+        } catch (error) {
+            // LuCy may not yet be installed on every environment. The storefront
+            // deliberately falls back to its checked-in navigation in that case.
+            console.warn("LuCy navigation is unavailable; using website fallback.", error);
+            return [];
+        }
+    }
+
     /**
      * Get all shop products from Odoo, normalized to match Sanity Product format
      */

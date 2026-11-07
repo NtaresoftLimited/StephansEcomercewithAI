@@ -3,35 +3,25 @@
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useState } from "react";
 import { 
-  List, 
-  Grid2X2, 
-  LayoutGrid, 
   Search, 
-  ChevronDown,
-  SlidersHorizontal 
+  ChevronDown
 } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 interface ShopToolbarProps {
   totalCount: number;
   currentSort?: string;
   itemsPerPage?: number;
-  onViewChange?: (view: "list" | "grid-2" | "grid-4") => void;
-  activeView?: "list" | "grid-2" | "grid-4";
 }
 
 export function ShopToolbar({
   totalCount,
   currentSort = "relevance",
   itemsPerPage = 8,
-  onViewChange,
-  activeView = "grid-4",
 }: ShopToolbarProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const [isSearching, setIsSearching] = useState(false);
   const [searchTerm, setSearchTerm] = useState(searchParams.get("q") || "");
 
   const updateParam = (key: string, value: string) => {
@@ -52,52 +42,8 @@ export function ShopToolbar({
 
   return (
     <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 rounded-2xl border border-zinc-200/90 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-4 py-3 mb-6 shadow-none">
-      {/* Left side: View switchers & Search */}
-      <div className="flex items-center gap-2">
-        <div className="flex items-center rounded-lg border border-zinc-200 dark:border-zinc-800 p-0.5">
-          <button
-            type="button"
-            onClick={() => onViewChange?.("list")}
-            aria-label="List view"
-            className={cn(
-              "p-1.5 rounded-md transition-colors",
-              activeView === "list"
-                ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
-                : "text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200"
-            )}
-          >
-            <List className="h-4 w-4" />
-          </button>
-          <button
-            type="button"
-            onClick={() => onViewChange?.("grid-2")}
-            aria-label="2-column grid view"
-            className={cn(
-              "p-1.5 rounded-md transition-colors",
-              activeView === "grid-2"
-                ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
-                : "text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200"
-            )}
-          >
-            <Grid2X2 className="h-4 w-4" />
-          </button>
-          <button
-            type="button"
-            onClick={() => onViewChange?.("grid-4")}
-            aria-label="4-column grid view"
-            className={cn(
-              "p-1.5 rounded-md transition-colors",
-              activeView === "grid-4"
-                ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
-                : "text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200"
-            )}
-          >
-            <LayoutGrid className="h-4 w-4" />
-          </button>
-        </div>
-
-        {/* Search bar / trigger */}
-        <form onSubmit={handleSearchSubmit} className="relative flex items-center ml-2">
+      <div className="flex min-w-0 items-center gap-3">
+        <form onSubmit={handleSearchSubmit} className="relative flex items-center">
           <input
             type="text"
             placeholder="Search catalog..."
@@ -107,6 +53,7 @@ export function ShopToolbar({
           />
           <Search className="absolute left-2.5 h-3.5 w-3.5 text-zinc-400 pointer-events-none" />
         </form>
+        <span className="hidden text-xs text-zinc-500 md:inline">{totalCount.toLocaleString()} products</span>
       </div>
 
       {/* Right side: Sort & Items Per Page Dropdowns */}

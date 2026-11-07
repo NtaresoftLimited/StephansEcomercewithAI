@@ -15,6 +15,7 @@ import {
   PAGINATED_PRODUCTS_BY_PRICE_DESC_QUERY,
   PAGINATED_PRODUCTS_BY_RELEVANCE_QUERY,
   FILTERED_PRODUCTS_COUNT_QUERY,
+  PRODUCT_FACETS_QUERY,
 } from "@/lib/sanity/queries/products";
 import { ProductGallery } from "@/components/app/ProductGallery";
 import { ProductInfo } from "@/components/app/ProductInfo";
@@ -134,10 +135,12 @@ interface ProductsPageProps {
     category?: string;
     brand?: string;
     color?: string;
+    material?: string;
     sort?: string;
     minPrice?: string;
     maxPrice?: string;
     page?: string;
+    limit?: string;
   }>;
 }
 
@@ -250,11 +253,12 @@ export default async function ProductsPage(props: ProductsPageProps) {
     }
   }
 
-  const { q, brand, color, sort, minPrice, maxPrice, page } = searchParams;
+  const { q, brand, color, material, sort, minPrice, maxPrice, page, limit } = searchParams;
   const category = (pathParams?.categorySlug?.[0]) || searchParams.category;
   
   const currentPage = parseInt(page || "1", 10);
-  const itemsPerPage = 8;
+  const parsedLimit = Number.parseInt(limit || "8", 10);
+  const itemsPerPage = [8, 12, 24, 36].includes(parsedLimit) ? parsedLimit : 8;
   const requestedPage = Number.isFinite(currentPage) ? Math.max(1, currentPage) : 1;
 
   // Prepare Query Parameters
@@ -262,12 +266,12 @@ export default async function ProductsPage(props: ProductsPageProps) {
     searchQuery: q || "",
     categorySlug: category || "",
     categoryLeafSlug: "",
-    brandSlug: brand || "",
+    brandSlugs: (brand || "").split(",").filter(Boolean),
     minPrice: minPrice ? Number(minPrice) : 0,
     maxPrice: maxPrice ? Number(maxPrice) : 0,
     inStock: false,
-    color: color || "",
-    material: "", // Default
+    colors: (color || "").split(",").filter(Boolean),
+    materials: (material || "").split(",").filter(Boolean),
     start: (requestedPage - 1) * itemsPerPage,
     end: requestedPage * itemsPerPage,
   };
@@ -335,12 +339,21 @@ export default async function ProductsPage(props: ProductsPageProps) {
   queryParams.categoryLeafSlug = leafSlug || "";
   
   // Fetch only the requested eight records and a lightweight count in parallel.
-  const [productsResult, countResult] = await Promise.all([
+  const [productsResult, countResult, facetResult] = await Promise.all([
     sanityFetch({ query, params: queryParams }),
     sanityFetch({ query: FILTERED_PRODUCTS_COUNT_QUERY, params: queryParams }),
+    sanityFetch({
+      query: PRODUCT_FACETS_QUERY,
+      params: {
+        searchQuery: q || "",
+        categorySlug: category || "",
+        categoryLeafSlug: leafSlug || "",
+      },
+    }),
   ]);
   const sanityProducts = productsResult.data || [];
   let totalProductCount = Number(countResult.data || 0);
+  const facetProducts = facetResult.data || [];
 
   // Fetch Odoo Products (Fallback only if Sanity returns no products, avoiding heavy network delay)
   let odooProducts: any[] = [];
@@ -352,6 +365,9 @@ export default async function ProductsPage(props: ProductsPageProps) {
         if (category) { const t = category.endsWith('s') ? category.slice(0,-1) : category; if (!p.categories.some((c: any) => c.slug === category || c.slug.includes(t) || c.title?.toLowerCase().includes(t)) && !p.name?.toLowerCase().includes(t)) return false; }
         if (minPrice && p.price < Number(minPrice)) return false;
         if (maxPrice && p.price > Number(maxPrice)) return false;
+        if (brand && !brand.split(",").includes(p.brand?.slug)) return false;
+        if (color && !color.split(",").includes(p.color)) return false;
+        if (material && !material.split(",").includes(p.material)) return false;
         return true;
       });
       totalProductCount = odooProducts.length;
@@ -409,9 +425,12 @@ export default async function ProductsPage(props: ProductsPageProps) {
   const urlSearchParams = new URLSearchParams();
   if (q) urlSearchParams.set("q", q);
   if (brand) urlSearchParams.set("brand", brand);
+  if (color) urlSearchParams.set("color", color);
+  if (material) urlSearchParams.set("material", material);
   if (sort) urlSearchParams.set("sort", sort);
   if (minPrice) urlSearchParams.set("minPrice", minPrice);
   if (maxPrice) urlSearchParams.set("maxPrice", maxPrice);
+  if (itemsPerPage !== 8) urlSearchParams.set("limit", String(itemsPerPage));
   
   const baseSearchString = urlSearchParams.toString();
   
@@ -455,10 +474,12 @@ export default async function ProductsPage(props: ProductsPageProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8 items-start">
             {/* Left Sidebar: Categories Filter */}
-            <div className="hidden lg:block sticky top-24">
+            <div className="lg:sticky lg:top-24">
               <ShopFilterSidebar 
                 categories={allCategories} 
                 activeCategorySlug={category || ""} 
+                brands={brands}
+                facetProducts={facetProducts}
               />
             </div>
 

@@ -24,6 +24,7 @@ import {
 import { useTotalItems } from "@/lib/store/cart-store-provider";
 import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
+import { useLucyNavigation } from "@/lib/navigation/use-lucy-navigation";
 
 const CategoryMegaMenu = dynamic(
   () => import("./CategoryMegaMenu").then((mod) => mod.CategoryMegaMenu),
@@ -49,6 +50,7 @@ function SecondaryStickyHeaderInner({
   const headerRef = useRef<HTMLDivElement>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pinnedCategoryRef = useRef<string | null>(null);
+  const lucyCategories = useLucyNavigation();
 
   const cancelScheduledClose = () => {
     if (closeTimerRef.current) {
@@ -158,7 +160,7 @@ function SecondaryStickyHeaderInner({
     );
   };
 
-  const categories = [
+  const fallbackCategories = [
     {
       name: "DOG",
       href: "/shop?category=dogs",
@@ -188,6 +190,7 @@ function SecondaryStickyHeaderInner({
       featuredTitles: FEATURED_NAV_GROUP_TITLES.smallPets,
     },
   ];
+  const categories = lucyCategories.length ? lucyCategories : fallbackCategories;
 
   return (
     <div

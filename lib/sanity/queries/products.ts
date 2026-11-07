@@ -17,13 +17,12 @@ export const PRODUCT_FILTER_CONDITIONS = `
       $categoryLeafSlug in categories[]->slug.current || 
       $categoryLeafSlug in categories[]->parentCategory->slug.current || 
       $categoryLeafSlug in categories[]->parentCategory->parentCategory->slug.current)
-  && ($brandSlug == '' || brand->slug.current == $brandSlug)
-  && ($color == "" || color == $color)
-  && ($material == "" || material == $material)
+  && (count($brandSlugs) == 0 || brand->slug.current in $brandSlugs)
+  && (count($colors) == 0 || color in $colors)
+  && (count($materials) == 0 || material in $materials)
   && ($minPrice == 0 || price >= $minPrice)
   && ($maxPrice == 0 || price <= $maxPrice)
   && ($searchQuery == "" || name match $searchQuery + "*" || description match $searchQuery + "*" || brand->name match $searchQuery + "*")
-  && ($brandSlug == "" || brand->slug.current == $brandSlug)
 `;
 
 /** Projection for filtered product lists (includes multiple images for hover) */
@@ -412,6 +411,29 @@ export const PAGINATED_PRODUCTS_BY_RELEVANCE_QUERY = defineQuery(
 export const FILTERED_PRODUCTS_COUNT_QUERY = defineQuery(
   `count(*[${PRODUCT_FILTER_CONDITIONS}])`
 );
+
+/**
+ * Lightweight catalog projection used to build filter choices and honest
+ * result counts. It deliberately excludes images and descriptions.
+ */
+export const PRODUCT_FACETS_QUERY = defineQuery(`*[
+  _type == "product"
+  && price > 0
+  && defined(images[0].asset)
+  && ($categorySlug == "" ||
+      $categorySlug in categories[]->slug.current ||
+      $categorySlug in categories[]->parentCategory->slug.current ||
+      $categorySlug in categories[]->parentCategory->parentCategory->slug.current ||
+      $categoryLeafSlug in categories[]->slug.current ||
+      $categoryLeafSlug in categories[]->parentCategory->slug.current ||
+      $categoryLeafSlug in categories[]->parentCategory->parentCategory->slug.current)
+  && ($searchQuery == "" || name match $searchQuery + "*" || description match $searchQuery + "*" || brand->name match $searchQuery + "*")
+] {
+  price,
+  color,
+  material,
+  "brand": brand->{name, "slug": slug.current}
+}`);
 
 export const NEW_ARRIVALS_QUERY = defineQuery(
   `*[${PRODUCT_FILTER_CONDITIONS}] | order(_createdAt desc) [0...60] ${FILTERED_PRODUCT_PROJECTION}`

@@ -4,8 +4,9 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn, formatPrice } from "@/lib/utils";
-import { PackageOpen, Heart } from "lucide-react";
+import { PackageOpen, Heart, ShoppingBag } from "lucide-react";
 import { sanityImageUrl } from "@/lib/sanity-image";
+import { useCartActions } from "@/lib/store/cart-store-provider";
 
 interface Product {
   _id: string;
@@ -37,6 +38,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, priority = false }: ProductCardProps) {
+  const { addItem } = useCartActions();
   const [imageError, setImageError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isWishlisted, setIsWishlisted] = useState(false);
@@ -45,6 +47,17 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
   const rawImageUrl = images[0]?.asset?.url;
   const mainImageUrl = sanityImageUrl(rawImageUrl, 480) ?? rawImageUrl;
   const productSlug = typeof product.slug === "string" ? product.slug : (product.slug as any)?.current || "";
+
+  const handleAddToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+    addItem({
+      productId: product._id,
+      name: product.name || "Product",
+      price: Number(product.price) || 0,
+      image: mainImageUrl || undefined,
+    });
+  };
 
   return (
     <div className="group relative h-full flex flex-col rounded-2xl border border-zinc-200/90 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-4 transition-colors hover:border-zinc-300 dark:hover:border-zinc-700 shadow-none">
@@ -108,13 +121,23 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
 
           
           {/* Price */}
-          <div className="mt-auto pt-2 flex items-baseline gap-2">
+          <div className="mt-auto pt-2 pr-12 flex items-baseline gap-2">
             <span className="text-base font-bold text-zinc-900 dark:text-zinc-50">
               {formatPrice(product.price, "Tsh")}
             </span>
           </div>
         </div>
       </Link>
+
+      <button
+        type="button"
+        onClick={handleAddToCart}
+        aria-label={`Add ${product.name || "product"} to bag`}
+        title="Add to bag"
+        className="absolute bottom-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-[#4e2a15] text-white shadow-sm transition-all hover:-translate-y-0.5 hover:bg-[#65391f] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c77e35] focus-visible:ring-offset-2 active:translate-y-0"
+      >
+        <ShoppingBag className="h-5 w-5" strokeWidth={1.8} aria-hidden="true" />
+      </button>
     </div>
   );
 }
