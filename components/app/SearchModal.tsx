@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Search, X, TrendingUp, Mic, ChevronRight, ShoppingBag, Loader2 } from "lucide-react";
 import Image from "next/image";
@@ -14,7 +14,36 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useCartActions } from "@/lib/store/cart-store-provider";
 import { urlFor } from "@/sanity/lib/image";
-import { searchProducts, getFeaturedProducts, getAllBrands } from "@/app/actions/search";
+import { getFeaturedProducts, getAllBrands } from "@/app/actions/search";
+
+type SearchProduct = {
+    id: string | number;
+    name: string;
+    price: number;
+    url: string;
+    imageUrl?: string;
+    category?: string;
+    brand?: string;
+    defaultCode?: string;
+};
+
+const SEARCH_CACHE_TTL = 5 * 60 * 1000;
+const searchCache = new Map<string, { expiresAt: number; products: SearchProduct[] }>();
+
+function normalizeSearchProduct(product: any): SearchProduct {
+    const rawId = product?.id ?? product?._id ?? product?.odooId ?? "";
+    const slug = typeof product?.slug === "string" ? product.slug : product?.slug?.current;
+    return {
+        id: rawId,
+        name: String(product?.name ?? "Product"),
+        price: Number(product?.price ?? product?.list_price ?? 0),
+        url: product?.url || (slug ? `/shop/${slug}` : `/shop/product/${rawId}`),
+        imageUrl: product?.image_url || product?.images?.[0]?.asset?.url || product?.image?.asset?.url,
+        category: product?.category || product?.categories?.[0]?.title || "Pet Essentials",
+        brand: product?.brand || "",
+        defaultCode: product?.default_code || "",
+    };
+}
 
 const POPULAR_SEARCHES = [
     "Dry Food",
@@ -35,17 +64,23 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
     const [query, setQuery] = useState("");
     const [products, setProducts] = useState<any[]>([]);
     const [brands, setBrands] = useState<any[]>([]);
-    const [searchResults, setSearchResults] = useState<any[]>([]);
+    const [searchResults, setSearchResults] = useState<SearchProduct[]>([]);
     const [isSearching, setIsSearching] = useState(false);
+    const [searchError, setSearchError] = useState(false);
     const [isLoadingInitial, setIsLoadingInitial] = useState(false);
     const [brandPage, setBrandPage] = useState(0);
     const [productPage, setProductPage] = useState(0);
     const router = useRouter();
     const { addItem } = useCartActions();
+    const inputRef = useRef<HTMLInputElement>(null);
 
     // Fetch initial data (popular products/brands)
     useEffect(() => {
         if (isOpen) {
+            setQuery("");
+            setSearchResults([]);
+            setSearchError(false);
+            window.requestAnimationFrame(() => inputRef.current?.focus());
             const fetchData = async () => {
                 setIsLoadingInitial(true);
                 try {
@@ -67,24 +102,56 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
     // Live Search Effect
     useEffect(() => {
-        const timer = setTimeout(async () => {
-            if (query.trim().length >= 2) {
-                setIsSearching(true);
-                try {
-                    const results = await searchProducts(query);
-                    setSearchResults(results);
-                } catch (error) {
-                    console.error("Search error:", error);
-                } finally {
-                    setIsSearching(false);
-                }
-            } else {
-                setSearchResults([]);
-            }
-        }, 300); // 300ms debounce
+        const cleanQuery = query.trim();
+        if (!isOpen || cleanQuery.length < 2) {
+            setSearchResults([]);
+            setIsSearching(false);
+            setSearchError(false);
+            return;
+        }
 
-        return () => clearTimeout(timer);
-    }, [query]);
+        const cacheKey = cleanQuery.toLocaleLowerCase();
+        const cached = searchCache.get(cacheKey);
+        if (cached && cached.expiresAt > Date.now()) {
+            setSearchResults(cached.products);
+            setIsSearching(false);
+            setSearchError(false);
+            return;
+        }
+
+        const controller = new AbortController();
+        const timer = window.setTimeout(async () => {
+            setIsSearching(true);
+            setSearchError(false);
+            try {
+                const response = await fetch(
+                    `/stephans/api/search?q=${encodeURIComponent(cleanQuery)}&limit=10`,
+                    { signal: controller.signal, headers: { Accept: "application/json" } },
+                );
+                if (!response.ok) throw new Error(`Search request failed (${response.status})`);
+                const payload = await response.json();
+                const normalized = (payload.products || payload.results || []).map(normalizeSearchProduct);
+                searchCache.set(cacheKey, {
+                    expiresAt: Date.now() + SEARCH_CACHE_TTL,
+                    products: normalized,
+                });
+                setSearchResults(normalized);
+            } catch (error) {
+                if (!controller.signal.aborted) {
+                    console.error("Search error:", error);
+                    setSearchResults([]);
+                    setSearchError(true);
+                }
+            } finally {
+                if (!controller.signal.aborted) setIsSearching(false);
+            }
+        }, 180);
+
+        return () => {
+            window.clearTimeout(timer);
+            controller.abort();
+        };
+    }, [isOpen, query]);
 
     const handleSearch = (searchTerm: string) => {
         if (searchTerm.trim()) {
@@ -94,13 +161,13 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
         }
     };
 
-    const handleAddToCart = (e: React.MouseEvent, product: any) => {
+    const handleAddToCart = (e: React.MouseEvent, product: SearchProduct) => {
         e.stopPropagation();
         addItem({
-            productId: product._id,
+            productId: String(product.id),
             name: product.name,
             price: product.price,
-            image: product.images?.[0]?.asset?.url,
+            image: product.imageUrl,
         });
         router.push('/cart');
         onClose();
@@ -108,12 +175,13 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
 
     return (
         <Dialog open={isOpen} onOpenChange={onClose}>
-            <DialogContent showCloseButton={false} className="sm:max-w-[700px] p-0 gap-0 overflow-hidden border-none shadow-2xl bg-white rounded-3xl">
+            <DialogContent showCloseButton={false} className="!top-[8vh] !translate-y-0 sm:max-w-[760px] p-0 gap-0 overflow-hidden border border-zinc-200/80 shadow-2xl bg-white rounded-[22px]">
                 <DialogTitle className="sr-only">Search Products</DialogTitle>
-                <div className="hidden sm:flex items-center justify-between px-6 py-4 bg-white">
+                <div className="flex items-center justify-between px-5 sm:px-6 pt-5 pb-2 bg-white">
                     <div className="text-lg font-semibold text-zinc-900">Search Products</div>
                     <button
                         onClick={onClose}
+                        aria-label="Close search"
                         className="p-1 hover:bg-zinc-100 rounded-full transition-colors"
                     >
                         <X className="h-5 w-5 text-zinc-500" />
@@ -121,16 +189,21 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                 </div>
 
                 {/* Search Input Area */}
-                <div className="px-4 py-4 sm:px-6 sm:pb-6 bg-white sticky top-0 z-10">
+                <div className="px-4 py-3 sm:px-6 sm:pb-5 bg-white sticky top-0 z-10">
                     <div className="relative flex items-center">
                         <div className="relative flex-1">
                             <div className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[#c77e35] flex items-center justify-center z-10">
                                 <Search className="h-4 w-4 text-white" strokeWidth={3} />
                             </div>
                             <Input
+                                ref={inputRef}
                                 autoFocus
                                 placeholder="Search for products, brands and more..."
                                 value={query}
+                                role="combobox"
+                                aria-label="Search products and brands"
+                                aria-expanded={query.trim().length >= 2}
+                                aria-controls="global-search-results"
                                 onChange={(e) => setQuery(e.target.value)}
                                 onKeyDown={(e) => {
                                     if (e.key === "Enter") handleSearch(query);
@@ -145,6 +218,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                         {query && (
                                             <button
                                                 onClick={() => setQuery("")}
+                                                aria-label="Clear search"
                                                 className="p-1 hover:bg-zinc-100 rounded-full transition-colors text-zinc-400"
                                             >
                                                 <X className="h-4 w-4" />
@@ -160,7 +234,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                     </div>
                 </div>
 
-                <div className="max-h-[70vh] overflow-y-auto p-4 space-y-8 bg-zinc-50/30 scrollbar-hide min-h-[300px]">
+                <div id="global-search-results" aria-live="polite" className="max-h-[calc(84vh-196px)] overflow-y-auto px-4 sm:px-6 py-5 space-y-8 bg-[#fcfbf9] scrollbar-hide min-h-[280px]">
                     {query.length >= 2 ? (
                         // Search Results View
                         <div className="space-y-4">
@@ -168,7 +242,15 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                 {isSearching ? "Searching..." : `Results for "${query}"`}
                             </h3>
 
-                            {!isSearching && searchResults.length === 0 && (
+                            {!isSearching && searchError && (
+                                <div className="text-center py-12 text-zinc-500">
+                                    <Search className="h-11 w-11 mx-auto mb-3 opacity-20" />
+                                    <p className="font-semibold text-zinc-700">Search is temporarily unavailable.</p>
+                                    <p className="mt-1 text-sm">Press Enter to search the full shop.</p>
+                                </div>
+                            )}
+
+                            {!isSearching && !searchError && searchResults.length === 0 && (
                                 <div className="text-center py-12 text-zinc-400">
                                     <Search className="h-12 w-12 mx-auto mb-3 opacity-20" />
                                     <p>No products found matching "{query}"</p>
@@ -178,31 +260,22 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 {searchResults.map((product) => (
                                     <div
-                                        key={product._id}
+                                        key={product.id}
                                         onClick={() => {
-                                            router.push(`/shop/${product.slug}`);
+                                            router.push(product.url);
                                             onClose();
                                         }}
                                         className="group flex items-center gap-3 p-3 rounded-2xl border border-zinc-100 bg-white hover:border-[#c77e35]/20 hover:shadow-md transition-all cursor-pointer relative"
                                     >
                                         <div className="relative w-16 h-16 rounded-xl bg-zinc-50 shrink-0 overflow-hidden">
-                                            {product.images?.[0]?.asset?.url ? (
+                                            {product.imageUrl ? (
                                                 <Image
-                                                    src={product.images[0].asset.url}
+                                                    src={product.imageUrl}
                                                     alt={product.name}
                                                     fill
                                                     sizes="64px"
                                                     className="object-contain p-2 group-hover:scale-110 transition-transform duration-500"
                                                 />
-                                            ) : product.image?.asset?.url ? (
-                                                <Image
-                                                    src={product.image.asset.url}
-                                                    alt={product.name}
-                                                    fill
-                                                    sizes="64px"
-                                                    className="object-contain p-2 group-hover:scale-110 transition-transform duration-500"
-                                                />
-
                                             ) : (
                                                 <div className="w-full h-full flex items-center justify-center bg-zinc-100">
                                                     <ShoppingBag className="w-6 h-6 text-zinc-300" />
@@ -214,10 +287,10 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                                 {product.name}
                                             </h4>
                                             <p className="text-xs text-zinc-500 mt-0.5">
-                                                {product.categories?.[0]?.title || "Pet Essentials"}
+                                                {[product.brand, product.category].filter(Boolean).join(" · ") || "Pet Essentials"}
                                             </p>
                                             <p className="text-sm font-bold text-[#c77e35] mt-1">
-                                                TSh {product.price?.toLocaleString()}
+                                                TSh {product.price.toLocaleString()}
                                             </p>
                                         </div>
                                         <button
@@ -406,6 +479,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                                 </div>
                                                 <button
                                                     onClick={(e) => handleAddToCart(e, product)}
+                                                    aria-label={`Add ${product.name} to cart`}
                                                     className="absolute right-2 bottom-2 w-6 h-6 rounded-full bg-[#c77e35] text-white flex items-center justify-center hover:bg-[#5a3419] hover:scale-110 transition-all shadow-sm opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 duration-300"
                                                 >
                                                     <ShoppingBag className="h-3 w-3" strokeWidth={2} />
@@ -416,6 +490,22 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                 )}
                             </div>
                         </>
+                    )}
+                </div>
+                <div className="flex min-h-12 items-center justify-between gap-3 border-t border-zinc-200 bg-white px-4 text-xs text-zinc-500 sm:px-6">
+                    <div className="flex items-center gap-2">
+                        <kbd className="rounded border border-zinc-200 bg-zinc-50 px-1.5 py-0.5 font-sans text-[11px] text-zinc-500">Esc</kbd>
+                        <span>to close</span>
+                        <span className="hidden sm:inline text-zinc-300">·</span>
+                        <span className="hidden sm:flex items-center gap-2">
+                            <kbd className="rounded border border-zinc-200 bg-zinc-50 px-1.5 py-0.5 font-sans text-[11px] text-zinc-500">Enter</kbd>
+                            to view all
+                        </span>
+                    </div>
+                    {query.trim().length >= 2 && !isSearching && (
+                        <button onClick={() => handleSearch(query)} className="font-medium text-[#6b3a1e] hover:text-[#c77e35]">
+                            {searchResults.length > 0 ? `See all ${searchResults.length}+ results` : "Search full shop"}
+                        </button>
                     )}
                 </div>
             </DialogContent>
